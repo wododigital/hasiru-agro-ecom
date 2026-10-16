@@ -95,6 +95,7 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - HQ demo now uses realistic spacing (Commercial 7.5 ft slots so sandalwood is 15 ft and mango 45 ft apart, rows 20 ft; Food Forest 10 x 10 ft), a step preloader, and a Magnific (Tripo) mango GLB for mango plants: 2.7 MB raw, 355 KB after `gltf-transform optimize --texture-compress webp --texture-size 512`, 7.3k triangles, instanced (downloaded once per tree type). Deployed at `/3d.html` (`site/3d.html` + `site/assets/mango.glb`, built by `_work/build_prototype.py`).
 - Prototype 3D modal: step preloader + link to `/3d.html`. Its spacing still follows the 6 x 12 ft placeholder (tied to the 36 x 36 block quantities); change only with the client's real spacing.
 - 2026-10-16 later: Recommendations cards keep the 2D diagram; "View in 3D" opens `/3d.html?m=<model>` in a new tab on the live site (falls back to the simple in-page 3D modal inside the claude.ai preview). `/3d.html` now has Commercial, Food Forest and Miyawaki (2 ft grid, random layer mix, plants at 0.42x as saplings), a PUBG-style thumbstick for walking (drag elsewhere to look; WASD strafe, arrows turn), and no stats panel.
+- `/3d.html` has a "3D view / 2D plan" toggle (also `?v=2d`): flat top view drawn on a canvas, canopy-spread circles by M/X/O colour, faded context rows, dashed patch outline, spacing labels, scale bar, tap to identify.
 - Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
 
 ## SRS quirks to remember

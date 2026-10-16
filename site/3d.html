@@ -46,6 +46,10 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 .joy-knob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe680,var(--gold) 60%,#d9a800);box-shadow:0 4px 12px rgba(0,0,0,.35),inset 0 -3px 6px rgba(0,0,0,.15);transition:transform .12s ease-out;pointer-events:none}
 #joy.active .joy-knob{transition:none}
 #hint{font-size:.78rem;max-width:260px}
+#viewSeg{background:var(--glass)}
+#viewSeg button{white-space:nowrap}
+@media(max-width:640px){body.plan2d #hint{display:block}}
+#plan{position:fixed;inset:0;z-index:2;width:100%;height:100%;background:#f4efdf;touch-action:none}
 #info{position:fixed;z-index:6;left:50%;transform:translateX(-50%);top:calc(130px + env(safe-area-inset-top,0px));display:flex;gap:10px;align-items:center;max-width:min(360px,calc(100vw - 32px))}
 #info .role{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff}
 #loading{position:fixed;inset:0;z-index:9;display:grid;place-items:center;background:rgba(230,239,230,.94);color:var(--forest);font:500 .95rem var(--body);text-align:center;padding:16px}
@@ -61,6 +65,7 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 </style>
 
 <div id="stage" aria-label="3D view of a planting patch"></div>
+<canvas id="plan" hidden aria-label="Flat top view of the planting layout"></canvas>
 <div id="loading" role="status" aria-live="polite"><div class="ld"><div class="spin" aria-hidden="true"></div><b id="ldTitle">Preparing your farm view</b><span id="ldStep">Loading 3D engine...</span><div class="bar"><i id="ldBar"></i></div></div></div>
 
 <div class="ui" id="top">
@@ -80,7 +85,8 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
     <div id="joy" hidden aria-label="Movement stick: drag to walk"><div class="joy-knob" id="knob"></div></div>
   </div>
   <div class="right">
-    <label class="card sun" for="sunR">Sun <input type="range" id="sunR" min="0" max="100" value="62"></label>
+    <div class="seg card" id="viewSeg" role="group" aria-label="View" style="padding:3px"><button data-v="3d" class="on">3D view</button><button data-v="2d">2D plan</button></div>
+    <label class="card sun" for="sunR" id="sunWrap">Sun <input type="range" id="sunR" min="0" max="100" value="62"></label>
     <button class="btn" id="walkBtn">Walk in</button>
   </div>
 </div>
@@ -226,6 +232,7 @@ function init(){
   CTRL=new THREE.OrbitControls(C,R.domElement); CTRL.enableDamping=true; CTRL.maxPolarAngle=Math.PI*.47; CTRL.minDistance=6; CTRL.maxDistance=260;
   document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x.dataset.m===CUR));
   build(CUR);
+  if(VIEW==="2d") setView("2d");
   step("Ready",100); $("#loading").hidden=true; $("#loading").classList.add("over");
   wire();
   requestAnimationFrame(loop);
@@ -332,9 +339,63 @@ function build(key){
   V.bounds=[-m.nx*m.col-10,W+m.nx*m.col+10,-m.ny*m.row-10,D+m.ny*m.row+12]; V.start=m.mix?[cx,D+m.ny*m.row+8,0]:[-m.col*.5,m.row/2,-Math.PI/2];
   setWalk(false); V.home(); setSun(+$("#sunR").value);
   // legend
-  $("#title").textContent=m.n;
+  $("#title").textContent=m.n; PLAN={m,pts,all,W,D};
+  if(VIEW==="2d") drawPlan();
   $("#legend").innerHTML=["M","X","O"].map(k=>`<span><i style="background:${ROLE[k].col}"></i>${k} ${ROLE[k].n}: ${m.plants[k].map(id=>PLANTS[id].n).join(", ")}</span>`).join("")+`<span style="opacity:.75">${pts.length} plants · ${m.col} ft along row · ${m.row} ft between rows</span>`;
   R.render(S,C); buildMs=performance.now()-t0;
+}
+/* ---------- 2D plan: flat top view, plants drawn as canopy footprints ---------- */
+let VIEW="2d"===new URLSearchParams(location.search).get("v")?"2d":"3d", PLAN=null, PLANPTS=[];
+const SPREAD={mango:5.2,guava:3.4,timber:3.3,shrub:2.3,banana:3.5}; // canopy radius in ft, same standard sizes as the 3D trees
+function drawPlan(){
+  if(!PLAN) return;
+  const cv=$("#plan"), dpr=Math.min(2,devicePixelRatio||1), Wp=innerWidth, Hp=innerHeight;
+  cv.width=Wp*dpr; cv.height=Hp*dpr; const g=cv.getContext("2d"); g.setTransform(dpr,0,0,dpr,0,0);
+  const {m,pts,all,W,D}=PLAN, SC=m.scale||1;
+  // show the patch plus one row/column of context around it
+  const mx=m.col*1.5+SC*6, mz=m.row*1.5+SC*6, x0=-mx, x1=W+mx, z0=-mz, z1=D+mz;
+  const top=Wp<640?150:120, bottom=Wp<640?190:110, side=24;
+  const k=Math.min((Wp-side*2)/(x1-x0),(Hp-top-bottom)/(z1-z0)), ox=(Wp-(x1-x0)*k)/2-x0*k, oz=top+((Hp-top-bottom)-(z1-z0)*k)/2-z0*k;
+  const X=x=>ox+x*k, Z=z=>oz+z*k;
+  g.fillStyle="#f4efdf"; g.fillRect(0,0,Wp,Hp);
+  // soil bed and the main patch outline
+  g.fillStyle="#e3d3b4"; g.fillRect(X(x0),Z(z0),(x1-x0)*k,(z1-z0)*k);
+  g.fillStyle="#d9c29a"; g.fillRect(X(-m.col/2),Z(-m.row/2),(W+m.col)*k,(D+m.row)*k);
+  // planting rows
+  if(m.row>=6){ g.strokeStyle="rgba(122,86,56,.35)"; g.lineWidth=Math.max(2,2.4*k); for(let r=Math.ceil(z0/m.row);r*m.row<=z1;r++){ g.beginPath(); g.moveTo(X(x0),Z(r*m.row)); g.lineTo(X(x1),Z(r*m.row)); g.stroke() } }
+  // plants: context first (faded), then the patch
+  PLANPTS=[];
+  const draw=(p,fade)=>{
+    if(p.x<x0||p.x>x1||p.z<z0||p.z>z1) return;
+    const pl=PLANTS[p.id], rad=SPREAD[pl.arch]*SC, col=ROLE[p.k].col, cx=X(p.x), cz=Z(p.z);
+    g.globalAlpha=fade?.28:1;
+    g.fillStyle=col+"2e"; g.strokeStyle=col+"99"; g.lineWidth=1; g.beginPath(); g.arc(cx,cz,rad*k,0,7); g.fill(); g.stroke();
+    const dot=Math.max(6,Math.min(13,k*.9)); g.fillStyle=col; g.beginPath(); g.arc(cx,cz,dot,0,7); g.fill();
+    if(dot>=8){ g.fillStyle="#fff"; g.font=`700 ${Math.round(dot*1.05)}px Outfit, sans-serif`; g.textAlign="center"; g.textBaseline="middle"; g.fillText(p.k,cx,cz+.5) }
+    g.globalAlpha=1; if(!fade) PLANPTS.push({p,pl,cx,cz});
+  };
+  all.filter(p=>p.ghost).forEach(p=>draw(p,true)); pts.forEach(p=>draw(p,false));
+  // patch outline
+  g.setLineDash([6,5]); g.strokeStyle="#b8860b"; g.lineWidth=2; g.strokeRect(X(-m.col/2),Z(-m.row/2),(W+m.col)*k,(D+m.row)*k); g.setLineDash([]);
+  // dimension labels
+  const dim=(ax,az,bx,bz,label,dx,dz)=>{ g.strokeStyle="#1B4332"; g.fillStyle="#1B4332"; g.lineWidth=1.5;
+    g.beginPath(); g.moveTo(X(ax)+dx,Z(az)+dz); g.lineTo(X(bx)+dx,Z(bz)+dz); g.stroke();
+    [[ax,az],[bx,bz]].forEach(([x,z])=>{ g.beginPath(); g.arc(X(x)+dx,Z(z)+dz,2.5,0,7); g.fill() });
+    const lx=(X(ax)+X(bx))/2+dx, lz=(Z(az)+Z(bz))/2+dz; g.font="600 12px Outfit, sans-serif"; const tw=g.measureText(label).width+12;
+    g.fillStyle="#1B4332"; g.fillRect(lx-tw/2,lz-10,tw,20); g.fillStyle="#FDC717"; g.textAlign="center"; g.textBaseline="middle"; g.fillText(label,lx,lz) };
+  dim(0,-m.row/2,m.col,-m.row/2,m.col+" ft",0,-14);
+  if(m.ny>1) dim(W+m.col/2,0,W+m.col/2,m.row,m.row+" ft",14,0);
+  // scale bar
+  const sb=m.col>=6?10:5, sx=X(x1)-sb*k, sy=Z(z1)+16; g.fillStyle="#1B4332"; g.fillRect(sx,sy,sb*k,4); g.font="500 12px Outfit, sans-serif"; g.textAlign="right"; g.textBaseline="top"; g.fillText(sb+" ft",X(x1),sy+7);
+}
+function setView(v){
+  VIEW=v; const two=v==="2d";
+  document.querySelectorAll("#viewSeg button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  if(two&&V.walk) setWalk(false);
+  $("#plan").hidden=!two; $("#walkBtn").hidden=two; $("#sunWrap").hidden=two; $("#info").hidden=true;
+  document.body.classList.toggle("plan2d",two);
+  $("#hint").textContent=two?"Flat top view. Circles show each plant's canopy spread; the dashed box is the patch shown in 3D. Tap a plant to see what it is.":"Drag to rotate, pinch or scroll to zoom. Tap a plant to see what it is.";
+  if(two) drawPlan();
 }
 function setWalk(on){
   V.walk=on; CTRL.enabled=!on; V.mv={f:0,b:0,l:0,r:0,sl:0,sr:0}; V.joy={x:0,y:0}; $("#joy").hidden=!on;
@@ -344,6 +405,9 @@ function setWalk(on){
 }
 function wire(){
   $("#walkBtn").onclick=()=>setWalk(!V.walk);
+  document.querySelectorAll("#viewSeg button").forEach(b=>b.onclick=()=>setView(b.dataset.v));
+  $("#plan").addEventListener("click",e=>{ let best=null,bd=22; PLANPTS.forEach(q=>{ const d=Math.hypot(q.cx-e.clientX,q.cz-e.clientY); if(d<bd){bd=d;best=q} }); const info=$("#info");
+    if(!best){ info.hidden=true; return } const {p,pl}=best; info.innerHTML=`<span class="role" style="background:${ROLE[p.k].col}">${p.k}</span><span><b>${pl.n}</b><br><span style="opacity:.8">${ROLE[p.k].n} · ${ARCH[pl.arch].n}</span></span>`; info.hidden=false });
   $("#sunR").oninput=e=>setSun(+e.target.value);
   document.querySelectorAll("#modelSeg button").forEach(b=>b.onclick=()=>{ document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x===b)); CUR=b.dataset.m; $("#info").hidden=true; step("Planting "+MODELS[CUR].n.replace(" model","")+" trees...",70,"Preparing your farm view"); nextFrame().then(()=>{ build(CUR); $("#loading").hidden=true }) });
   const joy=$("#joy"), knob=$("#knob"), JR=42; let jid=null;
@@ -362,7 +426,7 @@ function wire(){
     const b=el.getBoundingClientRect(); ptr.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1); ray.setFromCamera(ptr,C);
     const hit=ray.intersectObjects(PICK)[0], info=$("#info"); if(!hit){ info.hidden=true; return }
     const {p,pl}=hit.object.userData; info.innerHTML=`<span class="role" style="background:${ROLE[p.k].col}">${p.k}</span><span><b>${pl.n}</b><br><span style="opacity:.8">${ROLE[p.k].n} · ${ARCH[pl.arch].n}</span></span>`; info.hidden=false });
-  addEventListener("resize",()=>{ const h=$("#stage"); R.setSize(h.clientWidth,h.clientHeight); C.aspect=h.clientWidth/h.clientHeight; C.updateProjectionMatrix() });
+  addEventListener("resize",()=>{ if(VIEW==="2d") drawPlan(); const h=$("#stage"); R.setSize(h.clientWidth,h.clientHeight); C.aspect=h.clientWidth/h.clientHeight; C.updateProjectionMatrix() });
 }
 let last=performance.now();
 function loop(now){
