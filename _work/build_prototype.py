@@ -11,3 +11,6 @@ html = (root / "_work/prototype.template.html").read_text()
 html = html.replace("__CATALOG__", json.dumps(cat, ensure_ascii=False, separators=(",", ":"))).replace("__LOGO__", logo)
 (root / "hasiru-agro-prototype.html").write_text(html)
 print("wrote", len(html) // 1024, "KB")
+# Vercel deploys only this folder (root directory "site"), keeping client files out of the public site
+(root / "site").mkdir(exist_ok=True)
+(root / "site/index.html").write_text(html)
