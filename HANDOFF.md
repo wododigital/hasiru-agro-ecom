@@ -36,7 +36,7 @@ Current hasiruagro.com (WODO-built static services site) source: `../hasiru-agro
 ## Decisions confirmed by Shyam (2026-10-16)
 1. **Pricing:** two prices per plant: normal price below a bulk quantity, bulk price at/above it. **Bulk threshold differs per plant** (e.g. 50 mango trees is bulk, 200 small shrubs is bulk). Excel has columns for both.
 2. **Categories:** Forestry → **Timber Trees**; Desi + Exotic Fruits → **Fruiting Trees** (Desi/Exotic as sub-filter); Spices + Plantation → **Other Plants**.
-3. **OTP placement:** after Generate, show a **blurred preview** of the recommendations, unlock with name + phone OTP (better conversion, lead still captured). Demo OTP in prototype e.g. `1234`.
+3. **OTP placement:** after Generate, show a **blurred preview** of the recommendations, unlock with name + phone OTP (better conversion, lead still captured). Demo OTP in prototype e.g. `1234`. (2026-10-16: validation and OTP entry switched off for the demo; Send OTP unlocks directly, wizard falls back to Mysuru / 1 acre.)
 4. **Diagram:** use researched placeholder patterns. **M, X, O are 3 categories of plants** (treat as Main / Host-secondary / Biomass-support, legend editable). The **36 x 36 ft chart must auto-generate on a `<canvas>`** from the model's pattern.
 5. **Scope:** no standard e-com pages. Focus on prototypes of the main features. Standard e-com discussed later.
 6. **Logistics numbers:** invent sample values (my suggestion accepted).

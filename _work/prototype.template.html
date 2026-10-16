@@ -844,8 +844,9 @@ function locSearch(){
 function pickLoc(i){ S.loc=PLACES[i]; $("#locQ").value=S.loc[0]; $("#locList").classList.remove("on"); renderWizard() }
 function useMyLoc(){ toast("Location found (demo)"); pickLoc(PLACES.findIndex(p=>p[0]==="Ramanagara")) }
 function generate(){
-  if(!S.loc){ toast("Pick your location first"); $("#locQ").focus(); return }
-  if(!(S.land>0)){ toast("Enter your land size"); return }
+  // Prototype: no validation; fall back to sample values
+  if(!S.loc) S.loc=PLACES.find(p=>p[0]==="Mysuru");
+  if(!(S.land>0)){ S.land=1; S.unit="acre"; $("#landQ").value=1 }
   S.reco={}; location.hash="reco"; window.scrollTo(0,0);
 }
 
@@ -1191,10 +1192,9 @@ function renderUnlock(){
       inp.onkeydown=e=>{ if(e.key==="Backspace"&&!inp.value&&ins[i-1]) ins[i-1].focus() } }) }
 }
 function sendOtp(){
+  // Prototype: no validation and no OTP step for now; Send OTP unlocks straight away
   S.name=$("#ulN").value.trim(); S.phone=$("#ulP").value.replace(/\D/g,"");
-  if(S.name.length<2) return $("#ulE").textContent="Please enter your name";
-  if(!/^[6-9]\d{9}$/.test(S.phone)) return $("#ulE").textContent="Enter a valid 10 digit mobile number";
-  otpStage="otp"; renderUnlock(); toast("OTP sent (demo code 1234)");
+  S.unlocked=true; renderReco(); toast(S.name?`Welcome ${S.name}, your plan is unlocked`:"Your plan is unlocked");
 }
 function verifyOtp(){
   const v=[...document.querySelectorAll(".otp input")].map(i=>i.value).join("");
