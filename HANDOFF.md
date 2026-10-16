@@ -19,7 +19,7 @@ Hasiru Agro (Bengaluru nursery + farm-development company, incubated by UAS Dhar
 | `_work/catalog.json` | Compact catalogue for the prototype, 192 plants (see schema below) |
 | `_work/products.json` | Full parsed CSV rows |
 | `hasiru-agro-prototype.html` | **Deliverable 2**, self-contained (catalogue + logo inlined). Do not edit directly |
-| `_work/prototype.template.html` | Prototype source. Rebuild: `python3 _work/build_prototype.py` |
+| `_work/prototype.template.html` | Prototype source (6 screens incl. Ask AI: uses Claude `sample` capability when published as a claude.ai artifact, else keyword search over the catalogue). Rebuild: `python3 _work/build_prototype.py` |
 | `_work/build_xlsx.py` | Rebuild Excel: `python3 _work/build_xlsx.py _work/products.json Hasiru-Agro-Website-Data-Sheet.xlsx` |
 
 Current hasiruagro.com (WODO-built static services site) source: `../hasiru-agro/Latest/` (images in `Latest/images/`, also live at `https://hasiruagro.com/images/<name>.webp`).

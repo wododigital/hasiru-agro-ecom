@@ -272,6 +272,32 @@ section.blk{padding:48px 0}
 .promo{background:var(--gold);color:var(--forest-d);border-radius:12px;padding:10px 12px;font-size:.85rem;font-weight:600;margin-bottom:12px}
 .sugg-in{background:#fffbea;border:1.5px dashed #e6c54a;border-radius:var(--r);padding:14px;margin-bottom:16px}
 
+/* ask AI */
+.ask{max-width:860px;margin:0 auto}
+.ask-hero{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+.ask-hero .av{width:52px;height:52px;border-radius:16px;background:var(--forest);color:var(--gold);display:grid;place-items:center;flex:none}
+.mode{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:600;border-radius:99px;padding:3px 10px;background:var(--cream-d);color:var(--earth)}
+.mode i{width:7px;height:7px;border-radius:50%;background:var(--earth)}
+.mode.ai{background:#e3f3e7;color:var(--forest)}.mode.ai i{background:#2f9e5b}
+.chat{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.msg{max-width:88%;border-radius:18px;padding:12px 16px;font-size:.95rem;line-height:1.55;min-width:0;overflow-wrap:anywhere}
+.msg.me{align-self:flex-end;background:var(--forest);color:#fff;border-bottom-right-radius:6px}
+.msg.bot{align-self:flex-start;background:#fff;box-shadow:var(--shadow);border-bottom-left-radius:6px;max-width:100%;width:100%}
+.msg.bot p{margin:0 0 8px}.msg.bot p:last-child{margin:0}
+.msg.bot ul{margin:4px 0 8px 18px}
+.msg.bot .thinking{color:var(--muted);font-style:italic}
+.pchip{display:inline-flex;align-items:center;gap:4px;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:0 7px;font-weight:600;color:var(--forest);font-size:.88rem;cursor:pointer;white-space:nowrap}
+.pchip:hover{border-color:var(--forest-l)}
+.msg .rail{margin-top:10px}
+.msg .rail>*{flex-basis:180px}
+.msg .src{font-size:.72rem;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+.sugg-q{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.sugg-q button{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:7px 14px;font-size:.86rem;color:var(--forest);font-weight:500}
+.sugg-q button:hover{border-color:var(--forest)}
+.composer{position:sticky;bottom:12px;display:flex;gap:8px;background:#fff;border-radius:99px;padding:6px 6px 6px 18px;box-shadow:0 8px 30px rgba(15,43,31,.15);border:1.5px solid var(--line)}
+.composer input{flex:1;min-width:0;border:0;outline:none;background:transparent;font-size:1rem}
+.composer:focus-within{border-color:var(--forest-l)}
+
 /* mobile cart bar + toast */
 .mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:45;background:var(--forest);color:#fff;border-radius:16px;padding:12px 16px;display:none;align-items:center;justify-content:space-between;box-shadow:0 10px 30px rgba(0,0,0,.25);text-decoration:none}
 .mbar.on{display:flex}
@@ -291,6 +317,7 @@ footer b{color:#fff}
   <a href="#choose" data-r="choose">3 Help me choose</a>
   <a href="#reco" data-r="reco">4 Recommendations</a>
   <a href="#cart" data-r="cart">5 Cart and delivery</a>
+  <a href="#ask" data-r="ask">6 Ask AI</a>
 </div></div>
 
 <header class="site"><div class="wrap">
@@ -299,6 +326,7 @@ footer b{color:#fff}
     <a href="#shop" data-r="shop">Shop plants</a>
     <a href="#choose" data-r="choose">Help me choose</a>
     <a href="#home-inputs">Farm inputs</a>
+    <a href="#ask" data-r="ask">Ask AI</a>
     <a href="#home" onclick="toast('Farm development pages are part of the next round');return false">Farm development</a>
   </nav>
   <a class="cartbtn" href="#cart"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg>Cart <span class="n" id="cartN">0</span></a>
@@ -437,6 +465,23 @@ footer b{color:#fff}
       </div>
       <div class="box tot" id="totBox" style="position:sticky;top:110px"></div>
     </div>
+  </div></section>
+</div>
+<!-- ============ ASK AI ============ -->
+<div class="screen" id="s-ask">
+  <section class="blk"><div class="wrap ask">
+    <div class="ask-hero">
+      <div class="av"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22V12M12 12C12 7 8 4 3 4c0 5 4 8 9 8Zm0 0c0-4 3-7 9-7 0 5-4 7-9 7Z"/></svg></div>
+      <div><div class="eyebrow" style="margin:0">Ask our plant expert</div><h2>What would you like to grow?</h2>
+      <span class="mode" id="askMode"><i></i>Catalogue search</span></div>
+    </div>
+    <p class="muted small" style="margin-bottom:14px">Answers come from the Hasiru Agro plant catalogue: prices, bulk rates, spacing, sunlight, temperature, bearing time, yield and stock.</p>
+    <div class="sugg-q" id="askSugg"></div>
+    <div class="chat" id="chat"></div>
+    <form class="composer" id="askForm" autocomplete="off">
+      <input id="askQ" placeholder="e.g. Which mango varieties are in stock?" aria-label="Ask about plants" maxlength="400">
+      <button class="btn btn-gold btn-sm" id="askBtn" type="submit">Ask</button>
+    </form>
   </div></section>
 </div>
 </main>
@@ -1017,6 +1062,115 @@ function renderCart(){
     <p class="tiny muted" style="margin-top:10px">All rates are sample values for review.</p>`;
 }
 
+/* ---------------- ask AI ---------------- */
+// In the published artifact this uses Claude via the `sample` capability; anywhere else
+// (a saved file, another host) it falls back to keyword search over the same catalogue.
+let SAMPLE=null, askBusy=false, askCtl=null;
+const ASK = {turns:[], msgs:[]};  // turns: for Claude; msgs: what is rendered
+const ASK_SUGG = ["Which mango varieties are in stock?","Best timber trees for a 2 acre farm","Fruit trees under Rs 400 that bear in 2 years","What can I grow in partial shade?","How does bulk pricing work?","Exotic fruits for a hot, dry place"];
+function catalogueText(){
+  const rows = PLANTS.map(p=>[p.id,p.n,CAT_LABEL[p.c]+(p.s?"/"+p.s:""),p.p,bulkPrice(p),BULK_AT[p.sz],p.r,SIZE_LABEL[p.sz],p.sp?p.sp.join("x")+" ft":"",p.ex||"",p.t?shortT(p.t):"",p.ty||"",p.b||"",p.y||"",p.st?"in stock":"out of stock",p.sample?"sample item":""].join(" | "));
+  const inputs = INPUTS.map(i=>`${i.id} | ${i.n} | ${i.pack} | Rs ${i.price} | GST ${i.gst}%`).join("\n");
+  return "PLANTS (id | name | category | online price Rs | bulk price Rs | bulk from qty | list price Rs | size | spacing | sunlight | temperature | propagation | bears in | yield | stock | note)\n"+rows.join("\n")+"\n\nFARM INPUTS (id | name | pack | price | GST)\n"+inputs;
+}
+const ASK_RULES = () => `You are the plant expert for Hasiru Agro, a Bengaluru nursery and farm-development company (incubated by UAS Dharwad) that sells saplings to farmers and land owners.
+Answer the customer's question using ONLY the catalogue below. Rules:
+- Every time you name a catalogue plant or input, write its id in double square brackets right after the name, e.g. "Alphonoso Mango [[HA0011]]". Never invent ids.
+- Prices are in rupees, written like "Rs 490". Mention the bulk price and bulk quantity when the customer talks about many plants or an acreage. Bulk price applies when the quantity of that plant reaches its bulk quantity.
+- Prefer plants that are in stock. If you mention an out-of-stock plant, say so.
+- Plants per acre = 43,560 / (spacing x spacing in ft). Use the catalogue spacing when you calculate.
+- If the catalogue does not hold the answer (for example soil advice, pests, or a plant we do not sell), say that briefly, give short general guidance only if you are confident, and suggest calling the Hasiru Agro team.
+- Keep answers short: 2 to 6 sentences, or a short bulleted list of up to 6 plants. Plain text with "- " bullets and **bold** only. No tables, no headings, no em dashes.
+- Delivery: nursery pickup free; Bengaluru weekly delivery every Saturday; outstation delivery by distance. Live plants: no cancellation or return.
+
+CATALOGUE
+${catalogueText()}`;
+
+// ---- local fallback: keyword search over the catalogue ----
+function localAnswer(q){
+  const t=q.toLowerCase(), words=t.replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(w=>w.length>2);
+  if(/bulk|discount|wholesale/.test(t)) return {text:`Every plant has an online price and a lower bulk price. The bulk price applies once you order a plant's bulk quantity: **${BULK_AT.L} for large trees, ${BULK_AT.M} for medium trees and ${BULK_AT.S} for small plants**. Bulk prices are about 28% below the online price. In the shop and cart the price drops automatically when you cross the quantity.`,ids:[]};
+  if(/deliver|transport|ship|truck/.test(t)) return {text:"You can pick up free at our Bengaluru nursery, choose our **Bengaluru weekly delivery** (every Saturday, flat rate by vehicle) or **outstation delivery** charged by distance. The cart shows how full your truck is so you can add more at the same delivery cost.",ids:[]};
+  let list=PLANTS.slice(); const all=list.length;
+  if(/timber|wood|forestry/.test(t)) list=list.filter(p=>p.c==="timber");
+  else if(/fruit|mango|guava|orange|lemon|jack|chikku|sapota|litchi|ber|lime/.test(t)&&!/spice|plantation/.test(t)) list=list.filter(p=>p.c==="fruit");
+  else if(/spice|pepper|cardamom|clove|nutmeg|cinnamon/.test(t)) list=list.filter(p=>p.s==="Spices");
+  else if(/plantation|coconut|areca|coffee|cocoa/.test(t)) list=list.filter(p=>p.s==="Plantation");
+  else if(/biomass|mulch|green manure|support/.test(t)) list=list.filter(p=>p.s==="Biomass");
+  if(/exotic/.test(t)) list=list.filter(p=>p.s==="Exotic"); if(/desi|native|local/.test(t)) list=list.filter(p=>p.s==="Desi");
+  const price=t.match(/(?:under|below|less than|within|upto|up to)\s*(?:rs\.?|₹)?\s*(\d+)/); if(price) list=list.filter(p=>p.p<=+price[1]);
+  if(/shade/.test(t)) list=list.filter(p=>/shade/i.test(p.ex||""));
+  { const st=list.filter(p=>p.st); if(st.length) list=st; } // prefer in-stock plants
+  const yrs=t.match(/(\d)\s*year/); if(yrs) list=list.filter(p=>{const m=String(p.b||"").match(/(\d+)/); return m&&+m[1]<=+yrs[1]});
+  const named=list.filter(p=>words.some(w=>p.n.toLowerCase().includes(w)&&!["tree","trees","plant","plants","fruit","fruits","timber","stock","best","which","what","farm","acre"].includes(w)));
+  if(named.length) list=named;
+  else if(list.length===PLANTS.filter(p=>p.st).length && all===PLANTS.length) list=[]; // no filter or name matched
+  list=list.sort((a,b)=>(b.f-a.f)||(b.st-a.st)).slice(0,6);
+  if(!list.length) return {text:"I could not find a matching plant in our catalogue. Try a plant name, a category (timber, fruiting, spices, plantation) or a price, or call our team for advice.",ids:[]};
+  const lines=list.map(p=>`- ${p.n} [[${p.id}]]: Rs ${p.p}, bulk Rs ${bulkPrice(p)} from ${BULK_AT[p.sz]}${p.sp?`, spacing ${p.sp[0]} x ${p.sp[1]} ft`:""}${p.b?`, bears in ${p.b}`:""}${p.st?"":" (out of stock)"}`);
+  return {text:`Here is what matches in our catalogue:\n${lines.join("\n")}`,ids:list.map(p=>p.id)};
+}
+
+// ---- rendering ----
+function mdLite(src){
+  const ids=[];
+  let h=esc(src).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+  h=h.replace(/\[\[([A-Za-z0-9-]+)\]\]/g,(m,id)=>{ const p=BY_ID[id]||IN_BY_ID[id]; if(!p) return ""; if(!ids.includes(id)) ids.push(id); return `<button class="pchip" onclick="askAdd('${id}')" title="Add to cart">+ cart</button>` });
+  const out=[]; let ul=false;
+  h.split(/\n/).forEach(l=>{ const b=l.match(/^\s*[-*•]\s+(.*)/);
+    if(b){ if(!ul){out.push("<ul>");ul=true} out.push(`<li>${b[1]}</li>`) }
+    else { if(ul){out.push("</ul>");ul=false} if(l.trim()) out.push(`<p>${l}</p>`) } });
+  if(ul) out.push("</ul>");
+  return {html:out.join(""),ids};
+}
+function askAdd(id){ addExtra(id); toast((BY_ID[id]||IN_BY_ID[id]).n+" added to cart"); refreshAskRails() }
+function msgHTML(m,i){
+  if(m.role==="me") return `<div class="msg me">${esc(m.text)}</div>`;
+  if(m.pending && !m.text) return `<div class="msg bot"><span class="thinking">${SAMPLE?"Checking the catalogue...":"Searching..."}</span></div>`;
+  const r=mdLite(m.text), plants=r.ids.filter(id=>BY_ID[id]).slice(0,8);
+  return `<div class="msg bot">${r.html}${!m.pending&&plants.length?`<div class="rail" data-rail="${i}">${plants.map(id=>productCard(BY_ID[id])).join("")}</div>`:""}${m.note?`<div class="src">${esc(m.note)}</div>`:""}</div>`;
+}
+function renderChat(){ $("#chat").innerHTML = ASK.msgs.map(msgHTML).join("") }
+function refreshAskRails(){ if(route()==="ask") renderChat() }
+function renderAsk(){
+  $("#askSugg").innerHTML = ASK_SUGG.map(q=>`<button type="button" onclick="ask(this.textContent)">${esc(q)}</button>`).join("");
+  $("#askSugg").hidden = ASK.msgs.length>0;
+  const m=$("#askMode"); m.classList.toggle("ai",!!SAMPLE); m.innerHTML=`<i></i>${SAMPLE?"AI answers":"Catalogue search (AI runs on the live site)"}`;
+  if(!ASK.msgs.length) ASK.msgs.push({role:"bot",text:"Hello! Ask me about any plant we sell: price, bulk rate, spacing, sunlight, when it fruits, or what suits your land."});
+  renderChat();
+}
+async function ask(q){
+  q=String(q||"").trim(); if(!q||askBusy) return;
+  $("#askQ").value=""; $("#askSugg").hidden=true;
+  ASK.msgs.push({role:"me",text:q});
+  const bot={role:"bot",text:"",pending:true}; ASK.msgs.push(bot); renderChat(); scrollChat();
+  askBusy=true; $("#askBtn").disabled=true;
+  if(SAMPLE){
+    ASK.turns.push({role:"user",content:q});
+    askCtl=new AbortController();
+    try{
+      const {text,truncated}=await SAMPLE([{role:"user",content:ASK_RULES()},...ASK.turns.slice(-8)],{cache:false,modelTier:"quick",signal:askCtl.signal,
+        onText:({text})=>{ bot.text=text; renderChat(); }});
+      bot.text=text; ASK.turns.push({role:"assistant",content:text}); if(truncated) bot.note="Answer cut short. Ask a narrower question.";
+    }catch(e){
+      ASK.turns.pop();
+      if(["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"].includes(e.code)){ SAMPLE=null; renderAsk(); const l=localAnswer(q); bot.text=l.text; bot.note="AI is off for this view, so this answer comes from catalogue search."; }
+      else if(e.code==="rate_limited"){ bot.text=e.text||""; bot.note="Too many questions at once. Wait a moment and ask again."; }
+      else if(e.code==="refused"){ bot.text="I can only help with plants and farming questions."; }
+      else if(e.code!=="cancelled"){ const l=localAnswer(q); bot.text=(e.text?e.text+"\n\n":"")+l.text; bot.note="The AI answer was interrupted, so the list comes from catalogue search."; }
+    }
+  } else {
+    await new Promise(r=>setTimeout(r,350));
+    const l=localAnswer(q); bot.text=l.text; bot.note="Catalogue search. On the live site an AI model answers in full sentences using the same data.";
+  }
+  bot.pending=false; askBusy=false; $("#askBtn").disabled=false; renderChat(); scrollChat();
+}
+function scrollChat(){ const c=$("#chat").lastElementChild; if(c) c.scrollIntoView({block:"nearest",behavior:"smooth"}) }
+$("#askForm").addEventListener("submit",e=>{ e.preventDefault(); ask($("#askQ").value) });
+if(window.claude && typeof window.claude.use==="function"){
+  window.claude.use("sample").then(s=>{ if(s){ SAMPLE=s; if(route()==="ask") renderAsk() } }).catch(()=>{});
+}
+
 /* ---------------- global render + routing ---------------- */
 function renderBadges(){
   const n=Object.values(S.cart).reduce((a,l)=>a+l.qty,0), T=totals();
@@ -1025,7 +1179,7 @@ function renderBadges(){
   $("#mbarT").textContent=n?inr(T.total-T.ship):"";
   $("#mbar").classList.toggle("on",n>0 && route()!=="cart");
 }
-function route(){ const h=location.hash.slice(1); return ["home","shop","choose","reco","cart"].includes(h)?h:"home" }
+function route(){ const h=location.hash.slice(1); return ["home","shop","choose","reco","cart","ask"].includes(h)?h:"home" }
 function renderAll(){
   const r=route(), y=window.scrollY;
   renderBadges();
@@ -1033,6 +1187,7 @@ function renderAll(){
   if(r==="shop") renderShop();
   if(r==="cart") renderCart();
   if(r==="choose") renderWizard();
+  if(r==="ask") refreshAskRails();
   window.scrollTo(0,y);
 }
 function go(){
@@ -1048,6 +1203,7 @@ function show(r){
   if(r==="choose") renderWizard();
   if(r==="reco"){ if(!S.loc) S.loc=PLACES.find(p=>p[0]==="Mysuru"); renderReco() }
   if(r==="cart") renderCart();
+  if(r==="ask") renderAsk();
   renderBadges();
 }
 
