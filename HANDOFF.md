@@ -5,7 +5,7 @@ Last updated: 2026-10-16. Resume from here.
 ## Goal
 Hasiru Agro (Bengaluru nursery + farm-development company, incubated by UAS Dharwad) wants a new site that is **primarily plant e-commerce** (farm-scale buyers) with farm-development services as a second pillar. Deliverables:
 1. **Done:** formatted Excel listing the features and the data their team must fill per product.
-2. **Next:** a **single `.html` prototype file** with separate pages/screens showing the **main features only** (no standard e-com pages like account, product detail, policies), in Hasiru Agro brand language.
+2. **Built (2026-10-16):** `hasiru-agro-prototype.html`, a **single `.html` prototype file** with separate pages/screens showing the **main features only** (no standard e-com pages like account, product detail, policies), in Hasiru Agro brand language.
 
 ## Files in this folder
 | File | What |
@@ -18,6 +18,8 @@ Hasiru Agro (Bengaluru nursery + farm-development company, incubated by UAS Dhar
 | `Hasiru-Agro-Website-Data-Sheet.xlsx` | **Deliverable 1** (built by `_work/build_xlsx.py`) |
 | `_work/catalog.json` | Compact catalogue for the prototype, 192 plants (see schema below) |
 | `_work/products.json` | Full parsed CSV rows |
+| `hasiru-agro-prototype.html` | **Deliverable 2**, self-contained (catalogue + logo inlined). Do not edit directly |
+| `_work/prototype.template.html` | Prototype source. Rebuild: `python3 _work/build_prototype.py` |
 | `_work/build_xlsx.py` | Rebuild Excel: `python3 _work/build_xlsx.py _work/products.json Hasiru-Agro-Website-Data-Sheet.xlsx` |
 
 Current hasiruagro.com (WODO-built static services site) source: `../hasiru-agro/Latest/` (images in `Latest/images/`, also live at `https://hasiruagro.com/images/<name>.webp`).
@@ -40,7 +42,7 @@ Current hasiruagro.com (WODO-built static services site) source: `../hasiru-agro
 7. **Input products:** invent sample products/prices.
 8. **Integration (real build, later):** only **inventory + orders sync to hasiru-ops** (ops.hasiruagro.com, client's Next.js/Supabase ERP). Everything else lives in the new e-com admin panel. Stack for real build not decided yet.
 
-## Prototype spec (single HTML, not yet built)
+## Prototype spec (single HTML, built)
 One file, hash-routed screens, a top switcher bar labelled "Prototype, sample data". Mobile-first, responsive. Shared in-memory cart across screens.
 
 **Screens:**
@@ -89,7 +91,7 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - Policy: no cancellation/return; damage + replacement policy wording pending from client.
 
 ## Next steps
-1. Build `hasiru agro/hasiru-agro-prototype.html` per the spec above (consider loading the `frontend-design` skill for polish).
-2. Visually verify with Playwright at 375 / 768 / 1440 (all 5 screens, wizard → OTP → recommendations → cart flow, canvas diagrams render).
+1. Done: prototype built and checked with Playwright at 375 / 768 / 1440 (full flow, no JS errors, no horizontal scroll). Product and live-site images could not load from the build sandbox, so only the fallback leaf showed; check real images in a normal browser.
+2. Review the prototype with Shyam, then share with the client.
 3. Send Excel to client; collect real formulas, model patterns, logistics, input prices.
 4. Later: decide stack for real build; admin panel; Kannada; payment; hasiru-ops sync (inventory + orders only).
