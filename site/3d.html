@@ -34,18 +34,17 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 #legend{display:flex;flex-direction:column;gap:5px;font-size:.78rem;margin-top:8px}
 #legend span{display:flex;align-items:center;gap:7px}
 #legend i{width:11px;height:11px;border-radius:50%;flex:none}
-#stats{font-size:.72rem;font-variant-numeric:tabular-nums;line-height:1.5;min-width:150px}
-#stats b{color:var(--gold);font-weight:600}
 #bottom{left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:flex-end;gap:10px;pointer-events:none}
 #bottom>*{pointer-events:auto}
 .btn{border:0;border-radius:99px;padding:10px 18px;font:600 .9rem var(--body);cursor:pointer;background:var(--gold);color:var(--forest-d)}
-.btn:focus-visible,.seg button:focus-visible,#pad button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.btn:focus-visible,.seg button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .right{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .sun{display:flex;align-items:center;gap:8px;font-size:.8rem}
 .sun input{accent-color:var(--gold);width:120px}
-#pad{display:grid;grid-template-columns:repeat(3,50px);grid-template-rows:repeat(2,50px);gap:6px}
-#pad button{border:0;border-radius:12px;background:var(--glass);color:#fff;font-size:1.2rem;touch-action:none;user-select:none;-webkit-user-select:none}
-#pad button:active{background:var(--forest-l)}
+#joy{width:128px;height:128px;border-radius:50%;position:relative;touch-action:none;user-select:none;-webkit-user-select:none;
+  background:radial-gradient(circle,rgba(15,43,31,.25) 0 55%,rgba(15,43,31,.45) 56%);border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.joy-knob{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe680,var(--gold) 60%,#d9a800);box-shadow:0 4px 12px rgba(0,0,0,.35),inset 0 -3px 6px rgba(0,0,0,.15);transition:transform .12s ease-out;pointer-events:none}
+#joy.active .joy-knob{transition:none}
 #hint{font-size:.78rem;max-width:260px}
 #info{position:fixed;z-index:6;left:50%;transform:translateX(-50%);top:calc(130px + env(safe-area-inset-top,0px));display:flex;gap:10px;align-items:center;max-width:min(360px,calc(100vw - 32px))}
 #info .role{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff}
@@ -58,7 +57,7 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 @keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
 [hidden]{display:none!important}
-@media(max-width:640px){h1{font-size:1.1rem}#legend{display:none}#stats{min-width:0}.sun input{width:90px}#hint{display:none}}
+@media(max-width:640px){h1{font-size:1.1rem}#legend{display:none}.sun input{width:90px}#hint{display:none}}
 </style>
 
 <div id="stage" aria-label="3D view of a planting patch"></div>
@@ -68,10 +67,9 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
   <div class="card">
     <div class="eyebrow">Hasiru Agro · 3D close-up, high quality test</div>
     <h1 id="title">Commercial model</h1>
-    <div class="seg" id="modelSeg"><button data-m="commercial" class="on">Commercial</button><button data-m="food">Food Forest</button></div>
+    <div class="seg" id="modelSeg"><button data-m="commercial" class="on">Commercial</button><button data-m="food">Food Forest</button><button data-m="miyawaki">Miyawaki</button></div>
     <div id="legend"></div>
   </div>
-  <div class="card" id="stats">Measuring...</div>
 </div>
 
 <div class="card ui" id="info" hidden></div>
@@ -79,10 +77,7 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 <div class="ui" id="bottom">
   <div>
     <div class="card" id="hint">Drag to rotate, pinch or scroll to zoom. Tap a plant to see what it is.</div>
-    <div id="pad" hidden>
-      <span></span><button data-mv="f" aria-label="Walk forward">&#9650;</button><span></span>
-      <button data-mv="l" aria-label="Turn left">&#9664;</button><button data-mv="b" aria-label="Walk back">&#9660;</button><button data-mv="r" aria-label="Turn right">&#9654;</button>
-    </div>
+    <div id="joy" hidden aria-label="Movement stick: drag to walk"><div class="joy-knob" id="knob"></div></div>
   </div>
   <div class="right">
     <label class="card sun" for="sunR">Sun <input type="range" id="sunR" min="0" max="100" value="62"></label>
@@ -108,21 +103,27 @@ const PLANTS={
   jack:{n:"Sadananda Jackfruit",arch:"mango"}, raspuri:{n:"Raspuri Mango",arch:"mango"}, chikku:{n:"Chikku (Cricket ball)",arch:"guava"},
   honge:{n:"Honge (Pongamia)",arch:"timber"}, redsandal:{n:"Red Sandalwood",arch:"timber"},
   moringa:{n:"Moringa PKM-1",arch:"shrub"}, lemon:{n:"Kagzi Lemon",arch:"guava"},
+  amla:{n:"Amla",arch:"guava"}, saraca:{n:"Saraca asoca (Ashoka)",arch:"timber"}, jamun:{n:"Early dwarf white Jamun",arch:"mango"}, subabul:{n:"Subabul",arch:"shrub"},
 };
 const MODELS={
   commercial:{n:"Commercial model",col:7.5,row:20,nx:13,ny:3,rows:["MOXOXO"],plants:{M:["mango","guava"],X:["mahogany","sandal"],O:["gliricidia","banana"]}},
+  miyawaki:{n:"Miyawaki model",col:2,row:2,nx:7,ny:7,mix:{M:.1,X:.5,O:.4},scale:.42,plants:{M:["jack","amla"],X:["honge","saraca","jamun"],O:["subabul","moringa","gliricidia"]}},
   food:{n:"Food Forest model",col:10,row:10,nx:7,ny:7,rows:["MOXOMOX","OXOXOXO"],plants:{M:["jack","raspuri","chikku"],X:["honge","redsandal"],O:["banana","moringa","lemon"]}},
 };
+function roleAt(m,r,c,rnd){ // fixed row pattern, or a random layer mix (Miyawaki)
+  if(m.mix){ const v=rnd(); return v<m.mix.M?"M":v<m.mix.M+m.mix.X?"X":"O" }
+  const md=(a,n)=>((a%n)+n)%n, pat=m.rows[md(r,m.rows.length)]; return pat[md(c,pat.length)];
+}
 function patch(key){
-  const m=MODELS[key], pts=[], seen={M:0,X:0,O:0};
-  for(let r=0;r<m.ny;r++) for(let c=0;c<m.nx;c++){ const pat=m.rows[r%m.rows.length], k=pat[c%pat.length], list=m.plants[k]; pts.push({x:c*m.col,z:r*m.row,k,id:list[seen[k]++%list.length]}) }
+  const m=MODELS[key], pts=[], seen={M:0,X:0,O:0}, rnd=rng(7);
+  for(let r=0;r<m.ny;r++) for(let c=0;c<m.nx;c++){ const k=roleAt(m,r,c,rnd), list=m.plants[k]; pts.push({x:c*m.col,z:r*m.row,k,id:list[seen[k]++%list.length]}) }
   return pts;
 }
 function surround(key){ // pattern continued one patch-width on every side (no picking, lighter foliage)
-  const m=MODELS[key], pts=[], seen={M:0,X:0,O:0}, md=(a,n)=>((a%n)+n)%n;
+  const m=MODELS[key], pts=[], seen={M:0,X:0,O:0}, rnd=rng(99);
   for(let r=-m.ny;r<2*m.ny;r++) for(let c=-m.nx+1;c<2*m.nx-1;c++){
     if(r>=0&&r<m.ny&&c>=0&&c<m.nx) continue;
-    const pat=m.rows[md(r,m.rows.length)], k=pat[md(c,pat.length)], list=m.plants[k];
+    const k=roleAt(m,r,c,rnd), list=m.plants[k];
     pts.push({x:c*m.col,z:r*m.row,k,id:list[seen[k]++%list.length],ghost:true}) }
   return pts;
 }
@@ -205,7 +206,8 @@ const ARCH={
 };
 
 /* ---------- scene ---------- */
-let R,S,C,CTRL,SUN,V={walk:false,yaw:0,pitch:0,mv:{f:0,b:0,l:0,r:0}},PICK=[],CUR="commercial",GROUP=null,frames=0,fpsT=0,fps=0,buildMs=0,tris=0,calls=0;
+const QM=new URLSearchParams(location.search).get("m");
+let R,S,C,CTRL,SUN,V={walk:false,yaw:0,pitch:0,mv:{f:0,b:0,l:0,r:0}},PICK=[],CUR=MODELS[QM]?QM:"commercial",GROUP=null,frames=0,fpsT=0,fps=0,buildMs=0,tris=0,calls=0;
 function init(){
   const host=$("#stage");
   R=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
@@ -222,6 +224,7 @@ function init(){
   SUN=new THREE.DirectionalLight(0xfff0d8,1.55); SUN.castShadow=true; SUN.shadow.mapSize.set(4096,4096); SUN.shadow.bias=-.0004; SUN.shadow.normalBias=.04; S.add(SUN,SUN.target);
   C=new THREE.PerspectiveCamera(48,host.clientWidth/host.clientHeight,.1,2500);
   CTRL=new THREE.OrbitControls(C,R.domElement); CTRL.enableDamping=true; CTRL.maxPolarAngle=Math.PI*.47; CTRL.minDistance=6; CTRL.maxDistance=260;
+  document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x.dataset.m===CUR));
   build(CUR);
   step("Ready",100); $("#loading").hidden=true; $("#loading").classList.add("over");
   wire();
@@ -265,9 +268,9 @@ function build(key){
   // collect geometry per archetype
   const bark=[], leafInst={}, fruitInst=[], bananaLeaves=[], bananaStems=[], mangoInst=[];
   all.forEach((p,i)=>{
-    const pl=PLANTS[p.id], A=ARCH[pl.arch], rot=r()*6.28, s=.9+r()*.2, ox=p.x, oz=p.z, G=!!p.ghost;
-    if(!G){ const mulch=new THREE.Mesh(new THREE.CircleGeometry(pl.arch==="banana"||pl.arch==="shrub"?1.8:2.6,28),mulchMat); mulch.rotation.x=-Math.PI/2; mulch.position.set(ox,baseY+.02,oz); mulch.receiveShadow=true; GROUP.add(mulch);
-    const ring=new THREE.Mesh(new THREE.RingGeometry(2.7,3.05,40),ringMats[p.k]); ring.rotation.x=-Math.PI/2; ring.position.set(ox,baseY+.03,oz); ring.userData.ring=1; GROUP.add(ring); }
+    const pl=PLANTS[p.id], A=ARCH[pl.arch], rot=r()*6.28, SC=m.scale||1, s=(.9+r()*.2)*SC, ox=p.x, oz=p.z, G=!!p.ghost;
+    if(!G){ const mulch=new THREE.Mesh(new THREE.CircleGeometry((pl.arch==="banana"||pl.arch==="shrub"?1.8:2.6)*SC,28),mulchMat); mulch.rotation.x=-Math.PI/2; mulch.position.set(ox,baseY+.02,oz); mulch.receiveShadow=true; GROUP.add(mulch);
+    const ring=new THREE.Mesh(new THREE.RingGeometry(2.7*SC,3.05*SC+.05,40),ringMats[p.k]); ring.rotation.x=-Math.PI/2; ring.position.set(ox,baseY+.03,oz); ring.userData.ring=1; GROUP.add(ring); }
     const at=(x,y,z)=>new THREE.Vector3(ox+(x*Math.cos(rot)-z*Math.sin(rot))*s,baseY+y*s,oz+(x*Math.sin(rot)+z*Math.cos(rot))*s);
     let pickH=8;
     if(MANGO&&!G&&(p.id==="mango"||p.id==="raspuri")){
@@ -290,7 +293,7 @@ function build(key){
       pickH=ccy+cry;
     }
     if(G) return;
-    const pick=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,pickH,8),new THREE.MeshBasicMaterial({visible:false})); pick.position.set(ox,baseY+pickH/2,oz); pick.userData={p,pl}; GROUP.add(pick); PICK.push(pick);
+    const pick=new THREE.Mesh(new THREE.CylinderGeometry(2.6*SC,2.6*SC,pickH*SC,8),new THREE.MeshBasicMaterial({visible:false})); pick.position.set(ox,baseY+pickH*SC/2,oz); pick.userData={p,pl}; GROUP.add(pick); PICK.push(pick);
   });
   // bark mesh (all trees in one draw call)
   const barkT=canvasTex(128,256,(g,w,h)=>{ noiseFill(g,w,h,"#5e4630",[[900,["#4a3524","#6e5439","#3c2a1c"],3]],21); g.strokeStyle="rgba(40,28,18,.6)"; for(let i=0;i<26;i++){ g.lineWidth=1+Math.random()*2; g.beginPath(); const x=Math.random()*w; g.moveTo(x,0); g.bezierCurveTo(x+6,h*.3,x-6,h*.6,x+3,h); g.stroke() } },[2,3]);
@@ -326,7 +329,7 @@ function build(key){
   const dist=Math.max(span,30)*1.15*(innerWidth<innerHeight?1.5:1);
   V.home=()=>{ C.position.set(cx+dist*.45,dist*.62+14,cz+dist*.8); CTRL.target.set(cx,3,cz); CTRL.update() };
   V.fogAir=[dist*1.25,dist*3.2]; V.fogWalk=[30,Math.max(110,span*2.2)];
-  V.bounds=[-m.col*2-8,W+m.col*2+8,-m.row*2-8,D+m.row*2+8]; V.start=[-m.col*.5,m.row/2];
+  V.bounds=[-m.nx*m.col-10,W+m.nx*m.col+10,-m.ny*m.row-10,D+m.ny*m.row+12]; V.start=m.mix?[cx,D+m.ny*m.row+8,0]:[-m.col*.5,m.row/2,-Math.PI/2];
   setWalk(false); V.home(); setSun(+$("#sunR").value);
   // legend
   $("#title").textContent=m.n;
@@ -334,16 +337,23 @@ function build(key){
   R.render(S,C); buildMs=performance.now()-t0;
 }
 function setWalk(on){
-  V.walk=on; CTRL.enabled=!on; V.mv={f:0,b:0,l:0,r:0}; $("#pad").hidden=!on; $("#hint").hidden=on; $("#walkBtn").textContent=on?"Back to aerial view":"Walk in";
+  V.walk=on; CTRL.enabled=!on; V.mv={f:0,b:0,l:0,r:0,sl:0,sr:0}; V.joy={x:0,y:0}; $("#joy").hidden=!on;
+  $("#hint").textContent=on?"Use the stick to walk. Drag anywhere else to look around.":"Drag to rotate, pinch or scroll to zoom. Tap a plant to see what it is."; $("#walkBtn").textContent=on?"Back to aerial view":"Walk in";
   const f=on?V.fogWalk:V.fogAir; if(f){ S.fog.near=f[0]; S.fog.far=f[1] }
-  if(on){ C.position.set(V.start[0],5.5,V.start[1]); V.yaw=-Math.PI/2; V.pitch=-.04 } else if(V.home) V.home();
+  if(on){ C.position.set(V.start[0],5.5,V.start[1]); V.yaw=V.start[2]; V.pitch=-.04 } else if(V.home) V.home();
 }
 function wire(){
   $("#walkBtn").onclick=()=>setWalk(!V.walk);
   $("#sunR").oninput=e=>setSun(+e.target.value);
   document.querySelectorAll("#modelSeg button").forEach(b=>b.onclick=()=>{ document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x===b)); CUR=b.dataset.m; $("#info").hidden=true; step("Planting "+MODELS[CUR].n.replace(" model","")+" trees...",70,"Preparing your farm view"); nextFrame().then(()=>{ build(CUR); $("#loading").hidden=true }) });
-  document.querySelectorAll("#pad button").forEach(b=>{ const k=b.dataset.mv, on=e=>{e.preventDefault();V.mv[k]=1}, off=()=>V.mv[k]=0; b.addEventListener("pointerdown",on); ["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,off)) });
-  const key=e=>{ if(!V.walk) return; const k={ArrowUp:"f",w:"f",W:"f",ArrowDown:"b",s:"b",S:"b",ArrowLeft:"l",a:"l",A:"l",ArrowRight:"r",d:"r",D:"r"}[e.key]; if(!k) return; e.preventDefault(); V.mv[k]=e.type==="keydown"?1:0 };
+  const joy=$("#joy"), knob=$("#knob"), JR=42; let jid=null;
+  const joyMove=e=>{ const b=joy.getBoundingClientRect(); let x=e.clientX-(b.left+b.width/2), y=e.clientY-(b.top+b.height/2); const d=Math.hypot(x,y); if(d>JR){x*=JR/d;y*=JR/d}
+    knob.style.transform=`translate(${x}px,${y}px)`; V.joy={x:x/JR,y:y/JR} };
+  joy.addEventListener("pointerdown",e=>{ e.preventDefault(); jid=e.pointerId; joy.setPointerCapture(jid); joy.classList.add("active"); joyMove(e) });
+  joy.addEventListener("pointermove",e=>{ if(e.pointerId===jid) joyMove(e) });
+  const joyEnd=e=>{ if(e.pointerId!==jid) return; jid=null; joy.classList.remove("active"); knob.style.transform=""; V.joy={x:0,y:0} };
+  ["pointerup","pointercancel"].forEach(ev=>joy.addEventListener(ev,joyEnd));
+  const key=e=>{ if(!V.walk) return; const k={ArrowUp:"f",w:"f",W:"f",ArrowDown:"b",s:"b",S:"b",ArrowLeft:"l",ArrowRight:"r",a:"sl",A:"sl",d:"sr",D:"sr"}[e.key]; if(!k) return; e.preventDefault(); V.mv[k]=e.type==="keydown"?1:0 };
   addEventListener("keydown",key); addEventListener("keyup",key);
   const el=R.domElement, ray=new THREE.Raycaster(), ptr=new THREE.Vector2(); let down=null;
   el.addEventListener("pointerdown",e=>{ down=[e.clientX,e.clientY]; if(V.walk) V.drag=[e.clientX,e.clientY] });
@@ -357,12 +367,11 @@ function wire(){
 let last=performance.now();
 function loop(now){
   const dt=Math.min(.05,(now-last)/1000); last=now; WIND.value=now/1000;
-  if(V.walk){ V.yaw+=(V.mv.l-V.mv.r)*1.6*dt; const sp=(V.mv.f-V.mv.b)*9*dt;
-    C.position.x=Math.max(V.bounds[0],Math.min(V.bounds[1],C.position.x-Math.sin(V.yaw)*sp)); C.position.z=Math.max(V.bounds[2],Math.min(V.bounds[3],C.position.z-Math.cos(V.yaw)*sp));
+  if(V.walk){ V.yaw+=(V.mv.l-V.mv.r)*1.6*dt;
+    const j=V.joy||{x:0,y:0}, fw=(V.mv.f-V.mv.b)-j.y, st=(V.mv.sr-V.mv.sl)+j.x, sp=8*dt, sn=Math.sin(V.yaw), cs=Math.cos(V.yaw);
+    C.position.x=Math.max(V.bounds[0],Math.min(V.bounds[1],C.position.x+(-sn*fw+cs*st)*sp)); C.position.z=Math.max(V.bounds[2],Math.min(V.bounds[3],C.position.z+(-cs*fw-sn*st)*sp));
     C.position.y=5.5; C.rotation.order="YXZ"; C.rotation.set(V.pitch,V.yaw,0) } else CTRL.update();
   R.render(S,C);
-  frames++; if(now-fpsT>1000){ fps=Math.round(frames*1000/(now-fpsT)); frames=0; fpsT=now; tris=R.info.render.triangles; calls=R.info.render.calls;
-    $("#stats").innerHTML=`3D engine download <b>${(tLib/1000).toFixed(1)} s</b><br>Scene build <b>${Math.round(buildMs)} ms</b><br>Frame rate <b>${fps} fps</b><br>${calls} draw calls · ${(tris/1000).toFixed(0)}k triangles<br>Mango model <b>${MANGO?mangoKB+" KB":"not loaded"}</b>` }
   requestAnimationFrame(loop);
 }
 </script>

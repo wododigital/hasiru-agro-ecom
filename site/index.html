@@ -952,7 +952,7 @@ function modelHTML(key,open){
    <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary>
    <div class="mb"><div class="mgrid">
     <div>
-      <div class="cv"><button class="btn btn-forest btn-sm v3dbtn" onclick="open3D('${key}')">&#9651; View 3D close-up</button><canvas id="cv-${key}" onmousemove="canvasHover(event)" onmouseleave="this.parentElement.querySelector('.tip').style.display='none'" aria-label="${m.n} planting diagram, 36 by 36 feet"></canvas><div class="tip"></div></div>
+      <div class="cv"><button class="btn btn-forest btn-sm v3dbtn" onclick="open3D('${key}')">&#9651; View in 3D</button><canvas id="cv-${key}" onmousemove="canvasHover(event)" onmouseleave="this.parentElement.querySelector('.tip').style.display='none'" aria-label="${m.n} planting diagram, 36 by 36 feet"></canvas><div class="tip"></div></div>
       <div class="legend">${["M","X","O"].map(r=>`<div class="lg"><span class="dot" style="background:${ROLE[r].col}">${r}</span><span><b>${r}</b> ${ROLE[r].n} <span class="tiny muted">${m.plants[r].map(id=>BY_ID[id].n).join(", ")}</span></span><span class="ct">${bc[r]}</span></div>`).join("")}</div>
       <div class="scale">${m.desc}<br><b>${bc.M+bc.X+bc.O} plants per 36 x 36 ft block</b> x ${blocks.toFixed(1)} blocks = about ${Math.round((bc.M+bc.X+bc.O)*blocks).toLocaleString("en-IN")} plants for your land.</div>
       <div class="video" style="margin-top:12px;background-image:url('${LIVE}${key==="miyawaki"?"nursery_saplings_shade_net_hasiru_agro.webp":key==="food"?"mulching_sapling_with_organic_matter_hasiru_agro.webp":"planting_saplings_truck_loading_hasiru_agro.webp"}')"><div class="pl" style="width:54px;height:54px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="cap small">Watch: ${m.video}</div></div>
@@ -1036,7 +1036,12 @@ function loadThree(){
   threeP.catch(()=>{threeP=null});
   return threeP;
 }
+// The high-quality view (3d.html, realistic tree models) is hosted next to this page on the live site.
+const HQ3D = /^https?:$/.test(location.protocol) && !window.claude;
 async function open3D(key){
+  if(HQ3D){
+    window.open("3d.html?m="+key,"_blank","noopener"); return;
+  }
   $("#v3d").classList.add("on"); document.body.style.overflow="hidden";
   $("#v3dTitle").textContent=MODELS[key].n+" model";
   const msg=$("#v3dMsg"), stepTo=(t,p)=>{ $("#v3dStep").textContent=t; $("#v3dBar").style.width=p+"%" };
@@ -1454,7 +1459,7 @@ document.querySelectorAll("#landUnit button").forEach(b=>b.addEventListener("cli
 }));
 $("#purSel").addEventListener("change",e=>{S.purpose=e.target.value;renderReco()});
 let rz; window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{ if(route()==="reco") document.querySelectorAll(".model[open] canvas").forEach(cv=>drawModel(cv.id.slice(3),cv)) },150)});
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCalc(); if($("#v3d").classList.contains("on")) close3D() } });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCalc(); if($("#v3d").classList.contains("on")) close3D(); } });
 
 renderBand();
 mountCalc($("#calcHome"),"ch");
