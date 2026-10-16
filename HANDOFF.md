@@ -86,6 +86,12 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - Miyawaki 3-5 plants/m²; compost 5-10 kg/m² (IVN Tiny Forest handbook). Triangular spacing gives ~15% more plants than square.
 - Diagram inspiration: AgroForest Designer, Garden Map Maker (grid + guild legend).
 
+## 3D close-up (proof of concept, 2026-10-16)
+- "View 3D close-up" on each model's diagram opens a three.js view (three@0.128.0 from jsDelivr, loaded only when opened).
+- Shows the pattern repeated once in each direction, max ~50 plants (Commercial 13 x 3, Food Forest 7 x 7, Miyawaki 7 x 7), at true spacing (1 unit = 1 ft), with a 5.5 ft person for scale, spacing labels, M/X/O basin markers, tap to identify, and a walk mode (arrow pad / WASD).
+- Plants use standard display sizes per type (canopy, small fruit, timber, palm, banana, shrub), no growth scaling. Miyawaki shown at 0.45x as young saplings.
+- Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
+
 ## SRS quirks to remember
 - Section 1.7 heading is misplaced: the "after Why Choose Us, before Testimonials" placement text belongs to DIY videos.
 - Journey 2 in section 34 is written bottom-up (read in reverse).

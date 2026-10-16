@@ -24,6 +24,7 @@ input,select{font:inherit;color:inherit}
 img{display:block;max-width:100%}
 .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
 .muted{color:var(--muted)}.small{font-size:.86rem}.tiny{font-size:.75rem}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 /* prototype switcher */
@@ -276,6 +277,30 @@ section.blk{padding:48px 0}
 .promo{background:var(--gold);color:var(--forest-d);border-radius:12px;padding:10px 12px;font-size:.85rem;font-weight:600;margin-bottom:12px}
 .sugg-in{background:#fffbea;border:1.5px dashed #e6c54a;border-radius:var(--r);padding:14px;margin-bottom:16px}
 
+/* 3D close-up */
+.v3dbtn{position:absolute;top:18px;right:18px;z-index:3;box-shadow:0 4px 14px rgba(15,43,31,.25)}
+.modal.v3d{align-items:center;padding:0}
+.sheet3d{background:var(--cream);width:100%;max-width:1100px;height:100%;max-height:100%;display:flex;flex-direction:column;overflow:hidden}
+@media(min-width:761px){.modal.v3d{padding:24px}.sheet3d{border-radius:var(--rl);max-height:92vh}}
+.v3d-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px}
+.v3d-top b{font-size:1.25rem;color:var(--forest);font-weight:400}
+.v3d-stage{position:relative;flex:1;min-height:280px;background:#cfe6f2;overflow:hidden;touch-action:none}
+#v3dCanvas{position:absolute;inset:0}
+#v3dCanvas canvas{display:block;width:100%!important;height:100%!important}
+.v3d-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--forest);font-weight:600}
+.v3d-info{position:absolute;top:12px;left:12px;right:12px;margin:0 auto;max-width:360px;background:rgba(15,43,31,.92);color:#fff;border-radius:14px;padding:10px 14px;font-size:.88rem;display:flex;gap:10px;align-items:center}
+.v3d-info .role{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff;flex:none}
+.v3d-ctrls{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.v3d-chk{background:rgba(255,255,255,.9);border-radius:99px;padding:5px 12px}
+.v3d-hint{position:absolute;left:12px;bottom:12px;max-width:55%;font-size:.75rem;background:rgba(255,255,255,.88);border-radius:10px;padding:6px 10px;color:var(--forest-d)}
+.v3d-pad{position:absolute;left:12px;bottom:12px;display:grid;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px);gap:6px}
+.v3d-pad button{background:rgba(15,43,31,.85);color:#fff;border-radius:12px;font-size:1.2rem;user-select:none;-webkit-user-select:none;touch-action:none}
+.v3d-pad button:active{background:var(--forest-l)}
+.v3d-foot{padding:12px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.legend3d{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:.82rem}
+.legend3d span{display:inline-flex;align-items:center;gap:6px}
+.legend3d i{width:12px;height:12px;border-radius:50%;display:inline-block}
+
 /* ask AI */
 .ask{max-width:860px;margin:0 auto}
 .ask-hero{display:flex;gap:14px;align-items:center;margin-bottom:18px}
@@ -502,6 +527,24 @@ footer b{color:#fff}
   <button class="x" onclick="closeCalc()" aria-label="Close">&times;</button>
   <div class="eyebrow">Plant calculator</div><h3 style="margin-bottom:16px">How many plants fit your land?</h3>
   <div id="calcModalBody"></div>
+</div></div>
+<div class="modal v3d" id="v3d"><div class="sheet3d">
+  <div class="v3d-top"><div><div class="eyebrow" style="margin:0">3D close-up, illustrative</div><b id="v3dTitle" class="serif"></b></div><button class="x" onclick="close3D()" aria-label="Close 3D view">&times;</button></div>
+  <div class="v3d-stage" id="v3dStage">
+    <div id="v3dCanvas"></div>
+    <div class="v3d-msg" id="v3dMsg">Loading 3D view...</div>
+    <div class="v3d-info" id="v3dInfo" hidden></div>
+    <div class="v3d-hint" id="v3dHint">Drag to rotate, pinch or scroll to zoom. Tap a plant to see what it is.</div>
+    <div class="v3d-pad" id="v3dPad" hidden>
+      <span></span><button data-mv="f" aria-label="Walk forward">&#9650;</button><span></span>
+      <button data-mv="l" aria-label="Turn left">&#9664;</button><button data-mv="b" aria-label="Walk back">&#9660;</button><button data-mv="r" aria-label="Turn right">&#9654;</button>
+    </div>
+    <div class="v3d-ctrls">
+      <label class="check small v3d-chk"><input type="checkbox" id="v3dMarks" checked> M / X / O markers</label>
+      <button class="btn btn-gold btn-sm" id="v3dWalk" onclick="toggleWalk()">Walk in</button>
+    </div>
+  </div>
+  <div class="v3d-foot"><div class="legend3d" id="v3dLegend"></div><p class="small muted" id="v3dCap"></p></div>
 </div></div>
 <div class="toast" id="toast"></div>
 
@@ -904,7 +947,7 @@ function modelHTML(key,open){
    <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary>
    <div class="mb"><div class="mgrid">
     <div>
-      <div class="cv"><canvas id="cv-${key}" onmousemove="canvasHover(event)" onmouseleave="this.parentElement.querySelector('.tip').style.display='none'" aria-label="${m.n} planting diagram, 36 by 36 feet"></canvas><div class="tip"></div></div>
+      <div class="cv"><button class="btn btn-forest btn-sm v3dbtn" onclick="open3D('${key}')">&#9651; View 3D close-up</button><canvas id="cv-${key}" onmousemove="canvasHover(event)" onmouseleave="this.parentElement.querySelector('.tip').style.display='none'" aria-label="${m.n} planting diagram, 36 by 36 feet"></canvas><div class="tip"></div></div>
       <div class="legend">${["M","X","O"].map(r=>`<div class="lg"><span class="dot" style="background:${ROLE[r].col}">${r}</span><span><b>${r}</b> ${ROLE[r].n} <span class="tiny muted">${m.plants[r].map(id=>BY_ID[id].n).join(", ")}</span></span><span class="ct">${bc[r]}</span></div>`).join("")}</div>
       <div class="scale">${m.desc}<br><b>${bc.M+bc.X+bc.O} plants per 36 x 36 ft block</b> x ${blocks.toFixed(1)} blocks = about ${Math.round((bc.M+bc.X+bc.O)*blocks).toLocaleString("en-IN")} plants for your land.</div>
       <div class="video" style="margin-top:12px;background-image:url('${LIVE}${key==="miyawaki"?"nursery_saplings_shade_net_hasiru_agro.webp":key==="food"?"mulching_sapling_with_organic_matter_hasiru_agro.webp":"planting_saplings_truck_loading_hasiru_agro.webp"}')"><div class="pl" style="width:54px;height:54px"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div><div class="cap small">Watch: ${m.video}</div></div>
@@ -948,6 +991,176 @@ function addPackage(key){
   if(R.inputs.on) Object.entries(R.inq).forEach(([id,q])=>{ if(q>0) S.cart["p:"+id]={id,qty:q,pkg:true} });
   S.pkgName=MODELS[key].n; renderAll(); location.hash="cart"; window.scrollTo(0,0); toast(MODELS[key].n+" package added");
 }
+
+/* ---------------- 3D close-up of one patch ---------------- */
+// Shows the model's pattern repeated once in each direction (max ~50 plants), at true spacing.
+// Plants use standard display sizes per plant type, not growth-stage scaling.
+const THREE_SRC=["https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js","https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"];
+const PATCH={commercial:{nx:13,ny:3},food:{nx:7,ny:7},miyawaki:{nx:7,ny:7}};
+const ARCH={ // standard display sizes in ft
+  canopy:{h:12,w:10,n:"Large fruit tree",leaf:0x2f6b2f},
+  small:{h:8,w:6,n:"Small fruit tree",leaf:0x4f8f3a},
+  timber:{h:18,w:5,n:"Timber tree",leaf:0x3c6e3c},
+  palm:{h:16,w:9,n:"Palm",leaf:0x5d8f2e},
+  banana:{h:9,w:7,n:"Banana",leaf:0x77b347},
+  shrub:{h:6,w:4,n:"Shrub / biomass",leaf:0x5f9e3a},
+};
+const ARCH_BY_ID={"S-BAN":"banana","S-GLI":"shrub","S-SUB":"shrub","S-MOR":"shrub","HA0079":"small"};
+function archOf(p){
+  if(ARCH_BY_ID[p.id]) return ARCH_BY_ID[p.id];
+  if(p.c==="timber") return "timber";
+  if(/coconut|areca|palm/i.test(p.n)) return "palm";
+  if(p.c==="fruit") return (p.sz==="L"||/mango|jack|chikku|jamun|amla|tamarind/i.test(p.n))?"canopy":"small";
+  return "shrub";
+}
+function patchPoints(key){
+  const m=MODELS[key], P=PATCH[key], pts=[], rnd=rng(7), seen={M:0,X:0,O:0};
+  for(let r=0;r<P.ny;r++) for(let c=0;c<P.nx;c++){
+    let k;
+    if(m.rows){ const pat=m.rows[r%m.rows.length], unit=key==="commercial"?pat.slice(0,6):pat; k=unit[c%unit.length] }
+    else { const v=rnd(); k=v<m.mix.M?"M":v<m.mix.M+m.mix.X?"X":"O" }
+    const list=m.plants[k]; pts.push({x:c*m.col,z:r*m.row,k,id:list[seen[k]++%list.length]});
+  }
+  return pts;
+}
+let threeP=null, V=null;
+function loadThree(){
+  if(window.THREE&&window.THREE.OrbitControls) return Promise.resolve();
+  if(threeP) return threeP;
+  threeP=THREE_SRC.reduce((p,src)=>p.then(()=>new Promise((res,rej)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>rej(new Error(src));document.head.appendChild(s)})),Promise.resolve());
+  threeP.catch(()=>{threeP=null});
+  return threeP;
+}
+async function open3D(key){
+  $("#v3d").classList.add("on"); document.body.style.overflow="hidden";
+  $("#v3dTitle").textContent=MODELS[key].n+" model";
+  const msg=$("#v3dMsg"); msg.hidden=false; msg.textContent="Loading 3D view...";
+  try{ await loadThree() }catch(e){ msg.textContent="The 3D view could not load. Check your internet connection and try again."; return }
+  if(!$("#v3d").classList.contains("on")) return;
+  msg.hidden=true; build3D(key);
+}
+function close3D(){
+  $("#v3d").classList.remove("on"); document.body.style.overflow="";
+  if(!V) return;
+  cancelAnimationFrame(V.raf); V.controls.dispose(); V.renderer.dispose(); V.renderer.domElement.remove();
+  window.removeEventListener("keydown",V.onKey); window.removeEventListener("keyup",V.onKey); window.removeEventListener("resize",V.onResize);
+  V=null;
+}
+function mkLabel(T,text,w){
+  const c=document.createElement("canvas"); c.width=256; c.height=96; const g=c.getContext("2d");
+  g.fillStyle="rgba(15,43,31,.88)"; g.fillRect(8,12,240,72); g.fillStyle="#FDC717"; g.font="700 46px Outfit, Arial, sans-serif"; g.textAlign="center"; g.textBaseline="middle"; g.fillText(text,128,50);
+  const s=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),depthTest:false,transparent:true})); s.scale.set(w,w*0.375,1); s.renderOrder=10; return s;
+}
+function dimLine(T,scene,a,b,text,w){
+  const mat=new T.LineBasicMaterial({color:0xFDC717,depthTest:false});
+  const geo=new T.BufferGeometry().setFromPoints([new T.Vector3(...a),new T.Vector3(...b)]);
+  const ln=new T.Line(geo,mat); ln.renderOrder=9; scene.add(ln);
+  const lb=mkLabel(T,text,w); lb.position.set((a[0]+b[0])/2,a[1]+w*0.3,(a[2]+b[2])/2); scene.add(lb);
+}
+function makeTree(T,arch,rnd){
+  const g=new T.Group(), a=ARCH[arch];
+  const tint=new T.Color(a.leaf).offsetHSL((rnd()-.5)*.04,0,(rnd()-.5)*.08);
+  const bark=new T.MeshLambertMaterial({color:0x7a5a3a,flatShading:true}), leaf=new T.MeshLambertMaterial({color:tint,flatShading:true});
+  const add=(geo,mat,x,y,z)=>{const m=new T.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;g.add(m);return m};
+  const trunk=(h,r)=>add(new T.CylinderGeometry(r*.7,r,h,6),bark,0,h/2,0);
+  const blob=(r,x,y,z,sy)=>{const m=add(new T.IcosahedronGeometry(r,0),leaf,x,y,z);m.scale.y=sy||1;m.rotation.set(rnd()*3,rnd()*3,0);return m};
+  const {h,w}=a;
+  if(arch==="canopy"){ trunk(h*.42,.45); blob(w*.46,0,h*.64,0,.78); blob(w*.3,w*.26,h*.56,.6); blob(w*.28,-w*.24,h*.6,-.5) }
+  else if(arch==="small"){ trunk(h*.38,.25); blob(w*.46,0,h*.62,0,.9); blob(w*.28,.7,h*.78,.3) }
+  else if(arch==="timber"){ trunk(h*.55,.35); const c=add(new T.ConeGeometry(w*.55,h*.62,7),leaf,0,h*.66,0); c.rotation.y=rnd()*3; blob(w*.42,0,h*.48,0,1.1) }
+  else if(arch==="palm"){ const t=trunk(h*.88,.38); t.rotation.z=(rnd()-.5)*.12;
+    for(let i=0;i<9;i++){ const f=add(new T.BoxGeometry(w*.55,.08,.9),leaf,0,h*.88,0); f.geometry.translate(w*.27,0,0); f.rotation.set(0,i/9*Math.PI*2,-.35-rnd()*.25) } }
+  else if(arch==="banana"){ add(new T.CylinderGeometry(.3,.42,h*.55,7),new T.MeshLambertMaterial({color:0x6b7f3a,flatShading:true}),0,h*.275,0);
+    for(let i=0;i<7;i++){ const f=add(new T.BoxGeometry(w*.48,.04,.75),leaf,0,h*.55,0); f.geometry.translate(w*.24,0,0); f.rotation.set(0,i/7*Math.PI*2+rnd()*.3,.35-rnd()*.75) } }
+  else { trunk(h*.3,.12); blob(w*.38,0,h*.5,0,1); blob(w*.3,w*.25,h*.38,.3); blob(w*.28,-w*.2,h*.42,-.3) }
+  return g;
+}
+function build3D(key){
+  const T=window.THREE, host=$("#v3dCanvas"), W0=host.clientWidth||600, H0=host.clientHeight||400;
+  const m=MODELS[key], P=PATCH[key], pts=patchPoints(key), f=key==="miyawaki"?.45:1;
+  const W=(P.nx-1)*m.col, D=(P.ny-1)*m.row, cx=W/2, cz=D/2, span=Math.max(W,D);
+  const renderer=new T.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1)); renderer.setSize(W0,H0);
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=T.PCFSoftShadowMap; host.appendChild(renderer.domElement);
+  const scene=new T.Scene(); scene.background=new T.Color(0xcfe6f2); scene.fog=new T.Fog(0xcfe6f2,span+40,span*3+160);
+  scene.add(new T.HemisphereLight(0xeaf4ff,0x3f5a2a,.6));
+  const sun=new T.DirectionalLight(0xfff2d6,.85); sun.position.set(cx+span*.6+20,span+40,cz+span*.4+15); sun.target.position.set(cx,0,cz); sun.castShadow=true;
+  const sc=span/2+25; Object.assign(sun.shadow.camera,{left:-sc,right:sc,top:sc,bottom:-sc,near:1,far:span*4+200}); sun.shadow.mapSize.set(2048,2048); scene.add(sun,sun.target);
+  // grass, soil bed, raised rows and drip lines
+  const grass=new T.Mesh(new T.PlaneGeometry(800,800),new T.MeshLambertMaterial({color:0x5f8a3c})); grass.rotation.x=-Math.PI/2; grass.position.set(cx,0,cz); grass.receiveShadow=true; scene.add(grass);
+  const bed=new T.Mesh(new T.PlaneGeometry(W+m.col*1.5,D+m.row*1.5),new T.MeshLambertMaterial({color:0x7a5638})); bed.rotation.x=-Math.PI/2; bed.position.set(cx,.03,cz); bed.receiveShadow=true; scene.add(bed);
+  if(m.row>=6){ for(let r=0;r<P.ny;r++){
+    const rib=new T.Mesh(new T.BoxGeometry(W+m.col,.35,2.4),new T.MeshLambertMaterial({color:0x6a4a30})); rib.position.set(cx,.17,r*m.row); rib.receiveShadow=true; scene.add(rib);
+    const drip=new T.Mesh(new T.CylinderGeometry(.06,.06,W+m.col,5),new T.MeshLambertMaterial({color:0x222222})); drip.rotation.z=Math.PI/2; drip.position.set(cx,.4,r*m.row+.7); scene.add(drip);
+  } }
+  // plants and M/X/O basin markers
+  const rnd=rng(11), trees=[], marks=[];
+  pts.forEach(p=>{
+    const pl=BY_ID[p.id], arch=archOf(pl), t=makeTree(T,arch,rnd);
+    t.scale.setScalar(f*(.9+rnd()*.2)); t.position.set(p.x,m.row>=6?.35:.03,p.z); t.rotation.y=rnd()*6.28; t.userData={p,pl,arch}; scene.add(t); trees.push(t);
+    const ring=new T.Mesh(new T.RingGeometry(1.1*f+.2,1.6*f+.3,24),new T.MeshBasicMaterial({color:ROLE[p.k].col,side:T.DoubleSide}));
+    ring.rotation.x=-Math.PI/2; ring.position.set(p.x,(m.row>=6?.36:.05)+.02,p.z); scene.add(ring); marks.push(ring);
+  });
+  // a person for scale (5.5 ft)
+  const pm=new T.MeshLambertMaterial({color:0x2c4a7a}), skin=new T.MeshLambertMaterial({color:0xb07a52});
+  const person=new T.Group(); const body=new T.Mesh(new T.CylinderGeometry(.55,.65,3.4,8),pm); body.position.y=2.2; const legs=new T.Mesh(new T.CylinderGeometry(.5,.45,1.5,8),new T.MeshLambertMaterial({color:0x3a3a3a})); legs.position.y=.75; const head=new T.Mesh(new T.SphereGeometry(.45,10,8),skin); head.position.y=4.95+.05;
+  [body,legs,head].forEach(o=>{o.castShadow=true;person.add(o)}); person.position.set(-m.col*.6-1.5,0,cz); scene.add(person);
+  // spacing labels
+  const lw=key==="miyawaki"?2.6:6;
+  dimLine(T,scene,[0,.6,-m.row*.45-1],[m.col,.6,-m.row*.45-1],m.col+" ft",lw);
+  if(P.ny>1) dimLine(T,scene,[W+m.col*.45+1,.6,0],[W+m.col*.45+1,.6,m.row],m.row+" ft",lw);
+  // camera and orbit
+  const camera=new T.PerspectiveCamera(50,W0/H0,.1,2000);
+  const dist=Math.max(span,26)*(W0<H0?1.6:1), aerial=()=>{ camera.position.set(cx+dist*.5,dist*.55+4,cz+dist*.8); camera.rotation.set(0,0,0); camera.lookAt(cx,2,cz) };
+  aerial();
+  const controls=new T.OrbitControls(camera,renderer.domElement); controls.target.set(cx,2,cz); controls.maxPolarAngle=Math.PI*.47; controls.minDistance=6; controls.maxDistance=span*3+120; controls.enableDamping=true; controls.update();
+  V={T,renderer,scene,camera,controls,trees,marks,key,walk:false,yaw:0,pitch:0,mv:{f:0,b:0,l:0,r:0},bounds:[-m.col*1.5-6,W+m.col*1.5+6,-m.row*1.5-6,D+m.row*1.5+6],aerial,cx,cz,D,last:performance.now()};
+  // tap to identify
+  const ray=new T.Raycaster(), ptr=new T.Vector2(); let down=null;
+  renderer.domElement.addEventListener("pointerdown",e=>{ down=[e.clientX,e.clientY]; if(V&&V.walk){ V.drag=[e.clientX,e.clientY] } });
+  renderer.domElement.addEventListener("pointermove",e=>{ if(V&&V.walk&&V.drag){ V.yaw-=(e.clientX-V.drag[0])*.005; V.pitch=Math.max(-.6,Math.min(.6,V.pitch-(e.clientY-V.drag[1])*.004)); V.drag=[e.clientX,e.clientY] } });
+  renderer.domElement.addEventListener("pointerup",e=>{ if(V) V.drag=null; if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>6) return;
+    const b=renderer.domElement.getBoundingClientRect(); ptr.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1); ray.setFromCamera(ptr,camera);
+    const hit=ray.intersectObjects(trees,true)[0], info=$("#v3dInfo");
+    if(!hit){ info.hidden=true; return }
+    let o=hit.object; while(o&&!o.userData.pl) o=o.parent;
+    const {p,pl,arch}=o.userData;
+    info.innerHTML=`<span class="role" style="background:${ROLE[p.k].col}">${p.k}</span><span><b>${esc(pl.n)}</b><br><span style="opacity:.8">${ROLE[p.k].n} · ${ARCH[arch].n}${pl.sample?" · sample item":""}</span></span>`; info.hidden=false;
+  });
+  V.onKey=e=>{ if(!V||!V.walk) return; const k={ArrowUp:"f",w:"f",W:"f",ArrowDown:"b",s:"b",S:"b",ArrowLeft:"l",a:"l",A:"l",ArrowRight:"r",d:"r",D:"r"}[e.key]; if(!k) return; e.preventDefault(); V.mv[k]=e.type==="keydown"?1:0 };
+  window.addEventListener("keydown",V.onKey); window.addEventListener("keyup",V.onKey);
+  V.onResize=()=>{ if(!V) return; const w=host.clientWidth,h=host.clientHeight; renderer.setSize(w,h); camera.aspect=w/h; camera.updateProjectionMatrix() };
+  window.addEventListener("resize",V.onResize);
+  // legend and caption
+  const arches=[...new Set(pts.map(p=>archOf(BY_ID[p.id])))];
+  $("#v3dLegend").innerHTML=["M","X","O"].map(r=>`<span><i style="background:${ROLE[r].col}"></i><b>${r}</b> ${ROLE[r].n}: ${m.plants[r].map(id=>esc(BY_ID[id].n)).join(", ")}</span>`).join("");
+  const pw=P.nx*m.col, pd=P.ny*m.row, reps=Math.max(1,Math.round(landSqft()/(pw*pd)));
+  $("#v3dCap").textContent=`${pts.length} plants on a ${pw} x ${pd} ft patch, spaced ${m.col} ft along the row and ${m.row} ft between rows. A patch like this repeats about ${reps.toLocaleString("en-IN")} times across your ${S.unit==="acre"?S.land+" acre":Math.round(S.land).toLocaleString("en-IN")+" sq ft"}. Plant sizes are standard illustrations per plant type${key==="miyawaki"?", shown as young saplings for this dense planting":""}.`;
+  $("#v3dMarks").checked=true; $("#v3dMarks").onchange=e=>marks.forEach(r=>r.visible=e.target.checked);
+  $("#v3dInfo").hidden=true; setWalk(false);
+  const loop=now=>{
+    if(!V) return; const dt=Math.min(.05,(now-V.last)/1000); V.last=now;
+    if(V.walk){
+      V.yaw+=(V.mv.l-V.mv.r)*1.6*dt; const sp=(V.mv.f-V.mv.b)*9*dt;
+      camera.position.x=Math.max(V.bounds[0],Math.min(V.bounds[1],camera.position.x-Math.sin(V.yaw)*sp));
+      camera.position.z=Math.max(V.bounds[2],Math.min(V.bounds[3],camera.position.z-Math.cos(V.yaw)*sp));
+      camera.position.y=5.5; camera.rotation.order="YXZ"; camera.rotation.set(V.pitch,V.yaw,0);
+    } else controls.update();
+    renderer.render(scene,camera); V.raf=requestAnimationFrame(loop);
+  };
+  V.raf=requestAnimationFrame(loop);
+}
+function setWalk(on){
+  if(!V) return; V.walk=on; V.controls.enabled=!on; V.mv={f:0,b:0,l:0,r:0};
+  $("#v3dPad").hidden=!on; $("#v3dHint").hidden=on;
+  $("#v3dWalk").textContent=on?"Back to aerial view":"Walk in";
+  if(on){ V.camera.position.set(V.cx,5.5,V.D+MODELS[V.key].row*1.2+6); V.yaw=0; V.pitch=-.08 }
+  else { V.aerial(); V.controls.target.set(V.cx,2,V.cz); V.controls.update() }
+}
+function toggleWalk(){ if(V) setWalk(!V.walk) }
+document.querySelectorAll("#v3dPad button").forEach(b=>{
+  const k=b.dataset.mv, on=e=>{e.preventDefault(); if(V) V.mv[k]=1}, off=()=>{ if(V) V.mv[k]=0 };
+  b.addEventListener("pointerdown",on); b.addEventListener("pointerup",off); b.addEventListener("pointerleave",off); b.addEventListener("pointercancel",off);
+});
 
 /* ---------------- unlock (lead + OTP) ---------------- */
 let otpStage="form";
@@ -1233,7 +1446,7 @@ document.querySelectorAll("#landUnit button").forEach(b=>b.addEventListener("cli
 }));
 $("#purSel").addEventListener("change",e=>{S.purpose=e.target.value;renderReco()});
 let rz; window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>{ if(route()==="reco") document.querySelectorAll(".model[open] canvas").forEach(cv=>drawModel(cv.id.slice(3),cv)) },150)});
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeCalc() });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCalc(); if($("#v3d").classList.contains("on")) close3D() } });
 
 renderBand();
 mountCalc($("#calcHome"),"ch");
