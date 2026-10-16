@@ -92,6 +92,8 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - Plants use standard display sizes per type (canopy, small fruit, timber, palm, banana, shrub), no growth scaling. Miyawaki shown at 0.45x as young saplings.
 - `_work/3d-hq-demo.html`: higher-quality procedural 3D test (not deployed): textured leaf clusters, bark, soil, grass, ACES lighting, 4096 shadows, wind sway, sun slider, faded surrounding rows in walk mode, live stats. Same three.js download (~150 KB gzip), no asset files.
 - Magnific: stock 3D trees are cartoon icons (150 credits); text-to-3D realistic tree ~580 credits each (Tripo, 8k faces). Magnific files cannot be downloaded from the cloud session; user would download GLBs.
+- HQ demo now uses realistic spacing (Commercial 7.5 ft slots so sandalwood is 15 ft and mango 45 ft apart, rows 20 ft; Food Forest 10 x 10 ft), a step preloader, and a Magnific (Tripo) mango GLB for mango plants: 2.7 MB raw, 355 KB after `gltf-transform optimize --texture-compress webp --texture-size 512`, 7.3k triangles, instanced (downloaded once per tree type). Deployed at `/3d.html` (`site/3d.html` + `site/assets/mango.glb`, built by `_work/build_prototype.py`).
+- Prototype 3D modal: step preloader + link to `/3d.html`. Its spacing still follows the 6 x 12 ft placeholder (tied to the 36 x 36 block quantities); change only with the client's real spacing.
 - Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
 
 ## SRS quirks to remember

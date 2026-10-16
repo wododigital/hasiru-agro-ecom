@@ -42,13 +42,20 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 #hint{font-size:.78rem;max-width:260px}
 #info{position:fixed;z-index:6;left:50%;transform:translateX(-50%);top:calc(130px + env(safe-area-inset-top,0px));display:flex;gap:10px;align-items:center;max-width:min(360px,calc(100vw - 32px))}
 #info .role{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff}
-#loading{position:fixed;inset:0;z-index:9;display:grid;place-items:center;background:#e6efe6;color:var(--forest);font:600 1rem var(--body);text-align:center;padding:16px}
+#loading{position:fixed;inset:0;z-index:9;display:grid;place-items:center;background:rgba(230,239,230,.94);color:var(--forest);font:500 .95rem var(--body);text-align:center;padding:16px}
+#loading.over{background:rgba(230,239,230,.78)}
+.ld{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:300px}
+.ld b{font:400 1.35rem var(--display)}
+.spin{width:52px;height:52px;border-radius:50%;border:4px solid rgba(27,67,50,.15);border-top-color:var(--forest);animation:sp 1s linear infinite}
+.bar{width:220px;height:6px;border-radius:9px;background:rgba(27,67,50,.12);overflow:hidden}.bar i{display:block;height:100%;width:5%;background:linear-gradient(90deg,var(--forest-l),var(--gold));transition:width .3s}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
 [hidden]{display:none!important}
 @media(max-width:640px){h1{font-size:1.1rem}#legend{display:none}#stats{min-width:0}.sun input{width:90px}#hint{display:none}}
 </style>
 
 <div id="stage" aria-label="3D view of a planting patch"></div>
-<div id="loading">Loading 3D engine...</div>
+<div id="loading" role="status" aria-live="polite"><div class="ld"><div class="spin" aria-hidden="true"></div><b id="ldTitle">Preparing your farm view</b><span id="ldStep">Loading 3D engine...</span><div class="bar"><i id="ldBar"></i></div></div></div>
 
 <div class="ui" id="top">
   <div class="card">
@@ -78,7 +85,10 @@ h1{font-family:var(--display);font-weight:400;font-size:1.35rem;margin:2px 0 8px
 
 <script>
 const T0=performance.now();
-const SRC=["https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js","https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"];
+const SRC=["https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js","https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js","https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"];
+const MANGO_URL="assets/mango.glb"; let MANGO=null, mangoKB=0;
+const nextFrame=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+function step(text,pct,title){ const l=$("#loading"); l.hidden=false; $("#ldStep").textContent=text; $("#ldBar").style.width=pct+"%"; if(title) $("#ldTitle").textContent=title }
 const $=s=>document.querySelector(s);
 function rng(seed){ return ()=>{ seed=(seed*16807)%2147483647; return (seed-1)/2147483646 } }
 
@@ -93,8 +103,8 @@ const PLANTS={
   moringa:{n:"Moringa PKM-1",arch:"shrub"}, lemon:{n:"Kagzi Lemon",arch:"guava"},
 };
 const MODELS={
-  commercial:{n:"Commercial model",col:6,row:12,nx:13,ny:3,rows:["MOXOXO"],plants:{M:["mango","guava"],X:["mahogany","sandal"],O:["gliricidia","banana"]}},
-  food:{n:"Food Forest model",col:6,row:6,nx:7,ny:7,rows:["MOXOMOX","OXOXOXO"],plants:{M:["jack","raspuri","chikku"],X:["honge","redsandal"],O:["banana","moringa","lemon"]}},
+  commercial:{n:"Commercial model",col:7.5,row:20,nx:13,ny:3,rows:["MOXOXO"],plants:{M:["mango","guava"],X:["mahogany","sandal"],O:["gliricidia","banana"]}},
+  food:{n:"Food Forest model",col:10,row:10,nx:7,ny:7,rows:["MOXOMOX","OXOXOXO"],plants:{M:["jack","raspuri","chikku"],X:["honge","redsandal"],O:["banana","moringa","lemon"]}},
 };
 function patch(key){
   const m=MODELS[key], pts=[], seen={M:0,X:0,O:0};
@@ -114,8 +124,17 @@ function surround(key){ // pattern continued one patch-width on every side (no p
 function load(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(src); document.head.appendChild(s) }) }
 let tLib=0;
 (async()=>{
-  try{ for(const s of SRC) await load(s) }catch(e){ $("#loading").textContent="The 3D engine could not load. Check your internet connection and reload."; return }
-  tLib=performance.now()-T0; init();
+  try{ for(let i=0;i<SRC.length;i++){ step("Loading 3D engine...",5+i*15); await load(SRC[i]) } }
+  catch(e){ step("The 3D engine could not load. Check your internet connection and reload.",0,"Something went wrong"); $(".spin").hidden=true; return }
+  tLib=performance.now()-T0;
+  step("Loading realistic mango tree model...",55);
+  try{
+    const res=await fetch(MANGO_URL); if(!res.ok) throw 0; const buf=await res.arrayBuffer(); mangoKB=Math.round(buf.byteLength/1024);
+    const gl=await new Promise((ok,no)=>new THREE.GLTFLoader().parse(buf,"",ok,no));
+    gl.scene.traverse(o=>{ if(o.isMesh&&!MANGO) MANGO={geo:o.geometry,mat:o.material} });
+  }catch(e){ MANGO=null } // falls back to the code-drawn mango
+  step("Planting trees...",80); await nextFrame();
+  init();
 })();
 
 /* ---------- procedural textures ---------- */
@@ -197,7 +216,7 @@ function init(){
   C=new THREE.PerspectiveCamera(48,host.clientWidth/host.clientHeight,.1,2500);
   CTRL=new THREE.OrbitControls(C,R.domElement); CTRL.enableDamping=true; CTRL.maxPolarAngle=Math.PI*.47; CTRL.minDistance=6; CTRL.maxDistance=260;
   build(CUR);
-  $("#loading").hidden=true;
+  step("Ready",100); $("#loading").hidden=true; $("#loading").classList.add("over");
   wire();
   requestAnimationFrame(loop);
 }
@@ -237,14 +256,16 @@ function build(key){
   const mulchMat=new THREE.MeshStandardMaterial({map:mulchT,transparent:true,depthWrite:false,roughness:1}), ringMats={};
   ["M","X","O"].forEach(k=>ringMats[k]=new THREE.MeshBasicMaterial({color:ROLE[k].col,transparent:true,opacity:.85,depthWrite:false}));
   // collect geometry per archetype
-  const bark=[], leafInst={}, fruitInst=[], bananaLeaves=[], bananaStems=[];
+  const bark=[], leafInst={}, fruitInst=[], bananaLeaves=[], bananaStems=[], mangoInst=[];
   all.forEach((p,i)=>{
     const pl=PLANTS[p.id], A=ARCH[pl.arch], rot=r()*6.28, s=.9+r()*.2, ox=p.x, oz=p.z, G=!!p.ghost;
     if(!G){ const mulch=new THREE.Mesh(new THREE.CircleGeometry(pl.arch==="banana"||pl.arch==="shrub"?1.8:2.6,28),mulchMat); mulch.rotation.x=-Math.PI/2; mulch.position.set(ox,baseY+.02,oz); mulch.receiveShadow=true; GROUP.add(mulch);
     const ring=new THREE.Mesh(new THREE.RingGeometry(2.7,3.05,40),ringMats[p.k]); ring.rotation.x=-Math.PI/2; ring.position.set(ox,baseY+.03,oz); ring.userData.ring=1; GROUP.add(ring); }
     const at=(x,y,z)=>new THREE.Vector3(ox+(x*Math.cos(rot)-z*Math.sin(rot))*s,baseY+y*s,oz+(x*Math.sin(rot)+z*Math.cos(rot))*s);
     let pickH=8;
-    if(A.banana){
+    if(MANGO&&!G&&(p.id==="mango"||p.id==="raspuri")){
+      const o=new THREE.Object3D(); o.position.set(ox,baseY+6.5*s,oz); o.rotation.y=rot; o.scale.setScalar(13*s); o.updateMatrix(); mangoInst.push(o.matrix.clone()); pickH=13;
+    } else if(A.banana){
       bananaStems.push(limb(at(0,0,0),at(0,5.2,0),.42*s,.3*s));
       for(let j=0;j<(G?6:8);j++){ const lg=new THREE.PlaneGeometry(1.5,6.2,2,12); lg.translate(0,3.1,0); const lp=lg.attributes.position;
         for(let v=0;v<lp.count;v++){ const y=lp.getY(v), t=y/6.2; lp.setZ(v,-t*t*3.2+Math.abs(lp.getX(v))*.35); lp.setX(v,lp.getX(v)*(1-Math.pow(Math.abs(t-.45)*1.6,2)*.5)) }
@@ -285,6 +306,8 @@ function build(key){
     const lm=new THREE.Mesh(merge(bananaLeaves),new THREE.MeshStandardMaterial({map:bt,side:THREE.DoubleSide,alphaTest:.4,roughness:.7})); lm.castShadow=true; lm.receiveShadow=true; GROUP.add(lm);
     const sm=new THREE.Mesh(merge(bananaStems),new THREE.MeshStandardMaterial({color:0x6d7f3c,roughness:.8})); sm.castShadow=true; GROUP.add(sm);
   }
+  // Magnific mango model, one instanced draw call
+  if(mangoInst.length){ const mi=new THREE.InstancedMesh(MANGO.geo,MANGO.mat,mangoInst.length); mangoInst.forEach((mx,i)=>mi.setMatrixAt(i,mx)); mi.castShadow=true; mi.receiveShadow=true; GROUP.add(mi) }
   // fruit
   if(fruitInst.length){ const fm=new THREE.InstancedMesh(new THREE.SphereGeometry(1,10,8),new THREE.MeshStandardMaterial({roughness:.45}),fruitInst.length), o=new THREE.Object3D(), c3=new THREE.Color();
     fruitInst.forEach((f,i)=>{ o.position.copy(f.p); o.scale.set(f.s,f.s*1.35,f.s); o.updateMatrix(); fm.setMatrixAt(i,o.matrix); c3.setHex(f.c); fm.setColorAt(i,c3) }); fm.castShadow=true; GROUP.add(fm) }
@@ -311,7 +334,7 @@ function setWalk(on){
 function wire(){
   $("#walkBtn").onclick=()=>setWalk(!V.walk);
   $("#sunR").oninput=e=>setSun(+e.target.value);
-  document.querySelectorAll("#modelSeg button").forEach(b=>b.onclick=()=>{ document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x===b)); CUR=b.dataset.m; $("#info").hidden=true; build(CUR) });
+  document.querySelectorAll("#modelSeg button").forEach(b=>b.onclick=()=>{ document.querySelectorAll("#modelSeg button").forEach(x=>x.classList.toggle("on",x===b)); CUR=b.dataset.m; $("#info").hidden=true; step("Planting "+MODELS[CUR].n.replace(" model","")+" trees...",70,"Preparing your farm view"); nextFrame().then(()=>{ build(CUR); $("#loading").hidden=true }) });
   document.querySelectorAll("#pad button").forEach(b=>{ const k=b.dataset.mv, on=e=>{e.preventDefault();V.mv[k]=1}, off=()=>V.mv[k]=0; b.addEventListener("pointerdown",on); ["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,off)) });
   const key=e=>{ if(!V.walk) return; const k={ArrowUp:"f",w:"f",W:"f",ArrowDown:"b",s:"b",S:"b",ArrowLeft:"l",a:"l",A:"l",ArrowRight:"r",d:"r",D:"r"}[e.key]; if(!k) return; e.preventDefault(); V.mv[k]=e.type==="keydown"?1:0 };
   addEventListener("keydown",key); addEventListener("keyup",key);
@@ -332,7 +355,7 @@ function loop(now){
     C.position.y=5.5; C.rotation.order="YXZ"; C.rotation.set(V.pitch,V.yaw,0) } else CTRL.update();
   R.render(S,C);
   frames++; if(now-fpsT>1000){ fps=Math.round(frames*1000/(now-fpsT)); frames=0; fpsT=now; tris=R.info.render.triangles; calls=R.info.render.calls;
-    $("#stats").innerHTML=`3D engine download <b>${(tLib/1000).toFixed(1)} s</b><br>Scene build <b>${Math.round(buildMs)} ms</b><br>Frame rate <b>${fps} fps</b><br>${calls} draw calls · ${(tris/1000).toFixed(0)}k triangles` }
+    $("#stats").innerHTML=`3D engine download <b>${(tLib/1000).toFixed(1)} s</b><br>Scene build <b>${Math.round(buildMs)} ms</b><br>Frame rate <b>${fps} fps</b><br>${calls} draw calls · ${(tris/1000).toFixed(0)}k triangles<br>Mango model <b>${MANGO?mangoKB+" KB":"not loaded"}</b>` }
   requestAnimationFrame(loop);
 }
 </script>

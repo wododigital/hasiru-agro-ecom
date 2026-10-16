@@ -287,7 +287,11 @@ section.blk{padding:48px 0}
 .v3d-stage{position:relative;flex:1;min-height:280px;background:#cfe6f2;overflow:hidden;touch-action:none}
 #v3dCanvas{position:absolute;inset:0}
 #v3dCanvas canvas{display:block;width:100%!important;height:100%!important}
-.v3d-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--forest);font-weight:600}
+.v3d-msg{position:absolute;inset:0;z-index:4;display:grid;place-items:center;text-align:center;padding:20px;color:var(--forest);font-weight:600;background:rgba(232,240,232,.92)}
+.v3d-ld{display:flex;flex-direction:column;align-items:center;gap:10px}
+.v3d-spin{width:46px;height:46px;border-radius:50%;border:4px solid rgba(27,67,50,.15);border-top-color:var(--forest);animation:v3dsp 1s linear infinite}
+.v3d-bar{width:200px;height:6px;border-radius:9px;background:rgba(27,67,50,.12);overflow:hidden}.v3d-bar i{display:block;height:100%;width:5%;background:linear-gradient(90deg,var(--forest-l),var(--gold));transition:width .3s}
+@keyframes v3dsp{to{transform:rotate(360deg)}}
 .v3d-info{position:absolute;top:12px;left:12px;right:12px;margin:0 auto;max-width:360px;background:rgba(15,43,31,.92);color:#fff;border-radius:14px;padding:10px 14px;font-size:.88rem;display:flex;gap:10px;align-items:center}
 .v3d-info .role{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 7px;color:#fff;flex:none}
 .v3d-ctrls{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
@@ -532,7 +536,7 @@ footer b{color:#fff}
   <div class="v3d-top"><div><div class="eyebrow" style="margin:0">3D close-up, illustrative</div><b id="v3dTitle" class="serif"></b></div><button class="x" onclick="close3D()" aria-label="Close 3D view">&times;</button></div>
   <div class="v3d-stage" id="v3dStage">
     <div id="v3dCanvas"></div>
-    <div class="v3d-msg" id="v3dMsg">Loading 3D view...</div>
+    <div class="v3d-msg" id="v3dMsg"><div class="v3d-ld"><div class="v3d-spin" aria-hidden="true"></div><b id="v3dStep">Loading 3D view...</b><div class="v3d-bar"><i id="v3dBar"></i></div></div></div>
     <div class="v3d-info" id="v3dInfo" hidden></div>
     <div class="v3d-hint" id="v3dHint">Drag to rotate, pinch or scroll to zoom. Tap a plant to see what it is.</div>
     <div class="v3d-pad" id="v3dPad" hidden>
@@ -544,7 +548,7 @@ footer b{color:#fff}
       <button class="btn btn-gold btn-sm" id="v3dWalk" onclick="toggleWalk()">Walk in</button>
     </div>
   </div>
-  <div class="v3d-foot"><div class="legend3d" id="v3dLegend"></div><p class="small muted" id="v3dCap"></p></div>
+  <div class="v3d-foot"><div class="legend3d" id="v3dLegend"></div><p class="small muted" id="v3dCap"></p><a class="link small" id="v3dHQ" href="3d.html" target="_blank" rel="noopener" hidden>Open the high-quality 3D test (realistic trees, walk mode) &rarr;</a></div>
 </div></div>
 <div class="toast" id="toast"></div>
 
@@ -1034,13 +1038,17 @@ function loadThree(){
 async function open3D(key){
   $("#v3d").classList.add("on"); document.body.style.overflow="hidden";
   $("#v3dTitle").textContent=MODELS[key].n+" model";
-  const msg=$("#v3dMsg"); msg.hidden=false; msg.textContent="Loading 3D view...";
-  try{ await loadThree() }catch(e){ msg.textContent="The 3D view could not load. Check your internet connection and try again."; return }
+  const msg=$("#v3dMsg"), stepTo=(t,p)=>{ $("#v3dStep").textContent=t; $("#v3dBar").style.width=p+"%" };
+  if(V) close3DScene(); msg.hidden=false; $(".v3d-spin").hidden=false; stepTo(window.THREE?"Preparing the patch...":"Loading 3D engine...",window.THREE?50:15);
+  try{ await loadThree() }catch(e){ $(".v3d-spin").hidden=true; stepTo("The 3D view could not load. Check your internet connection and try again.",0); return }
   if(!$("#v3d").classList.contains("on")) return;
-  msg.hidden=true; build3D(key);
+  stepTo("Planting "+PATCH_COUNT(key)+" plants...",75);
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+  build3D(key); stepTo("Ready",100); msg.hidden=true;
 }
-function close3D(){
-  $("#v3d").classList.remove("on"); document.body.style.overflow="";
+const PATCH_COUNT=key=>PATCH[key].nx*PATCH[key].ny;
+function close3D(){ $("#v3d").classList.remove("on"); document.body.style.overflow=""; close3DScene() }
+function close3DScene(){
   if(!V) return;
   cancelAnimationFrame(V.raf); V.controls.dispose(); V.renderer.dispose(); V.renderer.domElement.remove();
   window.removeEventListener("keydown",V.onKey); window.removeEventListener("keyup",V.onKey); window.removeEventListener("resize",V.onResize);
@@ -1450,6 +1458,7 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeCalc(); if($
 
 renderBand();
 mountCalc($("#calcHome"),"ch");
+if(/^https?:$/.test(location.protocol)&&!window.claude) $("#v3dHQ").hidden=false; // only where 3d.html is hosted alongside
 go();
 </script>
 </body>

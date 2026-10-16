@@ -14,3 +14,8 @@ print("wrote", len(html) // 1024, "KB")
 # Vercel deploys only this folder (root directory "site"), keeping client files out of the public site
 (root / "site").mkdir(exist_ok=True)
 (root / "site/index.html").write_text(html)
+# High-quality 3D test page: the source is artifact-style (no document skeleton), so wrap it for static hosting
+hq = (root / "_work/3d-hq-demo.html").read_text()
+(root / "site/3d.html").write_text('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n' + hq + '\n</body>\n</html>\n')
+(root / "site/assets").mkdir(exist_ok=True)
+(root / "site/assets/mango.glb").write_bytes((root / "_work/assets/mango.glb").read_bytes())
