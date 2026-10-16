@@ -90,6 +90,8 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - "View 3D close-up" on each model's diagram opens a three.js view (three@0.128.0 from jsDelivr, loaded only when opened).
 - Shows the pattern repeated once in each direction, max ~50 plants (Commercial 13 x 3, Food Forest 7 x 7, Miyawaki 7 x 7), at true spacing (1 unit = 1 ft), with a 5.5 ft person for scale, spacing labels, M/X/O basin markers, tap to identify, and a walk mode (arrow pad / WASD).
 - Plants use standard display sizes per type (canopy, small fruit, timber, palm, banana, shrub), no growth scaling. Miyawaki shown at 0.45x as young saplings.
+- `_work/3d-hq-demo.html`: higher-quality procedural 3D test (not deployed): textured leaf clusters, bark, soil, grass, ACES lighting, 4096 shadows, wind sway, sun slider, faded surrounding rows in walk mode, live stats. Same three.js download (~150 KB gzip), no asset files.
+- Magnific: stock 3D trees are cartoon icons (150 credits); text-to-3D realistic tree ~580 credits each (Tripo, 8k faces). Magnific files cannot be downloaded from the cloud session; user would download GLBs.
 - Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
 
 ## SRS quirks to remember
