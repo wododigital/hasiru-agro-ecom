@@ -277,6 +277,41 @@ section.blk{padding:48px 0}
 .promo{background:var(--gold);color:var(--forest-d);border-radius:12px;padding:10px 12px;font-size:.85rem;font-weight:600;margin-bottom:12px}
 .sugg-in{background:#fffbea;border:1.5px dashed #e6c54a;border-radius:var(--r);padding:14px;margin-bottom:16px}
 
+/* data needed page */
+.req-wrap{max-width:900px;margin:0 auto}
+.req-intro{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.req-intro p{max-width:68ch}
+.req-key{display:flex;flex-wrap:wrap;gap:8px}
+.req-key span{font-size:.78rem;border-radius:99px;padding:4px 10px;font-weight:600}
+.k-logic{background:#e3f0e6;color:var(--forest)}.k-data{background:#fff4d1;color:#6a5300}.k-ask{background:#f3e6dc;color:#7a3e12}
+details.req{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden}
+details.req>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;gap:12px;align-items:center}
+details.req>summary::-webkit-details-marker{display:none}
+details.req>summary:focus-visible{outline:2px solid var(--forest-l);outline-offset:-2px}
+.req-n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.req-t{flex:1;min-width:0}
+.req-t b{display:block;font-size:1rem;color:var(--forest-d)}
+.req-t span{font-size:.78rem;color:var(--muted)}
+.req-c{flex:none;font-size:.72rem;font-weight:700;background:#fff4d1;color:#6a5300;border-radius:99px;padding:3px 9px;white-space:nowrap}
+details.req .chev{flex:none;transition:transform .2s;color:var(--forest)}
+details.req[open] .chev{transform:rotate(180deg)}
+.req-b{padding:2px 16px 16px;border-top:1px solid var(--line);display:grid;gap:12px}
+.req-b h4{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;margin:12px 0 6px;font-weight:700}
+.req-b ul{margin:0;padding-left:18px;display:grid;gap:5px;font-size:.92rem;line-height:1.5}
+.req-b .what{font-size:.95rem;margin-top:12px;max-width:70ch}
+.blk-logic{background:#f2f8f3;border-radius:12px;padding:2px 14px 12px}.blk-logic h4{color:var(--forest)}
+.blk-data{background:#fffbea;border-radius:12px;padding:2px 14px 12px}.blk-data h4{color:#6a5300}
+.blk-ask{background:#fbf3ee;border-radius:12px;padding:2px 14px 12px}.blk-ask h4{color:#7a3e12}
+.req-b code{font-family:inherit;background:rgba(27,67,50,.08);border-radius:5px;padding:0 5px;font-weight:600;white-space:nowrap}
+.req-table-wrap{background:#fff;border-radius:var(--rl);box-shadow:var(--shadow);overflow:hidden;margin-top:28px}
+table.req-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.req-table th{background:var(--forest);color:#fff;text-align:left;padding:10px 14px;font-weight:600}
+.req-table td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+.req-table td:first-child{font-weight:600;color:var(--forest-d);width:48%}
+.req-table td small{display:block;font-weight:400;color:var(--muted);font-size:.75rem;margin-top:2px}
+.req-table tr:nth-child(even) td{background:#fbf8ef}
+.req-table td:last-child{color:#4a4a40}
+
 /* 3D close-up */
 .v3dbtn{position:absolute;top:18px;right:18px;z-index:3;box-shadow:0 4px 14px rgba(15,43,31,.25)}
 .modal.v3d{align-items:center;padding:0}
@@ -351,6 +386,7 @@ footer b{color:#fff}
   <a href="#reco" data-r="reco">4 Recommendations</a>
   <a href="#cart" data-r="cart">5 Cart and delivery</a>
   <a href="#ask" data-r="ask">6 Ask AI</a>
+  <a href="#req" data-r="req">7 Data needed</a>
 </div></div>
 
 <header class="site"><div class="wrap">
@@ -502,6 +538,22 @@ footer b{color:#fff}
     </div>
   </div></section>
 </div>
+<!-- ============ DATA NEEDED ============ -->
+<div class="screen" id="s-req">
+  <section class="blk"><div class="wrap req-wrap">
+    <div class="req-intro">
+      <div class="eyebrow">For the Hasiru Agro team</div>
+      <h2>Data and logic we need, feature by feature</h2>
+      <p class="muted">Every number in this prototype is a placeholder so the screens can work. Open a feature to see how it works today, the data we need from you to make it real, and the questions where we need your rules. Please fill the data in the Excel data sheet we shared (the tab name is shown in the table at the end).</p>
+      <div class="req-key"><span class="k-logic">How it works now</span><span class="k-data">Data we need</span><span class="k-ask">Please confirm</span></div>
+    </div>
+    <div id="reqList"></div>
+    <h3 style="margin:34px 0 4px">All data in one list</h3>
+    <p class="small muted" style="margin-bottom:10px">Each item once, with the features that use it.</p>
+    <div class="req-table-wrap"><table class="req-table"><thead><tr><th>Data needed</th><th>Where it is used</th></tr></thead><tbody id="reqTable"></tbody></table></div>
+  </div></section>
+</div>
+
 <!-- ============ ASK AI ============ -->
 <div class="screen" id="s-ask">
   <section class="blk"><div class="wrap ask">
@@ -1294,6 +1346,116 @@ function renderCart(){
     <p class="tiny muted" style="margin-top:10px">All rates are sample values for review.</p>`;
 }
 
+/* ---------------- data needed page ---------------- */
+// One entry per feature. "data" items use shared names so the summary table can group them.
+// [name, Excel tab] pairs live in REQ_TAB.
+const REQ_TAB = {
+  "Plant name (English and Kannada)":"Plants","Category and sub-category per plant":"Plants","Plant photos (2 to 4 per plant)":"Plants",
+  "Plant height at sale":"Plants","Sunlight need":"Plants","Temperature range":"Plants","Plant type (grafted, seeded, air layered, tissue culture)":"Plants",
+  "Bearing time and expected yield":"Plants","Regular price and sale price":"Plants","Stock and availability":"Plants","Best seller flag":"Plants",
+  "Bulk price per plant":"Plants","Bulk quantity per plant (where bulk starts)":"Plants","Plant spacing (plant to plant and row to row)":"Plants",
+  "Mature height and canopy width per plant":"Plants","Weight per plant with bag or pot":"Plants","Bag or pot size per plant":"Plants",
+  "HSN code and GST % per product":"Plants / Input Products","Care guide per plant (water, manure, pests)":"Plants",
+  "Input products (pack size, price, GST, image)":"Input Products","Input dosage per plant, by crop or size":"Input Products",
+  "Planting models (name, description, purpose)":"Recommendation Models","Row pattern and spacing per model":"Recommendation Models",
+  "Meaning of M, X and O and the plants for each":"Recommendation Models","Input recipe per model":"Recommendation Models",
+  "Minimum land size per model":"Recommendation Models","Planting video per model":"Recommendation Models / Content",
+  "Plants per acre formula and buffer %":"Calculators","Serviceable locations and distance from nursery":"Logistics",
+  "Vehicles: capacity in kg and in plants":"Logistics","Delivery days, slots and rates":"Logistics","Packing charges":"Logistics",
+  "Current offers and their rules":"Content & Policies","Cancellation, return, damage and replacement policy":"Content & Policies",
+  "Banner images and headline":"Content & Policies","Logos and approved wording (UAS Dharwad, Startup India, MSME)":"Content & Policies",
+  "SMS provider and approved OTP template":"Content & Policies","Where new leads should go (ops system, sheet, CRM)":"Content & Policies",
+  "Common customer questions and answers":"Content & Policies","Support phone or WhatsApp number":"Content & Policies",
+};
+const REQ = [
+  {t:"Home: two ways in", where:"Home",
+   what:"The top of the home page splits visitors into two paths: people who know what they want go to the shop, people who need help go to the planting plan wizard.",
+   logic:["Two large buttons: \"I know what I want\" opens the Shop, \"Help me choose\" opens the wizard.","Banner photo and headline are taken from the current hasiruagro.com site."],
+   data:["Banner images and headline"],
+   ask:["Is this the right first choice to give visitors, or should farm development services also appear here?"]},
+  {t:"Plant catalogue and product cards", where:"Home best sellers, Shop",
+   what:"Quick-commerce style cards for every plant, grouped into Timber Trees, Fruiting Trees (Desi or Exotic) and Other Plants.",
+   logic:["192 plants imported from the old WooCommerce shop, of which 52 are in stock.","Categories: Forestry becomes Timber Trees; Desi and Exotic fruits become Fruiting Trees; Spices and Plantation become Other Plants.","Discount badge = 1 minus sale price divided by regular price.","Height on the card is a placeholder by size: large <code>3 to 4 ft</code>, medium <code>2 to 3 ft</code>, small <code>1 to 2 ft</code>.","\"In stock only\" is on by default; out of stock plants show a Notify button.","Best sellers: plants marked featured in the old shop, then other in-stock fruit trees."],
+   data:["Plant name (English and Kannada)","Category and sub-category per plant","Plant photos (2 to 4 per plant)","Plant height at sale","Sunlight need","Temperature range","Plant type (grafted, seeded, air layered, tissue culture)","Bearing time and expected yield","Regular price and sale price","Stock and availability","Best seller flag"],
+   ask:["Please check the category mapping, and which plants should not be shown online.","Which plants are best sellers today?"]},
+  {t:"Bulk pricing", where:"Shop, Recommendations, Cart",
+   what:"Each plant has a normal price and a lower bulk price that unlocks when the customer orders enough of that plant.",
+   logic:["Bulk price = sale price x <code>0.72</code>, rounded to the nearest Rs 5 (placeholder).","Bulk starts at <code>50</code> plants for large trees, <code>100</code> for medium trees and <code>200</code> for small plants.","The count adds up the same plant across the package and additional items.","Cards show \"Bulk price from 100 plants: Rs X\", and the price drops live when the quantity crosses it."],
+   data:["Bulk price per plant","Bulk quantity per plant (where bulk starts)"],
+   ask:["Is bulk set per plant, or per category or size?","Should the quantity count across different plants (for example any 200 plants), or per plant only?","Is there a second, larger tier (for example 1,000+ plants)?"]},
+  {t:"Plant calculator", where:"Home, Shop (floating button)",
+   what:"Tells a customer how many plants fit on their land, and adds that number to the cart in one tap.",
+   logic:["Plants = land area in sq ft / (plant to plant spacing x row to row spacing).","Triangular layout fits about 15% more (x <code>1.155</code>).","Optional <code>3%</code> extra for gap filling (from the note \"43,560 x 3 / 100\" in your sketch).","Picking a plant fills in its spacing from the catalogue (for example Alphonso mango 18 x 18 ft = 134 per acre)."],
+   data:["Plant spacing (plant to plant and row to row)","Plants per acre formula and buffer %"],
+   ask:["What did \"43,560 x 3 / 100\" in the sketch mean?","Do you plant square, triangular, or both?","Many plants have no spacing in the old shop. Please give spacing for every plant."]},
+  {t:"Farm inputs and compost calculator", where:"Home, Cart",
+   what:"Sells compost, vermicompost, biochar and other inputs, and works out how much a customer needs for their plants.",
+   logic:["Seven sample inputs, for example Vermicompost 25 kg Rs 450, Biochar 10 kg Rs 600, Neem cake 25 kg Rs 900 (all invented).","Dose per plant: large tree <code>2 kg</code> vermicompost + <code>1 kg</code> biochar, medium <code>1 + 0.5 kg</code>, small <code>0.5 + 0.25 kg</code>.","Packs are rounded up (25 kg and 10 kg bags).","In the cart, plants bought without inputs trigger a \"Recommended inputs for your plants\" suggestion."],
+   data:["Input products (pack size, price, GST, image)","Input dosage per plant, by crop or size","HSN code and GST % per product"],
+   ask:["Does dosage depend on the crop, the plant size, the soil, or all three?","Which inputs should be suggested by default, and which are optional?"]},
+  {t:"Help me choose wizard", where:"Help me choose",
+   what:"Three questions (location, land size, purpose) that lead to a recommended planting plan.",
+   logic:["Location: type 2 or more letters to see suggestions from a list of 36 Karnataka and South India places with their distance from Bengaluru. \"Use my location\" is a demo.","Land size in acres or sq ft (1 acre = 43,560 sq ft).","Purpose: Commercial, Food Forest or Miyawaki.","For the demo, empty fields fall back to Mysuru and 1 acre."],
+   data:["Serviceable locations and distance from nursery","Planting models (name, description, purpose)","Minimum land size per model"],
+   ask:["Which districts or states do you serve?","Should we calculate distance from the nursery address on a map instead of a fixed list?","Are there other purposes (for example agroforestry, boundary planting)?"]},
+  {t:"Lead capture and OTP", where:"Recommendations",
+   what:"The plan is shown blurred until the customer gives a name and phone number, so every plan generates a lead.",
+   logic:["Turned off for this demo: \"Send OTP\" unlocks the plan straight away with no checks.","In the real site: check the name and a 10 digit mobile number, send an SMS code, unlock after the code matches."],
+   data:["SMS provider and approved OTP template","Where new leads should go (ops system, sheet, CRM)"],
+   ask:["Which SMS provider do you use (DLT registered sender ID and template)?","Should leads go into ops.hasiruagro.com, a Google Sheet, or a CRM?","Should WhatsApp be offered instead of SMS?"]},
+  {t:"Planting models and the 2D layout", where:"Recommendations",
+   what:"For each purpose we show a layout diagram, the plants needed for the customer's land, and a package price.",
+   logic:["Layout is drawn for one 36 x 36 ft block, using M (main crop), X (host or secondary) and O (biomass or support).","Commercial: row pattern <code>M O X O X O M</code>, <code>6 ft</code> along the row, <code>12 ft</code> between rows (18 plants per block).","Food Forest: <code>6 x 6 ft</code> grid with alternating rows <code>M O X O M O X</code> and <code>O X O X O X O</code>.","Miyawaki: <code>2 x 2 ft</code> grid, random mix of 10% M, 50% X, 40% O.","Plants for the land = plants per block x (land in sq ft / 1,296). 1 acre = 33.6 blocks.","Each role is split evenly between its plants (for example M = Alphonso mango and Taiwan guava).","Biomass plants (Gliricidia, Subabul, Banana G9, Moringa) are not in the old shop, so we invented them as sample items."],
+   data:["Planting models (name, description, purpose)","Row pattern and spacing per model","Meaning of M, X and O and the plants for each","Minimum land size per model","Planting video per model"],
+   ask:["What exactly do M, X and O stand for?","Is 36 x 36 ft a fixed block, or just the size of your sketch?","Please give the real spacing for each model. 6 ft along the row is too tight for mango; the 3D view already uses 7.5 x 20 ft as a test.","Which plants go in each role, and in what share?","Should there be more models?"]},
+  {t:"Recommended inputs in the package", where:"Recommendations",
+   what:"Each plan includes the inputs needed to plant it, calculated from the plant quantities. Customers can edit or remove them.",
+   logic:["Vermicompost and biochar per plant by role: M <code>2 + 1 kg</code>, X <code>1 + 0.5 kg</code>, O <code>0.5 + 0.25 kg</code>.","Neem cake <code>0.25 kg</code> per plant; Jeevamrutha <code>4 cans</code> per acre.","If the customer changes a plant quantity, the inputs update unless they edited them by hand."],
+   data:["Input recipe per model","Input dosage per plant, by crop or size"],
+   ask:["What inputs and quantities do you recommend at planting for each model?","Any inputs needed later (for example after 3 or 6 months) that we should offer?"]},
+  {t:"3D view and 2D plan", where:"Recommendations (View in 3D)",
+   what:"A close-up 3D patch of the plan that customers can rotate or walk through, plus a flat top view.",
+   logic:["Shows the pattern repeated once each way (at most about 50 plants), with faded rows around it.","Test spacing: Commercial <code>7.5 x 20 ft</code>, Food Forest <code>10 x 10 ft</code>, Miyawaki <code>2 x 2 ft</code>.","Standard sizes by plant type: large fruit tree <code>12 ft</code> tall, small fruit tree <code>8 ft</code>, timber <code>18 ft</code>, banana <code>9 ft</code>, shrub <code>6 ft</code>. Miyawaki is shown at 0.42x as saplings.","Mango uses a realistic 3D model; other trees are drawn in code."],
+   data:["Mature height and canopy width per plant","Row pattern and spacing per model","Meaning of M, X and O and the plants for each"],
+   ask:["What size should trees be shown at: at planting, at 3 years, or fully grown?","Which plants matter most for realistic 3D models (each costs about Rs 50 to make)?"]},
+  {t:"Cart, packing and truck meter", where:"Cart",
+   what:"Shows the package and additional items separately, and a meter of how full the delivery vehicle is.",
+   logic:["Weight per sapling with bag: large <code>3 kg</code>, medium <code>2 kg</code>, small <code>1 kg</code>; Miyawaki saplings <code>0.8 kg</code>. Inputs use their pack weight.","Vehicles: Tata Ace <code>750 kg</code>, Tata 407 <code>2,500 kg</code>, Eicher 1110 <code>5,000 kg</code>. The smallest that fits is chosen; bigger orders use more Eicher trips.","Packing: <code>Rs 15</code> per large plant, <code>Rs 10</code> medium, <code>Rs 5</code> small; inputs free."],
+   data:["Weight per plant with bag or pot","Bag or pot size per plant","Vehicles: capacity in kg and in plants","Packing charges"],
+   ask:["Is the truck limit set by weight, by number of plants, or by space?","How many plants of each size fit in each vehicle?"]},
+  {t:"Delivery options and charges", where:"Cart",
+   what:"Nursery pickup, Bengaluru weekly delivery, or outstation delivery charged by distance.",
+   logic:["Pickup at the nursery: free.","Bengaluru: every Saturday, flat rate by vehicle (Ace <code>Rs 1,500</code>, 407 <code>Rs 3,500</code>, Eicher <code>Rs 6,000</code>).","Outstation: distance x rate per km (Ace <code>Rs 22</code>, 407 <code>Rs 35</code>, Eicher <code>Rs 48</code>).","Distances come from the same fixed list as the wizard."],
+   data:["Serviceable locations and distance from nursery","Delivery days, slots and rates","Vehicles: capacity in kg and in plants"],
+   ask:["Which days and time slots do you deliver in Bengaluru?","Is outstation charged one way or return, and is there a minimum charge?","Do customers pay for loading or unloading labour?"]},
+  {t:"Taxes, offers and policies", where:"Cart",
+   what:"The order summary with bulk savings, automatic offers, packing, transport, GST and the total.",
+   logic:["GST: plants <code>0%</code> (HSN 0602); compost, vermicompost, biochar <code>5%</code>; bio-pesticide <code>18%</code> (to be confirmed).","Automatic offer: \"Monsoon planting offer, 10% off fruiting trees\" (sample).","Note near the total: no cancellation or return; damage replacement wording pending."],
+   data:["HSN code and GST % per product","Current offers and their rules","Cancellation, return, damage and replacement policy"],
+   ask:["Please confirm GST and HSN for every product type.","What offers do you run, and who should be able to change them?","Exact wording for the replacement and no-return policy."]},
+  {t:"Ask AI", where:"Header button",
+   what:"Customers ask questions about plants in plain language and get answers from the catalogue, with add to cart buttons.",
+   logic:["On the live site it searches the catalogue by keywords (plant name, category, price, bearing years, shade).","Inside the Claude preview, an AI model answers using only the catalogue data, and says so when it does not know."],
+   data:["Care guide per plant (water, manure, pests)","Common customer questions and answers","Support phone or WhatsApp number"],
+   ask:["Which questions do customers ask you most often?","When the AI cannot answer, should it offer a call or a WhatsApp chat?"]},
+  {t:"Trust band and videos", where:"Home, Recommendations",
+   what:"A scrolling band of credentials, and planting videos on the home page and for each model.",
+   logic:["Band: Incubated by UAS Dharwad, Recognised by Startup India, MSME registered, own nursery, rated 4.8.","Videos are placeholders with sample captions."],
+   data:["Logos and approved wording (UAS Dharwad, Startup India, MSME)","Planting video per model"],
+   ask:["Approved wording for each credential, and the review score source.","Do you have videos already, or should we plan a shoot?"]},
+];
+function renderReq(){
+  const chev='<svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+  $("#reqList").innerHTML = REQ.map((f,i)=>`<details class="req"><summary><span class="req-n">${i+1}</span><span class="req-t"><b>${esc(f.t)}</b><span>${esc(f.where)}</span></span><span class="req-c">${f.data.length} data item${f.data.length>1?"s":""}</span>${chev}</summary>
+    <div class="req-b"><p class="what">${esc(f.what)}</p>
+      <div class="blk-logic"><h4>How it works now (sample values)</h4><ul>${f.logic.map(l=>`<li>${l}</li>`).join("")}</ul></div>
+      <div class="blk-data"><h4>Data we need</h4><ul>${f.data.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>
+      <div class="blk-ask"><h4>Please confirm</h4><ul>${f.ask.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
+    </div></details>`).join("");
+  const used={}; REQ.forEach(f=>f.data.forEach(d=>{ (used[d]=used[d]||[]).push(f.t) }));
+  $("#reqTable").innerHTML = Object.entries(used).map(([d,fs])=>`<tr><td>${esc(d)}${REQ_TAB[d]?`<small>Excel tab: ${esc(REQ_TAB[d])}</small>`:""}</td><td>${fs.map(esc).join(", ")}</td></tr>`).join("");
+}
+
 /* ---------------- ask AI ---------------- */
 // In the published artifact this uses Claude via the `sample` capability; anywhere else
 // (a saved file, another host) it falls back to keyword search over the same catalogue.
@@ -1411,7 +1573,7 @@ function renderBadges(){
   $("#mbarT").textContent=n?inr(T.total-T.ship):"";
   $("#mbar").classList.toggle("on",n>0 && route()!=="cart");
 }
-function route(){ const h=location.hash.slice(1); return ["home","shop","choose","reco","cart","ask"].includes(h)?h:"home" }
+function route(){ const h=location.hash.slice(1); return ["home","shop","choose","reco","cart","ask","req"].includes(h)?h:"home" }
 function renderAll(){
   const r=route(), y=window.scrollY;
   renderBadges();
@@ -1436,6 +1598,7 @@ function show(r){
   if(r==="reco"){ if(!S.loc) S.loc=PLACES.find(p=>p[0]==="Mysuru"); renderReco() }
   if(r==="cart") renderCart();
   if(r==="ask") renderAsk();
+  if(r==="req") renderReq();
   renderBadges();
 }
 

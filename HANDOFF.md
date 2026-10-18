@@ -96,6 +96,7 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - Prototype 3D modal: step preloader + link to `/3d.html`. Its spacing still follows the 6 x 12 ft placeholder (tied to the 36 x 36 block quantities); change only with the client's real spacing.
 - 2026-10-16 later: Recommendations cards keep the 2D diagram; "View in 3D" opens `/3d.html?m=<model>` in a new tab on the live site (falls back to the simple in-page 3D modal inside the claude.ai preview). `/3d.html` now has Commercial, Food Forest and Miyawaki (2 ft grid, random layer mix, plants at 0.42x as saplings), a PUBG-style thumbstick for walking (drag elsewhere to look; WASD strafe, arrows turn), and no stats panel.
 - `/3d.html` has a "3D view / 2D plan" toggle (also `?v=2d`): flat top view drawn on a canvas, canopy-spread circles by M/X/O colour, faded context rows, dashed patch outline, spacing labels, scale bar, tap to identify.
+- Prototype screen 7 "Data needed" (`#req`): one accordion per feature (what it does, current logic with sample values, data needed, questions) + a 2-column table (data item with Excel tab | features using it). Content lives in `REQ` / `REQ_TAB` in `_work/prototype.template.html`.
 - Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
 
 ## SRS quirks to remember
