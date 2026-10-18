@@ -111,3 +111,10 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 2. Review the prototype with Shyam, then share with the client.
 3. Send Excel to client; collect real formulas, model patterns, logistics, input prices.
 4. Later: decide stack for real build; admin panel; Kannada; payment; hasiru-ops sync (inventory + orders only).
+
+## Client answers on the 18 Oct 2026 data file (from Shyam)
+
+- **Spacing "18 x 18"** means 18 ft from a tree to the next tree of the same plant. Different plants in a mixed model can sit closer.
+- **"-" in a model spacing column** means the plant is not used in that model. Leave it out of that model's options.
+- **Identical food forest and commercial spacing** (150 of 159 plants) is intentional.
+- **Scientific-name rows are separate plants.** Rows 99 to 159 of Plant data (e.g. Santalum album L., Phyllanthus emblica L., Syzygium cumini) are distinct products from the common-name rows (Sandalwood, Amla, Jamun, Red sandal, Ber, Karonda, Soapnut, Bamboo). Keep both; do not merge.
