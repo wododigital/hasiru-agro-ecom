@@ -1,6 +1,6 @@
 # Hasiru Agro: New E-Commerce Site, Prototype Handoff
 
-Last updated: 2026-10-16. Resume from here.
+Last updated: 2026-10-18. Resume from here.
 
 ## Goal
 Hasiru Agro (Bengaluru nursery + farm-development company, incubated by UAS Dharwad) wants a new site that is **primarily plant e-commerce** (farm-scale buyers) with farm-development services as a second pillar. Deliverables:
@@ -97,6 +97,7 @@ Generic model shape: `{colSpacingFt, rowSpacingFt, rows: [pattern strings cyclin
 - 2026-10-16 later: Recommendations cards keep the 2D diagram; "View in 3D" opens `/3d.html?m=<model>` in a new tab on the live site (falls back to the simple in-page 3D modal inside the claude.ai preview). `/3d.html` now has Commercial, Food Forest and Miyawaki (2 ft grid, random layer mix, plants at 0.42x as saplings), a PUBG-style thumbstick for walking (drag elsewhere to look; WASD strafe, arrows turn), and no stats panel.
 - `/3d.html` has a "3D view / 2D plan" toggle (also `?v=2d`): flat top view drawn on a canvas, canopy-spread circles by M/X/O colour, faded context rows, dashed patch outline, spacing labels, scale bar, tap to identify.
 - Prototype screen 7 "Data needed" (`#req`): one accordion per feature (what it does, current logic with sample values, data needed, questions) + a 2-column table (data item with Excel tab | features using it). Content lives in `REQ` / `REQ_TAB` in `_work/prototype.template.html`.
+- 2026-10-18: client data file `latest_products.xlsx` received (gitignored; tabs Plant list (29), Plant data (159 plants: Kannada name, categories, size class, propagation, temp/humidity/rainfall, spacing per model incl. new Boundary model, compost kg by age), FAQs/General/Nursery questions (questions only, no answers), Farmer questions (empty), district geo data (644 districts)). No prices, stock, images, bulk, GST/HSN, weights or logistics yet. Statuses marked on screen 7 via `REQ_STATUS` (Received / Partly + what is missing). Product data NOT imported into the shop yet.
 - Next ideas discussed: semi-realistic textured tree models, AI "hero" render from the 3D layout, real land boundary from a map.
 
 ## SRS quirks to remember

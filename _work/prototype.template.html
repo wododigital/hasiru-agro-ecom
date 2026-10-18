@@ -284,6 +284,9 @@ section.blk{padding:48px 0}
 .req-key{display:flex;flex-wrap:wrap;gap:8px}
 .req-key span{font-size:.78rem;border-radius:99px;padding:4px 10px;font-weight:600}
 .k-logic{background:#e3f0e6;color:var(--forest)}.k-data{background:#fff4d1;color:#6a5300}.k-ask{background:#f3e6dc;color:#7a3e12}
+.st-ok,.st-pt{display:inline-block;font-size:.72rem;font-weight:700;border-radius:99px;padding:1px 8px;margin-left:6px;white-space:nowrap;vertical-align:1px}
+.st-ok{background:#dcf1e1;color:#1d6b38}.st-pt{background:#fde9c8;color:#7a4a00}
+.st-miss{display:block;font-size:.8rem;color:#7a4a00;font-weight:500;margin-top:2px}
 details.req{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden}
 details.req>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;gap:12px;align-items:center}
 details.req>summary::-webkit-details-marker{display:none}
@@ -545,7 +548,8 @@ footer b{color:#fff}
       <div class="eyebrow">For the Hasiru Agro team</div>
       <h2>Data and logic we need, feature by feature</h2>
       <p class="muted">Every number in this prototype is a placeholder so the screens can work. Open a feature to see how it works today, the data we need from you to make it real, and the questions where we need your rules. Please fill the data in the Excel data sheet we shared (the tab name is shown in the table at the end).</p>
-      <div class="req-key"><span class="k-logic">How it works now</span><span class="k-data">Data we need</span><span class="k-ask">Please confirm</span></div>
+      <div class="req-key"><span class="k-logic">How it works now</span><span class="k-data">Data we need</span><span class="k-ask">Please confirm</span><span class="st-ok" style="margin:0;font-size:.78rem;padding:4px 10px">Received ✓</span><span class="st-pt" style="margin:0;font-size:.78rem;padding:4px 10px">Partly received</span></div>
+      <p class="small"><b>Data status reflects the data file received on 18 Oct 2026</b> (plant data for 159 plants, district data and question lists). Items with no tag are still needed.</p>
     </div>
     <div id="reqList"></div>
     <h3 style="margin:34px 0 4px">All data in one list</h3>
@@ -1367,6 +1371,22 @@ const REQ_TAB = {
   "SMS provider and approved OTP template":"Content & Policies","Where new leads should go (ops system, sheet, CRM)":"Content & Policies",
   "Common customer questions and answers":"Content & Policies","Support phone or WhatsApp number":"Content & Policies",
 };
+// Status from the client's data file of 18 Oct 2026. "ok" = received; text = partly received, what is still missing.
+// Items not listed here are not received yet.
+const REQ_STATUS = {
+  "Temperature range":"ok","Plant type (grafted, seeded, air layered, tissue culture)":"ok",
+  "Plant name (English and Kannada)":"Kannada name for Egg fruit and Milk fruit; 34 old shop plants (for example Agarwood, Kiwi, Cocoa) are not in the sheet",
+  "Category and sub-category per plant":"which of your 13 categories go under Timber, Fruiting or Other Plants",
+  "Plant spacing (plant to plant and row to row)":"Commercial spacing for 64 plants, and any spacing for Miracle fruit",
+  "Mature height and canopy width per plant":"height and canopy width in feet (only the size class was given)",
+  "Care guide per plant (water, manure, pests)":"watering schedule, pests and diseases (rainfall, humidity, drought and compost were given)",
+  "Input dosage per plant, by crop or size":"vermicompost, biochar and other inputs (only compost kg by plant age was given)",
+  "Planting models (name, description, purpose)":"a short description and purpose for Food forest, Miyawaki, Commercial and Boundary",
+  "Row pattern and spacing per model":"the M, X, O row pattern for each model (spacing per plant was given)",
+  "Serviceable locations and distance from nursery":"which districts you deliver to, and their distance from the nursery",
+  "Common customer questions and answers":"answers to every question; the Farmer questions tab is empty",
+};
+function reqSt(d){ const s=REQ_STATUS[d]; return !s?"":s==="ok"?'<span class="st-ok">Received ✓</span>':`<span class="st-pt">Partly received</span><span class="st-miss">Still missing: ${esc(s)}</span>`; }
 const REQ = [
   {t:"Home: two ways in", where:"Home",
    what:"The top of the home page splits visitors into two paths: people who know what they want go to the shop, people who need help go to the planting plan wizard.",
@@ -1449,11 +1469,11 @@ function renderReq(){
   $("#reqList").innerHTML = REQ.map((f,i)=>`<details class="req"><summary><span class="req-n">${i+1}</span><span class="req-t"><b>${esc(f.t)}</b><span>${esc(f.where)}</span></span><span class="req-c">${f.data.length} data item${f.data.length>1?"s":""}</span>${chev}</summary>
     <div class="req-b"><p class="what">${esc(f.what)}</p>
       <div class="blk-logic"><h4>How it works now (sample values)</h4><ul>${f.logic.map(l=>`<li>${l}</li>`).join("")}</ul></div>
-      <div class="blk-data"><h4>Data we need</h4><ul>${f.data.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>
+      <div class="blk-data"><h4>Data we need</h4><ul>${f.data.map(d=>`<li>${esc(d)}${reqSt(d)}</li>`).join("")}</ul></div>
       <div class="blk-ask"><h4>Please confirm</h4><ul>${f.ask.map(a=>`<li>${esc(a)}</li>`).join("")}</ul></div>
     </div></details>`).join("");
   const used={}; REQ.forEach(f=>f.data.forEach(d=>{ (used[d]=used[d]||[]).push(f.t) }));
-  $("#reqTable").innerHTML = Object.entries(used).map(([d,fs])=>`<tr><td>${esc(d)}${REQ_TAB[d]?`<small>Excel tab: ${esc(REQ_TAB[d])}</small>`:""}</td><td>${fs.map(esc).join(", ")}</td></tr>`).join("");
+  $("#reqTable").innerHTML = Object.entries(used).map(([d,fs])=>`<tr><td>${esc(d)}${reqSt(d)}${REQ_TAB[d]?`<small>Excel tab: ${esc(REQ_TAB[d])}</small>`:""}</td><td>${fs.map(esc).join(", ")}</td></tr>`).join("");
 }
 
 /* ---------------- ask AI ---------------- */
