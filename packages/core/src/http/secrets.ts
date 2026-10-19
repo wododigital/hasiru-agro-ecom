@@ -10,6 +10,15 @@ export function derivedSecret(purpose: string): Buffer {
   return createHmac('sha256', root).update(`ecomkit:${purpose}`).digest();
 }
 
+/**
+ * The client IP for rate limits and audit. Only X-Real-IP is trusted: nginx sets it from $remote_addr and
+ * overwrites any client-sent value. X-Forwarded-For's first entry is client-controlled, never use it.
+ * Null when there is no proxy (local dev), so callers fall back to a shared bucket.
+ */
+export function clientIp(req: Request): string | null {
+  return req.headers.get('x-real-ip')?.trim() || null;
+}
+
 /** Salted, non-reversible IP for audit rows, rate-limit subjects and analytics. */
 export function hashIp(ip: string | null | undefined): string | null {
   if (!ip) return null;
