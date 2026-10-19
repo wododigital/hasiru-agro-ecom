@@ -32,11 +32,11 @@ export const COUPON_ATTEMPT_WINDOW_SEC = 15 * 60;
  * Salted, non-reversible phone for usage limits and single-use codes.
  * ponytail: local helper until core owns one phone hash for every module (request in BUILD-STATUS/wp-06.md).
  */
-export function hashPhone(phone: string): string {
-  return createHmac('sha256', derivedSecret('phone-hash'))
-    .update(normalisePhone(phone) ?? phone.trim())
-    .digest('base64url')
-    .slice(0, 22);
+export function hashPhone(phone: string): string | null {
+  // Fail closed: an unparseable phone must not get its own usage bucket (spacing/format variants would bypass limits).
+  const normalised = normalisePhone(phone);
+  if (!normalised) return null;
+  return createHmac('sha256', derivedSecret('phone-hash')).update(normalised).digest('base64url').slice(0, 22);
 }
 
 const toRule = (r: DiscountRuleRow): DiscountRule => r;
@@ -255,6 +255,7 @@ export async function addCodes(
   if (bad.length) throw new RangeError(`not a valid code: ${bad.join(', ')}`);
   const wanted = [...new Set(normalised.map((c) => c.code!))];
   const singleUsePhoneHash = options.singleUsePhone ? hashPhone(options.singleUsePhone) : null;
+  if (options.singleUsePhone && !singleUsePhoneHash) throw new RangeError('single-use phone is not a valid phone number');
   return withTx(async (tx) => {
     const [rule] = await tx.select({ kind: discountsRule.kind }).from(discountsRule).where(eq(discountsRule.id, ruleId));
     if (!rule) throw new NotFoundError();
