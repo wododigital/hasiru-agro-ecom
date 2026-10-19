@@ -6,7 +6,7 @@ import { db } from '../db';
 import { coreIntegrationLog } from '../schema';
 
 export { signHmacSha256, signInternal, timingSafeEqual, verifyHmacSha256, verifyInternal } from './hmac';
-export { derivedSecret, hashIp } from './secrets';
+export { clientIp, derivedSecret, hashIp } from './secrets';
 
 export { PayloadTooLargeError, readRawBody } from './raw-body';
 
