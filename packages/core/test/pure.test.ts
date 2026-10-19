@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { loadEnv } from '../src/env';
 import { newId, normalisePhone, slugify, SLUG_RE } from '../src/ids';
 import { financialYear } from '../src/sequence';
-import { isPublicAddress, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
+import { isPublicAddress, isSameOrigin, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
 import { fingerprint, topFrame } from '../src/observability';
 import { seal, unseal } from '../src/settings/crypto';
 import { defineSettings, fieldMeta, maskSecret } from '../src/settings';
@@ -204,5 +204,18 @@ describe('env and cache tags', () => {
   it('tag builders produce tags the revalidate endpoint accepts', () => {
     for (const t of [tags.catalog, tags.promoActive, tags.product(newId()), tags.settings('erp-sync'), tags.district('bengaluru-urban')]) expect(TAG_RE.test(t), t).toBe(true);
     expect(TAG_RE.test('product:../../x')).toBe(false);
+  });
+});
+
+describe('isSameOrigin', () => {
+  const req = (headers: Record<string, string>) => new Request('http://shop.example/api/x', { method: 'POST', headers });
+  it('trusts Sec-Fetch-Site first, then Origin vs Host, and fails closed', () => {
+    expect(isSameOrigin(req({ 'sec-fetch-site': 'same-origin' }))).toBe(true);
+    expect(isSameOrigin(req({ 'sec-fetch-site': 'cross-site', origin: 'http://shop.example', host: 'shop.example' }))).toBe(false);
+    expect(isSameOrigin(req({ 'sec-fetch-site': 'same-site' }))).toBe(false);
+    expect(isSameOrigin(req({ origin: 'https://shop.example', host: 'shop.example' }))).toBe(true);
+    expect(isSameOrigin(req({ origin: 'https://evil.example', host: 'shop.example' }))).toBe(false);
+    expect(isSameOrigin(req({ host: 'shop.example' }))).toBe(false);
+    expect(isSameOrigin(req({ origin: 'null', host: 'shop.example' }))).toBe(false);
   });
 });
