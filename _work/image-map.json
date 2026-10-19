@@ -1,0 +1,4539 @@
+{
+ "plants": {
+  "amla": {
+   "name": "Amla",
+   "variety": "",
+   "sku_match": "HA0013",
+   "csv_name": "Amla (Grafted)",
+   "primary": "images/wordpress uploads/2023/08/Amla-Graftedplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Amla-Graftedplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 116,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Amla-Grafted-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 42,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Amla-Red-1-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 68,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Indian gooseberry",
+    "scientific": "Phyllanthus emblica",
+    "kannada": "ನೆಲ್ಲಿಕಾಯಿ"
+   }
+  },
+  "anjeer-fig": {
+   "name": "Anjeer (Fig)",
+   "variety": "",
+   "sku_match": "HA0016",
+   "csv_name": "Diana Anjeer Fig Plants",
+   "primary": "images/wordpress uploads/2024/03/Diana-Anjeer-Fig-Plants-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Diana-Anjeer-Fig-Plants-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 90,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Anjeer-_-Fig-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 81,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Fig-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 110,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Fig",
+    "scientific": "Ficus carica",
+    "kannada": "ಅಂಜೂರ"
+   }
+  },
+  "apple-anna": {
+   "name": "Apple",
+   "variety": "Anna",
+   "sku_match": "HA0018",
+   "csv_name": "Apple Ana",
+   "primary": "images/wordpress uploads/2023/08/Apple-AnaPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Apple-AnaPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 72,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Apple-AnaFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Apple",
+    "scientific": "Malus domestica",
+    "kannada": "ಸೇಬುಹಣ್ಣು"
+   }
+  },
+  "apple-dorset": {
+   "name": "Apple",
+   "variety": "Dorset",
+   "sku_match": "HA0021",
+   "csv_name": "Apple Dorset",
+   "primary": "images/wordpress uploads/2023/08/Apple-DorsetPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Apple-DorsetPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 80,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Apple-DorsetFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 35,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Apple",
+    "scientific": "Malus domestica",
+    "kannada": "ಸೇಬುಹಣ್ಣು"
+   }
+  },
+  "apple-hariman-99": {
+   "name": "Apple",
+   "variety": "Hariman-99",
+   "sku_match": "HA0022",
+   "csv_name": "Apple Hariman-99",
+   "primary": "images/wordpress uploads/2023/08/Apple-hariman-99plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Apple-hariman-99plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 89,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Hariman-Apple-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 111,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Apple-HRMN-99-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 57,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Apple",
+    "scientific": "Malus domestica",
+    "kannada": "ಸೇಬುಹಣ್ಣು"
+   }
+  },
+  "arecanut-thirthahalli": {
+   "name": "Arecanut",
+   "variety": "Thirthahalli",
+   "sku_match": "HA0026",
+   "csv_name": "Areca Tirthalli",
+   "primary": "images/wordpress uploads/2023/08/Areca-TirthalliPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Areca-TirthalliPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 122,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Areca-TirthalliFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 55,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Areca nut palm",
+    "scientific": "Areca catechu",
+    "kannada": "ಅಡಿಕೆ"
+   }
+  },
+  "ber-bore-hannu": {
+   "name": "Ber (Bore hannu)",
+   "variety": "",
+   "sku_match": "HA00191",
+   "csv_name": "Apple Ber Plant",
+   "primary": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro-2.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro-2.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 61,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 12,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "medium",
+   "search": {
+    "common": "Indian jujube (Ber)",
+    "scientific": "Ziziphus mauritiana",
+    "kannada": "ಬೋರೆಹಣ್ಣು"
+   }
+  },
+  "cashewnut": {
+   "name": "Cashewnut",
+   "variety": "",
+   "sku_match": "HA0080",
+   "csv_name": "Kaju badam",
+   "primary": "images/wordpress uploads/2023/08/Kaju-badam-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Kaju-badam-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 99,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Kaju-badam.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 38,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Cashew",
+    "scientific": "Anacardium occidentale",
+    "kannada": "ಗೋಡಂಬಿ"
+   }
+  },
+  "sapota-chikku-cricket-ball": {
+   "name": "Sapota / Chikku",
+   "variety": "Cricket ball",
+   "sku_match": "HA0046",
+   "csv_name": "Chikku (Cricket ball)",
+   "primary": "images/wordpress uploads/2023/08/chikoo-cricket-ballplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/chikoo-cricket-ballplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 81,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/chikoo-cricket-ball-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 36,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Chickoo-Cricket-Ball-1-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 62,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Sapodilla (Chikoo)",
+    "scientific": "Manilkara zapota",
+    "kannada": "ಸಪೋಟ / ಚಿಕ್ಕು"
+   }
+  },
+  "sapota-chikku-kalapatti": {
+   "name": "Sapota / Chikku",
+   "variety": "Kalapatti",
+   "sku_match": "HA0047",
+   "csv_name": "Chikku (kalapatti)",
+   "primary": "images/wordpress uploads/2023/08/kalapatti-chikooplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/kalapatti-chikooplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 97,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/kalapatti-chikoo-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 36,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Chickoo-Kalapatti-2-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 78,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Sapodilla (Chikoo)",
+    "scientific": "Manilkara zapota",
+    "kannada": "ಸಪೋಟ / ಚಿಕ್ಕು"
+   }
+  },
+  "coconut-dwarf": {
+   "name": "Coconut",
+   "variety": "Dwarf",
+   "sku_match": "HA0052",
+   "csv_name": "Coconut Channaraypatna",
+   "primary": "images/wordpress uploads/2023/08/Coconut-channarayapatnaplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Coconut-channarayapatnaplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 193,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Coconut-channarayapatna-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 70,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Coconut-Channarayapatna-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 51,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Coconut palm",
+    "scientific": "Cocos nucifera",
+    "kannada": "ತೆಂಗಿನಕಾಯಿ"
+   }
+  },
+  "coconut-tiptur-tall": {
+   "name": "Coconut",
+   "variety": "Tiptur Tall",
+   "sku_match": "HA0053",
+   "csv_name": "Coconut Tiptur Tall",
+   "primary": "images/wordpress uploads/2023/08/Coconut-Tiptur-Tall-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Coconut-Tiptur-Tall-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 189,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Coconut-Tiptur-Tall.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 39,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Coconut palm",
+    "scientific": "Cocos nucifera",
+    "kannada": "ತೆಂಗಿನಕಾಯಿ"
+   }
+  },
+  "custard-apple": {
+   "name": "Custard Apple",
+   "variety": "",
+   "sku_match": "HA0055",
+   "csv_name": "Custard apple",
+   "primary": "images/wordpress uploads/2023/08/Custard-apple-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Custard-apple-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 97,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Custard-Apple-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 103,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Custard-Apple.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 28,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Custard apple",
+    "scientific": "Annona squamosa",
+    "kannada": "ಸೀತಾಫಲ"
+   }
+  },
+  "guava-pink": {
+   "name": "Guava",
+   "variety": "Pink",
+   "sku_match": "HA002",
+   "csv_name": "GuavaTaiwan Pink",
+   "primary": "images/wordpress uploads/2023/08/Taiwan-pink-guavaplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Taiwan-pink-guavaplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 88,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/taiwan-pink-guava-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 56,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Guava",
+    "scientific": "Psidium guajava",
+    "kannada": "ಸೀಬೆಹಣ್ಣು"
+   }
+  },
+  "guava-white": {
+   "name": "Guava",
+   "variety": "White",
+   "sku_match": "HA00150",
+   "csv_name": "Guava Taiwan White",
+   "primary": "images/wordpress uploads/2023/08/Guava-Taiwan-White-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Guava-Taiwan-White-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 104,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Guava-Taiwan-White.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 37,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Guava",
+    "scientific": "Psidium guajava",
+    "kannada": "ಸೀಬೆಹಣ್ಣು"
+   }
+  },
+  "hog-plum-amatekai": {
+   "name": "Hog plum (Amatekai)",
+   "variety": "",
+   "sku_match": "HA0074",
+   "csv_name": "Indian Olive (Amate)",
+   "primary": "images/wordpress uploads/2024/03/Indian-Olive-Amate-fruit-hasiru-agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Indian-Olive-Amate-fruit-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 20,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Hog plum (Amate)",
+    "scientific": "Spondias pinnata",
+    "kannada": "ಅಮಟೆಕಾಯಿ"
+   }
+  },
+  "jackfruit-gumless": {
+   "name": "Jackfruit",
+   "variety": "Gumless",
+   "sku_match": "HA0070",
+   "csv_name": "Gumless Jackfruit",
+   "primary": "images/wordpress uploads/2023/07/Gumless-Jackfruit-Plant-with-fru.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Gumless-Jackfruit-Plant-with-fru.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 97,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Gumless-Jackfruit-F.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 36,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Gumless-Jackfruit.jpg",
+     "role": "fruit",
+     "w": 790,
+     "h": 790,
+     "kb": 46,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Jackfruit",
+    "scientific": "Artocarpus heterophyllus",
+    "kannada": "ಹಲಸು"
+   }
+  },
+  "jackfruit-j-33": {
+   "name": "Jackfruit",
+   "variety": "J-33",
+   "sku_match": "HA0044",
+   "csv_name": "Byrachandra Jackfruit",
+   "primary": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit-Plant-with.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit-Plant-with.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 90,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Byrachandra-Jackfruit-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 81,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit.jpg",
+     "role": "fruit",
+     "w": 790,
+     "h": 790,
+     "kb": 44,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Jackfruit",
+    "scientific": "Artocarpus heterophyllus",
+    "kannada": "ಹಲಸು"
+   }
+  },
+  "jackfruit-red-honey": {
+   "name": "Jackfruit",
+   "variety": "Red honey",
+   "sku_match": "HA0044",
+   "csv_name": "Byrachandra Jackfruit",
+   "primary": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit-Plant-with.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit-Plant-with.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 90,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Byrachandra-Jackfruit-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 81,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Byrachandra-Jackfruit.jpg",
+     "role": "fruit",
+     "w": 790,
+     "h": 790,
+     "kb": 44,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Jackfruit",
+    "scientific": "Artocarpus heterophyllus",
+    "kannada": "ಹಲಸು"
+   }
+  },
+  "jackfruit-vietnam-super-early": {
+   "name": "Jackfruit",
+   "variety": "Vietnam super early",
+   "sku_match": "HA00174",
+   "csv_name": "Vietnam Jackfruit All season Grafted",
+   "primary": "images/wordpress uploads/2023/07/Vietnam-super-early-Jackfruit-Gr.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Vietnam-super-early-Jackfruit-Gr.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 83,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Vietnam-Jack-All-season-fruit-wi.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 112,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Vietnam-Jack-All-season-fruit-im.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 14,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety_partial",
+   "confidence": "medium",
+   "search": {
+    "common": "Jackfruit",
+    "scientific": "Artocarpus heterophyllus",
+    "kannada": "ಹಲಸು"
+   }
+  },
+  "jamun-jambu-nerale": {
+   "name": "Jamun (Jambu nerale)",
+   "variety": "",
+   "sku_match": "HA0037",
+   "csv_name": "Bhadoli Jamun",
+   "primary": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 120,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Jamun",
+    "scientific": "Syzygium cumini",
+    "kannada": "ನೇರಳೆಹಣ್ಣು"
+   }
+  },
+  "jamun-gratfed": {
+   "name": "Jamun gratfed",
+   "variety": "",
+   "sku_match": "HA0037",
+   "csv_name": "Bhadoli Jamun",
+   "primary": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 120,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Jamun (grafted)",
+    "scientific": "Syzygium cumini",
+    "kannada": "ಕಸಿ ನೇರಳೆ"
+   }
+  },
+  "karonda": {
+   "name": "Karonda",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Karonda",
+    "scientific": "Carissa carandas",
+    "kannada": "ಕರವಂದೆ"
+   }
+  },
+  "lemon-all-season-kagzi": {
+   "name": "Lemon All season",
+   "variety": "Kagzi",
+   "sku_match": "HA0079",
+   "csv_name": "Lemon Tree - All Season Kagzi lemon",
+   "primary": "images/wordpress uploads/2023/07/Lemon-Tree-All-Season-Kagzi-Hasiruagro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Lemon-Tree-All-Season-Kagzi-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 63,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Lemon-Tree-All-Season-Kagzi-fruit-Hasiruagro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 35,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Kagzi lime",
+    "scientific": "Citrus aurantiifolia",
+    "kannada": "ನಿಂಬೆಹಣ್ಣು"
+   }
+  },
+  "lemon-seedless": {
+   "name": "Lemon",
+   "variety": "Seedless",
+   "sku_match": "HA00195",
+   "csv_name": "Balaji Lemon",
+   "primary": "images/wordpress uploads/2024/03/Balaji-Lemon-tree-hasiru-agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Balaji-Lemon-tree-hasiru-agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 111,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/Balaji-Lemon-fruit-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 23,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Lemon",
+    "scientific": "Citrus limon",
+    "kannada": "ನಿಂಬೆಹಣ್ಣು"
+   }
+  },
+  "mango-all-season": {
+   "name": "Mango",
+   "variety": "All Season",
+   "sku_match": "HA008",
+   "csv_name": "All Season Mango",
+   "primary": "images/wordpress uploads/2023/08/All-Season-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/All-Season-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 159,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/All-Season-Mango-Fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/All-Season-Mango.jpg",
+     "role": "sapling",
+     "w": 790,
+     "h": 790,
+     "kb": 39,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-alphonoso": {
+   "name": "Mango",
+   "variety": "Alphonoso",
+   "sku_match": "HA0011",
+   "csv_name": "Alphonoso Mango",
+   "primary": "images/wordpress uploads/2023/08/Alphonso-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Alphonso-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 74,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Alphonso-Mango-S.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 75,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Alphonso-Mango.jpg",
+     "role": "sapling",
+     "w": 790,
+     "h": 790,
+     "kb": 44,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-badami": {
+   "name": "Mango",
+   "variety": "Badami",
+   "sku_match": "HA0033",
+   "csv_name": "Badami Mango",
+   "primary": "images/wordpress uploads/2023/08/Mango-Badamiplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Mango-Badamiplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 124,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Mango-Badami-Fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 44,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Mango-Badami-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 58,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-dasheri": {
+   "name": "Mango",
+   "variety": "Dasheri",
+   "sku_match": "HA0058",
+   "csv_name": "Dasheri Mango",
+   "primary": "images/wordpress uploads/2023/08/Dasheri-Mangoplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Dasheri-Mangoplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 100,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Dasheri-Mango-Fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Mango-Dasheri-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 63,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-mallika": {
+   "name": "Mango",
+   "variety": "Mallika",
+   "sku_match": "HA0095",
+   "csv_name": "Mallika Mango",
+   "primary": "images/wordpress uploads/2023/08/Mallika-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Mallika-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 219,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Mallika-Mango-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 47,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Mango-Mallika-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 55,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-raspuri": {
+   "name": "Mango",
+   "variety": "Raspuri",
+   "sku_match": "HA00131",
+   "csv_name": "Raspuri Mango",
+   "primary": "images/wordpress uploads/2023/08/Raspuri-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Raspuri-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 107,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Raspuri-Mango-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 78,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Mango-Raspuri-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 63,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-sakkaregutli": {
+   "name": "Mango",
+   "variety": "Sakkaregutli",
+   "sku_match": "HA0011",
+   "csv_name": "Alphonoso Mango",
+   "primary": "images/wordpress uploads/2023/08/Alphonso-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Alphonso-Mango-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 74,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Alphonso-Mango-S.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 75,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Alphonso-Mango.jpg",
+     "role": "sapling",
+     "w": 790,
+     "h": 790,
+     "kb": 44,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mango-totapuri": {
+   "name": "Mango",
+   "variety": "Totapuri",
+   "sku_match": "HA00166",
+   "csv_name": "Totapuri Mango",
+   "primary": "images/wordpress uploads/2023/07/totapuri-mangoplant-with-fruit-i.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/totapuri-mangoplant-with-fruit-i.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 138,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/totapuri-mango-fruit-fruit-image.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 21,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Mango-Totapuri-1-Hasiru-Agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 15,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "monkey-jack": {
+   "name": "Monkey Jack",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Monkey jack (Lakuchi)",
+    "scientific": "Artocarpus lacucha",
+    "kannada": "ಹಲಸು"
+   }
+  },
+  "mosumbi-malta-b-1": {
+   "name": "Mosumbi",
+   "variety": "Malta B-1",
+   "sku_match": "HA0032",
+   "csv_name": "B-1 Musambi Malta",
+   "primary": "images/wordpress uploads/2023/08/B-1-Musambi-MaltaPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/B-1-Musambi-MaltaPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 82,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/B-1-Musambi-MaltaFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 47,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Sweet lime (Mosambi)",
+    "scientific": "Citrus limetta",
+    "kannada": "ಮೂಸಂಬಿ"
+   }
+  },
+  "litchi-mozaffarpur-shahi": {
+   "name": "Litchi",
+   "variety": "Mozaffarpur shahi",
+   "sku_match": "HA00105",
+   "csv_name": "Sweet Shahi Litchi (Air layered)",
+   "primary": "images/wordpress uploads/2024/03/shahi-litchi-fruit-Hasiru-Agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/shahi-litchi-fruit-Hasiru-Agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 42,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/shahi-litchi-Tree-Hasiru-Agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 80,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Litchi",
+    "scientific": "Litchi chinensis",
+    "kannada": "ಲಿಚಿ ಹಣ್ಣು"
+   }
+  },
+  "orange-nagpur": {
+   "name": "Orange",
+   "variety": "Nagpur",
+   "sku_match": "HA00106",
+   "csv_name": "Nagpur Orange",
+   "primary": "images/wordpress uploads/2023/07/Nagpur-Orange-1.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Nagpur-Orange-1.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 106,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Nagpur-Orange.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 55,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Nagpur orange",
+    "scientific": "Citrus reticulata",
+    "kannada": "ಕಿತ್ತಳೆಹಣ್ಣು"
+   }
+  },
+  "nutmeg-grafted": {
+   "name": "Nutmeg grafted",
+   "variety": "",
+   "sku_match": "HA00107",
+   "csv_name": "Nutmeg (Grafted)",
+   "primary": "images/wordpress uploads/2023/08/Nutmeg-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Nutmeg-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 101,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Nutmeg-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 169,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Nutmeg-Seeded-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 72,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Nutmeg (grafted)",
+    "scientific": "Myristica fragrans",
+    "kannada": "ಕಸಿ ಜಾಯಿಕಾಯಿ"
+   }
+  },
+  "nutmeg-seeded": {
+   "name": "Nutmeg seeded",
+   "variety": "",
+   "sku_match": "HA00108",
+   "csv_name": "Nutmeg (Seeded)",
+   "primary": "images/wordpress uploads/2023/08/Nutmeg-Seeded-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Nutmeg-Seeded-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 108,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Nutmeg-Seeded-Fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 36,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Nutmeg-Seeded-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 72,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Nutmeg (seeded)",
+    "scientific": "Myristica fragrans",
+    "kannada": "ಬೀಜದ ಜಾಯಿಕಾಯಿ"
+   }
+  },
+  "papaya-pandrah-no-15": {
+   "name": "Papaya",
+   "variety": "Pandrah (No.15)",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Papaya",
+    "scientific": "Carica papaya",
+    "kannada": "ಪಪ್ಪಾಯಿ"
+   }
+  },
+  "peanut-butter": {
+   "name": "Peanut butter",
+   "variety": "",
+   "sku_match": "HA00113",
+   "csv_name": "Peanut butter",
+   "primary": "images/wordpress uploads/2023/08/Peanut-butter-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Peanut-butter-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 143,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/PeanutButter-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 132,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Peanut-Butter-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 59,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Peanut butter fruit",
+    "scientific": "Bunchosia argentea",
+    "kannada": "ಪೀನಟ್ ಬಟರ್ ಹಣ್ಣು"
+   }
+  },
+  "pepper-karimunda": {
+   "name": "Pepper",
+   "variety": "Karimunda",
+   "sku_match": "HA00116",
+   "csv_name": "Pepper ( Grafted )",
+   "primary": "images/wordpress uploads/2023/08/Pepper-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Pepper-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 112,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Pepper-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 50,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Pepper-Grafted-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 52,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Black pepper vine",
+    "scientific": "Piper nigrum",
+    "kannada": "ಕಾಳುಮೆಣಸು"
+   }
+  },
+  "pepper-paniyur": {
+   "name": "Pepper",
+   "variety": "Paniyur",
+   "sku_match": "HA00116",
+   "csv_name": "Pepper ( Grafted )",
+   "primary": "images/wordpress uploads/2023/08/Pepper-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Pepper-Grafted-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 112,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Pepper-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 50,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Pepper-Grafted-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 52,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Black pepper vine",
+    "scientific": "Piper nigrum",
+    "kannada": "ಕಾಳುಮೆಣಸು"
+   }
+  },
+  "pomelo-chakota": {
+   "name": "Pomelo (Chakota)",
+   "variety": "",
+   "sku_match": "HA00133",
+   "csv_name": "Red Chakota/Pomelo",
+   "primary": "images/wordpress uploads/2023/08/Red-Chakota-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Red-Chakota-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 144,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Pomelo-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 133,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Pomelo-Red-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 58,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Pomelo",
+    "scientific": "Citrus maxima",
+    "kannada": "ಚಕೋತ"
+   }
+  },
+  "pomegranate-super-bhagwa": {
+   "name": "Pomegranate",
+   "variety": "Super bhagwa",
+   "sku_match": "HA00193",
+   "csv_name": "Super Bagwa Pomegranate",
+   "primary": "images/wordpress uploads/2024/03/Super-Bagwa-Pomegranate-tree-hasiru-agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Super-Bagwa-Pomegranate-tree-hasiru-agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/Super-Bagwa-Pomegranate-fruit-Hasiru-Agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 28,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Pomegranate",
+    "scientific": "Punica granatum",
+    "kannada": "ದಾಳಿಂಬೆ"
+   }
+  },
+  "rose-apple-panneralu": {
+   "name": "Rose apple (Panneralu)",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Rose apple",
+    "scientific": "Syzygium jambos",
+    "kannada": "ಪನ್ನೇರಳೆ"
+   }
+  },
+  "soursop-lakshmanphal": {
+   "name": "Soursop (Lakshmanphal)",
+   "variety": "",
+   "sku_match": "HA0086",
+   "csv_name": "Lakshmanphal",
+   "primary": "images/wordpress uploads/2023/08/Lakshmanphalplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Lakshmanphalplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 82,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Lakshmanphal-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 43,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Lakshmana-phala-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 64,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Soursop (Lakshman phal)",
+    "scientific": "Annona muricata",
+    "kannada": "ಲಕ್ಷ್ಮಣಫಲ"
+   }
+  },
+  "starfruit": {
+   "name": "Starfruit",
+   "variety": "",
+   "sku_match": "HA00147",
+   "csv_name": "Starfruit",
+   "primary": "images/wordpress uploads/2023/08/StarFruit-F.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/StarFruit-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 57,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/StarFruit-2.jpg",
+     "role": "fruit",
+     "w": 790,
+     "h": 790,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Star fruit (Carambola)",
+    "scientific": "Averrhoa carambola",
+    "kannada": "ಕಮರಕ / ನಕ್ಷತ್ರಹಣ್ಣು"
+   }
+  },
+  "sweet-tamarind": {
+   "name": "Sweet tamarind",
+   "variety": "",
+   "sku_match": "HA00163",
+   "csv_name": "Thai sweet tamarind",
+   "primary": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 95,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 60,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Sweet-Tamrind.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Sweet tamarind",
+    "scientific": "Tamarindus indica",
+    "kannada": "ಸಿಹಿ ಹುಣಸೆ"
+   }
+  },
+  "water-apple-red": {
+   "name": "Water Apple Red",
+   "variety": "",
+   "sku_match": "HA00179",
+   "csv_name": "Water Apple Red",
+   "primary": "images/wordpress uploads/2023/08/red-water-appleplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/red-water-appleplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 92,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/WaterApple-Red-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 25,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Water-Apple-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 54,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Red water apple",
+    "scientific": "Syzygium samarangense",
+    "kannada": "ಕೆಂಪು ಪನ್ನೇರಳೆ"
+   }
+  },
+  "jackfruit-hebbalasu-wild": {
+   "name": "Jackfruit (Hebbalasu)",
+   "variety": "Wild",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Wild jack (Hebbalasu)",
+    "scientific": "Artocarpus hirsutus",
+    "kannada": "ಹೆಬ್ಬಲಸು"
+   }
+  },
+  "wood-apple": {
+   "name": "Wood apple",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Wood apple",
+    "scientific": "Limonia acidissima",
+    "kannada": "ಬೇಲದ ಮರ"
+   }
+  },
+  "banana-yelakki": {
+   "name": "Banana",
+   "variety": "Yelakki",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Banana",
+    "scientific": "Musa acuminata",
+    "kannada": "ಬಾಳೆಹಣ್ಣು"
+   }
+  },
+  "banana-robusta-pachbaale": {
+   "name": "Banana",
+   "variety": "Robusta (Pachbaale)",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Banana",
+    "scientific": "Musa acuminata",
+    "kannada": "ಬಾಳೆಹಣ್ಣು"
+   }
+  },
+  "banana-red": {
+   "name": "Banana",
+   "variety": "Red",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Banana",
+    "scientific": "Musa acuminata",
+    "kannada": "ಬಾಳೆಹಣ್ಣು"
+   }
+  },
+  "abiu": {
+   "name": "Abiu",
+   "variety": "",
+   "sku_match": "HA003",
+   "csv_name": "Abiu (Seeded)",
+   "primary": "images/wordpress uploads/2023/08/Abiu-Fruit-Plantplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Abiu-Fruit-Plantplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 93,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Abiu-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 53,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Abiu-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 68,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Abiu",
+    "scientific": "Pouteria caimito",
+    "kannada": "ಅಬಿಯು ಹಣ್ಣು"
+   }
+  },
+  "achachiru": {
+   "name": "Achachiru",
+   "variety": "",
+   "sku_match": "HA004",
+   "csv_name": "Achachiru",
+   "primary": "images/wordpress uploads/2023/08/Achachairuplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Achachairuplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 79,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Achacha-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 71,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Achachairu-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 74,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Achachairu",
+    "scientific": "Garcinia humilis",
+    "kannada": "ಅಚಚಿರು ಹಣ್ಣು"
+   }
+  },
+  "avocado-coorg": {
+   "name": "Avocado",
+   "variety": "Coorg",
+   "sku_match": "HA0027",
+   "csv_name": "Avocado coorg variety",
+   "primary": "images/wordpress uploads/2023/07/Avocado-coorg-varietyPlant-with-Fruit-image-Hasiruagro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Avocado-coorg-varietyPlant-with-Fruit-image-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 96,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Avocado-coorg-varietyFruit-image-Hasiruagro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 29,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Avocado",
+    "scientific": "Persea americana",
+    "kannada": "ಬೆಣ್ಣೆಹಣ್ಣು"
+   }
+  },
+  "avocado-mexican-hass": {
+   "name": "Avocado",
+   "variety": "Mexican Hass",
+   "sku_match": "HA0028",
+   "csv_name": "Hass Avocado Plant",
+   "primary": "images/wordpress uploads/2023/07/avocado-haasplant-with-fruit-image-Hasiruagro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/avocado-haasplant-with-fruit-image-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 117,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/avocado-haas-fruit-fruit-image-Hasiruagro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Avocado-Hass-Hasiru-Agro.webp",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 49,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Avocado",
+    "scientific": "Persea americana",
+    "kannada": "ಬೆಣ್ಣೆಹಣ್ಣು"
+   }
+  },
+  "baraba": {
+   "name": "Baraba",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Baraba fruit",
+    "scientific": "",
+    "kannada": "ಬರಬಾ ಹಣ್ಣು"
+   }
+  },
+  "bread-fruit": {
+   "name": "Bread fruit",
+   "variety": "",
+   "sku_match": "HA0043",
+   "csv_name": "Bread fruit",
+   "primary": "images/wordpress uploads/2023/08/Bread-fruit-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bread-fruit-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 132,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bread-fruit.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 43,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Breadfruit",
+    "scientific": "Artocarpus altilis",
+    "kannada": "ದೀವಿಹಲಸು"
+   }
+  },
+  "dragonfruit-jumbo-red": {
+   "name": "Dragonfruit",
+   "variety": "Jumbo red",
+   "sku_match": "HA0060",
+   "csv_name": "Sweet Red Dragonfruit Plants - Jumbo",
+   "primary": "images/wordpress uploads/2024/03/Sweet-Red-Dragonfruit-plants-Jumbo-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Sweet-Red-Dragonfruit-plants-Jumbo-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 116,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/dragon-fruit-redplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 156,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Dragon-Fruit-Jumbo-Red-Hasiru-Agro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Dragon fruit",
+    "scientific": "Selenicereus undatus",
+    "kannada": "ಡ್ರ್ಯಾಗನ್ ಹಣ್ಣು"
+   }
+  },
+  "egg-fruit": {
+   "name": "Egg fruit",
+   "variety": "",
+   "sku_match": "HA0064",
+   "csv_name": "Egg fruit",
+   "primary": "images/wordpress uploads/2023/08/Egg-fruitplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Egg-fruitplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 97,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Egg-Fruit-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 83,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Egg-Fruit-Hasiru-Agro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 64,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Canistel (Egg fruit)",
+    "scientific": "Pouteria campechiana",
+    "kannada": ""
+   }
+  },
+  "guava-japanese-red-diamond": {
+   "name": "Guava",
+   "variety": "Japanese Red diamond",
+   "sku_match": "HA0076",
+   "csv_name": "Japanese Red diamond Guava",
+   "primary": "images/wordpress uploads/2023/08/Japanese-Red-diamond-GuavaPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Japanese-Red-diamond-GuavaPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 100,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Japanese-Red-diamond-GuavaFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 51,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Guava",
+    "scientific": "Psidium guajava",
+    "kannada": "ಸೀಬೆಹಣ್ಣು"
+   }
+  },
+  "guava-strawberry": {
+   "name": "Guava",
+   "variety": "Strawberry",
+   "sku_match": "HA00148",
+   "csv_name": "Strawberry guava",
+   "primary": "images/wordpress uploads/2023/08/strawberry-guava-plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/strawberry-guava-plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 101,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/strawberry-guava-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 38,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Strawberry-Guava-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 57,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Guava",
+    "scientific": "Psidium guajava",
+    "kannada": "ಸೀಬೆಹಣ್ಣು"
+   }
+  },
+  "ice-cream-beans": {
+   "name": "Ice cream beans",
+   "variety": "",
+   "sku_match": "HA00190",
+   "csv_name": "Ice cream beans",
+   "primary": "images/wordpress uploads/2024/03/ice-cream-plant-hasiru-agro-2.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/ice-cream-plant-hasiru-agro-2.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 125,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/ice-cream-plant-hasiru-agro.webp",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Ice cream bean",
+    "scientific": "Inga edulis",
+    "kannada": "ಐಸ್‌ಕ್ರೀಮ್ ಬೀನ್ ಹಣ್ಣು"
+   }
+  },
+  "jaboticaba-sabara": {
+   "name": "Jaboticaba Sabara",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Jabuticaba",
+    "scientific": "Plinia cauliflora",
+    "kannada": "ಜಬೋಟಿಕಾಬಾ ಸಬಾರಾ"
+   }
+  },
+  "longon": {
+   "name": "Longon",
+   "variety": "",
+   "sku_match": "HA0090",
+   "csv_name": "Longon",
+   "primary": "images/wordpress uploads/2023/08/Longon-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Longon-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 87,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Longan-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 126,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Longan-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 62,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Longan",
+    "scientific": "Dimocarpus longan",
+    "kannada": "ಲಾಂಗನ್ ಹಣ್ಣು"
+   }
+  },
+  "macadamia-nuts-grafted": {
+   "name": "Macadamia Nuts Grafted",
+   "variety": "",
+   "sku_match": "HA0091",
+   "csv_name": "Australian Macadamia Nut plant",
+   "primary": "images/wordpress uploads/2023/07/Australian-Macadamia-Nuts-plant-Hasiruagro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Australian-Macadamia-Nuts-plant-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 65,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-Plant-with-fruit-image-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 31,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-F.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-Hasiru-Agro.webp",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 54,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety_partial",
+   "confidence": "medium",
+   "search": {
+    "common": "Macadamia (grafted)",
+    "scientific": "Macadamia integrifolia",
+    "kannada": "ಕಸಿ ಮಕಾಡಮಿಯಾ ಕಾಯಿ"
+   }
+  },
+  "macadamia-nuts-seeded": {
+   "name": "Macadamia Nuts Seeded",
+   "variety": "",
+   "sku_match": "HA0091",
+   "csv_name": "Australian Macadamia Nut plant",
+   "primary": "images/wordpress uploads/2023/07/Australian-Macadamia-Nuts-plant-Hasiruagro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Australian-Macadamia-Nuts-plant-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 65,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-Plant-with-fruit-image-Hasiruagro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 31,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-F.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Macadamia-Hasiru-Agro.webp",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 54,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety_partial",
+   "confidence": "medium",
+   "search": {
+    "common": "Macadamia (seeded)",
+    "scientific": "Macadamia integrifolia",
+    "kannada": "ಬೀಜದ ಮಕಾಡಮಿಯಾ ಕಾಯಿ"
+   }
+  },
+  "mango-verigated": {
+   "name": "Mango",
+   "variety": "Verigated",
+   "sku_match": "HA00170",
+   "csv_name": "Variegated Mango",
+   "primary": "images/wordpress uploads/2023/07/Variegated-Mango-Fruit-Hasiru-Ag.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Variegated-Mango-Fruit-Hasiru-Ag.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 17,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "mangosteen": {
+   "name": "Mangosteen",
+   "variety": "",
+   "sku_match": "HA0097",
+   "csv_name": "Mangosteen (1.5ft)",
+   "primary": "images/wordpress uploads/2023/08/Mangosteen-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Mangosteen-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 92,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Mangosteen-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 88,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Mangosteen-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 68,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Mangosteen",
+    "scientific": "Garcinia mangostana",
+    "kannada": "ಮ್ಯಾಂಗೋಸ್ಟೀನ್"
+   }
+  },
+  "matoa": {
+   "name": "Matoa",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Matoa",
+    "scientific": "Pometia pinnata",
+    "kannada": "ಮಾತೋವಾ ಹಣ್ಣು"
+   }
+  },
+  "milk-fruit-star-apple": {
+   "name": "Milk fruit/ star apple",
+   "variety": "",
+   "sku_match": "HA00102",
+   "csv_name": "Milk fruit",
+   "primary": "images/wordpress uploads/2023/08/Milk-fruitplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Milk-fruitplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 120,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Milk-fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 53,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Milk-Fruit-Hasiru-Agro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 64,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Star apple (Milk fruit)",
+    "scientific": "Chrysophyllum cainito",
+    "kannada": ""
+   }
+  },
+  "miracle-fruit": {
+   "name": "Miracle fruit",
+   "variety": "",
+   "sku_match": "HA00103",
+   "csv_name": "Miracle fruit",
+   "primary": "images/wordpress uploads/2023/08/Miracle-fruit-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Miracle-fruit-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 106,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Miracle-Fruit-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 36,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Miracle-Fruit-1-Hasiru-Agro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 87,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Miracle fruit",
+    "scientific": "Synsepalum dulcificum",
+    "kannada": "ಮಿರಾಕಲ್ ಹಣ್ಣು"
+   }
+  },
+  "mango-miyazaki": {
+   "name": "Mango",
+   "variety": "Miyazaki",
+   "sku_match": "HA00104",
+   "csv_name": "Japanese Miyazaki Mango Plant Grafted",
+   "primary": "images/wordpress uploads/2023/07/Miyazaki-Mango-fruit-with-plant.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/07/Miyazaki-Mango-fruit-with-plant.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 67,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Miyazaki-Mango-fruit-image-Hasir.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 20,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Mango",
+    "scientific": "Mangifera indica",
+    "kannada": "ಮಾವಿನಹಣ್ಣು"
+   }
+  },
+  "olive": {
+   "name": "Olive",
+   "variety": "",
+   "sku_match": "HA00109",
+   "csv_name": "Olive",
+   "primary": "images/wordpress uploads/2023/08/Olive-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Olive-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 105,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Olive-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 70,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Olive-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 67,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Olive",
+    "scientific": "Olea europaea",
+    "kannada": "ಆಲಿವ್ ಹಣ್ಣು"
+   }
+  },
+  "passion-fruit": {
+   "name": "Passion fruit",
+   "variety": "",
+   "sku_match": "HA00110",
+   "csv_name": "Passion fruit",
+   "primary": "images/wordpress uploads/2023/08/Passion-fruit-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Passion-fruit-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 128,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Passion-Fruit-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 74,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Passion-Fruit.jpg",
+     "role": "fruit",
+     "w": 790,
+     "h": 790,
+     "kb": 48,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Passion fruit",
+    "scientific": "Passiflora edulis",
+    "kannada": "ಪ್ಯಾಷನ್ ಹಣ್ಣು"
+   }
+  },
+  "rain-forest-plum": {
+   "name": "Rain forest plum",
+   "variety": "",
+   "sku_match": "HA00199",
+   "csv_name": "Rain forest Plum",
+   "primary": "images/wordpress uploads/2024/03/Rain-forest-Plum-tree-hasiru-agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Rain-forest-Plum-tree-hasiru-agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 73,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/Rain-forest-Plum-fruit-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Rainforest plum",
+    "scientific": "Eugenia candolleana",
+    "kannada": "ರೇನ್‌ಫಾರೆಸ್ಟ್ ಪ್ಲಮ್ ಹಣ್ಣು"
+   }
+  },
+  "rambutan-n-18": {
+   "name": "Rambutan",
+   "variety": "N-18",
+   "sku_match": "HA00127",
+   "csv_name": "Rambutan N-18 (3ft)",
+   "primary": "images/wordpress uploads/2023/08/Rambutan-N-18-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Rambutan-N-18-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 240,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/RambutanN-18-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 145,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Rambutan-N18-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 78,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Rambutan",
+    "scientific": "Nephelium lappaceum",
+    "kannada": "ರಂಬುಟಾನ್"
+   }
+  },
+  "rambutan-schoolboy": {
+   "name": "Rambutan",
+   "variety": "Schoolboy",
+   "sku_match": "HA00130",
+   "csv_name": "Rambutan Schoolboy",
+   "primary": "images/wordpress uploads/2023/08/Rambutan-Schoolboy-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Rambutan-Schoolboy-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 116,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/RambutanSchoolboy-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 115,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Rambutan-School-Boy-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 68,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "variety",
+   "confidence": "high",
+   "search": {
+    "common": "Rambutan",
+    "scientific": "Nephelium lappaceum",
+    "kannada": "ರಂಬುಟಾನ್"
+   }
+  },
+  "salak": {
+   "name": "Salak",
+   "variety": "",
+   "sku_match": "HA00198",
+   "csv_name": "Salak",
+   "primary": "images/wordpress uploads/2024/03/Salak-plant-hasiru-agro.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Salak-plant-hasiru-agro.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 205,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/salak-fruit-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 26,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Salak (Snake fruit)",
+    "scientific": "Salacca zalacca",
+    "kannada": "ಸಲಾಕ್ / ಹಾವಿನಹಣ್ಣು"
+   }
+  },
+  "velvet-apple": {
+   "name": "Velvet apple",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Velvet apple (Mabolo)",
+    "scientific": "Diospyros blancoi",
+    "kannada": "ವೆಲ್ವೆಟ್ ಆಪಲ್ ಹಣ್ಣು"
+   }
+  },
+  "all-spice": {
+   "name": "All spice",
+   "variety": "",
+   "sku_match": "HA009",
+   "csv_name": "All spices",
+   "primary": "images/wordpress uploads/2023/08/all-spices-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/all-spices-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 174,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/All-Spices-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 65,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Allspice-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 53,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Allspice",
+    "scientific": "Pimenta dioica",
+    "kannada": "ಸರ್ವಸುಗಂಧಿ"
+   }
+  },
+  "cardamom-nelyani-gold": {
+   "name": "Cardamom",
+   "variety": "Nelyani gold",
+   "sku_match": "HA0045",
+   "csv_name": "Cardamom(Vijetha)",
+   "primary": "images/wordpress uploads/2023/08/CardamomVijetha-fruit-with-plant-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/CardamomVijetha-fruit-with-plant-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 155,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/CardamomVijetha-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Cardamom-Vijetha-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 55,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Cardamom",
+    "scientific": "Elettaria cardamomum",
+    "kannada": "ಏಲಕ್ಕಿ"
+   }
+  },
+  "cinnamon-celyon": {
+   "name": "Cinnamon",
+   "variety": "Celyon",
+   "sku_match": "HA0049",
+   "csv_name": "Cinnamon",
+   "primary": "images/wordpress uploads/2023/08/Cinnamon-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Cinnamon-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 63,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Cinnamon-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 84,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Cinnamon.jpg",
+     "role": "sapling",
+     "w": 790,
+     "h": 790,
+     "kb": 57,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Ceylon cinnamon",
+    "scientific": "Cinnamomum verum",
+    "kannada": "ದಾಲ್ಚಿನ್ನಿ / ಚಕ್ಕೆ"
+   }
+  },
+  "clove": {
+   "name": "Clove",
+   "variety": "",
+   "sku_match": "HA0050",
+   "csv_name": "Clove",
+   "primary": "images/wordpress uploads/2023/08/cloveplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/cloveplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 133,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Clove-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 123,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Clove-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 62,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Clove",
+    "scientific": "Syzygium aromaticum",
+    "kannada": "ಲವಂಗ"
+   }
+  },
+  "curry-leaves": {
+   "name": "Curry leaves",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Curry leaf",
+    "scientific": "Murraya koenigii",
+    "kannada": "ಕರಿಬೇವು"
+   }
+  },
+  "bamboo": {
+   "name": "Bamboo",
+   "variety": "",
+   "sku_match": "HA0038",
+   "csv_name": "Bhima Bamboo",
+   "primary": "images/wordpress uploads/2023/08/Bhima-Bamboo-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bhima-Bamboo-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 99,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bhima-Bamboo.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 146,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Bamboo",
+    "scientific": "Bambusa",
+    "kannada": "ಬಿದಿರು"
+   }
+  },
+  "mahagony": {
+   "name": "Mahagony",
+   "variety": "",
+   "sku_match": "HA0092",
+   "csv_name": "Mahagony",
+   "primary": "images/wordpress uploads/2023/08/mahogany-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/mahogany-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 143,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/mahogany.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 39,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Mahogany",
+    "scientific": "Swietenia macrophylla",
+    "kannada": "ಮಹಾಗನಿ"
+   }
+  },
+  "neem": {
+   "name": "Neem",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Neem",
+    "scientific": "Azadirachta indica",
+    "kannada": "ಬೇವು"
+   }
+  },
+  "pongamia-honge": {
+   "name": "Pongamia (Honge)",
+   "variety": "",
+   "sku_match": "HA0073",
+   "csv_name": "Honge(Pongamia pinnata)",
+   "primary": "images/wordpress uploads/2023/08/Honge-Pongamia-pinnata-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Honge-Pongamia-pinnata-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 177,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Honge-Pongamia-pinnata.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 40,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Pongamia (Honge)",
+    "scientific": "Pongamia pinnata",
+    "kannada": "ಹೊಂಗೆ"
+   }
+  },
+  "red-sandal": {
+   "name": "Red sandal",
+   "variety": "",
+   "sku_match": "HA00137",
+   "csv_name": "Red Sandalwood",
+   "primary": "images/wordpress uploads/2023/08/Red-sandalwood-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Red-sandalwood-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 182,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Red-Sandal-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 78,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Red-Sandalwood-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 58,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Red sanders",
+    "scientific": "Pterocarpus santalinus",
+    "kannada": "ರಕ್ತಚಂದನ"
+   }
+  },
+  "sandalwood": {
+   "name": "Sandalwood",
+   "variety": "",
+   "sku_match": "HA00181",
+   "csv_name": "Sandalwood (Chandan)",
+   "primary": "images/wordpress uploads/2023/08/White-SandalwoodPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/White-SandalwoodPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 194,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Sandalwood-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 87,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Indian sandalwood",
+    "scientific": "Santalum album",
+    "kannada": "ಶ್ರೀಗಂಧ"
+   }
+  },
+  "soapnut-antwala": {
+   "name": "Soapnut (Antwala)",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Soapnut",
+    "scientific": "Sapindus emarginatus",
+    "kannada": "ಅಂಟುವಾಳ / ರೀಠಾ"
+   }
+  },
+  "teak": {
+   "name": "Teak",
+   "variety": "",
+   "sku_match": "HA00152",
+   "csv_name": "Teak",
+   "primary": "images/wordpress uploads/2023/08/Teak-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Teak-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 174,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Teak.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 49,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Teak",
+    "scientific": "Tectona grandis",
+    "kannada": "ತೇಗ"
+   }
+  },
+  "adansonia-digitata-l": {
+   "name": "Adansonia digitata L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Baobab",
+    "scientific": "Adansonia digitata L.",
+    "kannada": "ಆನೆ ಹುಣಿಸೆ"
+   }
+  },
+  "aegle-marmelos-l-corr-a": {
+   "name": "Aegle marmelos (L.) Corrêa",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Bael (Bilva)",
+    "scientific": "Aegle marmelos (L.) Corrêa",
+    "kannada": "ಬಿಲ್ವ ಪತ್ರೆ"
+   }
+  },
+  "alangium-salviifolium-l-f-wangerin": {
+   "name": "Alangium salviifolium (L.f.) Wangerin",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Sage-leaved alangium (Ankole)",
+    "scientific": "Alangium salviifolium (L.f.) Wangerin",
+    "kannada": "ಅಂಕೋಲ "
+   }
+  },
+  "albizia-amara-roxb-boivin": {
+   "name": "Albizia amara (Roxb.) Boivin",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Krishna siris",
+    "scientific": "Albizia amara (Roxb.) Boivin",
+    "kannada": "ಚಿಗರೆ"
+   }
+  },
+  "albizia-lebbeck-l-benth": {
+   "name": "Albizia lebbeck (L.) Benth.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Siris tree",
+    "scientific": "Albizia lebbeck (L.) Benth.",
+    "kannada": "ಬಾಗೆ ಮರ"
+   }
+  },
+  "bauhinia-racemosa-lam": {
+   "name": "Bauhinia racemosa Lam.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Bidi leaf tree (Apta)",
+    "scientific": "Bauhinia racemosa Lam.",
+    "kannada": "ಅಚಲು"
+   }
+  },
+  "bombax-ceiba-l": {
+   "name": "Bombax ceiba L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Red silk cotton tree",
+    "scientific": "Bombax ceiba L.",
+    "kannada": "ಕೆಂಪುಬೂರುಗ"
+   }
+  },
+  "butea-monosperma-lam-kuntze": {
+   "name": "Butea monosperma (Lam.) Kuntze",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Flame of the forest (Palash)",
+    "scientific": "Butea monosperma (Lam.) Kuntze",
+    "kannada": "ಮುತ್ತುಗ"
+   }
+  },
+  "butea-superba-roxb-ex-willd": {
+   "name": "Butea superba Roxb. ex Willd.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Climbing palash",
+    "scientific": "Butea superba Roxb. ex Willd.",
+    "kannada": "ಮುತ್ತುಗದ ಬಳ್ಳಿ"
+   }
+  },
+  "capparis-moonii-wight": {
+   "name": "Capparis moonii Wight",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Rudanti",
+    "scientific": "Capparis moonii Wight",
+    "kannada": "ರುದ್ರವಂತಿ"
+   }
+  },
+  "careya-arborea-roxb": {
+   "name": "Careya arborea Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Kumbhi (Wild guava)",
+    "scientific": "Careya arborea Roxb.",
+    "kannada": "ಕೌಲು ಮರ"
+   }
+  },
+  "carissa-carandas-l-hedge": {
+   "name": "Carissa carandas L.",
+   "variety": "hedge",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Karonda (hedge)",
+    "scientific": "Carissa carandas L.",
+    "kannada": "ಕವಳಿ ಹಣ್ಣು"
+   }
+  },
+  "cassia-fistula-l": {
+   "name": "Cassia fistula L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Golden shower tree (Amaltas)",
+    "scientific": "Cassia fistula L.",
+    "kannada": "ಕಕ್ಕೆ"
+   }
+  },
+  "chloroxylon-swietenia-dc": {
+   "name": "Chloroxylon swietenia DC.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "East Indian satinwood",
+    "scientific": "Chloroxylon swietenia DC.",
+    "kannada": "ಹುರುಗಲು/ ಮಸಿವಾಳ"
+   }
+  },
+  "cochlospermum-religiosum-l-alston": {
+   "name": "Cochlospermum religiosum (L.) Alston",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Buttercup tree (Yellow silk cotton)",
+    "scientific": "Cochlospermum religiosum (L.) Alston",
+    "kannada": "ಅರಿಶಿನ ಬೂರುಗ"
+   }
+  },
+  "cordia-dichotoma-g-forst": {
+   "name": "Cordia dichotoma G.Forst.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Indian cherry (Lasora)",
+    "scientific": "Cordia dichotoma G.Forst.",
+    "kannada": "ಚಳ್ಳೆ ಹಣ್ಣು"
+   }
+  },
+  "dalbergia-latifolia-roxb": {
+   "name": "Dalbergia latifolia Roxb.",
+   "variety": "",
+   "sku_match": "HA00139",
+   "csv_name": "Rose wood",
+   "primary": "images/wordpress uploads/2023/03/Rosewood-Hasiru-Agro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/03/Rosewood-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 69,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Indian rosewood (Beete)",
+    "scientific": "Dalbergia latifolia Roxb.",
+    "kannada": "ಬೀಟೆ"
+   }
+  },
+  "dalbergia-sissoo-roxb-ex-dc": {
+   "name": "Dalbergia sissoo Roxb. ex DC.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Shisham",
+    "scientific": "Dalbergia sissoo Roxb. ex DC.",
+    "kannada": "ಬಿರಡಿ"
+   }
+  },
+  "dendrocalamus-strictus-roxb-nees": {
+   "name": "Dendrocalamus strictus (Roxb.) Nees",
+   "variety": "",
+   "sku_match": "HA0038",
+   "csv_name": "Bhima Bamboo",
+   "primary": "images/wordpress uploads/2023/08/Bhima-Bamboo-1.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bhima-Bamboo-1.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 99,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bhima-Bamboo.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 146,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "low",
+   "search": {
+    "common": "Male bamboo",
+    "scientific": "Dendrocalamus strictus (Roxb.) Nees",
+    "kannada": "ಬಿದಿರು"
+   }
+  },
+  "diospyros-melanoxylon-roxb": {
+   "name": "Diospyros melanoxylon Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Tendu (Coromandel ebony)",
+    "scientific": "Diospyros melanoxylon Roxb.",
+    "kannada": "ಅಬನಾಸಿ/ತೂಪರ"
+   }
+  },
+  "diospyros-montana-roxb": {
+   "name": "Diospyros montana Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Bombay ebony",
+    "scientific": "Diospyros montana Roxb.",
+    "kannada": "ಜಗಳಗಂಟಿ "
+   }
+  },
+  "dodonaea-viscosa-jacq-hedge": {
+   "name": "Dodonaea viscosa Jacq.",
+   "variety": "hedge",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Hopbush",
+    "scientific": "Dodonaea viscosa Jacq.",
+    "kannada": "ಬಂದರಿಕೆ"
+   }
+  },
+  "dolichandrone-falcata-wall-ex-dc-seem": {
+   "name": "Dolichandrone falcata (Wall. ex DC.) Seem.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Medshingi",
+    "scientific": "Dolichandrone falcata (Wall. ex DC.) Seem.",
+    "kannada": "ಊದರೆ"
+   }
+  },
+  "ehretia-aspera-willd": {
+   "name": "Ehretia aspera Willd.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Ehretia",
+    "scientific": "Ehretia aspera Willd.",
+    "kannada": "ದಂತರಂಗ /ಕಡ್ಬ"
+   }
+  },
+  "flacourtia-indica-burm-f-merr": {
+   "name": "Flacourtia indica (Burm.f.) Merr.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Governor's plum",
+    "scientific": "Flacourtia indica (Burm.f.) Merr.",
+    "kannada": "ಮಿಂಡಿ "
+   }
+  },
+  "hardwickia-binata-roxb": {
+   "name": "Hardwickia binata Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Anjan tree",
+    "scientific": "Hardwickia binata Roxb.",
+    "kannada": "ಕಮರ"
+   }
+  },
+  "helicteres-isora-l": {
+   "name": "Helicteres isora L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Indian screw tree",
+    "scientific": "Helicteres isora L.",
+    "kannada": "ಎಡಮುರಿ"
+   }
+  },
+  "heterophragma-quadriloculare-roxb-k-schum": {
+   "name": "Heterophragma quadriloculare (Roxb.) K.Schum.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Heterophragma",
+    "scientific": "Heterophragma quadriloculare (Roxb.) K.Schum.",
+    "kannada": "ಬೇಚಾಡಿ ಮರ/ಅಡವಿ ನುಗ್ಗೆ"
+   }
+  },
+  "holarrhena-pubescens-wall-ex-g-don": {
+   "name": "Holarrhena pubescens Wall. ex G.Don",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Kurchi (Bitter oleander)",
+    "scientific": "Holarrhena pubescens Wall. ex G.Don",
+    "kannada": "ಕೊಡಸಲು"
+   }
+  },
+  "holoptelea-integrifolia-roxb-planch": {
+   "name": "Holoptelea integrifolia (Roxb.) Planch.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Indian elm",
+    "scientific": "Holoptelea integrifolia (Roxb.) Planch.",
+    "kannada": "ತಪಸಿ"
+   }
+  },
+  "kydia-calycina-roxb": {
+   "name": "Kydia calycina Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Kydia",
+    "scientific": "Kydia calycina Roxb.",
+    "kannada": "ಬೆಳ್ಳಕ/ಬೆಂಡೆ"
+   }
+  },
+  "lagerstroemia-parviflora-roxb": {
+   "name": "Lagerstroemia parviflora Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Small-flowered crape myrtle",
+    "scientific": "Lagerstroemia parviflora Roxb.",
+    "kannada": "ಚನ್ನಂಗಿ "
+   }
+  },
+  "lannea-coromandelica-houtt-merr": {
+   "name": "Lannea coromandelica (Houtt.) Merr.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Indian ash tree (Jhingan)",
+    "scientific": "Lannea coromandelica (Houtt.) Merr.",
+    "kannada": "ಉಡಿ ಮರ / ಗೊದ್ದ "
+   }
+  },
+  "lawsonia-inermis-l": {
+   "name": "Lawsonia inermis L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Henna",
+    "scientific": "Lawsonia inermis L.",
+    "kannada": "ಗೋರಂಟಿ"
+   }
+  },
+  "madhuca-longifolia-var-latifolia-roxb-a-chev": {
+   "name": "Madhuca longifolia var. latifolia (Roxb.) A.Chev.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Mahua (Ippe)",
+    "scientific": "Madhuca longifolia var. latifolia (Roxb.) A.Chev.",
+    "kannada": "ಹಿಪ್ಪೆ / ಇಪ್ಪೆ"
+   }
+  },
+  "melia-dubia-cav": {
+   "name": "Melia dubia Cav.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Malabar neem (Hebbevu)",
+    "scientific": "Melia dubia Cav.",
+    "kannada": "ಹೆಬ್ಬೇವು"
+   }
+  },
+  "phyllanthus-emblica-l": {
+   "name": "Phyllanthus emblica L.",
+   "variety": "",
+   "sku_match": "HA0013",
+   "csv_name": "Amla (Grafted)",
+   "primary": "images/wordpress uploads/2023/08/Amla-Graftedplant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Amla-Graftedplant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 116,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Amla-Grafted-fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 42,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/03/Amla-Red-1-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 68,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "medium",
+   "search": {
+    "common": "Amla (wild)",
+    "scientific": "Phyllanthus emblica L.",
+    "kannada": "ನೆಲ್ಲಿ"
+   }
+  },
+  "pithecellobium-dulce-roxb-benth": {
+   "name": "Pithecellobium dulce (Roxb.) Benth.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Manila tamarind",
+    "scientific": "Pithecellobium dulce (Roxb.) Benth.",
+    "kannada": "ಸೀಮೆ ಹುಣಿಸೆ"
+   }
+  },
+  "prosopis-cineraria-l-druce": {
+   "name": "Prosopis cineraria (L.) Druce",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Khejri (Banni)",
+    "scientific": "Prosopis cineraria (L.) Druce",
+    "kannada": "ಬನ್ನಿ ಮರ"
+   }
+  },
+  "pterocarpus-marsupium-roxb": {
+   "name": "Pterocarpus marsupium Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Indian kino (Honne)",
+    "scientific": "Pterocarpus marsupium Roxb.",
+    "kannada": "ಹೊನ್ನೆ"
+   }
+  },
+  "pterocarpus-santalinus-l-f": {
+   "name": "Pterocarpus santalinus L.f.",
+   "variety": "",
+   "sku_match": "HA00137",
+   "csv_name": "Red Sandalwood",
+   "primary": "images/wordpress uploads/2023/08/Red-sandalwood-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Red-sandalwood-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 182,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Red-Sandal-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 78,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Red-Sandalwood-Hasiru-Agro.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 58,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Red sanders",
+    "scientific": "Pterocarpus santalinus L.f.",
+    "kannada": "ರಕ್ತ ಚಂದನ "
+   }
+  },
+  "santalum-album-l": {
+   "name": "Santalum album L.",
+   "variety": "",
+   "sku_match": "HA00181",
+   "csv_name": "Sandalwood (Chandan)",
+   "primary": "images/wordpress uploads/2023/08/White-SandalwoodPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/White-SandalwoodPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 194,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Sandalwood-F.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 87,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "high",
+   "search": {
+    "common": "Indian sandalwood",
+    "scientific": "Santalum album L.",
+    "kannada": "ಶ್ರೀಗಂಧ"
+   }
+  },
+  "sapindus-emarginatus-vahl": {
+   "name": "Sapindus emarginatus Vahl",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Soapnut",
+    "scientific": "Sapindus emarginatus Vahl",
+    "kannada": "ಅಂಟುವಾಳ"
+   }
+  },
+  "schleichera-oleosa-lour-oken": {
+   "name": "Schleichera oleosa (Lour.) Oken",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Kusum tree",
+    "scientific": "Schleichera oleosa (Lour.) Oken",
+    "kannada": "ಸಗಡೆ/ಕೆಂದಾಳ"
+   }
+  },
+  "senegalia-catechu-l-f-p-j-h-hurter-mabb": {
+   "name": "Senegalia catechu (L.f.) P.J.H.Hurter & Mabb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Khair (Cutch tree)",
+    "scientific": "Senegalia catechu (L.f.) P.J.H.Hurter & Mabb.",
+    "kannada": "ಕಗ್ಗಲಿ"
+   }
+  },
+  "sterculia-foetida-l": {
+   "name": "Sterculia foetida L.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Wild almond (Java olive)",
+    "scientific": "Sterculia foetida L.",
+    "kannada": "ಪಿನಾರಿ / ಪಾತಾಳ ಮರ "
+   }
+  },
+  "sterculia-urens-roxb": {
+   "name": "Sterculia urens Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Karaya gum tree",
+    "scientific": "Sterculia urens Roxb.",
+    "kannada": "ಕೆಂಪುದಾಳೆ/ಪಿನಾರಿ"
+   }
+  },
+  "syzygium-cumini-l-skeels": {
+   "name": "Syzygium cumini (L.) Skeels",
+   "variety": "",
+   "sku_match": "HA0037",
+   "csv_name": "Bhadoli Jamun",
+   "primary": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunPlant-with-Fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 120,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Bhadoli-JamunFruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 45,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "medium",
+   "search": {
+    "common": "Jamun (wild)",
+    "scientific": "Syzygium cumini (L.) Skeels",
+    "kannada": "ನೇರಳೆ"
+   }
+  },
+  "tamarindus-indica-l": {
+   "name": "Tamarindus indica L.",
+   "variety": "",
+   "sku_match": "HA00163",
+   "csv_name": "Thai sweet tamarind",
+   "primary": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Plant-with-fruit-image-Hasiruagro.jpg",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Plant-with-fruit-image-Hasiruagro.jpg",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 95,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/08/Thai-sweet-tamarind-Fruit-image-Hasiruagro.jpg",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 60,
+     "fmt": "jpg",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2023/07/Sweet-Tamrind.jpg",
+     "role": "sapling",
+     "w": 800,
+     "h": 800,
+     "kb": 34,
+     "fmt": "jpg",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "medium",
+   "search": {
+    "common": "Tamarind",
+    "scientific": "Tamarindus indica L.",
+    "kannada": "ಹುಣಿಸೆ"
+   }
+  },
+  "tecomella-undulata-sm-seem": {
+   "name": "Tecomella undulata (Sm.) Seem.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Rohida (Desert teak)",
+    "scientific": "Tecomella undulata (Sm.) Seem.",
+    "kannada": "ಮುಳ್ಳು ಮುತ್ತಲ "
+   }
+  },
+  "terminalia-bellirica-gaertn-roxb": {
+   "name": "Terminalia bellirica (Gaertn.) Roxb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Bahera",
+    "scientific": "Terminalia bellirica (Gaertn.) Roxb.",
+    "kannada": "ತಾರೆ ಮರ"
+   }
+  },
+  "vitex-negundo-var-negundo": {
+   "name": "Vitex negundo var. negundo",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Nirgundi",
+    "scientific": "Vitex negundo var. negundo",
+    "kannada": "ಲಕ್ಕಿ ಗಿಡ"
+   }
+  },
+  "wrightia-arborea-dennst-mabb": {
+   "name": "Wrightia arborea (Dennst.) Mabb.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Wrightia arborea",
+    "scientific": "Wrightia arborea (Dennst.) Mabb.",
+    "kannada": "ಬೆಂಕಿ ಗಿಡ"
+   }
+  },
+  "wrightia-tinctoria-roxb-r-br": {
+   "name": "Wrightia tinctoria (Roxb.) R.Br.",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Pala indigo (Sweet indrajao)",
+    "scientific": "Wrightia tinctoria (Roxb.) R.Br.",
+    "kannada": "ಬೆಪ್ಪಾಲೆ"
+   }
+  },
+  "ziziphus-mauritiana-lam": {
+   "name": "Ziziphus mauritiana Lam.",
+   "variety": "",
+   "sku_match": "HA00191",
+   "csv_name": "Apple Ber Plant",
+   "primary": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro-2.webp",
+   "gallery": [
+    {
+     "path": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro-2.webp",
+     "role": "plant_with_fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 61,
+     "fmt": "webp",
+     "third_party_brand": false
+    },
+    {
+     "path": "images/wordpress uploads/2024/03/Apple-ber-plant-hasiru-agro.webp",
+     "role": "fruit",
+     "w": 800,
+     "h": 800,
+     "kb": 12,
+     "fmt": "webp",
+     "third_party_brand": false
+    }
+   ],
+   "match_method": "csv_gallery",
+   "match_level": "species",
+   "confidence": "medium",
+   "search": {
+    "common": "Ber (Indian jujube)",
+    "scientific": "Ziziphus mauritiana Lam.",
+    "kannada": "ಬೋರೆ/ ಬಾರೆ ಹಣ್ಣು"
+   }
+  },
+  "sesbania": {
+   "name": "Sesbania",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Sesbania (Agathi)",
+    "scientific": "Sesbania grandiflora",
+    "kannada": "ಅಗಸೆ"
+   }
+  },
+  "gliricidia": {
+   "name": "Gliricidia",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Gliricidia",
+    "scientific": "Gliricidia sepium",
+    "kannada": "ಗೊಬ್ಬರ ಗಿಡ"
+   }
+  },
+  "moringa": {
+   "name": "Moringa",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Moringa (Drumstick)",
+    "scientific": "Moringa oleifera",
+    "kannada": "ನುಗ್ಗೆ"
+   }
+  },
+  "lemongrass": {
+   "name": "Lemongrass",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Lemongrass",
+    "scientific": "Cymbopogon citratus",
+    "kannada": "ನಿಂಬೆ ಹುಲ್ಲು"
+   }
+  },
+  "vetiever-grass": {
+   "name": "Vetiever grass",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Vetiver grass",
+    "scientific": "Chrysopogon zizanioides",
+    "kannada": "ವಿಟಿವರ್ ಹುಲ್ಲು"
+   }
+  },
+  "marigold": {
+   "name": "Marigold",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Marigold",
+    "scientific": "Tagetes erecta",
+    "kannada": "ಚೆಂಡು ಹೂವು"
+   }
+  },
+  "mexican-sunflower": {
+   "name": "Mexican sunflower",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Mexican sunflower",
+    "scientific": "Tithonia diversifolia",
+    "kannada": "ಮೆಕ್ಸಿಕನ್ ಸೂರ್ಯಕಾಂತಿ"
+   }
+  },
+  "mulberry": {
+   "name": "Mulberry",
+   "variety": "",
+   "primary": null,
+   "gallery": [],
+   "match_method": null,
+   "confidence": "none",
+   "search": {
+    "common": "Mulberry",
+    "scientific": "Morus alba",
+    "kannada": "ಹಿಪ್ಪುನೇರಳೆ"
+   }
+  }
+ },
+ "missing": [
+  "karonda",
+  "monkey-jack",
+  "papaya-pandrah-no-15",
+  "rose-apple-panneralu",
+  "jackfruit-hebbalasu-wild",
+  "wood-apple",
+  "banana-yelakki",
+  "banana-robusta-pachbaale",
+  "banana-red",
+  "baraba",
+  "jaboticaba-sabara",
+  "matoa",
+  "velvet-apple",
+  "curry-leaves",
+  "neem",
+  "soapnut-antwala",
+  "adansonia-digitata-l",
+  "aegle-marmelos-l-corr-a",
+  "alangium-salviifolium-l-f-wangerin",
+  "albizia-amara-roxb-boivin",
+  "albizia-lebbeck-l-benth",
+  "bauhinia-racemosa-lam",
+  "bombax-ceiba-l",
+  "butea-monosperma-lam-kuntze",
+  "butea-superba-roxb-ex-willd",
+  "capparis-moonii-wight",
+  "careya-arborea-roxb",
+  "carissa-carandas-l-hedge",
+  "cassia-fistula-l",
+  "chloroxylon-swietenia-dc",
+  "cochlospermum-religiosum-l-alston",
+  "cordia-dichotoma-g-forst",
+  "dalbergia-sissoo-roxb-ex-dc",
+  "diospyros-melanoxylon-roxb",
+  "diospyros-montana-roxb",
+  "dodonaea-viscosa-jacq-hedge",
+  "dolichandrone-falcata-wall-ex-dc-seem",
+  "ehretia-aspera-willd",
+  "flacourtia-indica-burm-f-merr",
+  "hardwickia-binata-roxb",
+  "helicteres-isora-l",
+  "heterophragma-quadriloculare-roxb-k-schum",
+  "holarrhena-pubescens-wall-ex-g-don",
+  "holoptelea-integrifolia-roxb-planch",
+  "kydia-calycina-roxb",
+  "lagerstroemia-parviflora-roxb",
+  "lannea-coromandelica-houtt-merr",
+  "lawsonia-inermis-l",
+  "madhuca-longifolia-var-latifolia-roxb-a-chev",
+  "melia-dubia-cav",
+  "pithecellobium-dulce-roxb-benth",
+  "prosopis-cineraria-l-druce",
+  "pterocarpus-marsupium-roxb",
+  "sapindus-emarginatus-vahl",
+  "schleichera-oleosa-lour-oken",
+  "senegalia-catechu-l-f-p-j-h-hurter-mabb",
+  "sterculia-foetida-l",
+  "sterculia-urens-roxb",
+  "tecomella-undulata-sm-seem",
+  "terminalia-bellirica-gaertn-roxb",
+  "vitex-negundo-var-negundo",
+  "wrightia-arborea-dennst-mabb",
+  "wrightia-tinctoria-roxb-r-br",
+  "sesbania",
+  "gliricidia",
+  "moringa",
+  "lemongrass",
+  "vetiever-grass",
+  "marigold",
+  "mexican-sunflower",
+  "mulberry"
+ ]
+}
