@@ -1,2 +1,2 @@
-// @ecomkit/media: public entry. Prefer the specific exports (manifest, domain, server, ui, admin, routes/*, messages).
-export {};
+// @ecomkit/media: public entry. Prefer the specific exports (manifest, domain, server, admin, routes/*, messages).
+export { mediaMessages, type MediaMessages } from './messages';
