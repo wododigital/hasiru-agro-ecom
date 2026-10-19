@@ -124,9 +124,15 @@ export async function safeFetch(input: string | URL, init: SafeFetchInit = {}, o
     const location = res.headers.get('location');
     if (res.status >= 300 && res.status < 400 && location) {
       if (hop >= (options.maxRedirects ?? 3)) throw new SsrfError('too many redirects');
-      url = checkUrl(new URL(location, url), options.allowHosts);
+      const next = checkUrl(new URL(location, url), options.allowHosts);
       const method = (current.method ?? 'GET').toUpperCase();
       if (res.status === 303 || ((res.status === 301 || res.status === 302) && method === 'POST')) current = { ...current, method: 'GET', body: null };
+      if (next.origin !== url.origin) {
+        // Never forward credentials (Authorization, cookies, API-key headers) or a body to another origin.
+        if (current.body != null) throw new SsrfError('cross-origin redirect of a request with a body');
+        current = { ...current, headers: undefined };
+      }
+      url = next;
       continue;
     }
     const empty = res.status === 204 || res.status === 304 || res.status < 200;
