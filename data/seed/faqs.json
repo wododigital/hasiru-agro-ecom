@@ -1,0 +1,4636 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-20T04:40:04+05:30",
+  "sources": [
+    "latest_products.xlsx",
+    "HANDOFF.md"
+  ],
+  "records": [
+    {
+      "key": "general-001",
+      "product_sku": null,
+      "question": "How to select right variety? (Morphological traits)?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 1
+    },
+    {
+      "key": "general-002",
+      "product_sku": null,
+      "question": "Types of propagation? (Bud grafting / air layering / Tissue culture / Seed etc)?",
+      "answer": "Our saplings are raised by seed, air layering, grafting, cuttings, tissue culture, suckers and slips. Each plant page shows how that sapling was propagated.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 2
+    },
+    {
+      "key": "general-003",
+      "product_sku": null,
+      "question": "Type of propagation followed and why?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "general-004",
+      "product_sku": null,
+      "question": "What are the major differences between our varieties and those of other nurseries?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 4
+    },
+    {
+      "key": "general-005",
+      "product_sku": null,
+      "question": "How to select the right sapling?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 5
+    },
+    {
+      "key": "general-006",
+      "product_sku": null,
+      "question": "How are we different from other nurseries?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "general-007",
+      "product_sku": null,
+      "question": "How old should the sapling be before planting?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "general-008",
+      "product_sku": null,
+      "question": "What is the investment required to cultivate per acre?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 8
+    },
+    {
+      "key": "general-009",
+      "product_sku": null,
+      "question": "What are the usage/applications of end product?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "general-010",
+      "product_sku": null,
+      "question": "What is the scope of the plant in 10 years?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 10
+    },
+    {
+      "key": "general-011",
+      "product_sku": null,
+      "question": "Any legalities involved in production?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 11
+    },
+    {
+      "key": "general-012",
+      "product_sku": null,
+      "question": "What is the economics?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 12
+    },
+    {
+      "key": "general-013",
+      "product_sku": null,
+      "question": "What are different varieties in India, Why grow this variety (each plant)?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 13
+    },
+    {
+      "key": "general-014",
+      "product_sku": null,
+      "question": "How to identify fake variety?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 14
+    },
+    {
+      "key": "general-015",
+      "product_sku": null,
+      "question": "What is the yield per plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 15
+    },
+    {
+      "key": "general-016",
+      "product_sku": null,
+      "question": "What is the avg fruit size?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 16
+    },
+    {
+      "key": "general-017",
+      "product_sku": null,
+      "question": "What is the optimal spacing?",
+      "answer": "It depends on the plant and the model. Each plant page lists the spacing for every model it suits, for example 18 x 18 ft for a mango in a food forest or commercial layout and 2 x 2 ft for a Miyawaki sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 17
+    },
+    {
+      "key": "general-018",
+      "product_sku": null,
+      "question": "What is the manuring procedure?",
+      "answer": "Each plant page gives the compost needed at planting and then twice a year for years 1 and 2, years 3 to 6 and from year 7. The compost calculator adds this up for the plants in your cart.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 18
+    },
+    {
+      "key": "general-019",
+      "product_sku": null,
+      "question": "What are other famous varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 19
+    },
+    {
+      "key": "general-020",
+      "product_sku": null,
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 20
+    },
+    {
+      "key": "general-021",
+      "product_sku": null,
+      "question": "What are the intercropping methods to be followed for best economical and soil enriching returns?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 21
+    },
+    {
+      "key": "general-022",
+      "product_sku": null,
+      "question": "Exposure required?",
+      "answer": "Each plant page lists the sun exposure the plant needs: full sun, partial shade or shade.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 22
+    },
+    {
+      "key": "general-023",
+      "product_sku": null,
+      "question": "Rainfall required (in mm)?",
+      "answer": "Each plant page lists the yearly rainfall range the plant grows well in, in mm. Below that range the plant needs irrigation.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 23
+    },
+    {
+      "key": "general-024",
+      "product_sku": null,
+      "question": "How to understand the genuineness of the plant after planting?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 24
+    },
+    {
+      "key": "general-025",
+      "product_sku": null,
+      "question": "What are the temperature, water, humidity, pH and water requirements?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 25
+    },
+    {
+      "key": "general-026",
+      "product_sku": null,
+      "question": "What are the different agriculture practice methods?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 26
+    },
+    {
+      "key": "general-027",
+      "product_sku": null,
+      "question": "What are the land preparation and transplanting methods? Mention on the optimum manure and spacing required.",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 27
+    },
+    {
+      "key": "general-028",
+      "product_sku": null,
+      "question": "What are different models of plantation?",
+      "answer": "We plan farms in 4 models: Commercial (Rows of main fruit trees with host timber and biomass plants between them); Food Forest (A layered 6 x 6 ft grid of canopy, sub-canopy, shrub and biomass plants, alternating rows for a self-feeding forest garden); Miyawaki (A dense native mini-forest on a 2 x 2 ft grid, about 3 plants per square metre); Boundary (A single line of trees along the farm boundary as a windbreak and living fence). The Help me choose planner lays out any of them for your land.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 28
+    },
+    {
+      "key": "general-029",
+      "product_sku": null,
+      "question": "Why will there be no flower formation in few plants?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 29
+    },
+    {
+      "key": "general-030",
+      "product_sku": null,
+      "question": "What is the fertigation and pesticide process? or steps to maintain the plant to have an optimal growing condition?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 30
+    },
+    {
+      "key": "general-031",
+      "product_sku": null,
+      "question": "Why, when and how to do pruning?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 31
+    },
+    {
+      "key": "general-032",
+      "product_sku": null,
+      "question": "What are the diseases it is prone to? What are its preventions and control methods?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 32
+    },
+    {
+      "key": "general-033",
+      "product_sku": null,
+      "question": "What are the stages in flowering, fruiting and harvesting?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 33
+    },
+    {
+      "key": "general-034",
+      "product_sku": null,
+      "question": "What is the procedure to be followed during harvesting?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 34
+    },
+    {
+      "key": "general-035",
+      "product_sku": null,
+      "question": "What is the maintenance cost every year?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 35
+    },
+    {
+      "key": "general-036",
+      "product_sku": null,
+      "question": "What are the irrigation methods in all stages of the plant? (During planting and after)?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 36
+    },
+    {
+      "key": "hap-0003-q01",
+      "product_sku": "HAP-0003",
+      "question": "What variety is this?",
+      "answer": "This is Anna Apple (Malus domestica), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0003-q02",
+      "product_sku": "HAP-0003",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0003-q03",
+      "product_sku": "HAP-0003",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0003-q04",
+      "product_sku": "HAP-0003",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0003-q05",
+      "product_sku": "HAP-0003",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0003-q06",
+      "product_sku": "HAP-0003",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0003-q07",
+      "product_sku": "HAP-0003",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0003-q08",
+      "product_sku": "HAP-0003",
+      "question": "Can apple be grown in hot,humid areas?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0003-q09",
+      "product_sku": "HAP-0003",
+      "question": "What is the speciality of each variety?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0004-q01",
+      "product_sku": "HAP-0004",
+      "question": "What variety is this?",
+      "answer": "This is Dorset Apple (Malus domestica), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0004-q02",
+      "product_sku": "HAP-0004",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0004-q03",
+      "product_sku": "HAP-0004",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0004-q04",
+      "product_sku": "HAP-0004",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0004-q05",
+      "product_sku": "HAP-0004",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0004-q06",
+      "product_sku": "HAP-0004",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0004-q07",
+      "product_sku": "HAP-0004",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0004-q08",
+      "product_sku": "HAP-0004",
+      "question": "Can apple be grown in hot,humid areas?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0004-q09",
+      "product_sku": "HAP-0004",
+      "question": "What is the speciality of each variety?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0005-q01",
+      "product_sku": "HAP-0005",
+      "question": "What variety is this?",
+      "answer": "This is Hariman-99 Apple (Malus domestica), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0005-q02",
+      "product_sku": "HAP-0005",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0005-q03",
+      "product_sku": "HAP-0005",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0005-q04",
+      "product_sku": "HAP-0005",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0005-q05",
+      "product_sku": "HAP-0005",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0005-q06",
+      "product_sku": "HAP-0005",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0005-q07",
+      "product_sku": "HAP-0005",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0005-q08",
+      "product_sku": "HAP-0005",
+      "question": "Can apple be grown in hot,humid areas?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0005-q09",
+      "product_sku": "HAP-0005",
+      "question": "What is the speciality of each variety?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0006-q01",
+      "product_sku": "HAP-0006",
+      "question": "What variety is this?",
+      "answer": "This is Thirthahalli Arecanut (Areca catechu), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0006-q02",
+      "product_sku": "HAP-0006",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0006-q03",
+      "product_sku": "HAP-0006",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0006-q04",
+      "product_sku": "HAP-0006",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft), boundary (5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0006-q05",
+      "product_sku": "HAP-0006",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0006-q06",
+      "product_sku": "HAP-0006",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0006-q07",
+      "product_sku": "HAP-0006",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0009-q01",
+      "product_sku": "HAP-0009",
+      "question": "What variety is this?",
+      "answer": "This is Cricket ball Sapota (Chikku), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0009-q02",
+      "product_sku": "HAP-0009",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0009-q03",
+      "product_sku": "HAP-0009",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0009-q04",
+      "product_sku": "HAP-0009",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0009-q05",
+      "product_sku": "HAP-0009",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0009-q06",
+      "product_sku": "HAP-0009",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0009-q07",
+      "product_sku": "HAP-0009",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0010-q01",
+      "product_sku": "HAP-0010",
+      "question": "What variety is this?",
+      "answer": "This is Kalapatti Sapota (Chikku), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0010-q02",
+      "product_sku": "HAP-0010",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0010-q03",
+      "product_sku": "HAP-0010",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0010-q04",
+      "product_sku": "HAP-0010",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0010-q05",
+      "product_sku": "HAP-0010",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0010-q06",
+      "product_sku": "HAP-0010",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0010-q07",
+      "product_sku": "HAP-0010",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0011-q01",
+      "product_sku": "HAP-0011",
+      "question": "What variety is this?",
+      "answer": "This is Dwarf Coconut (Cocos nucifera), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0011-q02",
+      "product_sku": "HAP-0011",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0011-q03",
+      "product_sku": "HAP-0011",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0011-q04",
+      "product_sku": "HAP-0011",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (36 x 36 ft), commercial (36 x 36 ft), boundary (25 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0011-q05",
+      "product_sku": "HAP-0011",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0011-q06",
+      "product_sku": "HAP-0011",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0011-q07",
+      "product_sku": "HAP-0011",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0011-q08",
+      "product_sku": "HAP-0011",
+      "question": "Explain Tall, dwarf and hybrid varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0011-q09",
+      "product_sku": "HAP-0011",
+      "question": "In how many ways can we earn in a coconut farm (water,oil,copra)?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 9
+    },
+    {
+      "key": "hap-0012-q01",
+      "product_sku": "HAP-0012",
+      "question": "What variety is this?",
+      "answer": "This is Tiptur Tall Coconut (Cocos nucifera), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0012-q02",
+      "product_sku": "HAP-0012",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0012-q03",
+      "product_sku": "HAP-0012",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0012-q04",
+      "product_sku": "HAP-0012",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (36 x 36 ft), commercial (36 x 36 ft), boundary (25 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0012-q05",
+      "product_sku": "HAP-0012",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0012-q06",
+      "product_sku": "HAP-0012",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0012-q07",
+      "product_sku": "HAP-0012",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0012-q08",
+      "product_sku": "HAP-0012",
+      "question": "Explain Tall, dwarf and hybrid varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0012-q09",
+      "product_sku": "HAP-0012",
+      "question": "In how many ways can we earn in a coconut farm (water,oil,copra)?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 9
+    },
+    {
+      "key": "hap-0013-q01",
+      "product_sku": "HAP-0013",
+      "question": "What variety is this?",
+      "answer": "This is Custard Apple (Annona squamosa), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0013-q02",
+      "product_sku": "HAP-0013",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0013-q03",
+      "product_sku": "HAP-0013",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0013-q04",
+      "product_sku": "HAP-0013",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0013-q05",
+      "product_sku": "HAP-0013",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0013-q06",
+      "product_sku": "HAP-0013",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0013-q07",
+      "product_sku": "HAP-0013",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0013-q08",
+      "product_sku": "HAP-0013",
+      "question": "What is speciality of NMK gold?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0014-q01",
+      "product_sku": "HAP-0014",
+      "question": "What variety is this?",
+      "answer": "This is Pink Guava (Psidium guajava), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0014-q02",
+      "product_sku": "HAP-0014",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0014-q03",
+      "product_sku": "HAP-0014",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0014-q04",
+      "product_sku": "HAP-0014",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0014-q05",
+      "product_sku": "HAP-0014",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0014-q06",
+      "product_sku": "HAP-0014",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0014-q07",
+      "product_sku": "HAP-0014",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0014-q08",
+      "product_sku": "HAP-0014",
+      "question": "What is the speciality of Allahabad safeda?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0014-q09",
+      "product_sku": "HAP-0014",
+      "question": "What is the speciality of Taiwan pink?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0014-q10",
+      "product_sku": "HAP-0014",
+      "question": "Demand for L-49?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0015-q01",
+      "product_sku": "HAP-0015",
+      "question": "What variety is this?",
+      "answer": "This is White Guava (Psidium guajava), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0015-q02",
+      "product_sku": "HAP-0015",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0015-q03",
+      "product_sku": "HAP-0015",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0015-q04",
+      "product_sku": "HAP-0015",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0015-q05",
+      "product_sku": "HAP-0015",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0015-q06",
+      "product_sku": "HAP-0015",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0015-q07",
+      "product_sku": "HAP-0015",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0015-q08",
+      "product_sku": "HAP-0015",
+      "question": "What is the speciality of Allahabad safeda?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0015-q09",
+      "product_sku": "HAP-0015",
+      "question": "What is the speciality of Taiwan pink?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0015-q10",
+      "product_sku": "HAP-0015",
+      "question": "Demand for L-49?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0017-q01",
+      "product_sku": "HAP-0017",
+      "question": "What variety is this?",
+      "answer": "This is Gumless Jackfruit (Artocarpus heterophyllus), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0017-q02",
+      "product_sku": "HAP-0017",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0017-q03",
+      "product_sku": "HAP-0017",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0017-q04",
+      "product_sku": "HAP-0017",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0017-q05",
+      "product_sku": "HAP-0017",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0017-q06",
+      "product_sku": "HAP-0017",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0017-q07",
+      "product_sku": "HAP-0017",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0017-q08",
+      "product_sku": "HAP-0017",
+      "question": "What are the top varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0017-q09",
+      "product_sku": "HAP-0017",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0017-q10",
+      "product_sku": "HAP-0017",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0018-q01",
+      "product_sku": "HAP-0018",
+      "question": "What variety is this?",
+      "answer": "This is J-33 Jackfruit (Artocarpus heterophyllus), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0018-q02",
+      "product_sku": "HAP-0018",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0018-q03",
+      "product_sku": "HAP-0018",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0018-q04",
+      "product_sku": "HAP-0018",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0018-q05",
+      "product_sku": "HAP-0018",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0018-q06",
+      "product_sku": "HAP-0018",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0018-q07",
+      "product_sku": "HAP-0018",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0018-q08",
+      "product_sku": "HAP-0018",
+      "question": "What are the top varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0018-q09",
+      "product_sku": "HAP-0018",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0018-q10",
+      "product_sku": "HAP-0018",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0019-q01",
+      "product_sku": "HAP-0019",
+      "question": "What variety is this?",
+      "answer": "This is Red honey Jackfruit (Artocarpus heterophyllus), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0019-q02",
+      "product_sku": "HAP-0019",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0019-q03",
+      "product_sku": "HAP-0019",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0019-q04",
+      "product_sku": "HAP-0019",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0019-q05",
+      "product_sku": "HAP-0019",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0019-q06",
+      "product_sku": "HAP-0019",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0019-q07",
+      "product_sku": "HAP-0019",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0019-q08",
+      "product_sku": "HAP-0019",
+      "question": "What are the top varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0019-q09",
+      "product_sku": "HAP-0019",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0019-q10",
+      "product_sku": "HAP-0019",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0020-q01",
+      "product_sku": "HAP-0020",
+      "question": "What variety is this?",
+      "answer": "This is Vietnam super early Jackfruit (Artocarpus heterophyllus), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0020-q02",
+      "product_sku": "HAP-0020",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0020-q03",
+      "product_sku": "HAP-0020",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0020-q04",
+      "product_sku": "HAP-0020",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0020-q05",
+      "product_sku": "HAP-0020",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0020-q06",
+      "product_sku": "HAP-0020",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0020-q07",
+      "product_sku": "HAP-0020",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0020-q08",
+      "product_sku": "HAP-0020",
+      "question": "What are the top varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0020-q09",
+      "product_sku": "HAP-0020",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0020-q10",
+      "product_sku": "HAP-0020",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0021-q01",
+      "product_sku": "HAP-0021",
+      "question": "What variety is this?",
+      "answer": "This is Jamun (Jambu nerale), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0021-q02",
+      "product_sku": "HAP-0021",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0021-q03",
+      "product_sku": "HAP-0021",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0021-q04",
+      "product_sku": "HAP-0021",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0021-q05",
+      "product_sku": "HAP-0021",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0021-q06",
+      "product_sku": "HAP-0021",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0021-q07",
+      "product_sku": "HAP-0021",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0022-q01",
+      "product_sku": "HAP-0022",
+      "question": "What variety is this?",
+      "answer": "This is Jamun Grafted (Syzygium cumini), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0022-q02",
+      "product_sku": "HAP-0022",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0022-q03",
+      "product_sku": "HAP-0022",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0022-q04",
+      "product_sku": "HAP-0022",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0022-q05",
+      "product_sku": "HAP-0022",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0022-q06",
+      "product_sku": "HAP-0022",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0022-q07",
+      "product_sku": "HAP-0022",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0026-q01",
+      "product_sku": "HAP-0026",
+      "question": "What variety is this?",
+      "answer": "This is All Season Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0026-q02",
+      "product_sku": "HAP-0026",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0026-q03",
+      "product_sku": "HAP-0026",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0026-q04",
+      "product_sku": "HAP-0026",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0026-q05",
+      "product_sku": "HAP-0026",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0026-q06",
+      "product_sku": "HAP-0026",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0026-q07",
+      "product_sku": "HAP-0026",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0026-q08",
+      "product_sku": "HAP-0026",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0026-q09",
+      "product_sku": "HAP-0026",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0026-q10",
+      "product_sku": "HAP-0026",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0027-q01",
+      "product_sku": "HAP-0027",
+      "question": "What variety is this?",
+      "answer": "This is Alphonso Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0027-q02",
+      "product_sku": "HAP-0027",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0027-q03",
+      "product_sku": "HAP-0027",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0027-q04",
+      "product_sku": "HAP-0027",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0027-q05",
+      "product_sku": "HAP-0027",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0027-q06",
+      "product_sku": "HAP-0027",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0027-q07",
+      "product_sku": "HAP-0027",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0027-q08",
+      "product_sku": "HAP-0027",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0027-q09",
+      "product_sku": "HAP-0027",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0027-q10",
+      "product_sku": "HAP-0027",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0028-q01",
+      "product_sku": "HAP-0028",
+      "question": "What variety is this?",
+      "answer": "This is Badami Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0028-q02",
+      "product_sku": "HAP-0028",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0028-q03",
+      "product_sku": "HAP-0028",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0028-q04",
+      "product_sku": "HAP-0028",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0028-q05",
+      "product_sku": "HAP-0028",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0028-q06",
+      "product_sku": "HAP-0028",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0028-q07",
+      "product_sku": "HAP-0028",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0028-q08",
+      "product_sku": "HAP-0028",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0028-q09",
+      "product_sku": "HAP-0028",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0028-q10",
+      "product_sku": "HAP-0028",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0029-q01",
+      "product_sku": "HAP-0029",
+      "question": "What variety is this?",
+      "answer": "This is Dasheri Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0029-q02",
+      "product_sku": "HAP-0029",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0029-q03",
+      "product_sku": "HAP-0029",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0029-q04",
+      "product_sku": "HAP-0029",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0029-q05",
+      "product_sku": "HAP-0029",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0029-q06",
+      "product_sku": "HAP-0029",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0029-q07",
+      "product_sku": "HAP-0029",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0029-q08",
+      "product_sku": "HAP-0029",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0029-q09",
+      "product_sku": "HAP-0029",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0029-q10",
+      "product_sku": "HAP-0029",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0030-q01",
+      "product_sku": "HAP-0030",
+      "question": "What variety is this?",
+      "answer": "This is Mallika Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0030-q02",
+      "product_sku": "HAP-0030",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0030-q03",
+      "product_sku": "HAP-0030",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0030-q04",
+      "product_sku": "HAP-0030",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0030-q05",
+      "product_sku": "HAP-0030",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0030-q06",
+      "product_sku": "HAP-0030",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0030-q07",
+      "product_sku": "HAP-0030",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0030-q08",
+      "product_sku": "HAP-0030",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0030-q09",
+      "product_sku": "HAP-0030",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0030-q10",
+      "product_sku": "HAP-0030",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0031-q01",
+      "product_sku": "HAP-0031",
+      "question": "What variety is this?",
+      "answer": "This is Raspuri Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0031-q02",
+      "product_sku": "HAP-0031",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0031-q03",
+      "product_sku": "HAP-0031",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0031-q04",
+      "product_sku": "HAP-0031",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0031-q05",
+      "product_sku": "HAP-0031",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0031-q06",
+      "product_sku": "HAP-0031",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0031-q07",
+      "product_sku": "HAP-0031",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0031-q08",
+      "product_sku": "HAP-0031",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0031-q09",
+      "product_sku": "HAP-0031",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0031-q10",
+      "product_sku": "HAP-0031",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0032-q01",
+      "product_sku": "HAP-0032",
+      "question": "What variety is this?",
+      "answer": "This is Sakkaregutli Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0032-q02",
+      "product_sku": "HAP-0032",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0032-q03",
+      "product_sku": "HAP-0032",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0032-q04",
+      "product_sku": "HAP-0032",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0032-q05",
+      "product_sku": "HAP-0032",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0032-q06",
+      "product_sku": "HAP-0032",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0032-q07",
+      "product_sku": "HAP-0032",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0032-q08",
+      "product_sku": "HAP-0032",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0032-q09",
+      "product_sku": "HAP-0032",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0032-q10",
+      "product_sku": "HAP-0032",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0033-q01",
+      "product_sku": "HAP-0033",
+      "question": "What variety is this?",
+      "answer": "This is Totapuri Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0033-q02",
+      "product_sku": "HAP-0033",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0033-q03",
+      "product_sku": "HAP-0033",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0033-q04",
+      "product_sku": "HAP-0033",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0033-q05",
+      "product_sku": "HAP-0033",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0033-q06",
+      "product_sku": "HAP-0033",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0033-q07",
+      "product_sku": "HAP-0033",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0033-q08",
+      "product_sku": "HAP-0033",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0033-q09",
+      "product_sku": "HAP-0033",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0033-q10",
+      "product_sku": "HAP-0033",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0035-q01",
+      "product_sku": "HAP-0035",
+      "question": "What variety is this?",
+      "answer": "This is Malta B-1 Mosumbi (Citrus limetta), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0035-q02",
+      "product_sku": "HAP-0035",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0035-q03",
+      "product_sku": "HAP-0035",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0035-q04",
+      "product_sku": "HAP-0035",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0035-q05",
+      "product_sku": "HAP-0035",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0035-q06",
+      "product_sku": "HAP-0035",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0035-q07",
+      "product_sku": "HAP-0035",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0037-q01",
+      "product_sku": "HAP-0037",
+      "question": "What variety is this?",
+      "answer": "This is Nagpur Orange (Citrus reticulata), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0037-q02",
+      "product_sku": "HAP-0037",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0037-q03",
+      "product_sku": "HAP-0037",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0037-q04",
+      "product_sku": "HAP-0037",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0037-q05",
+      "product_sku": "HAP-0037",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0037-q06",
+      "product_sku": "HAP-0037",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0037-q07",
+      "product_sku": "HAP-0037",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0038-q01",
+      "product_sku": "HAP-0038",
+      "question": "What variety is this?",
+      "answer": "This is Nutmeg grafted (Myristica fragrans), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0038-q02",
+      "product_sku": "HAP-0038",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0038-q03",
+      "product_sku": "HAP-0038",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0038-q04",
+      "product_sku": "HAP-0038",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0038-q05",
+      "product_sku": "HAP-0038",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0038-q06",
+      "product_sku": "HAP-0038",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0038-q07",
+      "product_sku": "HAP-0038",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0039-q01",
+      "product_sku": "HAP-0039",
+      "question": "What variety is this?",
+      "answer": "This is Nutmeg seeded (Myristica fragrans), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0039-q02",
+      "product_sku": "HAP-0039",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0039-q03",
+      "product_sku": "HAP-0039",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0039-q04",
+      "product_sku": "HAP-0039",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0039-q05",
+      "product_sku": "HAP-0039",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0039-q06",
+      "product_sku": "HAP-0039",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0039-q07",
+      "product_sku": "HAP-0039",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0040-q01",
+      "product_sku": "HAP-0040",
+      "question": "What variety is this?",
+      "answer": "This is Pandrah (No.15) Papaya, supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0040-q02",
+      "product_sku": "HAP-0040",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0040-q03",
+      "product_sku": "HAP-0040",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0040-q04",
+      "product_sku": "HAP-0040",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (4.5 x 4.5 ft), commercial (4.5 x 4.5 ft), boundary (5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0040-q05",
+      "product_sku": "HAP-0040",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0040-q06",
+      "product_sku": "HAP-0040",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0040-q07",
+      "product_sku": "HAP-0040",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0042-q01",
+      "product_sku": "HAP-0042",
+      "question": "What variety is this?",
+      "answer": "This is Karimunda Pepper (Piper nigrum), supplied as a cutting-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0042-q02",
+      "product_sku": "HAP-0042",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0042-q03",
+      "product_sku": "HAP-0042",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about Rooted cutting, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0042-q04",
+      "product_sku": "HAP-0042",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (4.5 x 4.5 ft), commercial (4.5 x 4.5 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0042-q05",
+      "product_sku": "HAP-0042",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0042-q06",
+      "product_sku": "HAP-0042",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0042-q07",
+      "product_sku": "HAP-0042",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0042-q08",
+      "product_sku": "HAP-0042",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0042-q09",
+      "product_sku": "HAP-0042",
+      "question": "Why paniyur 1 and 4?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0042-q10",
+      "product_sku": "HAP-0042",
+      "question": "How to plant pepper?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0042-q11",
+      "product_sku": "HAP-0042",
+      "question": "How to maintain pepper plantation?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0043-q01",
+      "product_sku": "HAP-0043",
+      "question": "What variety is this?",
+      "answer": "This is Paniyur Pepper (Piper nigrum), supplied as a cutting-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0043-q02",
+      "product_sku": "HAP-0043",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0043-q03",
+      "product_sku": "HAP-0043",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about Rooted cutting, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0043-q04",
+      "product_sku": "HAP-0043",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (4.5 x 4.5 ft), commercial (4.5 x 4.5 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0043-q05",
+      "product_sku": "HAP-0043",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0043-q06",
+      "product_sku": "HAP-0043",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0043-q07",
+      "product_sku": "HAP-0043",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0043-q08",
+      "product_sku": "HAP-0043",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0043-q09",
+      "product_sku": "HAP-0043",
+      "question": "Why paniyur 1 and 4?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0043-q10",
+      "product_sku": "HAP-0043",
+      "question": "How to plant pepper?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0043-q11",
+      "product_sku": "HAP-0043",
+      "question": "How to maintain pepper plantation?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0049-q01",
+      "product_sku": "HAP-0049",
+      "question": "What variety is this?",
+      "answer": "This is Sweet tamarind (Tamarindus indica), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0049-q02",
+      "product_sku": "HAP-0049",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0049-q03",
+      "product_sku": "HAP-0049",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0049-q04",
+      "product_sku": "HAP-0049",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), Miyawaki (3 x 3 ft), commercial (18 x 18 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0049-q05",
+      "product_sku": "HAP-0049",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0049-q06",
+      "product_sku": "HAP-0049",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0049-q07",
+      "product_sku": "HAP-0049",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0053-q01",
+      "product_sku": "HAP-0053",
+      "question": "What variety is this?",
+      "answer": "This is Yelakki Banana (Musa spp.), supplied as a tissue-culture sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0053-q02",
+      "product_sku": "HAP-0053",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0053-q03",
+      "product_sku": "HAP-0053",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0053-q04",
+      "product_sku": "HAP-0053",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (6 x 6 ft), commercial (6 x 6 ft), boundary (5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0053-q05",
+      "product_sku": "HAP-0053",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0053-q06",
+      "product_sku": "HAP-0053",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0053-q07",
+      "product_sku": "HAP-0053",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0054-q01",
+      "product_sku": "HAP-0054",
+      "question": "What variety is this?",
+      "answer": "This is Robusta (Pachbaale) Banana, supplied as a tissue-culture sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0054-q02",
+      "product_sku": "HAP-0054",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0054-q03",
+      "product_sku": "HAP-0054",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0054-q04",
+      "product_sku": "HAP-0054",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (6 x 6 ft), commercial (6 x 6 ft), boundary (5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0054-q05",
+      "product_sku": "HAP-0054",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0054-q06",
+      "product_sku": "HAP-0054",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0054-q07",
+      "product_sku": "HAP-0054",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0055-q01",
+      "product_sku": "HAP-0055",
+      "question": "What variety is this?",
+      "answer": "This is Red Banana (Musa spp.), supplied as a sucker-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0055-q02",
+      "product_sku": "HAP-0055",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0055-q03",
+      "product_sku": "HAP-0055",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0055-q04",
+      "product_sku": "HAP-0055",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (6 x 6 ft), commercial (6 x 6 ft), boundary (5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0055-q05",
+      "product_sku": "HAP-0055",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0055-q06",
+      "product_sku": "HAP-0055",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0055-q07",
+      "product_sku": "HAP-0055",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0058-q01",
+      "product_sku": "HAP-0058",
+      "question": "What variety is this?",
+      "answer": "This is Coorg Avocado (Persea americana), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0058-q02",
+      "product_sku": "HAP-0058",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0058-q03",
+      "product_sku": "HAP-0058",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0058-q04",
+      "product_sku": "HAP-0058",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0058-q05",
+      "product_sku": "HAP-0058",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0058-q06",
+      "product_sku": "HAP-0058",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0058-q07",
+      "product_sku": "HAP-0058",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0058-q08",
+      "product_sku": "HAP-0058",
+      "question": "Is Haas variety successful in India? why not? where can we get those plants?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0058-q09",
+      "product_sku": "HAP-0058",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0058-q10",
+      "product_sku": "HAP-0058",
+      "question": "TKD-1 adv/dis?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0058-q11",
+      "product_sku": "HAP-0058",
+      "question": "What is the long term effect of plants in lands with less water sources?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0058-q12",
+      "product_sku": "HAP-0058",
+      "question": "Intercropping varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 12
+    },
+    {
+      "key": "hap-0059-q01",
+      "product_sku": "HAP-0059",
+      "question": "What variety is this?",
+      "answer": "This is Mexican Hass Avocado (Persea americana), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0059-q02",
+      "product_sku": "HAP-0059",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0059-q03",
+      "product_sku": "HAP-0059",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0059-q04",
+      "product_sku": "HAP-0059",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0059-q05",
+      "product_sku": "HAP-0059",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0059-q06",
+      "product_sku": "HAP-0059",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0059-q07",
+      "product_sku": "HAP-0059",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0059-q08",
+      "product_sku": "HAP-0059",
+      "question": "Is Haas variety successful in India? why not? where can we get those plants?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0059-q09",
+      "product_sku": "HAP-0059",
+      "question": "What variety should be chosen for different regions?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0059-q10",
+      "product_sku": "HAP-0059",
+      "question": "TKD-1 adv/dis?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0059-q11",
+      "product_sku": "HAP-0059",
+      "question": "What is the long term effect of plants in lands with less water sources?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0059-q12",
+      "product_sku": "HAP-0059",
+      "question": "Intercropping varieties?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 12
+    },
+    {
+      "key": "hap-0062-q01",
+      "product_sku": "HAP-0062",
+      "question": "What variety is this?",
+      "answer": "This is Jumbo red Dragonfruit (Selenicereus undatus), supplied as a cutting-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0062-q02",
+      "product_sku": "HAP-0062",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0062-q03",
+      "product_sku": "HAP-0062",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about Rooted cutting, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0062-q04",
+      "product_sku": "HAP-0062",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (4.5 x 4.5 ft), commercial (4.5 x 4.5 ft), boundary (2.5 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0062-q05",
+      "product_sku": "HAP-0062",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0062-q06",
+      "product_sku": "HAP-0062",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0062-q07",
+      "product_sku": "HAP-0062",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0064-q01",
+      "product_sku": "HAP-0064",
+      "question": "What variety is this?",
+      "answer": "This is Japanese Red diamond Guava (Psidium guajava), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0064-q02",
+      "product_sku": "HAP-0064",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0064-q03",
+      "product_sku": "HAP-0064",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0064-q04",
+      "product_sku": "HAP-0064",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0064-q05",
+      "product_sku": "HAP-0064",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0064-q06",
+      "product_sku": "HAP-0064",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0064-q07",
+      "product_sku": "HAP-0064",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0064-q08",
+      "product_sku": "HAP-0064",
+      "question": "What is the speciality of Allahabad safeda?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0064-q09",
+      "product_sku": "HAP-0064",
+      "question": "What is the speciality of Taiwan pink?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0064-q10",
+      "product_sku": "HAP-0064",
+      "question": "Demand for L-49?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0065-q01",
+      "product_sku": "HAP-0065",
+      "question": "What variety is this?",
+      "answer": "This is Strawberry Guava (Psidium guajava), supplied as a air-layered sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0065-q02",
+      "product_sku": "HAP-0065",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0065-q03",
+      "product_sku": "HAP-0065",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0065-q04",
+      "product_sku": "HAP-0065",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0065-q05",
+      "product_sku": "HAP-0065",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0065-q06",
+      "product_sku": "HAP-0065",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0065-q07",
+      "product_sku": "HAP-0065",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0065-q08",
+      "product_sku": "HAP-0065",
+      "question": "What is the speciality of Allahabad safeda?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0065-q09",
+      "product_sku": "HAP-0065",
+      "question": "What is the speciality of Taiwan pink?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0065-q10",
+      "product_sku": "HAP-0065",
+      "question": "Demand for L-49?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0069-q01",
+      "product_sku": "HAP-0069",
+      "question": "What variety is this?",
+      "answer": "This is Macadamia Nuts Grafted (Macadamia integrifolia), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0069-q02",
+      "product_sku": "HAP-0069",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0069-q03",
+      "product_sku": "HAP-0069",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0069-q04",
+      "product_sku": "HAP-0069",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0069-q05",
+      "product_sku": "HAP-0069",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0069-q06",
+      "product_sku": "HAP-0069",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0069-q07",
+      "product_sku": "HAP-0069",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0070-q01",
+      "product_sku": "HAP-0070",
+      "question": "What variety is this?",
+      "answer": "This is Macadamia Nuts Seeded (Macadamia integrifolia), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0070-q02",
+      "product_sku": "HAP-0070",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0070-q03",
+      "product_sku": "HAP-0070",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0070-q04",
+      "product_sku": "HAP-0070",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0070-q05",
+      "product_sku": "HAP-0070",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0070-q06",
+      "product_sku": "HAP-0070",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0070-q07",
+      "product_sku": "HAP-0070",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0071-q01",
+      "product_sku": "HAP-0071",
+      "question": "What variety is this?",
+      "answer": "This is Variegated Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0071-q02",
+      "product_sku": "HAP-0071",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0071-q03",
+      "product_sku": "HAP-0071",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0071-q04",
+      "product_sku": "HAP-0071",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0071-q05",
+      "product_sku": "HAP-0071",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0071-q06",
+      "product_sku": "HAP-0071",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0071-q07",
+      "product_sku": "HAP-0071",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0071-q08",
+      "product_sku": "HAP-0071",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0071-q09",
+      "product_sku": "HAP-0071",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0071-q10",
+      "product_sku": "HAP-0071",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0076-q01",
+      "product_sku": "HAP-0076",
+      "question": "What variety is this?",
+      "answer": "This is Miyazaki Mango (Mangifera indica), supplied as a grafted sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0076-q02",
+      "product_sku": "HAP-0076",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0076-q03",
+      "product_sku": "HAP-0076",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1.5 to 2 ft, 8x10 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0076-q04",
+      "product_sku": "HAP-0076",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (18 x 18 ft), commercial (18 x 18 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0076-q05",
+      "product_sku": "HAP-0076",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0076-q06",
+      "product_sku": "HAP-0076",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0076-q07",
+      "product_sku": "HAP-0076",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0076-q08",
+      "product_sku": "HAP-0076",
+      "question": "What varieties of mango are we producing?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0076-q09",
+      "product_sku": "HAP-0076",
+      "question": "What are special varieties available?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0076-q10",
+      "product_sku": "HAP-0076",
+      "question": "Which are the top selling mangos in the country?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0085-q01",
+      "product_sku": "HAP-0085",
+      "question": "What variety is this?",
+      "answer": "This is Nelyani gold Cardamom (Elettaria cardamomum), supplied as a sucker-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0085-q02",
+      "product_sku": "HAP-0085",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0085-q03",
+      "product_sku": "HAP-0085",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0085-q04",
+      "product_sku": "HAP-0085",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (4.5 x 4.5 ft), commercial (4.5 x 4.5 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0085-q05",
+      "product_sku": "HAP-0085",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0085-q06",
+      "product_sku": "HAP-0085",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0085-q07",
+      "product_sku": "HAP-0085",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0086-q01",
+      "product_sku": "HAP-0086",
+      "question": "What variety is this?",
+      "answer": "This is Ceylon Cinnamon (Cinnamomum verum), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0086-q02",
+      "product_sku": "HAP-0086",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0086-q03",
+      "product_sku": "HAP-0086",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0086-q04",
+      "product_sku": "HAP-0086",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0086-q05",
+      "product_sku": "HAP-0086",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0086-q06",
+      "product_sku": "HAP-0086",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0086-q07",
+      "product_sku": "HAP-0086",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0087-q01",
+      "product_sku": "HAP-0087",
+      "question": "What variety is this?",
+      "answer": "This is Clove (Syzygium aromaticum), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0087-q02",
+      "product_sku": "HAP-0087",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0087-q03",
+      "product_sku": "HAP-0087",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0087-q04",
+      "product_sku": "HAP-0087",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: food forest (9 x 9 ft), commercial (9 x 9 ft).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0087-q05",
+      "product_sku": "HAP-0087",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0087-q06",
+      "product_sku": "HAP-0087",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0087-q07",
+      "product_sku": "HAP-0087",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0089-q01",
+      "product_sku": "HAP-0089",
+      "question": "What variety is this?",
+      "answer": "This is Bamboo (Bambusa spp.), supplied as a sucker-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0089-q02",
+      "product_sku": "HAP-0089",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0089-q03",
+      "product_sku": "HAP-0089",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0089-q04",
+      "product_sku": "HAP-0089",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: commercial (18 x 18 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0089-q05",
+      "product_sku": "HAP-0089",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0089-q06",
+      "product_sku": "HAP-0089",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0089-q07",
+      "product_sku": "HAP-0089",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0090-q01",
+      "product_sku": "HAP-0090",
+      "question": "What variety is this?",
+      "answer": "This is Mahogany (Swietenia macrophylla), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0090-q02",
+      "product_sku": "HAP-0090",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0090-q03",
+      "product_sku": "HAP-0090",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0090-q04",
+      "product_sku": "HAP-0090",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: Miyawaki (3 x 3 ft), commercial (18 x 18 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0090-q05",
+      "product_sku": "HAP-0090",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0090-q06",
+      "product_sku": "HAP-0090",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0090-q07",
+      "product_sku": "HAP-0090",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0093-q01",
+      "product_sku": "HAP-0093",
+      "question": "What variety is this?",
+      "answer": "This is Red sandal (Pterocarpus santalinus), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0093-q02",
+      "product_sku": "HAP-0093",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0093-q03",
+      "product_sku": "HAP-0093",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0093-q04",
+      "product_sku": "HAP-0093",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: Miyawaki (2 x 2 ft), commercial (9 x 9 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0093-q05",
+      "product_sku": "HAP-0093",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0093-q06",
+      "product_sku": "HAP-0093",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0093-q07",
+      "product_sku": "HAP-0093",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0094-q01",
+      "product_sku": "HAP-0094",
+      "question": "What variety is this?",
+      "answer": "This is Sandalwood (Santalum album), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0094-q02",
+      "product_sku": "HAP-0094",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0094-q03",
+      "product_sku": "HAP-0094",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0094-q04",
+      "product_sku": "HAP-0094",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: Miyawaki (2 x 2 ft), commercial (9 x 9 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0094-q05",
+      "product_sku": "HAP-0094",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0094-q06",
+      "product_sku": "HAP-0094",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0094-q07",
+      "product_sku": "HAP-0094",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0094-q08",
+      "product_sku": "HAP-0094",
+      "question": "Why grow Sandalwood?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0094-q09",
+      "product_sku": "HAP-0094",
+      "question": "Difference between sandal and red sander?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 9
+    },
+    {
+      "key": "hap-0094-q10",
+      "product_sku": "HAP-0094",
+      "question": "What are different protection methods?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 10
+    },
+    {
+      "key": "hap-0094-q11",
+      "product_sku": "HAP-0094",
+      "question": "What are the host plants to be used (in nur)?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0094-q12",
+      "product_sku": "HAP-0094",
+      "question": "What are the host plants to be used (in farm)?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 12
+    },
+    {
+      "key": "hap-0096-q01",
+      "product_sku": "HAP-0096",
+      "question": "What variety is this?",
+      "answer": "This is Teak (Tectona grandis), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0096-q02",
+      "product_sku": "HAP-0096",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0096-q03",
+      "product_sku": "HAP-0096",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0096-q04",
+      "product_sku": "HAP-0096",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: Miyawaki (2 x 2 ft), commercial (9 x 9 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0096-q05",
+      "product_sku": "HAP-0096",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0096-q06",
+      "product_sku": "HAP-0096",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0096-q07",
+      "product_sku": "HAP-0096",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0132-q01",
+      "product_sku": "HAP-0132",
+      "question": "What variety is this?",
+      "answer": "This is Malabar Neem (Melia dubia), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0132-q02",
+      "product_sku": "HAP-0132",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0132-q03",
+      "product_sku": "HAP-0132",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about Miyawaki sapling, 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0132-q04",
+      "product_sku": "HAP-0132",
+      "question": "Intercropping details?",
+      "answer": "It is planted with other trees in these layouts: Miyawaki (3 x 3 ft), boundary (10 ft apart in a line).",
+      "source": "derived",
+      "status": "approved",
+      "sort": 4
+    },
+    {
+      "key": "hap-0132-q05",
+      "product_sku": "HAP-0132",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0132-q06",
+      "product_sku": "HAP-0132",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0132-q07",
+      "product_sku": "HAP-0132",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0160-q01",
+      "product_sku": "HAP-0160",
+      "question": "What variety is this?",
+      "answer": "This is Agarwood (Aquilaria malaccensis), supplied as a seed-raised sapling.",
+      "source": "derived",
+      "status": "approved",
+      "sort": 1
+    },
+    {
+      "key": "hap-0160-q02",
+      "product_sku": "HAP-0160",
+      "question": "Do you need permission to grow?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 2
+    },
+    {
+      "key": "hap-0160-q03",
+      "product_sku": "HAP-0160",
+      "question": "What is the height and package size?",
+      "answer": "The sapling is dispatched at about 1 to 1.5 ft, 6x8 in bag.",
+      "source": "derived",
+      "status": "draft",
+      "sort": 3
+    },
+    {
+      "key": "hap-0160-q04",
+      "product_sku": "HAP-0160",
+      "question": "Intercropping details?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 4
+    },
+    {
+      "key": "hap-0160-q05",
+      "product_sku": "HAP-0160",
+      "question": "What is the yield and how much money can we earn?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 5
+    },
+    {
+      "key": "hap-0160-q06",
+      "product_sku": "HAP-0160",
+      "question": "Type of propagation and what is the age of mother plant?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 6
+    },
+    {
+      "key": "hap-0160-q07",
+      "product_sku": "HAP-0160",
+      "question": "Host plant details?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 7
+    },
+    {
+      "key": "hap-0160-q08",
+      "product_sku": "HAP-0160",
+      "question": "Why agarwood?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 8
+    },
+    {
+      "key": "hap-0160-q09",
+      "product_sku": "HAP-0160",
+      "question": "What are different ways to earn from agarwood farm?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 9
+    },
+    {
+      "key": "hap-0160-q10",
+      "product_sku": "HAP-0160",
+      "question": "Who are the buyers?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 10
+    },
+    {
+      "key": "hap-0160-q11",
+      "product_sku": "HAP-0160",
+      "question": "Agarwood vs Sandalwood comparison?",
+      "answer": null,
+      "source": "ai_draft",
+      "status": "draft",
+      "sort": 11
+    },
+    {
+      "key": "hap-0160-q12",
+      "product_sku": "HAP-0160",
+      "question": "How to export it?",
+      "answer": null,
+      "source": "client",
+      "status": "needs_client",
+      "sort": 12
+    }
+  ]
+}

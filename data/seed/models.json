@@ -1,0 +1,1874 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-20T04:39:25+05:30",
+  "sources": [
+    "latest_products.xlsx",
+    "HANDOFF.md"
+  ],
+  "records": [
+    {
+      "slug": "boundary",
+      "name": "Boundary",
+      "description": "A single line of trees along the farm boundary as a windbreak and living fence.",
+      "kind": "line",
+      "block_ft": {
+        "w": 36,
+        "h": 0
+      },
+      "spacing_ft": {
+        "plant": 10,
+        "row": 0
+      },
+      "pattern": [
+        "MOXO"
+      ],
+      "mix": null,
+      "rng_seed": null,
+      "weight_override_kg": null,
+      "legend": {
+        "M": "Main",
+        "X": "Host",
+        "O": "Biomass"
+      },
+      "members": [
+        {
+          "sku": "HAP-0006",
+          "role": "X",
+          "sort": 1
+        },
+        {
+          "sku": "HAP-0007",
+          "role": "O",
+          "sort": 2
+        },
+        {
+          "sku": "HAP-0011",
+          "role": "M",
+          "sort": 3
+        },
+        {
+          "sku": "HAP-0012",
+          "role": "M",
+          "sort": 4
+        },
+        {
+          "sku": "HAP-0016",
+          "role": "O",
+          "sort": 5
+        },
+        {
+          "sku": "HAP-0021",
+          "role": "M",
+          "sort": 6
+        },
+        {
+          "sku": "HAP-0023",
+          "role": "O",
+          "sort": 7
+        },
+        {
+          "sku": "HAP-0040",
+          "role": "O",
+          "sort": 8
+        },
+        {
+          "sku": "HAP-0041",
+          "role": "O",
+          "sort": 9
+        },
+        {
+          "sku": "HAP-0044",
+          "role": "X",
+          "sort": 10
+        },
+        {
+          "sku": "HAP-0046",
+          "role": "M",
+          "sort": 11
+        },
+        {
+          "sku": "HAP-0047",
+          "role": "X",
+          "sort": 12
+        },
+        {
+          "sku": "HAP-0048",
+          "role": "O",
+          "sort": 13
+        },
+        {
+          "sku": "HAP-0049",
+          "role": "M",
+          "sort": 14
+        },
+        {
+          "sku": "HAP-0051",
+          "role": "M",
+          "sort": 15
+        },
+        {
+          "sku": "HAP-0052",
+          "role": "X",
+          "sort": 16
+        },
+        {
+          "sku": "HAP-0053",
+          "role": "O",
+          "sort": 17
+        },
+        {
+          "sku": "HAP-0054",
+          "role": "O",
+          "sort": 18
+        },
+        {
+          "sku": "HAP-0055",
+          "role": "O",
+          "sort": 19
+        },
+        {
+          "sku": "HAP-0061",
+          "role": "M",
+          "sort": 20
+        },
+        {
+          "sku": "HAP-0062",
+          "role": "O",
+          "sort": 21
+        },
+        {
+          "sku": "HAP-0089",
+          "role": "M",
+          "sort": 22
+        },
+        {
+          "sku": "HAP-0090",
+          "role": "M",
+          "sort": 23
+        },
+        {
+          "sku": "HAP-0091",
+          "role": "M",
+          "sort": 24
+        },
+        {
+          "sku": "HAP-0092",
+          "role": "M",
+          "sort": 25
+        },
+        {
+          "sku": "HAP-0093",
+          "role": "X",
+          "sort": 26
+        },
+        {
+          "sku": "HAP-0094",
+          "role": "X",
+          "sort": 27
+        },
+        {
+          "sku": "HAP-0095",
+          "role": "X",
+          "sort": 28
+        },
+        {
+          "sku": "HAP-0096",
+          "role": "X",
+          "sort": 29
+        },
+        {
+          "sku": "HAP-0097",
+          "role": "M",
+          "sort": 30
+        },
+        {
+          "sku": "HAP-0098",
+          "role": "X",
+          "sort": 31
+        },
+        {
+          "sku": "HAP-0099",
+          "role": "X",
+          "sort": 32
+        },
+        {
+          "sku": "HAP-0100",
+          "role": "O",
+          "sort": 33
+        },
+        {
+          "sku": "HAP-0101",
+          "role": "O",
+          "sort": 34
+        },
+        {
+          "sku": "HAP-0102",
+          "role": "X",
+          "sort": 35
+        },
+        {
+          "sku": "HAP-0103",
+          "role": "M",
+          "sort": 36
+        },
+        {
+          "sku": "HAP-0104",
+          "role": "X",
+          "sort": 37
+        },
+        {
+          "sku": "HAP-0105",
+          "role": "X",
+          "sort": 38
+        },
+        {
+          "sku": "HAP-0106",
+          "role": "O",
+          "sort": 39
+        },
+        {
+          "sku": "HAP-0107",
+          "role": "M",
+          "sort": 40
+        },
+        {
+          "sku": "HAP-0108",
+          "role": "O",
+          "sort": 41
+        },
+        {
+          "sku": "HAP-0109",
+          "role": "M",
+          "sort": 42
+        },
+        {
+          "sku": "HAP-0110",
+          "role": "M",
+          "sort": 43
+        },
+        {
+          "sku": "HAP-0111",
+          "role": "X",
+          "sort": 44
+        },
+        {
+          "sku": "HAP-0112",
+          "role": "X",
+          "sort": 45
+        },
+        {
+          "sku": "HAP-0113",
+          "role": "M",
+          "sort": 46
+        },
+        {
+          "sku": "HAP-0114",
+          "role": "M",
+          "sort": 47
+        },
+        {
+          "sku": "HAP-0115",
+          "role": "O",
+          "sort": 48
+        },
+        {
+          "sku": "HAP-0116",
+          "role": "M",
+          "sort": 49
+        },
+        {
+          "sku": "HAP-0117",
+          "role": "X",
+          "sort": 50
+        },
+        {
+          "sku": "HAP-0118",
+          "role": "O",
+          "sort": 51
+        },
+        {
+          "sku": "HAP-0119",
+          "role": "X",
+          "sort": 52
+        },
+        {
+          "sku": "HAP-0120",
+          "role": "X",
+          "sort": 53
+        },
+        {
+          "sku": "HAP-0121",
+          "role": "O",
+          "sort": 54
+        },
+        {
+          "sku": "HAP-0122",
+          "role": "M",
+          "sort": 55
+        },
+        {
+          "sku": "HAP-0123",
+          "role": "O",
+          "sort": 56
+        },
+        {
+          "sku": "HAP-0124",
+          "role": "M",
+          "sort": 57
+        },
+        {
+          "sku": "HAP-0125",
+          "role": "X",
+          "sort": 58
+        },
+        {
+          "sku": "HAP-0126",
+          "role": "M",
+          "sort": 59
+        },
+        {
+          "sku": "HAP-0127",
+          "role": "X",
+          "sort": 60
+        },
+        {
+          "sku": "HAP-0128",
+          "role": "M",
+          "sort": 61
+        },
+        {
+          "sku": "HAP-0129",
+          "role": "M",
+          "sort": 62
+        },
+        {
+          "sku": "HAP-0130",
+          "role": "O",
+          "sort": 63
+        },
+        {
+          "sku": "HAP-0131",
+          "role": "M",
+          "sort": 64
+        },
+        {
+          "sku": "HAP-0132",
+          "role": "M",
+          "sort": 65
+        },
+        {
+          "sku": "HAP-0133",
+          "role": "X",
+          "sort": 66
+        },
+        {
+          "sku": "HAP-0134",
+          "role": "M",
+          "sort": 67
+        },
+        {
+          "sku": "HAP-0135",
+          "role": "O",
+          "sort": 68
+        },
+        {
+          "sku": "HAP-0136",
+          "role": "M",
+          "sort": 69
+        },
+        {
+          "sku": "HAP-0137",
+          "role": "X",
+          "sort": 70
+        },
+        {
+          "sku": "HAP-0138",
+          "role": "X",
+          "sort": 71
+        },
+        {
+          "sku": "HAP-0139",
+          "role": "X",
+          "sort": 72
+        },
+        {
+          "sku": "HAP-0140",
+          "role": "M",
+          "sort": 73
+        },
+        {
+          "sku": "HAP-0141",
+          "role": "X",
+          "sort": 74
+        },
+        {
+          "sku": "HAP-0142",
+          "role": "M",
+          "sort": 75
+        },
+        {
+          "sku": "HAP-0143",
+          "role": "M",
+          "sort": 76
+        },
+        {
+          "sku": "HAP-0144",
+          "role": "M",
+          "sort": 77
+        },
+        {
+          "sku": "HAP-0145",
+          "role": "M",
+          "sort": 78
+        },
+        {
+          "sku": "HAP-0146",
+          "role": "O",
+          "sort": 79
+        },
+        {
+          "sku": "HAP-0147",
+          "role": "M",
+          "sort": 80
+        },
+        {
+          "sku": "HAP-0148",
+          "role": "O",
+          "sort": 81
+        },
+        {
+          "sku": "HAP-0149",
+          "role": "X",
+          "sort": 82
+        },
+        {
+          "sku": "HAP-0150",
+          "role": "X",
+          "sort": 83
+        },
+        {
+          "sku": "HAP-0151",
+          "role": "X",
+          "sort": 84
+        },
+        {
+          "sku": "HAP-0152",
+          "role": "O",
+          "sort": 85
+        },
+        {
+          "sku": "HAP-0153",
+          "role": "O",
+          "sort": 86
+        },
+        {
+          "sku": "HAP-0154",
+          "role": "O",
+          "sort": 87
+        },
+        {
+          "sku": "HAP-0155",
+          "role": "O",
+          "sort": 88
+        },
+        {
+          "sku": "HAP-0156",
+          "role": "O",
+          "sort": 89
+        },
+        {
+          "sku": "HAP-0157",
+          "role": "O",
+          "sort": 90
+        },
+        {
+          "sku": "HAP-0158",
+          "role": "O",
+          "sort": 91
+        },
+        {
+          "sku": "HAP-0159",
+          "role": "O",
+          "sort": 92
+        }
+      ],
+      "video": null,
+      "sort": 4
+    },
+    {
+      "slug": "commercial",
+      "name": "Commercial",
+      "description": "Rows of main fruit trees with host timber and biomass plants between them: 6 ft along the row, 12 ft between rows, each row M O X O X O M.",
+      "kind": "area",
+      "block_ft": {
+        "w": 36,
+        "h": 36
+      },
+      "spacing_ft": {
+        "plant": 6,
+        "row": 12
+      },
+      "pattern": [
+        "MOXOXOM"
+      ],
+      "mix": null,
+      "rng_seed": null,
+      "weight_override_kg": null,
+      "legend": {
+        "M": "Main",
+        "X": "Host",
+        "O": "Biomass"
+      },
+      "members": [
+        {
+          "sku": "HAP-0001",
+          "role": "M",
+          "sort": 1
+        },
+        {
+          "sku": "HAP-0002",
+          "role": "O",
+          "sort": 2
+        },
+        {
+          "sku": "HAP-0003",
+          "role": "X",
+          "sort": 3
+        },
+        {
+          "sku": "HAP-0004",
+          "role": "X",
+          "sort": 4
+        },
+        {
+          "sku": "HAP-0005",
+          "role": "X",
+          "sort": 5
+        },
+        {
+          "sku": "HAP-0006",
+          "role": "X",
+          "sort": 6
+        },
+        {
+          "sku": "HAP-0007",
+          "role": "O",
+          "sort": 7
+        },
+        {
+          "sku": "HAP-0008",
+          "role": "M",
+          "sort": 8
+        },
+        {
+          "sku": "HAP-0009",
+          "role": "M",
+          "sort": 9
+        },
+        {
+          "sku": "HAP-0010",
+          "role": "M",
+          "sort": 10
+        },
+        {
+          "sku": "HAP-0011",
+          "role": "M",
+          "sort": 11
+        },
+        {
+          "sku": "HAP-0012",
+          "role": "M",
+          "sort": 12
+        },
+        {
+          "sku": "HAP-0013",
+          "role": "X",
+          "sort": 13
+        },
+        {
+          "sku": "HAP-0014",
+          "role": "X",
+          "sort": 14
+        },
+        {
+          "sku": "HAP-0015",
+          "role": "X",
+          "sort": 15
+        },
+        {
+          "sku": "HAP-0016",
+          "role": "O",
+          "sort": 16
+        },
+        {
+          "sku": "HAP-0017",
+          "role": "M",
+          "sort": 17
+        },
+        {
+          "sku": "HAP-0018",
+          "role": "M",
+          "sort": 18
+        },
+        {
+          "sku": "HAP-0019",
+          "role": "M",
+          "sort": 19
+        },
+        {
+          "sku": "HAP-0020",
+          "role": "M",
+          "sort": 20
+        },
+        {
+          "sku": "HAP-0021",
+          "role": "M",
+          "sort": 21
+        },
+        {
+          "sku": "HAP-0022",
+          "role": "M",
+          "sort": 22
+        },
+        {
+          "sku": "HAP-0023",
+          "role": "O",
+          "sort": 23
+        },
+        {
+          "sku": "HAP-0024",
+          "role": "X",
+          "sort": 24
+        },
+        {
+          "sku": "HAP-0025",
+          "role": "X",
+          "sort": 25
+        },
+        {
+          "sku": "HAP-0026",
+          "role": "M",
+          "sort": 26
+        },
+        {
+          "sku": "HAP-0027",
+          "role": "M",
+          "sort": 27
+        },
+        {
+          "sku": "HAP-0028",
+          "role": "M",
+          "sort": 28
+        },
+        {
+          "sku": "HAP-0029",
+          "role": "M",
+          "sort": 29
+        },
+        {
+          "sku": "HAP-0030",
+          "role": "M",
+          "sort": 30
+        },
+        {
+          "sku": "HAP-0031",
+          "role": "M",
+          "sort": 31
+        },
+        {
+          "sku": "HAP-0032",
+          "role": "M",
+          "sort": 32
+        },
+        {
+          "sku": "HAP-0033",
+          "role": "M",
+          "sort": 33
+        },
+        {
+          "sku": "HAP-0034",
+          "role": "M",
+          "sort": 34
+        },
+        {
+          "sku": "HAP-0035",
+          "role": "X",
+          "sort": 35
+        },
+        {
+          "sku": "HAP-0036",
+          "role": "M",
+          "sort": 36
+        },
+        {
+          "sku": "HAP-0037",
+          "role": "X",
+          "sort": 37
+        },
+        {
+          "sku": "HAP-0038",
+          "role": "M",
+          "sort": 38
+        },
+        {
+          "sku": "HAP-0039",
+          "role": "M",
+          "sort": 39
+        },
+        {
+          "sku": "HAP-0040",
+          "role": "O",
+          "sort": 40
+        },
+        {
+          "sku": "HAP-0042",
+          "role": "O",
+          "sort": 41
+        },
+        {
+          "sku": "HAP-0043",
+          "role": "O",
+          "sort": 42
+        },
+        {
+          "sku": "HAP-0044",
+          "role": "X",
+          "sort": 43
+        },
+        {
+          "sku": "HAP-0045",
+          "role": "X",
+          "sort": 44
+        },
+        {
+          "sku": "HAP-0046",
+          "role": "M",
+          "sort": 45
+        },
+        {
+          "sku": "HAP-0047",
+          "role": "X",
+          "sort": 46
+        },
+        {
+          "sku": "HAP-0048",
+          "role": "O",
+          "sort": 47
+        },
+        {
+          "sku": "HAP-0049",
+          "role": "M",
+          "sort": 48
+        },
+        {
+          "sku": "HAP-0050",
+          "role": "X",
+          "sort": 49
+        },
+        {
+          "sku": "HAP-0051",
+          "role": "M",
+          "sort": 50
+        },
+        {
+          "sku": "HAP-0052",
+          "role": "X",
+          "sort": 51
+        },
+        {
+          "sku": "HAP-0053",
+          "role": "O",
+          "sort": 52
+        },
+        {
+          "sku": "HAP-0054",
+          "role": "O",
+          "sort": 53
+        },
+        {
+          "sku": "HAP-0055",
+          "role": "O",
+          "sort": 54
+        },
+        {
+          "sku": "HAP-0056",
+          "role": "M",
+          "sort": 55
+        },
+        {
+          "sku": "HAP-0057",
+          "role": "X",
+          "sort": 56
+        },
+        {
+          "sku": "HAP-0058",
+          "role": "M",
+          "sort": 57
+        },
+        {
+          "sku": "HAP-0059",
+          "role": "M",
+          "sort": 58
+        },
+        {
+          "sku": "HAP-0060",
+          "role": "X",
+          "sort": 59
+        },
+        {
+          "sku": "HAP-0061",
+          "role": "M",
+          "sort": 60
+        },
+        {
+          "sku": "HAP-0062",
+          "role": "O",
+          "sort": 61
+        },
+        {
+          "sku": "HAP-0063",
+          "role": "X",
+          "sort": 62
+        },
+        {
+          "sku": "HAP-0064",
+          "role": "X",
+          "sort": 63
+        },
+        {
+          "sku": "HAP-0065",
+          "role": "X",
+          "sort": 64
+        },
+        {
+          "sku": "HAP-0066",
+          "role": "X",
+          "sort": 65
+        },
+        {
+          "sku": "HAP-0067",
+          "role": "X",
+          "sort": 66
+        },
+        {
+          "sku": "HAP-0068",
+          "role": "X",
+          "sort": 67
+        },
+        {
+          "sku": "HAP-0069",
+          "role": "M",
+          "sort": 68
+        },
+        {
+          "sku": "HAP-0070",
+          "role": "M",
+          "sort": 69
+        },
+        {
+          "sku": "HAP-0071",
+          "role": "M",
+          "sort": 70
+        },
+        {
+          "sku": "HAP-0072",
+          "role": "X",
+          "sort": 71
+        },
+        {
+          "sku": "HAP-0073",
+          "role": "X",
+          "sort": 72
+        },
+        {
+          "sku": "HAP-0074",
+          "role": "X",
+          "sort": 73
+        },
+        {
+          "sku": "HAP-0076",
+          "role": "M",
+          "sort": 74
+        },
+        {
+          "sku": "HAP-0077",
+          "role": "X",
+          "sort": 75
+        },
+        {
+          "sku": "HAP-0078",
+          "role": "O",
+          "sort": 76
+        },
+        {
+          "sku": "HAP-0079",
+          "role": "X",
+          "sort": 77
+        },
+        {
+          "sku": "HAP-0080",
+          "role": "M",
+          "sort": 78
+        },
+        {
+          "sku": "HAP-0081",
+          "role": "M",
+          "sort": 79
+        },
+        {
+          "sku": "HAP-0082",
+          "role": "X",
+          "sort": 80
+        },
+        {
+          "sku": "HAP-0083",
+          "role": "X",
+          "sort": 81
+        },
+        {
+          "sku": "HAP-0084",
+          "role": "O",
+          "sort": 82
+        },
+        {
+          "sku": "HAP-0085",
+          "role": "O",
+          "sort": 83
+        },
+        {
+          "sku": "HAP-0086",
+          "role": "X",
+          "sort": 84
+        },
+        {
+          "sku": "HAP-0087",
+          "role": "X",
+          "sort": 85
+        },
+        {
+          "sku": "HAP-0088",
+          "role": "X",
+          "sort": 86
+        },
+        {
+          "sku": "HAP-0089",
+          "role": "M",
+          "sort": 87
+        },
+        {
+          "sku": "HAP-0090",
+          "role": "M",
+          "sort": 88
+        },
+        {
+          "sku": "HAP-0091",
+          "role": "M",
+          "sort": 89
+        },
+        {
+          "sku": "HAP-0092",
+          "role": "M",
+          "sort": 90
+        },
+        {
+          "sku": "HAP-0093",
+          "role": "X",
+          "sort": 91
+        },
+        {
+          "sku": "HAP-0094",
+          "role": "X",
+          "sort": 92
+        },
+        {
+          "sku": "HAP-0095",
+          "role": "X",
+          "sort": 93
+        },
+        {
+          "sku": "HAP-0096",
+          "role": "X",
+          "sort": 94
+        },
+        {
+          "sku": "HAP-0154",
+          "role": "O",
+          "sort": 95
+        }
+      ],
+      "video": null,
+      "sort": 1
+    },
+    {
+      "slug": "food-forest",
+      "name": "Food Forest",
+      "description": "A layered 6 x 6 ft grid of canopy, sub-canopy, shrub and biomass plants, alternating rows for a self-feeding forest garden.",
+      "kind": "area",
+      "block_ft": {
+        "w": 36,
+        "h": 36
+      },
+      "spacing_ft": {
+        "plant": 6,
+        "row": 6
+      },
+      "pattern": [
+        "MOXOMOX",
+        "OXOXOXO"
+      ],
+      "mix": null,
+      "rng_seed": null,
+      "weight_override_kg": null,
+      "legend": {
+        "M": "Main",
+        "X": "Host",
+        "O": "Biomass"
+      },
+      "members": [
+        {
+          "sku": "HAP-0001",
+          "role": "M",
+          "sort": 1
+        },
+        {
+          "sku": "HAP-0002",
+          "role": "O",
+          "sort": 2
+        },
+        {
+          "sku": "HAP-0003",
+          "role": "X",
+          "sort": 3
+        },
+        {
+          "sku": "HAP-0004",
+          "role": "X",
+          "sort": 4
+        },
+        {
+          "sku": "HAP-0005",
+          "role": "X",
+          "sort": 5
+        },
+        {
+          "sku": "HAP-0006",
+          "role": "X",
+          "sort": 6
+        },
+        {
+          "sku": "HAP-0007",
+          "role": "O",
+          "sort": 7
+        },
+        {
+          "sku": "HAP-0008",
+          "role": "M",
+          "sort": 8
+        },
+        {
+          "sku": "HAP-0009",
+          "role": "M",
+          "sort": 9
+        },
+        {
+          "sku": "HAP-0010",
+          "role": "M",
+          "sort": 10
+        },
+        {
+          "sku": "HAP-0011",
+          "role": "M",
+          "sort": 11
+        },
+        {
+          "sku": "HAP-0012",
+          "role": "M",
+          "sort": 12
+        },
+        {
+          "sku": "HAP-0013",
+          "role": "X",
+          "sort": 13
+        },
+        {
+          "sku": "HAP-0014",
+          "role": "X",
+          "sort": 14
+        },
+        {
+          "sku": "HAP-0015",
+          "role": "X",
+          "sort": 15
+        },
+        {
+          "sku": "HAP-0016",
+          "role": "O",
+          "sort": 16
+        },
+        {
+          "sku": "HAP-0017",
+          "role": "M",
+          "sort": 17
+        },
+        {
+          "sku": "HAP-0018",
+          "role": "M",
+          "sort": 18
+        },
+        {
+          "sku": "HAP-0019",
+          "role": "M",
+          "sort": 19
+        },
+        {
+          "sku": "HAP-0020",
+          "role": "M",
+          "sort": 20
+        },
+        {
+          "sku": "HAP-0021",
+          "role": "M",
+          "sort": 21
+        },
+        {
+          "sku": "HAP-0022",
+          "role": "M",
+          "sort": 22
+        },
+        {
+          "sku": "HAP-0023",
+          "role": "O",
+          "sort": 23
+        },
+        {
+          "sku": "HAP-0024",
+          "role": "X",
+          "sort": 24
+        },
+        {
+          "sku": "HAP-0025",
+          "role": "X",
+          "sort": 25
+        },
+        {
+          "sku": "HAP-0026",
+          "role": "M",
+          "sort": 26
+        },
+        {
+          "sku": "HAP-0027",
+          "role": "M",
+          "sort": 27
+        },
+        {
+          "sku": "HAP-0028",
+          "role": "M",
+          "sort": 28
+        },
+        {
+          "sku": "HAP-0029",
+          "role": "M",
+          "sort": 29
+        },
+        {
+          "sku": "HAP-0030",
+          "role": "M",
+          "sort": 30
+        },
+        {
+          "sku": "HAP-0031",
+          "role": "M",
+          "sort": 31
+        },
+        {
+          "sku": "HAP-0032",
+          "role": "M",
+          "sort": 32
+        },
+        {
+          "sku": "HAP-0033",
+          "role": "M",
+          "sort": 33
+        },
+        {
+          "sku": "HAP-0034",
+          "role": "M",
+          "sort": 34
+        },
+        {
+          "sku": "HAP-0035",
+          "role": "X",
+          "sort": 35
+        },
+        {
+          "sku": "HAP-0036",
+          "role": "M",
+          "sort": 36
+        },
+        {
+          "sku": "HAP-0037",
+          "role": "X",
+          "sort": 37
+        },
+        {
+          "sku": "HAP-0038",
+          "role": "M",
+          "sort": 38
+        },
+        {
+          "sku": "HAP-0039",
+          "role": "M",
+          "sort": 39
+        },
+        {
+          "sku": "HAP-0040",
+          "role": "O",
+          "sort": 40
+        },
+        {
+          "sku": "HAP-0042",
+          "role": "O",
+          "sort": 41
+        },
+        {
+          "sku": "HAP-0043",
+          "role": "O",
+          "sort": 42
+        },
+        {
+          "sku": "HAP-0044",
+          "role": "X",
+          "sort": 43
+        },
+        {
+          "sku": "HAP-0045",
+          "role": "X",
+          "sort": 44
+        },
+        {
+          "sku": "HAP-0046",
+          "role": "M",
+          "sort": 45
+        },
+        {
+          "sku": "HAP-0047",
+          "role": "X",
+          "sort": 46
+        },
+        {
+          "sku": "HAP-0048",
+          "role": "O",
+          "sort": 47
+        },
+        {
+          "sku": "HAP-0049",
+          "role": "M",
+          "sort": 48
+        },
+        {
+          "sku": "HAP-0050",
+          "role": "X",
+          "sort": 49
+        },
+        {
+          "sku": "HAP-0051",
+          "role": "M",
+          "sort": 50
+        },
+        {
+          "sku": "HAP-0052",
+          "role": "X",
+          "sort": 51
+        },
+        {
+          "sku": "HAP-0053",
+          "role": "O",
+          "sort": 52
+        },
+        {
+          "sku": "HAP-0054",
+          "role": "O",
+          "sort": 53
+        },
+        {
+          "sku": "HAP-0055",
+          "role": "O",
+          "sort": 54
+        },
+        {
+          "sku": "HAP-0056",
+          "role": "M",
+          "sort": 55
+        },
+        {
+          "sku": "HAP-0057",
+          "role": "X",
+          "sort": 56
+        },
+        {
+          "sku": "HAP-0058",
+          "role": "M",
+          "sort": 57
+        },
+        {
+          "sku": "HAP-0059",
+          "role": "M",
+          "sort": 58
+        },
+        {
+          "sku": "HAP-0060",
+          "role": "X",
+          "sort": 59
+        },
+        {
+          "sku": "HAP-0061",
+          "role": "M",
+          "sort": 60
+        },
+        {
+          "sku": "HAP-0062",
+          "role": "O",
+          "sort": 61
+        },
+        {
+          "sku": "HAP-0063",
+          "role": "X",
+          "sort": 62
+        },
+        {
+          "sku": "HAP-0064",
+          "role": "X",
+          "sort": 63
+        },
+        {
+          "sku": "HAP-0065",
+          "role": "X",
+          "sort": 64
+        },
+        {
+          "sku": "HAP-0066",
+          "role": "X",
+          "sort": 65
+        },
+        {
+          "sku": "HAP-0067",
+          "role": "X",
+          "sort": 66
+        },
+        {
+          "sku": "HAP-0068",
+          "role": "X",
+          "sort": 67
+        },
+        {
+          "sku": "HAP-0069",
+          "role": "M",
+          "sort": 68
+        },
+        {
+          "sku": "HAP-0070",
+          "role": "M",
+          "sort": 69
+        },
+        {
+          "sku": "HAP-0071",
+          "role": "M",
+          "sort": 70
+        },
+        {
+          "sku": "HAP-0072",
+          "role": "X",
+          "sort": 71
+        },
+        {
+          "sku": "HAP-0073",
+          "role": "X",
+          "sort": 72
+        },
+        {
+          "sku": "HAP-0074",
+          "role": "X",
+          "sort": 73
+        },
+        {
+          "sku": "HAP-0076",
+          "role": "M",
+          "sort": 74
+        },
+        {
+          "sku": "HAP-0077",
+          "role": "X",
+          "sort": 75
+        },
+        {
+          "sku": "HAP-0078",
+          "role": "O",
+          "sort": 76
+        },
+        {
+          "sku": "HAP-0079",
+          "role": "X",
+          "sort": 77
+        },
+        {
+          "sku": "HAP-0080",
+          "role": "M",
+          "sort": 78
+        },
+        {
+          "sku": "HAP-0081",
+          "role": "M",
+          "sort": 79
+        },
+        {
+          "sku": "HAP-0082",
+          "role": "X",
+          "sort": 80
+        },
+        {
+          "sku": "HAP-0083",
+          "role": "X",
+          "sort": 81
+        },
+        {
+          "sku": "HAP-0084",
+          "role": "O",
+          "sort": 82
+        },
+        {
+          "sku": "HAP-0085",
+          "role": "O",
+          "sort": 83
+        },
+        {
+          "sku": "HAP-0086",
+          "role": "X",
+          "sort": 84
+        },
+        {
+          "sku": "HAP-0087",
+          "role": "X",
+          "sort": 85
+        },
+        {
+          "sku": "HAP-0088",
+          "role": "X",
+          "sort": 86
+        }
+      ],
+      "video": null,
+      "sort": 2
+    },
+    {
+      "slug": "miyawaki",
+      "name": "Miyawaki",
+      "description": "A dense native mini-forest on a 2 x 2 ft grid, about 3 plants per square metre: roughly 10% canopy, 50% tree and 40% shrub layer, mixed at random.",
+      "kind": "area",
+      "block_ft": {
+        "w": 36,
+        "h": 36
+      },
+      "spacing_ft": {
+        "plant": 2,
+        "row": 2
+      },
+      "pattern": [],
+      "mix": {
+        "M": 0.1,
+        "X": 0.5,
+        "O": 0.4
+      },
+      "rng_seed": 42,
+      "weight_override_kg": 0.8,
+      "legend": {
+        "M": "Main",
+        "X": "Host",
+        "O": "Biomass"
+      },
+      "members": [
+        {
+          "sku": "HAP-0007",
+          "role": "O",
+          "sort": 1
+        },
+        {
+          "sku": "HAP-0023",
+          "role": "O",
+          "sort": 2
+        },
+        {
+          "sku": "HAP-0049",
+          "role": "M",
+          "sort": 3
+        },
+        {
+          "sku": "HAP-0051",
+          "role": "M",
+          "sort": 4
+        },
+        {
+          "sku": "HAP-0052",
+          "role": "X",
+          "sort": 5
+        },
+        {
+          "sku": "HAP-0061",
+          "role": "M",
+          "sort": 6
+        },
+        {
+          "sku": "HAP-0090",
+          "role": "M",
+          "sort": 7
+        },
+        {
+          "sku": "HAP-0091",
+          "role": "M",
+          "sort": 8
+        },
+        {
+          "sku": "HAP-0092",
+          "role": "M",
+          "sort": 9
+        },
+        {
+          "sku": "HAP-0093",
+          "role": "X",
+          "sort": 10
+        },
+        {
+          "sku": "HAP-0094",
+          "role": "X",
+          "sort": 11
+        },
+        {
+          "sku": "HAP-0095",
+          "role": "X",
+          "sort": 12
+        },
+        {
+          "sku": "HAP-0096",
+          "role": "X",
+          "sort": 13
+        },
+        {
+          "sku": "HAP-0097",
+          "role": "M",
+          "sort": 14
+        },
+        {
+          "sku": "HAP-0098",
+          "role": "X",
+          "sort": 15
+        },
+        {
+          "sku": "HAP-0099",
+          "role": "X",
+          "sort": 16
+        },
+        {
+          "sku": "HAP-0100",
+          "role": "O",
+          "sort": 17
+        },
+        {
+          "sku": "HAP-0101",
+          "role": "O",
+          "sort": 18
+        },
+        {
+          "sku": "HAP-0102",
+          "role": "X",
+          "sort": 19
+        },
+        {
+          "sku": "HAP-0103",
+          "role": "M",
+          "sort": 20
+        },
+        {
+          "sku": "HAP-0104",
+          "role": "X",
+          "sort": 21
+        },
+        {
+          "sku": "HAP-0105",
+          "role": "X",
+          "sort": 22
+        },
+        {
+          "sku": "HAP-0106",
+          "role": "O",
+          "sort": 23
+        },
+        {
+          "sku": "HAP-0107",
+          "role": "M",
+          "sort": 24
+        },
+        {
+          "sku": "HAP-0108",
+          "role": "O",
+          "sort": 25
+        },
+        {
+          "sku": "HAP-0109",
+          "role": "M",
+          "sort": 26
+        },
+        {
+          "sku": "HAP-0110",
+          "role": "M",
+          "sort": 27
+        },
+        {
+          "sku": "HAP-0111",
+          "role": "X",
+          "sort": 28
+        },
+        {
+          "sku": "HAP-0112",
+          "role": "X",
+          "sort": 29
+        },
+        {
+          "sku": "HAP-0113",
+          "role": "M",
+          "sort": 30
+        },
+        {
+          "sku": "HAP-0114",
+          "role": "M",
+          "sort": 31
+        },
+        {
+          "sku": "HAP-0115",
+          "role": "O",
+          "sort": 32
+        },
+        {
+          "sku": "HAP-0116",
+          "role": "M",
+          "sort": 33
+        },
+        {
+          "sku": "HAP-0117",
+          "role": "X",
+          "sort": 34
+        },
+        {
+          "sku": "HAP-0118",
+          "role": "O",
+          "sort": 35
+        },
+        {
+          "sku": "HAP-0119",
+          "role": "X",
+          "sort": 36
+        },
+        {
+          "sku": "HAP-0120",
+          "role": "X",
+          "sort": 37
+        },
+        {
+          "sku": "HAP-0121",
+          "role": "O",
+          "sort": 38
+        },
+        {
+          "sku": "HAP-0122",
+          "role": "M",
+          "sort": 39
+        },
+        {
+          "sku": "HAP-0123",
+          "role": "O",
+          "sort": 40
+        },
+        {
+          "sku": "HAP-0124",
+          "role": "M",
+          "sort": 41
+        },
+        {
+          "sku": "HAP-0125",
+          "role": "X",
+          "sort": 42
+        },
+        {
+          "sku": "HAP-0126",
+          "role": "M",
+          "sort": 43
+        },
+        {
+          "sku": "HAP-0127",
+          "role": "X",
+          "sort": 44
+        },
+        {
+          "sku": "HAP-0128",
+          "role": "M",
+          "sort": 45
+        },
+        {
+          "sku": "HAP-0129",
+          "role": "M",
+          "sort": 46
+        },
+        {
+          "sku": "HAP-0130",
+          "role": "O",
+          "sort": 47
+        },
+        {
+          "sku": "HAP-0131",
+          "role": "M",
+          "sort": 48
+        },
+        {
+          "sku": "HAP-0132",
+          "role": "M",
+          "sort": 49
+        },
+        {
+          "sku": "HAP-0133",
+          "role": "X",
+          "sort": 50
+        },
+        {
+          "sku": "HAP-0134",
+          "role": "M",
+          "sort": 51
+        },
+        {
+          "sku": "HAP-0135",
+          "role": "O",
+          "sort": 52
+        },
+        {
+          "sku": "HAP-0136",
+          "role": "M",
+          "sort": 53
+        },
+        {
+          "sku": "HAP-0137",
+          "role": "X",
+          "sort": 54
+        },
+        {
+          "sku": "HAP-0138",
+          "role": "X",
+          "sort": 55
+        },
+        {
+          "sku": "HAP-0139",
+          "role": "X",
+          "sort": 56
+        },
+        {
+          "sku": "HAP-0140",
+          "role": "M",
+          "sort": 57
+        },
+        {
+          "sku": "HAP-0141",
+          "role": "X",
+          "sort": 58
+        },
+        {
+          "sku": "HAP-0142",
+          "role": "M",
+          "sort": 59
+        },
+        {
+          "sku": "HAP-0143",
+          "role": "M",
+          "sort": 60
+        },
+        {
+          "sku": "HAP-0144",
+          "role": "M",
+          "sort": 61
+        },
+        {
+          "sku": "HAP-0145",
+          "role": "M",
+          "sort": 62
+        },
+        {
+          "sku": "HAP-0146",
+          "role": "O",
+          "sort": 63
+        },
+        {
+          "sku": "HAP-0147",
+          "role": "M",
+          "sort": 64
+        },
+        {
+          "sku": "HAP-0148",
+          "role": "O",
+          "sort": 65
+        },
+        {
+          "sku": "HAP-0149",
+          "role": "X",
+          "sort": 66
+        },
+        {
+          "sku": "HAP-0150",
+          "role": "X",
+          "sort": 67
+        },
+        {
+          "sku": "HAP-0151",
+          "role": "X",
+          "sort": 68
+        },
+        {
+          "sku": "HAP-0152",
+          "role": "O",
+          "sort": 69
+        },
+        {
+          "sku": "HAP-0153",
+          "role": "O",
+          "sort": 70
+        },
+        {
+          "sku": "HAP-0154",
+          "role": "O",
+          "sort": 71
+        },
+        {
+          "sku": "HAP-0155",
+          "role": "O",
+          "sort": 72
+        },
+        {
+          "sku": "HAP-0156",
+          "role": "O",
+          "sort": 73
+        },
+        {
+          "sku": "HAP-0157",
+          "role": "O",
+          "sort": 74
+        },
+        {
+          "sku": "HAP-0158",
+          "role": "O",
+          "sort": 75
+        },
+        {
+          "sku": "HAP-0159",
+          "role": "O",
+          "sort": 76
+        }
+      ],
+      "video": null,
+      "sort": 3
+    }
+  ]
+}

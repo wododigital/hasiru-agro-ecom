@@ -1,4 +1,4 @@
-// pnpm seed:build | pnpm seed:load [--app shop] [--dry-run]
+// pnpm seed:build | pnpm seed:load [--app shop] [--dry-run]   (env SEED_OUT_ROOT: write outputs under another root)
 // build: runs the pipeline steps in tooling/scripts/seed/<step>.ts (default export: (ctx) => Promise<void>),
 //        skipping steps not written yet. Inputs are read, never modified; outputs go to data/seed.
 // load:  runs every enabled module's seedHooks in dependency order (registry of the app).
@@ -26,6 +26,8 @@ export const BUILD_STEPS = [
   'faqs',
   'cms-content',
   'legacy-redirects',
+  'client-questions',
+  'self-check',
 ] as const;
 
 const arg = (name: string, fallback: string) => {
@@ -39,9 +41,11 @@ const log: SeedContext['log'] = {
   error: (m, d) => console.error(m, d ?? ''),
 };
 
+// SEED_OUT_ROOT redirects every output (data/seed, data/media, docs) to another tree, e.g. a test's temp dir.
+const OUT = process.env.SEED_OUT_ROOT ?? ROOT;
 const ctx: SeedContext = {
-  seedDir: join(ROOT, 'data', 'seed'),
-  mediaDir: join(ROOT, 'data', 'media'),
+  seedDir: join(OUT, 'data', 'seed'),
+  mediaDir: join(OUT, 'data', 'media'),
   dryRun: process.argv.includes('--dry-run'),
   log,
 };
