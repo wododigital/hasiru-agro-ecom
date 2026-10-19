@@ -46,6 +46,7 @@ describe('redirects after sign-in', () => {
     for (const bad of ['https://evil.example', '//evil.example', '/\\evil.example', undefined, ['/a']]) expect(safeNextPath(bad, '/account')).toBe('/account');
     for (const bad of ['/\t/evil.example', '/\n/evil.example', '/a\\b', '/%0a', '/\u0000x']) expect(safeNextPath(bad, '/account'), JSON.stringify(bad)).toBe(bad === '/%0a' ? '/%0a' : '/account');
     expect(safeNextPath('/plants?c=fruit#top', '/account')).toBe('/plants?c=fruit#top');
+    for (const bad of ['/.//evil.example', '/a/..//evil.example', '/%2e//evil.example']) expect(safeNextPath(bad, '/account'), bad).toBe('/account');
   });
 });
 

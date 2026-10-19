@@ -99,7 +99,7 @@ export type InviteStaffInput = z.infer<typeof inviteStaffSchema>;
 export function safeNextPath(next: unknown, fallback: string): string {
   // Browsers strip tabs/newlines and treat backslashes as slashes, so reject them anywhere, then require
   // that resolving against a dummy origin stays on that origin.
-  if (typeof next !== 'string' || !next.startsWith('/')) return fallback;
+  if (typeof next !== 'string' || !next.startsWith('/') || next.startsWith('//')) return fallback;
   for (const ch of next) {
     const code = ch.charCodeAt(0);
     if (ch === '\\' || code < 32 || code === 127) return fallback;
@@ -111,5 +111,7 @@ export function safeNextPath(next: unknown, fallback: string): string {
   } catch {
     return fallback;
   }
-  return url.origin === base ? `${url.pathname}${url.search}${url.hash}` : fallback;
+  // Normalising can turn '/.//evil.example' into '//evil.example' (protocol-relative), so check the output too.
+  const out = `${url.pathname}${url.search}${url.hash}`;
+  return url.origin === base && !out.startsWith('//') ? out : fallback;
 }
