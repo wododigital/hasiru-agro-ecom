@@ -63,11 +63,12 @@ async function issueInvite(user: { id: string; email: string; name: string; role
 export async function inviteStaff(input: InviteStaffInput): Promise<{ userId: string; link: string }> {
   const actor = await requirePermission('staff.manage');
   const data = inviteStaffSchema.parse(input);
+  assertOwnerRules(actor, null, data.role);
   const [existing] = await db.select().from(authUser).where(eq(authUser.email, data.email));
   if (existing && !isStaffRole(existing.role)) throw new Error('email belongs to a customer account');
-  const [user] = existing
-    ? await db.update(authUser).set({ role: data.role, name: data.name, updatedAt: new Date() }).where(eq(authUser.id, existing.id)).returning()
-    : await db.insert(authUser).values({ email: data.email, name: data.name, role: data.role }).returning();
+  // Roles of existing staff change only through setStaffRole (self, last-owner and owner-only checks live there).
+  if (existing) throw new Error('already a staff member; change the role or resend the invite instead');
+  const [user] = await db.insert(authUser).values({ email: data.email, name: data.name, role: data.role }).returning();
   const link = await issueInvite({ id: user!.id, email: user!.email, name: user!.name, role: data.role }, actor.userId);
   return { userId: user!.id, link };
 }
@@ -256,6 +257,16 @@ async function ownerCount(): Promise<number> {
   return row?.n ?? 0;
 }
 
+/** Only an owner may grant the owner role or change, disable or re-invite an owner. */
+function assertOwnerRules(actor: { role: StaffRole }, targetRole: string | null, nextRole?: StaffRole): void {
+  if (actor.role !== 'owner' && (targetRole === 'owner' || nextRole === 'owner')) throw new Error('only an owner can manage owners');
+}
+
+async function hasPassword(userId: string): Promise<boolean> {
+  const [row] = await db.select({ id: authAccount.id }).from(authAccount).where(and(eq(authAccount.userId, userId), eq(authAccount.providerId, 'credential')));
+  return Boolean(row);
+}
+
 async function staffTarget(userId: string) {
   const [user] = await db.select().from(authUser).where(eq(authUser.id, userId));
   if (!user || !isStaffRole(user.role)) throw new Error('not a staff account');
@@ -268,6 +279,7 @@ export async function setStaffRole(userId: string, role: StaffRole): Promise<voi
   const next = staffRoleSchema.parse(role);
   const user = await staffTarget(userId);
   if (user.id === actor.userId) throw new Error('you cannot change your own role');
+  assertOwnerRules(actor, user.role, next);
   if (user.role === 'owner' && next !== 'owner' && (await ownerCount()) <= 1) throw new Error('the last owner cannot be demoted');
   await db.update(authUser).set({ role: next, updatedAt: new Date() }).where(eq(authUser.id, userId));
   await audit({ actorId: actor.userId, actorType: 'staff', action: 'staff.role', entity: 'auth_user', entityId: userId, before: { role: user.role }, after: { role: next } });
@@ -278,6 +290,7 @@ export async function setStaffDisabled(userId: string, disabled: boolean): Promi
   const actor = await requirePermission('staff.manage');
   const user = await staffTarget(userId);
   if (user.id === actor.userId) throw new Error('you cannot disable yourself');
+  assertOwnerRules(actor, user.role);
   if (disabled && user.role === 'owner' && (await ownerCount()) <= 1) throw new Error('the last owner cannot be disabled');
   await db.transaction(async (tx) => {
     await tx.update(authUser).set({ banned: disabled, banReason: disabled ? 'disabled by staff' : null, updatedAt: new Date() }).where(eq(authUser.id, userId));
@@ -286,10 +299,15 @@ export async function setStaffDisabled(userId: string, disabled: boolean): Promi
   });
 }
 
-/** Resends an invite (new link, old one stops working). */
+/**
+ * Resends a PENDING invite (new link, old one stops working). Refused once the account has a password:
+ * an invite link sets a password, so re-issuing one for an active account would hand the caller a takeover.
+ */
 export async function resendInvite(userId: string): Promise<{ link: string }> {
   const actor = await requirePermission('staff.manage');
   const user = await staffTarget(userId);
+  assertOwnerRules(actor, user.role);
+  if (await hasPassword(user.id)) throw new Error('invite already accepted; the staff member resets their own password');
   return { link: await issueInvite({ id: user.id, email: user.email, name: user.name, role: user.role as StaffRole }, actor.userId) };
 }
 

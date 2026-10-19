@@ -44,6 +44,8 @@ describe('redirects after sign-in', () => {
   it('only follows same-site paths', () => {
     expect(safeNextPath('/account/orders', '/account')).toBe('/account/orders');
     for (const bad of ['https://evil.example', '//evil.example', '/\\evil.example', undefined, ['/a']]) expect(safeNextPath(bad, '/account')).toBe('/account');
+    for (const bad of ['/\t/evil.example', '/\n/evil.example', '/a\\b', '/%0a', '/\u0000x']) expect(safeNextPath(bad, '/account'), JSON.stringify(bad)).toBe(bad === '/%0a' ? '/%0a' : '/account');
+    expect(safeNextPath('/plants?c=fruit#top', '/account')).toBe('/plants?c=fruit#top');
   });
 });
 

@@ -97,6 +97,19 @@ export type InviteStaffInput = z.infer<typeof inviteStaffSchema>;
 
 /** A relative in-site path for post-login redirects; anything else (absolute, protocol-relative) falls back. */
 export function safeNextPath(next: unknown, fallback: string): string {
-  if (typeof next !== 'string' || !next.startsWith('/') || next.startsWith('//') || next.startsWith('/\\')) return fallback;
-  return next;
+  // Browsers strip tabs/newlines and treat backslashes as slashes, so reject them anywhere, then require
+  // that resolving against a dummy origin stays on that origin.
+  if (typeof next !== 'string' || !next.startsWith('/')) return fallback;
+  for (const ch of next) {
+    const code = ch.charCodeAt(0);
+    if (ch === '\\' || code < 32 || code === 127) return fallback;
+  }
+  const base = 'http://same.invalid';
+  let url: URL;
+  try {
+    url = new URL(next, base);
+  } catch {
+    return fallback;
+  }
+  return url.origin === base ? `${url.pathname}${url.search}${url.hash}` : fallback;
 }

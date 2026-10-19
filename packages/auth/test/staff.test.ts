@@ -19,6 +19,7 @@ import {
   getRoleMatrix,
   inviteStaff,
   listStaff,
+  resendInvite,
   setRolePermissions,
   setStaffDisabled,
   setStaffRole,
@@ -286,6 +287,28 @@ describe('role matrix', () => {
     const ownerId = staff.find((s) => s.email === 'owner@example.com')!.id;
     await expect(setStaffRole(ownerId, 'manager')).rejects.toThrow(/own role/);
     await expect(setStaffDisabled(ownerId, true)).rejects.toThrow(/yourself/);
+  });
+
+  it('non-owners cannot escalate to or act on owners; invites cannot reset active accounts', async () => {
+    as(owner.jar);
+    const staff = await listStaff();
+    const ownerId = staff.find((s) => s.email === 'owner@example.com')!.id;
+    const managerId = staff.find((s) => s.email === 'manager@example.com')!.id;
+    const pendingId = staff.find((s) => s.email === 'late@example.com')!.id;
+    await expect(inviteStaff({ email: 'manager@example.com', name: 'M', role: 'owner' })).rejects.toThrow(/already a staff member/);
+    await expect(resendInvite(managerId)).rejects.toThrow(/already accepted/);
+    expect((await resendInvite(pendingId)).link).toContain('invite=');
+    const before = (await getRoleMatrix()).manager;
+    await setRolePermissions('manager', [...before, 'staff.manage']);
+    try {
+      as(jars.manager);
+      await expect(inviteStaff({ email: 'boss@example.com', name: 'B', role: 'owner' })).rejects.toThrow(/only an owner/);
+      await expect(resendInvite(ownerId)).rejects.toThrow(/only an owner/);
+      await expect(setStaffDisabled(ownerId, true)).rejects.toThrow(/only an owner/);
+    } finally {
+      as(owner.jar);
+      await setRolePermissions('manager', before);
+    }
   });
 
   it('a disabled staff member is signed out everywhere and cannot sign in', async () => {
