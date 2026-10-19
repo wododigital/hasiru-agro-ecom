@@ -2,6 +2,7 @@
   "extends": "@tooling/tsconfig/base.json",
   "include": [
     "src",
-    "test"
+    "test",
+    "scripts"
   ]
 }
