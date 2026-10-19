@@ -29,32 +29,32 @@ export class SubscribeError extends Error {
 }
 
 /** Idempotent per (variant, phone, email): subscribing again re-arms a subscription that was already notified. */
-export async function subscribe(input: NotifyMeInput | Record<string, unknown>): Promise<{ subscriptionId: string }> {
+export async function subscribe(input: NotifyMeInput | Record<string, unknown>): Promise<{ subscriptionId: string | null }> {
   const v = notifyMeSchema.parse(input);
   const phone = v.phone ? normalisePhone(v.phone) : null;
   if (v.phone && !phone) throw new SubscribeError('invalid_phone');
   const email = v.email?.toLowerCase() ?? null;
   const [level] = await db.select({ productId: inventoryLevel.productId }).from(inventoryLevel).where(eq(inventoryLevel.variantId, v.variantId));
   if (!level) throw new SubscribeError('unknown_variant');
-  // Contacts are not verified, so keep only the newest MAX_PENDING_PER_CONTACT pending alerts per phone/email:
-  // a stranger can never queue more than that for someone, and no signup is ever refused (no lockout, no oracle).
-  // The per-contact advisory lock makes insert + trim atomic under concurrent requests.
-  const rows = await withTx(async (tx) => {
+  // Contacts are not verified, so one phone/email can hold at most MAX_PENDING_PER_CONTACT pending alerts.
+  // Past the cap a new signup is silently dropped (the route answers 201 either way: no enumeration oracle),
+  // existing rows are never deleted by anonymous input, and re-arming an existing row is always allowed.
+  // The per-contact advisory lock makes count + insert atomic under concurrent requests.
+  return withTx(async (tx) => {
     await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`notify-me:${phone ?? ''}|${email ?? ''}`}))`);
-    const { rows: inserted } = await tx.execute<{ id: string }>(sql`
+    const { rows: pending } = await tx.execute<{ n: number }>(sql`
+      select count(*)::int as n from inventory_subscription
+      where notified_at is null
+        and not (variant_id = ${v.variantId} and coalesce(phone, '') = ${phone ?? ''} and coalesce(email, '') = ${email ?? ''})
+        and ((${phone}::text is not null and phone = ${phone}) or (${email}::text is not null and email = ${email}))`);
+    if ((pending[0]?.n ?? 0) >= MAX_PENDING_PER_CONTACT) return { subscriptionId: null };
+    const { rows } = await tx.execute<{ id: string }>(sql`
       insert into inventory_subscription (id, variant_id, product_id, phone, email)
       values (${newId()}, ${v.variantId}, ${level.productId}, ${phone}, ${email})
-      on conflict (variant_id, coalesce(phone, ''), coalesce(email, '')) do update set notified_at = null, created_at = now()
+      on conflict (variant_id, coalesce(phone, ''), coalesce(email, '')) do update set notified_at = null
       returning id`);
-    await tx.execute(sql`
-      delete from inventory_subscription where id in (
-        select id from inventory_subscription
-        where notified_at is null
-          and ((${phone}::text is not null and phone = ${phone}) or (${email}::text is not null and email = ${email}))
-        order by created_at desc offset ${MAX_PENDING_PER_CONTACT})`);
-    return inserted;
+    return { subscriptionId: rows[0]!.id };
   });
-  return { subscriptionId: rows[0]!.id };
 }
 
 /**
