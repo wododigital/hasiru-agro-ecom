@@ -1,0 +1,1522 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-19T23:07:44.499Z",
+  "policy": "Real photographs only. Wikimedia Commons files under CC BY, CC BY-SA, CC0 or public domain; Magnific stock photographs (not generated). Author, licence and source recorded per file. No AI-generated images.",
+  "plants": {
+    "adansonia-digitata-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/adansonia-digitata-l.jpg",
+      "sha256": "92a26289fdcd895f3f54535d6c5dbd2b257dd30def3e24451157df2048382375",
+      "licence": "CC BY 2.0",
+      "author": "Quinn Norton",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Baobob_tree.jpg",
+      "credit_required": true,
+      "credit": "Photo: Quinn Norton, CC BY 2.0, via Wikimedia Commons",
+      "width": 938,
+      "height": 1400,
+      "subject": "Baobob tree.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Adansonia digitata\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "aegle-marmelos-l-corr-a": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/aegle-marmelos-l-corr-a.jpg",
+      "sha256": "dc90fc6be08dc65fe7df1b11b0d52aa4b6d0805d34796c79ad697a30ee6578d2",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Aegle_marmelos_fruit_06.JPG",
+      "credit_required": false,
+      "credit": "Photo: Forestowlet, CC0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Aegle marmelos fruit 06.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Aegle marmelos\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "alangium-salviifolium-l-f-wangerin": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/alangium-salviifolium-l-f-wangerin.jpg",
+      "sha256": "5b06ca9fdba77af389973a4cc492cfceee6133bed08d5e6829c8a56114c2359b",
+      "licence": "CC BY-SA 3.0",
+      "author": "Vinayaraj",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Alangium_salviifolium_leaves_03.JPG",
+      "credit_required": true,
+      "credit": "Photo: Vinayaraj, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 870,
+      "subject": "Alangium salviifolium leaves 03.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Alangium salviifolium\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "albizia-amara-roxb-boivin": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/albizia-amara-roxb-boivin.jpg",
+      "sha256": "c6a1a8555fa71f8e09a7e566a62ae8931faa442b4eb6ca6e802d911e8817bf3e",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Albizia_amara_flowers_01.JPG",
+      "credit_required": false,
+      "credit": "Photo: Forestowlet, CC0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1038,
+      "subject": "Albizia amara flowers 01.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Albizia amara\"",
+          "results": 39,
+          "accepted": 39
+        }
+      ]
+    },
+    "albizia-lebbeck-l-benth": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/albizia-lebbeck-l-benth.jpg",
+      "sha256": "e0f3ec4dfe19ac50c891bdee392c6c8573e178c315e3150999a7c65d2948d2e3",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Albizia_lebbeck_tree_01.JPG",
+      "credit_required": false,
+      "credit": "Photo: Forestowlet, CC0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Albizia lebbeck tree 01.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Albizia lebbeck\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "banana-red": {
+      "status": "shared",
+      "same_as": "banana-yelakki",
+      "searches": []
+    },
+    "banana-robusta-pachbaale": {
+      "status": "shared",
+      "same_as": "banana-yelakki",
+      "searches": []
+    },
+    "banana-yelakki": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/banana-yelakki.jpg",
+      "sha256": "b398b0c29855a4e7fc561333d1d5503ce226aa68d0ac71c47774d0f0b4869132",
+      "licence": "CC BY-SA 4.0",
+      "author": "Ong Jyh Seng",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Musa_acuminata_245646872.jpg",
+      "credit_required": true,
+      "credit": "Photo: Ong Jyh Seng, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Musa acuminata 245646872.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Musa acuminata\"",
+          "results": 40,
+          "accepted": 39
+        },
+        {
+          "engine": "magnific",
+          "query": "banana plant with bunch tree plantation",
+          "results": 50,
+          "accepted": 0,
+          "note": "free-licence results exist (e.g. banana trees, plantation field) but each costs credits and carries the stock licence; not downloaded, Commons photo kept. Replace with a nursery photo when available"
+        }
+      ],
+      "notes": [
+        "Leaf-and-stem photo of Musa acuminata, not a cultivar-specific shot; shared by the Robusta and Red rows. Replace with a nursery photo when available."
+      ]
+    },
+    "baraba": {
+      "status": "missing",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Baraba fruit\"",
+          "results": 0,
+          "accepted": 0
+        },
+        {
+          "engine": "magnific",
+          "query": "baraba fruit",
+          "results": 0,
+          "accepted": 0,
+          "note": "not searched on stock: the fruit is a local name with no botanical name to search (client to confirm the species)"
+        }
+      ],
+      "notes": [
+        "No Commons file with an allowed licence and a clear subject; keeps image_needed and the collection placeholder."
+      ]
+    },
+    "bauhinia-racemosa-lam": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/bauhinia-racemosa-lam.jpg",
+      "sha256": "6af5806350a3176f4d4aa9141185c947c6c1adebb62a329443e01fe93caa439d",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Bauhinia_racemosa_(Jhinjheri)_flowers_%26_fruits_W2_IMG_7477.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY 3.0, via Wikimedia Commons",
+      "width": 773,
+      "height": 600,
+      "subject": "Bauhinia racemosa (Jhinjheri) flowers & fruits W2 IMG 7477.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Bauhinia racemosa\"",
+          "results": 40,
+          "accepted": 32
+        }
+      ]
+    },
+    "bombax-ceiba-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/bombax-ceiba-l.jpg",
+      "sha256": "27d22a29587da6471b0e8f29994ce0cf04cf3125c4c581b254ad08fedc66ad3c",
+      "licence": "CC BY-SA 2.5",
+      "author": "Unknown author",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cotton_tree_at_Tsing_Yi_Island.jpg",
+      "credit_required": true,
+      "credit": "Photo: Unknown author, CC BY-SA 2.5, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Cotton tree at Tsing Yi Island.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Bombax ceiba\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "butea-monosperma-lam-kuntze": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/butea-monosperma-lam-kuntze.jpg",
+      "sha256": "d6525615058e2a819385ddbca1606b385089ea8be1b3bdebaae97047f547f8fc",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:(Butea_monosperma)_Moduga_tree_at_a_park_in_Madhurawada.jpg",
+      "credit_required": true,
+      "credit": "Photo: Adityamadhav83, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "(Butea monosperma) Moduga tree at a park in Madhurawada.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Butea monosperma\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "butea-superba-roxb-ex-willd": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/butea-superba-roxb-ex-willd.jpg",
+      "sha256": "76b745e562a76f95918c151a20bdd30ba8fbf42d585c79a2f0dda3877e548dd9",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:(Butea_superba)_sapling_in_the_Eastern_Ghats_near_Samedha.jpg",
+      "credit_required": true,
+      "credit": "Photo: Adityamadhav83, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1062,
+      "subject": "(Butea superba) sapling in the Eastern Ghats near Samedha.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Butea superba\"",
+          "results": 36,
+          "accepted": 7
+        }
+      ]
+    },
+    "capparis-moonii-wight": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/capparis-moonii-wight.jpg",
+      "sha256": "8c799fb454250f253029fef588c3c42cfff390370bf06d0e30a668af7c73e8e3",
+      "licence": "CC BY-SA 3.0",
+      "author": "Delonix",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Capparis_moonii_-_flower.JPG",
+      "credit_required": true,
+      "credit": "Photo: Delonix, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 962,
+      "subject": "Capparis moonii - flower.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Capparis moonii\"",
+          "results": 11,
+          "accepted": 11
+        }
+      ]
+    },
+    "careya-arborea-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/careya-arborea-roxb.jpg",
+      "sha256": "898064853c17e2549a05abdd99a60cd1c0d4df18569790bf6b4cf19573c35b52",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Slow_Match_Tree_(6871409034).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 936,
+      "subject": "Slow Match Tree (6871409034).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Careya arborea\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "carissa-carandas-l-hedge": {
+      "status": "shared",
+      "same_as": "karonda",
+      "searches": []
+    },
+    "cassia-fistula-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/cassia-fistula-l.jpg",
+      "sha256": "8a5204b4d1a0aa502fe1cf19fff2fbfc203f9916b6f75791473f9dcc524667a1",
+      "licence": "CC BY-SA 3.0",
+      "author": "Dr. Raju Kasambe",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cassia_fistula_tree_branch_with_flower._Thane,_Maharashtra..JPG",
+      "credit_required": true,
+      "credit": "Photo: Dr. Raju Kasambe, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Cassia fistula tree branch with flower. Thane, Maharashtra..JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Cassia fistula\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "chloroxylon-swietenia-dc": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/chloroxylon-swietenia-dc.jpg",
+      "sha256": "575cbcbb69bde3d6c5a4083e573b0b9131b1a7a0ed9e6953ce166a197278f827",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Canopy_of_East_Indian_satinwood_(Chloroxylon_swietenia)_at_Kambalakonda.jpg",
+      "credit_required": true,
+      "credit": "Photo: Adityamadhav83, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Canopy of East Indian satinwood (Chloroxylon swietenia) at Kambalakonda.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Chloroxylon swietenia\"",
+          "results": 37,
+          "accepted": 29
+        }
+      ]
+    },
+    "cochlospermum-religiosum-l-alston": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/cochlospermum-religiosum-l-alston.jpg",
+      "sha256": "fe34ad57a36e43597852cf95800ca555a0c0afaef669c38425ade49d5564345f",
+      "licence": "CC BY 2.0",
+      "author": "Jayesh Patil from Mumbai, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cochlospermum_religiosum_-_Yellow_Silk-Cotton_Tree_(5478653421).jpg",
+      "credit_required": true,
+      "credit": "Photo: Jayesh Patil from Mumbai, India, CC BY 2.0, via Wikimedia Commons",
+      "width": 700,
+      "height": 465,
+      "subject": "Cochlospermum religiosum - Yellow Silk-Cotton Tree (5478653421).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Cochlospermum religiosum\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "cordia-dichotoma-g-forst": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/cordia-dichotoma-g-forst.jpg",
+      "sha256": "50f6e526666f2c8fdda4610a6762d1e52b0dd5ccba35c3fb59b2efe08d9fdea8",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Bird_Lime_tree_(3382793130).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Bird Lime tree (3382793130).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Cordia dichotoma\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "curry-leaves": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/curry-leaves.jpg",
+      "sha256": "9f2cf36f45e39505146aa122bc2f6e5034d8313280e8429c5170a0890e716d5c",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vijay Kumar Soren",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Curry_plant_(curry_leaves).jpg",
+      "credit_required": true,
+      "credit": "Photo: Vijay Kumar Soren, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 788,
+      "subject": "Curry plant (curry leaves).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Murraya koenigii\"",
+          "results": 40,
+          "accepted": 36
+        }
+      ]
+    },
+    "dalbergia-sissoo-roxb-ex-dc": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/dalbergia-sissoo-roxb-ex-dc.jpg",
+      "sha256": "53d100f944c855a93c9f488f392fbc6782a9a19bb32c206df5464336df19c4e8",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Blackwood_Tree_(4656262165).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Blackwood Tree (4656262165).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Dalbergia sissoo\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "diospyros-melanoxylon-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/diospyros-melanoxylon-roxb.jpg",
+      "sha256": "0fcce2457c4a3692f13e642916ccf28895bd95a5929dd7b50723019e252e11df",
+      "licence": "CC BY-SA 4.0",
+      "author": "Xzantiyamoloy",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Diospyros_melanoxylon_little_Tree_of_Purulia,_West_Bengal,_India.jpg",
+      "credit_required": true,
+      "credit": "Photo: Xzantiyamoloy, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Diospyros melanoxylon little Tree of Purulia, West Bengal, India.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Diospyros melanoxylon\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "diospyros-montana-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/diospyros-montana-roxb.jpg",
+      "sha256": "ffbf5e0f950736bec4e837a488dae3e3930371bd3f84d3fa7d3fc2522593b06e",
+      "licence": "CC BY-SA 4.0",
+      "author": "Rohitjahnavi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Fruits_of_Diospyros_montana_DSCN1018.jpg",
+      "credit_required": true,
+      "credit": "Photo: Rohitjahnavi, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Fruits of Diospyros montana DSCN1018.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Diospyros montana\"",
+          "results": 32,
+          "accepted": 32
+        }
+      ]
+    },
+    "dodonaea-viscosa-jacq-hedge": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/dodonaea-viscosa-jacq-hedge.jpg",
+      "sha256": "801fbf5022f95be3725f81725061db4ff94068866bf16d29cefd75ab180a50d2",
+      "licence": "CC BY-SA 4.0",
+      "author": "Juan Carlos Fonseca Mata",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dodonaea_viscosa_-_Leaves.jpg",
+      "credit_required": true,
+      "credit": "Photo: Juan Carlos Fonseca Mata, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Dodonaea viscosa - Leaves.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Dodonaea viscosa\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "dolichandrone-falcata-wall-ex-dc-seem": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/dolichandrone-falcata-wall-ex-dc-seem.jpg",
+      "sha256": "97cb37a7627fe57a137f4a34cc1d3fefd6b7234a74722eda7eb5d51915b920cd",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dolichandrone_falcata_fruit_in_Hyderabad_W_IMG_7427.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY 3.0, via Wikimedia Commons",
+      "width": 653,
+      "height": 600,
+      "subject": "Dolichandrone falcata fruit in Hyderabad W IMG 7427.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Dolichandrone falcata\"",
+          "results": 25,
+          "accepted": 25
+        }
+      ]
+    },
+    "ehretia-aspera-willd": {
+      "status": "missing",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Ehretia aspera\"",
+          "results": 3,
+          "accepted": 0
+        },
+        {
+          "engine": "wikimedia",
+          "query": "\"Ehretia\" aspera flowers",
+          "results": 0,
+          "accepted": 0
+        },
+        {
+          "engine": "wikimedia",
+          "query": "\"Ehretia laevis\"",
+          "results": 40,
+          "accepted": 0
+        },
+        {
+          "engine": "magnific",
+          "query": "Ehretia aspera",
+          "results": 50,
+          "accepted": 0,
+          "note": "stock results were unrelated garden flowers; nothing downloaded"
+        }
+      ],
+      "notes": [
+        "No Commons file with an allowed licence and a clear subject; keeps image_needed and the collection placeholder.",
+        "No Commons photo of this species under an allowed licence. Keeps image_needed and the collection placeholder."
+      ]
+    },
+    "flacourtia-indica-burm-f-merr": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/flacourtia-indica-burm-f-merr.jpg",
+      "sha256": "5c076ea5c806abf1b35674df6e2001871c9e3ce0226e5838278007b71604910e",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Flacourtia_indica_fruit_in_Hyderabad_W_IMG_7482.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY 3.0, via Wikimedia Commons",
+      "width": 722,
+      "height": 600,
+      "subject": "Flacourtia indica fruit in Hyderabad W IMG 7482.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Flacourtia indica\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "gliricidia": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/gliricidia.jpg",
+      "sha256": "d9aa85bd343580672ede0fabeb6f2b83c158631ff50d3e8fd951ddeeb2a2ea2e",
+      "licence": "CC BY-SA 4.0",
+      "author": "Nativeplants garden",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Fence_Post_Tree(Gliricidia_sepium_2.jpg",
+      "credit_required": true,
+      "credit": "Photo: Nativeplants garden, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Fence Post Tree(Gliricidia sepium 2.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Gliricidia sepium\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "hardwickia-binata-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/hardwickia-binata-roxb.jpg",
+      "sha256": "b295ef90af2b0fcca9191ac87f77195724f69117fe0b1965c113f82d99f882bd",
+      "licence": "CC BY-SA 4.0",
+      "author": "Ajtjohnsingh",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Hardwickia_binata_a_characteristic_tree_species_of_Eastern_Ghats,_AJT_Johnsingh._._P1020686.jpg",
+      "credit_required": true,
+      "credit": "Photo: Ajtjohnsingh, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Hardwickia binata a characteristic tree species of Eastern Ghats, AJT Johnsingh. . P1020686.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Hardwickia binata\"",
+          "results": 23,
+          "accepted": 20
+        }
+      ]
+    },
+    "helicteres-isora-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/helicteres-isora-l.jpg",
+      "sha256": "4f34355cf2ac6a3ce4479500f29d912c67ecf720e4c8c79bea82bf4e9181715f",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:East_Indian_Screw_tree_(22447528190).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1051,
+      "subject": "East Indian Screw tree (22447528190).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Helicteres isora\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "heterophragma-quadriloculare-roxb-k-schum": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/heterophragma-quadriloculare-roxb-k-schum.jpg",
+      "sha256": "493d98c3fd8ab8c5862a105f131952a61a1565e31ce934a42373570e25db6703",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Heterophragma_quadriloculare_(2276478130).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Heterophragma quadriloculare (2276478130).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Heterophragma quadriloculare\"",
+          "results": 32,
+          "accepted": 24
+        }
+      ]
+    },
+    "holarrhena-pubescens-wall-ex-g-don": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/holarrhena-pubescens-wall-ex-g-don.jpg",
+      "sha256": "4ee4dba1a854a0ae28fd71f6303829048b86839ec0103e33a1b204c604bd85ab",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vijayanrajapuram",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Holarrhena_pubescens_fruit_beans.jpg",
+      "credit_required": true,
+      "credit": "Photo: Vijayanrajapuram, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 788,
+      "subject": "Holarrhena pubescens fruit beans.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Holarrhena pubescens\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "holoptelea-integrifolia-roxb-planch": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/holoptelea-integrifolia-roxb-planch.jpg",
+      "sha256": "51c520958f27c6f7b0aac011802e42c62e654c26fb740c625d4fa3cfd7a658c1",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Entire-leaved_Elm_tree_(3260221191).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Entire-leaved Elm tree (3260221191).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Holoptelea integrifolia\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "jaboticaba-sabara": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/jaboticaba-sabara.jpg",
+      "sha256": "2714b68cdb1e9cdf1065ae3f56d9e9bf7a3be17fad251513d843ef47c46c9037",
+      "licence": "CC0",
+      "author": "Daderot",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Plinia_cauliflora_(Myrciaria_cauliflora)_-_Fruit_and_Spice_Park_-_Homestead,_Florida_-_DSC08841.jpg",
+      "credit_required": false,
+      "credit": "Photo: Daderot, CC0, via Wikimedia Commons",
+      "width": 1118,
+      "height": 1400,
+      "subject": "Plinia cauliflora (Myrciaria cauliflora) - Fruit and Spice Park - Homestead, Florida - DSC08841.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Plinia cauliflora\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "jackfruit-hebbalasu-wild": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/jackfruit-hebbalasu-wild.jpg",
+      "sha256": "2439f497a47f59a42e147d4ec96b23a534c3d846c05c53bef5c3490505bc887d",
+      "licence": "CC BY 4.0",
+      "author": "Siddarth Machado",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Artocarpus_hirsutus_101621573.jpg",
+      "credit_required": true,
+      "credit": "Photo: Siddarth Machado, CC BY 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 933,
+      "subject": "Artocarpus hirsutus 101621573.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Artocarpus hirsutus\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "karonda": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/karonda.jpg",
+      "sha256": "f13774400f75c7a0e9c5f2b86f9642d0b522e26ee41c19734d4dc842b1e3e434",
+      "licence": "CC BY-SA 3.0",
+      "author": "Shyamal",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Carissa_carandas_fruit.jpg",
+      "credit_required": true,
+      "credit": "Photo: Shyamal, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Carissa carandas fruit.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Carissa carandas\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "kydia-calycina-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/kydia-calycina-roxb.jpg",
+      "sha256": "c361c084bf8526cb8c1a5f2b782c15864bc30ba4a686b8f1837a1fe66a07be4c",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vinayaraj",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Kydia_calycina_flowers_at_Kunnathurpadi_(1).jpg",
+      "credit_required": true,
+      "credit": "Photo: Vinayaraj, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 933,
+      "subject": "Kydia calycina flowers at Kunnathurpadi (1).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Kydia calycina\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "lagerstroemia-parviflora-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/lagerstroemia-parviflora-roxb.jpg",
+      "sha256": "c0199ee9baa2ddaa5f7ec02af40010e337870fb4db86a5b3b218b0ebf735d057",
+      "licence": "CC BY-SA 3.0",
+      "author": "Drorchidaceae",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lagerstroemia_parviflora_tree.JPG",
+      "credit_required": true,
+      "credit": "Photo: Drorchidaceae, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 600,
+      "height": 800,
+      "subject": "Lagerstroemia parviflora tree.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Lagerstroemia parviflora\"",
+          "results": 35,
+          "accepted": 33
+        }
+      ]
+    },
+    "lannea-coromandelica-houtt-merr": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/lannea-coromandelica-houtt-merr.jpg",
+      "sha256": "4b2b45861a1b061ac2f5f1a13ed806eddd010c405a79f5ec26064b3971f688d2",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lannea_coromandelica_(Wodier_Tree)_fruits_in_Hyderabd_W_IMG_7568.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY 3.0, via Wikimedia Commons",
+      "width": 719,
+      "height": 571,
+      "subject": "Lannea coromandelica (Wodier Tree) fruits in Hyderabd W IMG 7568.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Lannea coromandelica\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "lawsonia-inermis-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/lawsonia-inermis-l.jpg",
+      "sha256": "ef0990b0009208e76e6680f67ea9c6ed5e9b5e910d26fdcbe4abb5e568bf9b11",
+      "licence": "Public domain",
+      "author": "Cesinha X",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Henna_plant.jpg",
+      "credit_required": false,
+      "credit": "Photo: Cesinha X, Public domain, via Wikimedia Commons",
+      "width": 180,
+      "height": 180,
+      "subject": "Henna plant.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Lawsonia inermis\"",
+          "results": 40,
+          "accepted": 34
+        }
+      ]
+    },
+    "lemongrass": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/lemongrass.jpg",
+      "sha256": "7e798332d8cd0504a2a44689dbbec2d6a30d4675d128e3bb204f05d0e159944a",
+      "licence": "CC BY-SA 4.0",
+      "author": "Undeka 11",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cymbopogon_citratus_lemongrass_plant_in_garden.jpg",
+      "credit_required": true,
+      "credit": "Photo: Undeka 11, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Cymbopogon citratus lemongrass plant in garden.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Cymbopogon citratus\"",
+          "results": 40,
+          "accepted": 15
+        }
+      ]
+    },
+    "madhuca-longifolia-var-latifolia-roxb-a-chev": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/madhuca-longifolia-var-latifolia-roxb-a-chev.jpg",
+      "sha256": "5ac9be9393d77fd098b814befb3634b8751ae21eb5339b7735881526dd2f007b",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Madhuca_longifolia_var_latifolia_(Mahua)_leaves_W_IMG_0247.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY 3.0, via Wikimedia Commons",
+      "width": 824,
+      "height": 600,
+      "subject": "Madhuca longifolia var latifolia (Mahua) leaves W IMG 0247.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Madhuca longifolia\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "marigold": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/marigold.jpg",
+      "sha256": "d0ad4226d2c872bac271bb637c42ecf1f3aaefebbfed5b249e1bc72b8df162bf",
+      "licence": "CC BY-SA 3.0",
+      "author": "Dori",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Urbana_Illinois_park_20070928_img_2120-crop.jpg",
+      "credit_required": true,
+      "credit": "Photo: Dori, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 932,
+      "subject": "Urbana Illinois park 20070928 img 2120-crop.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Tagetes erecta\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "matoa": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/matoa.jpg",
+      "sha256": "e1979921a0ad5343dbe21fda5b4a4ef967ac421510a5947be092a10b4d89bdc5",
+      "licence": "CC BY 3.0 us",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-090714-2715-Pometia_pinnata-habit-Napili-Maui_(24602000159).jpg",
+      "credit_required": true,
+      "credit": "Photo: Forest and Kim Starr, CC BY 3.0 us, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Starr-090714-2715-Pometia pinnata-habit-Napili-Maui (24602000159).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Pometia pinnata\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "melia-dubia-cav": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/melia-dubia-cav.jpg",
+      "sha256": "d1fe6f27f1507d549acdf22224f6e03615581876aa9f2e8c8ac9c584e92ffe1a",
+      "licence": "CC BY-SA 4.0",
+      "author": "TheSlumPanda",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Leaves_of_Malabar_(Melia_dubia)_plant.jpg",
+      "credit_required": true,
+      "credit": "Photo: TheSlumPanda, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Leaves of Malabar (Melia dubia) plant.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Melia dubia\"",
+          "results": 27,
+          "accepted": 25
+        }
+      ]
+    },
+    "mexican-sunflower": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/mexican-sunflower.jpg",
+      "sha256": "1a3cb301cf787400725dad671248a68c0b250b2364277cf7657d911856e26fde",
+      "licence": "CC BY 3.0 us",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-090720-3175-Tithonia_diversifolia-habit_near_stream-Iao_Stream-Maui_(24674866580).jpg",
+      "credit_required": true,
+      "credit": "Photo: Forest and Kim Starr, CC BY 3.0 us, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Starr-090720-3175-Tithonia diversifolia-habit near stream-Iao Stream-Maui (24674866580).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Tithonia diversifolia\"",
+          "results": 40,
+          "accepted": 35
+        }
+      ]
+    },
+    "monkey-jack": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/monkey-jack.jpg",
+      "sha256": "e1989802837294789e826c0c235a2ba0620043886d750ae27f0acd2463b52473",
+      "licence": "CC BY-SA 3.0",
+      "author": "User:Bellayet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Deua_Bangladeshi_Fruit.jpeg",
+      "credit_required": true,
+      "credit": "Photo: User:Bellayet, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Deua Bangladeshi Fruit.jpeg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Artocarpus lacucha\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "moringa": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/moringa.jpg",
+      "sha256": "1b4517a66052744cfa8dfb6a29802b9a0212125602dd6c020a434e030cafdc0f",
+      "licence": "CC BY-SA 4.0",
+      "author": "Mazhanilavu",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%E0%B4%AE%E0%B5%81%E0%B4%B0%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B4%AA%E0%B5%8D%E0%B4%AA%E0%B5%82%E0%B4%B5%E0%B5%8D_-_Drumstick_tree_flower.jpg",
+      "credit_required": true,
+      "credit": "Photo: Mazhanilavu, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1280,
+      "height": 1129,
+      "subject": "മുരിങ്ങപ്പൂവ് - Drumstick tree flower.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Moringa oleifera\"",
+          "results": 40,
+          "accepted": 31
+        }
+      ]
+    },
+    "mulberry": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/mulberry.jpg",
+      "sha256": "609ab233205e7cd6ccda902309091f3b4a5776f9671b432072ad745cae0d0f75",
+      "licence": "CC BY-SA 3.0",
+      "author": "B.navez",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Morus_alba_fruits.jpg",
+      "credit_required": true,
+      "credit": "Photo: B.navez, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Morus alba fruits.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Morus alba\"",
+          "results": 40,
+          "accepted": 34
+        }
+      ]
+    },
+    "neem": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/neem.jpg",
+      "sha256": "f5f56dd51e4588defacd6c5688c231beb1e033aae560516655104744fdec4dd5",
+      "licence": "CC BY-SA 4.0",
+      "author": "Kwameghana(Bright Kwame Ayisi)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Azadirachta_indica-Neem_tree.jpg",
+      "credit_required": true,
+      "credit": "Photo: Kwameghana(Bright Kwame Ayisi), CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 933,
+      "subject": "Azadirachta indica-Neem tree.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Azadirachta indica\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "papaya-pandrah-no-15": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/papaya-pandrah-no-15.jpg",
+      "sha256": "3f517b330f5779281ec499fd3ccf7bddf9cf520418d6387a4cd8cc413b3b6df9",
+      "licence": "Public domain",
+      "author": "Author: P. Miller",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Papaya_plant_from_below.JPG",
+      "credit_required": false,
+      "credit": "Photo: Author: P. Miller, Public domain, via Wikimedia Commons",
+      "width": 1400,
+      "height": 931,
+      "subject": "Papaya plant from below.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Carica papaya\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "pithecellobium-dulce-roxb-benth": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/pithecellobium-dulce-roxb-benth.jpg",
+      "sha256": "023629e90d0de77dd519319f0357fe1450aa21ce3d7734394a7ab5d6b8682825",
+      "licence": "CC BY-SA 3.0",
+      "author": "B.navez",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pithecellobium_dulce_tree.JPG",
+      "credit_required": true,
+      "credit": "Photo: B.navez, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 768,
+      "height": 1024,
+      "subject": "Pithecellobium dulce tree.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Pithecellobium dulce\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "prosopis-cineraria-l-druce": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/prosopis-cineraria-l-druce.jpg",
+      "sha256": "564be276817f236d87c11f95d53dea08e5601264d8247b855bf1eeb809d7bd2e",
+      "licence": "CC BY-SA 4.0",
+      "author": "Mulkh Singh",
+      "source_url": "https://commons.wikimedia.org/wiki/File:A_tree_of_Prosopis_Cineraria_in_India.jpg",
+      "credit_required": true,
+      "credit": "Photo: Mulkh Singh, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1400,
+      "subject": "A tree of Prosopis Cineraria in India.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Prosopis cineraria\"",
+          "results": 40,
+          "accepted": 32
+        }
+      ]
+    },
+    "pterocarpus-marsupium-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/pterocarpus-marsupium-roxb.jpg",
+      "sha256": "f85444de5cbe45417d2e86990399f7227e7c238eba77d268399f5e1a6926537a",
+      "licence": "CC BY 3.0",
+      "author": "Biswarup Ganguly",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Acharya_Jagadish_Chandra_Bose_Indian_Botanic_Garden_-_Howrah_2011-01-08_9821.JPG",
+      "credit_required": true,
+      "credit": "Photo: Biswarup Ganguly, CC BY 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 930,
+      "subject": "Acharya Jagadish Chandra Bose Indian Botanic Garden - Howrah 2011-01-08 9821.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Pterocarpus marsupium\"",
+          "results": 40,
+          "accepted": 22
+        }
+      ]
+    },
+    "rose-apple-panneralu": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/rose-apple-panneralu.jpg",
+      "sha256": "170954b067950f18744295c2370d282d67b694545723d68350e979b1b2d22366",
+      "licence": "CC BY 3.0 us",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-090618-1046-Syzygium_jambos-leaves-Hana_Hwy-Maui_(24338601183).jpg",
+      "credit_required": true,
+      "credit": "Photo: Forest and Kim Starr, CC BY 3.0 us, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Starr-090618-1046-Syzygium jambos-leaves-Hana Hwy-Maui (24338601183).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Syzygium jambos\"",
+          "results": 40,
+          "accepted": 32
+        }
+      ]
+    },
+    "sapindus-emarginatus-vahl": {
+      "status": "shared",
+      "same_as": "soapnut-antwala",
+      "searches": []
+    },
+    "schleichera-oleosa-lour-oken": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/schleichera-oleosa-lour-oken.jpg",
+      "sha256": "488f037960b7e67cf36d55083e80f103b8aa794531db1538291d4a6fa011edf5",
+      "licence": "CC BY-SA 4.0",
+      "author": "Salim Khandoker",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Schleichera_oleosa_(_bn-Kusum),Young_leaves_blooming_in_various_shades_of_red._Ramna_Park,_Dhaka,_(12_March_2020)(1).jpg",
+      "credit_required": true,
+      "credit": "Photo: Salim Khandoker, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Schleichera oleosa ( bn-Kusum),Young leaves blooming in various shades of red. Ramna Park, Dhaka, (12 March 2020)(1).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Schleichera oleosa\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "senegalia-catechu-l-f-p-j-h-hurter-mabb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/senegalia-catechu-l-f-p-j-h-hurter-mabb.jpg",
+      "sha256": "c6418cd49655fd050dbe740d071975bd9faf72dd521fd8b42f6b8d7e2c2a085a",
+      "licence": "CC BY-SA 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Khair_(Acacia_catechu)_flowers_at_Hyderabad,_AP_W_IMG_7261.jpg",
+      "credit_required": true,
+      "credit": "Photo: J.M.Garg, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 650,
+      "height": 498,
+      "subject": "Khair (Acacia catechu) flowers at Hyderabad, AP W IMG 7261.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Senegalia catechu\"",
+          "results": 40,
+          "accepted": 35
+        }
+      ]
+    },
+    "sesbania": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/sesbania.jpg",
+      "sha256": "72c6f74607748e1cfce62ed2921982ff0c62b9a3ff92fd847857cf7f5cc2f4bc",
+      "licence": "CC BY-SA 2.0",
+      "author": "阿橋 HQ",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8%E7%94%B0%E8%8F%81(%E5%A4%A7%E8%8A%B1%E7%94%B0%E8%8F%81)_Sesbania_grandiflora_-%E6%B7%B1%E5%9C%B3%E5%9C%92%E5%8D%9A%E5%9C%92_Shenzhen_Expo_Garden,_China-_(9227096869).jpg",
+      "credit_required": true,
+      "credit": "Photo: 阿橋 HQ, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "木田菁(大花田菁) Sesbania grandiflora -深圳園博園 Shenzhen Expo Garden, China- (9227096869).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Sesbania grandiflora\"",
+          "results": 40,
+          "accepted": 37
+        }
+      ]
+    },
+    "soapnut-antwala": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/soapnut-antwala.jpg",
+      "sha256": "9af77148817b2ba28dcfb3d62e311350665013716618fa5df189109c8e7a4cf0",
+      "licence": "CC BY-SA 4.0",
+      "author": "Paryavarana Margadarsi Vaisakhi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Soap_nut_tree_(Sapindus_emarginatus)_with_fresh_foliage.jpg",
+      "credit_required": true,
+      "credit": "Photo: Paryavarana Margadarsi Vaisakhi, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1096,
+      "height": 759,
+      "subject": "Soap nut tree (Sapindus emarginatus) with fresh foliage.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Sapindus emarginatus\"",
+          "results": 38,
+          "accepted": 28
+        }
+      ]
+    },
+    "sterculia-foetida-l": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/sterculia-foetida-l.jpg",
+      "sha256": "43e9d61c36fa22fdd758817684502a8d39cdc2fce48d4499302ca297efd3cfd5",
+      "licence": "CC0",
+      "author": "Sunil D'Monte",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sterculia_foetida_112877015.jpg",
+      "credit_required": false,
+      "credit": "Photo: Sunil D'Monte, CC0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 788,
+      "subject": "Sterculia foetida 112877015.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Sterculia foetida\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "sterculia-urens-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/sterculia-urens-roxb.jpg",
+      "sha256": "346f07bad4139d0d9017e2432b49a5cf58f5cbc7aaa4190e9dae85be06e3c35c",
+      "licence": "CC BY 2.0",
+      "author": "gailhampshire from Cradley, Malvern, U.K",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ghost_Tree._Sterculia_urens..jpg",
+      "credit_required": true,
+      "credit": "Photo: gailhampshire from Cradley, Malvern, U.K, CC BY 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1220,
+      "subject": "Ghost Tree. Sterculia urens..jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Sterculia urens\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "tecomella-undulata-sm-seem": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/tecomella-undulata-sm-seem.jpg",
+      "sha256": "4ea91dd298f25dd540fc1331c127e7b58029f98bb57f231b0e9a42e3c2558cdb",
+      "licence": "CC BY 3.0",
+      "author": "Hadi Karimi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tecomella_undulata_tree_in_Alamarvdasht,_Fars,_Iran,_by_Hadi_Karimi.jpg",
+      "credit_required": true,
+      "credit": "Photo: Hadi Karimi, CC BY 3.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 890,
+      "subject": "Tecomella undulata tree in Alamarvdasht, Fars, Iran, by Hadi Karimi.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Tecomella undulata\"",
+          "results": 21,
+          "accepted": 21
+        }
+      ]
+    },
+    "terminalia-bellirica-gaertn-roxb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/terminalia-bellirica-gaertn-roxb.jpg",
+      "sha256": "f21ebb96214170813c367b2f9b9a233a2dba469219972a3e29aa2085cbe1f40f",
+      "licence": "CC BY-SA 4.0",
+      "author": "A. J. T. Johnsingh, WWF-India and NCF",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Terminalia_belerica_sprouting_young_leaves_in_Bannerghatta_NP_AJTJ_P1010459.jpg",
+      "credit_required": true,
+      "credit": "Photo: A. J. T. Johnsingh, WWF-India and NCF, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Terminalia belerica sprouting young leaves in Bannerghatta NP AJTJ P1010459.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Terminalia bellirica\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "velvet-apple": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/velvet-apple.jpg",
+      "sha256": "a94e90d71cf93cf6ef5565378148a2a62fa9b397494cb27beb2636c3b2966d75",
+      "licence": "CC BY 4.0",
+      "author": "(c) 林正文, some rights reserved (CC BY)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Butter_Fruit_imported_from_iNaturalist_photo_418627884_on_22_August_2024.jpg",
+      "credit_required": true,
+      "credit": "Photo: (c) 林正文, some rights reserved (CC BY), CC BY 4.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Butter Fruit imported from iNaturalist photo 418627884 on 22 August 2024.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Diospyros blancoi\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "vetiever-grass": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/vetiever-grass.jpg",
+      "sha256": "03a17b02427c5c877272857eebe7da1d873e4718e667765a0495f4e769858fcb",
+      "licence": "CC BY 2.0",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Chrysopogon_zizanioides-seeding_habit-Kokomo_Haiku.jpg",
+      "credit_required": true,
+      "credit": "Photo: Forest and Kim Starr, CC BY 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Chrysopogon zizanioides-seeding habit-Kokomo Haiku.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Chrysopogon zizanioides\"",
+          "results": 40,
+          "accepted": 34
+        }
+      ]
+    },
+    "vitex-negundo-var-negundo": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/vitex-negundo-var-negundo.jpg",
+      "sha256": "edb5373ad9ba4e23e3cd9b3ac01622ae90938f644dc6e16fe2b7939922a6a1ee",
+      "licence": "CC BY-SA 3.0",
+      "author": "Reji Jacob at Malayalam Wikipedia",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Karinochi-Plant.jpg",
+      "credit_required": true,
+      "credit": "Photo: Reji Jacob at Malayalam Wikipedia, CC BY-SA 3.0, via Wikimedia Commons",
+      "width": 928,
+      "height": 1400,
+      "subject": "Karinochi-Plant.jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Vitex negundo\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    },
+    "wood-apple": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/wood-apple.jpg",
+      "sha256": "9f8e22c53b6432b56c28d09e4d341ce210ac9cc6a0108be6244549698acc0d73",
+      "licence": "CC BY-SA 4.0",
+      "author": "AntanO",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Wood-apple_tree.JPG",
+      "credit_required": true,
+      "credit": "Photo: AntanO, CC BY-SA 4.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 933,
+      "subject": "Wood-apple tree.JPG",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Limonia acidissima\"",
+          "results": 40,
+          "accepted": 39
+        }
+      ]
+    },
+    "wrightia-arborea-dennst-mabb": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/wrightia-arborea-dennst-mabb.jpg",
+      "sha256": "9c0d771db9ef813b1aaf3b340e69d3db6ddf32b80ec0e9df237bc3eb1ada26c3",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Adavi_Ankudu_(Telugu-_%E0%B0%85%E0%B0%A1%E0%B0%B5%E0%B0%BF%E0%B0%85%E0%B0%82%E0%B0%95%E0%B1%81%E0%B0%A1%E0%B1%81)_(4779259879).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1400,
+      "height": 1050,
+      "subject": "Adavi Ankudu (Telugu- అడవిఅంకుడు) (4779259879).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Wrightia arborea\"",
+          "results": 40,
+          "accepted": 40
+        }
+      ]
+    },
+    "wrightia-tinctoria-roxb-r-br": {
+      "status": "sourced",
+      "engine": "wikimedia",
+      "file": "sourced/wrightia-tinctoria-roxb-r-br.jpg",
+      "sha256": "1ec8f3a0d1e6fd06e2c9729f6ae5334fc5b96e82bb851c2c34f3188cf248a1fd",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pala_Indigo_tree_(2443398324).jpg",
+      "credit_required": true,
+      "credit": "Photo: Dinesh Valke from Thane, India, CC BY-SA 2.0, via Wikimedia Commons",
+      "width": 1050,
+      "height": 1400,
+      "subject": "Pala Indigo tree (2443398324).jpg",
+      "searches": [
+        {
+          "engine": "wikimedia",
+          "query": "\"Wrightia tinctoria\"",
+          "results": 40,
+          "accepted": 38
+        }
+      ]
+    }
+  }
+}
