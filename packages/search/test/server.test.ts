@@ -177,11 +177,13 @@ describe('query log', () => {
 
   it('POST /api/search/log validates, logs and rate-limits per IP', async () => {
     const POST = logHandler();
-    const req = (body: string, ip = '203.0.113.9') => new Request('http://x/api/search/log', { method: 'POST', body, headers: { 'content-type': 'application/json', 'x-forwarded-for': ip } });
+    const req = (body: string, ip = '203.0.113.9') => new Request('http://x/api/search/log', { method: 'POST', body, headers: { 'content-type': 'application/json', 'x-real-ip': ip } });
     expect((await POST(req('not json'))).status).toBe(400);
     expect((await POST(req(JSON.stringify({ results: -1 })))).status).toBe(400);
     expect((await POST(req('x'.repeat(3000)))).status).toBe(413);
     expect((await POST(req(JSON.stringify({ q: '', results: 0, filters: 'model:boundary' })))).status).toBe(204);
+    expect((await POST(req(JSON.stringify({ q: '', results: 0, filters: '<script>' })))).status).toBe(400);
+    expect((await POST(req(JSON.stringify({ q: '', results: 3, filters: 'model:boundary' })))).status).toBe(400);
     const statuses: number[] = [];
     for (let i = 0; i < 31; i++) statuses.push((await POST(req(JSON.stringify({ q: 'x', results: 0 }), '198.51.100.1'))).status);
     expect(statuses.filter((s) => s === 204)).toHaveLength(30);

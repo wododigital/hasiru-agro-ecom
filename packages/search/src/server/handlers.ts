@@ -1,13 +1,11 @@
 import { db } from '@ecomkit/core/db';
-import { hashIp } from '@ecomkit/core/http';
-import { rateLimit } from '@ecomkit/core/rate-limit';
 import { getSettings, defineSettings } from '@ecomkit/core/settings';
 import { z } from 'zod';
 import type { SearchIndex } from '../domain/build-index';
 import { suggest } from '../domain/suggest';
 import { searchSettingsSchema } from '../settings';
 import { prepared } from './index-cache';
-import { logInputSchema, logSearch } from './log';
+import { logInputSchema, logSearchLimited } from './log';
 
 export const searchSettings = defineSettings('search', searchSettingsSchema);
 
@@ -40,10 +38,6 @@ export function facetsHandler(getIndex: GetIndex) {
   };
 }
 
-function clientIp(request: Request): string | null {
-  return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || null;
-}
-
 /** POST /api/search/log : zero-result filter combinations from the listing (sendBeacon). Rate limited per IP. */
 export function logHandler() {
   return async function POST(request: Request): Promise<Response> {
@@ -56,11 +50,10 @@ export function logHandler() {
       return new Response(null, { status: 400 });
     }
     const parsed = logInputSchema.safeParse(body);
-    if (!parsed.success) return new Response(null, { status: 400 });
-    const limit = await rateLimit(`search-log:${hashIp(clientIp(request)) ?? 'anon'}`, { limit: 30, windowSec: 60 });
-    if (!limit.ok) return new Response(null, { status: 429 });
+    // The beacon exists only for zero-result filter combinations.
+    if (!parsed.success || parsed.data.results !== 0) return new Response(null, { status: 400 });
     const settings = await getSettings(searchSettings);
-    if (settings.logQueries) await logSearch(db, parsed.data);
+    if (settings.logQueries && !(await logSearchLimited(db, parsed.data, request))) return new Response(null, { status: 429 });
     return new Response(null, { status: 204 });
   };
 }

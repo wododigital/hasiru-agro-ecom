@@ -2,11 +2,12 @@ import { db } from '@ecomkit/core/db';
 import { getSettings } from '@ecomkit/core/settings';
 import { Skeleton } from '@ecomkit/ui';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { after } from 'next/server';
 import { Suspense } from 'react';
 import { DEFAULT_FACET_CONFIG, fmt, itemHref, parseUrlState, suggest } from '../domain';
 import { searchMessages } from '../messages';
-import { facetPageProps, getSearchIndex, logSearch, prepared, searchProducts, searchSettings } from '../server';
+import { facetPageProps, getSearchIndex, logSearchLimited, prepared, searchProducts, searchSettings } from '../server';
 import { AppliedChips, FacetProvider, FacetResults, FacetSidebar, FilterSheet, ResultCount, SearchBox, SearchHitCard, SortSelect, ZeroCtas } from '../ui';
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -49,7 +50,10 @@ async function Results({ searchParams }: { searchParams: SearchParams }) {
   const { q } = parseUrlState(params, DEFAULT_FACET_CONFIG, 'relevance');
   const [index, settings] = await Promise.all([getSearchIndex(), getSettings(searchSettings)]);
   const hits = q.length >= 2 ? await searchProducts(db, q) : [];
-  if (q && settings.logQueries) after(() => logSearch(db, { q, results: hits.length }));
+  if (q && settings.logQueries) {
+    const source = { headers: await headers() };
+    after(() => logSearchLimited(db, { q, results: hits.length }, source));
+  }
 
   const box = <SearchBox defaultValue={q} itemHref={ITEM_HREF} messages={m.search} />;
   if (!q) {
