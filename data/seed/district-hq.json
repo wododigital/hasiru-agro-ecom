@@ -1,0 +1,3877 @@
+{
+  "version": 1,
+  "source": "OpenStreetMap Nominatim, queried once for each district headquarters town",
+  "attribution": "Data (c) OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright",
+  "records": {
+    "AP:Anantapur": {
+      "lat": 14.6783,
+      "lng": 77.6065,
+      "status": "verified",
+      "matched": "Anantapur, Anantapur Mandal, Anantapuramu District, Andhra Pradesh, 515001, India"
+    },
+    "AP:Chittoor": {
+      "lat": 13.2161,
+      "lng": 79.0973,
+      "status": "verified",
+      "matched": "Chittoor, Chittoor Mandal, Chittoor District, Andhra Pradesh, 517001, India"
+    },
+    "AP:East Godavari": {
+      "lat": 16.9437,
+      "lng": 82.2351,
+      "status": "verified",
+      "matched": "Kakinada, Kakinada Urban Mandal, Kakinada District, Andhra Pradesh, 533001, India"
+    },
+    "AP:Guntur": {
+      "lat": 16.2915,
+      "lng": 80.4542,
+      "status": "verified",
+      "matched": "Guntur, Guntur Mandal, Guntur District, Andhra Pradesh, 522001, India"
+    },
+    "AP:Krishna": {
+      "lat": 16.1817,
+      "lng": 81.1348,
+      "status": "verified",
+      "matched": "Machilipatnam, Machilipatnam Mandal, Krishna district, Andhra Pradesh, 521001, India"
+    },
+    "AP:Kurnool": {
+      "lat": 15.8309,
+      "lng": 78.0425,
+      "status": "verified",
+      "matched": "Kurnool, Kurnool Mandal, Kurnool District, Andhra Pradesh, 518001, India"
+    },
+    "AP:Prakasam": {
+      "lat": 15.5059,
+      "lng": 80.0499,
+      "status": "verified",
+      "matched": "Ongole, Ongole Mandal, Prakasam, Andhra Pradesh, 523002, India"
+    },
+    "AP:Sri Potti Sriramulu Nellore": {
+      "lat": 14.4494,
+      "lng": 79.9874,
+      "status": "verified",
+      "matched": "Nellore, Nellore Mandal, Sri Potti Sriramulu Nellore, Andhra Pradesh, 524001, India"
+    },
+    "AP:Srikakulam": {
+      "lat": 18.2949,
+      "lng": 83.8939,
+      "status": "verified",
+      "matched": "Srikakulam, Srikakulam Mandal, Srikakulam, Andhra Pradesh, 532001, India"
+    },
+    "AP:Visakhapatnam": {
+      "lat": 17.6936,
+      "lng": 83.2921,
+      "status": "verified",
+      "matched": "Visakhapatnam, Visakhapatnam Urban Mandal, Visakhapatnam District, Andhra Pradesh, 530001, India"
+    },
+    "AP:Vizianagaram": {
+      "lat": 18.1141,
+      "lng": 83.4114,
+      "status": "verified",
+      "matched": "Vizianagaram, Andhra Pradesh, 535001, India"
+    },
+    "AP:West Godavari": {
+      "lat": 16.7104,
+      "lng": 81.1154,
+      "status": "verified",
+      "matched": "Eluru, Eluru Mandal, Eluru, Andhra Pradesh, 534001, India"
+    },
+    "AP:YSR District, Kadapa": {
+      "lat": 14.4753,
+      "lng": 78.8217,
+      "status": "verified",
+      "matched": "Kadapa, Kadapa Mandal, YSR Kadapa, Andhra Pradesh, 516001, India"
+    },
+    "AR:Anjaw": {
+      "lat": 27.8844,
+      "lng": 96.8124,
+      "status": "verified",
+      "matched": "Hawai, Hawai HQ, Anjaw district, Arunachal Pradesh, India"
+    },
+    "AR:Changlang": {
+      "lat": 27.1398,
+      "lng": 95.7382,
+      "status": "verified",
+      "matched": "Changlang, Changlang HQ, Changlang, Arunachal Pradesh, India"
+    },
+    "AR:Dibang Valley": {
+      "lat": 28.7969,
+      "lng": 95.9045,
+      "status": "verified",
+      "matched": "Anini, Anini Circle, Dibang Valley, Arunachal Pradesh, India"
+    },
+    "AR:East Kameng": {
+      "lat": 27.3594,
+      "lng": 93.0406,
+      "status": "verified",
+      "matched": "Seppa, Seppa HQ, East Kameng, Arunachal Pradesh, 790102, India"
+    },
+    "AR:East Siang": {
+      "lat": 28.059,
+      "lng": 95.3325,
+      "status": "verified",
+      "matched": "Pasighat, Pasighat HQ, East Siang, Arunachal Pradesh, India"
+    },
+    "AR:Kamle": {
+      "lat": 27.7968,
+      "lng": 94.0693,
+      "status": "verified",
+      "matched": "Raga, Raga ADC, Kamle, Arunachal Pradesh, India"
+    },
+    "AR:Kra Daadi": {
+      "lat": 27.758,
+      "lng": 93.5846,
+      "status": "verified",
+      "matched": "Jaming Happa, Palin, Palin Circle, Kra Daadi, Arunachal Pradesh, India"
+    },
+    "AR:Kurung Kumey": {
+      "lat": 27.9055,
+      "lng": 93.3537,
+      "status": "verified",
+      "matched": "Koloriang, Koloriang HQ, Kurung Kumey, Arunachal Pradesh, India"
+    },
+    "AR:Lepa Rada": {
+      "lat": 27.9831,
+      "lng": 94.6879,
+      "status": "verified",
+      "matched": "Basar, Basar ADC, Lepa Rada, Arunachal Pradesh, India"
+    },
+    "AR:Lohit": {
+      "lat": 27.9254,
+      "lng": 96.1647,
+      "status": "verified",
+      "matched": "Tezu, Tezu HQ, Lohit, Arunachal Pradesh, 792001, India"
+    },
+    "AR:Longding": {
+      "lat": 26.8873,
+      "lng": 95.3203,
+      "status": "verified",
+      "matched": "Longding, Longding HQ, Longding, Arunachal Pradesh, India"
+    },
+    "AR:Lower Dibang Valley": {
+      "lat": 28.1368,
+      "lng": 95.8431,
+      "status": "verified",
+      "matched": "Roing, Roing HQ, Lower Dibang Valley, Arunachal Pradesh, India"
+    },
+    "AR:Lower Siang": {
+      "lat": 27.6588,
+      "lng": 94.6978,
+      "status": "verified",
+      "matched": "Likabali, Likabali SDO, Lower Siang, Arunachal Pradesh, 787059, India"
+    },
+    "AR:Lower Subansiri": {
+      "lat": 27.5387,
+      "lng": 93.8154,
+      "status": "verified",
+      "matched": "Ziro, Ziro HQ, Lower Subansiri, Arunachal Pradesh, 791120, India"
+    },
+    "AR:Namsai": {
+      "lat": 27.6658,
+      "lng": 95.8614,
+      "status": "verified",
+      "matched": "Namsai, Namsai HQ, Namsai, Arunachal Pradesh, 792103, India"
+    },
+    "AR:Pakke Kessang": {
+      "lat": 27.1594,
+      "lng": 93.2207,
+      "status": "verified",
+      "matched": "Lemmi, Pakke Kessang, Pakke-Kessang, Arunachal Pradesh, India"
+    },
+    "AR:Papum Pare": {
+      "lat": 27.1462,
+      "lng": 93.7206,
+      "status": "verified",
+      "matched": "Yupia, Doimukh SDO, Papum Pare, Arunachal Pradesh, 791109, India"
+    },
+    "AR:Shi Yomi": {
+      "lat": 28.5315,
+      "lng": 94.3753,
+      "status": "verified",
+      "matched": "Tato, Tato EAC, Shi Yomi, Arunachal Pradesh, India"
+    },
+    "AR:Siang": {
+      "lat": 28.3224,
+      "lng": 94.9542,
+      "status": "verified",
+      "matched": "Boleng, Boleng ADC, Siang, Arunachal Pradesh, India"
+    },
+    "AR:Tawang": {
+      "lat": 27.5879,
+      "lng": 91.8637,
+      "status": "verified",
+      "matched": "Tawang, Tawang Circle, Tawang district, Arunachal Pradesh, India"
+    },
+    "AR:Tirap": {
+      "lat": 26.991,
+      "lng": 95.5061,
+      "status": "verified",
+      "matched": "Khonsa, Khonsa HQ, Tirap, Arunachal Pradesh, 792130, India"
+    },
+    "AR:Upper Siang": {
+      "lat": 28.6411,
+      "lng": 95.0277,
+      "status": "verified",
+      "matched": "Yingkiong, Yingkiong Circle, Upper Siang, Arunachal Pradesh, 791002, India"
+    },
+    "AR:Upper Subansiri": {
+      "lat": 27.9843,
+      "lng": 94.2191,
+      "status": "verified",
+      "matched": "Daporijo, Daporijo Hq, Upper Subansiri, Arunachal Pradesh, 791122, India"
+    },
+    "AR:West Kameng": {
+      "lat": 27.2644,
+      "lng": 92.4207,
+      "status": "verified",
+      "matched": "Bomdila, Bomdila HQ, West Kameng, Arunachal Pradesh, India"
+    },
+    "AR:West Siang": {
+      "lat": 28.1386,
+      "lng": 94.7634,
+      "status": "check",
+      "matched": "Aalo HQ, West Siang, Arunachal Pradesh, 791001, India"
+    },
+    "AS:Baksa": {
+      "lat": 26.6276,
+      "lng": 91.3389,
+      "status": "check",
+      "matched": "Baksa, Assam, India"
+    },
+    "AS:Barpeta": {
+      "lat": 26.3258,
+      "lng": 91.0076,
+      "status": "verified",
+      "matched": "Barpeta, Assam, 781300, India"
+    },
+    "AS:Biswanath": {
+      "lat": 26.7267,
+      "lng": 93.1478,
+      "status": "check",
+      "matched": "Sub-Divisional Hospital, Biswanath Charali, one way road, Bishwanath Chariali, Biswanath, Sonitpur, Assam, 784176, India"
+    },
+    "AS:Bongaigaon": {
+      "lat": 26.48,
+      "lng": 90.558,
+      "status": "verified",
+      "matched": "Bongaigaon, Bongaigaon (Pt), Bongaigaon, Assam, 783380, India"
+    },
+    "AS:Cachar": {
+      "lat": 24.7586,
+      "lng": 92.8817,
+      "status": "check",
+      "matched": "Cachar, Assam, India"
+    },
+    "AS:Charaideo": {
+      "lat": 27.0267,
+      "lng": 95.0183,
+      "status": "verified",
+      "matched": "Sonari, Charaideo, Assam, 785690, India"
+    },
+    "AS:Chirang": {
+      "lat": 26.6464,
+      "lng": 90.6242,
+      "status": "check",
+      "matched": "Chirang, Assam, India"
+    },
+    "AS:Darrang": {
+      "lat": 26.4373,
+      "lng": 92.0047,
+      "status": "check",
+      "matched": "Darrang, Assam, India"
+    },
+    "AS:Dhemaji": {
+      "lat": 27.5945,
+      "lng": 94.7192,
+      "status": "check",
+      "matched": "Dhemaji, Assam, India"
+    },
+    "AS:Dhubri": {
+      "lat": 26.0196,
+      "lng": 89.9914,
+      "status": "verified",
+      "matched": "Dhubri, Assam, 783300, India"
+    },
+    "AS:Dibrugarh": {
+      "lat": 27.4845,
+      "lng": 94.9019,
+      "status": "verified",
+      "matched": "Dibrugarh, Dibrugarh East, Dibrugarh, Assam, 786001, India"
+    },
+    "AS:Dima Hasao (North Cachar Hills)": {
+      "lat": 25.1645,
+      "lng": 93.0176,
+      "status": "verified",
+      "matched": "Haflong, Dima Hasao, Assam, 788819, India"
+    },
+    "AS:Goalpara": {
+      "lat": 26.1784,
+      "lng": 90.6227,
+      "status": "verified",
+      "matched": "Goalpara, Kamakhyabari, Goalpara, Assam, 783362, India"
+    },
+    "AS:Golaghat": {
+      "lat": 26.5108,
+      "lng": 93.9744,
+      "status": "verified",
+      "matched": "Golaghat, Assam, 785621, India"
+    },
+    "AS:Hailakandi": {
+      "lat": 24.6847,
+      "lng": 92.5646,
+      "status": "verified",
+      "matched": "Hailakandi, Hailakandi district, Assam, 788151, India"
+    },
+    "AS:Hojai": {
+      "lat": 26.0032,
+      "lng": 92.8523,
+      "status": "verified",
+      "matched": "Hojai, Assam, 782435, India"
+    },
+    "AS:Jorhat": {
+      "lat": 26.7578,
+      "lng": 94.208,
+      "status": "verified",
+      "matched": "Jorhat, Jorhat East, Jorhat, Assam, 785001, India"
+    },
+    "AS:Kamrup": {
+      "lat": 26.1862,
+      "lng": 91.67,
+      "status": "verified",
+      "matched": "Amingaon, North Guwahati (Pt), Kamrup Metropolitan, Assam, 781031, India"
+    },
+    "AS:Kamrup Metropolitan": {
+      "lat": 26.1806,
+      "lng": 91.7539,
+      "status": "verified",
+      "matched": "Guwahati, Kamrup Metropolitan, Assam, 781001, India"
+    },
+    "AS:Karbi Anglong": {
+      "lat": 26.0713,
+      "lng": 93.4553,
+      "status": "check",
+      "matched": "Karbi Anglong, Assam, India"
+    },
+    "AS:Karimganj": {
+      "lat": 24.5828,
+      "lng": 92.3725,
+      "status": "check",
+      "matched": "Karimganj, Assam, India"
+    },
+    "AS:Kokrajhar": {
+      "lat": 26.4912,
+      "lng": 90.1215,
+      "status": "check",
+      "matched": "Kokrajhar, Assam, India"
+    },
+    "AS:Lakhimpur": {
+      "lat": 27.2362,
+      "lng": 94.1039,
+      "status": "verified",
+      "matched": "North Lakhimpur, Lakhimpur, Assam, India"
+    },
+    "AS:Majuli": {
+      "lat": 27.022,
+      "lng": 94.3274,
+      "status": "check",
+      "matched": "Majuli, Assam, India"
+    },
+    "AS:Morigaon": {
+      "lat": 26.2522,
+      "lng": 92.3421,
+      "status": "verified",
+      "matched": "Morigaon, Marigaon, Assam, 782105, India"
+    },
+    "AS:Nagaon": {
+      "lat": 26.3482,
+      "lng": 92.6858,
+      "status": "verified",
+      "matched": "Nagaon, Assam, 782001, India"
+    },
+    "AS:Nalbari": {
+      "lat": 26.3534,
+      "lng": 91.3984,
+      "status": "check",
+      "matched": "Nalbari, Assam, India"
+    },
+    "AS:Sivasagar": {
+      "lat": 26.9835,
+      "lng": 94.6394,
+      "status": "verified",
+      "matched": "Sivasagar, Sibsagar, Sivasagar, Assam, 785600, India"
+    },
+    "AS:Sonitpur": {
+      "lat": 26.7678,
+      "lng": 92.7014,
+      "status": "check",
+      "matched": "Sonitpur, Assam, India"
+    },
+    "AS:South Salamara-Mankachar": {
+      "lat": 25.5353,
+      "lng": 89.8628,
+      "status": "verified",
+      "matched": "Mankachar, South Salmara-Mankachar, Assam, 783131, India"
+    },
+    "AS:Tinsukia": {
+      "lat": 27.488,
+      "lng": 95.3602,
+      "status": "verified",
+      "matched": "Tinsukia, Assam, 786100, India"
+    },
+    "AS:Udalguri": {
+      "lat": 26.7504,
+      "lng": 92.0977,
+      "status": "verified",
+      "matched": "Udalguri, Udalguri tehsil, Udalguri, Assam, 784509, India"
+    },
+    "AS:West Karbi Anglong": {
+      "lat": 25.8529,
+      "lng": 92.5876,
+      "status": "check",
+      "matched": "West Karbi Anglong, Assam, India"
+    },
+    "BR:Araria": {
+      "lat": 26.1346,
+      "lng": 87.4654,
+      "status": "verified",
+      "matched": "Araria, Araria District, Bihar, 854311, India"
+    },
+    "BR:Arwal": {
+      "lat": 25.1813,
+      "lng": 84.6597,
+      "status": "check",
+      "matched": "Arwal, Bihar, India"
+    },
+    "BR:Aurangabad": {
+      "lat": 24.8033,
+      "lng": 84.411,
+      "status": "check",
+      "matched": "Aurangabad, Bihar, India"
+    },
+    "BR:Banka": {
+      "lat": 24.8328,
+      "lng": 86.8161,
+      "status": "check",
+      "matched": "Banka, Bihar, India"
+    },
+    "BR:Begusarai": {
+      "lat": 25.4139,
+      "lng": 86.1349,
+      "status": "verified",
+      "matched": "Begusarai, Bihar, 851117, India"
+    },
+    "BR:Bhagalpur": {
+      "lat": 25.2495,
+      "lng": 86.9828,
+      "status": "verified",
+      "matched": "Bhagalpur, Jagdishpur, Bhagalpur, Bihar, 812002, India"
+    },
+    "BR:Bhojpur": {
+      "lat": 25.4501,
+      "lng": 84.5635,
+      "status": "check",
+      "matched": "Bhojpur, Bihar, India"
+    },
+    "BR:Buxar": {
+      "lat": 25.5045,
+      "lng": 84.1098,
+      "status": "check",
+      "matched": "Buxar, Bihar, India"
+    },
+    "BR:Darbhanga": {
+      "lat": 26.157,
+      "lng": 85.8995,
+      "status": "verified",
+      "matched": "Darbhanga, Bihar, 846004, India"
+    },
+    "BR:East Champaran (Motihari)": {
+      "lat": 26.6507,
+      "lng": 84.9115,
+      "status": "verified",
+      "matched": "Motihari, East Champaran, Bihar, India"
+    },
+    "BR:Gaya": {
+      "lat": 24.7964,
+      "lng": 85.008,
+      "status": "verified",
+      "matched": "Gaya, Gaya Town C.D.Block, Gaya, Bihar, 823001, India"
+    },
+    "BR:Gopalganj": {
+      "lat": 26.4211,
+      "lng": 84.3739,
+      "status": "check",
+      "matched": "Gopalganj, Bihar, India"
+    },
+    "BR:Jamui": {
+      "lat": 24.7563,
+      "lng": 86.3011,
+      "status": "check",
+      "matched": "Jamui, Bihar, India"
+    },
+    "BR:Jehanabad": {
+      "lat": 25.153,
+      "lng": 85.0065,
+      "status": "check",
+      "matched": "Jehanabad, Bihar, India"
+    },
+    "BR:Kaimur (Bhabua)": {
+      "lat": 25.042,
+      "lng": 83.6088,
+      "status": "verified",
+      "matched": "Bhabua, Kaimur, Bihar, 821101, India"
+    },
+    "BR:Katihar": {
+      "lat": 25.5434,
+      "lng": 87.569,
+      "status": "verified",
+      "matched": "Katihar, Bihar, 854101, India"
+    },
+    "BR:Khagaria": {
+      "lat": 25.4931,
+      "lng": 86.6982,
+      "status": "check",
+      "matched": "Khagaria, Bihar, India"
+    },
+    "BR:Kishanganj": {
+      "lat": 26.1014,
+      "lng": 87.9508,
+      "status": "verified",
+      "matched": "Kishanganj, Bihar, 855107, India"
+    },
+    "BR:Lakhisarai": {
+      "lat": 25.1544,
+      "lng": 86.1745,
+      "status": "check",
+      "matched": "Lakhisarai, Bihar, India"
+    },
+    "BR:Madhepura": {
+      "lat": 25.7806,
+      "lng": 86.9365,
+      "status": "check",
+      "matched": "Madhepura, Bihar, India"
+    },
+    "BR:Madhubani": {
+      "lat": 26.3503,
+      "lng": 86.2296,
+      "status": "check",
+      "matched": "Madhubani, Bihar, India"
+    },
+    "BR:Munger (Monghyr)": {
+      "lat": 25.3774,
+      "lng": 86.4731,
+      "status": "verified",
+      "matched": "Munger, Bihar, India"
+    },
+    "BR:Muzaffarpur": {
+      "lat": 26.1183,
+      "lng": 85.3858,
+      "status": "verified",
+      "matched": "Muzaffarpur, Musahri, Muzaffarpur, Bihar, 842001, India"
+    },
+    "BR:Nalanda": {
+      "lat": 25.1365,
+      "lng": 85.4437,
+      "status": "check",
+      "matched": "Nalanda, Kapatia, Silao, Nalanda, Bihar, 803111, India"
+    },
+    "BR:Nawada": {
+      "lat": 24.8173,
+      "lng": 85.5179,
+      "status": "check",
+      "matched": "Nawada, Bihar, India"
+    },
+    "BR:Patna": {
+      "lat": 25.6093,
+      "lng": 85.1235,
+      "status": "verified",
+      "matched": "Patna, Patna Rural, Patna, Bihar, India"
+    },
+    "BR:Purnia (Purnea)": {
+      "lat": 25.7773,
+      "lng": 87.4731,
+      "status": "verified",
+      "matched": "Purnia, Purnia East, Purnia, Bihar, 854301, India"
+    },
+    "BR:Rohtas": {
+      "lat": 24.9394,
+      "lng": 84.0197,
+      "status": "check",
+      "matched": "Rohtas, Bihar, India"
+    },
+    "BR:Saharsa": {
+      "lat": 25.8759,
+      "lng": 86.5927,
+      "status": "verified",
+      "matched": "Saharsa, Kahara, Saharsa, Bihar, 852200, India"
+    },
+    "BR:Samastipur": {
+      "lat": 25.8597,
+      "lng": 85.7839,
+      "status": "verified",
+      "matched": "Samastipur, Bihar, 848101, India"
+    },
+    "BR:Saran": {
+      "lat": 25.7784,
+      "lng": 84.7515,
+      "status": "verified",
+      "matched": "Chhapra, Chapra, Saran, Bihar, 841300, India"
+    },
+    "BR:Sheikhpura": {
+      "lat": 25.1251,
+      "lng": 85.8161,
+      "status": "check",
+      "matched": "Sheikhpura, Bihar, India"
+    },
+    "BR:Sheohar": {
+      "lat": 26.4934,
+      "lng": 85.2718,
+      "status": "check",
+      "matched": "Sheohar, Bihar, 843329, India"
+    },
+    "BR:Sitamarhi": {
+      "lat": 26.5943,
+      "lng": 85.5004,
+      "status": "verified",
+      "matched": "Sitamarhi, Dumra, Sitamarhi, Bihar, 843300, India"
+    },
+    "BR:Siwan": {
+      "lat": 26.2185,
+      "lng": 84.3585,
+      "status": "verified",
+      "matched": "Siwan, Bihar, 841226, India"
+    },
+    "BR:Supaul": {
+      "lat": 26.2768,
+      "lng": 86.796,
+      "status": "check",
+      "matched": "Supaul, Bihar, India"
+    },
+    "BR:Vaishali": {
+      "lat": 25.7492,
+      "lng": 85.3972,
+      "status": "check",
+      "matched": "Vaishali, Bihar, India"
+    },
+    "BR:West Champaran": {
+      "lat": 26.8023,
+      "lng": 84.5074,
+      "status": "verified",
+      "matched": "Bettiah, West Champaran, Bihar, 845438, India"
+    },
+    "CG:Balod": {
+      "lat": 20.7277,
+      "lng": 81.1447,
+      "status": "check",
+      "matched": "Balod, Chhattisgarh, India"
+    },
+    "CG:Baloda Bazar": {
+      "lat": 21.5732,
+      "lng": 82.2995,
+      "status": "check",
+      "matched": "Baloda Bazar, Chhattisgarh, India"
+    },
+    "CG:Balrampur": {
+      "lat": 23.6283,
+      "lng": 83.4811,
+      "status": "check",
+      "matched": "Balrampur, Chhattisgarh, India"
+    },
+    "CG:Bastar": {
+      "lat": 19.1191,
+      "lng": 81.8292,
+      "status": "check",
+      "matched": "Bastar, Chhattisgarh, India"
+    },
+    "CG:Bemetara": {
+      "lat": 21.6784,
+      "lng": 81.4413,
+      "status": "check",
+      "matched": "Bemetara, Chhattisgarh, India"
+    },
+    "CG:Bijapur": {
+      "lat": 18.7936,
+      "lng": 80.8159,
+      "status": "check",
+      "matched": "Bijapur, Chhattisgarh, India"
+    },
+    "CG:Bilaspur": {
+      "lat": 22.0786,
+      "lng": 82.1476,
+      "status": "verified",
+      "matched": "Bilaspur, Bilaspur Tahsil, Bilaspur, Chhattisgarh, 495004, India"
+    },
+    "CG:Dantewada (South Bastar)": {
+      "lat": 18.8899,
+      "lng": 81.3478,
+      "status": "verified",
+      "matched": "Dantewada, Dantewada Tahsil, Dantewada, Chhattisgarh, 494449, India"
+    },
+    "CG:Dhamtari": {
+      "lat": 20.7103,
+      "lng": 81.5487,
+      "status": "verified",
+      "matched": "Dhamtari, Dhamtari Tahsil, Dhamtari, Chhattisgarh, 493773, India"
+    },
+    "CG:Durg": {
+      "lat": 21.1896,
+      "lng": 81.2851,
+      "status": "verified",
+      "matched": "Durg, Durg Tahsil, Durg, Chhattisgarh, 491002, India"
+    },
+    "CG:Gariyaband": {
+      "lat": 20.4292,
+      "lng": 82.2526,
+      "status": "check",
+      "matched": "Gariaband, Chhattisgarh, India"
+    },
+    "CG:Janjgir-Champa": {
+      "lat": 22.0091,
+      "lng": 82.5789,
+      "status": "verified",
+      "matched": "Janjgir, Janjgir Tahsil, Janjgir-Champa, Chhattisgarh, 495668, India"
+    },
+    "CG:Jashpur": {
+      "lat": 22.7703,
+      "lng": 83.9708,
+      "status": "check",
+      "matched": "Jashpur, Chhattisgarh, India"
+    },
+    "CG:Kabirdham (Kawardha)": {
+      "lat": 22.0059,
+      "lng": 81.2332,
+      "status": "verified",
+      "matched": "Kawardha, Kawardha Tahsil, Kabirdham, Chhattisgarh, 491995, India"
+    },
+    "CG:Kanker (North Bastar)": {
+      "lat": 20.2693,
+      "lng": 81.4932,
+      "status": "verified",
+      "matched": "Kanker, Kanker Tahsil, Uttar Bastar Kanker, Chhattisgarh, 494334, India"
+    },
+    "CG:Kondagaon": {
+      "lat": 19.5886,
+      "lng": 81.6629,
+      "status": "check",
+      "matched": "Kondagaon, Chhattisgarh, India"
+    },
+    "CG:Korba": {
+      "lat": 22.3547,
+      "lng": 82.7111,
+      "status": "verified",
+      "matched": "Korba, Korba Tahsil, Korba, Chhattisgarh, 495600, India"
+    },
+    "CG:Korea (Koriya)": {
+      "lat": 23.2649,
+      "lng": 82.56,
+      "status": "verified",
+      "matched": "Baikunthpur, Baikunthpur Tahsil, Koriya, Chhattisgarh, 497335, India"
+    },
+    "CG:Mahasamund": {
+      "lat": 21.1923,
+      "lng": 82.489,
+      "status": "check",
+      "matched": "Mahasamund, Chhattisgarh, India"
+    },
+    "CG:Mungeli": {
+      "lat": 22.0661,
+      "lng": 81.6874,
+      "status": "check",
+      "matched": "Mungeli, Chhattisgarh, India"
+    },
+    "CG:Narayanpur": {
+      "lat": 19.5842,
+      "lng": 81.1137,
+      "status": "check",
+      "matched": "Narayanpur, Chhattisgarh, 494661, India"
+    },
+    "CG:Raigarh": {
+      "lat": 21.8976,
+      "lng": 83.3966,
+      "status": "verified",
+      "matched": "Raigarh, Raigarh Tahsil, Raigarh, Chhattisgarh, 496001, India"
+    },
+    "CG:Raipur": {
+      "lat": 21.2381,
+      "lng": 81.6337,
+      "status": "verified",
+      "matched": "Raipur, Raipur Tahsil, Raipur, Chhattisgarh, 493332, India"
+    },
+    "CG:Rajnandgaon": {
+      "lat": 21.0965,
+      "lng": 81.0292,
+      "status": "verified",
+      "matched": "Rajnandgaon, Rajnandgaon Tahsil, Rajnandgaon, Chhattisgarh, 491441, India"
+    },
+    "GA:North Goa": {
+      "lat": 15.6039,
+      "lng": 73.9967,
+      "status": "check",
+      "matched": "North Goa, Goa, India"
+    },
+    "GA:South Goa": {
+      "lat": 15.3376,
+      "lng": 73.9937,
+      "status": "check",
+      "matched": "South Goa, Goa, India"
+    },
+    "GJ:Ahmedabad": {
+      "lat": 23.0215,
+      "lng": 72.5801,
+      "status": "verified",
+      "matched": "Ahmedabad, Gujarat, 380001, India"
+    },
+    "GJ:Amreli": {
+      "lat": 21.6009,
+      "lng": 71.2168,
+      "status": "verified",
+      "matched": "Amreli, Amreli Taluka, Amreli, Gujarat, 364600, India"
+    },
+    "GJ:Anand": {
+      "lat": 22.5587,
+      "lng": 72.9627,
+      "status": "verified",
+      "matched": "Anand, Anand City Taluka, Anand, Gujarat, 388001, India"
+    },
+    "GJ:Aravalli": {
+      "lat": 23.4634,
+      "lng": 73.2991,
+      "status": "verified",
+      "matched": "Modasa, Modasa Taluka, Aravalli, Gujarat, 383315, India"
+    },
+    "GJ:Banaskantha (Palanpur)": {
+      "lat": 24.2694,
+      "lng": 72.5368,
+      "status": "check",
+      "matched": "Banaskantha, Gujarat, India"
+    },
+    "GJ:Bharuch": {
+      "lat": 21.708,
+      "lng": 72.9957,
+      "status": "verified",
+      "matched": "Bharuch, Bharuch Taluka, Bharuch, Gujarat, India"
+    },
+    "GJ:Bhavnagar": {
+      "lat": 21.7719,
+      "lng": 72.1416,
+      "status": "verified",
+      "matched": "Bhavnagar, Bhavnagar Taluka, Bhavnagar, Gujarat, 364001, India"
+    },
+    "GJ:Botad": {
+      "lat": 22.1686,
+      "lng": 71.6685,
+      "status": "verified",
+      "matched": "Botad, Botad Taluka, Botad, Gujarat, 364700, India"
+    },
+    "GJ:Chhota Udepur": {
+      "lat": 22.2224,
+      "lng": 73.7779,
+      "status": "check",
+      "matched": "Chhota Udaipur, Gujarat, India"
+    },
+    "GJ:Dahod": {
+      "lat": 22.8359,
+      "lng": 74.2557,
+      "status": "verified",
+      "matched": "Dahod, Dahod Taluka, Dahod, Gujarat, 389100, India"
+    },
+    "GJ:Dangs (Ahwa)": {
+      "lat": 20.7587,
+      "lng": 73.6874,
+      "status": "verified",
+      "matched": "Ahwa, Ahava Taluka, Dang, Gujarat, 394710, India"
+    },
+    "GJ:Devbhoomi Dwarka": {
+      "lat": 22.229,
+      "lng": 69.5709,
+      "status": "check",
+      "matched": "Khambhalia Taluka, Devbhumi Dwaraka, Gujarat, India"
+    },
+    "GJ:Gandhinagar": {
+      "lat": 23.2233,
+      "lng": 72.6492,
+      "status": "verified",
+      "matched": "Gandhinagar, Gandhinagar Taluka, Gandhinagar, Gujarat, India"
+    },
+    "GJ:Gir Somnath": {
+      "lat": 20.9101,
+      "lng": 70.3653,
+      "status": "verified",
+      "matched": "Veraval, Patan Veraval Taluka, Gir Somnath, Gujarat, 362200, India"
+    },
+    "GJ:Jamnagar": {
+      "lat": 22.4732,
+      "lng": 70.0552,
+      "status": "verified",
+      "matched": "Jamnagar, Jamnagar City Taluka, Jamnagar, Gujarat, 361001, India"
+    },
+    "GJ:Junagadh": {
+      "lat": 21.522,
+      "lng": 70.4582,
+      "status": "verified",
+      "matched": "Junagadh, Junagadh City Taluka, Junagadh, Gujarat, 362015, India"
+    },
+    "GJ:Kachchh": {
+      "lat": 23.2472,
+      "lng": 69.6683,
+      "status": "verified",
+      "matched": "Bhuj, Bhuj Taluka, Kachchh, Gujarat, 370001, India"
+    },
+    "GJ:Kheda (Nadiad)": {
+      "lat": 22.7516,
+      "lng": 72.6857,
+      "status": "verified",
+      "matched": "Kheda, Kheda Taluka, Kheda, Gujarat, 387400, India"
+    },
+    "GJ:Mahisagar": {
+      "lat": 23.1291,
+      "lng": 73.6111,
+      "status": "verified",
+      "matched": "Lunavada, Lunavada Taluka, Mahisagar, Gujarat, 389230, India"
+    },
+    "GJ:Mehsana": {
+      "lat": 23.606,
+      "lng": 72.4045,
+      "status": "verified",
+      "matched": "Mehsana Lakhvad, Mahesana, Mahesana Taluka, Mahesana, Gujarat, 384001, India"
+    },
+    "GJ:Morbi": {
+      "lat": 22.8177,
+      "lng": 70.8346,
+      "status": "verified",
+      "matched": "Morbi, Morbi Taluka, Morbi, Gujarat, 363600, India"
+    },
+    "GJ:Narmada (Rajpipla)": {
+      "lat": 21.7393,
+      "lng": 73.6262,
+      "status": "check",
+      "matched": "Narmada, Gujarat, India"
+    },
+    "GJ:Navsari": {
+      "lat": 20.9524,
+      "lng": 72.9324,
+      "status": "verified",
+      "matched": "Navsari, Navsari Taluka, Navsari, Gujarat, 396400, India"
+    },
+    "GJ:Panchmahal (Godhra)": {
+      "lat": 22.6978,
+      "lng": 73.5981,
+      "status": "check",
+      "matched": "Panchmahal, Gujarat, India"
+    },
+    "GJ:Patan": {
+      "lat": 23.8505,
+      "lng": 72.1133,
+      "status": "verified",
+      "matched": "Patan, Patan Taluka, Patan, Gujarat, 384200, India"
+    },
+    "GJ:Porbandar": {
+      "lat": 21.6409,
+      "lng": 69.611,
+      "status": "verified",
+      "matched": "Porbandar, Porbandar Taluka, Porbandar, Gujarat, 360500, India"
+    },
+    "GJ:Rajkot": {
+      "lat": 22.3053,
+      "lng": 70.8028,
+      "status": "verified",
+      "matched": "Rajkot, Rajkot East Taluka, Rajkot, Gujarat, 360001, India"
+    },
+    "GJ:Sabarkantha (Himmatnagar)": {
+      "lat": 23.8689,
+      "lng": 73.0138,
+      "status": "check",
+      "matched": "Sabarkantha, Gujarat, India"
+    },
+    "GJ:Surat": {
+      "lat": 21.2095,
+      "lng": 72.8317,
+      "status": "verified",
+      "matched": "Surat, Katargam Taluka, Surat, Gujarat, 395008, India"
+    },
+    "GJ:Surendranagar": {
+      "lat": 22.7232,
+      "lng": 71.6484,
+      "status": "verified",
+      "matched": "Surendranagar, Wadhwan Taluka, Surendranagar, Gujarat, India"
+    },
+    "GJ:Tapi (Vyara)": {
+      "lat": 21.1917,
+      "lng": 73.5561,
+      "status": "check",
+      "matched": "Tapi, Gujarat, India"
+    },
+    "GJ:Vadodara": {
+      "lat": 22.2973,
+      "lng": 73.1943,
+      "status": "verified",
+      "matched": "Vadodara, Vadodara Rural Taluka, Vadodara, Gujarat, 390001, India"
+    },
+    "GJ:Valsad": {
+      "lat": 20.6068,
+      "lng": 72.9273,
+      "status": "verified",
+      "matched": "Valsad, Valsad Taluka, Valsad, Gujarat, 395125, India"
+    },
+    "HP:Bilaspur": {
+      "lat": 31.3381,
+      "lng": 76.7612,
+      "status": "check",
+      "matched": "Bilaspur, Himachal Pradesh, India"
+    },
+    "HP:Chamba": {
+      "lat": 32.5565,
+      "lng": 76.125,
+      "status": "verified",
+      "matched": "Chamba, Himachal Pradesh, 176310, India"
+    },
+    "HP:Hamirpur": {
+      "lat": 31.6849,
+      "lng": 76.5254,
+      "status": "verified",
+      "matched": "Hamirpur, Himachal Pradesh, 177001, India"
+    },
+    "HP:Kangra": {
+      "lat": 32.1032,
+      "lng": 76.2724,
+      "status": "verified",
+      "matched": "Kangra, Himachal Pradesh, 176002, India"
+    },
+    "HP:Kinnaur": {
+      "lat": 31.5421,
+      "lng": 78.2708,
+      "status": "verified",
+      "matched": "Rekong Peo, Kalpa, Kinnaur, Himachal Pradesh, 172107, India"
+    },
+    "HP:Kullu": {
+      "lat": 31.9579,
+      "lng": 77.1089,
+      "status": "verified",
+      "matched": "Kullu, Himachal Pradesh, 175100, India"
+    },
+    "HP:Lahaul & Spiti": {
+      "lat": 32.5718,
+      "lng": 77.0281,
+      "status": "verified",
+      "matched": "Keylang, Lahaul, Lahaul and Spiti, Himachal Pradesh, 175132, India"
+    },
+    "HP:Mandi": {
+      "lat": 31.7084,
+      "lng": 76.9294,
+      "status": "verified",
+      "matched": "Mandi, Himachal Pradesh, 175001, India"
+    },
+    "HP:Shimla": {
+      "lat": 31.104,
+      "lng": 77.1708,
+      "status": "verified",
+      "matched": "Shimla, Shimla (urban), Shimla, Himachal Pradesh, 171001, India"
+    },
+    "HP:Sirmaur (Sirmour)": {
+      "lat": 30.5602,
+      "lng": 77.2924,
+      "status": "verified",
+      "matched": "Nahan, Sirmaur, Himachal Pradesh, 173001, India"
+    },
+    "HP:Solan": {
+      "lat": 30.9078,
+      "lng": 77.1024,
+      "status": "verified",
+      "matched": "Solan, Himachal Pradesh, 173212, India"
+    },
+    "HP:Una": {
+      "lat": 31.4671,
+      "lng": 76.2721,
+      "status": "verified",
+      "matched": "Una, Himachal Pradesh, 174300, India"
+    },
+    "HR:Ambala": {
+      "lat": 30.3844,
+      "lng": 76.7704,
+      "status": "verified",
+      "matched": "Ambala, Ambala Cantt, Ambala, Haryana, 134002, India"
+    },
+    "HR:Bhiwani": {
+      "lat": 28.7932,
+      "lng": 76.1391,
+      "status": "verified",
+      "matched": "Bhiwani, Haryana, 125021, India"
+    },
+    "HR:Charkhi Dadri": {
+      "lat": 28.592,
+      "lng": 76.272,
+      "status": "verified",
+      "matched": "Charkhi Dadri, Dadri, Charkhi Dadri, Haryana, 123306, India"
+    },
+    "HR:Faridabad": {
+      "lat": 28.4031,
+      "lng": 77.3106,
+      "status": "verified",
+      "matched": "Faridabad, Haryana, 121001, India"
+    },
+    "HR:Fatehabad": {
+      "lat": 29.5359,
+      "lng": 75.5753,
+      "status": "check",
+      "matched": "Fatehabad, Haryana, India"
+    },
+    "HR:Gurugram (Gurgaon)": {
+      "lat": 28.4646,
+      "lng": 77.0299,
+      "status": "check",
+      "matched": "Gurgaon, Haryana, India"
+    },
+    "HR:Hisar": {
+      "lat": 29.1563,
+      "lng": 75.7292,
+      "status": "verified",
+      "matched": "Hisar, Hisar I Block, Hisar, Haryana, 125001, India"
+    },
+    "HR:Jhajjar": {
+      "lat": 28.5964,
+      "lng": 76.6505,
+      "status": "check",
+      "matched": "Jhajjar, Haryana, India"
+    },
+    "HR:Jind": {
+      "lat": 29.3152,
+      "lng": 76.3141,
+      "status": "verified",
+      "matched": "Jind, Haryana, 126100, India"
+    },
+    "HR:Kaithal": {
+      "lat": 29.7997,
+      "lng": 76.399,
+      "status": "verified",
+      "matched": "Kaithal, Haryana, 132027, India"
+    },
+    "HR:Karnal": {
+      "lat": 29.6803,
+      "lng": 76.9896,
+      "status": "verified",
+      "matched": "Karnal, Haryana, 132001, India"
+    },
+    "HR:Kurukshetra": {
+      "lat": 29.9694,
+      "lng": 76.8483,
+      "status": "verified",
+      "matched": "Kurukshetra, Thanesar, Kurukshetra, Haryana, 132118, India"
+    },
+    "HR:Mahendragarh": {
+      "lat": 28.1327,
+      "lng": 76.1697,
+      "status": "check",
+      "matched": "Mahendragarh, Haryana, India"
+    },
+    "HR:Nuh": {
+      "lat": 27.9935,
+      "lng": 77.042,
+      "status": "check",
+      "matched": "Nuh, Haryana, India"
+    },
+    "HR:Palwal": {
+      "lat": 28.1406,
+      "lng": 77.326,
+      "status": "verified",
+      "matched": "Palwal, Haryana, 121102, India"
+    },
+    "HR:Panchkula": {
+      "lat": 30.6975,
+      "lng": 76.8551,
+      "status": "verified",
+      "matched": "Panchkula, Haryana, 134109, India"
+    },
+    "HR:Panipat": {
+      "lat": 29.3913,
+      "lng": 76.9772,
+      "status": "verified",
+      "matched": "Panipat, Haryana, 132100, India"
+    },
+    "HR:Rewari": {
+      "lat": 28.1956,
+      "lng": 76.6165,
+      "status": "verified",
+      "matched": "Rewari, Haryana, 123110, India"
+    },
+    "HR:Rohtak": {
+      "lat": 28.9011,
+      "lng": 76.5802,
+      "status": "verified",
+      "matched": "Rohtak, Haryana, 124001, India"
+    },
+    "HR:Sirsa": {
+      "lat": 29.5373,
+      "lng": 75.0378,
+      "status": "verified",
+      "matched": "Sirsa, Haryana, 125055, India"
+    },
+    "HR:Sonipat": {
+      "lat": 28.9954,
+      "lng": 77.0234,
+      "status": "verified",
+      "matched": "Sonipat, Haryana, 131001, India"
+    },
+    "HR:Yamunanagar": {
+      "lat": 30.1231,
+      "lng": 77.2863,
+      "status": "verified",
+      "matched": "Yamunanagar, Jagadhri, Yamunanagar, Haryana, 135001, India"
+    },
+    "JH:Bokaro": {
+      "lat": 23.6544,
+      "lng": 86.1456,
+      "status": "verified",
+      "matched": "Bokaro, Chas, Bokaro, Jharkhand, 827004, India"
+    },
+    "JH:Chatra": {
+      "lat": 24.1062,
+      "lng": 84.8623,
+      "status": "check",
+      "matched": "Chatra, Jharkhand, India"
+    },
+    "JH:Deoghar": {
+      "lat": 24.4898,
+      "lng": 86.699,
+      "status": "verified",
+      "matched": "Deoghar, Jharkhand, 814112, India"
+    },
+    "JH:Dhanbad": {
+      "lat": 23.7953,
+      "lng": 86.431,
+      "status": "verified",
+      "matched": "Dhanbad, Dhanbad-Cum-Kenduadih-Cum-Jagata, Dhanbad, Jharkhand, 826001, India"
+    },
+    "JH:Dumka": {
+      "lat": 24.2678,
+      "lng": 87.2485,
+      "status": "check",
+      "matched": "Dumka, Sun Shine Gali, Dumka, Jharkhand, 814101, India"
+    },
+    "JH:East Singhbhum": {
+      "lat": 22.8015,
+      "lng": 86.203,
+      "status": "verified",
+      "matched": "Jamshedpur, Golmuri-Cum-Jugsalai, East Singhbhum, Jharkhand, 831001, India"
+    },
+    "JH:Garhwa": {
+      "lat": 24.16,
+      "lng": 83.8075,
+      "status": "verified",
+      "matched": "Garhwa, Jharkhand, 822114, India"
+    },
+    "JH:Giridih": {
+      "lat": 24.1863,
+      "lng": 86.3087,
+      "status": "verified",
+      "matched": "Giridih, Jharkhand, 815301, India"
+    },
+    "JH:Godda": {
+      "lat": 24.8646,
+      "lng": 87.2985,
+      "status": "check",
+      "matched": "Godda, Jharkhand, India"
+    },
+    "JH:Gumla": {
+      "lat": 23.0426,
+      "lng": 84.5422,
+      "status": "verified",
+      "matched": "Gumla, Jharkhand, 835200, India"
+    },
+    "JH:Hazaribag": {
+      "lat": 23.9924,
+      "lng": 85.3616,
+      "status": "verified",
+      "matched": "Hazaribagh, Jharkhand, 825300, India"
+    },
+    "JH:Jamtara": {
+      "lat": 23.963,
+      "lng": 86.8028,
+      "status": "verified",
+      "matched": "Jamtara, Jharkhand, 815351, India"
+    },
+    "JH:Khunti": {
+      "lat": 23.0771,
+      "lng": 85.28,
+      "status": "verified",
+      "matched": "Khunti, Jharkhand, 835210, India"
+    },
+    "JH:Koderma": {
+      "lat": 24.4931,
+      "lng": 85.5561,
+      "status": "check",
+      "matched": "Koderma, Kodarma, Jharkhand, India"
+    },
+    "JH:Latehar": {
+      "lat": 23.7442,
+      "lng": 84.4998,
+      "status": "verified",
+      "matched": "Latehar, Jharkhand, 829206, India"
+    },
+    "JH:Lohardaga": {
+      "lat": 23.477,
+      "lng": 84.6987,
+      "status": "check",
+      "matched": "Lohardaga, Jharkhand, India"
+    },
+    "JH:Pakur": {
+      "lat": 24.5326,
+      "lng": 87.5932,
+      "status": "check",
+      "matched": "Pakur, Jharkhand, India"
+    },
+    "JH:Palamu": {
+      "lat": 24.2213,
+      "lng": 84.1726,
+      "status": "check",
+      "matched": "Palamu, Jharkhand, India"
+    },
+    "JH:Ramgarh": {
+      "lat": 23.6303,
+      "lng": 85.5216,
+      "status": "verified",
+      "matched": "Ramgarh, Jharkhand, 829103, India"
+    },
+    "JH:Ranchi": {
+      "lat": 23.3701,
+      "lng": 85.325,
+      "status": "verified",
+      "matched": "Ranchi, Kanke, Ranchi, Jharkhand, 834001, India"
+    },
+    "JH:Sahibganj": {
+      "lat": 25.032,
+      "lng": 87.6918,
+      "status": "check",
+      "matched": "Sahibganj, Jharkhand, India"
+    },
+    "JH:Seraikela-Kharsawan": {
+      "lat": 22.8232,
+      "lng": 85.9197,
+      "status": "check",
+      "matched": "Seraikela-Kharsawan, Jharkhand, India"
+    },
+    "JH:Simdega": {
+      "lat": 22.5905,
+      "lng": 84.5465,
+      "status": "check",
+      "matched": "Simdega, Jharkhand, India"
+    },
+    "JH:West Singhbhum": {
+      "lat": 22.5504,
+      "lng": 85.8024,
+      "status": "verified",
+      "matched": "Chaibasa, West Singhbhum, Jharkhand, 833201, India"
+    },
+    "KA:Bagalkot": {
+      "lat": 16.1793,
+      "lng": 75.6999,
+      "status": "check",
+      "matched": "Bagalkot, Station Road, Bagalkote, Bagalakote taluk, Bagalkote, Karnataka, 587103, India"
+    },
+    "KA:Ballari (Bellary)": {
+      "lat": 15.143,
+      "lng": 76.9173,
+      "status": "verified",
+      "matched": "Ballari, Bellary taluk, Ballari, Karnataka, 583101, India"
+    },
+    "KA:Belagavi (Belgaum)": {
+      "lat": 15.8573,
+      "lng": 74.5069,
+      "status": "verified",
+      "matched": "Belagavi, Belagavi taluku, Belagavi, Karnataka, 590001, India"
+    },
+    "KA:Bengaluru Rural": {
+      "lat": 13.2484,
+      "lng": 77.7134,
+      "status": "verified",
+      "matched": "Devanahalli, Devanahalli taluku, Bengaluru North, Karnataka, 562110, India"
+    },
+    "KA:Bengaluru Urban": {
+      "lat": 12.9768,
+      "lng": 77.5901,
+      "status": "check",
+      "matched": "Bengaluru, Bangalore North, Bengaluru Urban, Karnataka, India"
+    },
+    "KA:Bidar": {
+      "lat": 17.9166,
+      "lng": 77.5113,
+      "status": "verified",
+      "matched": "Bidar, Bidar taluku, Bidar, Karnataka, 585400, India"
+    },
+    "KA:Bijapur": {
+      "lat": 16.827,
+      "lng": 75.7175,
+      "status": "verified",
+      "matched": "Vijayapura, Bijapur Taluk, Vijayapura, Karnataka, 586101, India"
+    },
+    "KA:Chamarajanagar": {
+      "lat": 11.9544,
+      "lng": 77.1069,
+      "status": "check",
+      "matched": "Chamarajanagar, Karnataka, India"
+    },
+    "KA:Chikballapur": {
+      "lat": 13.4359,
+      "lng": 77.7312,
+      "status": "verified",
+      "matched": "Chikkaballapura, Chikkaballapura taluk, Chikkaballapura, Karnataka, 562103, India"
+    },
+    "KA:Chikmagaluru": {
+      "lat": 13.318,
+      "lng": 75.7739,
+      "status": "verified",
+      "matched": "Chikkamagaluru, Chikkamagaluru taluku, Chikkamagaluru, Karnataka, 577101, India"
+    },
+    "KA:Chitradurga": {
+      "lat": 14.2266,
+      "lng": 76.4005,
+      "status": "verified",
+      "matched": "Chitradurga, Chitradurga taluku, Chitradurga, Karnataka, 577500, India"
+    },
+    "KA:Dakshina Kannada": {
+      "lat": 12.8698,
+      "lng": 74.843,
+      "status": "verified",
+      "matched": "Mangaluru, Mangaluru taluk, Dakshina Kannada, Karnataka, 575001, India"
+    },
+    "KA:Davangere": {
+      "lat": 14.4661,
+      "lng": 75.9206,
+      "status": "verified",
+      "matched": "Davanagere, Davanagere Taluku, Davanagere, Karnataka, 577000, India"
+    },
+    "KA:Dharwad": {
+      "lat": 15.4541,
+      "lng": 75.0067,
+      "status": "verified",
+      "matched": "Dharwad, Dharawada taluku, Dharwad, Karnataka, 580001, India"
+    },
+    "KA:Gadag": {
+      "lat": 15.4167,
+      "lng": 75.6816,
+      "status": "check",
+      "matched": "Gadag, Karnataka, India"
+    },
+    "KA:Hassan": {
+      "lat": 13.0071,
+      "lng": 76.0993,
+      "status": "verified",
+      "matched": "Hassan, Hasana taluk, Hassan, Karnataka, 573201, India"
+    },
+    "KA:Haveri": {
+      "lat": 14.718,
+      "lng": 75.3656,
+      "status": "check",
+      "matched": "Haveri, Karnataka, India"
+    },
+    "KA:Kalaburagi (Gulbarga)": {
+      "lat": 17.331,
+      "lng": 76.8334,
+      "status": "verified",
+      "matched": "Kalaburagi, Kalaburagi taluku, Kalaburagi, Karnataka, 585101, India"
+    },
+    "KA:Karwar": {
+      "lat": 14.8122,
+      "lng": 74.1323,
+      "status": "verified",
+      "matched": "Karwar, Karwar taluk, Uttara Kannada, Karnataka, 581300, India"
+    },
+    "KA:Kodugu": {
+      "lat": 12.4215,
+      "lng": 75.7388,
+      "status": "verified",
+      "matched": "Madikeri, Madikeri taluku, Coorg, Karnataka, 571201, India"
+    },
+    "KA:Kolar": {
+      "lat": 13.1805,
+      "lng": 78.2669,
+      "status": "check",
+      "matched": "Kolar, Karnataka, India"
+    },
+    "KA:Koppal": {
+      "lat": 15.5748,
+      "lng": 76.3118,
+      "status": "check",
+      "matched": "Koppal, Karnataka, India"
+    },
+    "KA:Mandya": {
+      "lat": 12.5239,
+      "lng": 76.8962,
+      "status": "verified",
+      "matched": "Mandya, Mandya taluk, Mandya, Karnataka, 571401, India"
+    },
+    "KA:Mysore": {
+      "lat": 12.3052,
+      "lng": 76.6554,
+      "status": "verified",
+      "matched": "Mysuru, Mysuru taluk, Mysuru District, Karnataka, 570001, India"
+    },
+    "KA:Raicur": {
+      "lat": 16.1983,
+      "lng": 77.3527,
+      "status": "verified",
+      "matched": "Raichur, Rayachuru taluku, Raichur, Karnataka, 584100, India"
+    },
+    "KA:Ramanagara": {
+      "lat": 12.7253,
+      "lng": 77.2805,
+      "status": "verified",
+      "matched": "Ramanagara, Ramanagara taluk, Bengaluru South, Karnataka, 571511, India"
+    },
+    "KA:Shivamogga": {
+      "lat": 13.9326,
+      "lng": 75.575,
+      "status": "verified",
+      "matched": "Shivamogga, Shivamogga taluk, Shimoga, Karnataka, 577200, India"
+    },
+    "KA:Tumkur": {
+      "lat": 13.3401,
+      "lng": 77.1006,
+      "status": "verified",
+      "matched": "Tumakuru, Tumkur taluk, Tumakuru, Karnataka, 572101, India"
+    },
+    "KA:Udupi": {
+      "lat": 13.3419,
+      "lng": 74.7473,
+      "status": "verified",
+      "matched": "Udupi, Udupi taluku, Udupi, Karnataka, 576101, India"
+    },
+    "KA:Vijayanagara": {
+      "lat": 15.2665,
+      "lng": 76.3872,
+      "status": "verified",
+      "matched": "Hosapete, Hosapete taluk, Vijayanagara, Karnataka, 583200, India"
+    },
+    "KA:Yadgir": {
+      "lat": 16.5744,
+      "lng": 76.9254,
+      "status": "check",
+      "matched": "Yadgir, Karnataka, India"
+    },
+    "KL:Alappuzha": {
+      "lat": 9.5003,
+      "lng": 76.4123,
+      "status": "check",
+      "matched": "Alappuzha, Kerala, India"
+    },
+    "KL:Ernakulam": {
+      "lat": 10.0166,
+      "lng": 76.3427,
+      "status": "verified",
+      "matched": "Kakkanad, Ernakulam, Kanayannur, Ernakulam, Kerala, 682030, India"
+    },
+    "KL:Idukki": {
+      "lat": 9.854,
+      "lng": 76.9446,
+      "status": "verified",
+      "matched": "Painavu, Idukki, Kerala, 685603, India"
+    },
+    "KL:Kannur": {
+      "lat": 11.8764,
+      "lng": 75.3738,
+      "status": "verified",
+      "matched": "Kannur, Kerala, 670004, India"
+    },
+    "KL:Kasaragod": {
+      "lat": 12.5036,
+      "lng": 74.9907,
+      "status": "verified",
+      "matched": "Kasaragod, Kerala, 671121, India"
+    },
+    "KL:Kollam": {
+      "lat": 8.8871,
+      "lng": 76.5907,
+      "status": "verified",
+      "matched": "Kollam, Kerala, 691001, India"
+    },
+    "KL:Kottayam": {
+      "lat": 9.5916,
+      "lng": 76.5222,
+      "status": "verified",
+      "matched": "Kottayam, Kerala, 686001, India"
+    },
+    "KL:Kozhikode": {
+      "lat": 11.2451,
+      "lng": 75.7755,
+      "status": "verified",
+      "matched": "Kozhikode, Kerala, 673001, India"
+    },
+    "KL:Malappuram": {
+      "lat": 11.0429,
+      "lng": 76.0808,
+      "status": "verified",
+      "matched": "Malappuram, Ernad, Malappuram, Kerala, India"
+    },
+    "KL:Palakkad": {
+      "lat": 10.7682,
+      "lng": 76.6521,
+      "status": "verified",
+      "matched": "Palakkad, Kerala, 678001, India"
+    },
+    "KL:Pathanamthitta": {
+      "lat": 9.2655,
+      "lng": 76.7872,
+      "status": "verified",
+      "matched": "Pathanamthitta, Kozhencherry, Pathanamthitta, Kerala, 689671, India"
+    },
+    "KL:Thiruvananthapuram": {
+      "lat": 8.4882,
+      "lng": 76.9476,
+      "status": "verified",
+      "matched": "Thiruvananthapuram, Kerala, 695001, India"
+    },
+    "KL:Thrissur": {
+      "lat": 10.4787,
+      "lng": 76.2737,
+      "status": "check",
+      "matched": "Thrissur, Kerala, India"
+    },
+    "KL:Wayanad": {
+      "lat": 11.6103,
+      "lng": 76.0828,
+      "status": "verified",
+      "matched": "Kalpetta, Vythiri, Wayanad, Kerala, 673121, India"
+    },
+    "MH:Ahmednagar": {
+      "lat": 19.093,
+      "lng": 74.7493,
+      "status": "verified",
+      "matched": "Ahilyanagar, Nagar Subdistrict, Ahilyanagar District, Maharashtra, 414001, India"
+    },
+    "MH:Akola": {
+      "lat": 20.7117,
+      "lng": 77.0026,
+      "status": "verified",
+      "matched": "Akola, Akola District, Maharashtra, 444001, India"
+    },
+    "MH:Amravati": {
+      "lat": 20.9316,
+      "lng": 77.7588,
+      "status": "verified",
+      "matched": "Amravati, Maharashtra, 444600, India"
+    },
+    "MH:Aurangabad": {
+      "lat": 19.8773,
+      "lng": 75.339,
+      "status": "verified",
+      "matched": "Chhatrapati Sambhajinagar, Chhatrapati Sambhajinagar District, Maharashtra, 431002, India"
+    },
+    "MH:Beed": {
+      "lat": 18.9904,
+      "lng": 75.7542,
+      "status": "verified",
+      "matched": "Beed, Beed District, Maharashtra, 431122, India"
+    },
+    "MH:Bhandara": {
+      "lat": 21.1226,
+      "lng": 79.7945,
+      "status": "check",
+      "matched": "Bhandara, Maharashtra, India"
+    },
+    "MH:Buldhana": {
+      "lat": 20.5628,
+      "lng": 76.4087,
+      "status": "check",
+      "matched": "Buldhana District, Maharashtra, India"
+    },
+    "MH:Chandrapur": {
+      "lat": 19.9508,
+      "lng": 79.2987,
+      "status": "verified",
+      "matched": "Chandrapur, Chandrapur Taluka, Chandrapur, Maharashtra, 442401, India"
+    },
+    "MH:Dhule": {
+      "lat": 20.898,
+      "lng": 74.7732,
+      "status": "verified",
+      "matched": "Dhule, Dhule Taluka, Dhule District, Maharashtra, 424001, India"
+    },
+    "MH:Gadchiroli": {
+      "lat": 19.7591,
+      "lng": 80.1623,
+      "status": "check",
+      "matched": "Gadchiroli, Maharashtra, India"
+    },
+    "MH:Gondia": {
+      "lat": 21.4552,
+      "lng": 80.1963,
+      "status": "check",
+      "matched": "Gondia City, Gondiya Taluka, Gondiya, Maharashtra, India"
+    },
+    "MH:Hingoli": {
+      "lat": 19.5431,
+      "lng": 77.1739,
+      "status": "check",
+      "matched": "Hingoli, Maharashtra, India"
+    },
+    "MH:Jalgaon": {
+      "lat": 21.0101,
+      "lng": 75.5696,
+      "status": "verified",
+      "matched": "Jalgaon, Jalgaon District, Maharashtra, 425001, India"
+    },
+    "MH:Jalna": {
+      "lat": 19.9188,
+      "lng": 75.8709,
+      "status": "check",
+      "matched": "Jalna District, Maharashtra, India"
+    },
+    "MH:Kolhapur": {
+      "lat": 16.7028,
+      "lng": 74.2405,
+      "status": "verified",
+      "matched": "Kolhapur, Karvir, Kolhapur District, Maharashtra, 416003, India"
+    },
+    "MH:Latur": {
+      "lat": 18.3982,
+      "lng": 76.5626,
+      "status": "verified",
+      "matched": "Latur, Latur District, Maharashtra, 413512, India"
+    },
+    "MH:Mumbai City": {
+      "lat": 19.055,
+      "lng": 72.8692,
+      "status": "verified",
+      "matched": "Mumbai, Mumbai Suburban District, Maharashtra, 400051, India"
+    },
+    "MH:Mumbai Suburban": {
+      "lat": 21.6363,
+      "lng": 79.3866,
+      "status": "verified",
+      "matched": "Bandra, Ramtek Taluka, Nagpur, Maharashtra, India"
+    },
+    "MH:Nagpur": {
+      "lat": 21.1498,
+      "lng": 79.0821,
+      "status": "check",
+      "matched": "Nagpur, Nagpur Urban Taluka, Nagpur, Maharashtra, India"
+    },
+    "MH:Nanded": {
+      "lat": 19.0943,
+      "lng": 77.4833,
+      "status": "check",
+      "matched": "Nanded District, Maharashtra, India"
+    },
+    "MH:Nandurbar": {
+      "lat": 21.3638,
+      "lng": 74.2411,
+      "status": "verified",
+      "matched": "Nandurbar, Nandurbar Taluka, Nandurbar, Maharashtra, 425412, India"
+    },
+    "MH:Nashik": {
+      "lat": 20.0112,
+      "lng": 73.7902,
+      "status": "verified",
+      "matched": "Nashik, Nashik Subdistrict, Nashik District, Maharashtra, 422001, India"
+    },
+    "MH:Osmanabad": {
+      "lat": 18.1854,
+      "lng": 76.042,
+      "status": "verified",
+      "matched": "Dharashiv, Dharashiv District, Maharashtra, 413500, India"
+    },
+    "MH:Palghar": {
+      "lat": 19.7572,
+      "lng": 73.0931,
+      "status": "check",
+      "matched": "Palghar, Maharashtra, India"
+    },
+    "MH:Parbhani": {
+      "lat": 19.2902,
+      "lng": 76.6026,
+      "status": "check",
+      "matched": "Parbhani District, Maharashtra, India"
+    },
+    "MH:Pune": {
+      "lat": 18.5214,
+      "lng": 73.8545,
+      "status": "verified",
+      "matched": "Pune, Pune City Subdistrict, Pune District, Maharashtra, 411001, India"
+    },
+    "MH:Raigad": {
+      "lat": 18.6498,
+      "lng": 72.8765,
+      "status": "verified",
+      "matched": "Alibag, Alibag Taluka, Raigad, Maharashtra, 402200, India"
+    },
+    "MH:Ratnagiri": {
+      "lat": 16.9934,
+      "lng": 73.2954,
+      "status": "verified",
+      "matched": "Ratnagiri, Ratnagiri Taluka, Ratnagiri, Maharashtra, 415612, India"
+    },
+    "MH:Sangli": {
+      "lat": 16.8503,
+      "lng": 74.5949,
+      "status": "verified",
+      "matched": "Sangli, Miraj, Sangli District, Maharashtra, 416416, India"
+    },
+    "MH:Satara": {
+      "lat": 17.6883,
+      "lng": 74.0042,
+      "status": "verified",
+      "matched": "Satara, Maharashtra, 415002, India"
+    },
+    "MH:Sindhudurg": {
+      "lat": 16.1163,
+      "lng": 73.7079,
+      "status": "verified",
+      "matched": "Oros, Kudal Taluka, Sindhudurg, Maharashtra, 416628, India"
+    },
+    "MH:Solapur": {
+      "lat": 17.67,
+      "lng": 75.9008,
+      "status": "verified",
+      "matched": "Solapur, Solapur North, Solapur District, Maharashtra, 413001, India"
+    },
+    "MH:Thane": {
+      "lat": 19.3654,
+      "lng": 73.3685,
+      "status": "check",
+      "matched": "Thane, Maharashtra, India"
+    },
+    "MH:Wardha": {
+      "lat": 20.7465,
+      "lng": 78.5998,
+      "status": "verified",
+      "matched": "Wardha, Maharashtra, 442001, India"
+    },
+    "MH:Washim": {
+      "lat": 20.1029,
+      "lng": 77.1354,
+      "status": "verified",
+      "matched": "Washim, Maharashtra, 444505, India"
+    },
+    "MH:Yavatmal": {
+      "lat": 20.3903,
+      "lng": 78.1329,
+      "status": "verified",
+      "matched": "Yavatmal, Yavatmal District, Maharashtra, 445001, India"
+    },
+    "ML:East Garo Hills": {
+      "lat": 25.5061,
+      "lng": 90.6038,
+      "status": "verified",
+      "matched": "Williamnagar, Samanda, East Garo Hills, Meghalaya, India"
+    },
+    "ML:East Jaintia Hills": {
+      "lat": 25.3587,
+      "lng": 92.367,
+      "status": "verified",
+      "matched": "Khliehriat, East Jaintia Hills, Meghalaya, India"
+    },
+    "ML:East Khasi Hills": {
+      "lat": 25.576,
+      "lng": 91.8828,
+      "status": "verified",
+      "matched": "Shillong, Mylliem, East Khasi Hills, Meghalaya, 793001, India"
+    },
+    "ML:North Garo Hills": {
+      "lat": 25.9042,
+      "lng": 90.6071,
+      "status": "verified",
+      "matched": "Resubelpara, North Garo Hills, Meghalaya, India"
+    },
+    "ML:Ri Bhoi": {
+      "lat": 25.899,
+      "lng": 91.8813,
+      "status": "verified",
+      "matched": "Nongpoh, Umling, Ri-Bhoi, Meghalaya, 793102, India"
+    },
+    "ML:South Garo Hills": {
+      "lat": 25.1928,
+      "lng": 90.6459,
+      "status": "verified",
+      "matched": "Baghmara, South Garo Hills, Meghalaya, 794102, India"
+    },
+    "ML:South West Garo Hills": {
+      "lat": 25.4705,
+      "lng": 89.9367,
+      "status": "verified",
+      "matched": "Ampati, Betasing, South West Garo Hills, Meghalaya, 794115, India"
+    },
+    "ML:South West Khasi Hills": {
+      "lat": 25.367,
+      "lng": 91.462,
+      "status": "verified",
+      "matched": "Mawkyrwat, South West Khasi Hills, Meghalaya, 393114, India"
+    },
+    "ML:West Garo Hills": {
+      "lat": 25.5126,
+      "lng": 90.2172,
+      "status": "verified",
+      "matched": "Tura, Gambegre, West Garo Hills, Meghalaya, 794001, India"
+    },
+    "ML:West Jaintia Hills": {
+      "lat": 25.4435,
+      "lng": 92.1973,
+      "status": "verified",
+      "matched": "Jowai, Thadlaskein, West Jaintia Hills, Meghalaya, 793150, India"
+    },
+    "ML:West Khasi Hills": {
+      "lat": 25.5194,
+      "lng": 91.2678,
+      "status": "verified",
+      "matched": "Nongstoin, West Khasi Hills, Meghalaya, 793119, India"
+    },
+    "MN:Bishnupur": {
+      "lat": 24.6267,
+      "lng": 93.76,
+      "status": "verified",
+      "matched": "Bishnupur, Nambol block, Bishnupur block, Bishnupur district, Manipur, 795126, India"
+    },
+    "MN:Chandel": {
+      "lat": 24.3312,
+      "lng": 94.0011,
+      "status": "verified",
+      "matched": "Chandel, Chandel subdivision, Chandel district, Manipur, 795127, India"
+    },
+    "MN:Churachandpur": {
+      "lat": 24.3469,
+      "lng": 93.6994,
+      "status": "verified",
+      "matched": "Churachandpur, Churachandpur Subdivision, Churachandpur district, Manipur, 795128, India"
+    },
+    "MN:Imphal East": {
+      "lat": 24.8183,
+      "lng": 93.9739,
+      "status": "check",
+      "matched": "Porompat, Imphal East, Manipur, India"
+    },
+    "MN:Imphal West": {
+      "lat": 24.8354,
+      "lng": 93.9136,
+      "status": "verified",
+      "matched": "Lamphelpat, Imphal West, Manipur, 795123, India"
+    },
+    "MN:Jiribam": {
+      "lat": 24.8098,
+      "lng": 93.1137,
+      "status": "verified",
+      "matched": "Jiribam, Jiribam district, Manipur, 788104, India"
+    },
+    "MN:Kakching": {
+      "lat": 24.4975,
+      "lng": 93.9836,
+      "status": "verified",
+      "matched": "Kakching, Kakching subdivision, Kakching district, Manipur, 795103, India"
+    },
+    "MN:Kamjong": {
+      "lat": 24.858,
+      "lng": 94.5097,
+      "status": "verified",
+      "matched": "Kamjong, Kamjong subdivision, Kamjong district, Manipur, India"
+    },
+    "MN:Kangpokpi": {
+      "lat": 25.1528,
+      "lng": 93.9714,
+      "status": "verified",
+      "matched": "Kangpokpi, Kangpoki subdivision, Kangpokpi district, Manipur, 795129, India"
+    },
+    "MN:Noney": {
+      "lat": 24.8599,
+      "lng": 93.6236,
+      "status": "verified",
+      "matched": "Noney, Longmei Subdivision, Noney district, Manipur, 795159, India"
+    },
+    "MN:Pherzawl": {
+      "lat": 24.2596,
+      "lng": 93.1906,
+      "status": "verified",
+      "matched": "Pherzawl, Parbung-Tipaimukh subdivision, Pherzawl district, Manipur, India"
+    },
+    "MN:Senapati": {
+      "lat": 25.3934,
+      "lng": 94.1502,
+      "status": "check",
+      "matched": "Senapati, Manipur, India"
+    },
+    "MN:Tamenglong": {
+      "lat": 24.9859,
+      "lng": 93.504,
+      "status": "verified",
+      "matched": "Tamenglong, Tamenglong Subdivision, Tamenglong district, Manipur, 795141, India"
+    },
+    "MN:Tengnoupal": {
+      "lat": 24.3848,
+      "lng": 94.1473,
+      "status": "verified",
+      "matched": "Tengnoupal, Tengnoupal subdivision, Tengnoupal, Manipur, India"
+    },
+    "MN:Thoubal": {
+      "lat": 24.6387,
+      "lng": 93.9969,
+      "status": "verified",
+      "matched": "Thoubal, Thoubal Subdivision, Thoubal district, Manipur, 795138, India"
+    },
+    "MN:Ukhrul": {
+      "lat": 25.0979,
+      "lng": 94.3611,
+      "status": "verified",
+      "matched": "Ukhrul, Ukhrul subdivision, Ukhrul district, Manipur, 795142, India"
+    },
+    "MP:Agar Malwa": {
+      "lat": 23.7155,
+      "lng": 76.0075,
+      "status": "verified",
+      "matched": "Agar, Agar Tahsil, Agar Malwa, Madhya Pradesh, 465441, India"
+    },
+    "MP:Alirajpur": {
+      "lat": 22.286,
+      "lng": 74.3546,
+      "status": "check",
+      "matched": "Alirajpur, Madhya Pradesh, India"
+    },
+    "MP:Anuppur": {
+      "lat": 23.0346,
+      "lng": 81.751,
+      "status": "check",
+      "matched": "Anuppur, Madhya Pradesh, India"
+    },
+    "MP:Ashoknagar": {
+      "lat": 24.5762,
+      "lng": 77.7303,
+      "status": "verified",
+      "matched": "Ashoknagar, Ashoknagar Tahsil, Ashoknagar, Madhya Pradesh, 473331, India"
+    },
+    "MP:Balaghat": {
+      "lat": 21.8612,
+      "lng": 80.3237,
+      "status": "check",
+      "matched": "Balaghat, Madhya Pradesh, India"
+    },
+    "MP:Barwani": {
+      "lat": 22.0334,
+      "lng": 74.8978,
+      "status": "verified",
+      "matched": "Barwani, Barwani Tahsil, Barwani, Madhya Pradesh, 451551, India"
+    },
+    "MP:Betul": {
+      "lat": 21.8797,
+      "lng": 77.8754,
+      "status": "check",
+      "matched": "Betul, Madhya Pradesh, India"
+    },
+    "MP:Bhind": {
+      "lat": 26.5652,
+      "lng": 78.789,
+      "status": "verified",
+      "matched": "Bhind, Bhind Nagar Tahsil, Bhind, Madhya Pradesh, 477001, India"
+    },
+    "MP:Bhopal": {
+      "lat": 23.2585,
+      "lng": 77.402,
+      "status": "verified",
+      "matched": "Bhopal, Huzur Tahsil, Bhopal, Madhya Pradesh, 462001, India"
+    },
+    "MP:Burhanpur": {
+      "lat": 21.3119,
+      "lng": 76.2292,
+      "status": "verified",
+      "matched": "Burhanpur, Burhanpur Nagar Tahsil, Burhanpur, Madhya Pradesh, 450331, India"
+    },
+    "MP:Chhatarpur": {
+      "lat": 24.9205,
+      "lng": 79.584,
+      "status": "verified",
+      "matched": "Chhatarpur, Chhatarpur Nagar Tahsil, Chhatarpur, Madhya Pradesh, 471001, India"
+    },
+    "MP:Chhindwara": {
+      "lat": 22.0578,
+      "lng": 78.9386,
+      "status": "verified",
+      "matched": "Chhindwara, Chhindwara Tahsil, Chhindwara, Madhya Pradesh, 480001, India"
+    },
+    "MP:Damoh": {
+      "lat": 23.8396,
+      "lng": 79.4444,
+      "status": "verified",
+      "matched": "Damoh, Danyantinagar Tahsil, Damoh, Madhya Pradesh, 470600, India"
+    },
+    "MP:Datia": {
+      "lat": 25.6689,
+      "lng": 78.4582,
+      "status": "verified",
+      "matched": "Datia, Datia Nagar Tahsil, Datia, Madhya Pradesh, 475600, India"
+    },
+    "MP:Dewas": {
+      "lat": 22.9636,
+      "lng": 76.0549,
+      "status": "verified",
+      "matched": "Dewas, Dewas Nagar Tahsil, Dewas, Madhya Pradesh, 455001, India"
+    },
+    "MP:Dhar": {
+      "lat": 22.5972,
+      "lng": 75.3066,
+      "status": "verified",
+      "matched": "Dhar, Dhar Tahsil, Dhar, Madhya Pradesh, 454001, India"
+    },
+    "MP:Dindori": {
+      "lat": 22.9071,
+      "lng": 80.8847,
+      "status": "check",
+      "matched": "Dindori, Madhya Pradesh, India"
+    },
+    "MP:Guna": {
+      "lat": 24.6477,
+      "lng": 77.3162,
+      "status": "verified",
+      "matched": "Guna, Guna NagarTahsil, Guna, Madhya Pradesh, 473001, India"
+    },
+    "MP:Gwalior": {
+      "lat": 26.2037,
+      "lng": 78.1574,
+      "status": "verified",
+      "matched": "Gwalior, Gird Tahsil, Gwalior, Madhya Pradesh, 474001, India"
+    },
+    "MP:Harda": {
+      "lat": 22.2428,
+      "lng": 77.1179,
+      "status": "check",
+      "matched": "Harda, Madhya Pradesh, India"
+    },
+    "MP:Hoshangabad": {
+      "lat": 22.7546,
+      "lng": 77.7198,
+      "status": "verified",
+      "matched": "Narmadapuram, Narmadapuram Tahsil, Narmadapuram, Madhya Pradesh, 461001, India"
+    },
+    "MP:Indore": {
+      "lat": 22.7204,
+      "lng": 75.8682,
+      "status": "verified",
+      "matched": "Indore, Juni Indore Tahsil, Indore, Madhya Pradesh, 452001, India"
+    },
+    "MP:Jabalpur": {
+      "lat": 23.1702,
+      "lng": 79.9325,
+      "status": "verified",
+      "matched": "Jabalpur, Ranjhi Tahsil, Jabalpur, Madhya Pradesh, 482001, India"
+    },
+    "MP:Jhabua": {
+      "lat": 22.887,
+      "lng": 74.7243,
+      "status": "check",
+      "matched": "Jhabua, Madhya Pradesh, India"
+    },
+    "MP:Katni": {
+      "lat": 23.834,
+      "lng": 80.3925,
+      "status": "verified",
+      "matched": "Katni, Katni Nagar, Katni, Madhya Pradesh, 483500, India"
+    },
+    "MP:Khandwa": {
+      "lat": 21.8204,
+      "lng": 76.3555,
+      "status": "verified",
+      "matched": "Khandwa, Khandwa Nagar Tahsil, Khandwa, Madhya Pradesh, 450001, India"
+    },
+    "MP:Khargone": {
+      "lat": 21.8256,
+      "lng": 75.6142,
+      "status": "verified",
+      "matched": "Khargone, Khargone Tahsil, Khargone, Madhya Pradesh, 451001, India"
+    },
+    "MP:Mandla": {
+      "lat": 22.5978,
+      "lng": 80.3721,
+      "status": "verified",
+      "matched": "Mandla, Mandla Tahsil, Mandla, Madhya Pradesh, 481661, India"
+    },
+    "MP:Mandsaur": {
+      "lat": 24.0683,
+      "lng": 75.0742,
+      "status": "verified",
+      "matched": "Mandsaur, Mandsaur Nagar Tahsil, Mandsaur, Madhya Pradesh, 458001, India"
+    },
+    "MP:Morena": {
+      "lat": 26.491,
+      "lng": 77.9814,
+      "status": "verified",
+      "matched": "Morena, Morena Nagar Tahsil, Morena, Madhya Pradesh, 476001, India"
+    },
+    "MP:Narsinghpur": {
+      "lat": 22.9346,
+      "lng": 79.0868,
+      "status": "check",
+      "matched": "Narsinghpur, Madhya Pradesh, India"
+    },
+    "MP:Neemuch": {
+      "lat": 24.465,
+      "lng": 74.869,
+      "status": "verified",
+      "matched": "Neemuch, Neemuch Nagar Tehsil, Neemuch, Madhya Pradesh, 458411, India"
+    },
+    "MP:Panna": {
+      "lat": 24.4499,
+      "lng": 80.1463,
+      "status": "check",
+      "matched": "Panna, Madhya Pradesh, India"
+    },
+    "MP:Raisen": {
+      "lat": 23.2676,
+      "lng": 78.1727,
+      "status": "check",
+      "matched": "Raisen, Madhya Pradesh, India"
+    },
+    "MP:Rajgarh": {
+      "lat": 24.0051,
+      "lng": 76.7337,
+      "status": "verified",
+      "matched": "Rajgarh, Rajgarh Tahsil, Rajgarh, Madhya Pradesh, India"
+    },
+    "MP:Ratlam": {
+      "lat": 23.3311,
+      "lng": 75.0361,
+      "status": "verified",
+      "matched": "Ratlam, Ratlam Nagar Tahsil, Ratlam, Madhya Pradesh, 457001, India"
+    },
+    "MP:Rewa": {
+      "lat": 24.5359,
+      "lng": 81.2934,
+      "status": "verified",
+      "matched": "Rewa, Huzur Tahsil, Rewa, Madhya Pradesh, 486001, India"
+    },
+    "MP:Sagar": {
+      "lat": 23.8418,
+      "lng": 78.7467,
+      "status": "verified",
+      "matched": "Sagar, Sagar Nagar Tahsil, Sagar, Madhya Pradesh, 470001, India"
+    },
+    "MP:Satna": {
+      "lat": 24.5751,
+      "lng": 80.8326,
+      "status": "verified",
+      "matched": "Satna, Raghurajnagar Nagareey Tahsil, Satna, Madhya Pradesh, 485001, India"
+    },
+    "MP:Sehore": {
+      "lat": 23.2049,
+      "lng": 77.0846,
+      "status": "verified",
+      "matched": "Sehore, Sehore Nagar Tahsil, Sehore, Madhya Pradesh, 466002, India"
+    },
+    "MP:Seoni": {
+      "lat": 22.091,
+      "lng": 79.5508,
+      "status": "verified",
+      "matched": "Seoni, Seoni Tahsil, Seoni, Madhya Pradesh, 480600, India"
+    },
+    "MP:Shahdol": {
+      "lat": 23.3002,
+      "lng": 81.3648,
+      "status": "check",
+      "matched": "Shahdol, Madhya Pradesh, India"
+    },
+    "MP:Shajapur": {
+      "lat": 23.4171,
+      "lng": 76.6075,
+      "status": "check",
+      "matched": "Shajapur, Madhya Pradesh, India"
+    },
+    "MP:Sheopur": {
+      "lat": 25.7499,
+      "lng": 76.9213,
+      "status": "check",
+      "matched": "Sheopur, Madhya Pradesh, India"
+    },
+    "MP:Shivpuri": {
+      "lat": 25.4235,
+      "lng": 77.6551,
+      "status": "verified",
+      "matched": "Shivpuri, Shivpuri NagarTahsil, Shivpuri, Madhya Pradesh, 473500, India"
+    },
+    "MP:Sidhi": {
+      "lat": 24.2113,
+      "lng": 81.7,
+      "status": "check",
+      "matched": "Sidhi, Madhya Pradesh, India"
+    },
+    "MP:Singrauli": {
+      "lat": 24.1974,
+      "lng": 82.6661,
+      "status": "verified",
+      "matched": "Singrauli, Singrauli Tahsil, Singrauli, Madhya Pradesh, 486889, India"
+    },
+    "MP:Tikamgarh": {
+      "lat": 24.8552,
+      "lng": 79.0473,
+      "status": "check",
+      "matched": "Tikamgarh, Madhya Pradesh, India"
+    },
+    "MP:Ujjain": {
+      "lat": 23.1885,
+      "lng": 75.7717,
+      "status": "verified",
+      "matched": "Ujjain, Ujjain NagarTahsil, Ujjain, Madhya Pradesh, 456001, India"
+    },
+    "MP:Umaria": {
+      "lat": 23.5247,
+      "lng": 80.8361,
+      "status": "verified",
+      "matched": "Umaria, Bandhogarh Umaria Tahsil, Umaria, Madhya Pradesh, 484661, India"
+    },
+    "MP:Vidisha": {
+      "lat": 23.5208,
+      "lng": 77.8063,
+      "status": "verified",
+      "matched": "Vidisha, Vidisha NagarTahsil, Vidisha, Madhya Pradesh, 464001, India"
+    },
+    "MZ:Aizawl": {
+      "lat": 23.7278,
+      "lng": 92.718,
+      "status": "verified",
+      "matched": "Aizawl, Tlangnuam, Aizawl, Mizoram, 796190, India"
+    },
+    "MZ:Champhai": {
+      "lat": 23.4787,
+      "lng": 93.3199,
+      "status": "verified",
+      "matched": "Champhai, Champhai district, Mizoram, 796321, India"
+    },
+    "MZ:Kolasib": {
+      "lat": 24.1905,
+      "lng": 92.7137,
+      "status": "check",
+      "matched": "Kolasib, Mizoram, India"
+    },
+    "MZ:Lawngtlai": {
+      "lat": 22.3913,
+      "lng": 92.7397,
+      "status": "check",
+      "matched": "Lawngtlai, Mizoram, India"
+    },
+    "MZ:Lunglei": {
+      "lat": 22.8932,
+      "lng": 92.747,
+      "status": "verified",
+      "matched": "Lunglei, Mizoram, 796701, India"
+    },
+    "MZ:Mamit": {
+      "lat": 23.7564,
+      "lng": 92.4515,
+      "status": "check",
+      "matched": "Mamit, Mizoram, India"
+    },
+    "MZ:Saiha": {
+      "lat": 22.2877,
+      "lng": 93.0134,
+      "status": "check",
+      "matched": "Saiha, Mizoram, India"
+    },
+    "MZ:Serchhip": {
+      "lat": 23.3053,
+      "lng": 92.8455,
+      "status": "check",
+      "matched": "Serchhip, Mizoram, India"
+    },
+    "OD:Angul": {
+      "lat": 21.1025,
+      "lng": 84.9537,
+      "status": "check",
+      "matched": "Angul, Odisha, India"
+    },
+    "OD:Balangir": {
+      "lat": 20.6095,
+      "lng": 83.1673,
+      "status": "check",
+      "matched": "Balangir, Odisha, India"
+    },
+    "OD:Balasore": {
+      "lat": 21.5017,
+      "lng": 86.9217,
+      "status": "verified",
+      "matched": "Balasore, Baleshwar (M), Baleshwar, Odisha, 756001, India"
+    },
+    "OD:Bargarh": {
+      "lat": 21.232,
+      "lng": 83.5653,
+      "status": "check",
+      "matched": "Bargarh, Odisha, India"
+    },
+    "OD:Bhadrak": {
+      "lat": 21.0633,
+      "lng": 86.5054,
+      "status": "verified",
+      "matched": "Bhadrak, Bhadrak Rural, Bhadrak, Odisha, 756100, India"
+    },
+    "OD:Boudh": {
+      "lat": 20.8416,
+      "lng": 84.3213,
+      "status": "verified",
+      "matched": "Boudh, Baudh Sadar, Boudh, Odisha, 762014, India"
+    },
+    "OD:Cuttack": {
+      "lat": 20.4686,
+      "lng": 85.8792,
+      "status": "verified",
+      "matched": "Cuttack, Cuttack (M.Corp.) P.S, Cuttack, Odisha, 753001, India"
+    },
+    "OD:Deogarh": {
+      "lat": 21.5371,
+      "lng": 84.7301,
+      "status": "verified",
+      "matched": "Deogarh, Debagarh, Odisha, 768108, India"
+    },
+    "OD:Dhenkanal": {
+      "lat": 20.8351,
+      "lng": 85.6022,
+      "status": "check",
+      "matched": "Dhenkanal, Odisha, India"
+    },
+    "OD:Gajapati": {
+      "lat": 19.1966,
+      "lng": 84.1931,
+      "status": "check",
+      "matched": "Gajapati, Odisha, India"
+    },
+    "OD:Ganjam": {
+      "lat": 19.609,
+      "lng": 84.7081,
+      "status": "check",
+      "matched": "Ganjam, Odisha, India"
+    },
+    "OD:Jagatsinghapur": {
+      "lat": 20.2594,
+      "lng": 86.1661,
+      "status": "verified",
+      "matched": "Jagatsinghpur, Jagatsinghapur, Odisha, 754100, India"
+    },
+    "OD:Jajpur": {
+      "lat": 20.8747,
+      "lng": 86.1215,
+      "status": "check",
+      "matched": "Jajpur, Odisha, India"
+    },
+    "OD:Jharsuguda": {
+      "lat": 21.8019,
+      "lng": 83.9714,
+      "status": "check",
+      "matched": "Jharsuguda, Odisha, India"
+    },
+    "OD:Kalahandi": {
+      "lat": 19.8266,
+      "lng": 83.0409,
+      "status": "check",
+      "matched": "Kalahandi, Odisha, India"
+    },
+    "OD:Kandhamal": {
+      "lat": 20.1307,
+      "lng": 84.079,
+      "status": "check",
+      "matched": "Kandhamal, Odisha, India"
+    },
+    "OD:Kendrapara": {
+      "lat": 20.5042,
+      "lng": 86.416,
+      "status": "verified",
+      "matched": "Kendrapara, Odisha, 754200, India"
+    },
+    "OD:Kendujhar (Keonjhar)": {
+      "lat": 21.6376,
+      "lng": 85.6089,
+      "status": "verified",
+      "matched": "Kendujhargarh, Kendujhar Town, Kendujhar, Odisha, 758001, India"
+    },
+    "OD:Khordha": {
+      "lat": 20.2603,
+      "lng": 85.8395,
+      "status": "verified",
+      "matched": "Bhubaneshwar, Bhubaneswar Municipal Corporation, Bhubaneswar (M.Corp.), Khordha, Odisha, 751001, India"
+    },
+    "OD:Koraput": {
+      "lat": 18.7232,
+      "lng": 82.6101,
+      "status": "check",
+      "matched": "Koraput, Odisha, India"
+    },
+    "OD:Malkangiri": {
+      "lat": 18.2745,
+      "lng": 81.952,
+      "status": "check",
+      "matched": "Malkangiri, Odisha, India"
+    },
+    "OD:Mayurbhanj": {
+      "lat": 21.9156,
+      "lng": 86.3962,
+      "status": "check",
+      "matched": "Mayurbhanj, Odisha, India"
+    },
+    "OD:Nabarangpur": {
+      "lat": 19.2289,
+      "lng": 82.5666,
+      "status": "check",
+      "matched": "Odisha Red Cross Blood Bank, Nabarangpur, NH26, Nabarangapur, Nabarangapur P.S, Nabarangapur, Odisha, 764059, India"
+    },
+    "OD:Nayagarh": {
+      "lat": 20.2394,
+      "lng": 85.0507,
+      "status": "check",
+      "matched": "Nayagarh, Odisha, India"
+    },
+    "OD:Nuapada": {
+      "lat": 20.5413,
+      "lng": 82.5292,
+      "status": "check",
+      "matched": "Nuapada, Odisha, India"
+    },
+    "OD:Puri": {
+      "lat": 19.8076,
+      "lng": 85.8253,
+      "status": "verified",
+      "matched": "Puri, Puri (M), Puri, Odisha, 752001, India"
+    },
+    "OD:Rayagada": {
+      "lat": 19.4427,
+      "lng": 83.5873,
+      "status": "check",
+      "matched": "Rayagada, Odisha, India"
+    },
+    "OD:Sambalpur": {
+      "lat": 21.4705,
+      "lng": 83.9762,
+      "status": "verified",
+      "matched": "Sambalpur, Odisha, 768001, India"
+    },
+    "OD:Sonepur": {
+      "lat": 20.8454,
+      "lng": 83.9091,
+      "status": "verified",
+      "matched": "Subarnapur, Sonapur, Subarnapur, Odisha, 767017, India"
+    },
+    "OD:Sundargarh": {
+      "lat": 22.0605,
+      "lng": 83.9359,
+      "status": "check",
+      "matched": "Sundargarh, Odisha, India"
+    },
+    "PB:Amritsar": {
+      "lat": 31.6357,
+      "lng": 74.8787,
+      "status": "verified",
+      "matched": "Amritsar, Amritsar I Tahsil, Amritsar, Punjab, 143001, India"
+    },
+    "PB:Barnala": {
+      "lat": 30.3762,
+      "lng": 75.5436,
+      "status": "verified",
+      "matched": "Barnala, Barnala Tahsil, Barnala, Punjab, 148101, India"
+    },
+    "PB:Bathinda": {
+      "lat": 30.2068,
+      "lng": 74.9464,
+      "status": "verified",
+      "matched": "Bathinda, Bathinda Tahsil, Bathinda, Punjab, 151001, India"
+    },
+    "PB:Faridkot": {
+      "lat": 30.673,
+      "lng": 74.7517,
+      "status": "verified",
+      "matched": "Faridkot, Faridkot Tahsil, Faridkot, Punjab, 151200, India"
+    },
+    "PB:Fatehgarh Sahib": {
+      "lat": 30.6634,
+      "lng": 76.3803,
+      "status": "check",
+      "matched": "Fatehgarh Sahib, Punjab, India"
+    },
+    "PB:Fazilka": {
+      "lat": 30.4032,
+      "lng": 74.0311,
+      "status": "verified",
+      "matched": "Fazilka, Fazilka Tahsil, Fazilka, Punjab, 152123, India"
+    },
+    "PB:Ferozepur": {
+      "lat": 30.684,
+      "lng": 76.3594,
+      "status": "verified",
+      "matched": "Ferozepur, Fatehgarh Sahib Tahsil, Fatehgarh Sahib, Punjab, 140407, India"
+    },
+    "PB:Gurdaspur": {
+      "lat": 32.0419,
+      "lng": 75.4002,
+      "status": "verified",
+      "matched": "Gurdaspur, Gurdaspur Tahsil, Gurdaspur, Punjab, 143521, India"
+    },
+    "PB:Hoshiarpur": {
+      "lat": 31.5329,
+      "lng": 75.9025,
+      "status": "verified",
+      "matched": "Hoshiarpur, Hoshiarpur Tahsil, Hoshiarpur, Punjab, 146001, India"
+    },
+    "PB:Jalandhar": {
+      "lat": 31.3324,
+      "lng": 75.5769,
+      "status": "verified",
+      "matched": "Jalandhar, Jalandhar I Tahsil, Jalandhar, Punjab, 144001, India"
+    },
+    "PB:Kapurthala": {
+      "lat": 31.3815,
+      "lng": 75.3844,
+      "status": "verified",
+      "matched": "Kapurthala, Kapurthala Tahsil, Kapurthala, Punjab, 144601, India"
+    },
+    "PB:Ludhiana": {
+      "lat": 30.909,
+      "lng": 75.8516,
+      "status": "verified",
+      "matched": "Ludhiana, Ludhiana (West) Tahsil, Ludhiana, Punjab, 141001, India"
+    },
+    "PB:Mansa": {
+      "lat": 29.9947,
+      "lng": 75.4022,
+      "status": "verified",
+      "matched": "Mansa, Mansa Tehsil, Mansa, Punjab, 151505, India"
+    },
+    "PB:Moga": {
+      "lat": 30.8223,
+      "lng": 75.1731,
+      "status": "verified",
+      "matched": "Moga, Moga Tahsil, Moga, Punjab, 142001, India"
+    },
+    "PB:Muktsar": {
+      "lat": 30.2867,
+      "lng": 74.5262,
+      "status": "check",
+      "matched": "Sri Muktsar Sahib, Punjab, India"
+    },
+    "PB:Nawanshahr (Shahid Bhagat Singh Nagar)": {
+      "lat": 31.127,
+      "lng": 76.1599,
+      "status": "check",
+      "matched": "Shaheed Bhagat Singh Nagar, Punjab, India"
+    },
+    "PB:Pathankot": {
+      "lat": 32.2692,
+      "lng": 75.6529,
+      "status": "verified",
+      "matched": "Pathankot, Pathankot Tahsil, Pathankot, Punjab, 145001, India"
+    },
+    "PB:Patiala": {
+      "lat": 30.3302,
+      "lng": 76.4008,
+      "status": "verified",
+      "matched": "Patiala, Patiala Tahsil, Patiala, Punjab, India"
+    },
+    "PB:Rupnagar": {
+      "lat": 30.9688,
+      "lng": 76.5261,
+      "status": "verified",
+      "matched": "Rupnagar, Rupnagar Tahsil, Rupnagar, Punjab, 140001, India"
+    },
+    "PB:Sahibzada Ajit Singh Nagar (Mohali)": {
+      "lat": 30.6909,
+      "lng": 76.7115,
+      "status": "verified",
+      "matched": "Mohali, S.A.S. Nagar (Mohali) Tahsil, Sahibzada Ajit Singh Nagar, Punjab, 140062, India"
+    },
+    "PB:Sangrur": {
+      "lat": 30.2432,
+      "lng": 75.8358,
+      "status": "verified",
+      "matched": "Sangrur, Sangrur Tahsil, Sangrur, Punjab, 148001, India"
+    },
+    "PB:Tarn Taran": {
+      "lat": 31.3212,
+      "lng": 74.8417,
+      "status": "check",
+      "matched": "Tarn Taran, Punjab, India"
+    },
+    "RJ:Ajmer": {
+      "lat": 26.4691,
+      "lng": 74.639,
+      "status": "verified",
+      "matched": "Ajmer, Ajmer Tehsil, Ajmer, Rajasthan, India"
+    },
+    "RJ:Alwar": {
+      "lat": 27.5646,
+      "lng": 76.6132,
+      "status": "verified",
+      "matched": "Alwar, Alwar Tehsil, Alwar, Rajasthan, India"
+    },
+    "RJ:Banswara": {
+      "lat": 23.5501,
+      "lng": 74.4463,
+      "status": "verified",
+      "matched": "Banswara, Banswara Tehsil, Banswara, Rajasthan, 327001, India"
+    },
+    "RJ:Baran": {
+      "lat": 25.0982,
+      "lng": 76.517,
+      "status": "verified",
+      "matched": "Baran, Baran Tehsil, Baran, Rajasthan, 325205, India"
+    },
+    "RJ:Barmer": {
+      "lat": 25.7453,
+      "lng": 71.3998,
+      "status": "verified",
+      "matched": "Barmer, Barmer Tehsil, Barmer, Rajasthan, 344001, India"
+    },
+    "RJ:Bharatpur": {
+      "lat": 27.2154,
+      "lng": 77.4987,
+      "status": "verified",
+      "matched": "Bharatpur, Bharatpur Tehsil, Bharatpur, Rajasthan, 321001, India"
+    },
+    "RJ:Bhilwara": {
+      "lat": 25.348,
+      "lng": 74.636,
+      "status": "verified",
+      "matched": "Bhilwara, Bhilwara Tehsil, Bhilwara, Rajasthan, 311001, India"
+    },
+    "RJ:Bikaner": {
+      "lat": 28.0159,
+      "lng": 73.3171,
+      "status": "verified",
+      "matched": "Bikaner, Bikaner Tehsil, Bikaner, Rajasthan, 334001, India"
+    },
+    "RJ:Bundi": {
+      "lat": 25.4416,
+      "lng": 75.6376,
+      "status": "verified",
+      "matched": "Bundi, Bundi Tehsil, Bundi, Rajasthan, 323001, India"
+    },
+    "RJ:Chittorgarh": {
+      "lat": 24.8837,
+      "lng": 74.6244,
+      "status": "verified",
+      "matched": "Chittorgarh, Chittaurgarh Tehsil, Chittorgarh, Rajasthan, 312001, India"
+    },
+    "RJ:Churu": {
+      "lat": 28.2983,
+      "lng": 74.9679,
+      "status": "verified",
+      "matched": "Churu, Churu Tehsil, Churu, Rajasthan, 331001, India"
+    },
+    "RJ:Dausa": {
+      "lat": 26.8049,
+      "lng": 76.4437,
+      "status": "check",
+      "matched": "Dausa, Rajasthan, India"
+    },
+    "RJ:Dholpur": {
+      "lat": 26.7011,
+      "lng": 77.8967,
+      "status": "verified",
+      "matched": "Dhaulpur, Dhaulpur Tehsil, Dhaulpur, Rajasthan, 328001, India"
+    },
+    "RJ:Dungarpur": {
+      "lat": 23.8539,
+      "lng": 73.7087,
+      "status": "verified",
+      "matched": "Dungarpur, Dungarpur Tehsil, Dungarpur, Rajasthan, 314001, India"
+    },
+    "RJ:Hanumangarh": {
+      "lat": 29.6153,
+      "lng": 74.2904,
+      "status": "verified",
+      "matched": "Hanumangarh, Hanumangarh Tehsil, Hanumangarh, Rajasthan, 335500, India"
+    },
+    "RJ:Jaipur": {
+      "lat": 26.9155,
+      "lng": 75.819,
+      "status": "verified",
+      "matched": "Jaipur, Jaipur Municipal Corporation, Jaipur Tehsil, Jaipur, Rajasthan, 302001, India"
+    },
+    "RJ:Jaisalmer": {
+      "lat": 26.9117,
+      "lng": 70.9125,
+      "status": "verified",
+      "matched": "Jaisalmer, Jaisalmer Tehsil, Jaisalmer, Rajasthan, 345001, India"
+    },
+    "RJ:Jalore": {
+      "lat": 25.3476,
+      "lng": 72.6261,
+      "status": "verified",
+      "matched": "Jalore, Jalor Tehsil, Jalore, Rajasthan, 343001, India"
+    },
+    "RJ:Jhalawar": {
+      "lat": 24.3132,
+      "lng": 76.5221,
+      "status": "check",
+      "matched": "Jhalawar, Rajasthan, India"
+    },
+    "RJ:Jhunjhunu": {
+      "lat": 28.1288,
+      "lng": 75.3993,
+      "status": "verified",
+      "matched": "Jhunjhunu, Jhunjhunun Tehsil, Jhunjhunu, Rajasthan, 333001, India"
+    },
+    "RJ:Jodhpur": {
+      "lat": 26.2968,
+      "lng": 73.0351,
+      "status": "verified",
+      "matched": "Jodhpur, Jodhpur Tehsil, Jodhpur, Rajasthan, India"
+    },
+    "RJ:Karauli": {
+      "lat": 26.5158,
+      "lng": 77.0566,
+      "status": "check",
+      "matched": "Karauli, Rajasthan, India"
+    },
+    "RJ:Kota": {
+      "lat": 25.1737,
+      "lng": 75.8574,
+      "status": "verified",
+      "matched": "Kota, Ladpura Tehsil, Kota, Rajasthan, 324001, India"
+    },
+    "RJ:Nagaur": {
+      "lat": 27.2001,
+      "lng": 73.7377,
+      "status": "verified",
+      "matched": "Nagaur, Nagaur Tehsil, Nagaur, Rajasthan, 341001, India"
+    },
+    "RJ:Pali": {
+      "lat": 25.7682,
+      "lng": 73.3275,
+      "status": "verified",
+      "matched": "Pali, Pali Tehsil, Pali, Rajasthan, 306400, India"
+    },
+    "RJ:Pratapgarh": {
+      "lat": 24.0232,
+      "lng": 74.625,
+      "status": "check",
+      "matched": "Pratapgarh, Rajasthan, India"
+    },
+    "RJ:Rajsamand": {
+      "lat": 25.2892,
+      "lng": 73.8241,
+      "status": "check",
+      "matched": "Rajsamand, Rajasthan, India"
+    },
+    "RJ:Sawai Madhopur": {
+      "lat": 26.0189,
+      "lng": 76.3522,
+      "status": "verified",
+      "matched": "Sawai Madhopur, Sawai Madhopur Tehsil, Sawai Madhopur, Rajasthan, 322021, India"
+    },
+    "RJ:Sikar": {
+      "lat": 27.6092,
+      "lng": 75.1396,
+      "status": "verified",
+      "matched": "Sikar, Sikar Tehsil, Sikar, Rajasthan, 332001, India"
+    },
+    "RJ:Sirohi": {
+      "lat": 24.8858,
+      "lng": 72.8589,
+      "status": "verified",
+      "matched": "Sirohi, Sirohi Tehsil, Sirohi, Rajasthan, 307001, India"
+    },
+    "RJ:Sri Ganganagar": {
+      "lat": 29.9271,
+      "lng": 73.8762,
+      "status": "verified",
+      "matched": "Sri Ganganagar, Ganganagar Tehsil, Sri Ganganagar, Rajasthan, 335001, India"
+    },
+    "RJ:Tonk": {
+      "lat": 26.1612,
+      "lng": 75.7858,
+      "status": "verified",
+      "matched": "Tonk, Tonk Tehsil, Tonk, Rajasthan, 304001, India"
+    },
+    "RJ:Udaipur": {
+      "lat": 24.5787,
+      "lng": 73.6863,
+      "status": "verified",
+      "matched": "Udaipur, Girwa Tehsil, Udaipur, Rajasthan, 313001, India"
+    },
+    "TG:Adilabad": {
+      "lat": 19.6759,
+      "lng": 78.534,
+      "status": "verified",
+      "matched": "Adilabad, Adilabad Urban Mandal, Adilabad, Telangana, 504001, India"
+    },
+    "TG:Bhadradri Kothagudem": {
+      "lat": 17.5477,
+      "lng": 80.6137,
+      "status": "verified",
+      "matched": "Kothagudem, Kothagudem mandal, Bhadradri Kothagudem, Telangana, 507101, India"
+    },
+    "TG:Hyderabad": {
+      "lat": 17.3606,
+      "lng": 78.4741,
+      "status": "check",
+      "matched": "Hyderabad, Bahadurpura mandal, Hyderabad, Telangana, India"
+    },
+    "TG:Jagtial": {
+      "lat": 18.7957,
+      "lng": 78.9162,
+      "status": "verified",
+      "matched": "Jagtial, Jagtial mandal, Jagtial, Telangana, 505327, India"
+    },
+    "TG:Jangaon": {
+      "lat": 17.7244,
+      "lng": 79.1571,
+      "status": "verified",
+      "matched": "Jangaon, Jangoan mandal, Jangaon, Telangana, 506167, India"
+    },
+    "TG:Jayashankar Bhoopalpally": {
+      "lat": 18.4381,
+      "lng": 79.8685,
+      "status": "verified",
+      "matched": "Bhupalpally, Bhupalpally mandal, Jayashankar Bhupalapally, Telangana, 506169, India"
+    },
+    "TG:Jogulamba Gadwal": {
+      "lat": 16.2347,
+      "lng": 77.7946,
+      "status": "verified",
+      "matched": "Gadwal, Gadwal mandal, Jogulamba Gadwal, Telangana, 509100, India"
+    },
+    "TG:Kamareddy": {
+      "lat": 18.3222,
+      "lng": 78.3387,
+      "status": "verified",
+      "matched": "Kamareddy, Kamareddy mandal, Kamareddy, Telangana, 503100, India"
+    },
+    "TG:Karimnagar": {
+      "lat": 18.4348,
+      "lng": 79.1328,
+      "status": "verified",
+      "matched": "Karimnagar, Karimnagar mandal, Karimnagar, Telangana, 505001, India"
+    },
+    "TG:Khammam": {
+      "lat": 17.2465,
+      "lng": 80.15,
+      "status": "verified",
+      "matched": "Khammam, Khammam Urban mandal, Khammam, Telangana, 507003, India"
+    },
+    "TG:Komaram Bheem Asifabad": {
+      "lat": 19.3593,
+      "lng": 79.296,
+      "status": "verified",
+      "matched": "Asifabad, Asifabad mandal, Kumuram Bheem Asifabad, Telangana, 504293, India"
+    },
+    "TG:Mahabubabad": {
+      "lat": 17.5957,
+      "lng": 79.9999,
+      "status": "verified",
+      "matched": "Mahabubabad, Mahabubabad mandal, Mahabubabad, Telangana, 506100, India"
+    },
+    "TG:Mahabubnagar": {
+      "lat": 16.6966,
+      "lng": 77.9591,
+      "status": "check",
+      "matched": "Mahabubnagar, Telangana, India"
+    },
+    "TG:Mancherial": {
+      "lat": 18.8762,
+      "lng": 79.445,
+      "status": "verified",
+      "matched": "Mancherial, Mancherial mandal, Mancherial, Telangana, 504200, India"
+    },
+    "TG:Medak": {
+      "lat": 17.9375,
+      "lng": 78.2117,
+      "status": "check",
+      "matched": "Medak, Telangana, India"
+    },
+    "TG:Medchal": {
+      "lat": 17.634,
+      "lng": 78.4843,
+      "status": "verified",
+      "matched": "Medchal, Medchal mandal, Medchal–Malkajgiri, Telangana, 501400, India"
+    },
+    "TG:Nagarkurnool": {
+      "lat": 16.487,
+      "lng": 78.3169,
+      "status": "verified",
+      "matched": "Nagarkurnool, Nagar_Kurnool mandal, Nagarkurnool, Telangana, 509209, India"
+    },
+    "TG:Nalgonda": {
+      "lat": 17.0504,
+      "lng": 79.2669,
+      "status": "verified",
+      "matched": "Nalgonda, Nalgonda mandal, Nalgonda, Telangana, 508001, India"
+    },
+    "TG:Nirmal": {
+      "lat": 19.0925,
+      "lng": 78.3486,
+      "status": "verified",
+      "matched": "Nirmal, Nirmal mandal, Nirmal, Telangana, 504106, India"
+    },
+    "TG:Nizamabad": {
+      "lat": 18.6732,
+      "lng": 78.0978,
+      "status": "verified",
+      "matched": "Nizamabad, Nizamabad South mandal, Nizamabad, Telangana, 503001, India"
+    },
+    "TG:Peddapalli": {
+      "lat": 18.6177,
+      "lng": 79.3868,
+      "status": "verified",
+      "matched": "Peddapalli, Peddapalli mandal, Peddapalli, Telangana, 505100, India"
+    },
+    "TG:Rajanna Sircilla": {
+      "lat": 18.3898,
+      "lng": 78.8086,
+      "status": "verified",
+      "matched": "Sircilla, Sircilla mandal, Rajanna Sircilla, Telangana, 505301, India"
+    },
+    "TG:Rangareddy": {
+      "lat": 17.2611,
+      "lng": 78.3932,
+      "status": "verified",
+      "matched": "Shamshabad, Vellanki Agros, Ranga Reddy, Telangana, 509218, India"
+    },
+    "TG:Sangareddy": {
+      "lat": 17.8684,
+      "lng": 77.8227,
+      "status": "check",
+      "matched": "Sangareddy, Telangana, India"
+    },
+    "TG:Siddipet": {
+      "lat": 18.1018,
+      "lng": 78.852,
+      "status": "verified",
+      "matched": "Siddipet, Siddipet Urban mandal, Siddipet, Telangana, 502103, India"
+    },
+    "TG:Suryapet": {
+      "lat": 17.1405,
+      "lng": 79.6225,
+      "status": "verified",
+      "matched": "Suryapet, Suryapet mandal, Suryapet, Telangana, 508213, India"
+    },
+    "TG:Vikarabad": {
+      "lat": 17.3379,
+      "lng": 77.904,
+      "status": "verified",
+      "matched": "Vikarabad, Vikarabad mandal, Vikarabad, Telangana, 501102, India"
+    },
+    "TG:Wanaparthy": {
+      "lat": 16.3618,
+      "lng": 78.0611,
+      "status": "verified",
+      "matched": "Wanaparthy, Wanaparthy mandal, Wanaparthy, Telangana, 509103, India"
+    },
+    "TG:Warangal (Rural)": {
+      "lat": 17.9821,
+      "lng": 79.5971,
+      "status": "verified",
+      "matched": "Warangal, Warangal mandal, Warangal, Telangana, 506002, India"
+    },
+    "TG:Warangal (Urban)": {
+      "lat": 18.0069,
+      "lng": 79.5579,
+      "status": "verified",
+      "matched": "Hanamkonda, Hanamkonda mandal, Hanumakonda, Telangana, 506001, India"
+    },
+    "TG:Yadadri Bhuvanagiri": {
+      "lat": 17.5173,
+      "lng": 78.8863,
+      "status": "verified",
+      "matched": "Bhongir, Bhongiri mandal, Yadadri Bhuvanagiri, Telangana, 508100, India"
+    },
+    "TN:Ariyalur": {
+      "lat": 11.1358,
+      "lng": 79.0723,
+      "status": "verified",
+      "matched": "Ariyalur, Tamil Nadu, 621704, India"
+    },
+    "TN:Chengalpet": {
+      "lat": 12.6841,
+      "lng": 79.9836,
+      "status": "verified",
+      "matched": "Chengalpattu, Chennai Metropolitan Area, Chengalpattu, Tamil Nadu, 603001, India"
+    },
+    "TN:Chennai": {
+      "lat": 13.0801,
+      "lng": 80.2808,
+      "status": "check",
+      "matched": "Chennai, Chennai Metropolitan Area, Chennai District, Tamil Nadu, India"
+    },
+    "TN:Coimbatore": {
+      "lat": 11.0018,
+      "lng": 76.9628,
+      "status": "verified",
+      "matched": "Coimbatore, Coimbatore North, Coimbatore, Tamil Nadu, 641001, India"
+    },
+    "TN:Cuddalore": {
+      "lat": 11.7427,
+      "lng": 79.7503,
+      "status": "verified",
+      "matched": "Cuddalore, Tamil Nadu, 607002, India"
+    },
+    "TN:Dharmapuri": {
+      "lat": 12.1348,
+      "lng": 78.159,
+      "status": "verified",
+      "matched": "Dharmapuri, Tamil Nadu, 636700, India"
+    },
+    "TN:Dindigul": {
+      "lat": 10.3656,
+      "lng": 77.9693,
+      "status": "verified",
+      "matched": "Dindigul, Tamil Nadu, 624001, India"
+    },
+    "TN:Erode": {
+      "lat": 11.3306,
+      "lng": 77.7277,
+      "status": "verified",
+      "matched": "Erode, Tamil Nadu, 638001, India"
+    },
+    "TN:Kallakurichi": {
+      "lat": 11.7406,
+      "lng": 78.9637,
+      "status": "verified",
+      "matched": "Kallakuruchi, Kallakkurichi, Kallakurichi, Tamil Nadu, 606200, India"
+    },
+    "TN:Kancheepuram": {
+      "lat": 12.8364,
+      "lng": 79.7053,
+      "status": "verified",
+      "matched": "Kanchipuram, Chennai Metropolitan Area, Kancheepuram, Kanchipuram, Tamil Nadu, 631501, India"
+    },
+    "TN:Kanyakumari": {
+      "lat": 8.184,
+      "lng": 77.4315,
+      "status": "verified",
+      "matched": "Nagercoil, Agastheeswaram, Kanniyakumari, Tamil Nadu, 629001, India"
+    },
+    "TN:Karur": {
+      "lat": 10.9596,
+      "lng": 78.0808,
+      "status": "verified",
+      "matched": "Karur, Tamil Nadu, India"
+    },
+    "TN:Krishnageri": {
+      "lat": 12.5152,
+      "lng": 78.0094,
+      "status": "check",
+      "matched": "Krishnagiri, Tamil Nadu, India"
+    },
+    "TN:Madurai": {
+      "lat": 9.9261,
+      "lng": 78.1141,
+      "status": "check",
+      "matched": "Madurai, Madurai South, Madurai, Tamil Nadu, India"
+    },
+    "TN:Mayiladuthurai": {
+      "lat": 11.1019,
+      "lng": 79.6503,
+      "status": "verified",
+      "matched": "Mayiladuthurai, Tamil Nadu, 609129, India"
+    },
+    "TN:Nagapattinam": {
+      "lat": 10.7648,
+      "lng": 79.8431,
+      "status": "verified",
+      "matched": "Nagapattinam, Nagapattinam District, Tamil Nadu, 611001, India"
+    },
+    "TN:Namakkal": {
+      "lat": 11.2192,
+      "lng": 78.1679,
+      "status": "verified",
+      "matched": "Namakkal, Tamil Nadu, 637001, India"
+    },
+    "TN:Perambalur": {
+      "lat": 11.2357,
+      "lng": 78.8688,
+      "status": "verified",
+      "matched": "Perambalur, Tamil Nadu, India"
+    },
+    "TN:Pudukottai": {
+      "lat": 10.2903,
+      "lng": 78.8174,
+      "status": "check",
+      "matched": "Pudukkottai, Tamil Nadu, India"
+    },
+    "TN:Ramanathapuram": {
+      "lat": 9.5206,
+      "lng": 78.5185,
+      "status": "check",
+      "matched": "Ramanathapuram, Tamil Nadu, India"
+    },
+    "TN:Ranipet": {
+      "lat": 12.9292,
+      "lng": 79.3322,
+      "status": "verified",
+      "matched": "Ranipet, Wallajah, Ranipet, Tamil Nadu, 632401, India"
+    },
+    "TN:Salem": {
+      "lat": 11.6552,
+      "lng": 78.1582,
+      "status": "verified",
+      "matched": "Salem, Tamil Nadu, 636001, India"
+    },
+    "TN:Sivagangai": {
+      "lat": 9.9651,
+      "lng": 78.7204,
+      "status": "check",
+      "matched": "Sivagangai, Tamil Nadu, India"
+    },
+    "TN:Tenkasi": {
+      "lat": 8.9568,
+      "lng": 77.3121,
+      "status": "verified",
+      "matched": "Tenkasi, Tamil Nadu, 627800, India"
+    },
+    "TN:Thanjavur": {
+      "lat": 10.786,
+      "lng": 79.1381,
+      "status": "verified",
+      "matched": "Thanjavur, Tamil Nadu, 613001, India"
+    },
+    "TN:The Nilgiris": {
+      "lat": 11.4127,
+      "lng": 76.7031,
+      "status": "verified",
+      "matched": "Udhagamandalam, Nilgiris, Tamil Nadu, 643001, India"
+    },
+    "TN:Theni": {
+      "lat": 10.0108,
+      "lng": 77.481,
+      "status": "verified",
+      "matched": "Theni, Tamil Nadu, India"
+    },
+    "TN:Thirunelveli": {
+      "lat": 8.7332,
+      "lng": 77.7103,
+      "status": "verified",
+      "matched": "Tirunelveli, Tamil Nadu, 627001, India"
+    },
+    "TN:Thirupathur": {
+      "lat": 12.4909,
+      "lng": 78.5647,
+      "status": "verified",
+      "matched": "Tirupattur, Tirupathur, Tirupattur, Tamil Nadu, 635600, India"
+    },
+    "TN:Thiruvallur": {
+      "lat": 13.2538,
+      "lng": 80.0563,
+      "status": "check",
+      "matched": "Thiruvallur, Tamil Nadu, India"
+    },
+    "TN:Thiruvarur": {
+      "lat": 10.7667,
+      "lng": 79.6352,
+      "status": "verified",
+      "matched": "Thiruvarur, Tamil Nadu, 610001, India"
+    },
+    "TN:Tiruppur": {
+      "lat": 11.1018,
+      "lng": 77.3452,
+      "status": "verified",
+      "matched": "Tiruppur, Tiruppur South, Tiruppur, Tamil Nadu, 638600, India"
+    },
+    "TN:Tiruvannamalai": {
+      "lat": 12.2343,
+      "lng": 79.0762,
+      "status": "verified",
+      "matched": "Tiruvannamalai, Tamil Nadu, India"
+    },
+    "TN:Trichirappalli": {
+      "lat": 10.8071,
+      "lng": 78.6881,
+      "status": "check",
+      "matched": "Tiruchirappalli, Tiruchchirāppalli, Tiruchirappalli, Tamil Nadu, India"
+    },
+    "TN:Tuticorin": {
+      "lat": 8.8053,
+      "lng": 78.1453,
+      "status": "verified",
+      "matched": "Thoothukudi, Thoothukkudi, Thoothukudi, Tamil Nadu, 628001, India"
+    },
+    "TN:Vellore": {
+      "lat": 12.9072,
+      "lng": 79.131,
+      "status": "verified",
+      "matched": "Vellore, Tamil Nadu, 632012, India"
+    },
+    "TN:Viluppuram": {
+      "lat": 11.9398,
+      "lng": 79.4946,
+      "status": "check",
+      "matched": "Villupuram Municipality Park, Viluppuram, Tamil Nadu, 605600, India"
+    },
+    "TN:Virudhunagar": {
+      "lat": 9.4926,
+      "lng": 77.8632,
+      "status": "check",
+      "matched": "Virudhunagar, Tamil Nadu, India"
+    },
+    "UP:Agra": {
+      "lat": 27.1753,
+      "lng": 78.0098,
+      "status": "verified",
+      "matched": "Agra, Uttar Pradesh, 280001, India"
+    },
+    "UP:Aligarh": {
+      "lat": 27.8815,
+      "lng": 78.069,
+      "status": "verified",
+      "matched": "Aligarh, Koil, Aligarh, Uttar Pradesh, 202001, India"
+    },
+    "UP:Allahabad": {
+      "lat": 25.4381,
+      "lng": 81.8338,
+      "status": "verified",
+      "matched": "Prayagraj, Allahabad, Prayagraj, Uttar Pradesh, 211001, India"
+    },
+    "UP:Ambedkar Nagar": {
+      "lat": 26.4201,
+      "lng": 82.5383,
+      "status": "verified",
+      "matched": "Akbarpur, Ambedkar Nagar, Uttar Pradesh, 224122, India"
+    },
+    "UP:Amethi (Chatrapati Sahuji Mahraj Nagar)": {
+      "lat": 26.2071,
+      "lng": 81.6926,
+      "status": "verified",
+      "matched": "Gauriganj, Amethi, Uttar Pradesh, 227409, India"
+    },
+    "UP:Amroha (J.P. Nagar)": {
+      "lat": 28.9066,
+      "lng": 78.4707,
+      "status": "verified",
+      "matched": "Amroha, Uttar Pradesh, 244221, India"
+    },
+    "UP:Auraiya": {
+      "lat": 26.6558,
+      "lng": 79.5161,
+      "status": "check",
+      "matched": "Auraiya, Uttar Pradesh, India"
+    },
+    "UP:Azamgarh": {
+      "lat": 26.0654,
+      "lng": 83.1844,
+      "status": "verified",
+      "matched": "Azamgarh, Uttar Pradesh, 276001, India"
+    },
+    "UP:Baghpat": {
+      "lat": 28.9434,
+      "lng": 77.2193,
+      "status": "verified",
+      "matched": "Baghpat, Uttar Pradesh, 250609, India"
+    },
+    "UP:Bahraich": {
+      "lat": 27.5752,
+      "lng": 81.5954,
+      "status": "verified",
+      "matched": "Bahraich, Uttar Pradesh, 271801, India"
+    },
+    "UP:Ballia": {
+      "lat": 25.7557,
+      "lng": 84.1503,
+      "status": "verified",
+      "matched": "Ballia, Uttar Pradesh, 277001, India"
+    },
+    "UP:Balrampur": {
+      "lat": 27.4295,
+      "lng": 82.1855,
+      "status": "verified",
+      "matched": "Balrampur, Uttar Pradesh, 271200, India"
+    },
+    "UP:Banda": {
+      "lat": 25.4738,
+      "lng": 80.3313,
+      "status": "verified",
+      "matched": "Banda, Uttar Pradesh, 210001, India"
+    },
+    "UP:Barabanki": {
+      "lat": 26.9274,
+      "lng": 81.1948,
+      "status": "verified",
+      "matched": "Barabanki, Nawabganj, Barabanki, Uttar Pradesh, 225001, India"
+    },
+    "UP:Bareilly": {
+      "lat": 28.3551,
+      "lng": 79.4179,
+      "status": "verified",
+      "matched": "Bareilly, Uttar Pradesh, 243001, India"
+    },
+    "UP:Basti": {
+      "lat": 26.8387,
+      "lng": 82.5351,
+      "status": "check",
+      "matched": "Basti, Uttar Pradesh, India"
+    },
+    "UP:Bhadohi": {
+      "lat": 25.3335,
+      "lng": 82.4651,
+      "status": "verified",
+      "matched": "Gyanpur, Sant Ravidas Nagar, Uttar Pradesh, 221304, India"
+    },
+    "UP:Bijnor": {
+      "lat": 29.3695,
+      "lng": 78.1371,
+      "status": "verified",
+      "matched": "Bijnor, Uttar Pradesh, 246700, India"
+    },
+    "UP:Budaun": {
+      "lat": 28.0367,
+      "lng": 79.1234,
+      "status": "verified",
+      "matched": "Budaun, Badaun, Uttar Pradesh, 243600, India"
+    },
+    "UP:Bulandshahr": {
+      "lat": 28.4057,
+      "lng": 77.8543,
+      "status": "verified",
+      "matched": "Bulandshahr, Uttar Pradesh, 203001, India"
+    },
+    "UP:Chandauli": {
+      "lat": 25.1257,
+      "lng": 83.2495,
+      "status": "check",
+      "matched": "Chandauli, Uttar Pradesh, India"
+    },
+    "UP:Chitrakoot": {
+      "lat": 25.2171,
+      "lng": 81.1046,
+      "status": "check",
+      "matched": "Chitrakoot, Uttar Pradesh, India"
+    },
+    "UP:Deoria": {
+      "lat": 26.424,
+      "lng": 83.7639,
+      "status": "check",
+      "matched": "Deoria, Uttar Pradesh, India"
+    },
+    "UP:Etah": {
+      "lat": 27.56,
+      "lng": 78.6578,
+      "status": "verified",
+      "matched": "Etah, Uttar Pradesh, 207001, India"
+    },
+    "UP:Etawah": {
+      "lat": 26.7156,
+      "lng": 79.0917,
+      "status": "check",
+      "matched": "Etawah, Uttar Pradesh, India"
+    },
+    "UP:Faizabad": {
+      "lat": 26.7991,
+      "lng": 82.2052,
+      "status": "verified",
+      "matched": "Ayodhya, Faizabad, Ayodhya, Uttar Pradesh, 224123, India"
+    },
+    "UP:Farrukhabad": {
+      "lat": 27.3895,
+      "lng": 79.5791,
+      "status": "verified",
+      "matched": "Farrukhabad, Uttar Pradesh, 209625, India"
+    },
+    "UP:Fatehpur": {
+      "lat": 25.8348,
+      "lng": 80.9155,
+      "status": "check",
+      "matched": "Fatehpur, Uttar Pradesh, India"
+    },
+    "UP:Firozabad": {
+      "lat": 27.1528,
+      "lng": 78.3991,
+      "status": "verified",
+      "matched": "Firozabad, Uttar Pradesh, 283203, India"
+    },
+    "UP:Gautam Buddha Nagar": {
+      "lat": 28.5706,
+      "lng": 77.3272,
+      "status": "check",
+      "matched": "Noida, Dadri, Gautam Buddha Nagar, Uttar Pradesh, India"
+    },
+    "UP:Ghaziabad": {
+      "lat": 28.6712,
+      "lng": 77.412,
+      "status": "verified",
+      "matched": "Ghaziabad, Uttar Pradesh, 201001, India"
+    },
+    "UP:Ghazipur": {
+      "lat": 25.5874,
+      "lng": 83.5904,
+      "status": "verified",
+      "matched": "Ghazipur, Uttar Pradesh, 233001, India"
+    },
+    "UP:Gonda": {
+      "lat": 27.1335,
+      "lng": 81.962,
+      "status": "verified",
+      "matched": "Gonda, Uttar Pradesh, 271001, India"
+    },
+    "UP:Gorakhpur": {
+      "lat": 26.76,
+      "lng": 83.3668,
+      "status": "verified",
+      "matched": "Gorakhpur, Uttar Pradesh, 273001, India"
+    },
+    "UP:Hamirpur": {
+      "lat": 25.75,
+      "lng": 80,
+      "status": "check",
+      "matched": "Hamirpur, Uttar Pradesh, India"
+    },
+    "UP:Hapur (Panchsheel Nagar)": {
+      "lat": 28.7167,
+      "lng": 77.8904,
+      "status": "check",
+      "matched": "Hapur, Uttar Pradesh, India"
+    },
+    "UP:Hardoi": {
+      "lat": 27.3966,
+      "lng": 80.1253,
+      "status": "verified",
+      "matched": "Hardoi, Uttar Pradesh, 241001, India"
+    },
+    "UP:Hathras": {
+      "lat": 27.5976,
+      "lng": 78.0545,
+      "status": "verified",
+      "matched": "Hathras, Uttar Pradesh, 204101, India"
+    },
+    "UP:Jalaun": {
+      "lat": 26.1049,
+      "lng": 79.3919,
+      "status": "check",
+      "matched": "Jalaun, Uttar Pradesh, India"
+    },
+    "UP:Jaunpur": {
+      "lat": 25.7472,
+      "lng": 82.689,
+      "status": "verified",
+      "matched": "Jaunpur, Uttar Pradesh, 222001, India"
+    },
+    "UP:Jhansi": {
+      "lat": 25.5299,
+      "lng": 78.6528,
+      "status": "check",
+      "matched": "Jhansi, Uttar Pradesh, India"
+    },
+    "UP:Kannauj": {
+      "lat": 26.9987,
+      "lng": 79.6928,
+      "status": "check",
+      "matched": "Kannauj, Uttar Pradesh, India"
+    },
+    "UP:Kanpur Dehat": {
+      "lat": 26.3832,
+      "lng": 79.9488,
+      "status": "verified",
+      "matched": "Akbarpur, Kanpur Dehat, Uttar Pradesh, 209300, India"
+    },
+    "UP:Kanpur Nagar": {
+      "lat": 26.4609,
+      "lng": 80.3218,
+      "status": "verified",
+      "matched": "Kanpur, Kanpur Nagar, Uttar Pradesh, 208012, India"
+    },
+    "UP:Kanshiram Nagar (Kasganj)": {
+      "lat": 27.8077,
+      "lng": 78.6456,
+      "status": "verified",
+      "matched": "Kasganj, Uttar Pradesh, 207123, India"
+    },
+    "UP:Kaushambi": {
+      "lat": 25.5342,
+      "lng": 81.4494,
+      "status": "check",
+      "matched": "Kaushambi, Uttar Pradesh, India"
+    },
+    "UP:Kushinagar (Padrauna)": {
+      "lat": 26.9036,
+      "lng": 83.9793,
+      "status": "verified",
+      "matched": "Padrauna, Kushinagar, Uttar Pradesh, India"
+    },
+    "UP:Lakhimpur - Kheri": {
+      "lat": 27.9463,
+      "lng": 80.7815,
+      "status": "verified",
+      "matched": "Lakhimpur, Lakhimpur Kheri, Uttar Pradesh, 262701, India"
+    },
+    "UP:Lalitpur": {
+      "lat": 24.6936,
+      "lng": 78.4179,
+      "status": "verified",
+      "matched": "Lalitpur, Lalitpur Tehsil, Lalitpur, Uttar Pradesh, 284403, India"
+    },
+    "UP:Lucknow": {
+      "lat": 26.8381,
+      "lng": 80.9346,
+      "status": "verified",
+      "matched": "Lucknow, Uttar Pradesh, 226027, India"
+    },
+    "UP:Maharajganj": {
+      "lat": 27.1445,
+      "lng": 83.5623,
+      "status": "verified",
+      "matched": "Maharajganj, Mahrajganj, Uttar Pradesh, 273303, India"
+    },
+    "UP:Mahoba": {
+      "lat": 25.2887,
+      "lng": 79.8792,
+      "status": "verified",
+      "matched": "Mahoba, Uttar Pradesh, 210427, India"
+    },
+    "UP:Mainpuri": {
+      "lat": 27.2271,
+      "lng": 79.0272,
+      "status": "verified",
+      "matched": "Mainpuri, Uttar Pradesh, 205001, India"
+    },
+    "UP:Mathura": {
+      "lat": 27.4956,
+      "lng": 77.6856,
+      "status": "verified",
+      "matched": "Mathura, Uttar Pradesh, 281001, India"
+    },
+    "UP:Mau": {
+      "lat": 26.0391,
+      "lng": 83.4986,
+      "status": "check",
+      "matched": "Mau, Uttar Pradesh, India"
+    },
+    "UP:Meerut": {
+      "lat": 28.9963,
+      "lng": 77.7062,
+      "status": "verified",
+      "matched": "Meerut, Uttar Pradesh, 250001, India"
+    },
+    "UP:Mirzapur": {
+      "lat": 24.9317,
+      "lng": 82.628,
+      "status": "check",
+      "matched": "Mirzapur, Uttar Pradesh, India"
+    },
+    "UP:Moradabad": {
+      "lat": 28.8335,
+      "lng": 78.7733,
+      "status": "verified",
+      "matched": "Moradabad, Uttar Pradesh, 244001, India"
+    },
+    "UP:Muzaffarnagar": {
+      "lat": 29.4662,
+      "lng": 77.6962,
+      "status": "verified",
+      "matched": "Muzaffarnagar, Uttar Pradesh, 251001, India"
+    },
+    "UP:Pilibhit": {
+      "lat": 28.6295,
+      "lng": 79.8054,
+      "status": "verified",
+      "matched": "Pilibhit, Uttar Pradesh, 262001, India"
+    },
+    "UP:Pratapgarh": {
+      "lat": 25.75,
+      "lng": 81.75,
+      "status": "check",
+      "matched": "Pratapgarh, Uttar Pradesh, India"
+    },
+    "UP:RaeBareli": {
+      "lat": 26.2087,
+      "lng": 81.2186,
+      "status": "check",
+      "matched": "Raebareli, Uttar Pradesh, India"
+    },
+    "UP:Rampur": {
+      "lat": 28.8014,
+      "lng": 79.0284,
+      "status": "verified",
+      "matched": "Rampur, Uttar Pradesh, 244901, India"
+    },
+    "UP:Saharanpur": {
+      "lat": 29.9637,
+      "lng": 77.5427,
+      "status": "verified",
+      "matched": "Saharanpur, Uttar Pradesh, 247001, India"
+    },
+    "UP:Sambhal (Bhim Nagar)": {
+      "lat": 28.5852,
+      "lng": 78.5709,
+      "status": "verified",
+      "matched": "Sambhal, Uttar Pradesh, 244302, India"
+    },
+    "UP:Sant Kabir Nagar": {
+      "lat": 26.7726,
+      "lng": 83.0691,
+      "status": "verified",
+      "matched": "Khalilabad, Sant Kabir Nagar, Uttar Pradesh, 272175, India"
+    },
+    "UP:Shahjahanpur": {
+      "lat": 27.9129,
+      "lng": 79.7476,
+      "status": "check",
+      "matched": "Shahjahanpur, Uttar Pradesh, India"
+    },
+    "UP:Shamali (Prabuddh Nagar)": {
+      "lat": 29.4483,
+      "lng": 77.3088,
+      "status": "verified",
+      "matched": "Shamli, Uttar Pradesh, 247776, India"
+    },
+    "UP:Shravasti": {
+      "lat": 27.5083,
+      "lng": 82.0264,
+      "status": "verified",
+      "matched": "Sravasti, Ikauna, Sharavasti, Uttar Pradesh, India"
+    },
+    "UP:Siddharth Nagar": {
+      "lat": 27.2793,
+      "lng": 83.0856,
+      "status": "verified",
+      "matched": "Naugarh, Siddharthnagar, Uttar Pradesh, 272203, India"
+    },
+    "UP:Sitapur": {
+      "lat": 27.5616,
+      "lng": 80.684,
+      "status": "verified",
+      "matched": "Sitapur, Uttar Pradesh, 261001, India"
+    },
+    "UP:Sonbhadra": {
+      "lat": 24.4148,
+      "lng": 83.0638,
+      "status": "check",
+      "matched": "Sonbhadra, Uttar Pradesh, India"
+    },
+    "UP:Sultanpur": {
+      "lat": 26.2589,
+      "lng": 82.0717,
+      "status": "verified",
+      "matched": "Sultanpur, Uttar Pradesh, 228001, India"
+    },
+    "UP:Unnao": {
+      "lat": 26.5436,
+      "lng": 80.4871,
+      "status": "verified",
+      "matched": "Unnao, Uttar Pradesh, 209800, India"
+    },
+    "UP:Varanasi": {
+      "lat": 25.3356,
+      "lng": 83.0076,
+      "status": "verified",
+      "matched": "Varanasi, Sadar, Varanasi, Uttar Pradesh, 221001, India"
+    },
+    "WB:Alipurduar": {
+      "lat": 26.4852,
+      "lng": 89.5247,
+      "status": "verified",
+      "matched": "Alipurduar, Alipurduar - I, Alipurduar, West Bengal, 736121, India"
+    },
+    "WB:Bankura": {
+      "lat": 23.2356,
+      "lng": 87.066,
+      "status": "verified",
+      "matched": "Bankura, Bankura - I, Bankura, West Bengal, 722101, India"
+    },
+    "WB:Birbhum": {
+      "lat": 24.0622,
+      "lng": 87.6983,
+      "status": "check",
+      "matched": "Birbhum, West Bengal, India"
+    },
+    "WB:Cooch Behar": {
+      "lat": 26.3224,
+      "lng": 89.4592,
+      "status": "verified",
+      "matched": "Cooch Behar, Cooch Behar - I, Cooch Behar, West Bengal, 736101, India"
+    },
+    "WB:Dakshin Dinajpur (South Dinajpur)": {
+      "lat": 25.2234,
+      "lng": 88.7781,
+      "status": "verified",
+      "matched": "Balurghat, Dakshin Dinajpur, West Bengal, 733101, India"
+    },
+    "WB:Darjeeling": {
+      "lat": 27.0378,
+      "lng": 88.2632,
+      "status": "verified",
+      "matched": "Darjeeling, Darjeeling Pulbazar, Darjeeling, West Bengal, 734101, India"
+    },
+    "WB:Hooghly": {
+      "lat": 22.8992,
+      "lng": 88.3921,
+      "status": "verified",
+      "matched": "Hugli-Chuchura, Greater Kolkata, Chinsurah - Magra, Hooghly, West Bengal, 712101, India"
+    },
+    "WB:Howrah": {
+      "lat": 22.5736,
+      "lng": 88.3251,
+      "status": "check",
+      "matched": "Howrah, West Bengal, India"
+    },
+    "WB:Jalpaiguri": {
+      "lat": 26.5242,
+      "lng": 88.7198,
+      "status": "verified",
+      "matched": "Jalpaiguri, Jalpaiguri Sadar Block, Jalpaiguri District, West Bengal, 735101, India"
+    },
+    "WB:Jhargram": {
+      "lat": 22.4539,
+      "lng": 86.9949,
+      "status": "verified",
+      "matched": "Jhargram, West Bengal, 721507, India"
+    },
+    "WB:Kalimpong": {
+      "lat": 27.0703,
+      "lng": 88.4724,
+      "status": "verified",
+      "matched": "Kalimpong, Kalimpong -I, Kalimpong, West Bengal, 734316, India"
+    },
+    "WB:Kolkata": {
+      "lat": 22.5726,
+      "lng": 88.3639,
+      "status": "check",
+      "matched": "Kolkata, Greater Kolkata, Kolkata, West Bengal, India"
+    },
+    "WB:Malda": {
+      "lat": 25.0057,
+      "lng": 88.1398,
+      "status": "verified",
+      "matched": "Malda, English Bazar, Maldah, West Bengal, 732101, India"
+    },
+    "WB:Murshidabad": {
+      "lat": 24.1746,
+      "lng": 88.2721,
+      "status": "verified",
+      "matched": "Murshidabad, Murshidabad Jiaganj, Murshidabad, West Bengal, 742149, India"
+    },
+    "WB:Nadia": {
+      "lat": 23.4847,
+      "lng": 88.5567,
+      "status": "check",
+      "matched": "Nadia, West Bengal, India"
+    },
+    "WB:North 24 Parganas": {
+      "lat": 22.7191,
+      "lng": 88.4826,
+      "status": "verified",
+      "matched": "Barasat, Barasat - I, North 24 Parganas, West Bengal, 700124, India"
+    },
+    "WB:Paschim (West) Burdwan (Bardhaman)": {
+      "lat": 23.6869,
+      "lng": 86.9746,
+      "status": "check",
+      "matched": "Asansol, Asansol Kulti Township, Paschim Bardhaman, West Bengal, India"
+    },
+    "WB:Paschim Medinipur (West Medinipur)": {
+      "lat": 22.4207,
+      "lng": 87.327,
+      "status": "verified",
+      "matched": "Medinipur, Midnapore, Paschim Medinipur, West Bengal, 721101, India"
+    },
+    "WB:Purba Burdwan (Bardhaman)": {
+      "lat": 23.2496,
+      "lng": 87.8682,
+      "status": "verified",
+      "matched": "Bardhaman, Burdwan - I, Purba Bardhaman, West Bengal, India"
+    },
+    "WB:Purba Medinipur (East Medinipur)": {
+      "lat": 22.2897,
+      "lng": 87.9256,
+      "status": "verified",
+      "matched": "Tamluk, Purba Medinipur, West Bengal, 721600, India"
+    },
+    "WB:Purulia": {
+      "lat": 23.3292,
+      "lng": 86.3672,
+      "status": "verified",
+      "matched": "Purulia, Purulia - II, Purulia, West Bengal, 723101, India"
+    },
+    "WB:South 24 Parganas": {
+      "lat": 22.5265,
+      "lng": 88.3324,
+      "status": "verified",
+      "matched": "Alipore, Kolkata, Greater Kolkata, Kolkata, West Bengal, 700027, India"
+    },
+    "WB:Uttar Dinajpur (North Dinajpur)": {
+      "lat": 25.6272,
+      "lng": 88.1318,
+      "status": "verified",
+      "matched": "Raiganj, Uttar Dinajpur, West Bengal, 733134, India"
+    }
+  }
+}
