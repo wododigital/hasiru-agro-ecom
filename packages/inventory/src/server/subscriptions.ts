@@ -19,8 +19,10 @@ export function setNotificationsProvider(next: SenderProvider): void {
   senderProvider = next;
 }
 
+const MAX_PENDING_PER_CONTACT = 5;
+
 export class SubscribeError extends Error {
-  constructor(readonly code: 'unknown_variant' | 'invalid_phone') {
+  constructor(readonly code: 'unknown_variant' | 'invalid_phone' | 'too_many') {
     super(code);
     this.name = 'SubscribeError';
   }
@@ -34,6 +36,12 @@ export async function subscribe(input: NotifyMeInput | Record<string, unknown>):
   const email = v.email?.toLowerCase() ?? null;
   const [level] = await db.select({ productId: inventoryLevel.productId }).from(inventoryLevel).where(eq(inventoryLevel.variantId, v.variantId));
   if (!level) throw new SubscribeError('unknown_variant');
+  // Contacts are not verified, so cap pending alerts per phone/email: limits how much a stranger can enrol someone else.
+  const { rows: pending } = await db.execute<{ n: number }>(sql`
+    select count(*)::int as n from inventory_subscription
+    where notified_at is null and variant_id <> ${v.variantId}
+      and ((${phone}::text is not null and phone = ${phone}) or (${email}::text is not null and email = ${email}))`);
+  if ((pending[0]?.n ?? 0) >= MAX_PENDING_PER_CONTACT) throw new SubscribeError('too_many');
   const { rows } = await db.execute<{ id: string }>(sql`
     insert into inventory_subscription (id, variant_id, product_id, phone, email)
     values (${newId()}, ${v.variantId}, ${level.productId}, ${phone}, ${email})

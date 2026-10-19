@@ -1,4 +1,4 @@
-import { hashIp, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
+import { clientIp, hashIp, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
 import { formGuards } from '@ecomkit/core/validation';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import { getSettings } from '@ecomkit/core/settings';
@@ -7,10 +7,6 @@ import { notifyMeSchema } from '../domain';
 import { inventorySettings, subscribe, SubscribeError } from '../server';
 
 const json = (status: number, body: object) => Response.json(body, { status, headers: { 'cache-control': 'no-store' } });
-
-function clientIp(req: Request): string | null {
-  return req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip');
-}
 
 /**
  * POST /api/notify-me `{ variantId, phone?, email?, consent: true }`: back-in-stock subscription.
@@ -36,7 +32,7 @@ export async function POST(req: Request): Promise<Response> {
   try {
     await subscribe(parsed.data);
   } catch (err) {
-    if (err instanceof SubscribeError) return json(err.code === 'unknown_variant' ? 404 : 400, { ok: false, error: err.code });
+    if (err instanceof SubscribeError) return json(err.code === 'unknown_variant' ? 404 : err.code === 'too_many' ? 429 : 400, { ok: false, error: err.code });
     throw err;
   }
   return json(201, { ok: true });

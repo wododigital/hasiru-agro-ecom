@@ -38,7 +38,7 @@ const post = (body: unknown, headers: Record<string, string> = {}) =>
   POST(
     new Request('http://localhost/api/notify-me', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-forwarded-for': `10.0.0.${++ip}`, ...headers },
+      headers: { 'content-type': 'application/json', 'x-real-ip': `10.0.0.${++ip}`, ...headers },
       body: typeof body === 'string' ? body : JSON.stringify(body),
     }),
   );
@@ -122,10 +122,19 @@ describe('POST /api/notify-me', () => {
     expect(await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.variantId, v.variantId))).toHaveLength(0);
   });
 
+  it('caps pending alerts per contact at 5 variants', async () => {
+    const codes: string[] = [];
+    for (let i = 0; i < 6; i++) {
+      const v = await makeLevel(0);
+      codes.push(await subscribe({ variantId: v.variantId, email: 'victim@example.com', consent: true }).then(() => 'ok', (e) => e.code));
+    }
+    expect(codes).toEqual(['ok', 'ok', 'ok', 'ok', 'ok', 'too_many']);
+  });
+
   it('rate limits 10 requests per hour per IP', async () => {
     const v = await makeLevel(0);
     const statuses: number[] = [];
-    for (let i = 0; i < 11; i++) statuses.push((await post({ variantId: v.variantId, email: `r${i}@example.com`, consent: true }, { 'x-forwarded-for': '10.9.9.9' })).status);
+    for (let i = 0; i < 11; i++) statuses.push((await post({ variantId: v.variantId, email: `r${i}@example.com`, consent: true }, { 'x-real-ip': '10.9.9.9' })).status);
     expect(statuses.slice(0, 10).every((s) => s === 201)).toBe(true);
     expect(statuses[10]).toBe(429);
   });
