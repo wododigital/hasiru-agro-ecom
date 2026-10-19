@@ -1,0 +1,138 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import type { SeedContext, SeedResult } from '@ecomkit/core/contracts';
+import { db } from '@ecomkit/core/db';
+import { z } from 'zod';
+import { isPolicySlug, menuItemsSchema, pageSlugSchema, parseBlock, type Block } from '../domain';
+import { cmsCounter, cmsMenu, cmsPage, cmsTeamMember, cmsTestimonial, cmsTrustClaim } from '../schema';
+import { saveMenu } from './menus';
+import { savePage } from './pages';
+import { cmsRuntime } from './runtime';
+
+const page = z.object({
+  slug: z.string(),
+  title: z.string(),
+  template: z.enum(['default', 'landing', 'policy', 'service']).optional(),
+  status: z.enum(['draft', 'published']).default('draft'),
+  noindex: z.boolean().default(false),
+  blocks: z.array(z.object({ type: z.string(), props: z.record(z.string(), z.unknown()).default({}), sort: z.number().default(0) })).default([]),
+  seo: z.object({ title: z.string().nullish(), description: z.string().nullish() }).default({}),
+});
+const link = z.object({ label: z.string(), href: z.string(), external: z.boolean().optional() });
+const fileSchema = z.object({
+  records: z.object({
+    pages: z.array(page).default([]),
+    menus: z.array(z.object({ key: z.string(), label: z.string().default(''), items: z.array(link.extend({ children: z.array(link).default([]) })).default([]) })).default([]),
+    testimonials: z.array(z.object({ key: z.string(), author: z.string(), location: z.string().nullish(), body: z.string(), source: z.string().nullish(), sort: z.number().default(0) })).default([]),
+    team: z.array(z.object({ key: z.string(), name: z.string(), role: z.string().nullish(), bio: z.string().nullish(), sort: z.number().default(0) })).default([]),
+    trust_claims: z.array(z.object({ key: z.string(), label: z.string(), value: z.string().nullish(), logo: z.string().nullish(), visible: z.boolean().default(false), sort: z.number().default(0) })).default([]),
+    counters: z.array(z.object({ key: z.string(), label: z.string(), value: z.number().int(), suffix: z.string().nullish(), verified: z.boolean().default(false), sort: z.number().default(0) })).default([]),
+  }),
+});
+
+/**
+ * Seed hook `content`: data/seed/cms.json. Inserts only what is missing (by slug or key) and never overwrites
+ * admin edits, so a second run changes nothing. Policy pages are always seeded as draft + noindex, whatever the
+ * file says: they publish only when the store owner approves the wording. Blocks that do not validate are skipped
+ * with a note.
+ */
+export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
+  const file = join(ctx.seedDir, 'cms.json');
+  if (!existsSync(file)) return { inserted: 0, updated: 0, skipped: 0, notes: ['cms.json not found'] };
+  const { records } = fileSchema.parse(JSON.parse(readFileSync(file, 'utf8')));
+  const r = { inserted: 0, updated: 0, skipped: 0, notes: [] as string[] };
+  const keys = async <T>(rows: Promise<T[]>, pick: (row: T) => string | null) => new Set((await rows).map(pick).filter(Boolean));
+
+  const existingPages = await keys(db.select({ slug: cmsPage.slug }).from(cmsPage), (x) => x.slug);
+  for (const p of records.pages) {
+    const slug = pageSlugSchema.safeParse(p.slug);
+    if (!slug.success || existingPages.has(slug.data)) {
+      r.skipped++;
+      if (!slug.success) r.notes.push(`page ${p.slug}: invalid slug`);
+      continue;
+    }
+    const blocks = [...p.blocks]
+      .sort((a, b) => a.sort - b.sort)
+      .map((b) => {
+        const block = parseBlock(b.type, b.props);
+        if (!block) r.notes.push(`page ${slug.data}: block ${b.type} skipped (unknown type or invalid data)`);
+        return block;
+      })
+      .filter((b): b is Block => b !== null);
+    const policy = isPolicySlug(slug.data) || p.template === 'policy';
+    if (!ctx.dryRun) {
+      await savePage(
+        null,
+        {
+          slug: slug.data,
+          title: p.title,
+          titleKn: undefined,
+          status: policy ? 'draft' : p.status,
+          template: policy ? 'policy' : (p.template ?? 'default'),
+          seoTitle: p.seo.title ?? undefined,
+          seoDescription: p.seo.description ?? undefined,
+          noindex: policy ? true : p.noindex,
+          publishedAt: null,
+          blocks,
+        },
+        null,
+      );
+    }
+    r.inserted++;
+  }
+
+  const existingMenus = await keys(db.select({ key: cmsMenu.key }).from(cmsMenu), (x) => x.key);
+  for (const m of records.menus) {
+    if (existingMenus.has(m.key)) {
+      r.skipped++;
+      continue;
+    }
+    const items = menuItemsSchema.safeParse(m.items);
+    if (!items.success) {
+      r.skipped++;
+      r.notes.push(`menu ${m.key}: invalid links`);
+      continue;
+    }
+    if (!ctx.dryRun) await saveMenu(m.key, m.label, items.data, null);
+    r.inserted++;
+  }
+
+  const insertMissing = async <T>(rows: readonly T[], existing: Set<string | null>, key: (row: T) => string, insert: (rows: T[]) => Promise<unknown>) => {
+    const fresh = rows.filter((x) => !existing.has(key(x)));
+    r.skipped += rows.length - fresh.length;
+    if (fresh.length && !ctx.dryRun) await insert(fresh);
+    r.inserted += fresh.length;
+  };
+
+  await insertMissing(
+    records.testimonials,
+    await keys(db.select({ key: cmsTestimonial.key }).from(cmsTestimonial), (x) => x.key),
+    (x) => x.key,
+    (rows) =>
+      db.insert(cmsTestimonial).values(rows.map((t) => ({ key: t.key, name: t.author, location: t.location ?? null, body: t.body, source: t.source ?? null, position: t.sort, status: 'published' as const }))),
+  );
+  await insertMissing(
+    records.team,
+    await keys(db.select({ key: cmsTeamMember.key }).from(cmsTeamMember), (x) => x.key),
+    (x) => x.key,
+    (rows) => db.insert(cmsTeamMember).values(rows.map((t) => ({ key: t.key, name: t.name, role: t.role ?? null, bio: t.bio ?? null, position: t.sort, status: 'published' as const }))),
+  );
+  await insertMissing(
+    records.counters,
+    await keys(db.select({ key: cmsCounter.key }).from(cmsCounter), (x) => x.key),
+    (x) => x.key,
+    (rows) => db.insert(cmsCounter).values(rows.map((c) => ({ key: c.key, label: c.label, value: c.value, suffix: c.suffix ?? null, verified: c.verified, position: c.sort }))),
+  );
+  const logos = records.trust_claims.flatMap((t) => (t.logo ? [t.logo] : []));
+  const logoIds = logos.length && cmsRuntime().resolveMediaIds ? await cmsRuntime().resolveMediaIds!(logos) : {};
+  await insertMissing(
+    records.trust_claims,
+    await keys(db.select({ key: cmsTrustClaim.key }).from(cmsTrustClaim), (x) => x.key),
+    (x) => x.key,
+    (rows) =>
+      db.insert(cmsTrustClaim).values(rows.map((t) => ({ key: t.key, label: t.label, value: t.value ?? null, logoMediaId: t.logo ? (logoIds[t.logo] ?? null) : null, show: t.visible, position: t.sort }))),
+  );
+
+  ctx.log.info('cms content seeded', { inserted: r.inserted, skipped: r.skipped });
+  return r;
+}
