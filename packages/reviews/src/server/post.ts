@@ -1,4 +1,5 @@
-import { NotFoundError } from '@ecomkit/core/auth-context';
+import { getViewer, NotFoundError } from '@ecomkit/core/auth-context';
+import { isSameOrigin, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
 import { formDataToObject } from '@ecomkit/core/validation';
 import { ZodError } from 'zod';
 import type { ReviewOutcome } from '../messages';
@@ -19,11 +20,17 @@ export async function handleReviewPost(req: Request): Promise<Response> {
     if (productId && outcome !== 'sent') q.set('product', productId);
     return new Response(null, { status: 303, headers: { location: `/account/reviews?${q}` } });
   };
-  if (Number(req.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return reply('photos', 413);
+  const toLogin = () => (wantsJson ? Response.json({ ok: false, outcome: 'not_found' }, { status: 404 }) : new Response(null, { status: 303, headers: { location: '/account/login' } }));
+  // Cookie-authenticated multipart POST: reject cross-site requests (CSRF) and anonymous callers before reading a byte.
+  if (!isSameOrigin(req)) return new Response(null, { status: 403 });
+  if ((await getViewer()).kind !== 'customer') return toLogin();
   let form: FormData;
   try {
-    form = await req.formData();
-  } catch {
+    // The cap is enforced on bytes actually read, not on the (optional, spoofable) Content-Length.
+    const body = await readRawBody(req, MAX_BODY_BYTES);
+    form = await new Response(new Uint8Array(body), { headers: { 'content-type': req.headers.get('content-type') ?? '' } }).formData();
+  } catch (err) {
+    if (err instanceof PayloadTooLargeError) return reply('photos', 413);
     return reply('invalid', 400);
   }
   const values = formDataToObject(form);
@@ -41,7 +48,7 @@ export async function handleReviewPost(req: Request): Promise<Response> {
     if (err instanceof ZodError) return reply('invalid', 400, productId);
     if (err instanceof ReviewError) return reply(err.code, err.code === 'rate_limited' ? 429 : 400, productId);
     // Not signed in: same 404 as any other customer-only resource.
-    if (err instanceof NotFoundError) return wantsJson ? Response.json({ ok: false, outcome: 'not_found' }, { status: 404 }) : new Response(null, { status: 303, headers: { location: '/account/login' } });
+    if (err instanceof NotFoundError) return toLogin();
     throw err;
   }
 }
