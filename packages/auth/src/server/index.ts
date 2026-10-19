@@ -2,7 +2,7 @@ import 'server-only';
 
 // Public server API of @ecomkit/auth.
 export { authOptions, getAuth, type Auth } from './auth';
-export { configureAuth, clientIp, type AuthDeps } from './config';
+export { configureAuth, type AuthDeps } from './config';
 export { sendOtp, verifyOtp, type SendOtpResult, type VerifyOtpResult } from './otp';
 export {
   acceptInvite,

@@ -46,7 +46,3 @@ export async function requestHeaders(): Promise<Headers> {
   return new Headers(await headers());
 }
 
-/** nginx sets x-real-ip; x-forwarded-for is the fallback for other proxies. */
-export function clientIp(headers: Headers): string | null {
-  return headers.get('x-real-ip') ?? headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;
-}

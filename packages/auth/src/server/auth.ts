@@ -51,7 +51,8 @@ export function authOptions() {
     session: { expiresIn: CUSTOMER_SESSION_SEC, updateAge: 24 * 3600 },
     advanced: {
       cookiePrefix: 'ek',
-      ipAddress: { ipAddressHeaders: ['x-real-ip', 'x-forwarded-for'] },
+      // Only nginx's X-Real-IP is trusted (X-Forwarded-For is client-controlled), same as core clientIp.
+      ipAddress: { ipAddressHeaders: ['x-real-ip'] },
       database: { generateId: () => newId() },
     },
     databaseHooks: {

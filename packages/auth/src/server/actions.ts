@@ -3,7 +3,7 @@
 import { headers as nextHeaders } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { safeNextPath } from '../domain';
-import { clientIp } from './config';
+import { clientIp } from '@ecomkit/core/http';
 import { sendOtp, verifyOtp } from './otp';
 import { acceptInvite, beginTotpEnrolment, confirmTotpEnrolment, signInStaff, signOut, verifyStaffSecondFactor } from './staff';
 
@@ -47,7 +47,7 @@ export async function customerLoginAction(prev: CustomerLoginState, form: FormDa
       ? { step: 'code', identifier, error: 'rate_limited', retryAfterSec: result.retryAfterSec }
       : { step: 'code', identifier, error: 'invalid_code' };
   }
-  const result = await sendOtp({ identifier, ip: clientIp(headers) });
+  const result = await sendOtp({ identifier, ip: clientIp({ headers }) });
   if (result.status === 'invalid') return { step: 'start', identifier, error: 'invalid_identifier' };
   if (result.status === 'rate_limited') return { step: prev.step, identifier, error: 'rate_limited', retryAfterSec: result.retryAfterSec };
   return { step: 'code', identifier, error: null, resent: prev.step === 'code' };
@@ -82,7 +82,7 @@ export async function staffLoginAction(prev: StaffLoginState, form: FormData): P
     return { ...prev, step: 'enrol_confirm', error: 'code_invalid' };
   }
 
-  const result = await signInStaff({ email: field(form, 'email'), password: field(form, 'password'), ip: clientIp(headers), requestHeaders: headers });
+  const result = await signInStaff({ email: field(form, 'email'), password: field(form, 'password'), ip: clientIp({ headers }), requestHeaders: headers });
   switch (result.status) {
     case 'two_factor':
       return { step: 'second_factor', method: 'totp', error: null };
