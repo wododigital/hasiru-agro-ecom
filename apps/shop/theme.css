@@ -1,0 +1,41 @@
+/*
+ * Hasiru Agro theme: overrides the @ecomkit/ui semantic tokens. Only this file and
+ * packages/ui/src/tokens.css carry colour literals. Fonts come from next/font in app/layout.tsx.
+ * [data-surface='shop'] re-applies the theme inside the admin layout (UI stories page).
+ * Muted is the earth tone darkened from #8B7355 (4.1:1 on cream) to pass WCAG AA (6:1).
+ */
+:root,
+[data-surface='shop'] {
+  --color-bg: #faf6e9;
+  --color-surface: #ffffff;
+  --color-surface-2: #f0ead6;
+  --color-text: #2c2c2c;
+  --color-muted: #6e5a42;
+  --color-border: #e2dccb;
+
+  --color-primary: #1b4332;
+  --color-primary-fg: #ffffff;
+  --color-primary-hover: #2d6a4f;
+  --color-primary-strong: #0f2b1f;
+  --color-accent: #fdc717;
+  --color-accent-fg: #0f2b1f;
+
+  --color-success: #2d6a4f;
+  --color-warning: #7a5200;
+  --color-danger: #b3261e;
+  --color-ring: #2d6a4f;
+  --color-overlay: rgb(15 43 31 / 0.55);
+
+  --color-role-main: #1b4332;
+  --color-role-host: #c08a1e;
+  --color-role-biomass: #7fb069;
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+
+  --font-display: var(--font-dm-serif-display), Georgia, serif;
+  --font-body: var(--font-outfit), system-ui, sans-serif;
+
+  --shadow-card: 0 6px 24px rgb(15 43 31 / 0.08);
+}

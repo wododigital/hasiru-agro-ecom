@@ -3,3 +3,20 @@
 latest_products.xlsx
 images/
 latest_products.numbers
+
+# build swarm
+.worktrees/
+node_modules/
+.next/
+.turbo/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+.lighthouseci/
+data/media/derivatives/

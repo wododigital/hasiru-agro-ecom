@@ -1,0 +1,31 @@
+{
+  "name": "hasiru-agro-ecom",
+  "private": true,
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "e2e": "pnpm -F shop e2e",
+    "e2e:minimal": "pnpm -F minimal e2e",
+    "dev": "pnpm -F shop dev",
+    "db:fresh": "tsx tooling/scripts/db-fresh.ts",
+    "modules:sync": "tsx tooling/scripts/modules-sync.ts",
+    "seed:build": "tsx tooling/scripts/seed/run.ts build",
+    "seed:load": "tsx tooling/scripts/seed/run.ts load",
+    "cta-coverage": "tsx tooling/scripts/cta-coverage.ts"
+  },
+  "devDependencies": {
+    "@tooling/eslint": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  }
+}

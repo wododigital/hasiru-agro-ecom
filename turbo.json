@@ -1,0 +1,50 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "agentGuidance": false,
+  "ui": "stream",
+  "globalDependencies": [
+    "tooling/tsconfig/*.json",
+    "eslint.config.js",
+    "tooling/eslint/**"
+  ],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "DATABASE_ADMIN_URL",
+    "TEST_DATABASE_URL"
+  ],
+  "tasks": {
+    "typecheck": {
+      "dependsOn": [
+        "^typecheck"
+      ],
+      "outputs": []
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": [],
+      "cache": false
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "env": [
+        "SITE_URL",
+        "GIT_SHA",
+        "NEXT_PUBLIC_*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
+    },
+    "e2e": {
+      "dependsOn": [
+        "build"
+      ],
+      "cache": false
+    }
+  }
+}

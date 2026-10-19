@@ -1,0 +1,130 @@
+/*
+ * @ecomkit/ui semantic design tokens. The only file in packages/ that may contain colour literals.
+ * Defaults are brand-neutral so any store works without a theme; a store's theme.css overrides
+ * the same variables on :root. Utilities: bg-primary, text-muted, border-border, rounded-md,
+ * font-display, shadow-card, and so on. Tailwind's default palette is switched off on purpose.
+ *
+ * Import order in an app's globals.css:
+ *   @import 'tailwindcss';  @import '@ecomkit/ui/tokens.css';  @import '../theme.css';
+ */
+@import 'tw-animate-css';
+
+@theme static {
+  --color-*: initial;
+
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f4f5;
+  --color-text: #18181b;
+  --color-muted: #52525b;
+  --color-border: #e4e4e7;
+
+  --color-primary: #18181b;
+  --color-primary-fg: #ffffff;
+  /* Hover and strong (dark band) shades of primary. */
+  --color-primary-hover: #3f3f46;
+  --color-primary-strong: #09090b;
+  --color-accent: #2563eb;
+  --color-accent-fg: #ffffff;
+
+  --color-success: #15803d;
+  --color-warning: #8a5a00;
+  --color-danger: #b91c1c;
+  --color-ring: #2563eb;
+  --color-overlay: rgb(9 9 11 / 0.55);
+
+  /* Planting roles (M / X / O). Fills, not text backgrounds: pair them with text-text, not white. */
+  --color-role-main: #3f3f46;
+  --color-role-host: #a16207;
+  --color-role-biomass: #65a30d;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --font-display: ui-serif, Georgia, serif;
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 6px 24px rgb(0 0 0 / 0.08);
+
+  --animate-marquee: ecomkit-marquee var(--marquee-duration, 30s) linear infinite;
+  @keyframes ecomkit-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--color-primary);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+  /* Number inputs never show spinners; QtyStepper owns the buttons. */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Admin surface: neutral palette, no display serif. The admin root layout wraps children in data-surface="admin". */
+  [data-surface='admin'] {
+    --color-bg: #f1f1f1;
+    --color-surface: #ffffff;
+    --color-surface-2: #f7f7f7;
+    --color-text: #303030;
+    --color-muted: #616161;
+    --color-border: #e3e3e3;
+    --color-primary: #303030;
+    --color-primary-fg: #ffffff;
+    --color-primary-hover: #1a1a1a;
+    --color-primary-strong: #1a1a1a;
+    --color-accent: #005bd3;
+    --color-accent-fg: #ffffff;
+    --color-success: #0c7a43;
+    --color-warning: #8a6116;
+    --color-danger: #c4291c;
+    --color-ring: #005bd3;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font-display: var(--font-body);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.08), 0 0 0 1px rgb(0 0 0 / 0.04);
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+}

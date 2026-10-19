@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import '@ecomkit/ui/tokens.css';
+@import '../theme.css';
+
+/*
+ * Module UI lives in workspace packages; Tailwind does not scan node_modules on its own.
+ * The glob must end in a file pattern: a bare wildcard directory (packages, star, src) matches nothing.
+ */
+@source '../../../packages/*/src/**/*.{ts,tsx}';

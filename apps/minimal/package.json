@@ -1,0 +1,52 @@
+{
+  "name": "minimal",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3100",
+    "build": "next build",
+    "start": "next start --port 3100",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run --passWithNoTests",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@ecomkit/auth": "workspace:*",
+    "@ecomkit/cart": "workspace:*",
+    "@ecomkit/catalog": "workspace:*",
+    "@ecomkit/checkout": "workspace:*",
+    "@ecomkit/core": "workspace:*",
+    "@ecomkit/customers": "workspace:*",
+    "@ecomkit/inventory": "workspace:*",
+    "@ecomkit/media": "workspace:*",
+    "@ecomkit/orders": "workspace:*",
+    "@ecomkit/payments": "workspace:*",
+    "@ecomkit/pricing": "workspace:*",
+    "@ecomkit/seo": "workspace:*",
+    "@ecomkit/ui": "workspace:*",
+    "next": "catalog:",
+    "pg": "catalog:",
+    "pg-boss": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "sharp": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@tailwindcss/postcss": "catalog:",
+    "@tooling/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "babel-plugin-react-compiler": "catalog:",
+    "drizzle-kit": "catalog:",
+    "eslint": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}
