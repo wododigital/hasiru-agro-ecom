@@ -39,9 +39,13 @@ export async function subscribe(input: NotifyMeInput | Record<string, unknown>):
   // Contacts are not verified, so one phone/email can hold at most MAX_PENDING_PER_CONTACT pending alerts.
   // Past the cap a new signup is silently dropped (the route answers 201 either way: no enumeration oracle),
   // existing rows are never deleted by anonymous input, and re-arming an existing row is always allowed.
-  // The per-contact advisory lock makes count + insert atomic under concurrent requests.
+  // Per-contact advisory locks make count + insert atomic under concurrent requests.
   return withTx(async (tx) => {
-    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`notify-me:${phone ?? ''}|${email ?? ''}`}))`);
+    // One lock per contact (phone first, then email: fixed order, no deadlock) so a phone-only and a
+    // phone+email request for the same phone serialise too.
+    for (const key of [phone && `notify-me:phone:${phone}`, email && `notify-me:email:${email}`]) {
+      if (key) await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${key}))`);
+    }
     const { rows: pending } = await tx.execute<{ n: number }>(sql`
       select count(*)::int as n from inventory_subscription
       where notified_at is null
