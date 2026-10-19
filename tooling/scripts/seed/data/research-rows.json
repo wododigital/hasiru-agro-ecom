@@ -1,0 +1,2909 @@
+[
+ {
+  "row": 4,
+  "display": "Amla",
+  "scientific": "Phyllanthus emblica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0014",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 5,
+  "display": "Anjeer (Fig)",
+  "scientific": "Ficus carica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA0016",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 6,
+  "display": "Anna Apple",
+  "scientific": "Malus domestica",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0018",
+  "price": 390,
+  "bulk": 280,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 7,
+  "display": "Dorset Apple",
+  "scientific": "Malus domestica",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0021",
+  "price": 390,
+  "bulk": 280,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 8,
+  "display": "Hariman-99 Apple",
+  "scientific": "Malus domestica",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0022",
+  "price": 420,
+  "bulk": 300,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 9,
+  "display": "Thirthahalli Arecanut",
+  "scientific": "Areca catechu",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "exact",
+  "woo_sku": "HA0026",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 10,
+  "display": "Ber (Bore hannu)",
+  "scientific": "Ziziphus mauritiana",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00191",
+  "price": 140,
+  "bulk": 100,
+  "bulk_min_qty": 200,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 11,
+  "display": "Cashewnut",
+  "scientific": "Anacardium occidentale",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 150,
+  "bulk": 110,
+  "bulk_min_qty": 50,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 12,
+  "display": "Cricket ball Sapota (Chikku)",
+  "scientific": "Manilkara zapota",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0046",
+  "price": 365,
+  "bulk": 265,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 13,
+  "display": "Kalapatti Sapota (Chikku)",
+  "scientific": "Manilkara zapota",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0047",
+  "price": 365,
+  "bulk": 265,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 14,
+  "display": "Dwarf Coconut",
+  "scientific": "Cocos nucifera",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "none",
+  "woo_sku": null,
+  "price": 450,
+  "bulk": 325,
+  "bulk_min_qty": 50,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 15,
+  "display": "Tiptur Tall Coconut",
+  "scientific": "Cocos nucifera",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "exact",
+  "woo_sku": "HA0053",
+  "price": 420,
+  "bulk": 300,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 16,
+  "display": "Custard Apple",
+  "scientific": "Annona squamosa",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0055",
+  "price": 280,
+  "bulk": 200,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 17,
+  "display": "Pink Guava",
+  "scientific": "Psidium guajava",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA002",
+  "price": 420,
+  "bulk": 300,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 18,
+  "display": "White Guava",
+  "scientific": "Psidium guajava",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00150",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 19,
+  "display": "Hog plum (Amatekai)",
+  "scientific": "Spondias pinnata",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0074",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 20,
+  "display": "Gumless Jackfruit",
+  "scientific": "Artocarpus heterophyllus",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0070",
+  "price": 530,
+  "bulk": 380,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 21,
+  "display": "J-33 Jackfruit",
+  "scientific": "Artocarpus heterophyllus",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00143",
+  "price": 530,
+  "bulk": 380,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 22,
+  "display": "Red honey Jackfruit",
+  "scientific": "Artocarpus heterophyllus",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA0099",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 23,
+  "display": "Vietnam super early Jackfruit",
+  "scientific": "Artocarpus heterophyllus",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00174",
+  "price": 365,
+  "bulk": 265,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 24,
+  "display": "Jamun (Jambu nerale)",
+  "scientific": "Syzygium cumini",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 150,
+  "bulk": 110,
+  "bulk_min_qty": 50,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 25,
+  "display": "Jamun Grafted",
+  "scientific": "Syzygium cumini",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00156",
+  "price": 280,
+  "bulk": 200,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 26,
+  "display": "Karonda",
+  "scientific": "Carissa carandas",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 120,
+  "bulk": 86,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 27,
+  "display": "All Season Kagzi Lemon",
+  "scientific": "Citrus limon",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0079",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 28,
+  "display": "Seedless Lemon",
+  "scientific": "Citrus limon",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00161",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 100,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 29,
+  "display": "All Season Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA008",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 30,
+  "display": "Alphonso Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0011",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 31,
+  "display": "Badami Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0033",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 32,
+  "display": "Dasheri Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0058",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 33,
+  "display": "Mallika Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0095",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 34,
+  "display": "Raspuri Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00131",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 35,
+  "display": "Sakkaregutli Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00166",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 36,
+  "display": "Totapuri Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00166",
+  "price": 490,
+  "bulk": 355,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 37,
+  "display": "Monkey Jack",
+  "scientific": "Artocarpus lakoocha",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 50,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 38,
+  "display": "Malta B-1 Mosumbi",
+  "scientific": "Citrus limetta",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0032",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 39,
+  "display": "Mozaffarpur shahi Litchi",
+  "scientific": "Litchi chinensis",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00105",
+  "price": 420,
+  "bulk": 300,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 40,
+  "display": "Nagpur Orange",
+  "scientific": "Citrus reticulata",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00106",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 41,
+  "display": "Nutmeg grafted",
+  "scientific": "Myristica fragrans",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "exact",
+  "woo_sku": "HA00107",
+  "price": 700,
+  "bulk": 505,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 42,
+  "display": "Nutmeg seeded",
+  "scientific": "Myristica fragrans",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "exact",
+  "woo_sku": "HA00108",
+  "price": 280,
+  "bulk": 200,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 43,
+  "display": "Pandrah (No.15) Papaya",
+  "scientific": "Carica papaya",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 44,
+  "display": "Peanut butter",
+  "scientific": "Bunchosia argentea",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00113",
+  "price": 700,
+  "bulk": 505,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "BD"
+  ]
+ },
+ {
+  "row": 45,
+  "display": "Karimunda Pepper",
+  "scientific": "Piper nigrum",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "sibling",
+  "woo_sku": "HA00117",
+  "price": 190,
+  "bulk": 135,
+  "bulk_min_qty": 200,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 46,
+  "display": "Paniyur Pepper",
+  "scientific": "Piper nigrum",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "sibling",
+  "woo_sku": "HA00117",
+  "price": 190,
+  "bulk": 135,
+  "bulk_min_qty": 200,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 47,
+  "display": "Pomelo (Chakota)",
+  "scientific": "Citrus maxima",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "sibling",
+  "woo_sku": "HA00157",
+  "price": 420,
+  "bulk": 300,
+  "bulk_min_qty": 100,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 48,
+  "display": "Super bhagwa Pomegranate",
+  "scientific": "Punica granatum",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00193",
+  "price": 175,
+  "bulk": 125,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 49,
+  "display": "Rose apple (Panneralu)",
+  "scientific": "Syzygium jambos",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00138",
+  "price": 365,
+  "bulk": 265,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 50,
+  "display": "Soursop (Lakshmanphal)",
+  "scientific": "Annona muricata",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA0086",
+  "price": 390,
+  "bulk": 280,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 51,
+  "display": "Starfruit",
+  "scientific": "Averrhoa carambola",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00147",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 52,
+  "display": "Sweet tamarind",
+  "scientific": "Tamarindus indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00163",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 53,
+  "display": "Water Apple Red",
+  "scientific": "Syzygium samarangense",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "exact",
+  "woo_sku": "HA00179",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 54,
+  "display": "Wild Jackfruit (Hebbalasu)",
+  "scientific": "Artocarpus hirsutus",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 150,
+  "bulk": 110,
+  "bulk_min_qty": 50,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 55,
+  "display": "Wood apple",
+  "scientific": "Limonia acidissima",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 150,
+  "bulk": 110,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 56,
+  "display": "Yelakki Banana",
+  "scientific": "Musa spp.",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 57,
+  "display": "Robusta (Pachbaale) Banana",
+  "scientific": "Musa spp.",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Plantation",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 58,
+  "display": "Red Banana",
+  "scientific": "Musa spp.",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 59,
+  "display": "Abiu",
+  "scientific": "Pouteria caimito",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA003",
+  "price": 1090,
+  "bulk": 785,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 60,
+  "display": "Achachiru",
+  "scientific": "Garcinia humilis",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA004",
+  "price": 1080,
+  "bulk": 780,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 61,
+  "display": "Coorg Avocado",
+  "scientific": "Persea americana",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0027",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 62,
+  "display": "Mexican Hass Avocado",
+  "scientific": "Persea americana",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0028",
+  "price": 1120,
+  "bulk": 805,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 63,
+  "display": "Baraba",
+  "scientific": "Rollinia deliciosa (Biriba)?",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "none",
+  "woo_sku": null,
+  "price": 450,
+  "bulk": 325,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 64,
+  "display": "Bread fruit",
+  "scientific": "Artocarpus altilis",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0043",
+  "price": 630,
+  "bulk": 455,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 65,
+  "display": "Jumbo red Dragonfruit",
+  "scientific": "Selenicereus undatus",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0060",
+  "price": 250,
+  "bulk": 180,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 66,
+  "display": "Egg fruit",
+  "scientific": "Pouteria campechiana",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0064",
+  "price": 350,
+  "bulk": 250,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 67,
+  "display": "Japanese Red diamond Guava",
+  "scientific": "Psidium guajava",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0076",
+  "price": 560,
+  "bulk": 405,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 68,
+  "display": "Strawberry Guava",
+  "scientific": "Psidium guajava",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00148",
+  "price": 630,
+  "bulk": 455,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 69,
+  "display": "Ice cream beans",
+  "scientific": "Inga edulis",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00190",
+  "price": 1120,
+  "bulk": 805,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 70,
+  "display": "Jaboticaba Sabara",
+  "scientific": "Plinia cauliflora",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "none",
+  "woo_sku": null,
+  "price": 1200,
+  "bulk": 865,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 71,
+  "display": "Longan",
+  "scientific": "Dimocarpus longan",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0090",
+  "price": 1960,
+  "bulk": 1410,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 72,
+  "display": "Macadamia Nuts Grafted",
+  "scientific": "Macadamia integrifolia",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "sibling",
+  "woo_sku": "HA0091",
+  "price": 770,
+  "bulk": 555,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 73,
+  "display": "Macadamia Nuts Seeded",
+  "scientific": "Macadamia integrifolia",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0091",
+  "price": 770,
+  "bulk": 555,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 74,
+  "display": "Variegated Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00170",
+  "price": 740,
+  "bulk": 535,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 75,
+  "display": "Mangosteen",
+  "scientific": "Garcinia mangostana",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA0097",
+  "price": 630,
+  "bulk": 455,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 76,
+  "display": "Matoa",
+  "scientific": "Pometia pinnata",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "none",
+  "woo_sku": null,
+  "price": 800,
+  "bulk": 575,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 77,
+  "display": "Milk fruit/ star apple",
+  "scientific": "Chrysophyllum cainito",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00102",
+  "price": 1175,
+  "bulk": 845,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 78,
+  "display": "Miracle fruit",
+  "scientific": "Synsepalum dulcificum",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00103",
+  "price": 1765,
+  "bulk": 1270,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": []
+ },
+ {
+  "row": 79,
+  "display": "Miyazaki Mango",
+  "scientific": "Mangifera indica",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00104",
+  "price": 1120,
+  "bulk": 805,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 80,
+  "display": "Olive",
+  "scientific": "Olea europaea",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00109",
+  "price": 630,
+  "bulk": 455,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 81,
+  "display": "Passion fruit",
+  "scientific": "Passiflora edulis",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00110",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 82,
+  "display": "Rain forest plum",
+  "scientific": "Eugenia candolleana",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00199",
+  "price": 1960,
+  "bulk": 1410,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 83,
+  "display": "N-18 Rambutan",
+  "scientific": "Nephelium lappaceum",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00127",
+  "price": 770,
+  "bulk": 555,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 84,
+  "display": "Schoolboy Rambutan",
+  "scientific": "Nephelium lappaceum",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00130",
+  "price": 770,
+  "bulk": 555,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 85,
+  "display": "Salak",
+  "scientific": "Salacca zalacca",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "exact",
+  "woo_sku": "HA00198",
+  "price": 1820,
+  "bulk": 1310,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 86,
+  "display": "Velvet apple",
+  "scientific": "Diospyros blancoi",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Exotic",
+  "match": "none",
+  "woo_sku": null,
+  "price": 450,
+  "bulk": 325,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 87,
+  "display": "All spice",
+  "scientific": "Pimenta dioica",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "exact",
+  "woo_sku": "HA009",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 200,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 88,
+  "display": "Nelyani gold Cardamom",
+  "scientific": "Elettaria cardamomum",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "sibling",
+  "woo_sku": "HA0045",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 200,
+  "price_source": "woo_sibling",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 89,
+  "display": "Ceylon Cinnamon",
+  "scientific": "Cinnamomum verum",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "exact",
+  "woo_sku": "HA0049",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 90,
+  "display": "Clove",
+  "scientific": "Syzygium aromaticum",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "exact",
+  "woo_sku": "HA0050",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 91,
+  "display": "Curry leaves",
+  "scientific": "Murraya koenigii",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Spices",
+  "match": "none",
+  "woo_sku": null,
+  "price": 80,
+  "bulk": 58,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "FF",
+   "CO"
+  ]
+ },
+ {
+  "row": 92,
+  "display": "Bamboo",
+  "scientific": "Bambusa spp.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "sibling",
+  "woo_sku": "HA0038",
+  "price": 250,
+  "bulk": 180,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 93,
+  "display": "Mahogany",
+  "scientific": "Swietenia macrophylla",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "exact",
+  "woo_sku": "HA0092",
+  "price": 250,
+  "bulk": 180,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 94,
+  "display": "Neem",
+  "scientific": "Azadirachta indica",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "sibling",
+  "woo_sku": "HA0073",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 50,
+  "price_source": "woo_sibling",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 95,
+  "display": "Pongamia (Honge)",
+  "scientific": "Pongamia pinnata",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "exact",
+  "woo_sku": "HA0073",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 96,
+  "display": "Red sandal",
+  "scientific": "Pterocarpus santalinus",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "exact",
+  "woo_sku": "HA00137",
+  "price": 265,
+  "bulk": 190,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 97,
+  "display": "Sandalwood",
+  "scientific": "Santalum album",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "exact",
+  "woo_sku": "HA00181",
+  "price": 265,
+  "bulk": 190,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 98,
+  "display": "Soapnut (Antwala)",
+  "scientific": "Sapindus spp.",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "sibling",
+  "woo_sku": "HA0073",
+  "price": 225,
+  "bulk": 160,
+  "bulk_min_qty": 100,
+  "price_source": "woo_sibling",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 99,
+  "display": "Teak",
+  "scientific": "Tectona grandis",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "exact",
+  "woo_sku": "HA00152",
+  "price": 310,
+  "bulk": 225,
+  "bulk_min_qty": 100,
+  "price_source": "woo",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 100,
+  "display": "Baobab",
+  "scientific": "Adansonia digitata L.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 101,
+  "display": "Bael",
+  "scientific": "Aegle marmelos (L.) Corrêa",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 150,
+  "bulk": 110,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 102,
+  "display": "Ankola (Sage-leaved Alangium)",
+  "scientific": "Alangium salviifolium (L.f.) Wangerin",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 103,
+  "display": "Bitter Albizia (Chigare)",
+  "scientific": "Albizia amara (Roxb.) Boivin",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 104,
+  "display": "Siris Tree",
+  "scientific": "Albizia lebbeck (L.) Benth.",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 105,
+  "display": "Bidi Leaf Tree (Apta)",
+  "scientific": "Bauhinia racemosa Lam.",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 106,
+  "display": "Red Silk Cotton",
+  "scientific": "Bombax ceiba L.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 107,
+  "display": "Flame of the Forest (Palash)",
+  "scientific": "Butea monosperma (Lam.) Kuntze",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 108,
+  "display": "Palash Creeper",
+  "scientific": "Butea superba Roxb. ex Willd.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 109,
+  "display": "Rudravanti",
+  "scientific": "Capparis moonii Wight",
+  "size": "S",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 110,
+  "display": "Kumbhi (Wild Guava)",
+  "scientific": "Careya arborea Roxb.",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 111,
+  "display": "Karonda Hedge",
+  "scientific": "Carissa carandas L.",
+  "size": "S",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 112,
+  "display": "Indian Laburnum (Golden Shower)",
+  "scientific": "Cassia fistula L.",
+  "size": "L",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 113,
+  "display": "East Indian Satinwood",
+  "scientific": "Chloroxylon swietenia DC.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 114,
+  "display": "Yellow Silk Cotton",
+  "scientific": "Cochlospermum religiosum (L.) Alston",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 115,
+  "display": "Indian Cherry (Lasora)",
+  "scientific": "Cordia dichotoma G.Forst.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 116,
+  "display": "Indian Rosewood (Beete)",
+  "scientific": "Dalbergia latifolia Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 117,
+  "display": "Shisham",
+  "scientific": "Dalbergia sissoo Roxb. ex DC.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 118,
+  "display": "Male Bamboo",
+  "scientific": "Dendrocalamus strictus (Roxb.) Nees",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 119,
+  "display": "Tendu (Coromandel Ebony)",
+  "scientific": "Diospyros melanoxylon Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 120,
+  "display": "Mountain Persimmon",
+  "scientific": "Diospyros montana Roxb.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 121,
+  "display": "Hopbush",
+  "scientific": "Dodonaea viscosa Jacq.",
+  "size": "S",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 122,
+  "display": "Medshingi",
+  "scientific": "Dolichandrone falcata (Wall. ex DC.) Seem.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 123,
+  "display": "Khanduchi (Ehretia)",
+  "scientific": "Ehretia aspera Willd.",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 124,
+  "display": "Governor's Plum",
+  "scientific": "Flacourtia indica (Burm.f.) Merr.",
+  "size": "S",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 125,
+  "display": "Anjan Tree",
+  "scientific": "Hardwickia binata Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 126,
+  "display": "Indian Screw Tree",
+  "scientific": "Helicteres isora L.",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 127,
+  "display": "Waras",
+  "scientific": "Heterophragma quadriloculare (Roxb.) K.Schum.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 128,
+  "display": "Kurchi (Kodasige)",
+  "scientific": "Holarrhena pubescens Wall. ex G.Don",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 129,
+  "display": "Indian Elm",
+  "scientific": "Holoptelea integrifolia (Roxb.) Planch.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 130,
+  "display": "Kydia (Bende)",
+  "scientific": "Kydia calycina Roxb.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 131,
+  "display": "Lendia",
+  "scientific": "Lagerstroemia parviflora Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 132,
+  "display": "Indian Ash Tree (Jhingan)",
+  "scientific": "Lannea coromandelica (Houtt.) Merr.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 133,
+  "display": "Henna",
+  "scientific": "Lawsonia inermis L.",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 134,
+  "display": "Mahua (Ippe)",
+  "scientific": "Madhuca longifolia var. latifolia (Roxb.) A.Chev.",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 135,
+  "display": "Melia Dubia (Malabar Neem)",
+  "scientific": "Melia dubia Cav.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 136,
+  "display": "Native Amla",
+  "scientific": "Phyllanthus emblica L.",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 137,
+  "display": "Manila Tamarind (Jungle Jalebi)",
+  "scientific": "Pithecellobium dulce (Roxb.) Benth.",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 138,
+  "display": "Khejri (Banni)",
+  "scientific": "Prosopis cineraria (L.) Druce",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 139,
+  "display": "Indian Kino (Honne)",
+  "scientific": "Pterocarpus marsupium Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 140,
+  "display": "Native Red Sanders",
+  "scientific": "Pterocarpus santalinus L.f.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 141,
+  "display": "Native Sandalwood",
+  "scientific": "Santalum album L.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 142,
+  "display": "Native Soapnut",
+  "scientific": "Sapindus emarginatus Vahl",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 143,
+  "display": "Kusum (Sagade)",
+  "scientific": "Schleichera oleosa (Lour.) Oken",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 144,
+  "display": "Khair (Kaggali)",
+  "scientific": "Senegalia catechu (L.f.) P.J.H.Hurter & Mabb.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 145,
+  "display": "Wild Almond (Pinari)",
+  "scientific": "Sterculia foetida L.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 146,
+  "display": "Karaya Gum Tree",
+  "scientific": "Sterculia urens Roxb.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 147,
+  "display": "Native Jamun",
+  "scientific": "Syzygium cumini (L.) Skeels",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 90,
+  "bulk": 65,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 148,
+  "display": "Tamarind",
+  "scientific": "Tamarindus indica L.",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 120,
+  "bulk": 86,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 149,
+  "display": "Rohida (Desert Teak)",
+  "scientific": "Tecomella undulata (Sm.) Seem.",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 150,
+  "display": "Bahera (Tare)",
+  "scientific": "Terminalia bellirica (Gaertn.) Roxb.",
+  "size": "L",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 120,
+  "bulk": 86,
+  "bulk_min_qty": 50,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 151,
+  "display": "Nirgundi (Lakki)",
+  "scientific": "Vitex negundo var. negundo",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Native & medicinal",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 200,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 152,
+  "display": "Woolly Dyeing Rosebay",
+  "scientific": "Wrightia arborea (Dennst.) Mabb.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 120,
+  "bulk": 86,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 153,
+  "display": "Pala Indigo (Beppale)",
+  "scientific": "Wrightia tinctoria (Roxb.) R.Br.",
+  "size": "M",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "none",
+  "woo_sku": null,
+  "price": 120,
+  "bulk": 86,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 154,
+  "display": "Native Ber (Indian Jujube)",
+  "scientific": "Ziziphus mauritiana Lam.",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Forest fruit",
+  "match": "none",
+  "woo_sku": null,
+  "price": 75,
+  "bulk": 54,
+  "bulk_min_qty": 100,
+  "price_source": "researched_native",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 155,
+  "display": "Sesbania",
+  "scientific": "Sesbania grandiflora",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 45,
+  "bulk": 32,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 156,
+  "display": "Gliricidia",
+  "scientific": "Gliricidia sepium",
+  "size": "M",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 25,
+  "bulk": 18,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 157,
+  "display": "Moringa",
+  "scientific": "Moringa oleifera",
+  "size": "M",
+  "collection": "fruiting",
+  "subcategory": "Desi",
+  "match": "none",
+  "woo_sku": null,
+  "price": 60,
+  "bulk": 43,
+  "bulk_min_qty": 100,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "CO",
+   "BD"
+  ]
+ },
+ {
+  "row": 158,
+  "display": "Lemongrass",
+  "scientific": "Cymbopogon flexuosus",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 10,
+  "bulk": 7,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 159,
+  "display": "Vetiver Grass",
+  "scientific": "Chrysopogon zizanioides",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 10,
+  "bulk": 7,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 160,
+  "display": "Marigold",
+  "scientific": "Tagetes erecta",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 15,
+  "bulk": 11,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 161,
+  "display": "Mexican sunflower",
+  "scientific": "Tithonia diversifolia",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 15,
+  "bulk": 11,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": 162,
+  "display": "Mulberry",
+  "scientific": "Morus alba",
+  "size": "S",
+  "collection": "other",
+  "subcategory": "Biomass & support",
+  "match": "none",
+  "woo_sku": null,
+  "price": 40,
+  "bulk": 29,
+  "bulk_min_qty": 200,
+  "price_source": "researched",
+  "models": [
+   "MY",
+   "BD"
+  ]
+ },
+ {
+  "row": null,
+  "display": "Agarwood",
+  "scientific": "Aquilaria malaccensis",
+  "size": "L",
+  "collection": "timber",
+  "subcategory": "Timber",
+  "match": "exact",
+  "woo_sku": "HA005",
+  "price": 280,
+  "bulk": 200,
+  "bulk_min_qty": 50,
+  "price_source": "woo",
+  "models": []
+ }
+]

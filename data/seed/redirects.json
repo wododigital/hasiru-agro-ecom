@@ -1,0 +1,1388 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-20T04:39:25+05:30",
+  "sources": [
+    "_work/products.json"
+  ],
+  "records": [
+    {
+      "from": "/product-category/desi-fruits",
+      "to_sku": null,
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product-category/exotic-fruits",
+      "to_sku": null,
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product-category/forestry",
+      "to_sku": null,
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product-category/plantation",
+      "to_sku": null,
+      "to_path": "/plants/other-plants/plantation",
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product-category/spices",
+      "to_sku": null,
+      "to_path": "/plants/other-plants/spices",
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/abiu-air-layered",
+      "to_sku": "HAP-0275",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/abiu-seeded",
+      "to_sku": "HAP-0056",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/achachiru",
+      "to_sku": "HAP-0057",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/agarwood",
+      "to_sku": "HAP-0160",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/all-season-jackfruit",
+      "to_sku": "HAP-0162",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/all-season-lemon",
+      "to_sku": "HAP-0163",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/all-season-mango",
+      "to_sku": "HAP-0026",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/all-spices",
+      "to_sku": "HAP-0084",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/allahabad-safeda-guava",
+      "to_sku": "HAP-0164",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/alphonoso-mango",
+      "to_sku": "HAP-0027",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/american-red-palmar-mango",
+      "to_sku": "HAP-0165",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/amla-grafted",
+      "to_sku": "HAP-0166",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/amla-seeded",
+      "to_sku": "HAP-0001",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/amrapali-mango",
+      "to_sku": "HAP-0167",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/appe-midi-mango",
+      "to_sku": "HAP-0169",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apple-ana",
+      "to_sku": "HAP-0003",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/apple-ber-ball-sundari",
+      "to_sku": "HAP-0170",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apple-ber-kashmiri",
+      "to_sku": "HAP-0171",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apple-ber-miss-india",
+      "to_sku": "HAP-0281",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apple-ber-plant",
+      "to_sku": "HAP-0280",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apple-dorset",
+      "to_sku": "HAP-0004",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/apple-hariman-99",
+      "to_sku": "HAP-0005",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/apple-litchi",
+      "to_sku": "HAP-0172",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/apricot",
+      "to_sku": "HAP-0173",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/areca-bukkambudi",
+      "to_sku": "HAP-0174",
+      "to_path": "/plants/other-plants/plantation",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/areca-tirthalli",
+      "to_sku": "HAP-0006",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/australian-macadamia-nut-plant",
+      "to_sku": "HAP-0070",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/avocado-coorg-variety",
+      "to_sku": "HAP-0058",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/avocado-tkd-1",
+      "to_sku": "HAP-0177",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/b-1-musambi-malta",
+      "to_sku": "HAP-0035",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/badami-mango",
+      "to_sku": "HAP-0028",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/balaji-lemon",
+      "to_sku": "HAP-0283",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/banana-sapota",
+      "to_sku": "HAP-0178",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bangkok-mango",
+      "to_sku": "HAP-0179",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/barbados-cherry",
+      "to_sku": "HAP-0180",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bhadoli-jamun",
+      "to_sku": "HAP-0181",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bhima-bamboo",
+      "to_sku": "HAP-0182",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bhutan-chatuki-orange",
+      "to_sku": "HAP-0183",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/black-guava",
+      "to_sku": "HAP-0185",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/black-mango",
+      "to_sku": "HAP-0184",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bombay-litchi",
+      "to_sku": "HAP-0186",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/bread-fruit",
+      "to_sku": "HAP-0061",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/buddhas-hand-lime",
+      "to_sku": "HAP-0282",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/byrachandra-jackfruit",
+      "to_sku": "HAP-0187",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/cardamom-vijetha",
+      "to_sku": "HAP-0188",
+      "to_path": "/plants/other-plants/spices",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/chikku-cricket-ball",
+      "to_sku": "HAP-0009",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/chikku-kalapatti",
+      "to_sku": "HAP-0010",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/china-orange",
+      "to_sku": "HAP-0189",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/cinnamon",
+      "to_sku": "HAP-0086",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/clove",
+      "to_sku": "HAP-0087",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/cocoa",
+      "to_sku": "HAP-0190",
+      "to_path": "/plants/other-plants/plantation",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/coconut-channaraypatna",
+      "to_sku": "HAP-0191",
+      "to_path": "/plants/other-plants/plantation",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/coconut-tiptur-tall",
+      "to_sku": "HAP-0012",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/coffee-robusta",
+      "to_sku": "HAP-0192",
+      "to_path": "/plants/other-plants/plantation",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/custard-apple",
+      "to_sku": "HAP-0013",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/dang-surya-jackfruit",
+      "to_sku": "HAP-0193",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/darjeeling-orange",
+      "to_sku": "HAP-0194",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/dasheri-mango",
+      "to_sku": "HAP-0029",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/date-palm",
+      "to_sku": "HAP-0195",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/diana-anjeer-fig-plants",
+      "to_sku": "HAP-0168",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/disco-water-apple",
+      "to_sku": "HAP-0284",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/dragon-fruit-pink",
+      "to_sku": "HAP-0196",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/dragon-fruit-white",
+      "to_sku": "HAP-0197",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/early-dwarf-white-jamun",
+      "to_sku": "HAP-0198",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/egg-fruit",
+      "to_sku": "HAP-0063",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/finger-lime",
+      "to_sku": "HAP-0199",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/grafted-mexican-purple-avocado-plant",
+      "to_sku": "HAP-0175",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/grapes-mango",
+      "to_sku": "HAP-0200",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/guava-kg",
+      "to_sku": "HAP-0161",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/guava-l-49",
+      "to_sku": "HAP-0201",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/guava-taiwan-seedless",
+      "to_sku": "HAP-0202",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/guava-taiwan-white",
+      "to_sku": "HAP-0015",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/guavataiwan-pink",
+      "to_sku": "HAP-0014",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/gulmohar",
+      "to_sku": "HAP-0278",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/gumless-jackfruit",
+      "to_sku": "HAP-0017",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/hass-avocado-plant",
+      "to_sku": "HAP-0059",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/hemachandra-jackfruit",
+      "to_sku": "HAP-0203",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/hing",
+      "to_sku": "HAP-0204",
+      "to_path": "/plants/other-plants/spices",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/honge-pongamia-pinnata",
+      "to_sku": "HAP-0092",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/ice-cream-beans",
+      "to_sku": "HAP-0066",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/indian-olive-amate",
+      "to_sku": "HAP-0016",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/jamun-seedless",
+      "to_sku": "HAP-0205",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/japanese-miyazaki-mango-plant-grafted",
+      "to_sku": "HAP-0076",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/japanese-red-diamond-guava",
+      "to_sku": "HAP-0064",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/jardalu-mango",
+      "to_sku": "HAP-0206",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/jeerige-midi-mango",
+      "to_sku": "HAP-0207",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/kaju-badam",
+      "to_sku": "HAP-0208",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/kesar-mango",
+      "to_sku": "HAP-0209",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/kinnow-orange",
+      "to_sku": "HAP-0210",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/kiwi",
+      "to_sku": "HAP-0211",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/kolkata-patti-lemon",
+      "to_sku": "HAP-0212",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/lakshmanphal",
+      "to_sku": "HAP-0047",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/lalbhag-madhura-jackfruit",
+      "to_sku": "HAP-0214",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/lemon-tree-all-season-kagzi-lemon",
+      "to_sku": "HAP-0024",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/lilli-pilli",
+      "to_sku": "HAP-0215",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/litchi-seedless",
+      "to_sku": "HAP-0216",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/longon",
+      "to_sku": "HAP-0068",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/loquat-lakota",
+      "to_sku": "HAP-0213",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/mahagony",
+      "to_sku": "HAP-0090",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/malaysian-dwarf-jackfruit",
+      "to_sku": "HAP-0217",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/mallika-mango",
+      "to_sku": "HAP-0030",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/mandarin-orange",
+      "to_sku": "HAP-0218",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/mangosteen-1-5ft",
+      "to_sku": "HAP-0072",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/mankale-red-jackfruit",
+      "to_sku": "HAP-0219",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/maprang-mango",
+      "to_sku": "HAP-0220",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/mijar-gaint-jackfruit",
+      "to_sku": "HAP-0221",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/milk-fruit",
+      "to_sku": "HAP-0074",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/miracle-fruit",
+      "to_sku": "HAP-0075",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/nagpur-orange",
+      "to_sku": "HAP-0037",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/nutmeg-grafted",
+      "to_sku": "HAP-0038",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/nutmeg-seeded",
+      "to_sku": "HAP-0039",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/olive",
+      "to_sku": "HAP-0077",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/passion-fruit",
+      "to_sku": "HAP-0078",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/peach",
+      "to_sku": "HAP-0222",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/peanut-butter",
+      "to_sku": "HAP-0041",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/pear",
+      "to_sku": "HAP-0223",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pear-babugosha",
+      "to_sku": "HAP-0224",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pepper-grafted",
+      "to_sku": "HAP-0225",
+      "to_path": "/plants/other-plants/spices",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pepper-rooted",
+      "to_sku": "HAP-0226",
+      "to_path": "/plants/other-plants/spices",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/persimon",
+      "to_sku": "HAP-0227",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pink-cherry-water-apple",
+      "to_sku": "HAP-0270",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pista",
+      "to_sku": "HAP-0228",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/plum",
+      "to_sku": "HAP-0229",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/prakashchandra-jackfruit",
+      "to_sku": "HAP-0230",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pulasan",
+      "to_sku": "HAP-0231",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/pusa-suriya-mango",
+      "to_sku": "HAP-0232",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/rain-forest-plum",
+      "to_sku": "HAP-0079",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/rambai",
+      "to_sku": "HAP-0233",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/rambutan-e-35",
+      "to_sku": "HAP-0234",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/rambutan-kg-10",
+      "to_sku": "HAP-0235",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/rambutan-n-18-3ft",
+      "to_sku": "HAP-0080",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/rambutan-rongrien",
+      "to_sku": "HAP-0236",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/rambutan-schoolboy",
+      "to_sku": "HAP-0081",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/ramphal",
+      "to_sku": "HAP-0285",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/raspuri-mango",
+      "to_sku": "HAP-0031",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/red-amla",
+      "to_sku": "HAP-0237",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/red-chakota-pomelo",
+      "to_sku": "HAP-0238",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/red-king-mango",
+      "to_sku": "HAP-0239",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/red-rudrakshi-jackfruit",
+      "to_sku": "HAP-0240",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/red-sandalwood",
+      "to_sku": "HAP-0093",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/rose-water-apple",
+      "to_sku": "HAP-0046",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/rose-wood",
+      "to_sku": "HAP-0241",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/sadananda-jackfruit",
+      "to_sku": "HAP-0242",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/salak",
+      "to_sku": "HAP-0082",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/sandalwood-chandan",
+      "to_sku": "HAP-0094",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/santhol",
+      "to_sku": "HAP-0243",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/saraca-asoca",
+      "to_sku": "HAP-0279",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/seedless-jackfruit",
+      "to_sku": "HAP-0244",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/shiny-green-avocado",
+      "to_sku": "HAP-0176",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/siddu-jackfruit",
+      "to_sku": "HAP-0245",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/simarouba",
+      "to_sku": "HAP-0246",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/singapore-cherry",
+      "to_sku": "HAP-0247",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/singapore-jackfruit",
+      "to_sku": "HAP-0269",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/spicy-guava",
+      "to_sku": "HAP-0248",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/starfruit",
+      "to_sku": "HAP-0048",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/strawberry-guava",
+      "to_sku": "HAP-0065",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/super-bagwa-pomegranate",
+      "to_sku": "HAP-0045",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/sweet-cherry",
+      "to_sku": "HAP-0249",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/sweet-mini-orange-plant-4ft",
+      "to_sku": "HAP-0274",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/sweet-red-dragonfruit-plants-jumbo",
+      "to_sku": "HAP-0062",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/sweet-shahi-litchi-air-layered",
+      "to_sku": "HAP-0036",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/tabebuia-avellanedae",
+      "to_sku": "HAP-0276",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/tabebuia-rosea",
+      "to_sku": "HAP-0277",
+      "to_path": "/plants/timber-trees",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/teak",
+      "to_sku": "HAP-0096",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/tennis-ball-cherry",
+      "to_sku": "HAP-0250",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-all-season-mango",
+      "to_sku": "HAP-0251",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-banana-mango",
+      "to_sku": "HAP-0252",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-black-jamun",
+      "to_sku": "HAP-0253",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-chakota-pomelo",
+      "to_sku": "HAP-0254",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-chikku",
+      "to_sku": "HAP-0255",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-long-chikku",
+      "to_sku": "HAP-0256",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-mix-mango",
+      "to_sku": "HAP-0257",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-seedless-lime",
+      "to_sku": "HAP-0258",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-super-guava",
+      "to_sku": "HAP-0259",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/thai-sweet-tamarind",
+      "to_sku": "HAP-0049",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/thailand-new-jackfruit",
+      "to_sku": "HAP-0260",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/totapuri-mango",
+      "to_sku": "HAP-0033",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/varashree-jackfruit",
+      "to_sku": "HAP-0261",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/variegated-guava",
+      "to_sku": "HAP-0262",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/variegated-mango",
+      "to_sku": "HAP-0071",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/varigatd-mosumbie",
+      "to_sku": "HAP-0264",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/varigated-chikku",
+      "to_sku": "HAP-0266",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/varigated-lime",
+      "to_sku": "HAP-0263",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/vatagar-jackfruit",
+      "to_sku": "HAP-0265",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/vietnam-jackfruit-all-season-grafted",
+      "to_sku": "HAP-0020",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/vietnam-mosumbi-all-season",
+      "to_sku": "HAP-0267",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/vnr-bihi-guava",
+      "to_sku": "HAP-0268",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/water-apple-red",
+      "to_sku": "HAP-0050",
+      "to_path": null,
+      "code": 301,
+      "status": "active"
+    },
+    {
+      "from": "/product/water-apple-white",
+      "to_sku": "HAP-0271",
+      "to_path": "/plants/fruiting-trees/exotic",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/yellow-chakota-pomelo",
+      "to_sku": "HAP-0272",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/product/yellow-rudrakshi-jackfruit",
+      "to_sku": "HAP-0273",
+      "to_path": "/plants/fruiting-trees/desi",
+      "code": 301,
+      "status": "pending"
+    },
+    {
+      "from": "/shop",
+      "to_sku": null,
+      "to_path": "/plants",
+      "code": 301,
+      "status": "active"
+    }
+  ]
+}

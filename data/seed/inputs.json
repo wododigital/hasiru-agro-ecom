@@ -1,0 +1,861 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-20T04:39:25+05:30",
+  "sources": [
+    "HANDOFF.md",
+    "docs/research/product-data.md (appendix A, as tooling/scripts/seed/data/research-rows.json)"
+  ],
+  "records": [
+    {
+      "sku": "HAI-001",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Vermicompost",
+      "base_name": "Vermicompost",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "vermicompost",
+      "collection": "input",
+      "subcategory": "Vermicompost",
+      "tags": [
+        "vermicompost"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 25,
+        "unit": "kg",
+        "pack_weight_kg": 25,
+        "input_type": "vermicompost",
+        "dosage_rules": [
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "M",
+            "size_class": null,
+            "qty": 2,
+            "unit": "kg"
+          },
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "X",
+            "size_class": null,
+            "qty": 1,
+            "unit": "kg"
+          },
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "O",
+            "size_class": null,
+            "qty": 0.5,
+            "unit": "kg"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest",
+          "miyawaki",
+          "boundary"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-001-01",
+          "label": "25 kg bag",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 450,
+          "compare_at_price": null,
+          "bulk_price": 450,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 25,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "3101",
+        "gst_rate": 5,
+        "tax_class": "inputs_5"
+      },
+      "content": {
+        "short_description": "Packed vermicompost for planting pits and yearly feeding. 25 kg bag.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Vermicompost Online | Hasiru Agro",
+        "description": "Packed vermicompost for planting pits and yearly feeding. 25 kg bag.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "Packed and branded compost is 5% GST (loose and unbranded is nil); confirm with the CA."
+      ]
+    },
+    {
+      "sku": "HAI-002",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Biochar",
+      "base_name": "Biochar",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "biochar",
+      "collection": "input",
+      "subcategory": "Biochar",
+      "tags": [
+        "biochar"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 10,
+        "unit": "kg",
+        "pack_weight_kg": 10,
+        "input_type": "biochar",
+        "dosage_rules": [
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "M",
+            "size_class": null,
+            "qty": 1,
+            "unit": "kg"
+          },
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "X",
+            "size_class": null,
+            "qty": 0.5,
+            "unit": "kg"
+          },
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": "O",
+            "size_class": null,
+            "qty": 0.25,
+            "unit": "kg"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest",
+          "miyawaki",
+          "boundary"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-002-01",
+          "label": "10 kg bag",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 600,
+          "compare_at_price": null,
+          "bulk_price": 600,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 10,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "3101",
+        "gst_rate": 5,
+        "tax_class": "inputs_5",
+        "needs_ca_confirmation": true
+      },
+      "content": {
+        "short_description": "Biochar to mix into planting pits; holds water and nutrients in the root zone. 10 kg bag.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Biochar Online | Hasiru Agro",
+        "description": "Biochar to mix into planting pits; holds water and nutrients in the root zone. 10 kg bag.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "HSN 3101 or 4402 for biochar; confirm with the CA."
+      ]
+    },
+    {
+      "sku": "HAI-003",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Farm Compost",
+      "base_name": "Farm Compost",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "farm-compost",
+      "collection": "input",
+      "subcategory": "Compost",
+      "tags": [
+        "compost"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 50,
+        "unit": "kg",
+        "pack_weight_kg": 50,
+        "input_type": "compost",
+        "dosage_rules": [
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 1,
+            "unit": "kg",
+            "note": "uses each plant's compost_kg.at_planting from the client data"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest",
+          "miyawaki",
+          "boundary"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-003-01",
+          "label": "50 kg bag",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 400,
+          "compare_at_price": null,
+          "bulk_price": 400,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 50,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "3101",
+        "gst_rate": 5,
+        "tax_class": "inputs_5"
+      },
+      "content": {
+        "short_description": "Well-rotted farm compost for planting and yearly feeding. 50 kg bag.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Farm Compost Online | Hasiru Agro",
+        "description": "Well-rotted farm compost for planting and yearly feeding. 50 kg bag.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm."
+      ]
+    },
+    {
+      "sku": "HAI-004",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Neem Cake",
+      "base_name": "Neem Cake",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "neem-cake",
+      "collection": "input",
+      "subcategory": "Compost",
+      "tags": [
+        "neem_cake"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 25,
+        "unit": "kg",
+        "pack_weight_kg": 25,
+        "input_type": "neem_cake",
+        "dosage_rules": [
+          {
+            "basis": "per_plant",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 0.25,
+            "unit": "kg"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-004-01",
+          "label": "25 kg bag",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 900,
+          "compare_at_price": null,
+          "bulk_price": 900,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 25,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "2306",
+        "gst_rate": 5,
+        "tax_class": "inputs_5",
+        "needs_ca_confirmation": true
+      },
+      "content": {
+        "short_description": "Neem cake for soil application around the root zone. 25 kg bag.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Neem Cake Online | Hasiru Agro",
+        "description": "Neem cake for soil application around the root zone. 25 kg bag.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "Neem cake HSN 2306 and GST rate; confirm with the CA."
+      ]
+    },
+    {
+      "sku": "HAI-005",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Jeevamrutha Liquid",
+      "base_name": "Jeevamrutha Liquid",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "jeevamrutha-liquid",
+      "collection": "input",
+      "subcategory": "Liquid fertiliser",
+      "tags": [
+        "liquid_fertiliser"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 5,
+        "unit": "L",
+        "pack_weight_kg": 5.5,
+        "input_type": "liquid_fertiliser",
+        "dosage_rules": [
+          {
+            "basis": "per_acre",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 4,
+            "unit": "L"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-005-01",
+          "label": "5 L can",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 250,
+          "compare_at_price": null,
+          "bulk_price": 250,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 5.5,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "3101",
+        "gst_rate": 5,
+        "tax_class": "inputs_5",
+        "needs_ca_confirmation": true
+      },
+      "content": {
+        "short_description": "Ready-to-dilute Jeevamrutha for soil drenching. 5 L can.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Jeevamrutha Liquid Online | Hasiru Agro",
+        "description": "Ready-to-dilute Jeevamrutha for soil drenching. 5 L can.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "GST rate for liquid organic fertiliser; confirm with the CA."
+      ]
+    },
+    {
+      "sku": "HAI-006",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Neem Oil Bio-pesticide",
+      "base_name": "Neem Oil Bio-pesticide",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "neem-oil-bio-pesticide",
+      "collection": "input",
+      "subcategory": "Bio-pesticide",
+      "tags": [
+        "bio_pesticide"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 1,
+        "unit": "L",
+        "pack_weight_kg": 1.1,
+        "input_type": "bio_pesticide",
+        "dosage_rules": [
+          {
+            "basis": "per_acre",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 1,
+            "unit": "L",
+            "note": "spray, dilution as per label"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-006-01",
+          "label": "1 L bottle",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 350,
+          "compare_at_price": null,
+          "bulk_price": 350,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 1.1,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "3808",
+        "gst_rate": 18,
+        "tax_class": "inputs_18",
+        "needs_ca_confirmation": true
+      },
+      "content": {
+        "short_description": "Neem oil spray for natural pest control. 1 L bottle.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Neem Oil Bio-pesticide Online | Hasiru Agro",
+        "description": "Neem oil spray for natural pest control. 1 L bottle.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "HANDOFF says 18% GST; the rate was reportedly cut in the Sept 2025 GST rationalisation. CA to confirm."
+      ]
+    },
+    {
+      "sku": "HAI-007",
+      "legacy_sku": null,
+      "legacy_woo_id": null,
+      "ops_item_id": null,
+      "source_row": null,
+      "status": "active",
+      "kind": "input",
+      "data_source": "placeholder",
+      "name_en": "Green Manure Seed Mix",
+      "base_name": "Green Manure Seed Mix",
+      "variety": null,
+      "name_kn": null,
+      "scientific_name": null,
+      "search_aliases": [],
+      "slug": "green-manure-seed-mix",
+      "collection": "input",
+      "subcategory": "Seeds",
+      "tags": [
+        "seeds"
+      ],
+      "is_priority": false,
+      "is_best_seller": false,
+      "is_featured": false,
+      "sourcing": null,
+      "has_video": {
+        "whatsapp": false,
+        "youtube": false
+      },
+      "plant": null,
+      "input": {
+        "pack_size": 1,
+        "unit": "kg",
+        "pack_weight_kg": 1,
+        "input_type": "seeds",
+        "dosage_rules": [
+          {
+            "basis": "per_acre",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 10,
+            "unit": "kg"
+          },
+          {
+            "basis": "per_block",
+            "model": null,
+            "role": null,
+            "size_class": null,
+            "qty": 0.3,
+            "unit": "kg",
+            "note": "36 x 36 ft block, from 10 kg per acre"
+          }
+        ],
+        "recommended_with": [
+          "commercial",
+          "food-forest",
+          "boundary"
+        ]
+      },
+      "variants": [
+        {
+          "sku": "HAI-007-01",
+          "label": "1 kg pack",
+          "height_at_dispatch_ft": null,
+          "bag_size": null,
+          "price": 180,
+          "compare_at_price": null,
+          "bulk_price": 180,
+          "bulk_min_qty": 1,
+          "offline_price": null,
+          "cost_price": null,
+          "weight_kg": 1,
+          "packing_fee": 0,
+          "stock_qty": 0,
+          "availability": "preorder",
+          "ready_in_days": 30,
+          "low_stock_threshold": 10
+        }
+      ],
+      "tax": {
+        "hsn": "1209",
+        "gst_rate": 0,
+        "tax_class": "seeds_nil"
+      },
+      "content": {
+        "short_description": "Seed mix for a green-manure cover crop between rows. 1 kg pack.",
+        "description_html": null,
+        "status": "ai_draft",
+        "faqs": []
+      },
+      "media": {
+        "images": [],
+        "videos": [],
+        "image_needed": true
+      },
+      "seo": {
+        "title": "Buy Green Manure Seed Mix Online | Hasiru Agro",
+        "description": "Seed mix for a green-manure cover crop between rows. 1 kg pack.",
+        "focus_keyword": null,
+        "noindex": false,
+        "legacy_urls": [],
+        "google_product_category": "Home & Garden > Lawn & Garden > Gardening > Fertilizers",
+        "identifier_exists": false
+      },
+      "provenance": {
+        "identity": "placeholder",
+        "climate": null,
+        "models": null,
+        "compost": null,
+        "attributes": "placeholder",
+        "price": "placeholder",
+        "stock": "placeholder",
+        "content": "ai_draft",
+        "images": "placeholder",
+        "seo": "derived"
+      },
+      "match": null,
+      "needs_review": true,
+      "review_notes": [
+        "Sample input product from the prototype (name, pack, price, dosage are placeholders); client to confirm.",
+        "Green-manure seed rate of 10 kg per acre is a placeholder."
+      ]
+    }
+  ]
+}
