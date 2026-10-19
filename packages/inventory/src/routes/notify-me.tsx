@@ -32,7 +32,7 @@ export async function POST(req: Request): Promise<Response> {
   try {
     await subscribe(parsed.data);
   } catch (err) {
-    if (err instanceof SubscribeError) return json(err.code === 'unknown_variant' ? 404 : err.code === 'too_many' ? 429 : 400, { ok: false, error: err.code });
+    if (err instanceof SubscribeError) return json(err.code === 'unknown_variant' ? 404 : 400, { ok: false, error: err.code });
     throw err;
   }
   return json(201, { ok: true });

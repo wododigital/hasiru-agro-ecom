@@ -1,7 +1,7 @@
 // Back-in-stock ("notify me") subscriptions and their delivery.
 import { invalidateTags, tags } from '@ecomkit/core/cache-tags';
 import type { EventHandler, NotificationSender } from '@ecomkit/core/contracts';
-import { db } from '@ecomkit/core/db';
+import { db, withTx } from '@ecomkit/core/db';
 import { newId, normalisePhone } from '@ecomkit/core/ids';
 import { and, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { notifyMeSchema, type NotifyMeInput } from '../domain';
@@ -22,7 +22,7 @@ export function setNotificationsProvider(next: SenderProvider): void {
 const MAX_PENDING_PER_CONTACT = 5;
 
 export class SubscribeError extends Error {
-  constructor(readonly code: 'unknown_variant' | 'invalid_phone' | 'too_many') {
+  constructor(readonly code: 'unknown_variant' | 'invalid_phone') {
     super(code);
     this.name = 'SubscribeError';
   }
@@ -36,17 +36,24 @@ export async function subscribe(input: NotifyMeInput | Record<string, unknown>):
   const email = v.email?.toLowerCase() ?? null;
   const [level] = await db.select({ productId: inventoryLevel.productId }).from(inventoryLevel).where(eq(inventoryLevel.variantId, v.variantId));
   if (!level) throw new SubscribeError('unknown_variant');
-  // Contacts are not verified, so cap pending alerts per phone/email: limits how much a stranger can enrol someone else.
-  const { rows: pending } = await db.execute<{ n: number }>(sql`
-    select count(*)::int as n from inventory_subscription
-    where notified_at is null and variant_id <> ${v.variantId}
-      and ((${phone}::text is not null and phone = ${phone}) or (${email}::text is not null and email = ${email}))`);
-  if ((pending[0]?.n ?? 0) >= MAX_PENDING_PER_CONTACT) throw new SubscribeError('too_many');
-  const { rows } = await db.execute<{ id: string }>(sql`
-    insert into inventory_subscription (id, variant_id, product_id, phone, email)
-    values (${newId()}, ${v.variantId}, ${level.productId}, ${phone}, ${email})
-    on conflict (variant_id, coalesce(phone, ''), coalesce(email, '')) do update set notified_at = null
-    returning id`);
+  // Contacts are not verified, so keep only the newest MAX_PENDING_PER_CONTACT pending alerts per phone/email:
+  // a stranger can never queue more than that for someone, and no signup is ever refused (no lockout, no oracle).
+  // The per-contact advisory lock makes insert + trim atomic under concurrent requests.
+  const rows = await withTx(async (tx) => {
+    await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${`notify-me:${phone ?? ''}|${email ?? ''}`}))`);
+    const { rows: inserted } = await tx.execute<{ id: string }>(sql`
+      insert into inventory_subscription (id, variant_id, product_id, phone, email)
+      values (${newId()}, ${v.variantId}, ${level.productId}, ${phone}, ${email})
+      on conflict (variant_id, coalesce(phone, ''), coalesce(email, '')) do update set notified_at = null, created_at = now()
+      returning id`);
+    await tx.execute(sql`
+      delete from inventory_subscription where id in (
+        select id from inventory_subscription
+        where notified_at is null
+          and ((${phone}::text is not null and phone = ${phone}) or (${email}::text is not null and email = ${email}))
+        order by created_at desc offset ${MAX_PENDING_PER_CONTACT})`);
+    return inserted;
+  });
   return { subscriptionId: rows[0]!.id };
 }
 

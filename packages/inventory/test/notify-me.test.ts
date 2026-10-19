@@ -122,13 +122,15 @@ describe('POST /api/notify-me', () => {
     expect(await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.variantId, v.variantId))).toHaveLength(0);
   });
 
-  it('caps pending alerts per contact at 5 variants', async () => {
-    const codes: string[] = [];
-    for (let i = 0; i < 6; i++) {
+  it('keeps only the newest 5 pending alerts per contact and never refuses a signup', async () => {
+    const variants: string[] = [];
+    for (let i = 0; i < 7; i++) {
       const v = await makeLevel(0);
-      codes.push(await subscribe({ variantId: v.variantId, email: 'victim@example.com', consent: true }).then(() => 'ok', (e) => e.code));
+      variants.push(v.variantId);
+      await subscribe({ variantId: v.variantId, email: 'victim@example.com', consent: true });
     }
-    expect(codes).toEqual(['ok', 'ok', 'ok', 'ok', 'ok', 'too_many']);
+    const left = await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.email, 'victim@example.com'));
+    expect(left.map((r) => r.variantId).sort()).toEqual(variants.slice(2).sort());
   });
 
   it('rate limits 10 requests per hour per IP', async () => {
