@@ -49,12 +49,13 @@ describe('subscribe', () => {
     const a = await subscribe({ variantId: v.variantId, phone: '098765 43210', consent: true });
     const b = await subscribe({ variantId: v.variantId, phone: '+91 98765 43210', consent: true });
     expect(b.subscriptionId).toBe(a.subscriptionId);
-    const [row] = await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.id, a.subscriptionId));
+    const id = a.subscriptionId!;
+    const [row] = await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.id, id));
     expect(row).toMatchObject({ phone: '+919876543210', email: null, productId: v.productId, notifiedAt: null });
 
-    await t.db.update(inventorySubscription).set({ notifiedAt: new Date() }).where(eq(inventorySubscription.id, a.subscriptionId));
+    await t.db.update(inventorySubscription).set({ notifiedAt: new Date() }).where(eq(inventorySubscription.id, id));
     await subscribe({ variantId: v.variantId, phone: '9876543210', consent: true });
-    const [again] = await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.id, a.subscriptionId));
+    const [again] = await t.db.select().from(inventorySubscription).where(eq(inventorySubscription.id, id));
     expect(again?.notifiedAt).toBeNull();
   });
 
