@@ -2,6 +2,7 @@
 // caught too. Fails the build with every problem listed.
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { readJson, sha256, SLUG_RE } from './lib/common';
 import type { ProductRecord } from './fill-gaps';

@@ -1,3 +1,4 @@
+import { dynamicRequest } from '../server/request';
 import { Badge, Button, DataTable, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
@@ -45,7 +46,9 @@ const columns = (now: Date): Column<Issue>[] => [
 ];
 
 /** Server errors grouped by fingerprint (core observability). */
-export async function ErrorsPage({ searchParams, now = new Date() }: { searchParams: SearchParamsInput; now?: Date }) {
+export async function ErrorsPage({ searchParams, now: nowOverride }: { searchParams: SearchParamsInput; now?: Date }) {
+  await dynamicRequest();
+  const now = nowOverride ?? new Date();
   const params = parseTableParams(searchParams, SPEC);
   const status = (params.filters.status ?? 'open') as (typeof ISSUE_STATUSES)[number];
   const { rows, total } = await listIssues({ status, page: params.page, pageSize: PAGE_SIZE });

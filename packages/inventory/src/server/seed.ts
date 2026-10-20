@@ -44,7 +44,8 @@ export async function readSeedVariants(seedDir: string): Promise<{ sku: string; 
   for (const file of ['products.json', 'inputs.json']) {
     let raw: string;
     try {
-      raw = await readFile(join(seedDir, file), 'utf8');
+      // The ignore comments stop Turbopack from tracing the whole repo into the standalone output for this seed-time read.
+      raw = await readFile(/*turbopackIgnore: true*/ join(/*turbopackIgnore: true*/ seedDir, file), 'utf8');
     } catch {
       continue;
     }

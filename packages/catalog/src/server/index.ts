@@ -41,6 +41,6 @@ export {
 } from './write';
 export { importSeed, importSheet, importCsv, exportSheet, exportCsv, rowToFields, type ImportReport, type SeedImportOptions } from './import';
 export { listAdminProducts, getProductForEdit, listCollectionsAdmin, listTagsAdmin, listFaqsAdmin, dataGaps, ADMIN_PAGE_SIZE, type GapKind } from './admin-queries';
-export { cacheFor, expireTags } from './cache';
+export { cacheFor, expireTags } from '@ecomkit/core/cache-tags';
 export { pageMetadata, listingIndexing } from './meta';
 export { loadListing, parseListingQuery, SORTS, type Listing, type Sort } from './listing';

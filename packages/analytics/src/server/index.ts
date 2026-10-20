@@ -1,7 +1,7 @@
 import 'server-only';
 
 export { onConsentChanged } from './consent';
-export { clientIp, createBeaconIngest, type BeaconIngestOptions } from './http';
+export { createBeaconIngest, type BeaconIngestOptions } from './http';
 export { ingest, type HasConsent, type IngestContext, type IngestResult } from './ingest';
 export { createPartitionJob, ensurePartitions, listPartitions, type PartitionChanges } from './partitions';
 export {

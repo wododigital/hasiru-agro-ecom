@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag, updateTag } from 'next/cache';
 import { signInternal } from '../http/hmac';
 
 /** The only cache tags in the system. Builders keep the `<kind>:<key>` spelling in one place. */
@@ -59,5 +60,34 @@ export async function invalidateTags(tagList: readonly string[]): Promise<void> 
     await revalidateFromWorker(tagList);
   } catch (err) {
     process.stderr.write(`${JSON.stringify({ level: 'warn', scope: 'cache-tags', message: 'revalidate skipped', tags: tagList, error: String(err) })}\n`);
+  }
+}
+
+/**
+ * Inside a 'use cache' function: a life (default days) plus the given tags. Outside Next (worker, scripts, tests)
+ * there is no cache scope and the calls throw; that is ignored and the read is simply not cached.
+ */
+export function cacheFor(tagList: readonly string[], life: 'minutes' | 'hours' | 'days' = 'days'): void {
+  try {
+    cacheLife(life);
+    if (tagList.length) cacheTag(...tagList);
+  } catch {
+    // not inside a cache scope
+  }
+}
+
+/**
+ * After a write: `updateTag` (read-your-own-writes inside the server action that made the change); anywhere else
+ * `invalidateTags` (revalidateTag, or the worker's post to the web process).
+ */
+export async function expireTags(tagList: readonly string[]): Promise<'update' | 'invalidate'> {
+  const unique = [...new Set(tagList)];
+  if (!unique.length) return 'update';
+  try {
+    for (const tag of unique) updateTag(tag);
+    return 'update';
+  } catch {
+    await invalidateTags(unique);
+    return 'invalidate';
   }
 }

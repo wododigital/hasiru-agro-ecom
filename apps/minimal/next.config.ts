@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   agentRules: false,
   allowedDevOrigins: ['localhost', '127.0.0.1'],
   serverExternalPackages: ['sharp', 'pg', 'pg-boss'],
+  images: { loader: 'custom', loaderFile: './image-loader.ts' },
 };
 
 export default nextConfig;

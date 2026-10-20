@@ -3,6 +3,7 @@
 // Also builds Agarwood (from Woo) and the Woo-only legacy plants as hidden drafts (A18), and writes the
 // row -> match -> price review CSV.
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { cleanLine, cleanText, csvCell, once, paths, readJson, roundBulk, slugify, SOURCES, writeIfChanged, writeSeedFile } from './lib/common';
 import { type MediaRole, registerProductImage, registerSiteImage, wooUrlToPath } from './lib/media-plan';

@@ -11,7 +11,7 @@ import { productPath } from '../domain/card';
 import * as E from '../domain/enums';
 import { normaliseVariants, SLUG_PATTERN, type ProductFields, type VariantFields } from '../domain/product';
 import { catalogCollection, catalogFaq, catalogProduct, catalogProductCollection, catalogProductTag, catalogTag, catalogVariant, type ProductRow } from '../schema';
-import { expireTags } from './cache';
+import { expireTags } from '@ecomkit/core/cache-tags';
 import { catalogRuntime } from './runtime';
 
 const log = createLogger('catalog');

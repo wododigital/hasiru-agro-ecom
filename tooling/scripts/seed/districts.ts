@@ -1,10 +1,9 @@
 // WP-13 seed step 6: the 644-row district sheet -> data/seed/districts.json (BUILD-PLAN 9.6, SCHEMA.md).
 // Deterministic: same inputs give byte-identical records. Reads the sheet, the bundled HQ table
 // (data/seed/district-hq.json, produced once by geocode-districts.ts) and, when present, data/seed/products.json.
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import * as XLSX from 'xlsx';
 
 // @boundaries-ignore type-only: core is loaded at runtime through the app's dependency graph
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
@@ -29,7 +28,6 @@ import {
   type HqTable,
 } from '../../../packages/places/src/domain';
 
-const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 /** Gitignored client workbook; lives only in the main checkout. */
 export const WORKBOOK = process.env.HASIRU_WORKBOOK ?? '/Users/shyam/Desktop/Claude Dev Projects/hasiru-agro-ecom/latest_products.xlsx';
 const SHEET = 'Dis-wise Geo data';
@@ -74,32 +72,8 @@ export interface SheetRow {
 
 const num = (v: unknown): number | null => (typeof v === 'number' && Number.isFinite(v) ? v : null);
 
-/** The few SheetJS calls used here. tooling/scripts does not declare xlsx yet (cross-package request), so no static import. */
-interface Xlsx {
-  readFile(file: string): { Sheets: Record<string, { '!ref'?: string } | undefined> };
-  utils: {
-    decode_range(ref: string): { e: { r: number; c: number } };
-    encode_range(range: { s: { r: number; c: number }; e: { r: number; c: number } }): string;
-    sheet_to_json<T>(ws: unknown, options: { header: 1; defval: null; blankrows: false; range: string }): T[];
-  };
-}
-
-async function loadXlsx(): Promise<Xlsx> {
-  const name = 'xlsx';
-  try {
-    return (await import(name)) as Xlsx;
-  } catch {
-    // Fall back to the copy in the pnpm store (the catalog package depends on it).
-    const store = join(ROOT, 'node_modules', '.pnpm');
-    const dir = existsSync(store) ? readdirSync(store).find((d) => d.startsWith('xlsx@')) : undefined;
-    if (!dir) throw new Error('xlsx is not installed');
-    return createRequire(import.meta.url)(join(store, dir, 'node_modules', 'xlsx')) as Xlsx;
-  }
-}
-
 export async function readSheet(file = WORKBOOK): Promise<SheetRow[]> {
-  const XLSX = await loadXlsx();
-  const wb = XLSX.readFile(file);
+  const wb = XLSX.read(readFileSync(file), { type: 'buffer' });
   const ws = wb.Sheets[SHEET];
   if (!ws) throw new Error(`sheet "${SHEET}" not found in ${file}`);
   // Column A is empty in the sheet; anchor the range at A1 so indices match the column letters (B = 1).

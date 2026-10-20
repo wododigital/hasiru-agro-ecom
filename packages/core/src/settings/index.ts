@@ -113,7 +113,9 @@ export async function setSettings(def: SettingsDef, patch: Record<string, unknow
     if (secretSet.has(key) && value === null) clear.push(key);
     else cleaned[key] = value;
   }
-  const parsed = def.schema.partial().parse(cleaned) as Record<string, unknown>;
+  // zod 4 fills defaults for absent keys even through `.partial()`; keep only the keys the patch carried, or a
+  // partial update would reset every other defaulted field.
+  const parsed = Object.fromEntries(Object.entries(def.schema.partial().parse(cleaned) as Record<string, unknown>).filter(([k]) => k in cleaned));
 
   await withTx(async (tx) => {
     const before = await getSettingsForAdmin(def);

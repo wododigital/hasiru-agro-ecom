@@ -1,6 +1,7 @@
 // Plan 9.13 (pipeline half): docs/CLIENT-QUESTIONS.md generated from the seed's needs_review records and
 // research section 11. The admin "Data gaps" view (catalog) reads the same flags from the database.
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { writeIfChanged } from './lib/common';
 import { buildProducts, type ProductRecord } from './fill-gaps';

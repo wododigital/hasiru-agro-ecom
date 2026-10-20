@@ -23,7 +23,7 @@ import {
 } from '../domain/seed';
 import { matchKey, parseSheetRow, SHEET_DATA_START, SHEET_HEADER, SHEET_MERGES, SHEET_NAME, toSheetRow, type SheetRow } from '../domain/sheet';
 import { catalogCollection, catalogFaq, catalogProduct, catalogProductMedia, catalogProductTag, catalogTag, catalogVariant, type ProductRow } from '../schema';
-import { expireTags } from './cache';
+import { expireTags } from '@ecomkit/core/cache-tags';
 import { catalogRuntime } from './runtime';
 import { saveProduct, type Actor } from './write';
 

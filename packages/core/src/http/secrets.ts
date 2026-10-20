@@ -1,4 +1,5 @@
 import { createHmac } from 'node:crypto';
+import { normalisePhone } from '../ids';
 
 /**
  * One server secret (INTERNAL_SECRET), a separate derived key per purpose, so a token signed for one
@@ -24,4 +25,18 @@ export function clientIp(source: { headers: { get(name: string): string | null }
 export function hashIp(ip: string | null | undefined): string | null {
   if (!ip) return null;
   return createHmac('sha256', derivedSecret('ip-hash')).update(ip.trim()).digest('base64url').slice(0, 22);
+}
+
+/**
+ * Keyed, non-reversible hash of a phone or email for matching, search and per-contact limits (the plain value
+ * may be stored alongside for display). Phones are normalised to E.164 and emails lowercased first, so every
+ * spelling of one contact hashes the same. Fails closed: an unparseable phone gets no hash (null), never a hash
+ * of the raw string, or format variants would each get their own limit bucket.
+ */
+export function hashContact(value: string | null | undefined): string | null {
+  if (!value) return null;
+  const v = value.trim();
+  const key = v.includes('@') ? v.toLowerCase() : normalisePhone(v);
+  if (!key) return null;
+  return createHmac('sha256', derivedSecret('contact-hash')).update(key).digest('base64url').slice(0, 22);
 }

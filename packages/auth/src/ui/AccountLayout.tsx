@@ -40,7 +40,8 @@ export function AccountLayout({ children, pagePaths, messages = authMessages.acc
       <Suspense fallback={<Skeleton className="h-9 w-full" />}>
         <AccountNav pagePaths={pagePaths} messages={messages} />
       </Suspense>
-      {children}
+      {/* Every account page reads the signed-in customer (request-time data); the shell owns the boundary so pages need none. */}
+      <Suspense fallback={<Skeleton className="h-40 w-full" />}>{children}</Suspense>
     </div>
   );
 }

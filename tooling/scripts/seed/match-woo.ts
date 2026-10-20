@@ -1,6 +1,7 @@
 // Step 9.2: match the 159 client rows against the 193 old Woo plants. Token Jaccard + variety bonus +
 // string similarity over an alias map, with two hard rules: the base species must match, and the
 // scientific (native) rows are never matched. Hand decisions from the research review are pinned below.
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { cleanLine, once, paths, readJson } from './lib/common';
 import { normalizePlants, type PlantRow, type Propagation } from './normalize-plants';

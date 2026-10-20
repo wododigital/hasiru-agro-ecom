@@ -5,7 +5,7 @@ import { safeHtml } from '@ecomkit/core/validation';
 import { and, asc, desc, eq, inArray, isNotNull, lte } from 'drizzle-orm';
 import { pagePath, videoLinks } from '../domain';
 import { cmsClient, cmsCounter, cmsPortfolioItem, cmsPost, cmsTeamMember, cmsTestimonial, cmsTrustClaim, cmsVideo, type CmsPost, type CmsVideo } from '../schema';
-import { cacheFor } from './cache';
+import { cacheFor } from '@ecomkit/core/cache-tags';
 import { publishedPages } from './pages';
 import { imagesFor } from './runtime';
 

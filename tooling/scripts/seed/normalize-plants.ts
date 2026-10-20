@@ -1,5 +1,6 @@
 // Step 9.1: read the client's "Plant data" tab (159 rows) and normalise it: typo fixes (originals kept as
 // search aliases), category mapping, size class, spacing parse, compost by age, climate, flags.
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { cleanLine, once, paths, readJson, ROOT } from './lib/common';
 import { type Cell, readWorkbook, sheetByName, type Sheet } from './lib/xlsx';

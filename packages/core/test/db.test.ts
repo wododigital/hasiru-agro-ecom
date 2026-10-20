@@ -139,6 +139,12 @@ describe('settings', () => {
     await expect(setSettings(def, { nope: 1 }, { actorId: null })).rejects.toThrow(/unknown setting/);
   });
 
+  it('a partial update leaves the other stored fields alone (zod fills defaults through .partial())', async () => {
+    await setSettings(def, { merchantId: 'M777', advancePct: 55 }, { actorId: null });
+    await setSettings(def, { merchantId: 'M778' }, { actorId: null });
+    expect(await getSettings(def)).toMatchObject({ merchantId: 'M778', advancePct: 55 });
+  });
+
   it('refuses a tampered stored secret', async () => {
     await setSettings(def, { clientSecret: 'sk_live_zzzzzz999999' }, { actorId: null });
     const [row] = await t.db.select().from(coreSettings).where(sql`${coreSettings.module} = 'payments' and ${coreSettings.key} = 'clientSecret'`);

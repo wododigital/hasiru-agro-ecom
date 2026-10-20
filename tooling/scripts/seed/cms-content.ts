@@ -4,6 +4,7 @@
 // Copy follows the site rules: no em or en dashes, no "phase" wording (the old site's "Phase One" steps are
 // "Step 1" here).
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { once, SOURCES, writeSeedFile } from './lib/common';
 import { siteMaster } from './lib/media-plan';

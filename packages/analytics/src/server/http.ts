@@ -1,5 +1,5 @@
 import { getViewer, type Viewer } from '@ecomkit/core/auth-context';
-import { hashIp, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
+import { clientIp, hashIp, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import { MAX_BEACON_BYTES } from '../domain/payload';
 import { ingest, type HasConsent } from './ingest';
@@ -17,11 +17,6 @@ export interface BeaconIngestOptions {
 
 const NO_STORE = { 'cache-control': 'no-store', 'x-robots-tag': 'noindex' };
 
-/** nginx sets X-Real-IP from the connection; X-Forwarded-For is only a fallback (first hop). */
-export function clientIp(headers: Headers): string | null {
-  return headers.get('x-real-ip')?.trim() || headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null;
-}
-
 /**
  * POST /api/beacon-ingest. Stateless (no CSRF token): cross-site posts are refused by Sec-Fetch-Site, the body is
  * capped before parsing, the IP is rate-limited under `beacon-ingest:<ipHash>`. Always answers 204 for a valid
@@ -31,7 +26,7 @@ export function createBeaconIngest(options: BeaconIngestOptions = {}): (req: Req
   return async function POST(req) {
     if (req.headers.get('sec-fetch-site') === 'cross-site') return new Response(null, { status: 403, headers: NO_STORE });
 
-    const ipHash = hashIp(clientIp(req.headers)) ?? 'unknown';
+    const ipHash = hashIp(clientIp(req)) ?? 'unknown';
     const limit = await rateLimit(`beacon-ingest:${ipHash}`, { limit: options.ratePerMinute ?? 300, windowSec: 60 });
     if (!limit.ok) return new Response(null, { status: 429, headers: { ...NO_STORE, 'retry-after': String(Math.ceil((limit.resetAt.getTime() - Date.now()) / 1000)) } });
 

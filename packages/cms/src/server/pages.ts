@@ -5,7 +5,7 @@ import { safeHtml } from '@ecomkit/core/validation';
 import { and, asc, count, desc, eq, ilike, or } from 'drizzle-orm';
 import { pagePath, pageTagKey, parseBlock, type Block, type PageInput } from '../domain';
 import { cmsBlock, cmsPage, type CmsPage } from '../schema';
-import { cacheFor, expireTags } from './cache';
+import { cacheFor, expireTags } from '@ecomkit/core/cache-tags';
 import { cmsRuntime } from './runtime';
 
 export const PAGES_TAG = tags.cms('pages');

@@ -3,6 +3,7 @@
 // two folders that nothing uses any more are removed. Records for sourced/ photos (WP-13) are kept as is.
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { readJson, sha256, SOURCES, writeSeedFile } from './lib/common';
 import { allMasters, type MasterFile, primaryRole, siteImages } from './lib/media-plan';

@@ -15,6 +15,27 @@
       "when": 1792447609506,
       "tag": "0001_core_rate_limit_unlogged",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792452859885,
+      "tag": "0002_wave1_modules",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792452860470,
+      "tag": "0003_search_trgm",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792452861060,
+      "tag": "0004_analytics_event_partitions",
+      "breakpoints": true
     }
   ]
 }

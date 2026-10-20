@@ -1,24 +1,13 @@
 // Route handlers: POST /api/media/upload and GET /media/[...path].
 import { readdir } from 'node:fs/promises';
 import { ForbiddenError, requirePermission } from '@ecomkit/core/auth-context';
-import { PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
+import { isSameOrigin, PayloadTooLargeError, readRawBody } from '@ecomkit/core/http';
 import { assetMetaSchema, CONTENT_TYPES, masterKey, MAX_UPLOAD_BYTES, parseMediaPath, pickDerivative, type DerivativeFormat } from '../domain';
 import { mediaMessages, type MediaErrorCode } from '../messages';
 import { getAsset, uploadFile, UploadError, verifySignedUrl } from './assets';
 import { absPath, readKey } from './storage';
 
 const IMMUTABLE = 'public, max-age=31536000, immutable';
-
-function sameOrigin(req: Request): boolean {
-  const origin = req.headers.get('origin');
-  if (!origin) return true; // same-origin form posts from older browsers; cookies are SameSite=Lax anyway
-  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host');
-  try {
-    return new URL(origin).host === host;
-  } catch {
-    return false;
-  }
-}
 
 /**
  * Multipart upload (field `file`, plus optional alt, caption, source, licence, author, sourceUrl,
@@ -32,7 +21,7 @@ export async function handleUpload(req: Request): Promise<Response> {
       ? new Response(null, { status: 303, headers: { location: `/admin/media?error=${code}` } })
       : Response.json({ ok: false, error: code, message: mediaMessages.errors[code] }, { status });
 
-  if (!sameOrigin(req)) return fail('cross_origin', 403);
+  if (!isSameOrigin(req)) return fail('cross_origin', 403);
   let actorId: string;
   try {
     actorId = (await requirePermission('media.write')).userId;

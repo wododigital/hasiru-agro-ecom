@@ -6,7 +6,7 @@ import { and, count, desc, eq, ilike } from 'drizzle-orm';
 import type { Metadata } from 'next';
 import { metadataFor, normalisePath } from '../domain';
 import { seoPageMeta, type SeoPageMeta } from '../schema';
-import { cacheFor, expireTags } from './cache';
+import { cacheFor, expireTags } from '@ecomkit/core/cache-tags';
 import { seoRuntime } from './runtime';
 
 /** Page meta overrides share the `settings:seo` tag: one admin save expires every page that read one. */

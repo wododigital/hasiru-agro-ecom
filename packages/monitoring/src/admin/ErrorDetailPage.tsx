@@ -1,3 +1,4 @@
+import { dynamicRequest } from '../server/request';
 import { Badge } from '@ecomkit/ui';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -7,7 +8,9 @@ import { ago, ist } from './format';
 import { HealthTabs } from './HealthTabs';
 
 /** One error issue with its latest events (stack, route, release). */
-export async function ErrorDetailPage({ id, now = new Date() }: { id: string; now?: Date }) {
+export async function ErrorDetailPage({ id, now: nowOverride }: { id: string; now?: Date }) {
+  await dynamicRequest();
+  const now = nowOverride ?? new Date();
   const found = await getIssue(id);
   if (!found) notFound();
   const { issue, events } = found;

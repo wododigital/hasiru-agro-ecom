@@ -1,6 +1,7 @@
 // Step 9.4: the seven input products from the HANDOFF sample (research section 7). Every value is a
 // placeholder until the client sends real products, prices and dosage formulas.
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { once, slugify, SOURCES, writeSeedFile } from './lib/common';
 import { type InputBlock, PREORDER_DAYS, type ProductRecord } from './fill-gaps';

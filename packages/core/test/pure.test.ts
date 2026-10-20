@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { loadEnv } from '../src/env';
 import { newId, normalisePhone, slugify, SLUG_RE } from '../src/ids';
 import { financialYear } from '../src/sequence';
-import { isPublicAddress, isSameOrigin, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
+import { hashContact, isPublicAddress, isSameOrigin, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
 import { fingerprint, topFrame } from '../src/observability';
 import { seal, unseal } from '../src/settings/crypto';
 import { defineSettings, fieldMeta, maskSecret } from '../src/settings';
@@ -204,6 +204,18 @@ describe('env and cache tags', () => {
   it('tag builders produce tags the revalidate endpoint accepts', () => {
     for (const t of [tags.catalog, tags.promoActive, tags.product(newId()), tags.settings('erp-sync'), tags.district('bengaluru-urban')]) expect(TAG_RE.test(t), t).toBe(true);
     expect(TAG_RE.test('product:../../x')).toBe(false);
+  });
+});
+
+describe('hashContact', () => {
+  it('hashes every spelling of one contact the same and fails closed on junk phones', () => {
+    process.env.INTERNAL_SECRET ??= randomBytes(32).toString('hex');
+    expect(hashContact('98450 12345')).toBe(hashContact('+91 9845012345'));
+    expect(hashContact('Farmer@Example.com')).toBe(hashContact('farmer@example.com'));
+    expect(hashContact('98450 12345')).not.toBe(hashContact('98450 12346'));
+    expect(hashContact('12')).toBeNull();
+    expect(hashContact('')).toBeNull();
+    expect(hashContact(null)).toBeNull();
   });
 });
 

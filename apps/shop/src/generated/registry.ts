@@ -3,6 +3,23 @@
 import { createRegistry } from '@ecomkit/core/manifest';
 import m_core from '@ecomkit/core/manifest';
 import m_ui from '@ecomkit/ui/manifest';
+import m_auth from '@ecomkit/auth/manifest';
+import m_admin_shell from '@ecomkit/admin-shell/manifest';
+import m_media from '@ecomkit/media/manifest';
+import m_catalog from '@ecomkit/catalog/manifest';
+import m_pricing from '@ecomkit/pricing/manifest';
+import m_discounts from '@ecomkit/discounts/manifest';
+import m_inventory from '@ecomkit/inventory/manifest';
+import m_search from '@ecomkit/search/manifest';
+import m_seo from '@ecomkit/seo/manifest';
+import m_cms from '@ecomkit/cms/manifest';
+import m_notifications from '@ecomkit/notifications/manifest';
+import m_monitoring from '@ecomkit/monitoring/manifest';
+import m_analytics from '@ecomkit/analytics/manifest';
+import m_places from '@ecomkit/places/manifest';
+import m_customers from '@ecomkit/customers/manifest';
+import m_enquiries from '@ecomkit/enquiries/manifest';
+import m_reviews from '@ecomkit/reviews/manifest';
 
-export const enabledModules = ["core","ui"] as const;
-export const registry = createRegistry([m_core, m_ui], { mocks: true });
+export const enabledModules = ["core","ui","auth","admin-shell","media","catalog","pricing","discounts","inventory","search","seo","cms","notifications","monitoring","analytics","places","customers","enquiries","reviews"] as const;
+export const registry = createRegistry([m_core, m_ui, m_auth, m_admin_shell, m_media, m_catalog, m_pricing, m_discounts, m_inventory, m_search, m_seo, m_cms, m_notifications, m_monitoring, m_analytics, m_places, m_customers, m_enquiries, m_reviews], { mocks: true });

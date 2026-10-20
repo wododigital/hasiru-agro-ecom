@@ -26,5 +26,6 @@ describe('freshDatabase', () => {
     } finally {
       await client.end();
     }
-  });
+    // CREATE DATABASE ... TEMPLATE waits for other sessions on the template; the full-workspace test run creates many.
+  }, 60_000);
 });

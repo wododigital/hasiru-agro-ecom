@@ -4,7 +4,8 @@ import { defineModule } from '@ecomkit/core/manifest';
 /** Product reviews with photos, verified-buyer flag, moderation and a per-product aggregate. No Q&A. */
 export default defineModule({
   id: 'reviews',
-  dependsOn: ['core', 'catalog', 'orders', 'media'],
+  dependsOn: ['core', 'catalog', 'media'],
+  optional: ['orders'],
   schema: () => import('./schema'),
   routes: [
     { path: '/account/reviews', module: 'routes/account-reviews', kind: 'page', exports: ['default', 'generateMetadata'] },

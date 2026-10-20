@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['localhost', '127.0.0.1'],
   serverExternalPackages: ['sharp', 'pg', 'pg-boss'],
   images: {
+    loader: 'custom',
+    loaderFile: './image-loader.ts',
     formats: ['image/avif', 'image/webp'],
     qualities: [50, 75],
     minimumCacheTTL: 2678400,

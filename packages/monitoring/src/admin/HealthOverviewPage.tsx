@@ -1,3 +1,4 @@
+import { dynamicRequest } from '../server/request';
 import { Badge, Button, EmptyState, Sparkline, Stat, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
 import Link from 'next/link';
 import { bellCounts } from '../server/alerts';
@@ -15,7 +16,9 @@ const detailText = (detail: unknown): string => {
 };
 
 /** System health: checks, uptime, open alerts, integration cards, workers. */
-export async function HealthOverviewPage({ now = new Date() }: { now?: Date } = {}) {
+export async function HealthOverviewPage({ now: nowOverride }: { now?: Date } = {}) {
+  await dynamicRequest();
+  const now = nowOverride ?? new Date();
   const [checks, uptime, bell, cards, workers, queues] = await Promise.all([latestCheckResults(), checkHistory('uptime.live', { now }), bellCounts(), integrationCards({ now }), heartbeats(), listQueues()]);
   const failing = checks.filter((c) => !c.ok);
   const openAlerts = bell.open.critical + bell.open.high + bell.open.low;

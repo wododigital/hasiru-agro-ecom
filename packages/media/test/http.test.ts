@@ -51,7 +51,7 @@ function uploadRequest(file: Blob, name: string, fields: Record<string, string> 
   const form = new FormData();
   form.set('file', file, name);
   for (const [k, v] of Object.entries(fields)) form.set(k, v);
-  return new Request('http://localhost/api/media/upload', { method: 'POST', body: form, headers: { accept: 'application/json', ...headers } });
+  return new Request('http://localhost/api/media/upload', { method: 'POST', body: form, headers: { accept: 'application/json', 'sec-fetch-site': 'same-origin', ...headers } });
 }
 const get = (path: string, accept = 'image/avif,image/webp,*/*') => {
   const url = new URL(path, 'http://localhost');
@@ -84,8 +84,8 @@ describe('POST /api/media/upload', () => {
     permissions = ['products.read'];
     expect((await handleUpload(uploadRequest(jpg, 'a.jpg'))).status).toBe(403);
     permissions = ['media.write'];
-    expect((await handleUpload(uploadRequest(jpg, 'a.jpg', {}, { origin: 'https://attacker.example' }))).status).toBe(403);
-    const empty = new Request('http://localhost/api/media/upload', { method: 'POST', body: new FormData(), headers: { accept: 'application/json' } });
+    expect((await handleUpload(uploadRequest(jpg, 'a.jpg', {}, { 'sec-fetch-site': 'cross-site', origin: 'https://attacker.example' }))).status).toBe(403);
+    const empty = new Request('http://localhost/api/media/upload', { method: 'POST', body: new FormData(), headers: { accept: 'application/json', 'sec-fetch-site': 'same-origin' } });
     expect((await handleUpload(empty)).status).toBe(400);
     expect((await handleUpload(uploadRequest(jpg, 'a.jpg', { sourceUrl: 'javascript:alert(1)' }))).status).toBe(400);
     const huge = new Blob([new Uint8Array([0xff, 0xd8, 0xff]), new Uint8Array(13 * 1024 * 1024)]);

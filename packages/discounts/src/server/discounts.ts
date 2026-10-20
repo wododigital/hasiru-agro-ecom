@@ -1,14 +1,12 @@
 // Discounts server API. No `server-only` import here (the worker loads the event handlers under plain
 // Node); `./index.ts` adds the guard for app code.
-import { createHmac } from 'node:crypto';
 import { and, asc, count, desc, eq, inArray, ne, or, sql } from 'drizzle-orm';
 import { audit } from '@ecomkit/core/audit';
 import { NotFoundError } from '@ecomkit/core/auth-context';
 import { invalidateTags, tags } from '@ecomkit/core/cache-tags';
 import type { AppliedDiscountInput, Paise } from '@ecomkit/core/contracts';
 import { db, withTx, type DbOrTx, type Tx } from '@ecomkit/core/db';
-import { derivedSecret } from '@ecomkit/core/http';
-import { normalisePhone } from '@ecomkit/core/ids';
+import { hashContact } from '@ecomkit/core/http';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import {
   evaluate,
@@ -28,16 +26,8 @@ import { discountsCode, discountsRedemption, discountsRule, type DiscountRuleRow
 export const COUPON_ATTEMPT_LIMIT = 10;
 export const COUPON_ATTEMPT_WINDOW_SEC = 15 * 60;
 
-/**
- * Salted, non-reversible phone for usage limits and single-use codes.
- * ponytail: local helper until core owns one phone hash for every module (request in BUILD-STATUS/wp-06.md).
- */
-export function hashPhone(phone: string): string | null {
-  // Fail closed: an unparseable phone must not get its own usage bucket (spacing/format variants would bypass limits).
-  const normalised = normalisePhone(phone);
-  if (!normalised) return null;
-  return createHmac('sha256', derivedSecret('phone-hash')).update(normalised).digest('base64url').slice(0, 22);
-}
+/** Salted, non-reversible phone for usage limits and single-use codes; null (fail closed) for an unparseable number. */
+export const hashPhone = (phone: string): string | null => hashContact(phone);
 
 const toRule = (r: DiscountRuleRow): DiscountRule => r;
 

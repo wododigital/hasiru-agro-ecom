@@ -1,6 +1,7 @@
 // Step 9.5: the four planting models (HANDOFF placeholder patterns) and their member plants. A plant is a
 // member of a model when the client gave it a spacing for that model; its role is the A12 default.
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { once, SOURCES, writeSeedFile } from './lib/common';
 import { buildProducts, type Role } from './fill-gaps';

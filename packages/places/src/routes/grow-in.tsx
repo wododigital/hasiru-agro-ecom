@@ -12,8 +12,16 @@ import { DistrictPlantList } from '../ui/DistrictPlantList';
 type Params = { params: Promise<{ district: string }> };
 const m = placesMessages.district;
 
+/** Cache components need at least one param; `_none` fails SLUG_RE and 404s (same pattern as catalog and cms). */
+const PLACEHOLDER = '_none';
+
 export async function generateStaticParams(): Promise<{ district: string }[]> {
-  return (await listEnabledDistrictSlugs()).map((district) => ({ district }));
+  try {
+    const slugs = (await listEnabledDistrictSlugs()).map((district) => ({ district }));
+    return slugs.length ? slugs : [{ district: PLACEHOLDER }];
+  } catch {
+    return [{ district: PLACEHOLDER }];
+  }
 }
 
 async function load(params: Params['params']) {

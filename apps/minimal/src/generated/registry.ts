@@ -3,6 +3,13 @@
 import { createRegistry } from '@ecomkit/core/manifest';
 import m_core from '@ecomkit/core/manifest';
 import m_ui from '@ecomkit/ui/manifest';
+import m_auth from '@ecomkit/auth/manifest';
+import m_media from '@ecomkit/media/manifest';
+import m_catalog from '@ecomkit/catalog/manifest';
+import m_pricing from '@ecomkit/pricing/manifest';
+import m_inventory from '@ecomkit/inventory/manifest';
+import m_customers from '@ecomkit/customers/manifest';
+import m_seo from '@ecomkit/seo/manifest';
 
-export const enabledModules = ["core","ui"] as const;
-export const registry = createRegistry([m_core, m_ui], { mocks: true });
+export const enabledModules = ["core","ui","auth","media","catalog","pricing","inventory","customers","seo"] as const;
+export const registry = createRegistry([m_core, m_ui, m_auth, m_media, m_catalog, m_pricing, m_inventory, m_customers, m_seo], { mocks: true });

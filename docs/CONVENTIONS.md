@@ -243,3 +243,12 @@ Never in code, tables, files, comments or copy (from `docs/research/internal-pat
 - Write `BUILD-STATUS/wp-xx.md` from the template in `BUILD-STATUS/README.md`. Never edit `BUILD-STATUS.md`, `modules.config*.ts`, `src/generated/*` or `pnpm-lock.yaml`.
 - Tool-written agent files stay out of the repo: `turbo.json` sets `agentGuidance: false`; if `next dev` writes an `AGENTS.md`, delete it rather than commit it (client handover rule).
 - Commit only if your brief says so; in the current run the orchestrator's gate commits. Never push.
+
+## 15. Security rules for route handlers and identity keys (added by the Wave 1 gate, 2026-10-20)
+
+1. **Client IP**: `clientIp(req)` from `@ecomkit/core/http` (trusts only nginx `X-Real-IP`; `{ headers: await headers() }` in server components). Never read `X-Forwarded-For`: its first entry is client-controlled and spoofing it bypasses rate limits. Production nginx sets `proxy_set_header X-Real-IP $remote_addr;`.
+2. **Contact hashes fail closed**: `hashContact(value)` from `@ecomkit/core/http` is the one phone/email hash (E.164 or lowercased email, HMAC under `INTERNAL_SECRET`, purpose `contact-hash`). It returns null for an unparseable phone; never hash a raw string as a fallback, and treat null as "no identity" wherever a limit applies.
+3. **Unverified contacts** (notify-me, enquiries, newsletter): cap pending items per contact; an anonymous request must never enrol a third party into repeated messages.
+4. **CSRF on route handlers**: server actions get Next's Origin check, route handlers do not. Every cookie-authenticated, state-changing handler (POST/PUT/PATCH/DELETE under `app/api` that reads the session) starts with `if (!isSameOrigin(req)) return 403` from `@ecomkit/core/http`, checks the viewer before reading the body, and caps the body with `readRawBody(req, max)` (counts real bytes; never trust Content-Length alone).
+5. **Outbound HTTP**: `safeFetch` only (https, public addresses, allowlisted hosts); it strips headers on cross-origin redirects and never forwards a body across them.
+6. **Cache helpers**: `cacheFor(tags, life?)` and `expireTags(tags)` live in `@ecomkit/core/cache-tags`; no module keeps its own copy.

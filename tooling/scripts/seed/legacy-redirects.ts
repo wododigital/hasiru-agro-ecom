@@ -3,6 +3,7 @@
 // Old category URLs point at the matching collection. Old slugs are derived WordPress-style from the Woo
 // names (the old product sitemap is not fetched at build time).
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { once, slugify, SOURCES, writeSeedFile } from './lib/common';
 import { buildProducts } from './fill-gaps';

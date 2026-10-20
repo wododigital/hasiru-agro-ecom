@@ -23,7 +23,7 @@ import {
   type TagRow,
   type VariantRow,
 } from '../schema';
-import { cacheFor } from './cache';
+import { cacheFor } from '@ecomkit/core/cache-tags';
 import { climateOf, collectionPath, visible } from './shared';
 
 const p = catalogProduct;

@@ -11,8 +11,10 @@ const when = (d: Date | null) => (d ? toIstLocal(d).replace('T', ' ') : 'open');
 const STATE_LABEL = { live: 'Live', inactive: 'Off', not_started: 'Scheduled', ended: 'Ended' } as const;
 
 /** /admin/discounts */
-export async function DiscountsListPage({ now = new Date() }: { now?: Date } = {}) {
+export async function DiscountsListPage({ now: nowOverride }: { now?: Date } = {}) {
   await requirePermission('marketing.write');
+  // The clock is read only after the request-time marker above (cache components refuse `new Date()` in a prerender).
+  const now = nowOverride ?? new Date();
   const rules = await listRules();
   return (
     <div className="flex flex-col gap-4">

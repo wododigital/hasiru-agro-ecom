@@ -1,3 +1,4 @@
+import { dynamicRequest } from '../server/request';
 import { can, getViewer } from '@ecomkit/core/auth-context';
 import { Badge, Button, Checkbox, DataTable, Input, Select, TBody, THead, Table, Td, Th, Tr, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
@@ -61,7 +62,9 @@ const columns = (now: Date): Column<AlertRow>[] => [
 ];
 
 /** Alert issues (URL-bound filters) and the routing rules. */
-export async function AlertsPage({ searchParams, now = new Date() }: { searchParams: SearchParamsInput; now?: Date }) {
+export async function AlertsPage({ searchParams, now: nowOverride }: { searchParams: SearchParamsInput; now?: Date }) {
+  await dynamicRequest();
+  const now = nowOverride ?? new Date();
   const params = parseTableParams(searchParams, SPEC);
   const status = (params.filters.status ?? 'unresolved') as AlertStatus | 'unresolved';
   const [{ rows, total }, rules, viewer] = await Promise.all([

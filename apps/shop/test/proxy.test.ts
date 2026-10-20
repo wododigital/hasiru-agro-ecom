@@ -67,6 +67,12 @@ describe('proxy', () => {
     expect(res.headers.get('strict-transport-security')).toContain('max-age=');
   });
 
+  it('passes the request path to layouts as x-pathname', () => {
+    vi.stubEnv('SITE_URL', 'https://www.example.com');
+    const res = proxy(request('https://www.example.com/admin/products'));
+    expect(res.headers.get('x-middleware-request-x-pathname')).toBe('/admin/products');
+  });
+
   it('sets a nonce CSP on checkout and a static CSP on the storefront', () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
     const shop = proxy(request('https://www.example.com/plants'));

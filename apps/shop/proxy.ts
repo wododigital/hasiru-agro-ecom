@@ -79,6 +79,8 @@ export function proxy(request: NextRequest): NextResponse {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-locale', pathname === '/kn' || pathname.startsWith('/kn/') ? 'kn-IN' : 'en-IN');
+  // Layouts and the 404 page cannot read the URL; admin-shell (staff gate) and seo (404 log) read this header.
+  requestHeaders.set('x-pathname', pathname);
   if (nonce) {
     requestHeaders.set('x-nonce', nonce);
     requestHeaders.set('content-security-policy', csp);

@@ -5,7 +5,7 @@ import { newId } from '@ecomkit/core/ids';
 import { asc, count, eq } from 'drizzle-orm';
 import { isExternalHref, menuTree, type MenuInput, type MenuNode } from '../domain';
 import { cmsMenu, cmsMenuItem } from '../schema';
-import { cacheFor, expireTags } from './cache';
+import { cacheFor, expireTags } from '@ecomkit/core/cache-tags';
 
 export const menuTag = (key: string) => tags.cms(`menu_${key}`);
 

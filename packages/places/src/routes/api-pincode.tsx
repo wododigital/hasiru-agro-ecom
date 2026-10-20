@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { hashIp } from '@ecomkit/core/audit';
+import { clientIp, hashIp } from '@ecomkit/core/http';
 import { db } from '@ecomkit/core/db';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import { getSettings } from '@ecomkit/core/settings';
@@ -20,7 +20,7 @@ export async function GET(request: Request): Promise<Response> {
   const parsed = query.safeParse(Object.fromEntries(new URL(request.url).searchParams));
   if (!parsed.success) return Response.json({ found: false }, { status: 400, headers: { 'cache-control': 'no-store' } });
 
-  const ip = request.headers.get('x-real-ip') ?? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const ip = clientIp(request) ?? 'unknown';
   const limited = await rateLimit(`places-pincode:${hashIp(ip)}`, { limit: 60, windowSec: 60 });
   if (!limited.ok) return Response.json({ found: false }, { status: 429, headers: { 'retry-after': '30', 'cache-control': 'no-store' } });
 

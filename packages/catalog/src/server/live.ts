@@ -5,7 +5,7 @@ import { tags } from '@ecomkit/core/cache-tags';
 import type { ImageRef, ReviewAggregate, StockInfo } from '@ecomkit/core/contracts';
 import { tierLadder, type TierStep } from '../domain/tiers';
 import type { CatalogSettings } from '../settings';
-import { cacheFor } from './cache';
+import { cacheFor } from '@ecomkit/core/cache-tags';
 import { imagesFor, readCatalogSettings } from './cards';
 import { optionalService } from './runtime';
 

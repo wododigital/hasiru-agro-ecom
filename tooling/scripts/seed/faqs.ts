@@ -3,6 +3,7 @@
 // Answers exist only where they follow from the client data or HANDOFF (`derived`, approved); everything
 // else is a draft or waits for the client (never invented, never published until approved).
 import { join } from 'node:path';
+// @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { cleanLine, once, SOURCES, writeSeedFile } from './lib/common';
 import { sheetByName } from './lib/xlsx';

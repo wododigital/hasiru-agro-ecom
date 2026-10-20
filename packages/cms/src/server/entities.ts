@@ -6,7 +6,7 @@ import { asc, count, desc, eq, ilike, type SQL } from 'drizzle-orm';
 import type { PgColumn, PgTable } from 'drizzle-orm/pg-core';
 import { ENTITIES, type EntityInput, type EntityKey } from '../domain';
 import { cmsClient, cmsCounter, cmsPortfolioItem, cmsPost, cmsTeamMember, cmsTestimonial, cmsTrustClaim, cmsVideo } from '../schema';
-import { expireTags } from './cache';
+import { expireTags } from '@ecomkit/core/cache-tags';
 import { CmsWriteError } from './pages';
 import { cmsRuntime } from './runtime';
 

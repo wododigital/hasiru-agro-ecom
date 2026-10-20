@@ -1,3 +1,4 @@
+import { dynamicRequest } from '../server/request';
 import { can, getViewer } from '@ecomkit/core/auth-context';
 import { Badge, Button, EmptyState, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
 import { listFailedJobs, listQueues } from '../server/views';
@@ -6,7 +7,9 @@ import { ago, ist } from './format';
 import { HealthTabs } from './HealthTabs';
 
 /** Queue counts and failed / dead-lettered jobs with Retry. */
-export async function JobsPage({ now = new Date() }: { now?: Date } = {}) {
+export async function JobsPage({ now: nowOverride }: { now?: Date } = {}) {
+  await dynamicRequest();
+  const now = nowOverride ?? new Date();
   const [queues, failed, viewer] = await Promise.all([listQueues(), listFailedJobs(), getViewer()]);
   const canRetry = can(viewer, 'jobs.retry');
   return (

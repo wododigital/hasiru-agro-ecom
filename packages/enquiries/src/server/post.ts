@@ -1,4 +1,4 @@
-import { hashIp } from '@ecomkit/core/audit';
+import { clientIp, hashIp } from '@ecomkit/core/http';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import { formDataToObject, formGuards } from '@ecomkit/core/validation';
 import { pickUtm, safeReturnPath, farmDevelopmentSchema } from '../domain';
@@ -11,10 +11,6 @@ const MAX_BODY_BYTES = 52 * 1024 * 1024;
 const LIMIT = { limit: 5, windowSec: 3600 };
 
 export type EnquiryOutcome = 'sent' | 'invalid' | 'retry' | 'rate_limited' | 'attachment';
-
-function clientIp(req: Request): string | null {
-  return req.headers.get('x-real-ip') ?? req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;
-}
 
 /**
  * POST /api/enquiry. A plain HTML form posts here (multipart, no JS needed) and gets a 303 back to the page
