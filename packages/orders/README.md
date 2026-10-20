@@ -15,6 +15,7 @@ Orders after checkout: line snapshots, the status machine with guards, the timel
 | `issueInvoice(orderId)` / `invoicePdf(doc)` / `invoiceResponse(orderId)` | Issue once per paid order (subscriber of `order.paid`); PDF rendered on demand from the frozen invoice document. |
 | `getMyOrder`, `listMyOrders`, `getOrderByToken`, `orderForBuyer` | Buyer reads, owner-scoped (NotFound for anyone else). |
 | `listOrdersAdmin`, `getOrderForStaff`, `dispatchPlan`, `ordersForSlot` | Admin reads (`orders.read` / `orders.dispatch`), personal data masked for `support`. |
+| `exportOrders`, `ORDER_EXPORT_HEADER` | CSV export of the admin view or ticked rows (`orders.read` + `orders.export`, owner/manager by default); same filter as the list, phone/email masked unless the viewer sees full PII, audit `orders.export` (filters + row count), id-keyset batches of 500. |
 | `requestRefund`, `recordOfflinePayment`, `createManualOrder`, `staffTransition`, `staffCreateReplacement`, `addStaffNote`, `staffSetTestFlag` | Staff actions with their permission checks. |
 | `verifiedOrderId(customerId, productId)` | For reviews' verified-buyer flag. |
 | `guestTokenFor(orderId)` | The signed guest link token (checkout's replay path). |
@@ -28,7 +29,7 @@ Domain (`@ecomkit/orders/domain`): `TRANSITIONS`, `checkTransition`, `staffMoves
 
 ## Routes
 
-Storefront: `/account/orders`, `/account/orders/[id]`, `/account/orders/[id]/invoice.pdf`, `/order/[token]`, `/order/[token]/invoice.pdf`. Admin: `/admin/orders` (saved views: All, Unfulfilled, Pending payment, Today's slot, Outstation, Replacements), `/admin/orders/[id]`, `/admin/orders/dispatch`, `/admin/orders/new`, `/admin/orders/[id]/invoice.pdf`.
+Storefront: `/account/orders`, `/account/orders/[id]`, `/account/orders/[id]/invoice.pdf`, `/order/[token]`, `/order/[token]/invoice.pdf`. Admin: `/admin/orders` (saved views: All, Unfulfilled, Pending payment, Today's slot, Outstation, Replacements), `/admin/orders/[id]`, `/admin/orders/dispatch`, `/admin/orders/new`, `/admin/orders/[id]/invoice.pdf`, `/admin/orders/export.csv` (`?view=&q=&status=&placed=` or `?ids=..`; Export button on the index and Export selected in the bulk bar). The index also has a Date filter (`placed`: today, last 7/30/90 days, last 12 months, IST days).
 
 ## Admin (Shopify structure)
 

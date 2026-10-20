@@ -22,6 +22,7 @@ export { invoicePdf } from './invoice-pdf';
 export { invoiceResponse } from './invoice-response';
 export {
   dispatchPlan,
+  exportOrders,
   getMyOrder,
   getOrderByToken,
   getOrderForStaff,
@@ -29,6 +30,7 @@ export {
   listOrdersAdmin,
   orderForBuyer,
   ordersForSlot,
+  ORDER_EXPORT_HEADER,
   type AdminListParams,
   type OrderDetail,
   type OrderEventRow,

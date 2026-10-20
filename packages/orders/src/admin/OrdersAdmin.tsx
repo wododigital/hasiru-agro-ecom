@@ -2,12 +2,14 @@ import { can, requirePermission } from '@ecomkit/core/auth-context';
 import type { Paise } from '@ecomkit/core/contracts';
 import { formatINR } from '@ecomkit/core/money';
 import { Badge, Button, buttonVariants, Card, cn, Checkbox, DataTable, DetailFrame, EmptyState, Input, Select, Textarea, type Column } from '@ecomkit/ui';
-import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
+import { parseTableParams, tableQuery, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   istDateTime,
   ORDER_STATUSES,
+  PLACED_RANGE_LABELS,
+  PLACED_RANGES,
   SAVED_VIEW_LABELS,
   SAVED_VIEWS,
   slotLabel,
@@ -68,9 +70,10 @@ function Flash({ flags }: { flags: Record<string, string | undefined> }) {
 export async function OrdersListPage({ searchParams, now: nowOverride }: { searchParams: SearchParamsInput; now?: Date }) {
   const staff = await requirePermission('orders.read');
   const now = nowOverride ?? new Date();
-  const params = parseTableParams(searchParams, { filters: { view: SAVED_VIEWS, status: ORDER_STATUSES } });
+  const params = parseTableParams(searchParams, { filters: { view: SAVED_VIEWS, status: ORDER_STATUSES, placed: PLACED_RANGES } });
   const view = (params.filters.view ?? 'all') as SavedView;
-  const { rows, total } = await listOrdersAdmin({ view, q: params.q, status: params.filters.status, page: params.page, pageSize: PAGE_SIZE, now });
+  const { rows, total } = await listOrdersAdmin({ view, q: params.q, status: params.filters.status, placed: params.filters.placed, page: params.page, pageSize: PAGE_SIZE, now });
+  const canExport = can(staff, 'orders.export');
   const flags = Object.fromEntries(['done', 'n', 'skipped'].map((k) => [k, [(searchParams as Record<string, string | string[] | undefined>)[k]].flat()[0]]));
   const columns: Column<OrderRow>[] = [
     {
@@ -106,6 +109,12 @@ export async function OrdersListPage({ searchParams, now: nowOverride }: { searc
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-semibold">Orders</h1>
         <div className="flex gap-2">
+          {canExport ? (
+            // A download, not a page: plain anchor so the router does not try to render it.
+            <a href={`/admin/orders/export.csv${tableQuery(params, { page: 1 })}`} download className={buttonVariants({ size: 'sm', variant: 'outline' })} data-cta="orders-export">
+              Export
+            </a>
+          ) : null}
           <Link href="/admin/orders/dispatch" className={buttonVariants({ size: 'sm', variant: 'outline' })} data-cta="orders-dispatch">
             Dispatch planner
           </Link>
@@ -125,8 +134,14 @@ export async function OrdersListPage({ searchParams, now: nowOverride }: { searc
         pageSize={PAGE_SIZE}
         basePath="/admin/orders"
         views={SAVED_VIEWS.filter((v) => v !== 'all').map((v) => ({ id: v, label: SAVED_VIEW_LABELS[v], filters: { view: v } }))}
-        filters={[{ key: 'status', label: 'Status', options: ORDER_STATUSES.map((s) => ({ value: s, label: STATUS_LABEL[s] })) }]}
-        bulkActions={can(staff, 'orders.write') ? [{ label: 'Confirm', action: bulkConfirmAction }, { label: 'Mark packed', action: bulkPackAction }] : undefined}
+        filters={[
+          { key: 'status', label: 'Status', options: ORDER_STATUSES.map((s) => ({ value: s, label: STATUS_LABEL[s] })) },
+          { key: 'placed', label: 'Date', options: PLACED_RANGES.map((r) => ({ value: r, label: PLACED_RANGE_LABELS[r] })) },
+        ]}
+        bulkActions={[
+          ...(can(staff, 'orders.write') ? [{ label: 'Confirm', action: bulkConfirmAction }, { label: 'Mark packed', action: bulkPackAction }] : []),
+          ...(canExport ? [{ label: 'Export selected', action: '/admin/orders/export.csv' }] : []),
+        ]}
         empty={<EmptyState title="No orders in this view" />}
       />
     </div>

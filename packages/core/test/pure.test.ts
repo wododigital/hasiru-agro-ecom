@@ -3,13 +3,15 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { loadEnv } from '../src/env';
 import { newId, normalisePhone, slugify, SLUG_RE } from '../src/ids';
 import { financialYear } from '../src/sequence';
-import { hashContact, isPublicAddress, isSameOrigin, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
+import { csvCell, csvLine, csvResponse, hashContact, isPublicAddress, isSameOrigin, safeFetch, signHmacSha256, SsrfError, timingSafeEqual, verifyHmacSha256 } from '../src/http';
 import { fingerprint, topFrame } from '../src/observability';
 import { seal, unseal } from '../src/settings/crypto';
 import { defineSettings, fieldMeta, maskSecret } from '../src/settings';
 import { formGuards, safeHtml } from '../src/validation';
 import { tags, TAG_RE } from '../src/cache-tags';
 import { z } from 'zod';
+import { isHTTPAccessFallbackError } from 'next/dist/client/components/http-access-fallback/http-access-fallback';
+import { ForbiddenError, NotFoundError } from '../src/auth-context';
 
 beforeAll(() => {
   process.env.INTERNAL_SECRET = 'x'.repeat(40);
@@ -229,5 +231,41 @@ describe('isSameOrigin', () => {
     expect(isSameOrigin(req({ origin: 'https://evil.example', host: 'shop.example' }))).toBe(false);
     expect(isSameOrigin(req({ host: 'shop.example' }))).toBe(false);
     expect(isSameOrigin(req({ origin: 'null', host: 'shop.example' }))).toBe(false);
+  });
+});
+
+describe('csv', () => {
+  it('quotes per RFC 4180 and neutralises formulas in text only', () => {
+    expect(csvCell('plain')).toBe('plain');
+    expect(csvCell('a,b')).toBe('"a,b"');
+    expect(csvCell('say "hi"\nnow')).toBe('"say ""hi""\nnow"');
+    for (const f of ['=SUM(A1)', '+91 98', '-2+3', '@cmd', '\tx', '\rx']) expect(csvCell(f).replace(/^"/, '').startsWith("'")).toBe(true);
+    expect(csvCell('=1,2')).toBe(`"'=1,2"`);
+    expect(csvCell(-12.5)).toBe('-12.5');
+    expect(csvCell(null)).toBe('');
+    expect(csvLine(['a', 1, null])).toBe('a,1,\r\n');
+  });
+
+  it('streams a BOM, the header and the rows as an attachment', async () => {
+    async function* rows() {
+      yield ['ORD-1', 10];
+      yield ['ORD-2', 20];
+    }
+    const res = csvResponse('orders 2026.csv', ['Order', 'Total'], rows());
+    expect(res.headers.get('content-type')).toBe('text/csv; charset=utf-8');
+    expect(res.headers.get('content-disposition')).toBe('attachment; filename="orders_2026.csv"');
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    expect([...bytes.slice(0, 3)]).toEqual([0xef, 0xbb, 0xbf]);
+    expect(new TextDecoder().decode(bytes)).toBe('Order,Total\r\nORD-1,10\r\nORD-2,20\r\n');
+  });
+});
+
+describe('permission denials', () => {
+  it('are a quiet Next not-found when uncaught, and still their own class when caught', () => {
+    for (const e of [new ForbiddenError(), new NotFoundError()]) {
+      expect(isHTTPAccessFallbackError(e)).toBe(true);
+      expect(e).toBeInstanceOf(Error);
+    }
+    expect(new ForbiddenError().status).toBe(403);
   });
 });

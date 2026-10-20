@@ -4,6 +4,7 @@ export const PERMISSIONS = [
   'orders.write',
   'orders.refund',
   'orders.dispatch',
+  'orders.export',
   'products.read',
   'products.write',
   'inventory.read',

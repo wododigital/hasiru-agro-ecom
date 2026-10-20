@@ -81,7 +81,7 @@ describe('fakes implement the frozen contracts', () => {
 describe('catalogues', () => {
   it('have the frozen sizes and no duplicates', () => {
     expect(new Set(EVENT_NAMES).size).toBe(34);
-    expect(new Set(PERMISSIONS).size).toBe(26);
+    expect(new Set(PERMISSIONS).size).toBe(27);
     expect(new Set(TEMPLATE_KEYS).size).toBe(21);
     expect(new Set(MODULE_IDS).size).toBe(34);
   });

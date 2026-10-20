@@ -581,6 +581,8 @@ async function admin() {
     if (r.status !== 200 || renderError(r.text) || !/aria-label="Views"/.test(r.text) || (rows && !/aria-label="Bulk actions"/.test(r.text))) idxBad.push(`${h} ${r.status}`);
   }
   rec(S, `index tables: views + bulk bar (${idx.length})`, idxBad.length ? 'FAIL' : 'PASS', idxBad.join(' '));
+  await adminLive(S, support);
+  await supportCrawl(S, support, [...seen, ...reports.map((h) => h.split('?')[0])]);
   let target = modules.find((m) => m.endsWith('/store'));
   for (const m of target ? [] : modules) if (forms((await req(m, { admin: true })).text).some((f) => /save/i.test(f.text))) { target = m; break; }
   if (target) {
@@ -643,6 +645,142 @@ async function admin() {
   rec(S, 'create discount', d.skipped ? 'SKIP' : dRow > 0 ? 'PASS' : 'FAIL', d.skipped ?? `${d.res.status}${d.res.location ? ' -> ' + d.res.location : ''}, rows=${dRow}`);
   const auditAfter = count('select count(*) from core_audit_log');
   rec(S, 'audit rows written', auditAfter > auditBefore ? 'PASS' : 'FAIL', `${auditBefore} -> ${auditAfter}`);
+}
+
+// ---------- admin: live data (orders, enquiry, review), bulk bars, CSV export, quiet denials ----------
+const as = (cookie, path) =>
+  fetch(BASE + path, { redirect: 'manual', headers: { cookie, 'x-real-ip': SMOKE_IP, 'user-agent': 'ecomkit-smoke' }, signal: AbortSignal.timeout(60000) }).then(async (r) => ({
+    status: r.status,
+    type: r.headers.get('content-type') ?? '',
+    disposition: r.headers.get('content-disposition') ?? '',
+    text: await r.text(),
+  }));
+const csvRows = (text) => text.split('\r\n').filter(Boolean);
+const EXPORT_HEADER = 'Order,Placed (IST),Status,Payment status,Fulfilment status,Customer,Phone,Email,District,Pincode,Items,Line items,Subtotal,Discount,Shipping,GST,Total,Paid,Payment method,Coupon,Delivery slot';
+
+/**
+ * Presses a bulk-bar button the no-JS way: the button's server-action name plus the hidden inputs React renders
+ * inside it (bound arguments), and the ticked `ids`.
+ */
+async function bulkPost(page, label, ids) {
+  const r = await req(page, { admin: true });
+  const bar = /role="toolbar" aria-label="Bulk actions"[^>]*>([\s\S]*?)<\/div>/.exec(r.text)?.[1];
+  if (!bar) return { skipped: `no bulk bar on ${page}` };
+  const button = [...bar.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].find((m) => m[2].replace(/<[^>]+>/g, '').trim() === label);
+  if (!button) return { skipped: `no "${label}" button on ${page}` };
+  const fd = new FormData();
+  const name = /\sname="([^"]*)"/.exec(button[1])?.[1];
+  if (name) fd.append(name, '');
+  for (const [, a] of button[2].matchAll(/<input\b([^>]*)>/g)) {
+    const n = /\sname="([^"]*)"/.exec(a)?.[1];
+    if (n) fd.append(n, (/\svalue="([^"]*)"/.exec(a)?.[1] ?? '').replaceAll('&quot;', '"').replaceAll('&amp;', '&'));
+  }
+  for (const id of ids) fd.append('ids', id);
+  return { res: await req(page, { method: 'POST', body: fd, admin: true }) };
+}
+
+async function adminLive(S, support) {
+  if (!DB) return rec(S, 'live bulk bars + export', 'SKIP', 'DATABASE_URL not set');
+  // fixtures: two orders through the real checkout (one paid through mock PhonePe), an enquiry, a review to moderate
+  const variant = purchasable(5)[0];
+  const pickup = one(`select id from shipping_method where kind = 'pickup' limit 1`) ?? '';
+  const made = [];
+  for (const pay of [true, false]) {
+    if (!variant) break;
+    newCart();
+    await addLine(variant, 1);
+    const since = one('select now()');
+    const placed = await placeOrder({ methodId: pickup });
+    const o = latestOrder(since);
+    if (!o) {
+      made.push(null);
+      rec(S, 'fixtures: place order', 'FAIL', placed.skipped ?? `POST /checkout -> ${placed.res.status} ${placed.res.location ?? ''} ${placed.res.error ?? ''}`);
+      continue;
+    }
+    made.push(o[0]);
+    const mo = pay && one(`select merchant_order_id from payments_attempt where order_id = '${o[0]}' order by attempt_no desc limit 1`);
+    if (mo) {
+      await req('/api/_mock/phonepe/paypage', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ o: mo, outcome: 'success' }).toString() });
+      await until(`select status from orders_order where id = '${o[0]}'`, (v) => v === 'paid', 45000);
+    }
+  }
+  newCart();
+  const [paidId, pendingId] = made;
+  const st = (id) => one(`select status from orders_order where id = '${id}'`);
+  rec(S, 'fixtures: orders placed (paid + pending)', paidId && pendingId && st(paidId) === 'paid' && st(pendingId) === 'pending_payment' ? 'PASS' : 'FAIL', made.map((id) => (id ? `${id.slice(-6)}:${st(id)}` : 'none')).join(' ') || 'no purchasable variant');
+  const enqSince = one('select now()');
+  const vals = { name: 'Smoke Bulk Enquirer', phone: '9876501234', email: 'smoke-bulk@example.invalid', requirement: 'Smoke bulk enquiry', acres: '2', location: 'Mysuru' };
+  let e = await submitForm('/contact', /^phone$/, vals, { admin: false, waitMs: 3500 });
+  if (e.skipped) e = await submitForm('/build-farm-with-us', /^phone$/, vals, { admin: false, waitMs: 3500 });
+  const enquiryId = one(`select id from enquiries_enquiry where created_at >= '${enqSince}' order by created_at desc limit 1`);
+  const productId = one(`select id from catalog_product where status = 'active' order by created_at limit 1`);
+  const reviewId = productId && one(`insert into reviews_review (id, product_id, rating, body, author_name, status, is_sample, data_source) values ('${randomUUID()}', '${productId}', 5, 'Smoke review for the bulk bar', 'Smoke', 'pending', true, 'smoke') returning id`);
+  rec(S, 'fixtures: enquiry + review', enquiryId && reviewId ? 'PASS' : 'FAIL', `enquiry ${enquiryId ?? e.skipped ?? 'none'}, review ${reviewId ?? 'none'}`);
+
+  // bulk bars, live: orders Confirm (one allowed, one refused) then Mark packed; enquiries Mark contacted; reviews Approve
+  if (paidId && pendingId) {
+    const c = await bulkPost('/admin/orders', 'Confirm', [paidId, pendingId]);
+    rec(S, 'bulk: orders Confirm (1 moved, 1 refused)', !c.skipped && /done=bulk&n=1&skipped=1/.test(c.res.location ?? c.res.text) && st(paidId) === 'confirmed' && st(pendingId) === 'pending_payment' ? 'PASS' : 'FAIL', c.skipped ?? `${c.res.status} ${c.res.location ?? ''} ${st(paidId)}/${st(pendingId)}`);
+    const p = await bulkPost('/admin/orders', 'Mark packed', [paidId]);
+    rec(S, 'bulk: orders Mark packed', !p.skipped && st(paidId) === 'packed' ? 'PASS' : 'FAIL', p.skipped ?? `${p.res.status} ${st(paidId)}`);
+  }
+  if (enquiryId) {
+    const b = await bulkPost('/admin/enquiries', 'Mark contacted', [enquiryId]);
+    const now = one(`select status from enquiries_enquiry where id = '${enquiryId}'`);
+    rec(S, 'bulk: enquiries Mark contacted', !b.skipped && now === 'contacted' ? 'PASS' : 'FAIL', b.skipped ?? `${b.res.status} ${now}`);
+  }
+  if (reviewId) {
+    const b = await bulkPost('/admin/reviews', 'Approve', [reviewId]);
+    const now = one(`select status from reviews_review where id = '${reviewId}'`);
+    rec(S, 'bulk: reviews Approve', !b.skipped && now === 'approved' ? 'PASS' : 'FAIL', b.skipped ?? `${b.res.status} ${now}`);
+  }
+
+  // CSV export: owner gets the view / the ticked rows with full contacts, audit-logged; support is denied (404)
+  const index = await req('/admin/orders', { admin: true });
+  rec(S, 'export: owner sees Export + Export selected', /href="\/admin\/orders\/export\.csv/.test(index.text) && />Export selected<\/button>/.test(index.text) ? 'PASS' : 'FAIL');
+  const auditBefore = count(`select count(*) from core_audit_log where action = 'orders.export'`);
+  const all = await as(OWNER_COOKIE, '/admin/orders/export.csv');
+  const lines = csvRows(all.text);
+  const total = count('select count(*) from orders_order');
+  rec(S, 'export: owner, current view (all)', all.status === 200 && all.type.startsWith('text/csv') && /attachment/.test(all.disposition) && lines[0] === EXPORT_HEADER && lines.length - 1 === total ? 'PASS' : 'FAIL', `${all.status} ${all.type} rows=${lines.length - 1}/${total} header=${lines[0] === EXPORT_HEADER}`);
+  const fullPhone = paidId && one(`select contact->>'phone' from orders_order where id = '${paidId}'`);
+  rec(S, 'export: owner sees full phone and email', fullPhone && all.text.includes(`'${fullPhone}`) && all.text.includes(BUYER.email) ? 'PASS' : 'FAIL', fullPhone ?? '');
+  const view = await as(OWNER_COOKIE, '/admin/orders/export.csv?view=pending_payment&placed=today');
+  const pending = count(`select count(*) from orders_order where status = 'pending_payment' and (placed_at at time zone 'Asia/Kolkata')::date = (now() at time zone 'Asia/Kolkata')::date`);
+  rec(S, 'export: saved view + date filter', view.status === 200 && csvRows(view.text).length - 1 === pending ? 'PASS' : 'FAIL', `${csvRows(view.text).length - 1}/${pending}`);
+  if (paidId) {
+    const sel = await as(OWNER_COOKIE, `/admin/orders/export.csv?ids=${paidId}`);
+    const number = one(`select number from orders_order where id = '${paidId}'`);
+    rec(S, 'export: selected rows only', csvRows(sel.text).length === 2 && csvRows(sel.text)[1].startsWith(`${number},`) ? 'PASS' : 'FAIL', `${csvRows(sel.text).length - 1} rows`);
+  }
+  const auditAfter = count(`select count(*) from core_audit_log where action = 'orders.export'`);
+  const lastAudit = one(`select after::text from core_audit_log where action = 'orders.export' order by created_at desc limit 1`) ?? '';
+  rec(S, 'export: audit-logged with filters + row count', auditAfter - auditBefore >= 3 && /"rows":/.test(lastAudit) && /"view":/.test(lastAudit) ? 'PASS' : 'FAIL', `${auditBefore} -> ${auditAfter} ${lastAudit.slice(0, 80)}`);
+  if (support) {
+    const denied = await as(support, '/admin/orders/export.csv');
+    const page = await as(support, '/admin/orders');
+    rec(S, 'export: support denied (404, no button)', denied.status === 404 && !denied.text.includes(EXPORT_HEADER) && !/export\.csv/.test(page.text) ? 'PASS' : 'FAIL', String(denied.status));
+    // a role granted orders.export without full-PII access gets masked phones and emails
+    sql(`insert into auth_role_permission (role, permission) values ('support', 'orders.export') on conflict do nothing`);
+    const masked = await as(support, '/admin/orders/export.csv');
+    sql(`delete from auth_role_permission where role = 'support' and permission = 'orders.export'`);
+    const ok = masked.status === 200 && csvRows(masked.text)[0] === EXPORT_HEADER && (!fullPhone || !masked.text.includes(fullPhone)) && !masked.text.includes(BUYER.email) && masked.text.includes('•');
+    rec(S, 'export: support granted export gets masked PII', ok ? 'PASS' : 'FAIL', `${masked.status} rows=${csvRows(masked.text).length - 1}`);
+  }
+}
+
+/** Support opens every admin page the owner can (and every report): denials are quiet, nothing lands in Health > Errors. */
+async function supportCrawl(S, support, pages) {
+  if (!support || !DB) return rec(S, 'support crawl: quiet denials', 'SKIP', 'no support session or DB');
+  const since = one('select now()');
+  const bad = [];
+  await pool(pages, 4, async (h) => {
+    const r = await as(support, h);
+    if (r.status >= 500 || renderError(r.text)) bad.push(`${h} ${r.status}`);
+  });
+  const events = count(`select count(*) from core_error_event where created_at >= '${since}'`);
+  const forbidden = count(`select count(*) from core_error_issue where title like 'ForbiddenError%' and last_seen >= '${since}'`);
+  rec(S, `support crawl (${pages.length} pages): no errors captured`, !bad.length && events === 0 && forbidden === 0 ? 'PASS' : 'FAIL', `${bad.join(' ')} events=${events} forbiddenIssues=${forbidden}`);
 }
 
 // ---------- run ----------

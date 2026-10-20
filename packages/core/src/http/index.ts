@@ -10,6 +10,7 @@ export { clientIp, derivedSecret, hashContact, hashIp } from './secrets';
 export { isSameOrigin } from './origin';
 
 export { PayloadTooLargeError, readRawBody } from './raw-body';
+export { csvCell, csvLine, csvResponse } from './csv';
 
 // ---- SSRF guard -----------------------------------------------------------
 

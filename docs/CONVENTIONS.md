@@ -169,6 +169,7 @@ Source of truth is code in `packages/core/src/contracts/`; this table mirrors it
 | orders.write | x | x | | x | |
 | orders.refund | x | x | | | |
 | orders.dispatch | x | x | | x | |
+| orders.export | x | x | | | |
 | products.read | x | x | x | x | x |
 | products.write | x | x | x | | |
 | inventory.read | x | x | x | x | x |

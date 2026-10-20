@@ -3,9 +3,17 @@ import type { AuthContext, CustomerViewer, Permission, StaffViewer, Viewer } fro
 
 export type { AuthContext, CustomerViewer, StaffViewer, Viewer } from '../contracts';
 
-/** Maps to HTTP 403. Thrown when a staff viewer lacks a permission (or the viewer is not staff). */
+/**
+ * Next's not-found signal (`notFound()` throws an error with this digest). Carrying it makes an uncaught permission
+ * or ownership denial a quiet 404 (page, route handler or action): Next renders not-found and neither logs it nor
+ * reports it to `onRequestError`. Code that catches these errors by class is unaffected.
+ */
+const NEXT_NOT_FOUND_DIGEST = 'NEXT_HTTP_ERROR_FALLBACK;404';
+
+/** Maps to HTTP 403 (answered as a quiet 404 when uncaught in Next). Thrown when a staff viewer lacks a permission (or the viewer is not staff). */
 export class ForbiddenError extends Error {
   readonly status = 403;
+  readonly digest = NEXT_NOT_FOUND_DIGEST;
   constructor(message = 'forbidden') {
     super(message);
     this.name = 'ForbiddenError';
@@ -15,6 +23,7 @@ export class ForbiddenError extends Error {
 /** Maps to HTTP 404. Thrown on ownership failures so an id's existence never leaks. */
 export class NotFoundError extends Error {
   readonly status = 404;
+  readonly digest = NEXT_NOT_FOUND_DIGEST;
   constructor(message = 'not found') {
     super(message);
     this.name = 'NotFoundError';

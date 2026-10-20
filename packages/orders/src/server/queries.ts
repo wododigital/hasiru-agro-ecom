@@ -1,9 +1,22 @@
-import { getViewer, NotFoundError, requireOwner, requirePermission } from '@ecomkit/core/auth-context';
-import type { Viewer } from '@ecomkit/core/contracts';
+import { audit } from '@ecomkit/core/audit';
+import { can, ForbiddenError, getViewer, NotFoundError, requireOwner, requirePermission } from '@ecomkit/core/auth-context';
+import type { StaffViewer, Viewer } from '@ecomkit/core/contracts';
 import { db } from '@ecomkit/core/db';
 import { maskPii, seesFullPii } from '@ecomkit/customers/domain';
-import { and, asc, count, desc, eq, ilike, inArray, or, sql, type SQL } from 'drizzle-orm';
-import { istDay, ORDER_STATUSES, type OrderContact, type OrderStatus, type SavedView } from '../domain';
+import { and, asc, count, desc, eq, ilike, inArray, lt, or, sql, type SQL } from 'drizzle-orm';
+import {
+  istDateTime,
+  istDay,
+  ORDER_STATUSES,
+  PLACED_RANGES,
+  placedFrom,
+  type OrderAddress,
+  type OrderContact,
+  type OrderDelivery,
+  type OrderStatus,
+  type PlacedRange,
+  type SavedView,
+} from '../domain';
 import { ordersEvent, ordersInvoice, ordersLine, ordersOrder } from '../schema';
 import { hashGuestToken, type OrderLineRow, type OrderRow } from './orders';
 
@@ -76,11 +89,17 @@ export interface AdminListParams {
   view: SavedView;
   q?: string | null;
   status?: string | null;
+  /** Date preset on `placed_at` (IST days), see `PLACED_RANGES`. */
+  placed?: string | null;
+  /** Only these orders (the bulk bar's ticked rows); invalid ids are dropped, an empty list matches nothing. */
+  ids?: readonly string[] | null;
   page?: number;
   pageSize?: number;
   /** Excluded by default from nothing: test orders are listed with a badge. */
   now?: Date;
 }
+
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function viewWhere(view: SavedView, today: string): SQL | undefined {
   switch (view) {
@@ -99,16 +118,18 @@ function viewWhere(view: SavedView, today: string): SQL | undefined {
   }
 }
 
-export async function listOrdersAdmin(params: AdminListParams): Promise<{ rows: OrderRow[]; total: number }> {
-  const staff = await requirePermission('orders.read');
+/** The admin list's filter (view, status, date preset, search, selected ids); the list and the CSV export share it. */
+function adminWhere(staff: StaffViewer, params: AdminListParams): SQL | undefined {
   const now = params.now ?? new Date();
-  const pageSize = Math.min(Math.max(params.pageSize ?? 50, 1), 200);
-  const page = Math.max(params.page ?? 1, 1);
   const q = params.q?.trim();
   const status = (ORDER_STATUSES as readonly string[]).includes(params.status ?? '') ? (params.status as OrderStatus) : null;
-  const where = and(
+  const placed = (PLACED_RANGES as readonly string[]).includes(params.placed ?? '') ? (params.placed as PlacedRange) : null;
+  const ids = params.ids ? params.ids.filter((id) => UUID_RE.test(id)).slice(0, 500) : null;
+  return and(
     viewWhere(params.view, istDay(now)),
     status ? eq(ordersOrder.status, status) : undefined,
+    placed ? sql`(${ordersOrder.placedAt} at time zone 'Asia/Kolkata')::date >= ${placedFrom(placed, now)}::date` : undefined,
+    ids ? (ids.length ? inArray(ordersOrder.id, ids) : sql`false`) : undefined,
     // Phone search only for staff who see full phones; otherwise it would reveal masked digits by trial.
     q
       ? or(
@@ -118,11 +139,126 @@ export async function listOrdersAdmin(params: AdminListParams): Promise<{ rows: 
         )
       : undefined,
   );
+}
+
+export async function listOrdersAdmin(params: AdminListParams): Promise<{ rows: OrderRow[]; total: number }> {
+  const staff = await requirePermission('orders.read');
+  const pageSize = Math.min(Math.max(params.pageSize ?? 50, 1), 200);
+  const page = Math.max(params.page ?? 1, 1);
+  const where = adminWhere(staff, params);
   const [rows, [total]] = await Promise.all([
     db.select().from(ordersOrder).where(where).orderBy(desc(ordersOrder.placedAt), desc(ordersOrder.id)).limit(pageSize).offset((page - 1) * pageSize),
     db.select({ n: count() }).from(ordersOrder).where(where),
   ]);
   return { rows: rows.map((r) => maskContact(r, staff)), total: total!.n };
+}
+
+// ---- CSV export -------------------------------------------------------------
+
+export const ORDER_EXPORT_HEADER = [
+  'Order',
+  'Placed (IST)',
+  'Status',
+  'Payment status',
+  'Fulfilment status',
+  'Customer',
+  'Phone',
+  'Email',
+  'District',
+  'Pincode',
+  'Items',
+  'Line items',
+  'Subtotal',
+  'Discount',
+  'Shipping',
+  'GST',
+  'Total',
+  'Paid',
+  'Payment method',
+  'Coupon',
+  'Delivery slot',
+] as const;
+
+const FULFILMENT: Partial<Record<OrderStatus, string>> = { paid: 'unfulfilled', confirmed: 'unfulfilled', packed: 'packed', dispatched: 'dispatched', delivered: 'delivered' };
+const rupees = (paise: number) => paise / 100;
+const EXPORT_BATCH = 500;
+
+type ExportLine = { orderId: string; name: string | null; qty: number };
+
+/** One CSV row (money in rupees as numbers; contact already masked for the viewer). */
+function exportRow(o: OrderRow, lines: readonly ExportLine[]): unknown[] {
+  const contact = o.contact as OrderContact;
+  const address = o.shippingAddress as Partial<OrderAddress> | null;
+  const delivery = o.delivery as OrderDelivery;
+  const coupons = ((o.totals as { appliedDiscounts?: { kind: string; label: string }[] }).appliedDiscounts ?? []).filter((d) => d.kind === 'coupon').map((d) => d.label);
+  return [
+    o.number,
+    istDateTime(o.placedAt),
+    o.status,
+    o.paymentStatus,
+    FULFILMENT[o.status] ?? '',
+    contact.name,
+    contact.phone,
+    contact.email,
+    address?.district ?? '',
+    address?.pincode ?? '',
+    lines.reduce((n, l) => n + l.qty, 0),
+    lines.map((l) => `${l.name ?? 'Item'} x ${l.qty}`).join('; '),
+    rupees(o.subtotalPaise),
+    rupees(o.tierSavingsPaise + o.promoPaise + o.couponPaise),
+    rupees(o.shippingPaise),
+    rupees(o.taxPaise),
+    rupees(o.totalPaise),
+    rupees(o.paidPaise),
+    o.paymentMode,
+    coupons.join('; '),
+    delivery.slotDate ?? '',
+  ];
+}
+
+/**
+ * CSV export of the admin orders view (same filter as the list, every page) or of the ticked rows (`ids`).
+ * Needs `orders.read` and `orders.export`; phone and email are masked unless the viewer sees full PII. The export is
+ * audit-logged (`orders.export`, filters + row count) before the first row is read. Rows come in id-keyset batches
+ * (UUIDv7, newest first), so memory stays flat however many orders match.
+ */
+export async function exportOrders(params: AdminListParams, options: { ipHash?: string | null } = {}): Promise<{ count: number; rows: AsyncGenerator<unknown[]> }> {
+  const staff = await requirePermission('orders.export');
+  if (!can(staff, 'orders.read')) throw new ForbiddenError();
+  const where = adminWhere(staff, params);
+  const [total] = await db.select({ n: count() }).from(ordersOrder).where(where);
+  await audit({
+    actorId: staff.userId,
+    actorType: 'staff',
+    action: 'orders.export',
+    entity: 'order',
+    entityId: 'export',
+    after: { view: params.view, q: params.q?.trim() || null, status: params.status ?? null, placed: params.placed ?? null, selected: params.ids?.length ?? null, rows: total!.n, pii: seesFullPii(staff) ? 'full' : 'masked' },
+    ipHash: options.ipHash ?? null,
+  });
+  async function* rows(): AsyncGenerator<unknown[]> {
+    let after: string | null = null;
+    for (;;) {
+      const batch: OrderRow[] = await db
+        .select()
+        .from(ordersOrder)
+        .where(and(where, after ? lt(ordersOrder.id, after) : undefined))
+        .orderBy(desc(ordersOrder.id))
+        .limit(EXPORT_BATCH);
+      if (!batch.length) return;
+      const lines = await db
+        .select({ orderId: ordersLine.orderId, name: sql<string | null>`${ordersLine.productSnapshot} ->> 'name'`, qty: ordersLine.qty })
+        .from(ordersLine)
+        .where(inArray(ordersLine.orderId, batch.map((o) => o.id)))
+        .orderBy(asc(ordersLine.createdAt), asc(ordersLine.id));
+      const byOrder = new Map<string, ExportLine[]>();
+      for (const l of lines) byOrder.set(l.orderId, [...(byOrder.get(l.orderId) ?? []), l]);
+      for (const o of batch) yield exportRow(maskContact(o, staff), byOrder.get(o.id) ?? []);
+      if (batch.length < EXPORT_BATCH) return;
+      after = batch.at(-1)!.id;
+    }
+  }
+  return { count: total!.n, rows: rows() };
 }
 
 export async function getOrderForStaff(orderId: string): Promise<OrderDetail | null> {

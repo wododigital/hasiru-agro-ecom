@@ -51,7 +51,8 @@ export interface TableView {
 
 export interface BulkAction {
   label: string;
-  action: (form: FormData) => void | Promise<void>;
+  /** A server action, or a URL that receives the ticked `ids` by GET (a download such as a CSV export). */
+  action: ((form: FormData) => void | Promise<void>) | string;
   tone?: 'default' | 'danger';
 }
 
@@ -138,7 +139,7 @@ export function DataTable<Row>({ columns, rows, rowKey, params, total, pageSize,
             <div role="toolbar" aria-label={l.bulk} className="hidden flex-wrap items-center gap-2 rounded-md border border-border bg-surface-2 px-3 py-2 group-has-[input[name=ids]:checked]/bulk:flex">
               <span className="text-sm text-muted">{l.selected}</span>
               {bulk.map((b) => (
-                <button key={b.label} type="submit" formAction={b.action} className={cn('rounded-sm border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:bg-surface-2', b.tone === 'danger' && 'text-danger')}>
+                <button key={b.label} type="submit" formAction={b.action} formMethod={typeof b.action === 'string' ? 'get' : undefined} className={cn('rounded-sm border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:bg-surface-2', b.tone === 'danger' && 'text-danger')}>
                   {b.label}
                 </button>
               ))}
