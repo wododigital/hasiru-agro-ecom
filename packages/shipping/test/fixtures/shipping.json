@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "records": {
+    "zones": [
+      { "slug": "local", "name": "Local delivery area", "kind": "local", "district_slugs": ["bengaluru-urban", "bengaluru-rural"], "state_codes": [] },
+      { "slug": "outstation", "name": "Outstation", "kind": "outstation", "district_slugs": [], "state_codes": ["KA", "TN", "KL", "AP", "TG", "GA"] }
+    ],
+    "methods": [
+      { "name": "Pickup", "kind": "pickup", "zone_slug": null, "rules": { "readyInDays": 1 } },
+      { "name": "Weekly local delivery", "kind": "local_slot", "zone_slug": "local", "rules": { "slotsShown": 4 } },
+      { "name": "Outstation by distance", "kind": "outstation_distance", "zone_slug": "outstation", "rules": { "minDays": 5, "maxDays": 7 } }
+    ],
+    "vehicles": [
+      { "name": "Small pickup", "capacity_kg": 750, "local_flat_rs": 1500, "per_km_rs": 22 },
+      { "name": "Medium truck", "capacity_kg": 2500, "local_flat_rs": 3500, "per_km_rs": 35 },
+      { "name": "Large truck", "capacity_kg": 5000, "local_flat_rs": 6000, "per_km_rs": 48 }
+    ],
+    "slots": [{ "weekday": 6, "cutoff_hours": 24, "capacity_kg": 15000 }],
+    "packing_rules": [],
+    "distance_overrides": [
+      { "district_slug": "mysuru", "km": 150, "note": "sample" },
+      { "district_slug": "tumakuru", "km": 70, "note": "sample" },
+      { "district_slug": "hassan", "km": 185, "note": "sample" }
+    ]
+  }
+}
