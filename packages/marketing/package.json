@@ -14,7 +14,8 @@
     "./admin": "./src/admin/index.ts",
     "./routes/*": "./src/routes/*.tsx",
     "./mocks/*": "./src/mocks/*.ts",
-    "./messages": "./src/messages.ts"
+    "./messages": "./src/messages.ts",
+    "./client": "./src/ui/browser.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
