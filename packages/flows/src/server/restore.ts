@@ -16,7 +16,8 @@ export async function GET(_req: Request, ctx: { params: Promise<{ token: string 
   const carts = flowPorts().carts;
   if (!runId || !carts) return toCart();
   const [run] = await db.select().from(flowsRun).where(and(eq(flowsRun.id, runId), eq(flowsRun.subjectType, 'cart')));
-  if (!run?.context.cartId) return toCart();
+  // A stopped run (order placed, cart emptied, unsubscribed...) has nothing left to restore.
+  if (!run?.context.cartId || run.status === 'stopped') return toCart();
   await carts.restore(run.context.cartId, { couponCode: run.context.code ?? null });
   await db
     .update(flowsRun)

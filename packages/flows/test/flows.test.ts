@@ -16,7 +16,7 @@ import { backInStockSender, onCartAbandoned, onLeadCreated, onOrderConfirmed, on
 import { getFlowRow, saveFlow } from '../src/server/flows';
 import { GET as restoreGet } from '../src/server/restore';
 import { configureFlows } from '../src/server/ports';
-import { restoreToken, runDue, startFlow } from '../src/server/runner';
+import { restoreToken, runDue, startFlow, verifyRestoreToken } from '../src/server/runner';
 import { bindFakes, cart, createQueues, order, signIn, STAFF, testEnv, type Fakes } from './harness';
 
 let t: TestDb;
@@ -94,7 +94,8 @@ describe('abandoned cart', () => {
       ['cart.reminder_1', 'email', 'marketing'],
     ]);
     const text = (msgs[0]!.rendered as { text: string }).text;
-    expect(text).toContain(`https://shop.example.test/r/${restoreToken(run.id)}`);
+    const link = /https:\/\/shop\.example\.test\/r\/(\S+)/.exec(text)?.[1];
+    expect(link && verifyRestoreToken(link)).toBe(run.id);
     expect(text).toContain('Hi Asha');
 
     // Marketing sends go through the Marketing Messages endpoint (real notifications delivery, captured HTTP).
@@ -204,10 +205,16 @@ describe('abandoned cart', () => {
     expect(f.restored).toEqual([{ cartId, couponCode: 'SAVE5' }]);
     expect((await runOf(run.id)).context.restoredAt).toBeTruthy();
 
-    for (const token of [`${run.id}.${'0'.repeat(32)}`, 'nope', restoreToken(newId())]) {
+    const expired = restoreToken(run.id, new Date(Date.now() - 15 * 24 * 60 * 60 * 1000));
+    expect(verifyRestoreToken(expired)).toBeNull();
+    for (const token of [`${run.id}.${'0'.repeat(32)}`, 'nope', restoreToken(newId()), expired]) {
       const bad = await restoreGet(new Request('https://shop.example.test/r/x'), { params: Promise.resolve({ token }) });
       expect(bad.status).toBe(303);
     }
+    expect(f.restored).toHaveLength(1);
+
+    await t.db.update(flowsRun).set({ status: 'stopped' }).where(eq(flowsRun.id, run.id));
+    await restoreGet(new Request('https://shop.example.test/r/x'), { params: Promise.resolve({ token: restoreToken(run.id) }) });
     expect(f.restored).toHaveLength(1);
   });
 

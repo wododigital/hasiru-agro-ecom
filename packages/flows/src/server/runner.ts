@@ -25,13 +25,19 @@ export const siteUrl = (): string => (env.SITE_URL ?? env.INTERNAL_BASE_URL).rep
 const absolute = (href: string) => (/^https?:\/\//.test(href) ? href : `${siteUrl()}${href.startsWith('/') ? '' : '/'}${href}`);
 
 // ---- restore link -----------------------------------------------------------------------------
-const restoreSig = (runId: string) => signInternal(runId, RESTORE_PURPOSE).slice(0, 32);
-export const restoreToken = (runId: string): string => `${runId}.${restoreSig(runId)}`;
-/** The run id inside a valid token, else null. */
-export function verifyRestoreToken(token: string): string | null {
-  const [runId, sig] = token.split('.');
-  if (!runId || !sig || !/^[0-9a-f-]{36}$/.test(runId)) return null;
-  return timingSafeEqual(restoreSig(runId), sig) ? runId : null;
+/** Restore links stop working 14 days after they are issued (the last reminder goes out at 72 h). */
+const RESTORE_TTL_SEC = 14 * 24 * 60 * 60;
+const restoreSig = (runId: string, exp: string) => signInternal(`${runId}.${exp}`, RESTORE_PURPOSE).slice(0, 32);
+export const restoreToken = (runId: string, now = new Date()): string => {
+  const exp = String(Math.floor(now.getTime() / 1000) + RESTORE_TTL_SEC);
+  return `${runId}.${exp}.${restoreSig(runId, exp)}`;
+};
+/** The run id inside a valid, unexpired token, else null. */
+export function verifyRestoreToken(token: string, now = new Date()): string | null {
+  const [runId, exp, sig] = token.split('.');
+  if (!runId || !exp || !sig || !/^[0-9a-f-]{36}$/.test(runId) || !/^\d{1,12}$/.test(exp)) return null;
+  if (Number(exp) * 1000 < now.getTime()) return null;
+  return timingSafeEqual(restoreSig(runId, exp), sig) ? runId : null;
 }
 
 // ---- subjects ---------------------------------------------------------------------------------
