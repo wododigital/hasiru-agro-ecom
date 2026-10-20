@@ -120,3 +120,9 @@ describe('rendering', () => {
     expect(csvField('a\nb')).toBe('"a\nb"');
   });
 });
+
+describe('htmlToText entity safety', () => {
+  it('keeps invalid numeric entities as text instead of throwing', () => {
+    expect(htmlToText('a &#x110000; b &#99999999999; c &#xD800; d &#65; &#x42;')).toBe('a &#x110000; b &#99999999999; c &#xD800; d A B');
+  });
+});

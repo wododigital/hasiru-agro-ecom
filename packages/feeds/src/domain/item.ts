@@ -77,9 +77,10 @@ export function htmlToText(html: string | null | undefined): string {
     .replace(/&(#\d+|#x[0-9a-f]+|[a-z]+\d*|#39);/gi, (m, e: string) => {
       const k = e.toLowerCase();
       if (ENTITIES[k]) return ENTITIES[k]!;
-      if (k.startsWith('#x')) return String.fromCodePoint(parseInt(k.slice(2), 16));
-      if (k.startsWith('#')) return String.fromCodePoint(Number(k.slice(1)));
-      return m;
+      if (!k.startsWith('#')) return m;
+      const cp = k.startsWith('#x') ? parseInt(k.slice(2), 16) : Number(k.slice(1));
+      // Out-of-range or surrogate code points would throw (and kill the whole feed run): keep the entity as text.
+      return Number.isInteger(cp) && cp > 0 && cp <= 0x10ffff && (cp < 0xd800 || cp > 0xdfff) ? String.fromCodePoint(cp) : m;
     })
     .replace(/[ \t]+/g, ' ')
     .replace(/ *\n */g, '\n')
