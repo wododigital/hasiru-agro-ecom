@@ -381,28 +381,53 @@ async function money() {
   newCart();
 }
 
+/** A server action's id by export name, from the build the server runs (the checkout island calls these with JS). */
+function actionId(name) {
+  const p = join(ROOT, 'apps/shop/.next/server/server-reference-manifest.json');
+  if (!existsSync(p)) return null;
+  const m = JSON.parse(readFileSync(p, 'utf8'));
+  return Object.entries(m.node ?? {}).find(([, v]) => v.exportedName === name)?.[0] ?? null;
+}
+const callAction = (page, id, args) =>
+  req(page, { method: 'POST', headers: { 'next-action': id, accept: 'text/x-component', 'content-type': 'text/plain;charset=UTF-8' }, body: JSON.stringify(args) });
+
 async function abandonedCart(S, since) {
-  if (!SECRET) return rec(S, 'abandoned cart flow', 'SKIP', 'INTERNAL_SECRET not set (consent rows hold contact hashes)');
-  // A fresh guest who ticked marketing consent at checkout and left: the checkout form autosaves the contact and the
-  // consent tick on blur (JS), so the smoke writes those same two rows (session contact, consent with core's hashes).
-  const phone = `97${String(Date.now()).slice(-8)}`;
-  const buyer = { name: 'Smoke Leaver', phone: `+91${phone}`, email: `smoke-leaver-${phone}@example.invalid` };
-  const key = createHmac('sha256', SECRET).update('ecomkit:contact-hash').digest();
-  const hash = (v) => createHmac('sha256', key).update(v).digest('base64url').slice(0, 22);
-  sql(`insert into customers_consent (id, phone_hash, email_hash, purpose, status, text_shown, source) values ('${randomUUID()}', '${hash(buyer.phone)}', '${hash(buyer.email)}', 'marketing', 'granted', 'smoke', 'checkout')`);
-  newCart();
+  const save = actionId('saveContactAction');
+  const tick = actionId('marketingConsentAction');
+  if (!save || !tick) return rec(S, 'abandoned cart flow', 'SKIP', 'checkout actions not in apps/shop/.next (run against a next build)');
   const [v] = purchasable(5);
   if (!v) return rec(S, 'abandoned cart flow', 'SKIP', 'no purchasable variant');
-  await addLine(v, 1);
-  await req('/checkout'); // opens the checkout session for this cart
-  const cartId = one(`select cart_id from checkout_session where created_at >= '${since}' and order_id is null order by created_at desc limit 1`);
-  if (!cartId) return rec(S, 'abandoned cart flow', 'FAIL', 'no checkout session for the cart');
-  // The checkout form autosaves the contact on blur (JS); the smoke writes the same session row that autosave writes.
-  sql(`update checkout_session set contact = '${JSON.stringify({ ...buyer, marketingConsent: true })}'::jsonb where cart_id = '${cartId}'`);
-  sql(`update cart_cart set last_activity_at = now() - interval '2 days' where id = '${cartId}'`);
-  const st = await until(`select status from cart_cart where id = '${cartId}'`, (x) => x === 'abandoned', 330000);
-  rec(S, 'cart marked abandoned (job)', st === 'abandoned' ? 'PASS' : 'FAIL', st ?? '');
-  const run = await until(`select r.id || ':' || r.status || ':' || coalesce(r.stop_reason::text, '') from flows_run r join flows_flow f on f.id = r.flow_id where f.key = 'abandoned_cart' and r.subject_id = '${cartId}'`, (x) => !!x, 30000);
+  // Two fresh guests start checkout, type only a phone (the island autosaves it on blur through saveContactAction) and
+  // leave before placing an order. One also ticks marketing consent. Distinct phones: flows cap runs per contact.
+  const stamp = String(Date.now()).slice(-8);
+  const leave = async (phone, consent) => {
+    newCart();
+    await addLine(v, 1);
+    await req('/checkout'); // opens the checkout session for this cart
+    const cartId = one(`select cart_id from checkout_session where created_at >= '${since}' and order_id is null order by created_at desc limit 1`);
+    if (!cartId) return null;
+    const saved = await callAction('/checkout', save, [{ name: 'Smoke Leaver', phone, email: '' }]);
+    if (consent) await callAction('/checkout', tick, [true]);
+    return { cartId, phone, saved: saved.status };
+  };
+  const quiet = await leave(`+9196${stamp}`, false);
+  const keen = await leave(`+9197${stamp}`, true);
+  if (!quiet || !keen) return rec(S, 'abandoned cart flow', 'FAIL', 'no checkout session for the cart');
+  const noted = sql(`select id, contact_at is not null from cart_cart where id in ('${quiet.cartId}', '${keen.cartId}')`) ?? [];
+  rec(S, 'checkout contact noted on the cart', noted.length === 2 && noted.every((r) => r[1] === 't') ? 'PASS' : 'FAIL', `saveContactAction ${quiet.saved}/${keen.saved}; ${noted.map((r) => r[1]).join(',')}`);
+  sql(`update cart_cart set last_activity_at = now() - interval '2 days' where id in ('${quiet.cartId}', '${keen.cartId}')`);
+  // The */5 cron can miss its minute on a loaded host; enqueue the same job once so the worker runs it now.
+  sql(`insert into pgboss.job (name, data) values ('cart.mark-abandoned', '{}'::jsonb)`);
+  const st = await until(`select string_agg(status::text, ',' order by id) from cart_cart where id in ('${quiet.cartId}', '${keen.cartId}')`, (x) => x === 'abandoned,abandoned', 330000);
+  rec(S, 'cart marked abandoned (job)', st === 'abandoned,abandoned' ? 'PASS' : 'FAIL', st ?? '');
+  const flagged = count(`select count(*) from pgboss.job where name = 'core.event' and data->>'event' = 'cart.abandoned' and data->'payload'->>'hasContact' = 'true' and data->'payload'->>'cartId' in ('${quiet.cartId}', '${keen.cartId}')`);
+  rec(S, 'cart.abandoned carries hasContact', flagged === 2 ? 'PASS' : 'FAIL', `${flagged} of 2 events`);
+  const runOf = (cartId) => until(`select r.id || ':' || r.status || ':' || coalesce(r.stop_reason::text, '') from flows_run r join flows_flow f on f.id = r.flow_id where f.key = 'abandoned_cart' and r.subject_id = '${cartId}'`, (x) => !!x, 30000);
+  // No marketing consent: the run is recorded as stopped and nothing is sent (flows consent rule).
+  const q = await runOf(quiet.cartId);
+  const qMsgs = count(`select count(*) from notifications_message m join flows_run r on r.id = m.flow_run_id where r.subject_id = '${quiet.cartId}'`);
+  rec(S, 'phone only, no consent: no reminder', q?.endsWith(':stopped:no_consent') && qMsgs === 0 ? 'PASS' : 'FAIL', `${q ?? 'no run'}, ${qMsgs} messages`);
+  const run = await runOf(keen.cartId);
   const [runId, runStatus, stop] = (run ?? '::').split(':');
   rec(S, 'abandoned cart flow run started', runStatus === 'running' ? 'PASS' : 'FAIL', run ?? 'no run');
   if (runStatus !== 'running') return;
@@ -413,18 +438,28 @@ async function abandonedCart(S, since) {
   const rendered = one(`select rendered::text from notifications_message where flow_run_id = '${runId}' limit 1`) ?? '';
   const link = /https?:\/\/[^\s"\\]+\/api\/cart\/restore\?t=[A-Za-z0-9._%-]+/.exec(rendered)?.[0];
   if (!link) return rec(S, 'restore link works', 'FAIL', 'no restore link in the message');
+  newCart();
   const page = await req(link.replace(/^https?:\/\/[^/]+/, ''));
   const t = /name="t" value="([^"]+)"/.exec(page.text)?.[1]?.replaceAll('&#46;', '.');
   const post = t ? await req('/api/cart/restore', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ t }).toString() }) : null;
   rec(S, 'restore link works', page.status === 200 && post?.status === 303 && post.location?.endsWith('/cart') ? 'PASS' : 'FAIL', `GET ${page.status}, POST ${post?.status} -> ${post?.location ?? ''}`);
+  // The restored cart converts: the run stops as purchased and the next reminder never goes out, even when due.
+  const local = one(`select id from shipping_method where kind = 'local_slot' limit 1`);
+  const placed = await placeOrder({ methodId: local ?? '', pincode: '560060', line1: '1 Test Road', villageTown: 'Kengeri', district: 'Bengaluru Urban', districtSlug: 'bengaluru-urban', state: 'Karnataka', stateCode: 'KA', phone: keen.phone.slice(3), email: '' });
+  const converted = await until(`select status from cart_cart where id = '${keen.cartId}'`, (x) => x === 'converted', 15000);
+  rec(S, 'restored cart converts to an order', converted === 'converted' ? 'PASS' : 'FAIL', `${placed.skipped ?? placed.res?.status} cart ${converted}`);
+  sql(`update flows_run set next_step_at = now() where id = '${runId}' and status = 'running'`);
+  const after = await until(`select status || ':' || coalesce(stop_reason::text, '') from flows_run where id = '${runId}'`, (x) => x === 'stopped:purchased', 90000);
+  const later = count(`select count(*) from notifications_message where flow_run_id = '${runId}' and template_key <> 'cart.reminder_1'`);
+  rec(S, 'no reminder after the order', after === 'stopped:purchased' && later === 0 ? 'PASS' : 'FAIL', `run ${after}, ${later} later reminders`);
   newCart();
 }
 
 async function jobs() {
   const S = 'jobs';
   const since = one('select now()');
-  // abandoned cart: a guest cart with a saved checkout contact (marketing consent from the money run's order) goes
-  // idle -> cart.mark-abandoned (every 5 min) -> flows run -> first reminder with the cart's restore link.
+  // abandoned cart: guest carts with a phone saved at checkout go idle -> cart.mark-abandoned (every 5 min) ->
+  // flows run (reminder only with marketing consent) -> first reminder with the restore link -> order stops the run.
   if (DB && !tableExists('flows_run')) rec(S, 'abandoned cart flow', 'SKIP', 'flows tables missing (module not enabled)');
   else if (DB) await abandonedCart(S, since);
   // notify-me

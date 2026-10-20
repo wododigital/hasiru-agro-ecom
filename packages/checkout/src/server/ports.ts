@@ -85,6 +85,8 @@ export interface CheckoutPorts {
     current(): Promise<CheckoutCart | null>;
     /** Marks the cart converted inside the place-order transaction. */
     markConverted(cartId: string, orderId: string, options: { tx: Tx }): Promise<void>;
+    /** Marks the cart as having a contact (abandoned-cart `hasContact`) inside the contact autosave transaction. */
+    noteContact(cartId: string, options: { tx: Tx }): Promise<void>;
   } | null;
   orders: {
     createOrder(input: CheckoutOrderInput, options: { tx: Tx }): Promise<{ id: string; number: string; guestToken: string }>;
