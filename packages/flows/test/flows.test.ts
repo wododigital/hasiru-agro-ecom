@@ -14,9 +14,8 @@ import { flowsRun, flowsStep } from '../src/schema';
 import { getFlowDetail, listAbandonedCheckouts, listFlowCards, testRun } from '../src/server/admin';
 import { backInStockSender, onCartAbandoned, onLeadCreated, onOrderConfirmed, onOrderDelivered, onOrderPlaced, onSlotReminder } from '../src/server/events';
 import { getFlowRow, saveFlow } from '../src/server/flows';
-import { GET as restoreGet } from '../src/server/restore';
 import { configureFlows } from '../src/server/ports';
-import { restoreToken, runDue, startFlow, verifyRestoreToken } from '../src/server/runner';
+import { runDue, startFlow } from '../src/server/runner';
 import { bindFakes, cart, createQueues, order, signIn, STAFF, testEnv, type Fakes } from './harness';
 
 let t: TestDb;
@@ -81,7 +80,7 @@ describe('abandoned cart', () => {
     const rule = '0192a000-0000-7000-8000-0000000000c1';
     await saveFlow('abandoned_cart', { status: 'active', settings: { ...FLOW_DEFS.abandoned_cart.defaults, discountRuleId: rule } }, STAFF.userId);
     const start = ist('2026-10-20T08:30:00');
-    const { run } = await abandon({ phone, email: 'asha@example.test', name: 'Asha' }, start);
+    const { run, cartId } = await abandon({ phone, email: 'asha@example.test', name: 'Asha' }, start);
     expect(run.status).toBe('running');
     // 1 h after 08:30 is 09:30, inside the 09:00-11:00 window, so it waits for 11:00.
     expect(run.nextStepAt).toEqual(ist('2026-10-20T11:00:00'));
@@ -94,8 +93,9 @@ describe('abandoned cart', () => {
       ['cart.reminder_1', 'email', 'marketing'],
     ]);
     const text = (msgs[0]!.rendered as { text: string }).text;
-    const link = /https:\/\/shop\.example\.test\/r\/(\S+)/.exec(text)?.[1];
-    expect(link && verifyRestoreToken(link)).toBe(run.id);
+    // The link comes from the cart module (owner of restore links); flows makes it absolute.
+    expect(text).toContain(`https://shop.example.test/api/cart/restore?t=${cartId}`);
+    expect(f.restored.at(-1)).toEqual({ cartId, couponCode: null, days: 14 });
     expect(text).toContain('Hi Asha');
 
     // Marketing sends go through the Marketing Messages endpoint (real notifications delivery, captured HTTP).
@@ -194,28 +194,14 @@ describe('abandoned cart', () => {
     expect(await startFlow('abandoned_cart', { type: 'cart', id: other }, { cartId: other })).toBeNull();
   });
 
-  it('restore link: valid token restores the cart with the code; anything else lands on /cart and restores nothing', async () => {
+  it('the 72 h reminder asks the cart for a link carrying the run\'s single-use code', async () => {
     const phone = nextPhone();
     await consent(phone);
     const { run, cartId } = await abandon({ phone }, ist('2026-10-20T12:00:00'));
     await t.db.update(flowsRun).set({ context: { cartId, code: 'SAVE5' } }).where(eq(flowsRun.id, run.id));
-    const res = await restoreGet(new Request('https://shop.example.test/r/x'), { params: Promise.resolve({ token: restoreToken(run.id) }) });
-    expect(res.status).toBe(303);
-    expect(res.headers.get('location')).toBe('/cart');
-    expect(f.restored).toEqual([{ cartId, couponCode: 'SAVE5' }]);
-    expect((await runOf(run.id)).context.restoredAt).toBeTruthy();
-
-    const expired = restoreToken(run.id, new Date(Date.now() - 15 * 24 * 60 * 60 * 1000));
-    expect(verifyRestoreToken(expired)).toBeNull();
-    for (const token of [`${run.id}.${'0'.repeat(32)}`, 'nope', restoreToken(newId()), expired]) {
-      const bad = await restoreGet(new Request('https://shop.example.test/r/x'), { params: Promise.resolve({ token }) });
-      expect(bad.status).toBe(303);
-    }
-    expect(f.restored).toHaveLength(1);
-
-    await t.db.update(flowsRun).set({ status: 'stopped' }).where(eq(flowsRun.id, run.id));
-    await restoreGet(new Request('https://shop.example.test/r/x'), { params: Promise.resolve({ token: restoreToken(run.id) }) });
-    expect(f.restored).toHaveLength(1);
+    await runDue(ist('2026-10-20T13:00:00'));
+    expect(f.restored.at(-1)).toEqual({ cartId, couponCode: 'SAVE5', days: 14 });
+    expect((await messagesOf(run.id)).length).toBeGreaterThan(0);
   });
 
   it('a failing source marks the run failed instead of retrying forever', async () => {
@@ -227,7 +213,7 @@ describe('abandoned cart', () => {
         snapshot: async () => {
           throw new Error('cart store unavailable');
         },
-        restore: async () => false,
+        restoreLink: async () => null,
       },
     });
     await runDue(ist('2026-10-20T13:00:00'));

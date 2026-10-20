@@ -16,8 +16,8 @@ describe('manifest', () => {
       expect(dev.some((x) => x.endsWith(p))).toBe(true);
       expect(prod.some((x) => x.endsWith(p))).toBe(true);
     }
-    expect(dev.filter((x) => x.includes('_mock'))).toHaveLength(2);
-    expect(prod.filter((x) => x.includes('_mock'))).toHaveLength(0);
+    expect(dev.filter((x) => x.includes('%5Fmock'))).toHaveLength(2);
+    expect(prod.filter((x) => x.includes('mock'))).toHaveLength(0);
   });
 
   it('every lazy reference resolves (jobs, actions, health checks, service, panel)', async () => {

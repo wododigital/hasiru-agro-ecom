@@ -4,7 +4,7 @@ import { TEST_NOW, type TestDb } from '@ecomkit/core/testing';
 import { eq } from 'drizzle-orm';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { cartCart } from '../src/schema';
-import { addLine, cartSettings, findCart, markAbandoned, noteContact, removeLine, restoreCart, restorePath, restoreToken, getCartView, type CartContext } from '../src/server';
+import { addLine, cartSettings, findCart, markAbandoned, noteContact, peekRestore, removeLine, restoreCart, restorePath, restoreToken, getCartView, type CartContext } from '../src/server';
 import { markAbandonedJob } from '../src/server/jobs';
 import { bind, cartDb, makeVariant, outboxEvents } from './helpers';
 
@@ -93,12 +93,16 @@ describe('abandoned carts', () => {
 });
 
 describe('restore links', () => {
-  it('opens a guest cart on another device with a fresh cookie and merges what that device had', async () => {
+  it('opens a guest cart on another device with a fresh cookie, merges what that device had, applies the code, and is single use', async () => {
     const v = await makeVariant(t, { listPaise: 10_000 });
     const w = await makeVariant(t, { listPaise: 20_000 });
     const original = await addLine(ctx(null, 0), { variantId: v.variantId, qty: 4 });
-    const link = await restoreToken(original.cartId, { now: at(0) });
+    const link = (await restoreToken(original.cartId, { now: at(0), couponCode: 'SAVE5' }))!;
     expect(restorePath(link)).toMatch(/^\/api\/cart\/restore\?t=/);
+
+    // Peeking changes nothing: same count, same cookie still works.
+    expect(await peekRestore(ctx(null, 1), link)).toEqual({ ok: true, cartId: original.cartId, itemCount: 4, needsSignIn: false });
+    expect((await findCart(ctx(original.issuedToken, 1)))?.id).toBe(original.cartId);
 
     const phone = await addLine(ctx(null, 5), { variantId: w.variantId, qty: 1 });
     const r = await restoreCart(ctx(phone.issuedToken, 70), link);
@@ -107,24 +111,40 @@ describe('restore links', () => {
     const view = (await getCartView(ctx(issued, 70)))!;
     expect(view.cartId).toBe(original.cartId);
     expect(view.lines.map((l) => [l.variantId, l.qty]).sort()).toEqual([[v.variantId, 4], [w.variantId, 1]].sort());
+    expect((await t.db.select().from(cartCart).where(eq(cartCart.id, original.cartId)))[0]!.couponCode).toBe('SAVE5');
     // The old cookie stops working; the phone's own cart was merged in.
     expect(await findCart(ctx(original.issuedToken, 70))).toBeNull();
     expect((await t.db.select().from(cartCart).where(eq(cartCart.id, phone.cartId)))[0]!.status).toBe('merged');
+    // The link is spent: the cookie token it was bound to has been rotated.
+    expect(await peekRestore(ctx(null, 71), link)).toEqual({ ok: false, reason: 'used' });
+    expect(await restoreCart(ctx(null, 71), link)).toEqual({ ok: false, reason: 'used' });
+    // A fresh link for the same cart works again and keeps the code the cart already has.
+    const again = (await restoreToken(original.cartId, { now: at(71), couponCode: 'OTHER' }))!;
+    expect(await restoreCart(ctx(null, 72), again)).toMatchObject({ ok: true, cartId: original.cartId });
+    expect((await t.db.select().from(cartCart).where(eq(cartCart.id, original.cartId)))[0]!.couponCode).toBe('SAVE5');
   });
 
   it('refuses tampered and expired links, gone carts, and someone else\'s customer cart', async () => {
     const v = await makeVariant(t, { listPaise: 10_000 });
     const guestCart = await addLine(ctx(null, 0), { variantId: v.variantId, qty: 1 });
-    const link = await restoreToken(guestCart.cartId, { now: at(0) });
+    const link = (await restoreToken(guestCart.cartId, { now: at(0) }))!;
     expect(await restoreCart(ctx(null, 1), link.replace(/.$/, (c) => (c === '0' ? '1' : '0')))).toEqual({ ok: false, reason: 'invalid' });
+    expect(await restoreCart(ctx(null, 1), 'nope')).toEqual({ ok: false, reason: 'invalid' });
     expect(await restoreCart(ctx(null, 31 * 24 * 60), link)).toEqual({ ok: false, reason: 'expired' });
+    expect(await restoreCart(ctx(null, 15 * 24 * 60), (await restoreToken(guestCart.cartId, { now: at(0), days: 14 }))!)).toEqual({ ok: false, reason: 'expired' });
     await t.db.update(cartCart).set({ status: 'converted' }).where(eq(cartCart.id, guestCart.cartId));
     expect(await restoreCart(ctx(null, 1), link)).toEqual({ ok: false, reason: 'gone' });
+    expect(await restoreToken(guestCart.cartId, { now: at(1) })).toBeNull();
 
     const owner = newId();
     const theirs = await addLine(ctx(null, 0, owner), { variantId: v.variantId, qty: 1 });
-    const theirLink = await restoreToken(theirs.cartId, { now: at(0) });
+    const theirLink = (await restoreToken(theirs.cartId, { now: at(0) }))!;
+    expect(await peekRestore(ctx(null, 1), theirLink)).toMatchObject({ ok: true, itemCount: 1, needsSignIn: true });
     expect(await restoreCart(ctx(null, 1), theirLink)).toEqual({ ok: false, reason: 'sign_in' });
-    expect(await restoreCart(ctx(null, 1, owner), theirLink)).toEqual({ ok: true, cartId: theirs.cartId, issuedToken: null });
+    expect(await restoreCart(ctx(null, 1, newId()), theirLink)).toEqual({ ok: false, reason: 'sign_in' });
+    const mine = await restoreCart(ctx(null, 1, owner), theirLink);
+    expect(mine).toMatchObject({ ok: true, cartId: theirs.cartId });
+    expect((mine as { issuedToken: string | null }).issuedToken).toBeTruthy();
+    expect((await findCart(ctx(null, 2, owner)))?.id).toBe(theirs.cartId);
   });
 });

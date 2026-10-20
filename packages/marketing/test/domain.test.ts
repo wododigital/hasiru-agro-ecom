@@ -10,6 +10,7 @@ import {
   ga4Purchase,
   metaNormalise,
   parseConsent,
+  purchaseTagPlan,
   sanitiseClicks,
   sanitiseTouch,
   serializeConsent,
@@ -84,6 +85,19 @@ describe('tags', () => {
     expect(tagAppliesTo(t, '/checkout/123/pay')).toBe(true);
     expect(tagAppliesTo(t, '/checkouts')).toBe(false);
     expect(tagAppliesTo({ scope: 'all', paths: [] }, '/anything')).toBe(true);
+  });
+});
+
+describe('browser purchase tags', () => {
+  const data = { eventId: 'e1', transactionId: 'T1', value: 10, currency: 'INR', contentIds: ['p1'], contents: [], adsSendTo: 'AW-1/abc', enhanced: { email: 'a@example.com', phone_number: null } };
+  it('fire the pixel, the Ads conversion and user_data only with marketing consent', () => {
+    expect(purchaseTagPlan(data, { marketing: true })).toEqual({ pixel: true, ads: true, userData: { email: 'a@example.com' } });
+    expect(purchaseTagPlan({ ...data, adsSendTo: null }, { marketing: true })).toEqual({ pixel: true, ads: false, userData: { email: 'a@example.com' } });
+  });
+  it('analytics-only consent (or none) sends nothing, and never user_data', () => {
+    expect(purchaseTagPlan(data, { marketing: false })).toEqual({ pixel: false, ads: false, userData: null });
+    expect(purchaseTagPlan(data, null)).toEqual({ pixel: false, ads: false, userData: null });
+    expect(purchaseTagPlan({ ...data, enhanced: null }, { marketing: true }).userData).toBeNull();
   });
 });
 

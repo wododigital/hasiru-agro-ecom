@@ -5,7 +5,8 @@ const events = () => import('./server/events');
 
 /**
  * Fixed automation flows (abandoned cart, order updates, slot reminder, review request, back in stock, planner lead
- * follow-up): per-flow settings form, runs, cart restore link. Cart, orders, discounts and catalog are reached
+ * follow-up): per-flow settings form, runs. The cart restore link in reminders is the cart module's (single use,
+ * signed); flows only asks for it. Cart, orders, discounts and catalog are reached
  * through boot-time ports (`configureFlows`); a flow whose source is absent starts no messages.
  */
 export default defineModule({
@@ -13,7 +14,7 @@ export default defineModule({
   dependsOn: ['core', 'notifications', 'customers'],
   optional: ['cart', 'orders', 'discounts', 'shipping', 'inventory', 'catalog'],
   schema: () => import('./schema'),
-  routes: [{ path: '/r/[token]', module: 'routes/restore', kind: 'route', exports: ['GET'] }],
+  routes: [],
   admin: {
     nav: [
       { label: 'Automations', href: '/admin/marketing/automations', icon: 'workflow', order: NAV_BANDS.marketing + 10, permission: 'marketing.write' },

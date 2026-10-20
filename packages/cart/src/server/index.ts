@@ -13,6 +13,7 @@ export {
   markAbandoned,
   markConverted,
   noteContact,
+  peekRestore,
   readCartSettings,
   removeLine,
   replacePackage,
@@ -26,7 +27,10 @@ export {
   type CartContext,
   type CartErrorCode,
   type Mutation,
+  type RestoreFailure,
+  type RestorePeek,
   type RestoreResult,
+  type RestoreTokenOptions,
 } from './cart';
 export { applyCoupon, cartCount, cartTotals, getCartView, loadCartView, toDrawerData, type CartView, type CartViewLine, type DrawerData } from './view';
 export { cartContextFromRequest, cartCookieHeader, currentCartContext, getCart, inRequest, writeCartCookie } from './request';

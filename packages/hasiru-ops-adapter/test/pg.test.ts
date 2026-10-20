@@ -119,7 +119,12 @@ describe('read-only role', () => {
 
   it('refuses plaintext connections to a remote host', () => {
     expect(() => checkPgUrl('postgres://u:p@db.example.com:5432/postgres?sslmode=disable')).toThrow(/TLS is required/);
-    expect(() => checkPgUrl('postgres://u:p@db.example.com:5432/postgres?sslmode=verify-full')).not.toThrow();
+    expect(checkPgUrl('postgres://u:p@db.example.com:5432/postgres?sslmode=verify-full')).toEqual({ ssl: { rejectUnauthorized: true } });
+    // No sslmode, ssl=false, prefer or allow: a remote host still gets verified TLS; loopback stays plain.
+    for (const q of ['', '?ssl=false', '?sslmode=prefer', '?sslmode=allow', '?sslmode=require']) {
+      expect(checkPgUrl(`postgres://u:p@db.example.com:5432/postgres${q}`)).toEqual({ ssl: { rejectUnauthorized: true } });
+    }
+    expect(checkPgUrl('postgres://u:p@localhost:5433/postgres')).toEqual({ ssl: false });
     expect(() => checkPgUrl('https://example.com')).toThrow(/postgres/);
   });
 });

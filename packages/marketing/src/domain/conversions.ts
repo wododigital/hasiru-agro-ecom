@@ -255,6 +255,20 @@ export interface PurchaseTagData {
   enhanced: { email: string | null; phone_number: string | null } | null;
 }
 
+/** What the browser purchase island may fire for a consent state: Meta Pixel and the Ads conversion need marketing consent. */
+export interface PurchaseTagPlan {
+  pixel: boolean;
+  ads: boolean;
+  /** Enhanced-conversion `user_data` (hashed by gtag): only with marketing consent, never on analytics-only consent. */
+  userData: Record<string, string> | null;
+}
+
+export function purchaseTagPlan(data: PurchaseTagData, consent: { marketing: boolean } | null): PurchaseTagPlan {
+  const marketing = consent?.marketing === true;
+  const userData = marketing && data.enhanced ? Object.fromEntries(Object.entries(data.enhanced).filter((e): e is [string, string] => !!e[1])) : null;
+  return { pixel: marketing, ads: marketing && !!data.adsSendTo, userData: userData && Object.keys(userData).length ? userData : null };
+}
+
 // ---- browser events ------------------------------------------------------------------------------------------
 
 /** Storefront beacon names (core TRACK_EVENTS) that map to a Meta standard event. GA4 takes the beacon names as they are. */

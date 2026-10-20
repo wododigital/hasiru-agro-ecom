@@ -15,7 +15,7 @@ export default defineModule({
     { path: '/cart', module: 'routes/cart-page', kind: 'page', exports: ['default', 'generateMetadata'] },
     { path: '/api/cart', module: 'routes/api-cart', kind: 'route', exports: ['GET'] },
     { path: '/api/cart/lines', module: 'routes/api-cart-lines', kind: 'route', exports: ['POST'] },
-    { path: '/api/cart/restore', module: 'routes/api-cart-restore', kind: 'route', exports: ['GET'] },
+    { path: '/api/cart/restore', module: 'routes/api-cart-restore', kind: 'route', exports: ['GET', 'POST'] },
   ],
   settings: { schema: cartSettingsSchema },
   jobs: {

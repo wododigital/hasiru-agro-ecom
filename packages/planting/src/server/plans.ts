@@ -267,7 +267,8 @@ async function markUnlocked(plan: PlanRow, lead: { name: string; phone: string; 
     );
     await tx
       .update(plantingPlan)
-      .set({ leadId, unlockMode: mode, unlockedAt: sql`coalesce(${plantingPlan.unlockedAt}, now())`, ...(lead.userId ? { customerId: lead.userId } : {}) })
+      // Never re-assign a plan that already belongs to a customer.
+      .set({ leadId, unlockMode: mode, unlockedAt: sql`coalesce(${plantingPlan.unlockedAt}, now())`, ...(lead.userId && !plan.customerId ? { customerId: lead.userId } : {}) })
       .where(eq(plantingPlan.id, plan.id));
     await emit('plan.unlocked', { planId: plan.id, leadId, mode }, { tx });
   });
@@ -278,7 +279,18 @@ async function markUnlocked(plan: PlanRow, lead: { name: string; phone: string; 
  * unlock the plan; nobody is signed in. `send` / `verify` (otp mode): a code through the auth module; a good code
  * creates a verified lead, signs the customer in (the returned headers carry the session cookie) and unlocks.
  */
-export async function unlockPlan(raw: unknown, ctx: { ip: string | null; requestHeaders: Headers }): Promise<{ status: UnlockStatus; headers?: Headers }> {
+export interface UnlockContext {
+  ip: string | null;
+  requestHeaders: Headers;
+  /** The `plan_visitor` cookie; a plan can be unlocked only by the visitor who generated it or its customer. */
+  visitorId: string | null;
+  customerId: string | null;
+}
+
+const ownsPlan = (plan: PlanRow, ctx: Pick<UnlockContext, 'visitorId' | 'customerId'>) =>
+  (ctx.visitorId !== null && plan.visitorId === ctx.visitorId) || (ctx.customerId !== null && plan.customerId === ctx.customerId);
+
+export async function unlockPlan(raw: unknown, ctx: UnlockContext): Promise<{ status: UnlockStatus; headers?: Headers }> {
   const parsed = unlockInputSchema.safeParse(raw);
   if (!parsed.success) return { status: parsed.error.issues.some((i) => i.path[0] === 'code') ? 'code_invalid' : 'invalid' };
   const input = parsed.data;
@@ -287,7 +299,9 @@ export async function unlockPlan(raw: unknown, ctx: { ip: string | null; request
   if (!phone || !phoneHash) return { status: 'invalid' };
   if (!(await limitUnlock(ctx.ip, phoneHash))) return { status: 'limited' };
   const plan = await getPlan(input.planId);
-  if (!plan) return { status: 'not_found' };
+  // Someone else's plan reads as missing (the id is in a shareable link); an unlocked plan is left exactly as it is.
+  if (!plan || !ownsPlan(plan, ctx)) return { status: 'not_found' };
+  if (plan.unlockedAt) return { status: 'unlocked' };
   const mode = (await readPlantingSettings()).unlock_mode;
   if ((input.step === 'soft') !== (mode === 'soft')) return { status: 'wrong_mode' };
   if (input.step === 'soft') {

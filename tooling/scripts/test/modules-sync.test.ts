@@ -14,7 +14,7 @@ describe('modules:sync against the committed apps', () => {
   });
   it('prod config plans no mock stubs', async () => {
     const r = await syncModules({ app: 'shop', config: 'prod', check: true });
-    expect(r.planned.some((p) => p.includes('_mock'))).toBe(false);
+    expect(r.planned.some((p) => p.includes('mock'))).toBe(false);
   });
   it('minimal app is in sync', async () => {
     const r = await syncModules({ app: 'minimal', config: 'dev', check: true });

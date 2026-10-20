@@ -17,7 +17,8 @@ import { catalogProduct } from '../src/schema';
 import { importSeed, rowToFields } from '../src/server/import';
 import { configureCatalog, type CatalogRuntimeInput } from '../src/server/runtime';
 import { saveProduct } from '../src/server/write';
-import { loadProductOr404 } from '../src/ui/ProductPage';
+import { catalogMessages } from '../src/messages';
+import { buyBoxLabels, loadProductOr404 } from '../src/ui/ProductPage';
 import { fakeImages, fakeMediaIds, writeSeedDir } from './fixtures';
 import { fakeRegistry, renderHtml, signInAs, STAFF } from './helpers';
 
@@ -99,6 +100,8 @@ describe('product page against the core fakes', () => {
   });
 
   it('in stock: price, bulk tiers and nudge, buy buttons, sections, JSON-LD, published FAQs only', async () => {
+    // The buy box is a client island: everything handed to it must be serialisable (no message functions).
+    expect(Object.values(buyBoxLabels(catalogMessages.pdp)).every((v) => typeof v === 'string')).toBe(true);
     bind({ district: 'bengaluru-urban', stock: 'in_stock' });
     const html = await render();
     expect(html).toContain('data-availability="in_stock"');

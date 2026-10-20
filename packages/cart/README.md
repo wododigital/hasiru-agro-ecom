@@ -24,7 +24,7 @@ Cookie-keyed database cart: product and package lines with per-unit weight, merg
 | `getCartView(ctx)`, `cartTotals(ctx)`, `cartCount(ctx)`, `findCart(ctx)` | reads (merge on sign-in happens here) |
 | `getCart()`, `currentCartContext()`, `inRequest(fn)` | request-bound (next/headers); `inRequest` writes the cookie when a cart was created, e.g. `inRequest((ctx) => replacePackage(ctx, input))` |
 | `markConverted(cartId, orderId, { tx })`, `noteContact(cartId, { tx })` | checkout hooks (place-order; contact saved) |
-| `restoreToken(cartId)`, `restorePath(token)`, `restoreCart(ctx, token)` | signed reminder links (HMAC, `restoreLinkDays`) |
+| `restoreToken(cartId, { days?, couponCode? })`, `restorePath(token)`, `peekRestore(ctx, token)`, `restoreCart(ctx, token)` | signed, single-use reminder links (HMAC over cart id, expiry, a nonce bound to the cart's cookie token, optional code; `restoreLinkDays` default) |
 | `markAbandoned({ now })` | the idle sweep (scheduled job) |
 | `configureCart({ variants, registry, discounts, readDistrict, messages })` | host binding at boot |
 
@@ -53,7 +53,7 @@ Without `variants` a cart with lines throws "cart is not configured". Without `d
 | `/cart` | server-rendered page in its own Suspense boundary, noindex |
 | `GET /api/cart` | drawer summary (formatted strings), no-store |
 | `POST /api/cart/lines` | JSON `{ variantId, delta }` -> `{ qty }`; form `variantId, qty, intent=add|buy` -> 303 `/cart` or `/checkout`. Same-origin only, 4 KB body, 30 new carts per IP per hour |
-| `GET /api/cart/restore?t=` | restore link: new cookie, 303 `/cart`; a customer's cart asks for sign-in |
+| `GET /api/cart/restore?t=` | restore link page (noindex, not frameable, item count only, changes nothing: preview bots fetch it); `POST` (same origin) opens the cart on this device with a new cookie and lands on `/cart`; a used link fails; a customer's cart asks for sign-in and is never handed to another visitor |
 
 ## Settings (`/admin/settings/cart`)
 

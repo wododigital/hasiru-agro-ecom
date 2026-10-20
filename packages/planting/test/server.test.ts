@@ -220,7 +220,7 @@ describe('results view and unlock', () => {
 
   it('soft unlock (default): creates an unverified wizard lead, unlocks, emits events and signs nobody in', async () => {
     const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
-    const r = await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '98450 12345' }, { ip: '203.0.113.9', requestHeaders: new Headers() });
+    const r = await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '98450 12345' }, { ...visitor, requestHeaders: new Headers() });
     expect(r).toEqual({ status: 'unlocked' });
     const plan = (await getPlan(planId))!;
     expect(plan.unlockedAt).not.toBeNull();
@@ -230,8 +230,8 @@ describe('results view and unlock', () => {
     expect(lead).toMatchObject({ source: 'wizard', phoneVerified: false, userId: null });
     expect(await eventsNamed('lead.created')).toContainEqual({ leadId: plan.leadId, source: 'wizard' });
     expect(await eventsNamed('plan.unlocked')).toContainEqual({ planId, leadId: plan.leadId, mode: 'soft' });
-    // Unlocking again from the same phone updates the same lead (customers dedupes on plan ref).
-    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '+919845012345' }, { ip: '203.0.113.9', requestHeaders: new Headers() });
+    // Unlocking again (any phone) leaves the unlocked plan exactly as it is: same lead, no re-assignment.
+    expect(await unlockPlan({ step: 'soft', planId, name: 'Someone', phone: '+919845099911' }, { ...visitor, requestHeaders: new Headers() })).toEqual({ status: 'unlocked' });
     expect((await getPlan(planId))!.leadId).toBe(plan.leadId);
     // Unlocked: quantities, prices and inputs are present.
     const v = (await planView(planId))!;
@@ -245,15 +245,29 @@ describe('results view and unlock', () => {
 
   it('rejects a bad phone and the otp steps while in soft mode', async () => {
     const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
-    expect((await unlockPlan({ step: 'soft', planId, name: 'A', phone: '12345' }, { ip: null, requestHeaders: new Headers() })).status).toBe('invalid');
-    expect((await unlockPlan({ step: 'send', planId, name: 'A', phone: '9845012345' }, { ip: null, requestHeaders: new Headers() })).status).toBe('wrong_mode');
-    expect((await unlockPlan({ step: 'soft', planId: '0199f000-0000-7000-8000-00000000ffff', name: 'A', phone: '9845012345' }, { ip: null, requestHeaders: new Headers() })).status).toBe('not_found');
+    expect((await unlockPlan({ step: 'soft', planId, name: 'A', phone: '12345' }, { ...visitor, ip: null, requestHeaders: new Headers() })).status).toBe('invalid');
+    expect((await unlockPlan({ step: 'send', planId, name: 'A', phone: '9845012345' }, { ...visitor, ip: null, requestHeaders: new Headers() })).status).toBe('wrong_mode');
+    expect((await unlockPlan({ step: 'soft', planId: '0199f000-0000-7000-8000-00000000ffff', name: 'A', phone: '9845012345' }, { ...visitor, ip: null, requestHeaders: new Headers() })).status).toBe('not_found');
+  });
+
+  it('only the visitor who generated a plan (or its customer) can unlock it; a customer plan is never re-assigned', async () => {
+    const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
+    const stranger = { ip: '203.0.113.50', requestHeaders: new Headers(), visitorId: '0199f000-0000-7000-8000-0000000000bb', customerId: null };
+    expect((await unlockPlan({ step: 'soft', planId, name: 'X', phone: '9845012300' }, stranger)).status).toBe('not_found');
+    expect((await unlockPlan({ step: 'soft', planId, name: 'X', phone: '9845012300' }, { ...stranger, visitorId: null })).status).toBe('not_found');
+    expect((await getPlan(planId))!.unlockedAt).toBeNull();
+    // A customer's plan: the signed-in owner may unlock it from another device; the stored customer id stays.
+    const owner = '0199f000-0000-7000-8000-0000000000cc';
+    const theirs = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, { ...visitor, visitorId: '0199f000-0000-7000-8000-0000000000dd', customerId: owner });
+    expect((await unlockPlan({ step: 'soft', planId: theirs.planId, name: 'X', phone: '9845012301' }, stranger)).status).toBe('not_found');
+    expect((await unlockPlan({ step: 'soft', planId: theirs.planId, name: 'Owner', phone: '9845012302' }, { ...stranger, customerId: owner })).status).toBe('unlocked');
+    expect((await getPlan(theirs.planId))!.customerId).toBe(owner);
   });
 
   it('limits unlock attempts per phone', async () => {
     const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
     const statuses: string[] = [];
-    for (let i = 0; i < 9; i++) statuses.push((await unlockPlan({ step: 'soft', planId, name: 'A', phone: '9845099999' }, { ip: `198.51.100.${i}`, requestHeaders: new Headers() })).status);
+    for (let i = 0; i < 9; i++) statuses.push((await unlockPlan({ step: 'soft', planId, name: 'A', phone: '9845099999' }, { ...visitor, ip: `198.51.100.${i}`, requestHeaders: new Headers() })).status);
     expect(statuses.slice(0, 8).every((s) => s === 'unlocked')).toBe(true);
     expect(statuses[8]).toBe('limited');
   });
@@ -263,7 +277,7 @@ describe('results view and unlock', () => {
     try {
       const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
       const base = { planId, name: 'Ravi', phone: '9876543210' };
-      const h = { ip: '203.0.113.9', requestHeaders: new Headers() };
+      const h = { ...visitor, requestHeaders: new Headers() };
       expect((await unlockPlan({ step: 'soft', ...base }, h)).status).toBe('wrong_mode');
       expect((await unlockPlan({ step: 'send', ...base }, h)).status).toBe('sent');
       expect(otpSent).toContain('+919876543210');
@@ -285,7 +299,7 @@ describe('results view and unlock', () => {
 describe('package to cart and inputs', () => {
   const unlocked = async (purpose: string) => {
     const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose }, visitor);
-    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ip: null, requestHeaders: new Headers() });
+    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ...visitor, ip: null, requestHeaders: new Headers() });
     return { planId, plan: (await getPlan(planId))! };
   };
 
@@ -379,10 +393,15 @@ describe('route handlers', () => {
 
   it('unlock handler: JSON answers the status, a form post redirects back to the plan', async () => {
     const { planId } = await generatePlan({ district: 'wetland', sqft: ACRE, purpose: 'commercial' }, visitor);
-    const bad = await handleUnlock(req('/api/plan/unlock', { body: JSON.stringify({ step: 'soft', planId, name: 'A', phone: '1' }) }));
+    const cookie = `plan_visitor=${visitor.visitorId}`;
+    const bad = await handleUnlock(req('/api/plan/unlock', { body: JSON.stringify({ step: 'soft', planId, name: 'A', phone: '1' }), cookie }));
     expect(bad.status).toBe(400);
     expect(await bad.json()).toEqual({ status: 'invalid' });
-    const f = await handleUnlock(req('/api/plan/unlock', { body: new URLSearchParams({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }).toString(), json: false }));
+    // Without the visitor cookie the plan is somebody else's: 404, nothing unlocked.
+    const stranger = await handleUnlock(req('/api/plan/unlock', { body: JSON.stringify({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }) }));
+    expect(stranger.status).toBe(404);
+    expect((await getPlan(planId))!.unlockedAt).toBeNull();
+    const f = await handleUnlock(req('/api/plan/unlock', { body: new URLSearchParams({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }).toString(), json: false, cookie }));
     expect(f.status).toBe(303);
     expect(new URL(f.headers.get('location')!).pathname).toBe(`/plan/results/${planId}`);
     expect(f.headers.getSetCookie()).toEqual([]);
@@ -428,7 +447,7 @@ describe('admin, layouts and companions', () => {
     expect(generic.blocks).toBeCloseTo(33.61, 2);
     expect(await modelLayout('missing')).toBeNull();
     const { planId } = await generatePlan({ district: 'dryland', sqft: 2 * ACRE, purpose: 'commercial' }, visitor);
-    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ip: null, requestHeaders: new Headers() });
+    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ...visitor, ip: null, requestHeaders: new Headers() });
     const own = (await modelLayout('commercial', { planId }))!;
     expect(own.blocks).toBeCloseTo(67.22, 2);
     expect(own.points.some((p) => wetOnly(p.productId))).toBe(false);

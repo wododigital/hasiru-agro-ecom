@@ -4,7 +4,7 @@ import type { TestDb } from '@ecomkit/core/testing';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { GET as summary } from '../src/routes/api-cart';
 import { POST } from '../src/routes/api-cart-lines';
-import { GET as restore } from '../src/routes/api-cart-restore';
+import { GET as restoreGet, POST as restorePost } from '../src/routes/api-cart-restore';
 import { CART_CREATE_LIMIT } from '../src/server/cart';
 import { findCart, restoreToken, type DrawerData } from '../src/server';
 import { bind, cartDb, makeVariant } from './helpers';
@@ -110,20 +110,45 @@ describe('POST /api/cart/lines (no-JS form)', () => {
   });
 });
 
-describe('GET /api/cart/restore', () => {
-  it('sets a new cookie and lands on /cart; bad links land on /cart with a notice', async () => {
+describe('/api/cart/restore', () => {
+  it('GET changes nothing and renders the noindex page; POST sets a new cookie and lands on /cart; bad links land on /cart with a notice', async () => {
     const v = await makeVariant(t, { listPaise: 10_000 });
     const made = await POST(req('/api/cart/lines', { json: { variantId: v.variantId, delta: 2 } }));
     const token = cookieOf(made)!;
-    const link = await restoreToken((await findCart({ token, customerId: null }))!.id);
-    const res = await restore(req(`/api/cart/restore?t=${encodeURIComponent(link)}`));
+    const link = (await restoreToken((await findCart({ token, customerId: null }))!.id))!;
+    const path = `/api/cart/restore?t=${encodeURIComponent(link)}`;
+
+    // A link-preview bot: no cookie, no state change, nothing but the item count.
+    const page = await restoreGet(req(path, { sameOrigin: false }));
+    expect(page.status).toBe(200);
+    expect(page.headers.get('set-cookie')).toBeNull();
+    expect(page.headers.get('x-robots-tag')).toContain('noindex');
+    expect(page.headers.get('content-security-policy')).toContain("frame-ancestors 'none'");
+    const html = await page.text();
+    expect(html).toContain('<meta name="robots" content="noindex');
+    expect(html).toContain('2 items are waiting for you');
+    expect(html).toContain('method="post"');
+    expect(html).not.toContain('<!-- line');
+    expect(((await (await summary(req('/api/cart', { cookie: token }))).json()) as DrawerData).count).toBe(2);
+    // The same page again: still valid (GET never spends the link).
+    expect((await restoreGet(req(path))).status).toBe(200);
+
+    // Cross-site POST is refused and changes nothing.
+    expect((await restorePost(req('/api/cart/restore', { form: { t: link }, sameOrigin: false }))).status).toBe(403);
+    expect((await restoreGet(req(path))).status).toBe(200);
+
+    const res = await restorePost(req('/api/cart/restore', { form: { t: link } }));
     expect(res.status).toBe(303);
     expect(res.headers.get('location')).toBe('/cart');
     const fresh = cookieOf(res)!;
     expect(fresh).not.toBe(token);
     expect(((await (await summary(req('/api/cart', { cookie: fresh }))).json()) as DrawerData).count).toBe(2);
-    const bad = await restore(req('/api/cart/restore?t=nope'));
-    expect(bad.headers.get('location')).toBe('/cart?error=restore_invalid');
+
+    // Second use of the link fails on both GET and POST.
+    expect((await restoreGet(req(path))).headers.get('location')).toBe('/cart?error=restore_used');
+    expect((await restorePost(req('/api/cart/restore', { form: { t: link } }))).headers.get('location')).toBe('/cart?error=restore_used');
+    expect((await restoreGet(req('/api/cart/restore?t=nope'))).headers.get('location')).toBe('/cart?error=restore_invalid');
+    expect((await restorePost(req('/api/cart/restore', { form: { t: 'nope' } }))).headers.get('location')).toBe('/cart?error=restore_invalid');
   });
 
   it('sends a customer cart link to sign-in when someone else opens it', async () => {
@@ -139,9 +164,13 @@ describe('GET /api/cart/restore', () => {
       },
     }));
     await POST(req('/api/cart/lines', { json: { variantId: v.variantId, delta: 1 } }));
-    const link = await restoreToken((await findCart({ token: null, customerId: owner }))!.id);
+    const link = (await restoreToken((await findCart({ token: null, customerId: owner }))!.id))!;
     setAuthProvider(async () => null);
-    const res = await restore(req(`/api/cart/restore?t=${encodeURIComponent(link)}`));
+    const page = await restoreGet(req(`/api/cart/restore?t=${encodeURIComponent(link)}`));
+    expect(page.status).toBe(200);
+    expect(await page.text()).toContain('Sign in to open this cart.');
+    const res = await restorePost(req('/api/cart/restore', { form: { t: link } }));
     expect(res.headers.get('location')).toBe('/account/login?next=%2Fcart');
+    expect(res.headers.get('set-cookie')).toBeNull();
   });
 });

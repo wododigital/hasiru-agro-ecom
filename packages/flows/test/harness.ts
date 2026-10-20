@@ -41,7 +41,8 @@ export interface Fakes {
   /** Contacts (by phone) that placed an order, with the time. */
   purchases: { phone: string; at: Date }[];
   leads: Map<string, Contact & { link: string | null }>;
-  restored: { cartId: string; couponCode: string | null }[];
+  /** Restore links asked from the cart port (one per reminder send). */
+  restored: { cartId: string; couponCode: string | null; days: number }[];
   codes: { ruleId: string; phone: string; expiresAt: Date | null }[];
 }
 
@@ -50,9 +51,9 @@ export function bindFakes(): Fakes {
   configureFlows({
     carts: {
       snapshot: async (cartId) => f.carts.get(cartId) ?? null,
-      restore: async (cartId, { couponCode }) => {
-        f.restored.push({ cartId, couponCode });
-        return true;
+      restoreLink: async (cartId, { couponCode, days }) => {
+        f.restored.push({ cartId, couponCode, days });
+        return `/api/cart/restore?t=${cartId}`;
       },
     },
     orders: {

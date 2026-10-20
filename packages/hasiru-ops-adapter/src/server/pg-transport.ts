@@ -10,8 +10,12 @@ export class PgTransportError extends Error {
   override name = 'PgTransportError';
 }
 
-/** TLS is required off the local machine: `sslmode=disable` is refused unless the host is loopback. */
-export function checkPgUrl(url: string): void {
+/**
+ * TLS is required off the local machine: `sslmode=disable` is refused unless the host is loopback, and for any
+ * other host the client is given `ssl: { rejectUnauthorized: true }` whatever the URL says (`ssl=false`, `prefer`,
+ * `allow` or nothing cannot downgrade the link). Returns the pg client options to use.
+ */
+export function checkPgUrl(url: string): { ssl: { rejectUnauthorized: true } | false } {
   let u: URL;
   try {
     u = new URL(url);
@@ -19,7 +23,9 @@ export function checkPgUrl(url: string): void {
     throw new PgTransportError('pg connection string is not a URL');
   }
   if (u.protocol !== 'postgres:' && u.protocol !== 'postgresql:') throw new PgTransportError('pg connection string must start with postgres://');
-  if (u.searchParams.get('sslmode') === 'disable' && !LOOPBACK.has(u.hostname)) throw new PgTransportError('TLS is required: remove sslmode=disable');
+  const loopback = LOOPBACK.has(u.hostname);
+  if (u.searchParams.get('sslmode') === 'disable' && !loopback) throw new PgTransportError('TLS is required: remove sslmode=disable');
+  return { ssl: loopback ? false : { rejectUnauthorized: true } };
 }
 
 /**
@@ -27,8 +33,8 @@ export function checkPgUrl(url: string): void {
  * transaction-mode poolers too, where session settings do not stick). Always rolls back: nothing is ever written.
  */
 export async function withReadOnly<T>(url: string, fn: (client: pg.Client) => Promise<T>): Promise<T> {
-  checkPgUrl(url);
-  const client = new pg.Client({ connectionString: url, statement_timeout: 10_000, query_timeout: 15_000, connectionTimeoutMillis: 10_000, application_name: 'ecomkit-erp-sync' });
+  const { ssl } = checkPgUrl(url);
+  const client = new pg.Client({ connectionString: url, ssl, statement_timeout: 10_000, query_timeout: 15_000, connectionTimeoutMillis: 10_000, application_name: 'ecomkit-erp-sync' });
   await client.connect();
   try {
     await client.query('begin transaction read only');

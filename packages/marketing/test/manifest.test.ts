@@ -23,9 +23,9 @@ describe('manifest', () => {
     const ids = modules.map((m) => m.id);
     const prod = planFiles({ app: 'shop', modules: ids, mocks: false }, modules).map((f) => f.path);
     expect(prod).toEqual(expect.arrayContaining(['app/api/consent/route.ts', 'app/(admin)/admin/marketing/tags/page.tsx']));
-    expect(prod.some((p) => p.includes('_mock/ga4') || p.includes('_mock/meta-capi'))).toBe(false);
+    expect(prod.some((p) => p.includes('mock/ga4') || p.includes('mock/meta-capi'))).toBe(false);
     const dev = planFiles({ app: 'shop', modules: ids, mocks: true }, modules).map((f) => f.path);
-    expect(dev).toEqual(expect.arrayContaining(['app/api/_mock/ga4/[...path]/route.ts', 'app/api/_mock/meta-capi/[...path]/route.ts']));
+    expect(dev).toEqual(expect.arrayContaining(['app/api/%5Fmock/ga4/[...path]/route.ts', 'app/api/%5Fmock/meta-capi/[...path]/route.ts']));
   });
 
   it('every route module exports what the manifest says', async () => {

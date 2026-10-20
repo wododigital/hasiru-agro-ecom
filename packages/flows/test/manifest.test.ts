@@ -15,9 +15,10 @@ describe('manifest', () => {
     expect(manifest.optional).toEqual(expect.arrayContaining(['cart', 'orders', 'discounts']));
   });
 
-  it('generates the restore route and the three admin pages', () => {
+  it('generates the three admin pages and no storefront route (the restore link is the cart module\'s)', () => {
     const paths = planFiles({ app: 'shop', modules: ids, mocks: false }, resolveModules(all, ids)).map((f) => f.path);
-    for (const p of ['app/r/[token]/route.ts', 'app/(admin)/admin/marketing/automations/page.tsx', 'app/(admin)/admin/marketing/automations/[key]/page.tsx', 'app/(admin)/admin/abandoned-checkouts/page.tsx']) {
+    expect(paths.some((x) => x.startsWith('app/r/'))).toBe(false);
+    for (const p of ['app/(admin)/admin/marketing/automations/page.tsx', 'app/(admin)/admin/marketing/automations/[key]/page.tsx', 'app/(admin)/admin/abandoned-checkouts/page.tsx']) {
       expect(paths.some((x) => x.endsWith(p)), p).toBe(true);
     }
   });

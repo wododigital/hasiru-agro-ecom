@@ -68,7 +68,14 @@ export async function handleUnlock(req: Request): Promise<Response> {
   } catch {
     return json({ status: 'invalid' }, 400);
   }
-  const result = await unlockPlan(body.data, { ip: clientIp(req), requestHeaders: req.headers });
+  const existing = cookieValue(req, VISITOR_COOKIE);
+  const viewer = await getViewer();
+  const result = await unlockPlan(body.data, {
+    ip: clientIp(req),
+    requestHeaders: req.headers,
+    visitorId: existing && VISITOR_RE.test(existing) ? existing : null,
+    customerId: viewer.kind === 'customer' ? viewer.customerId : null,
+  });
   const planId = typeof body.data.planId === 'string' && VISITOR_RE.test(body.data.planId) ? body.data.planId : null;
   const status = result.status === 'unlocked' || result.status === 'sent' ? 200 : result.status === 'limited' ? 429 : result.status === 'not_found' ? 404 : 400;
   const res = body.form && planId ? redirect(req, `/plan/results/${planId}${result.status === 'unlocked' ? '' : `?unlock=${result.status}`}`) : json({ status: result.status }, status);

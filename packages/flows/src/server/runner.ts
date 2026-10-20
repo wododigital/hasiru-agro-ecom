@@ -1,7 +1,7 @@
 import type { TemplateKey } from '@ecomkit/core/contracts';
 import { db, withTx, type Tx } from '@ecomkit/core/db';
 import { env } from '@ecomkit/core/env';
-import { hashContact, signInternal, timingSafeEqual } from '@ecomkit/core/http';
+import { hashContact } from '@ecomkit/core/http';
 import { newId } from '@ecomkit/core/ids';
 import { formatINR } from '@ecomkit/core/money';
 import { hasConsent } from '@ecomkit/customers/server';
@@ -19,26 +19,12 @@ type RunLike = Pick<RunRow, 'id' | 'subjectType' | 'subjectId' | 'context' | 'st
 /** Stop reasons decided at start: those runs never messaged anyone and do not count toward the 7-day cap. */
 const START_STOPS: StopReason[] = ['no_contact', 'no_consent', 'frequency_cap', 'subject_missing'];
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-const RESTORE_PURPOSE = 'flows-restore';
 
 export const siteUrl = (): string => (env.SITE_URL ?? env.INTERNAL_BASE_URL).replace(/\/$/, '');
 const absolute = (href: string) => (/^https?:\/\//.test(href) ? href : `${siteUrl()}${href.startsWith('/') ? '' : '/'}${href}`);
 
-// ---- restore link -----------------------------------------------------------------------------
 /** Restore links stop working 14 days after they are issued (the last reminder goes out at 72 h). */
-const RESTORE_TTL_SEC = 14 * 24 * 60 * 60;
-const restoreSig = (runId: string, exp: string) => signInternal(`${runId}.${exp}`, RESTORE_PURPOSE).slice(0, 32);
-export const restoreToken = (runId: string, now = new Date()): string => {
-  const exp = String(Math.floor(now.getTime() / 1000) + RESTORE_TTL_SEC);
-  return `${runId}.${exp}.${restoreSig(runId, exp)}`;
-};
-/** The run id inside a valid, unexpired token, else null. */
-export function verifyRestoreToken(token: string, now = new Date()): string | null {
-  const [runId, exp, sig] = token.split('.');
-  if (!runId || !exp || !sig || !/^[0-9a-f-]{36}$/.test(runId) || !/^\d{1,12}$/.test(exp)) return null;
-  if (Number(exp) * 1000 < now.getTime()) return null;
-  return timingSafeEqual(restoreSig(runId, exp), sig) ? runId : null;
-}
+const RESTORE_LINK_DAYS = 14;
 
 // ---- subjects ---------------------------------------------------------------------------------
 interface Resolved {
@@ -56,11 +42,12 @@ async function resolveSubject(run: RunLike, def: FlowDef, inline?: Contact): Pro
   const ports = flowPorts();
   const ctx = run.context;
   if (run.subjectType === 'cart') {
-    const snap = ctx.cartId && ports.carts ? await ports.carts.snapshot(ctx.cartId, ctx.checkoutSessionId ?? null) : null;
-    if (!snap) return missing();
+    const carts = ports.carts;
+    const snap = ctx.cartId && carts ? await carts.snapshot(ctx.cartId, ctx.checkoutSessionId ?? null) : null;
+    if (!snap || !carts || !ctx.cartId) return missing();
     return {
       contact: snap.contact,
-      vars: { name: nameOf(snap.contact), cart_link: `${siteUrl()}/r/${restoreToken(run.id)}` },
+      vars: { name: nameOf(snap.contact), cart_link: absolute((await carts.restoreLink(ctx.cartId, { couponCode: ctx.code ?? null, days: RESTORE_LINK_DAYS })) ?? '/cart') },
       stop: snap.status === 'converted' ? 'purchased' : null,
       isTest: false,
       orderId: null,

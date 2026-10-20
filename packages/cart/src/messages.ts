@@ -92,7 +92,15 @@ export const cartMessages = {
     restore_invalid: 'That cart link is not valid.',
     restore_expired: 'That cart link has expired.',
     restore_gone: 'That cart has already been ordered or cleared.',
+    restore_used: 'That cart link has already been used. Your cart is still here.',
   } as Record<string, string>,
+  restore: {
+    title: 'Your cart is ready',
+    items: (n: number) => plural(n, 'item is waiting for you', 'items are waiting for you'),
+    signIn: 'Sign in to open this cart.',
+    open: 'Open my cart',
+    back: 'Back to the shop',
+  },
   drawer: {
     open: 'Open cart',
     title: 'Cart',

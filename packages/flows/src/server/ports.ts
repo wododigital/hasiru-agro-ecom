@@ -37,8 +37,12 @@ export interface OrderSummary {
 export interface FlowPorts {
   carts: {
     snapshot(cartId: string, checkoutSessionId: string | null): Promise<CartSnapshot | null>;
-    /** Called from the restore route handler: makes this cart the visitor's cart (cookie) and applies the code. */
-    restore(cartId: string, options: { couponCode: string | null }): Promise<boolean>;
+    /**
+     * The cart module's restore link for reminder messages (path or absolute URL; null when the cart is gone).
+     * The cart owns the link: it is signed, single use and stays valid 14 days (`days`); `couponCode` is the run's
+     * single-use code, applied by the cart when the link is opened.
+     */
+    restoreLink(cartId: string, options: { couponCode: string | null; days: number }): Promise<string | null>;
   } | null;
   orders: {
     summary(orderId: string): Promise<OrderSummary | null>;

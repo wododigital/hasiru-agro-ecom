@@ -60,7 +60,8 @@ export const catalogMessages = {
     tierRow: (minQty: number) => `${minQty}+ plants`,
     tierBase: (maxQty: number) => `1 to ${maxQty}`,
     perUnit: 'each',
-    nudge: (more: number, unit: string, save: string) => `Add ${more} more to unlock ${unit} each, save ${save}`,
+    /** `more` may be a placeholder string: the buy-box island receives the sentence as a template (see `buyBoxLabels`). */
+    nudge: (more: number | string, unit: string, save: string) => `Add ${more} more to unlock ${unit} each, save ${save}`,
     needMore: 'Need a larger quantity? Ask us for a quote.',
     gallery: 'Product images',
     imageCredit: (credit: string) => `Photo: ${credit}`,

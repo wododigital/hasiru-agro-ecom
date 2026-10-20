@@ -154,7 +154,7 @@ describe('storefront pages', () => {
 
   it('results: unlocked plans show quantities, the package button, 3D, video, share and build-for-me links', async () => {
     const { planId } = await generatePlan({ district: 'mysuru', sqft: 43_560, purpose: 'commercial' }, visitor);
-    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ip: null, requestHeaders: new Headers() });
+    await unlockPlan({ step: 'soft', planId, name: 'Asha', phone: '9845012345' }, { ...visitor, requestHeaders: new Headers() });
     const html = await renderHtml(<PlanResultsPage params={params({ planId })} searchParams={noSearch} />);
     expect(html).not.toContain('Unlock your plan');
     expect(html).toContain('data-cta="plan-add-package"');

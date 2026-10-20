@@ -11,8 +11,9 @@ import { getProductCardsByIds } from '../server/api';
 import { cachedImages, cachedSettings, pdpCommerce } from '../server/live';
 import { getProductBySlug, movedSlug, type ProductDetail } from '../server/queries';
 import { catalogRuntime, optionalService } from '../server/runtime';
+import type { CatalogMessages } from '../messages';
 import { climateOf, collectionPath } from '../server/shared';
-import { BuyBoxIsland } from './BuyBoxIsland';
+import { BuyBoxIsland, type BuyBoxProps } from './BuyBoxIsland';
 import { FitPanel } from './FitPanel';
 import { Gallery } from './Gallery';
 import { NotifyForm } from './NotifyForm';
@@ -20,6 +21,11 @@ import { FaqList, JsonLdScript, KeyFacts, RichText, TrustRow } from './PdpParts'
 import { ProductCard } from './ProductCard';
 import { RecentlyViewedIsland } from './RecentlyViewedIsland';
 import { TierTable } from './TierTable';
+
+/** Plain-string labels for the client island: functions (the `nudge` formatter) cannot cross the server/client boundary. */
+export function buyBoxLabels(m: CatalogMessages['pdp']): BuyBoxProps['labels'] {
+  return { perUnit: m.perUnit, variant: m.variant, addToCart: m.addToCart, buyNow: m.buyNow, askWhatsApp: m.askWhatsApp, nudge: m.nudge('{more}', '{unit}', '{save}') };
+}
 
 /**
  * Resolves a PDP slug: the product, a 301 for a slug it used to have, or a 404 (unknown, other kind, hidden).
@@ -136,7 +142,7 @@ export async function ProductPage({ slug, kind }: { slug: string; kind: Kind }) 
               tiers={ladder.tiers}
               canBuy={canBuy}
               whatsappHref={whatsappHref}
-              labels={m.pdp}
+              labels={buyBoxLabels(m.pdp)}
             />
           ) : whatsappHref ? (
             <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'outline' })} data-cta="pdp-ask-whatsapp">

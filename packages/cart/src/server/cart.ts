@@ -8,6 +8,7 @@ import { signInternal, verifyInternal } from '@ecomkit/core/http';
 import { rateLimit } from '@ecomkit/core/rate-limit';
 import { defineSettings, getSettings } from '@ecomkit/core/settings';
 import { and, asc, count, desc, eq, inArray, sql } from 'drizzle-orm';
+import { z } from 'zod';
 import {
   addLineSchema,
   cartSettingsSchema,
@@ -358,42 +359,115 @@ export async function markAbandoned(options: { now?: Date; batch?: number } = {}
 // ---- restore links -----------------------------------------------------------------
 
 const RESTORE_PURPOSE = 'cart-restore';
+const b64 = (s: string) => Buffer.from(s, 'utf8').toString('base64url');
+const unb64 = (s: string) => Buffer.from(s, 'base64url').toString('utf8');
+/** The part of the cart's cookie-token hash a link is bound to: a restore issues a new cookie, so a used link stops matching. */
+const nonceOf = (cart: Pick<CartRow, 'cookieTokenHash'>) => cart.cookieTokenHash.slice(0, 16);
 
-/** A signed link token for reminder messages: `<cartId>.<expiry seconds>.<hmac>`. */
-export async function restoreToken(cartId: string, options: { now?: Date } = {}): Promise<string> {
-  const now = options.now ?? new Date();
-  const { restoreLinkDays } = await readCartSettings();
-  const exp = Math.floor(now.getTime() / 1000) + restoreLinkDays * 86_400;
-  return `${cartId}.${exp}.${signInternal(`${cartId}.${exp}`, RESTORE_PURPOSE)}`;
+const restorePayload = z.object({
+  c: z.uuid(),
+  e: z.number().int().positive(),
+  n: z.string().min(1).max(16),
+  k: z.string().min(1).max(40).optional(),
+});
+
+export interface RestoreTokenOptions {
+  now?: Date;
+  /** Days the link stays valid; defaults to the `restoreLinkDays` setting. */
+  days?: number;
+  /** A code the restore applies to the cart (reminder offers); the cart keeps a code it already has. */
+  couponCode?: string | null;
 }
 
-/** Path flows put in messages; the route sets the cookie and lands on /cart. */
+/**
+ * A signed, single-use link token for reminder messages: `<base64url payload>.<hmac>`. The payload carries the cart id,
+ * the expiry, a nonce bound to the cart's current cookie token and an optional coupon code. Null when the cart is gone.
+ */
+export async function restoreToken(cartId: string, options: RestoreTokenOptions = {}): Promise<string | null> {
+  const now = options.now ?? new Date();
+  const [cart] = await db.select({ cookieTokenHash: cartCart.cookieTokenHash, status: cartCart.status }).from(cartCart).where(eq(cartCart.id, cartId));
+  if (!cart || !(LIVE as readonly string[]).includes(cart.status)) return null;
+  const days = options.days ?? (await readCartSettings()).restoreLinkDays;
+  const payload: z.infer<typeof restorePayload> = { c: cartId, e: Math.floor(now.getTime() / 1000) + days * 86_400, n: nonceOf(cart) };
+  if (options.couponCode) payload.k = options.couponCode;
+  const body = b64(JSON.stringify(payload));
+  return `${body}.${signInternal(body, RESTORE_PURPOSE)}`;
+}
+
+/** Path flows put in messages; GET shows a confirmation page, POST restores the cart on this device. */
 export const restorePath = (token: string) => `/api/cart/restore?t=${encodeURIComponent(token)}`;
 
-export type RestoreResult = { ok: true; cartId: string; issuedToken: string | null } | { ok: false; reason: 'invalid' | 'expired' | 'gone' | 'sign_in' };
+export type RestoreFailure = 'invalid' | 'expired' | 'used' | 'gone' | 'sign_in';
+export type RestoreResult = { ok: true; cartId: string; issuedToken: string | null } | { ok: false; reason: RestoreFailure };
+export type RestorePeek = { ok: true; cartId: string; itemCount: number; needsSignIn: boolean } | { ok: false; reason: RestoreFailure };
 
-const RESTORE_RE = /^([0-9a-f-]{36})\.(\d{1,12})\.([0-9a-f]{64})$/;
+const RESTORE_RE = /^([A-Za-z0-9_-]{20,400})\.([0-9a-f]{64})$/;
+
+function parseRestoreToken(token: string, now: Date): { ok: true; payload: z.infer<typeof restorePayload> } | { ok: false; reason: 'invalid' | 'expired' } {
+  const m = RESTORE_RE.exec(token);
+  if (!m || !verifyInternal(m[1]!, m[2]!, RESTORE_PURPOSE)) return { ok: false, reason: 'invalid' };
+  let payload: z.infer<typeof restorePayload>;
+  try {
+    payload = restorePayload.parse(JSON.parse(unb64(m[1]!)));
+  } catch {
+    return { ok: false, reason: 'invalid' };
+  }
+  if (payload.e * 1000 <= now.getTime()) return { ok: false, reason: 'expired' };
+  return { ok: true, payload };
+}
+
+/** The live cart a token points at, following one merge hop; null when gone. */
+async function cartForToken(tx: Tx, payload: z.infer<typeof restorePayload>): Promise<CartRow | null> {
+  let [cart] = await tx.select().from(cartCart).where(eq(cartCart.id, payload.c)).for('update');
+  if (cart?.status === 'merged' && cart.mergedIntoId) [cart] = await tx.select().from(cartCart).where(eq(cartCart.id, cart.mergedIntoId)).for('update');
+  if (!cart || !(LIVE as readonly string[]).includes(cart.status)) return null;
+  return cart;
+}
 
 /**
- * Opens the cart a restore link points at on this device. A guest cart gets a fresh cookie token (and absorbs
- * whatever guest cart the device had); a customer's cart needs that customer signed in.
+ * Checks a restore link without changing anything (link-preview bots fetch the GET page): item count only, no
+ * contents or contact data. A link whose nonce no longer matches the cart's cookie token has been used.
+ */
+export async function peekRestore(ctx: CartContext, token: string): Promise<RestorePeek> {
+  const now = ctx.now ?? new Date();
+  const parsed = parseRestoreToken(token, now);
+  if (!parsed.ok) return parsed;
+  return withTx(async (tx) => {
+    const cart = await cartForToken(tx, parsed.payload);
+    if (!cart) return { ok: false, reason: 'gone' } as const;
+    if (nonceOf(cart) !== parsed.payload.n) return { ok: false, reason: 'used' } as const;
+    const [n] = await tx.select({ n: sql<number>`coalesce(sum(${cartLine.qty}), 0)::int` }).from(cartLine).where(eq(cartLine.cartId, cart.id));
+    return { ok: true, cartId: cart.id, itemCount: n?.n ?? 0, needsSignIn: !!cart.customerId && cart.customerId !== ctx.customerId } as const;
+  });
+}
+
+/**
+ * Opens the cart a restore link points at on this device (the POST step). A guest cart gets a fresh cookie token
+ * (so the link is spent) and absorbs whatever guest cart the device had; a customer's cart needs that customer
+ * signed in and is never handed to another visitor. The token's coupon code is applied when the cart has none.
  */
 export async function restoreCart(ctx: CartContext, token: string): Promise<RestoreResult> {
   const now = ctx.now ?? new Date();
-  const m = RESTORE_RE.exec(token);
-  if (!m || !verifyInternal(`${m[1]}.${m[2]}`, m[3], RESTORE_PURPOSE)) return { ok: false, reason: 'invalid' };
-  if (Number(m[2]) * 1000 <= now.getTime()) return { ok: false, reason: 'expired' };
+  const parsed = parseRestoreToken(token, now);
+  if (!parsed.ok) return parsed;
+  const { payload } = parsed;
   return withTx(async (tx) => {
-    let [cart] = await tx.select().from(cartCart).where(eq(cartCart.id, m[1]!)).for('update');
-    if (cart?.status === 'merged' && cart.mergedIntoId) [cart] = await tx.select().from(cartCart).where(eq(cartCart.id, cart.mergedIntoId)).for('update');
-    if (!cart || !(LIVE as readonly string[]).includes(cart.status)) return { ok: false, reason: 'gone' } as const;
+    let cart = await cartForToken(tx, payload);
+    if (!cart) return { ok: false, reason: 'gone' } as const;
+    if (nonceOf(cart) !== payload.n) return { ok: false, reason: 'used' } as const;
+    const coupon = payload.k && !cart.couponCode ? { couponCode: payload.k } : {};
     if (cart.customerId) {
-      return cart.customerId === ctx.customerId ? ({ ok: true, cartId: cart.id, issuedToken: null } as const) : ({ ok: false, reason: 'sign_in' } as const);
+      if (cart.customerId !== ctx.customerId) return { ok: false, reason: 'sign_in' } as const;
+      // The owner's own cart: nothing moves between visitors; spend the link by rotating the cookie token.
+      const issued = newToken();
+      await tx.update(cartCart).set({ cookieTokenHash: hashToken(issued), ...coupon, updatedAt: now }).where(eq(cartCart.id, cart.id));
+      await touch(tx, cart, now, true);
+      return { ok: true, cartId: cart.id, issuedToken: issued } as const;
     }
     const current = await cartByToken(tx, ctx.token);
     if (current && current.id !== cart.id && current.customerId === null) cart = await mergeInto(tx, cart, current, now);
     const issued = newToken();
-    await tx.update(cartCart).set({ cookieTokenHash: hashToken(issued), updatedAt: now }).where(eq(cartCart.id, cart.id));
+    await tx.update(cartCart).set({ cookieTokenHash: hashToken(issued), ...coupon, updatedAt: now }).where(eq(cartCart.id, cart.id));
     await touch(tx, cart, now, true);
     return { ok: true, cartId: cart.id, issuedToken: issued } as const;
   });

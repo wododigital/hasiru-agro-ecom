@@ -21,8 +21,12 @@ export interface BuyBoxProps {
   /** Cart enabled and the product is purchasable. */
   canBuy: boolean;
   whatsappHref: string | null;
-  labels: CatalogMessages['pdp'];
+  /** Plain strings only (this is a client island): the nudge is a template with `{more}`, `{unit}` and `{save}`. */
+  labels: Pick<CatalogMessages['pdp'], 'perUnit' | 'variant' | 'addToCart' | 'buyNow' | 'askWhatsApp'> & { nudge: string };
 }
+
+const fillNudge = (template: string, more: number, unit: string, save: string) =>
+  template.replace('{more}', String(more)).replace('{unit}', unit).replace('{save}', save);
 
 /**
  * Quantity, live bulk price and nudge, Add to cart / Buy now / Ask on WhatsApp. A plain form post underneath,
@@ -53,7 +57,7 @@ export function BuyBoxIsland({ name, variants, list, tiers, canBuy, whatsappHref
       </div>
       {at.next ? (
         <p className="rounded-sm bg-accent/20 px-2 py-1 text-sm" aria-live="polite">
-          {m.nudge(at.next.more, formatINR(at.next.unitPaise as Paise), formatINR(at.next.savePaise as Paise))}
+          {fillNudge(m.nudge, at.next.more, formatINR(at.next.unitPaise as Paise), formatINR(at.next.savePaise as Paise))}
         </p>
       ) : null}
       {variants.length > 1 ? (

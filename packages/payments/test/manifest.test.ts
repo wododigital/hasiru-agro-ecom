@@ -21,8 +21,8 @@ describe('manifest', () => {
       expect(dev.some((x) => x.endsWith(p))).toBe(true);
       expect(prod.some((x) => x.endsWith(p))).toBe(true);
     }
-    expect(dev.filter((x) => x.includes('_mock'))).toEqual([expect.stringContaining('app/api/_mock/phonepe/[...path]/route.ts')]);
-    expect(prod.filter((x) => x.includes('_mock'))).toHaveLength(0);
+    expect(dev.filter((x) => x.includes('%5Fmock'))).toEqual([expect.stringContaining('app/api/%5Fmock/phonepe/[...path]/route.ts')]);
+    expect(prod.filter((x) => x.includes('mock'))).toHaveLength(0);
   });
 
   it('every lazy reference resolves and schedules name own jobs', async () => {

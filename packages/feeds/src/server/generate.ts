@@ -58,12 +58,19 @@ export async function regenerateFeeds(options: { force?: boolean; destinations?:
     const included: { item: FeedItem; hash: string }[] = [];
     const rejected = new Map<string, string>();
     for (const { row, item: generic } of base) {
-      const item = forDestination(generic, row, destination, origin);
-      if (item.availability === 'out_of_stock' && !s.includeOutOfStock) continue;
-      const found = validateFeedItem(item, destination, { requireHttps: origin.startsWith('https:') });
-      for (const i of found) issues.push({ itemId: item.id, variantId: item.variantId, ...i });
-      if (hasErrors(found)) rejected.set(item.variantId, found.filter((i) => i.severity === 'error').map((i) => `${i.field}: ${i.message}`).join('; '));
-      else included.push({ item, hash: sha256(stableItemText(item)) });
+      // One bad product records a validation error and never kills the run.
+      try {
+        const item = forDestination(generic, row, destination, origin);
+        if (item.availability === 'out_of_stock' && !s.includeOutOfStock) continue;
+        const found = validateFeedItem(item, destination, { requireHttps: origin.startsWith('https:') });
+        for (const i of found) issues.push({ itemId: item.id, variantId: item.variantId, ...i });
+        if (hasErrors(found)) rejected.set(item.variantId, found.filter((i) => i.severity === 'error').map((i) => `${i.field}: ${i.message}`).join('; '));
+        else included.push({ item, hash: sha256(stableItemText(item)) });
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        issues.push({ itemId: generic.id, variantId: generic.variantId, field: 'item', severity: 'error', message });
+        rejected.set(generic.variantId, `item: ${message}`);
+      }
     }
 
     const report = await withTx(async (tx) => {

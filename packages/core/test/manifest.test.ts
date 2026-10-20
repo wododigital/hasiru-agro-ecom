@@ -82,6 +82,8 @@ describe('routeFilePath', () => {
     expect(routeFilePath({ path: '/plant/[slug]', kind: 'page' })).toBe('app/(shop)/plant/[slug]/page.tsx');
     expect(routeFilePath({ path: '/admin/products', kind: 'page' })).toBe('app/(admin)/admin/products/page.tsx');
     expect(routeFilePath({ path: '/sitemap.xml', kind: 'route' })).toBe('app/sitemap.xml/route.ts');
+    // `app/api/_mock` would be a Next private folder (never routed); `%5F` escapes the underscore.
+    expect(routeFilePath({ path: '/api/_mock/phonepe/[...path]', kind: 'route' })).toBe('app/api/%5Fmock/phonepe/[...path]/route.ts');
   });
 });
 
@@ -91,8 +93,8 @@ describe('planFiles', () => {
   it('writes mock route stubs only when mocks are on', () => {
     const dev = planFiles({ app: 'shop', modules: ['core', 'catalog', 'payments'], mocks: true }, ordered).map((f) => f.path);
     const prod = planFiles({ app: 'shop', modules: ['core', 'catalog', 'payments'], mocks: false }, ordered).map((f) => f.path);
-    expect(dev).toContain('app/api/_mock/phonepe/[...path]/route.ts');
-    expect(prod.some((p) => p.includes('_mock'))).toBe(false);
+    expect(dev).toContain('app/api/%5Fmock/phonepe/[...path]/route.ts');
+    expect(prod.some((p) => p.includes('mock'))).toBe(false);
   });
 
   it('writes stubs that re-export from package exports with literal segment config', () => {
