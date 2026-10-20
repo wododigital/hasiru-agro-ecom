@@ -9,6 +9,15 @@ import { saveMenu } from './menus';
 import { savePage } from './pages';
 import { cmsRuntime } from './runtime';
 
+/** The data pipeline writes counters as display strings ("850+"); split into the integer and its suffix. */
+function splitCounter(raw: unknown): unknown {
+  if (!raw || typeof raw !== 'object') return raw;
+  const r = raw as { value?: unknown; suffix?: unknown };
+  if (typeof r.value !== 'string') return raw;
+  const m = /^(\d+)(.*)$/.exec(r.value.replace(/,/g, '').trim());
+  return m ? { ...r, value: Number(m[1]), suffix: r.suffix ?? (m[2] || null) } : raw;
+}
+
 const page = z.object({
   slug: z.string(),
   title: z.string(),
@@ -26,7 +35,7 @@ const fileSchema = z.object({
     testimonials: z.array(z.object({ key: z.string(), author: z.string(), location: z.string().nullish(), body: z.string(), source: z.string().nullish(), sort: z.number().default(0) })).default([]),
     team: z.array(z.object({ key: z.string(), name: z.string(), role: z.string().nullish(), bio: z.string().nullish(), sort: z.number().default(0) })).default([]),
     trust_claims: z.array(z.object({ key: z.string(), label: z.string(), value: z.string().nullish(), logo: z.string().nullish(), visible: z.boolean().default(false), sort: z.number().default(0) })).default([]),
-    counters: z.array(z.object({ key: z.string(), label: z.string(), value: z.number().int(), suffix: z.string().nullish(), verified: z.boolean().default(false), sort: z.number().default(0) })).default([]),
+    counters: z.array(z.preprocess(splitCounter, z.object({ key: z.string(), label: z.string(), value: z.number().int(), suffix: z.string().nullish(), verified: z.boolean().default(false), sort: z.number().default(0) }))).default([]),
   }),
 });
 
