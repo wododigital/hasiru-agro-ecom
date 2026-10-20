@@ -70,7 +70,10 @@ describe('AdminLayout gate', () => {
   it('owner sees every nav item; support sees only what the role may open', async () => {
     actAs(staff('owner'));
     const owner = (await render(<AdminLayout registry={registry} title="Test store">{page}</AdminLayout>)).html;
-    for (const href of ['/admin', '/admin/orders', '/admin/settings', '/admin/staff', '/admin/roles', '/admin/audit']) expect(owner).toContain(`href="${href}"`);
+    for (const href of ['/admin', '/admin/orders', '/admin/settings']) expect(owner).toContain(`href="${href}"`);
+    // Staff, roles and audit live in the settings layer (Shopify), not the sidebar.
+    for (const href of ['/admin/staff', '/admin/roles', '/admin/audit']) expect(owner).not.toContain(`href="${href}"`);
+    expect(owner).toContain('data-cta="admin-nav-settings"');
     expect(owner).toContain('PAGE BODY');
     expect(owner).toContain('Test store');
 

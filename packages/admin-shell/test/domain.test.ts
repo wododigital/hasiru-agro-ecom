@@ -4,6 +4,9 @@ import { z } from 'zod';
 import {
   absoluteUrl,
   activeHref,
+  activeSection,
+  compareRange,
+  parseCompare,
   adminGate,
   auditChanges,
   bandOf,
@@ -209,5 +212,35 @@ describe('manifest extensions', () => {
     expect(absoluteUrl('/api/webhooks/x', 'https://shop.example.com')).toBe('https://shop.example.com/api/webhooks/x');
     expect(absoluteUrl('/api/webhooks/x', null)).toBe('/api/webhooks/x');
     expect(settingsUrls(undefined)).toEqual([]);
+  });
+});
+
+describe('compareRange', () => {
+  it('previous period is the same length immediately before', () => {
+    expect(compareRange({ from: '2026-10-01', to: '2026-10-14' }, 'previous-period')).toEqual({ from: '2026-09-17', to: '2026-09-30' });
+  });
+  it('previous year shifts 365 days and none is null', () => {
+    expect(compareRange({ from: '2026-10-01', to: '2026-10-14' }, 'previous-year')).toEqual({ from: '2025-10-01', to: '2025-10-14' });
+    expect(compareRange({ from: '2026-10-01', to: '2026-10-14' }, 'none')).toBeNull();
+    expect(parseCompare('junk')).toBe('previous-period');
+  });
+});
+
+describe('navSections ordering (Shopify)', () => {
+  it('folds enquiries into customers and pins settings last', () => {
+    const s = navSections(
+      [
+        { label: 'Home', href: '/admin', icon: 'house', order: 0 },
+        { label: 'Customers', href: '/admin/customers', icon: 'users', order: 300 },
+        { label: 'Discounts', href: '/admin/discounts', icon: 'percent', order: 410 },
+        { label: 'Pages', href: '/admin/content', icon: 'file', order: 500 },
+        { label: 'Enquiries', href: '/admin/enquiries', icon: 'inbox', order: 700 },
+        { label: 'Settings', href: '/admin/settings', icon: 'settings', order: 900 },
+      ],
+      ROLE_PERMISSIONS.owner,
+    );
+    expect(s.map((x) => x.band)).toEqual(['home', 'customers', 'content', 'marketing', 'settings']);
+    expect(s[1]!.items.map((i) => i.label)).toEqual(['Customers', 'Enquiries']);
+    expect(activeSection(s, '/admin/enquiries/12')).toBe('customers');
   });
 });

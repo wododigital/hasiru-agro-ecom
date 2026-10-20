@@ -49,19 +49,37 @@ export function bandOf(order: number): keyof typeof NAV_BANDS {
 }
 
 /**
+ * Sidebar order (Shopify admin): Home, Orders, Products, Customers, Content, Analytics, Marketing, Health, then
+ * Settings, which the shell pins bottom-left. Enquiries fold into Customers (they are leads, not their own section).
+ */
+const SECTION_ORDER: (keyof typeof NAV_BANDS)[] = ['home', 'orders', 'products', 'customers', 'content', 'analytics', 'marketing', 'health', 'settings'];
+const SECTION_OF: Partial<Record<keyof typeof NAV_BANDS, keyof typeof NAV_BANDS>> = { enquiries: 'customers' };
+
+/**
  * Sidebar sections from the registry nav (already sorted by order, then label): items the viewer may not open are
- * dropped, then items are grouped by band. Empty bands disappear, so a store without a module shows no gap.
+ * dropped, then items are grouped by section. The first item of a section is its parent link; the rest are its
+ * sub-menu. Empty sections disappear, so a store without a module shows no gap.
  */
 export function navSections(nav: readonly AdminNavItem[], permissions: readonly Permission[]): NavSection[] {
-  const sections: NavSection[] = [];
+  const byBand = new Map<keyof typeof NAV_BANDS, NavSection>();
   for (const item of nav) {
     if (item.permission && !permissions.includes(item.permission)) continue;
-    const band = bandOf(item.order);
-    let section = sections.at(-1);
-    if (!section || section.band !== band) sections.push((section = { band, label: BAND_LABELS[band], items: [] }));
+    const raw = bandOf(item.order);
+    const band = SECTION_OF[raw] ?? raw;
+    let section = byBand.get(band);
+    if (!section) byBand.set(band, (section = { band, label: BAND_LABELS[band], items: [] }));
     section.items.push({ label: item.label, href: item.href, icon: item.icon });
   }
-  return sections;
+  return SECTION_ORDER.flatMap((b) => byBand.get(b) ?? []);
+}
+
+/** The section that owns the current page (its parent or any child is active), or null. */
+export function activeSection(sections: readonly { band: string; items: readonly { href: string }[] }[], pathname: string): string | null {
+  const href = activeHref(
+    sections.flatMap((s) => s.items.map((i) => i.href)),
+    pathname,
+  );
+  return sections.find((s) => s.items.some((i) => i.href === href))?.band ?? null;
 }
 
 /** Longest nav href that prefixes the pathname, so /admin/orders/123 lights up Orders and /admin only lights Home. */

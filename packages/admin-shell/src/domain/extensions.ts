@@ -99,3 +99,15 @@ export function parseRange(input: { from?: unknown; to?: unknown }, now: Date): 
   if (shiftDays(from.data, 366) <= to.data) return fallback;
   return { from: from.data, to: to.data };
 }
+
+export type CompareMode = 'previous-period' | 'previous-year' | 'none';
+
+/** Comparison window for the Home and Analytics date range: the same-length period before, or the same dates a year back. */
+export function compareRange(range: DateRange, mode: CompareMode): DateRange | null {
+  if (mode === 'none') return null;
+  if (mode === 'previous-year') return { from: shiftDays(range.from, -365), to: shiftDays(range.to, -365) };
+  const days = Math.round((Date.parse(range.to) - Date.parse(range.from)) / 86_400_000) + 1;
+  return { from: shiftDays(range.from, -days), to: shiftDays(range.from, -1) };
+}
+
+export const parseCompare = (v: unknown): CompareMode => (v === 'previous-year' || v === 'none' ? v : 'previous-period');

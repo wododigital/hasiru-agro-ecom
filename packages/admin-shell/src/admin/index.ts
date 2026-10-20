@@ -5,4 +5,5 @@ export { AdminLayout, type AdminLayoutProps } from './AdminLayout';
 export { AuditPage } from './AuditPage';
 export { NoAccess, PageHeader } from './PageHeader';
 export { SettingsIndexPage, SettingsPage, type SettingsPageProps } from './SettingsPage';
+export { SettingsLayout } from './SettingsLayout';
 export { RolesPage, StaffPage, type StaffActions, type StaffPageProps } from './StaffPage';

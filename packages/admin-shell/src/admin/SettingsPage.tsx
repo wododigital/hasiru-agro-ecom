@@ -1,11 +1,11 @@
 import type { Registry } from '@ecomkit/core/manifest';
-import { EmptyState, Skeleton } from '@ecomkit/ui';
+import { Badge, EmptyState, Skeleton } from '@ecomkit/ui';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import { requireAdmin } from '../server/access';
-import { loadSettingsView, settingsIndex, type ActionOutcome } from '../server/settings';
+import { keysChecklist, loadSettingsView, settingsIndex, type ActionOutcome } from '../server/settings';
 import type { FormState } from '../domain';
 import type { FormAction } from './ActionFormIsland';
 import { NoAccess, PageHeader, PageSkeleton } from './PageHeader';
@@ -44,7 +44,41 @@ async function SettingsIndex({ registry }: { registry: Registry }) {
           ))}
         </ul>
       )}
+      <Suspense fallback={<Skeleton className="h-48 w-full" />}>
+        <KeysChecklist registry={registry} />
+      </Suspense>
     </>
+  );
+}
+
+/** Integrations keys checklist: which secrets are still missing, each linking to the page that sets it. */
+async function KeysChecklist({ registry }: { registry: Registry }) {
+  const rows = await keysChecklist(registry);
+  if (!rows.length) return null;
+  const missing = rows.reduce((n, r) => n + r.keys.filter((k) => !k.configured).length, 0);
+  return (
+    <section aria-labelledby="keys-checklist" className="flex flex-col gap-3 rounded-md border border-border bg-surface p-4 md:p-5">
+      <div className="flex items-center justify-between gap-2">
+        <h2 id="keys-checklist" className="text-base font-semibold text-primary">
+          Integrations keys checklist
+        </h2>
+        <Badge tone={missing ? 'warning' : 'success'}>{missing ? `${missing} missing` : 'All set'}</Badge>
+      </div>
+      <ul className="flex flex-col divide-y divide-border">
+        {rows.flatMap((r) =>
+          r.keys.map((k) => (
+            <li key={`${r.moduleId}:${k.key}`}>
+              <Link href={r.href} className="flex items-center justify-between gap-3 py-2 text-sm hover:text-primary">
+                <span>
+                  <span className="font-medium">{r.title}</span> <span className="text-muted">· {k.label}</span>
+                </span>
+                <Badge tone={k.configured ? 'success' : 'warning'}>{k.configured ? 'Configured' : 'Missing'}</Badge>
+              </Link>
+            </li>
+          )),
+        )}
+      </ul>
+    </section>
   );
 }
 
