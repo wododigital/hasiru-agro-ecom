@@ -1,4 +1,6 @@
+import { getViewer } from '@ecomkit/core/auth-context';
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import { reviewsMessages } from '../messages';
 import { getReviewPorts, listMyReviews } from '../server';
 import { AccountReviews } from '../ui/AccountReviews';
@@ -12,7 +14,14 @@ export function generateMetadata(): Metadata {
 
 /** /account/reviews (?product=<id> opens the write form, ?edit=<id> the edit form, ?review=<outcome> the notice). */
 export default async function AccountReviewsPage({ searchParams }: Props) {
-  const [mine, q] = await Promise.all([listMyReviews(), searchParams]);
+  const q = await searchParams;
+  // reviews does not depend on auth, so the login redirect is spelled out (same target as auth's requireCustomer).
+  // A review-request link (?product=<id>) survives the sign-in.
+  if ((await getViewer()).kind !== 'customer') {
+    const back = q.product && UUID_RE.test(q.product) ? `/account/reviews?product=${q.product}` : '/account/reviews';
+    redirect(`/account/login?next=${encodeURIComponent(back)}`);
+  }
+  const mine = await listMyReviews();
   const { products, images } = getReviewPorts();
   const labels = await Promise.all(mine.map((r) => products?.label(r.productId) ?? null));
   const reviews = mine.map((r, i) => ({ ...r, productName: labels[i]?.name ?? null, productHref: labels[i]?.href ?? null }));

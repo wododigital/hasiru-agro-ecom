@@ -20,6 +20,7 @@ import {
   imageProps,
   listAssets,
   listDerivatives,
+  staleProcessing,
   MediaInUseError,
   releaseUsage,
   trackUsage,
@@ -82,7 +83,7 @@ describe('upload normalisation', () => {
     expect(meta.exif).toBeDefined();
 
     const { asset } = await uploadImage({ bytes: input, originalName: 'IMG_0001.JPG', derive: 'none' });
-    expect(asset).toMatchObject({ kind: 'image', mime: 'image/webp', width: 800, height: 1200, status: 'processing', isPrivate: false });
+    expect(asset).toMatchObject({ kind: 'image', mime: 'image/webp', width: 800, height: 1200, status: 'ready', isPrivate: false });
     expect(asset.storageKey).toMatch(/^public\/m\/[0-9a-f]{2}\/[0-9a-f]{32}\.webp$/);
     expect(asset.storageKey).not.toContain('IMG');
 
@@ -197,10 +198,19 @@ describe('derivatives', () => {
     expect((await getAsset(asset.id))!.status).toBe('ready');
 
     const lost = await uploadImage({ bytes: await jpeg(300, 300), originalName: 'lost.jpg', derive: 'none' });
-    await t.db.update(mediaAsset).set({ updatedAt: sql`now() - interval '10 minutes'` }).where(eq(mediaAsset.id, lost.asset.id));
+    // a queued upload whose job was lost: still processing, 10 minutes old
+    await t.db.update(mediaAsset).set({ status: 'processing', updatedAt: sql`now() - interval '10 minutes'` }).where(eq(mediaAsset.id, lost.asset.id));
     await warmJob({}, jobCtx);
     expect((await getAsset(lost.asset.id))!.status).toBe('ready');
     expect((await listDerivatives(lost.asset.id)).length).toBeGreaterThan(0);
+  });
+
+  it('two derives of one asset at once (seed rerun next to the worker) both succeed with one row set', async () => {
+    const { asset } = await uploadImage({ bytes: await jpeg(400, 300), originalName: 'twice.jpg', derive: 'none' });
+    await Promise.all([deriveAsset(asset.id), deriveAsset(asset.id), deriveAsset(asset.id)]);
+    const rows = await listDerivatives(asset.id);
+    expect(rows.map((r) => `${r.format}:${r.width}`).sort()).toEqual(['avif:160', 'avif:320', 'jpeg:320', 'webp:160', 'webp:320']);
+    expect((await getAsset(asset.id))!.status).toBe('ready');
   });
 
   it('a broken master marks the asset failed', async () => {
@@ -320,6 +330,9 @@ describe('seed hook', () => {
     expect(first).toMatchObject({ inserted: 1, updated: 0, skipped: 2 });
     const asset = (await t.db.select().from(mediaAsset).where(eq(mediaAsset.sha256, record.sha256)))[0]!;
     expect(asset).toMatchObject({ status: 'ready', source: 'wikimedia', author: 'C. Person', creditRequired: true, alt: 'Sample fruit tree', originalName: record.file });
+    // seed images are served as masters: no derivative ladder now, and nothing left for the worker sweep
+    expect(await listDerivatives(asset.id)).toEqual([]);
+    expect(await staleProcessing(0)).not.toContain(asset.id);
 
     const second = await importMasters(ctx);
     expect(second).toMatchObject({ inserted: 0, updated: 0 });

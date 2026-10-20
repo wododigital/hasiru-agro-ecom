@@ -10,7 +10,8 @@ export default defineModule({
     { path: '/api/places/suggest', module: 'routes/api-suggest', kind: 'route', exports: ['GET'] },
     { path: '/api/places/pincode', module: 'routes/api-pincode', kind: 'route', exports: ['GET'] },
     { path: '/api/places/nearest', module: 'routes/api-nearest', kind: 'route', exports: ['GET'] },
-    { path: '/grow-in/[district]', module: 'routes/grow-in', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'] },
+    // Unknown districts wait for the full render (real 404 status) instead of the shared fallback shell.
+    { path: '/grow-in/[district]', module: 'routes/grow-in', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'], segmentConfig: { unstable_paramMatching: { district: 'blocking' } } },
   ],
   admin: {
     nav: [{ label: 'Districts', href: '/admin/places', icon: 'map-pin', order: 560, permission: 'content.write' }],

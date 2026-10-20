@@ -1,3 +1,4 @@
+import { requireCustomer } from '@ecomkit/auth/server';
 import type { Metadata } from 'next';
 import { customersMessages } from '../messages';
 import { listMyLand } from '../server';
@@ -11,6 +12,7 @@ export function generateMetadata(): Metadata {
 
 /** /account/land */
 export default async function AccountLandPage({ searchParams }: Props) {
+  await requireCustomer('/account/land');
   const [land, flags] = await Promise.all([listMyLand(), searchParams]);
   return <LandView land={land} flags={flags} />;
 }

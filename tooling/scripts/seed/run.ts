@@ -67,6 +67,13 @@ async function build(): Promise<void> {
 async function load(app: string): Promise<void> {
   const registryFile = join(ROOT, 'apps', app, 'src', 'generated', 'registry.ts');
   const { registry } = (await import(pathToFileURL(registryFile).href)) as { registry: Registry };
+  // The app's port bindings (apps/<app>/src/boot.ts `boot({ mediaDir })`), so hooks that link across modules
+  // (catalog and cms images -> media assets) run with the same wiring as the web and worker processes.
+  const bootFile = join(ROOT, 'apps', app, 'src', 'boot.ts');
+  if (existsSync(bootFile)) {
+    const { boot } = (await import(pathToFileURL(bootFile).href)) as { boot?: (o: { mediaDir: string }) => void | Promise<void> };
+    await boot?.({ mediaDir: ctx.mediaDir });
+  } else log.warn(`seed:load ${app}: no src/boot.ts, cross-module links (product images) are skipped`);
   const hooks = registry.list('seedHooks');
   if (!hooks.length) log.warn(`seed:load ${app}: no enabled module has seed hooks`);
   for (const hook of hooks) {

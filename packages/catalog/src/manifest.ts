@@ -3,6 +3,11 @@ import { catalogSettingsSchema } from './settings';
 
 const page = (path: string, module: string, exports: ('default' | 'generateMetadata' | 'generateStaticParams')[] = ['default', 'generateMetadata']) =>
   ({ path, module: `routes/${module}`, kind: 'page', exports }) as const;
+/**
+ * Slugs not prerendered at build wait for the full render instead of getting the shared fallback shell, so an
+ * unknown slug answers a real 404 (notFound() before anything streams) and a new product still renders on demand.
+ */
+const blocking = (...params: string[]) => ({ unstable_paramMatching: Object.fromEntries(params.map((p) => [p, 'blocking'])) });
 
 /**
  * Catalog: products, variants, collections, tags, FAQs, listing and product pages, the admin product form
@@ -17,11 +22,11 @@ export default defineModule({
   schema: () => import('./schema'),
   routes: [
     page('/plants', 'plants'),
-    page('/plants/[collection]', 'plants-collection', ['default', 'generateMetadata', 'generateStaticParams']),
-    page('/plants/[collection]/[sub]', 'plants-sub', ['default', 'generateMetadata', 'generateStaticParams']),
-    page('/plant/[slug]', 'plant', ['default', 'generateMetadata', 'generateStaticParams']),
+    { ...page('/plants/[collection]', 'plants-collection', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blocking('collection') },
+    { ...page('/plants/[collection]/[sub]', 'plants-sub', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blocking('collection', 'sub') },
+    { ...page('/plant/[slug]', 'plant', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blocking('slug') },
     page('/inputs', 'inputs'),
-    page('/input/[slug]', 'input', ['default', 'generateMetadata', 'generateStaticParams']),
+    { ...page('/input/[slug]', 'input', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blocking('slug') },
     { path: '/api/catalog/export', module: 'routes/export', kind: 'route', exports: ['GET'] },
   ],
   admin: {

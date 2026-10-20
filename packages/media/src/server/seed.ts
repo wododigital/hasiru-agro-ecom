@@ -2,6 +2,7 @@
 import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
+import { availableParallelism } from 'node:os';
 import { join } from 'node:path';
 import { eq, sql } from 'drizzle-orm';
 import type { SeedContext, SeedResult } from '@ecomkit/core/contracts';
@@ -9,7 +10,7 @@ import { db } from '@ecomkit/core/db';
 import { z } from 'zod';
 import { MEDIA_SOURCES } from '../domain';
 import { mediaAsset } from '../schema';
-import { deriveAsset, findBySha256, uploadFile } from './assets';
+import { findBySha256, uploadFile } from './assets';
 
 const recordSchema = z.object({
   file: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9 _.()-]*(\/[A-Za-z0-9][A-Za-z0-9 _.()-]*)*$/, 'relative path under masters/'),
@@ -21,6 +22,7 @@ const recordSchema = z.object({
   credit_required: z.boolean().optional(),
 });
 const manifestSchema = z.object({ records: z.array(z.unknown()) });
+const SEED_CONCURRENCY = Math.max(1, Math.min(4, availableParallelism() - 1));
 
 /** "products/alphonso-mango-2.webp" -> "Alphonso mango": a usable default until someone writes better alt text. */
 export function altFromFile(file: string): string {
@@ -28,26 +30,29 @@ export function altFromFile(file: string): string {
   return name ? name[0]!.toUpperCase() + name.slice(1).toLowerCase() : '';
 }
 
-/** Idempotent by sha256: a second run inserts and updates nothing. Derivatives are generated inline. */
+/**
+ * Idempotent by sha256: a second run inserts and updates nothing. Seed images are served as their (normalised)
+ * masters: no derivative ladder, so a fresh load takes minutes, not an hour. /media/w/ falls back to the master.
+ */
 export async function importMasters(ctx: SeedContext): Promise<SeedResult> {
   const manifestFile = join(ctx.mediaDir, 'media-manifest.json');
   if (!existsSync(manifestFile)) return { inserted: 0, updated: 0, skipped: 0, notes: ['media-manifest.json not found; nothing imported'] };
   const manifest = manifestSchema.parse(JSON.parse(await readFile(manifestFile, 'utf8')));
   const result = { inserted: 0, updated: 0, skipped: 0, notes: [] as string[] };
 
-  for (const raw of manifest.records) {
+  const importOne = async (raw: unknown): Promise<void> => {
     const parsed = recordSchema.safeParse(raw);
     if (!parsed.success || parsed.data.file.split('/').includes('..')) {
       result.skipped++;
       result.notes.push(`invalid manifest record: ${JSON.stringify(raw).slice(0, 120)}`);
-      continue;
+      return;
     }
     const rec = parsed.data;
     const path = join(ctx.mediaDir, 'masters', rec.file);
     if (!existsSync(path)) {
       result.skipped++;
       result.notes.push(`missing file: masters/${rec.file}`);
-      continue;
+      return;
     }
     const bytes = await readFile(path);
     const hash = createHash('sha256').update(bytes).digest('hex');
@@ -62,15 +67,29 @@ export async function importMasters(ctx: SeedContext): Promise<SeedResult> {
 
     const existing = await findBySha256(hash);
     if (!existing) {
-      if (!ctx.dryRun) await uploadFile({ bytes, originalName: rec.file, meta: { ...meta, alt: altFromFile(rec.file) }, accept: ['image'], derive: 'inline' });
+      if (!ctx.dryRun) await uploadFile({ bytes, originalName: rec.file, meta: { ...meta, alt: altFromFile(rec.file) }, accept: ['image'], derive: 'none' });
       result.inserted++;
-      continue;
+      return;
     }
     const changed = (Object.keys(meta) as (keyof typeof meta)[]).some((k) => existing[k] !== meta[k]);
     if (changed && !ctx.dryRun) await db.update(mediaAsset).set({ ...meta, updatedAt: sql`now()` }).where(eq(mediaAsset.id, existing.id));
-    if (existing.status !== 'ready' && !ctx.dryRun) await deriveAsset(existing.id);
-    if (changed || existing.status !== 'ready') result.updated++;
+    if (changed) result.updated++;
     else result.skipped++;
-  }
+  };
+
+  // A few files at a time: each import is one sharp encode of the master. Records are distinct files (deduped by sha256).
+  const queue = [...manifest.records];
+  const workers = Array.from({ length: Math.min(SEED_CONCURRENCY, queue.length) }, async () => {
+    for (let raw = queue.shift(); raw !== undefined; raw = queue.shift()) {
+      try {
+        await importOne(raw);
+      } catch (err) {
+        // One unreadable master must not stop the other few hundred; it is reported and retried next run.
+        result.skipped++;
+        result.notes.push(`import failed: ${(raw as { file?: string }).file ?? '?'}: ${String(err).slice(0, 160)}`);
+      }
+    }
+  });
+  await Promise.all(workers);
   return result;
 }

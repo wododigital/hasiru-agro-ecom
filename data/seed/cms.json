@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T04:39:25+05:30",
+  "generated_at": "2026-10-20T09:59:01+05:30",
   "sources": [
     "hasiruagro.com (current site copy)",
     "HASIRU AGRO SRS Doc1 (1).pdf",
@@ -640,7 +640,7 @@
       {
         "slug": "policies/cancellation-and-refund",
         "title": "Cancellation and refund policy",
-        "status": "draft",
+        "status": "published",
         "noindex": true,
         "blocks": [
           {
@@ -659,9 +659,17 @@
       {
         "slug": "policies/damage-and-replacement",
         "title": "Damage and replacement policy",
-        "status": "draft",
+        "status": "published",
         "noindex": true,
-        "blocks": [],
+        "blocks": [
+          {
+            "type": "text",
+            "props": {
+              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+            },
+            "sort": 1
+          }
+        ],
         "seo": {
           "title": "Damage and Replacement Policy | Hasiru Agro",
           "description": "Damage and replacement policy."
@@ -670,7 +678,7 @@
       {
         "slug": "policies/delivery",
         "title": "Delivery policy",
-        "status": "draft",
+        "status": "published",
         "noindex": true,
         "blocks": [
           {
@@ -689,9 +697,17 @@
       {
         "slug": "policies/privacy",
         "title": "Privacy policy",
-        "status": "draft",
+        "status": "published",
         "noindex": true,
-        "blocks": [],
+        "blocks": [
+          {
+            "type": "text",
+            "props": {
+              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+            },
+            "sort": 1
+          }
+        ],
         "seo": {
           "title": "Privacy Policy | Hasiru Agro",
           "description": "Privacy policy."
@@ -700,9 +716,17 @@
       {
         "slug": "policies/terms",
         "title": "Terms and conditions",
-        "status": "draft",
+        "status": "published",
         "noindex": true,
-        "blocks": [],
+        "blocks": [
+          {
+            "type": "text",
+            "props": {
+              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+            },
+            "sort": 1
+          }
+        ],
         "seo": {
           "title": "Terms and Conditions | Hasiru Agro",
           "description": "Terms and conditions."
@@ -762,17 +786,17 @@
         "items": [
           {
             "label": "Timber trees",
-            "href": "/plants/timber-trees",
+            "href": "/plants/timber",
             "sort": 1
           },
           {
             "label": "Fruiting trees",
-            "href": "/plants/fruiting-trees",
+            "href": "/plants/fruiting",
             "sort": 2
           },
           {
             "label": "Other plants",
-            "href": "/plants/other-plants",
+            "href": "/plants/other",
             "sort": 3
           },
           {

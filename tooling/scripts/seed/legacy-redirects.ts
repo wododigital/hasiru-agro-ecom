@@ -17,28 +17,28 @@ export interface RedirectRecord {
 }
 
 export const COLLECTION_PATH: Record<string, string> = {
-  timber: '/plants/timber-trees',
-  fruiting: '/plants/fruiting-trees',
-  other: '/plants/other-plants',
+  timber: '/plants/timber',
+  fruiting: '/plants/fruiting',
+  other: '/plants/other',
 };
 /** Sub-collection paths (plan 4.1) by subcategory label. */
 export const SUBCOLLECTION_PATH: Record<string, string> = {
-  Desi: '/plants/fruiting-trees/desi',
-  Exotic: '/plants/fruiting-trees/exotic',
-  'Forest fruit': '/plants/fruiting-trees/forest-fruit',
-  Timber: '/plants/timber-trees',
-  Spices: '/plants/other-plants/spices',
-  Plantation: '/plants/other-plants/plantation',
-  'Native & medicinal': '/plants/other-plants/native-medicinal',
-  'Biomass & support': '/plants/other-plants/biomass-support',
+  Desi: '/plants/fruiting/desi',
+  Exotic: '/plants/fruiting/exotic',
+  'Forest fruit': '/plants/fruiting/forest-fruit',
+  Timber: '/plants/timber',
+  Spices: '/plants/other/spices',
+  Plantation: '/plants/other/plantation',
+  'Native & medicinal': '/plants/other/native-medicinal',
+  'Biomass & support': '/plants/other/biomass-support',
 };
 /** Old Woo product categories (CSV "Categories") -> new collection pages. */
 const OLD_CATEGORIES: Record<string, string> = {
-  'Desi Fruits': '/plants/fruiting-trees/desi',
-  'Exotic fruits': '/plants/fruiting-trees/exotic',
-  Forestry: '/plants/timber-trees',
-  Spices: '/plants/other-plants/spices',
-  Plantation: '/plants/other-plants/plantation',
+  'Desi Fruits': '/plants/fruiting/desi',
+  'Exotic fruits': '/plants/fruiting/exotic',
+  Forestry: '/plants/timber',
+  Spices: '/plants/other/spices',
+  Plantation: '/plants/other/plantation',
 };
 
 export const buildRedirects = once((): RedirectRecord[] => {

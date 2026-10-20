@@ -30,6 +30,9 @@ export const paths = {
   wooProducts: () => join(ROOT, '_work', 'products.json'),
   wooCatalog: () => join(ROOT, '_work', 'catalog.json'),
   imageMap: () => join(ROOT, '_work', 'image-map.json'),
+  /** Committed (WP-13): sourced photos live under data/media/masters/sourced/, their licences in the log. */
+  sourcingLog: () => join(ROOT, 'data', 'media', 'sourcing-log.json'),
+  masters: () => join(ROOT, 'data', 'media', 'masters'),
 };
 
 /** Source labels written into each seed file's `sources` (repo-relative, never absolute). */
@@ -39,6 +42,7 @@ export const SOURCES = {
   catalog: '_work/catalog.json',
   imageMap: '_work/image-map.json',
   images: 'images/',
+  sourcingLog: 'data/media/sourcing-log.json',
   research: 'docs/research/product-data.md (appendix A, as tooling/scripts/seed/data/research-rows.json)',
   handoff: 'HANDOFF.md',
   srs: 'HASIRU AGRO SRS Doc1 (1).pdf',

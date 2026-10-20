@@ -6,7 +6,7 @@ import { join } from 'node:path';
 // @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { cleanLine, cleanText, csvCell, once, paths, readJson, roundBulk, slugify, SOURCES, writeIfChanged, writeSeedFile } from './lib/common';
-import { type MediaRole, registerProductImage, registerSiteImage, wooUrlToPath } from './lib/media-plan';
+import { type MediaRole, registerProductImage, registerSiteImage, registerSourcedImage, wooUrlToPath } from './lib/media-plan';
 import { AGARWOOD_SKU, type Match, matchPlants, SIZE_VARIANT_DEFAULT_LABEL, SIZE_VARIANTS, wooBySku, wooPlants, wooPropagation, type WooRow } from './match-woo';
 import { type Canopy, type Collection, type ModelKey, normalizePlants, type PlantRow, type Propagation, type SizeClass, workbook } from './normalize-plants';
 import { sheetByName } from './lib/xlsx';
@@ -230,11 +230,14 @@ export const wpSlug = (name: string) => slugify(name.replace(/['’]/g, ''));
 const escapeHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const stripTags = (s: string) => cleanText(s.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&'));
 /** Old short descriptions sometimes carry copywriting scaffolding ("Product Title: ...", "Short Description:"). */
-export const wooShort = (raw: string) =>
-  stripTags(raw)
+export const wooShort = (raw: string) => {
+  const text = stripTags(raw)
     .replace(/^Product Title:[^\n]*(\n+[^\n]*?(?=\n\nShort Description:))?/i, '')
     .replace(/^\s*Short Description:\s*/im, '')
     .trim();
+  // catalog caps the short description at 1000 characters; a longer old one is cut at a sentence.
+  return text.length > 1000 ? firstSentences(text, 1000) : text;
+};
 
 /** Woo long description -> HTML: kept when it already is HTML, else paragraphs (sanitised again on import). */
 export function wooHtml(raw: string): string | null {
@@ -361,12 +364,13 @@ interface ImageMapEntry {
 }
 const imageMap = once(() => {
   const m = readJson<{ plants: Record<string, ImageMapEntry> }>(paths.imageMap()).plants;
-  return new Map(Object.values(m).map((e) => [`${cleanLine(e.name)}|${cleanLine(e.variety) ?? ''}`, e]));
+  return new Map(Object.entries(m).map(([key, e]) => [`${cleanLine(e.name)}|${cleanLine(e.variety) ?? ''}`, { ...e, key }]));
 });
 
 const wooSeo = (w: WooRow) => ({
   title: cleanLine(w['Meta: rank_math_title']),
-  description: cleanLine(w['Meta: _yoast_wpseo_metadesc']) ?? cleanLine(w['Meta: rank_math_description']),
+  // catalog caps the meta description at 320 characters (old ones run to 550).
+  description: ((d) => (d ? firstSentences(d, 320) : null))(cleanLine(w['Meta: _yoast_wpseo_metadesc']) ?? cleanLine(w['Meta: rank_math_description'])),
   focus: cleanLine(w['Meta: rank_math_focus_keyword']) ?? cleanLine(w['Meta: _yoast_wpseo_focuskw']),
 });
 
@@ -462,6 +466,12 @@ function clientImages(p: PlantRow, sku: string, exact: WooRow | null, notes: str
       return { src: m.file, alt: r === 'as_delivered' ? `${alt}, as delivered` : alt, w: m.w, h: m.h, role: r };
     });
     if (!exact || im.confidence !== 'high') notes.push(`Photo is from the old listing "${cleanLine(im.csv_name)}" (${im.confidence} confidence); replace photo.`);
+  }
+  // No photo in the backup: the species photo sourced from Wikimedia Commons (licence and author in the media manifest).
+  const photo = !images.length && im ? registerSourcedImage(im.key, sku) : undefined;
+  if (photo) {
+    images.push({ src: photo.file, alt, w: photo.w, h: photo.h, role: 'main' });
+    notes.push(`Species photo from Wikimedia Commons (${photo.credit}); replace photo with a Hasiru one when available.`);
   }
   for (const f of FIELD_PHOTOS.filter((x) => x.match(p))) {
     const m = registerSiteImage(f.file, sku);
@@ -584,7 +594,7 @@ function clientRecord(p: PlantRow, match: Match, flags: PlantListFlag | undefine
       price: priceSource,
       stock: exact ? 'woo' : 'placeholder',
       content: exact ? 'woo' : 'ai_draft',
-      images: images.length ? 'woo' : 'placeholder',
+      images: images[0]?.src.startsWith('sourced/') ? 'wikimedia' : images.length ? 'woo' : 'placeholder',
       seo: seo?.title || seo?.description ? 'woo' : 'derived',
     },
     match: { kind: match.kind, woo_sku: match.woo_sku, confidence: match.confidence },
@@ -789,7 +799,7 @@ export const REVIEW_CSV = 'match-review.csv';
 
 export default async function step(ctx: SeedContext): Promise<void> {
   const { products, reviewCsv } = buildProducts();
-  const wrote = writeSeedFile(join(ctx.seedDir, 'products.json'), [SOURCES.xlsx, SOURCES.woo, SOURCES.catalog, SOURCES.imageMap, SOURCES.research], products, ctx);
+  const wrote = writeSeedFile(join(ctx.seedDir, 'products.json'), [SOURCES.xlsx, SOURCES.woo, SOURCES.catalog, SOURCES.imageMap, SOURCES.sourcingLog, SOURCES.research], products, ctx);
   writeIfChanged(join(ctx.seedDir, REVIEW_CSV), reviewCsv, ctx);
   const by = (s: string) => products.filter((p) => p.data_source === s).length;
   ctx.log.info(`fill-gaps: ${products.length} products (client ${by('client')}, extra ${by('woo_extra')}, legacy drafts ${by('woo_legacy')})${wrote ? '' : ', unchanged'}`);
