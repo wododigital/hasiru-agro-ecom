@@ -17,7 +17,7 @@
     "db:fresh": "tsx tooling/scripts/db-fresh.ts",
     "modules:sync": "tsx tooling/scripts/modules-sync.ts",
     "seed:build": "tsx tooling/scripts/seed/run.ts build",
-    "seed:load": "tsx tooling/scripts/seed/run.ts load",
+    "seed:load": "tsx --conditions=react-server tooling/scripts/seed/run.ts load",
     "cta-coverage": "tsx tooling/scripts/cta-coverage.ts"
   },
   "devDependencies": {
