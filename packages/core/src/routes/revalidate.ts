@@ -6,15 +6,18 @@ import { verifyInternal } from '../http/hmac';
 
 const bodySchema = z.object({ tags: z.array(z.string().regex(TAG_RE)).min(1).max(500), ts: z.number().int() });
 const LOOPBACK = new Set(['127.0.0.1', '::1', 'localhost']);
+/** `next start` fills x-forwarded-for with the socket address itself, so loopback entries are the direct call. */
+const LOOPBACK_IP = /^(127\.\d+\.\d+\.\d+|::1|::ffff:127\.\d+\.\d+\.\d+)$/;
 
 /**
  * POST /api/internal/revalidate: the worker's way to expire cache tags in the web process.
- * Loopback only (nginx always adds x-forwarded-for, so a proxied request is refused), HMAC-signed
+ * Loopback only (nginx always adds X-Real-IP and a client address in x-forwarded-for, so a proxied request is refused), HMAC-signed
  * with the derived `revalidate` key, timestamp within 5 minutes.
  */
 export async function POST(req: Request): Promise<Response> {
   const host = new URL(req.url).hostname.replace(/^\[|\]$/g, '');
-  if (!LOOPBACK.has(host) || req.headers.has('x-forwarded-for') || req.headers.has('x-real-ip')) return new Response(null, { status: 404 });
+  const forwarded = (req.headers.get('x-forwarded-for') ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (!LOOPBACK.has(host) || req.headers.has('x-real-ip') || forwarded.some((ip) => !LOOPBACK_IP.test(ip))) return new Response(null, { status: 404 });
   let raw: Buffer;
   try {
     raw = await readRawBody(req, 64 * 1024);

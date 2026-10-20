@@ -1,5 +1,5 @@
-import { GuideList } from '../ui';
-import { cmsMetadata, cmsRuntime, imagesFor, JsonLdGraph, listPosts } from '../server';
+import { cmsMetadata, GuideList, JsonLdGraph } from '../ui';
+import { cmsRuntime, imagesFor, listPosts } from '../server';
 
 export async function generateMetadata() {
   const m = cmsRuntime().messages.guides;

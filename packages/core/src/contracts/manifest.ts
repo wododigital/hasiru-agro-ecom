@@ -4,6 +4,7 @@ import type { Permission } from './auth';
 import type { Lazy, ModuleId } from './common';
 import type { EventHandler, EventName } from './events';
 import type {
+  AdminTodo,
   CartBlock,
   CheckoutSection,
   DashboardWidget,
@@ -123,6 +124,7 @@ export interface ModuleManifest {
   checkoutSections?: readonly CheckoutSection[];
   dashboardWidgets?: readonly DashboardWidget[];
   reports?: readonly Report[];
+  adminTodos?: readonly AdminTodo[];
   healthChecks?: readonly HealthCheck[];
   sitemapSources?: readonly SitemapSource[];
   seedHooks?: readonly SeedHook[];

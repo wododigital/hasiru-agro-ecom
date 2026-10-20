@@ -8,7 +8,7 @@ import type { Kind } from '../domain/enums';
 import { productFacts } from '../domain/facts';
 import { productJsonLdInput } from '../domain/jsonld';
 import { getProductCardsByIds } from '../server/api';
-import { cachedImages, cachedSettings, pdpCommerce } from '../server/live';
+import { cachedImages, cachedNow, cachedSettings, pdpCommerce } from '../server/live';
 import { getProductBySlug, movedSlug, type ProductDetail } from '../server/queries';
 import { catalogRuntime, optionalService } from '../server/runtime';
 import type { CatalogMessages } from '../messages';
@@ -96,7 +96,7 @@ export async function ProductPage({ slug, kind }: { slug: string; kind: Kind }) 
       availability,
       reviews: aggregate,
       facts,
-      now: rt.now(),
+      now: await cachedNow(),
     });
     if (input) nodes.push(rt.jsonLd.product(input));
     nodes.push(rt.jsonLd.breadcrumbs(crumbs.map((c) => ({ name: c.label, path: c.href ?? path }))));

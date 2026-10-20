@@ -2,10 +2,10 @@ import type { JsonLdNode, MetadataInput } from '@ecomkit/core/contracts';
 import type { Crumb } from '@ecomkit/ui';
 import type { Metadata } from 'next';
 import { pagePath } from '../domain';
-import { PageView } from '../ui/PageView';
-import type { PageWithBlocks } from './pages';
-import { blockJsonLd, resolveBlocks } from './render';
-import { cmsRuntime } from './runtime';
+import { PageView } from './PageView';
+import type { PageWithBlocks } from '../server/pages';
+import { blockJsonLd, resolveBlocks } from '../server/render';
+import { cmsRuntime } from '../server/runtime';
 
 /** Placeholder param when nothing is published yet (Cache Components needs at least one static param). */
 export const NO_PAGE = '__no-page';

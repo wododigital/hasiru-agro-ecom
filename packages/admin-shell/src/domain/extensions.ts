@@ -1,8 +1,8 @@
-import { PERMISSIONS, type ModuleManifest } from '@ecomkit/core/contracts';
+import { PERMISSIONS, type AdminTodo, type ModuleManifest } from '@ecomkit/core/contracts';
 import { z } from 'zod';
 
 /**
- * Three admin extension points the frozen manifest contract does not name yet (requested for core contracts in
+ * Admin extension points read structurally (adminSearch, settingsUrls; adminTodos is in the core contract since the final gate) (requested for core contracts in
  * BUILD-STATUS/wp-08.md). A module adds them as extra manifest keys; admin-shell reads them structurally and
  * validates them with zod here, so a malformed entry is dropped instead of breaking the admin.
  *
@@ -28,16 +28,7 @@ export interface AdminSearchProvider {
   permission: (typeof PERMISSIONS)[number];
   search: () => Promise<(query: string, limit: number) => Promise<AdminSearchHit[]>>;
 }
-export interface AdminTodo {
-  id: string;
-  /** Plural noun phrase after the count, e.g. "orders to dispatch". */
-  label: string;
-  /** The filtered index, e.g. /admin/orders?view=unfulfilled. */
-  href: string;
-  order: number;
-  permission: (typeof PERMISSIONS)[number];
-  count: () => Promise<() => Promise<number>>;
-}
+export type { AdminTodo };
 export interface SettingsUrl {
   label: string;
   /** Path on the canonical host (absolute URLs are shown as they are). */
@@ -85,7 +76,7 @@ export function searchProviders(modules: readonly ModuleManifest[]): (AdminSearc
 
 export function todoProviders(modules: readonly ModuleManifest[]): (AdminTodo & { moduleId: string })[] {
   return modules
-    .flatMap((m) => validList((m as { adminTodos?: unknown }).adminTodos, todoSchema).map((t) => ({ ...t, moduleId: m.id })))
+    .flatMap((m) => validList(m.adminTodos, todoSchema).map((t) => ({ ...t, moduleId: m.id })))
     .sort((a, b) => a.order - b.order);
 }
 

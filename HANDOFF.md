@@ -1,6 +1,6 @@
-# Hasiru Agro: Resume from here (2026-10-20 07:40 IST)
+# Hasiru Agro: Resume from here (2026-10-20 14:10 IST)
 
-Branch `ecom-build` (local, not pushed) holds the full Next.js 16 / @ecomkit store build. Read `docs/FINAL-REPORT.md` first: run commands, what was built, real check numbers, open items. First job on resume: boot wiring in `apps/shop/instrumentation.ts` + `worker.ts` (section 4 of the report); the money path is blocked on it. Status detail: `BUILD-STATUS.md`, `BUILD-STATUS/verify-*.md`. Below is the earlier prototype handoff (branch `prototype-html`), kept for the brand and data decisions.
+Branch `ecom-build` (local, not pushed) holds the full Next.js 16 / @ecomkit store build, verified end to end on a fresh database at the final gate (full smoke 226 pass / 0 fail / 17 skip; money 19/0, jobs 12/0, admin 26/0, routes 169/0). Read `docs/FINAL-REPORT.md` first: run commands (section 1, note `MEDIA_ROOT` must be absolute), what was built, real numbers, open items (section 4: ERP order/lead payloads, marketing CSP in the proxy, `HA` order prefix in Settings > Orders, 200 + noindex on private routes and anonymous admin, home product rails / calculator teasers need cms block types, Playwright and Lighthouse not run). Next job: staging deploy prep per section 9 (Postgres 17 on the VPS needs Shyam's approval). Status detail: `BUILD-STATUS.md` ("Final gate" section), `BUILD-STATUS/wp-32.md`, `wp-33.md`, `verify-*.md`. Below is the earlier prototype handoff (branch `prototype-html`), kept for the brand and data decisions.
 
 ---
 

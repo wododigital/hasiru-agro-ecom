@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { isPolicySlug } from '../domain';
-import { CmsPageBody, cmsRuntime, getPage, NO_PAGE, pageMetadataFor, publishedPages } from '../server';
+import { cmsRuntime, getPage, publishedPages } from '../server';
+import { CmsPageBody, NO_PAGE, pageMetadataFor } from '../ui';
 
 type Props = { params: Promise<{ slug: string[] }> };
 /** Pages with their own routes (about, contact, policies) are not served by the catch-all. */

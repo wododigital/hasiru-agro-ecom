@@ -59,7 +59,8 @@ export async function startWorker(registry: Registry, options: WorkerOptions = {
     const jobLog = createLogger(job.name, { module: job.moduleId });
     await boss.work<object>(job.name, polling, async (batch) => {
       handler ??= (await job.def.handler()) as JobHandler<unknown>;
-      for (const j of batch) await handler(j.data, { jobId: j.id, queue: job.name, attempt: j.retryCount + 1, log: jobLog });
+      // a scheduled run carries no payload (pg-boss stores null): handlers read an empty object, not null
+      for (const j of batch) await handler(j.data ?? {}, { jobId: j.id, queue: job.name, attempt: j.retryCount + 1, log: jobLog });
     });
   }
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T09:59:01+05:30",
+  "generated_at": "2026-10-20T11:42:07+05:30",
   "sources": [
     "hasiruagro.com (current site copy)",
     "HASIRU AGRO SRS Doc1 (1).pdf",
@@ -15,59 +15,31 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Born from the soil, built for the future",
-              "text": "We are a team of agronomists, engineers and nature lovers on a mission to make every farm in India a self-sustaining ecosystem."
+              "subheading": "We are a team of agronomists, engineers and nature lovers on a mission to make every farm in India a self-sustaining ecosystem."
             },
             "sort": 1
           },
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "heading": "Our vision",
-              "body": "A self-sustaining farm on every piece of land: the land feeds the farmer, the farmer nurtures the land, and together they create abundance that lasts generations."
+              "html": "<h2>Our vision</h2><p>A self-sustaining farm on every piece of land: the land feeds the farmer, the farmer nurtures the land, and together they create abundance that lasts generations.</p>"
             },
             "sort": 2
           },
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "heading": "Our mission",
-              "body": "To combine satellite technology, permaculture science and hands-on execution to turn any piece of land into a thriving, productive, self-sustaining farm. We handle everything from design to management."
+              "html": "<h2>Our mission</h2><p>To combine satellite technology, permaculture science and hands-on execution to turn any piece of land into a thriving, productive, self-sustaining farm. We handle everything from design to management.</p>"
             },
             "sort": 3
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "heading": "Our values",
-              "items": [
-                {
-                  "title": "Nature first",
-                  "text": "Every decision starts with what is best for the ecosystem. Zero chemicals, always."
-                },
-                {
-                  "title": "Radical transparency",
-                  "text": "Every visit documented, every rupee accounted for, every decision explained."
-                },
-                {
-                  "title": "Science over guesswork",
-                  "text": "Satellite data, contour maps and soil analysis: we design with data."
-                },
-                {
-                  "title": "Complete ownership",
-                  "text": "We execute, manage and take full responsibility for your farm."
-                },
-                {
-                  "title": "Community impact",
-                  "text": "Local employment, skills for rural youth and degraded land restored."
-                },
-                {
-                  "title": "Long-term thinking",
-                  "text": "We design for decades: every farm is a 30-year asset."
-                }
-              ]
+              "html": "<h2>Our values</h2><ul><li><strong>Nature first</strong>: Every decision starts with what is best for the ecosystem. Zero chemicals, always.</li><li><strong>Radical transparency</strong>: Every visit documented, every rupee accounted for, every decision explained.</li><li><strong>Science over guesswork</strong>: Satellite data, contour maps and soil analysis: we design with data.</li><li><strong>Complete ownership</strong>: We execute, manage and take full responsibility for your farm.</li><li><strong>Community impact</strong>: Local employment, skills for rural youth and degraded land restored.</li><li><strong>Long-term thinking</strong>: We design for decades: every farm is a 30-year asset.</li></ul>"
             },
             "sort": 4
           },
@@ -77,7 +49,7 @@
             "sort": 5
           },
           {
-            "type": "trust_marquee",
+            "type": "trust_band",
             "props": {},
             "sort": 6
           }
@@ -94,18 +66,18 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "contact",
+            "type": "rich_text",
             "props": {
-              "phone": "+91 81051 00749",
-              "email": "contact@hasiruagro.com",
-              "address": "Near Komghatta Lake, Tavarekere Main Road, Kengeri, Bangalore 560060",
-              "hours": "Monday to Sunday, 9:30 AM to 5:30 PM"
+              "html": "<p><a href=\"tel:+918105100749\">+91 81051 00749</a></p><p><a href=\"mailto:contact@hasiruagro.com\">contact@hasiruagro.com</a></p><p>Near Komghatta Lake, Tavarekere Main Road, Kengeri, Bangalore 560060</p><p>Monday to Sunday, 9:30 AM to 5:30 PM</p>"
             },
             "sort": 1
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 2
@@ -123,51 +95,46 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "From barren land to living farm",
-              "text": "We take your land through five steps and manage it until it sustains itself.",
+              "subheading": "We take your land through five steps and manage it until it sustains itself.",
               "image": "site/transformation_young_saplings_field_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "process_steps",
+            "type": "rail",
             "props": {
-              "steps": [
+              "items": [
                 {
-                  "step": 1,
-                  "title": "Site assessment",
-                  "text": "Soil, water and climate study on your land.",
+                  "title": "Step 1: Site assessment",
                   "href": "/farm-development/site-assessment",
+                  "caption": "Soil, water and climate study on your land.",
                   "image": "site/process_site_assessment_field_survey_hasiru_agro.webp"
                 },
                 {
-                  "step": 2,
-                  "title": "Satellite mapping",
-                  "text": "NDVI and contour maps of every part of the land.",
+                  "title": "Step 2: Satellite mapping",
                   "href": "/farm-development/design",
+                  "caption": "NDVI and contour maps of every part of the land.",
                   "image": "site/process_satellite_topographical_map_hasiru_agro.webp"
                 },
                 {
-                  "step": 3,
-                  "title": "Earthwork",
-                  "text": "Swales, basins and irrigation laid along the contours.",
+                  "title": "Step 3: Earthwork",
                   "href": "/farm-development/earthwork",
+                  "caption": "Swales, basins and irrigation laid along the contours.",
                   "image": "site/process_earthwork_aerial_swales_basin_hasiru_agro.webp"
                 },
                 {
-                  "step": 4,
-                  "title": "Planting",
-                  "text": "200+ varieties planted in layers.",
+                  "title": "Step 4: Planting",
                   "href": "/farm-development/planting",
+                  "caption": "200+ varieties planted in layers.",
                   "image": "site/process_planting_coconut_sapling_hasiru_agro.webp"
                 },
                 {
-                  "step": 5,
-                  "title": "Management",
-                  "text": "Ongoing care through to harvest.",
+                  "title": "Step 5: Management",
                   "href": "/farm-development",
+                  "caption": "Ongoing care through to harvest.",
                   "image": "site/process_harvest_jackfruit_farmer_hasiru_agro.webp"
                 }
               ]
@@ -175,53 +142,18 @@
             "sort": 2
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "heading": "Farm management, every season",
-              "items": [
-                {
-                  "title": "Weed management"
-                },
-                {
-                  "title": "Fertigation"
-                },
-                {
-                  "title": "Natural pest management"
-                },
-                {
-                  "title": "Pruning and training"
-                },
-                {
-                  "title": "Composting"
-                },
-                {
-                  "title": "Mulching"
-                },
-                {
-                  "title": "Soil building"
-                },
-                {
-                  "title": "Irrigation checks"
-                },
-                {
-                  "title": "Harvest coordination"
-                },
-                {
-                  "title": "Replanting"
-                },
-                {
-                  "title": "Documentation"
-                },
-                {
-                  "title": "Seasonal planning"
-                }
-              ]
+              "html": "<h2>Farm management, every season</h2><ul><li><strong>Weed management</strong></li><li><strong>Fertigation</strong></li><li><strong>Natural pest management</strong></li><li><strong>Pruning and training</strong></li><li><strong>Composting</strong></li><li><strong>Mulching</strong></li><li><strong>Soil building</strong></li><li><strong>Irrigation checks</strong></li><li><strong>Harvest coordination</strong></li><li><strong>Replanting</strong></li><li><strong>Documentation</strong></li><li><strong>Seasonal planning</strong></li></ul>"
             },
             "sort": 3
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 4
@@ -239,41 +171,27 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Farm design",
-              "text": "Satellite imagery, NDVI analysis and contour maps turn into a complete layout: every swale, bund, tree row and planting zone placed along the natural contour.",
+              "subheading": "Satellite imagery, NDVI analysis and contour maps turn into a complete layout: every swale, bund, tree row and planting zone placed along the natural contour.",
               "image": "site/design_farm_blueprint_zonal_plan_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "NDVI vegetation analysis",
-                  "text": "Colour-coded maps of plant health, bare spots and biological activity."
-                },
-                {
-                  "title": "Elevation and slope mapping",
-                  "text": "Topographic data down to 30 cm changes in elevation."
-                },
-                {
-                  "title": "Keyline design",
-                  "text": "Swales and bunds on the keylines to hold the most moisture."
-                },
-                {
-                  "title": "Zonal planting plan",
-                  "text": "Fruit, timber, spice and forest zones placed by sun, wind and water access."
-                }
-              ]
+              "html": "<ul><li><strong>NDVI vegetation analysis</strong>: Colour-coded maps of plant health, bare spots and biological activity.</li><li><strong>Elevation and slope mapping</strong>: Topographic data down to 30 cm changes in elevation.</li><li><strong>Keyline design</strong>: Swales and bunds on the keylines to hold the most moisture.</li><li><strong>Zonal planting plan</strong>: Fruit, timber, spice and forest zones placed by sun, wind and water access.</li></ul>"
             },
             "sort": 2
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 3
@@ -291,37 +209,27 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Earthwork and land preparation",
-              "text": "Swales to harvest rainwater, basins for moisture, ponds for the microclimate and terraces for slopes. Every cubic foot of earth moved has an ecological purpose.",
+              "subheading": "Swales to harvest rainwater, basins for moisture, ponds for the microclimate and terraces for slopes. Every cubic foot of earth moved has an ecological purpose.",
               "image": "site/earthwork_swale_trench_digging_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "Bio-swales and basins",
-                  "text": "Structures that slow, sink and spread water across the contour lines."
-                },
-                {
-                  "title": "Ponds",
-                  "text": "Water storage that also cools the microclimate."
-                },
-                {
-                  "title": "Boundary and wind breaks",
-                  "text": "Tabebuia, Pongamia, bamboo and mahogany as natural boundaries."
-                }
-              ]
+              "html": "<ul><li><strong>Bio-swales and basins</strong>: Structures that slow, sink and spread water across the contour lines.</li><li><strong>Ponds</strong>: Water storage that also cools the microclimate.</li><li><strong>Boundary and wind breaks</strong>: Tabebuia, Pongamia, bamboo and mahogany as natural boundaries.</li></ul>"
             },
             "sort": 2
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 3
@@ -339,45 +247,27 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Planting",
-              "text": "Multi-layer planting from our own nursery: boundary trees, green manure, quick-yield crops, fruit trees and timber, each in the right zone.",
+              "subheading": "Multi-layer planting from our own nursery: boundary trees, green manure, quick-yield crops, fruit trees and timber, each in the right zone.",
               "image": "site/planting_team_drip_line_execution_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "Boundary plantation",
-                  "text": "Tabebuia, Pongamia, wild badam, bamboo and mahogany for wind breaks and privacy."
-                },
-                {
-                  "title": "Green manure",
-                  "text": "Sesbania, Gliricidia, Moringa, Vetiver and Lemongrass for organic matter."
-                },
-                {
-                  "title": "Short-term yield",
-                  "text": "Lemon, banana, papaya, pineapple and mulberry for early returns."
-                },
-                {
-                  "title": "Fruiting plants",
-                  "text": "Jackfruit, avocado, litchi, orange and musambi."
-                },
-                {
-                  "title": "Timber trees",
-                  "text": "Mahogany, sandalwood, red sandal and rosewood as a long-term asset."
-                }
-              ]
+              "html": "<ul><li><strong>Boundary plantation</strong>: Tabebuia, Pongamia, wild badam, bamboo and mahogany for wind breaks and privacy.</li><li><strong>Green manure</strong>: Sesbania, Gliricidia, Moringa, Vetiver and Lemongrass for organic matter.</li><li><strong>Short-term yield</strong>: Lemon, banana, papaya, pineapple and mulberry for early returns.</li><li><strong>Fruiting plants</strong>: Jackfruit, avocado, litchi, orange and musambi.</li><li><strong>Timber trees</strong>: Mahogany, sandalwood, red sandal and rosewood as a long-term asset.</li></ul>"
             },
             "sort": 2
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 3
@@ -395,37 +285,27 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Site assessment",
-              "text": "Our agronomists walk your land and study soil texture, water sources, slope and microclimate. Everything else is built on this.",
+              "subheading": "Our agronomists walk your land and study soil texture, water sources, slope and microclimate. Everything else is built on this.",
               "image": "site/site_analysis_soil_testing_sample_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "Soil analysis",
-                  "text": "Samples from several points for pH, organic matter, nutrients and microbial activity."
-                },
-                {
-                  "title": "Water source mapping",
-                  "text": "Borewells, springs, seasonal streams and the rainfall pattern."
-                },
-                {
-                  "title": "Microclimate study",
-                  "text": "Sun exposure, wind, frost pockets and shade across the seasons."
-                }
-              ]
+              "html": "<ul><li><strong>Soil analysis</strong>: Samples from several points for pH, organic matter, nutrients and microbial activity.</li><li><strong>Water source mapping</strong>: Borewells, springs, seasonal streams and the rainfall pattern.</li><li><strong>Microclimate study</strong>: Sun exposure, wind, frost pockets and shade across the seasons.</li></ul>"
             },
             "sort": 2
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 3
@@ -443,41 +323,27 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "page_hero",
+            "type": "hero",
             "props": {
               "heading": "Water management",
-              "text": "Rainwater is slowed, sunk and spread across the land, so the farm handles both drought and heavy rain by design.",
+              "subheading": "Rainwater is slowed, sunk and spread across the land, so the farm handles both drought and heavy rain by design.",
               "image": "site/water_harvesting_pond_excavation_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "feature_list",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "Bio-swales",
-                  "text": "Rainwater harvesting structures along the contour lines."
-                },
-                {
-                  "title": "Basins",
-                  "text": "Hold moisture at the root zone of each plant."
-                },
-                {
-                  "title": "Drip irrigation",
-                  "text": "Water delivered by zone, with nothing wasted."
-                },
-                {
-                  "title": "Fertigation setup",
-                  "text": "Drum, venturi and shade structure for mixing nutrients into the drip."
-                }
-              ]
+              "html": "<ul><li><strong>Bio-swales</strong>: Rainwater harvesting structures along the contour lines.</li><li><strong>Basins</strong>: Hold moisture at the root zone of each plant.</li><li><strong>Drip irrigation</strong>: Water delivered by zone, with nothing wasted.</li><li><strong>Fertigation setup</strong>: Drum, venturi and shade structure for mixing nutrients into the drip.</li></ul>"
             },
             "sort": 2
           },
           {
-            "type": "enquiry_cta",
+            "type": "cta",
             "props": {
+              "heading": "Build your farm with us",
+              "body": "Share a few details about your land. Our team calls you within one working day to plan a site visit.",
+              "label": "Tell us about your land",
               "href": "/build-farm-with-us"
             },
             "sort": 3
@@ -495,141 +361,69 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "hero",
+            "type": "rich_text",
             "props": {
-              "image": "site/hero_farm_transformation_hasiru_agro.webp",
-              "paths": [
-                {
-                  "id": "shop",
-                  "href": "/plants"
-                },
-                {
-                  "id": "plan",
-                  "href": "/plan"
-                }
-              ]
+              "html": "<h2>Why choose us</h2><ul><li><strong>Intelligent farm design</strong>: Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow.</li><li><strong>200+ native varieties</strong>: Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised.</li><li><strong>Full-time farm team</strong>: Trained agronomists and field staff, not freelancers. Every visit is documented.</li><li><strong>Radical transparency</strong>: Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm.</li><li><strong>30-year vision</strong>: Every tree placement plans for its 30-year canopy, shade and yield cycle.</li></ul>"
             },
             "sort": 1
           },
           {
-            "type": "product_rail",
+            "type": "video",
             "props": {
-              "source": "best_sellers",
-              "limit": 12
+              "limit": 6
             },
             "sort": 2
-          },
-          {
-            "type": "plant_calculator",
-            "props": {},
-            "sort": 3
-          },
-          {
-            "type": "product_rail",
-            "props": {
-              "source": "inputs",
-              "limit": 8
-            },
-            "sort": 4
-          },
-          {
-            "type": "compost_calculator",
-            "props": {
-              "image": "site/mulching_sapling_with_organic_matter_hasiru_agro.webp"
-            },
-            "sort": 5
-          },
-          {
-            "type": "why_choose_us",
-            "props": {
-              "items": [
-                {
-                  "title": "Intelligent farm design",
-                  "text": "Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow."
-                },
-                {
-                  "title": "200+ native varieties",
-                  "text": "Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised."
-                },
-                {
-                  "title": "Full-time farm team",
-                  "text": "Trained agronomists and field staff, not freelancers. Every visit is documented."
-                },
-                {
-                  "title": "Radical transparency",
-                  "text": "Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm."
-                },
-                {
-                  "title": "30-year vision",
-                  "text": "Every tree placement plans for its 30-year canopy, shade and yield cycle."
-                }
-              ]
-            },
-            "sort": 6
-          },
-          {
-            "type": "video_rail",
-            "props": {
-              "source": "videos"
-            },
-            "sort": 7
           },
           {
             "type": "testimonials",
             "props": {
               "limit": 3
             },
-            "sort": 8
+            "sort": 3
           },
           {
-            "type": "trust_marquee",
+            "type": "trust_band",
             "props": {},
-            "sort": 9
+            "sort": 4
           },
           {
-            "type": "farm_development_teaser",
+            "type": "rail",
             "props": {
-              "image": "site/service_farm_setup_design_hasiru_agro.webp",
-              "href": "/farm-development",
-              "steps": [
+              "heading": "Farm development",
+              "items": [
                 {
-                  "step": 1,
-                  "title": "Site assessment",
-                  "text": "Soil, water and climate study on your land.",
+                  "title": "Step 1: Site assessment",
                   "href": "/farm-development/site-assessment",
+                  "caption": "Soil, water and climate study on your land.",
                   "image": "site/process_site_assessment_field_survey_hasiru_agro.webp"
                 },
                 {
-                  "step": 2,
-                  "title": "Satellite mapping",
-                  "text": "NDVI and contour maps of every part of the land.",
+                  "title": "Step 2: Satellite mapping",
                   "href": "/farm-development/design",
+                  "caption": "NDVI and contour maps of every part of the land.",
                   "image": "site/process_satellite_topographical_map_hasiru_agro.webp"
                 },
                 {
-                  "step": 3,
-                  "title": "Earthwork",
-                  "text": "Swales, basins and irrigation laid along the contours.",
+                  "title": "Step 3: Earthwork",
                   "href": "/farm-development/earthwork",
+                  "caption": "Swales, basins and irrigation laid along the contours.",
                   "image": "site/process_earthwork_aerial_swales_basin_hasiru_agro.webp"
                 },
                 {
-                  "step": 4,
-                  "title": "Planting",
-                  "text": "200+ varieties planted in layers.",
+                  "title": "Step 4: Planting",
                   "href": "/farm-development/planting",
+                  "caption": "200+ varieties planted in layers.",
                   "image": "site/process_planting_coconut_sapling_hasiru_agro.webp"
                 },
                 {
-                  "step": 5,
-                  "title": "Management",
-                  "text": "Ongoing care through to harvest.",
+                  "title": "Step 5: Management",
                   "href": "/farm-development",
+                  "caption": "Ongoing care through to harvest.",
                   "image": "site/process_harvest_jackfruit_farmer_hasiru_agro.webp"
                 }
               ]
             },
-            "sort": 10
+            "sort": 5
           }
         ],
         "seo": {
@@ -644,9 +438,9 @@
         "noindex": true,
         "blocks": [
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "body": "Cancellation or return of an order is not allowed."
+              "html": "<p>Cancellation or return of an order is not allowed.</p>"
             },
             "sort": 1
           }
@@ -663,9 +457,9 @@
         "noindex": true,
         "blocks": [
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+              "html": "<p>The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.</p>"
             },
             "sort": 1
           }
@@ -682,9 +476,9 @@
         "noindex": true,
         "blocks": [
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "body": "Customers can choose nursery pickup or delivery. Within Bengaluru, deliveries are planned on a scheduled basis, once a week. Outstation transportation is calculated separately and considers distance and weight. Packing charges are calculated separately."
+              "html": "<p>Customers can choose nursery pickup or delivery. Within Bengaluru, deliveries are planned on a scheduled basis, once a week. Outstation transportation is calculated separately and considers distance and weight. Packing charges are calculated separately.</p>"
             },
             "sort": 1
           }
@@ -701,9 +495,9 @@
         "noindex": true,
         "blocks": [
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+              "html": "<p>The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.</p>"
             },
             "sort": 1
           }
@@ -720,9 +514,9 @@
         "noindex": true,
         "blocks": [
           {
-            "type": "text",
+            "type": "rich_text",
             "props": {
-              "body": "The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com."
+              "html": "<p>The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.</p>"
             },
             "sort": 1
           }
@@ -739,30 +533,9 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "why_choose_us",
+            "type": "rich_text",
             "props": {
-              "items": [
-                {
-                  "title": "Intelligent farm design",
-                  "text": "Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow."
-                },
-                {
-                  "title": "200+ native varieties",
-                  "text": "Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised."
-                },
-                {
-                  "title": "Full-time farm team",
-                  "text": "Trained agronomists and field staff, not freelancers. Every visit is documented."
-                },
-                {
-                  "title": "Radical transparency",
-                  "text": "Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm."
-                },
-                {
-                  "title": "30-year vision",
-                  "text": "Every tree placement plans for its 30-year canopy, shade and yield cycle."
-                }
-              ]
+              "html": "<ul><li><strong>Intelligent farm design</strong>: Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow.</li><li><strong>200+ native varieties</strong>: Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised.</li><li><strong>Full-time farm team</strong>: Trained agronomists and field staff, not freelancers. Every visit is documented.</li><li><strong>Radical transparency</strong>: Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm.</li><li><strong>30-year vision</strong>: Every tree placement plans for its 30-year canopy, shade and yield cycle.</li></ul>"
             },
             "sort": 1
           },

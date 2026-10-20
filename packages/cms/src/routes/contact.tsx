@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
-import { CmsPageBody, getPage, pageMetadataFor } from '../server';
+import { getPage } from '../server';
+import { CmsPageBody, pageMetadataFor } from '../ui';
 
 export async function generateMetadata() {
   return pageMetadataFor(await getPage('contact'));

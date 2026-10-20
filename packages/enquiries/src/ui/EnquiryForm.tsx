@@ -1,5 +1,6 @@
 import { Button, FormField, Input, Select, Textarea } from '@ecomkit/ui';
 import { formGuards } from '@ecomkit/core/validation';
+import { connection } from 'next/server';
 import { ATTACHMENT_LIMITS, ENQUIRY_CUSTOMER_TYPES, UTM_KEYS, type EnquiryKind } from '../domain';
 import { enquiriesMessages, type EnquiriesMessages, type EnquiryOutcomeKey } from '../messages';
 
@@ -23,7 +24,8 @@ const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v
  * The public enquiry form: a plain multipart POST to /api/enquiry that works without JavaScript, with a
  * honeypot and a signed time token. Render it dynamically (the time token is issued per request).
  */
-export function EnquiryForm({ kind = 'farm_development', returnTo, searchParams = {}, landFields, uploads = true, messages = enquiriesMessages, className }: EnquiryFormProps) {
+export async function EnquiryForm({ kind = 'farm_development', returnTo, searchParams = {}, landFields, uploads = true, messages = enquiriesMessages, className }: EnquiryFormProps) {
+  await connection(); // the time token is issued per request, so this part of the page is never prerendered
   const m = messages.form;
   const showLand = landFields ?? kind === 'farm_development';
   const outcome = first(searchParams.enquiry) as EnquiryOutcomeKey | undefined;

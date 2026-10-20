@@ -25,6 +25,7 @@ import {
   variantsOf,
 } from '@ecomkit/catalog/server';
 import { checkoutContact, configureCheckout } from '@ecomkit/checkout/server';
+import { configureCms, videosFor } from '@ecomkit/cms/server';
 import { setAuthProvider } from '@ecomkit/core/auth-context';
 import { loadEnv } from '@ecomkit/core/env';
 import { getSettings } from '@ecomkit/core/settings';
@@ -78,12 +79,9 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
   const env = loadEnv();
   const site = env.SITE_URL ?? 'http://localhost:3000';
   const m = messages;
-  // auth, seo and cms server code needs Next's server React build: bound only inside the Next server process.
-  // The worker and seed:load run no page rendering, OTP or redirects, so they skip these three.
-  const [auth, seo, cms] =
-    process.env.NEXT_RUNTIME === 'nodejs'
-      ? await Promise.all([import('@ecomkit/auth/server'), import('@ecomkit/seo/server'), import('@ecomkit/cms/server')])
-      : [null, null, null];
+  // auth and seo server code needs Next's server React build: bound only inside the Next server process.
+  // The worker and seed:load run no page rendering, OTP or redirects, so they skip these two.
+  const [auth, seo] = process.env.NEXT_RUNTIME === 'nodejs' ? await Promise.all([import('@ecomkit/auth/server'), import('@ecomkit/seo/server')]) : [null, null];
 
   // core + auth
   setAuthProvider(() => registry.service('auth'));
@@ -119,8 +117,8 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
     }));
   });
 
-  // seo + cms (web only)
-  if (seo && cms) {
+  // seo (web only)
+  if (seo) {
     seo.configureSeo({
       site: {
         url: site,
@@ -154,14 +152,13 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
         { label: m.shell.notFound.browse, href: '/plants' },
       ],
     });
-    cms.configureCms({
-      images: imageRefs,
-      metadata: seo.buildMetadata,
-      jsonLd: seo.jsonLd,
-      onMissing: seo.resolveMissing,
-      addRedirect: seo.addRedirect,
-    });
   }
+  // cms: every process (seed:load links block images, team photos and logos to media); the seo hooks only on the web.
+  configureCms({
+    images: imageRefs,
+    resolveMediaIds: options.mediaDir ? (srcs) => masterAssetIds(srcs, options.mediaDir!) : null,
+    ...(seo ? { metadata: seo.buildMetadata, jsonLd: seo.jsonLd, onMissing: seo.resolveMissing, addRedirect: seo.addRedirect } : {}),
+  });
 
   // customers-side ports
   configureEnquiries({ contacts: contactPort, files: privateStore });
@@ -388,14 +385,12 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
         ),
     },
     otp: auth ? { send: auth.sendOtp, verify: auth.verifyOtp } : null,
-    videos: cms
-      ? async (slug) =>
-          (await cms.videosFor({ modelSlug: slug })).map((v) => ({
-            id: v.id,
-            title: v.title,
-            url: v.url,
-          }))
-      : null,
+    videos: async (slug) =>
+      (await videosFor({ modelSlug: slug })).map((v) => ({
+        id: v.id,
+        title: v.title,
+        url: v.url,
+      })),
   });
   configureFarmCalculators({
     registry,

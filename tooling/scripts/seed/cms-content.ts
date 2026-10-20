@@ -34,8 +34,27 @@ const blocks = (...b: [string, Record<string, unknown>][]): Block[] => b.map(([t
 const page = (slug: string, title: string, seoTitle: string, description: string, b: Block[], noindex = false): Page => ({
   slug, title, status: 'published', noindex, blocks: b, seo: { title: seoTitle, description },
 });
+// Blocks use the cms module's vocabulary (packages/cms/src/domain/blocks.ts): hero, rich_text, cta, rail, video,
+// trust_band, testimonials, team. Images are master paths; the cms seed hook turns them into media ids.
+type B = [string, Record<string, unknown>];
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/** `rich_text`: optional heading, paragraphs (plain text, or ready html when it starts with `<`) and titled points. */
+const richText = (heading: string | null, paras: string[], points: { title: string; text?: string }[] = []): B => [
+  'rich_text',
+  {
+    html: [
+      heading ? `<h2>${esc(heading)}</h2>` : '',
+      ...paras.map((t) => (t.startsWith('<') ? t : `<p>${esc(t)}</p>`)),
+      points.length ? `<ul>${points.map((pt) => `<li><strong>${esc(pt.title)}</strong>${pt.text ? `: ${esc(pt.text)}` : ''}</li>`).join('')}</ul>` : '',
+    ].join(''),
+  },
+];
+/** `rail` of the five farm development steps. */
+const processRail = (heading?: string): B => ['rail', { ...(heading ? { heading } : {}), items: PROCESS.map((st) => ({ title: `Step ${st.step}: ${st.title}`, href: st.href, caption: st.text, image: img(st.image) })) }];
+/** `cta` to the farm development enquiry; the copy is the /build-farm-with-us page's own. */
+const ENQUIRY_CTA: B = ['cta', { heading: 'Build your farm with us', body: 'Share a few details about your land. Our team calls you within one working day to plan a site visit.', label: 'Tell us about your land', href: '/build-farm-with-us' }];
 /** Body for a policy page the SRS has no text for yet. */
-const PENDING_POLICY = blocks(['text', { body: 'The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.' }]);
+const PENDING_POLICY = blocks(richText(null, ['The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.']));
 
 const PROCESS = [
   { step: 1, title: 'Site assessment', text: 'Soil, water and climate study on your land.', image: 'process_site_assessment_field_survey_hasiru_agro.webp', href: '/farm-development/site-assessment' },
@@ -113,74 +132,65 @@ const SERVICES: { slug: string; title: string; intro: string; points: { title: s
 export const buildCms = once(() => {
   const pages: Page[] = [
     page('home', 'Home', 'Plants, Saplings and Farm Development in Bengaluru | Hasiru Agro', 'Fruit, timber and native saplings from our Bengaluru nursery, with farm design and management for landowners across South India.', blocks(
-      ['hero', { image: img('hero_farm_transformation_hasiru_agro.webp'), paths: [{ id: 'shop', href: '/plants' }, { id: 'plan', href: '/plan' }] }],
-      ['product_rail', { source: 'best_sellers', limit: 12 }],
-      ['plant_calculator', {}],
-      ['product_rail', { source: 'inputs', limit: 8 }],
-      ['compost_calculator', { image: img('mulching_sapling_with_organic_matter_hasiru_agro.webp') }],
-      ['why_choose_us', { items: WHY }],
-      ['video_rail', { source: 'videos' }],
+      // The home hero is the app's own (two paths: shop or wizard). Product rails and the calculator teasers need
+      // cms block types that call catalog and farm-calculators; until then the home shows the content blocks below.
+      richText('Why choose us', [], WHY),
+      ['video', { limit: 6 }],
       ['testimonials', { limit: 3 }],
-      ['trust_marquee', {}],
-      ['farm_development_teaser', { image: img('service_farm_setup_design_hasiru_agro.webp'), href: '/farm-development', steps: PROCESS.map(({ image, ...s }) => ({ ...s, image: img(image) })) }],
+      ['trust_band', {}],
+      processRail('Farm development'),
     )),
     page('farm-development', 'Farm development', 'Farm Design, Setup and Management | Hasiru Agro', 'From barren land to a living farm: site assessment, satellite mapping, earthwork, planting and ongoing management by our own team.', blocks(
-      ['page_hero', { heading: 'From barren land to living farm', text: 'We take your land through five steps and manage it until it sustains itself.', image: img('transformation_young_saplings_field_hasiru_agro.webp') }],
-      ['process_steps', { steps: PROCESS.map(({ image, ...s }) => ({ ...s, image: img(image) })) }],
-      ['feature_list', {
-        heading: 'Farm management, every season',
-        items: [
-          'Weed management', 'Fertigation', 'Natural pest management', 'Pruning and training', 'Composting', 'Mulching', 'Soil building',
-          'Irrigation checks', 'Harvest coordination', 'Replanting', 'Documentation', 'Seasonal planning',
-        ].map((title) => ({ title })),
-      }],
-      ['enquiry_cta', { href: '/build-farm-with-us' }],
+      ['hero', { heading: 'From barren land to living farm', subheading: 'We take your land through five steps and manage it until it sustains itself.', image: img('transformation_young_saplings_field_hasiru_agro.webp') }],
+      processRail(),
+      richText('Farm management, every season', [], [
+        'Weed management', 'Fertigation', 'Natural pest management', 'Pruning and training', 'Composting', 'Mulching', 'Soil building',
+        'Irrigation checks', 'Harvest coordination', 'Replanting', 'Documentation', 'Seasonal planning',
+      ].map((title) => ({ title }))),
+      ENQUIRY_CTA,
     )),
     ...SERVICES.map((s) =>
       page(`farm-development/${s.slug}`, s.title, `${s.title} | Hasiru Agro Farm Development`, s.intro.split('. ')[0]!.replace(/\.?$/, '.'), blocks(
-        ['page_hero', { heading: s.title, text: s.intro, image: img(s.image) }],
-        ['feature_list', { items: s.points }],
-        ['enquiry_cta', { href: '/build-farm-with-us' }],
+        ['hero', { heading: s.title, subheading: s.intro, image: img(s.image) }],
+        richText(null, [], s.points),
+        ENQUIRY_CTA,
       )),
     ),
     page('about', 'About us', 'About Hasiru Agro | Our Mission, Team and Values', 'A team of agronomists, engineers and nature lovers making every farm a self-sustaining ecosystem.', blocks(
-      ['page_hero', { heading: 'Born from the soil, built for the future', text: 'We are a team of agronomists, engineers and nature lovers on a mission to make every farm in India a self-sustaining ecosystem.' }],
-      ['text', { heading: 'Our vision', body: 'A self-sustaining farm on every piece of land: the land feeds the farmer, the farmer nurtures the land, and together they create abundance that lasts generations.' }],
-      ['text', { heading: 'Our mission', body: 'To combine satellite technology, permaculture science and hands-on execution to turn any piece of land into a thriving, productive, self-sustaining farm. We handle everything from design to management.' }],
-      ['feature_list', {
-        heading: 'Our values',
-        items: [
-          { title: 'Nature first', text: 'Every decision starts with what is best for the ecosystem. Zero chemicals, always.' },
-          { title: 'Radical transparency', text: 'Every visit documented, every rupee accounted for, every decision explained.' },
-          { title: 'Science over guesswork', text: 'Satellite data, contour maps and soil analysis: we design with data.' },
-          { title: 'Complete ownership', text: 'We execute, manage and take full responsibility for your farm.' },
-          { title: 'Community impact', text: 'Local employment, skills for rural youth and degraded land restored.' },
-          { title: 'Long-term thinking', text: 'We design for decades: every farm is a 30-year asset.' },
-        ],
-      }],
+      ['hero', { heading: 'Born from the soil, built for the future', subheading: 'We are a team of agronomists, engineers and nature lovers on a mission to make every farm in India a self-sustaining ecosystem.' }],
+      richText('Our vision', ['A self-sustaining farm on every piece of land: the land feeds the farmer, the farmer nurtures the land, and together they create abundance that lasts generations.']),
+      richText('Our mission', ['To combine satellite technology, permaculture science and hands-on execution to turn any piece of land into a thriving, productive, self-sustaining farm. We handle everything from design to management.']),
+      richText('Our values', [], [
+        { title: 'Nature first', text: 'Every decision starts with what is best for the ecosystem. Zero chemicals, always.' },
+        { title: 'Radical transparency', text: 'Every visit documented, every rupee accounted for, every decision explained.' },
+        { title: 'Science over guesswork', text: 'Satellite data, contour maps and soil analysis: we design with data.' },
+        { title: 'Complete ownership', text: 'We execute, manage and take full responsibility for your farm.' },
+        { title: 'Community impact', text: 'Local employment, skills for rural youth and degraded land restored.' },
+        { title: 'Long-term thinking', text: 'We design for decades: every farm is a 30-year asset.' },
+      ]),
       ['team', {}],
-      ['trust_marquee', {}],
+      ['trust_band', {}],
     )),
     page('why-choose-us', 'Why choose us', 'Why Landowners Choose Hasiru Agro', 'Farm design from satellite data, saplings from our own nursery, a full-time farm team and transparent reporting.', blocks(
-      ['why_choose_us', { items: WHY }],
+      richText(null, [], WHY),
       ['testimonials', { limit: 3 }],
     )),
     page('contact', 'Contact us', 'Contact Hasiru Agro | Nursery in Kengeri, Bengaluru', 'Call, email or visit our nursery near Komghatta Lake, Kengeri, Bengaluru. Open every day, 9:30 AM to 5:30 PM.', blocks(
-      ['contact', {
-        phone: '+91 81051 00749',
-        email: 'contact@hasiruagro.com',
-        address: 'Near Komghatta Lake, Tavarekere Main Road, Kengeri, Bangalore 560060',
-        hours: 'Monday to Sunday, 9:30 AM to 5:30 PM',
-      }],
-      ['enquiry_cta', { href: '/build-farm-with-us' }],
+      richText(null, [
+        '<p><a href="tel:+918105100749">+91 81051 00749</a></p>',
+        '<p><a href="mailto:contact@hasiruagro.com">contact@hasiruagro.com</a></p>',
+        'Near Komghatta Lake, Tavarekere Main Road, Kengeri, Bangalore 560060',
+        'Monday to Sunday, 9:30 AM to 5:30 PM',
+      ]),
+      ENQUIRY_CTA,
     )),
     // Policy pages: only what the SRS says. Published (the footer links them) but noindex until the client's text arrives.
     page('policies/cancellation-and-refund', 'Cancellation and refund policy', 'Cancellation and Refund Policy | Hasiru Agro', 'Cancellation or return of an order is not allowed.', blocks(
-      ['text', { body: 'Cancellation or return of an order is not allowed.' }],
+      richText(null, ['Cancellation or return of an order is not allowed.']),
     ), true),
     page('policies/damage-and-replacement', 'Damage and replacement policy', 'Damage and Replacement Policy | Hasiru Agro', 'Damage and replacement policy.', PENDING_POLICY, true),
     page('policies/delivery', 'Delivery policy', 'Delivery Policy | Hasiru Agro', 'Nursery pickup, scheduled weekly delivery in Bengaluru and outstation transport.', blocks(
-      ['text', { body: 'Customers can choose nursery pickup or delivery. Within Bengaluru, deliveries are planned on a scheduled basis, once a week. Outstation transportation is calculated separately and considers distance and weight. Packing charges are calculated separately.' }],
+      richText(null, ['Customers can choose nursery pickup or delivery. Within Bengaluru, deliveries are planned on a scheduled basis, once a week. Outstation transportation is calculated separately and considers distance and weight. Packing charges are calculated separately.']),
     ), true),
     page('policies/privacy', 'Privacy policy', 'Privacy Policy | Hasiru Agro', 'Privacy policy.', PENDING_POLICY, true),
     page('policies/terms', 'Terms and conditions', 'Terms and Conditions | Hasiru Agro', 'Terms and conditions.', PENDING_POLICY, true),

@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { CmsPageBody, getPage, pageMetadataFor } from '@ecomkit/cms/server';
+import { getPage } from '@ecomkit/cms/server';
+import { CmsPageBody, pageMetadataFor } from '@ecomkit/cms/ui';
 import { messages } from '../../messages/en';
 
 const h = messages.home;

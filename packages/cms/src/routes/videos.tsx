@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@ecomkit/ui';
-import { VideoGrid } from '../ui';
-import { cmsMetadata, cmsRuntime, JsonLdGraph, videosFor } from '../server';
+import { cmsMetadata, JsonLdGraph, VideoGrid } from '../ui';
+import { cmsRuntime, videosFor } from '../server';
 
 export async function generateMetadata() {
   const m = cmsRuntime().messages.videos;

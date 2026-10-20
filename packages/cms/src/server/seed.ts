@@ -32,8 +32,8 @@ const fileSchema = z.object({
   records: z.object({
     pages: z.array(page).default([]),
     menus: z.array(z.object({ key: z.string(), label: z.string().default(''), items: z.array(link.extend({ children: z.array(link).default([]) })).default([]) })).default([]),
-    testimonials: z.array(z.object({ key: z.string(), author: z.string(), location: z.string().nullish(), body: z.string(), source: z.string().nullish(), sort: z.number().default(0) })).default([]),
-    team: z.array(z.object({ key: z.string(), name: z.string(), role: z.string().nullish(), bio: z.string().nullish(), sort: z.number().default(0) })).default([]),
+    testimonials: z.array(z.object({ key: z.string(), author: z.string(), location: z.string().nullish(), body: z.string(), source: z.string().nullish(), avatar: z.string().nullish(), sort: z.number().default(0) })).default([]),
+    team: z.array(z.object({ key: z.string(), name: z.string(), role: z.string().nullish(), bio: z.string().nullish(), photo: z.string().nullish(), sort: z.number().default(0) })).default([]),
     trust_claims: z.array(z.object({ key: z.string(), label: z.string(), value: z.string().nullish(), logo: z.string().nullish(), visible: z.boolean().default(false), sort: z.number().default(0) })).default([]),
     counters: z.array(z.preprocess(splitCounter, z.object({ key: z.string(), label: z.string(), value: z.number().int(), suffix: z.string().nullish(), verified: z.boolean().default(false), sort: z.number().default(0) }))).default([]),
   }),
@@ -52,6 +52,37 @@ export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
   const r = { inserted: 0, updated: 0, skipped: 0, notes: [] as string[] };
   const keys = async <T>(rows: Promise<T[]>, pick: (row: T) => string | null) => new Set((await rows).map(pick).filter(Boolean));
 
+  // The pipeline names images by master path (data/media/masters/<path>); the cms stores media ids. One lookup
+  // for every image in the file: block `image` fields (hero, rail items), avatars, photos and logos.
+  type Props = Record<string, unknown>;
+  const itemImage = (it: unknown): string | null => (it && typeof it === 'object' && typeof (it as Props).image === 'string' ? ((it as Props).image as string) : null);
+  const paths = new Set<string>();
+  for (const p of records.pages)
+    for (const b of p.blocks) {
+      if (typeof b.props.image === 'string') paths.add(b.props.image);
+      if (Array.isArray(b.props.items)) for (const it of b.props.items) if (itemImage(it)) paths.add(itemImage(it)!);
+    }
+  for (const t of records.testimonials) if (t.avatar) paths.add(t.avatar);
+  for (const t of records.team) if (t.photo) paths.add(t.photo);
+  for (const t of records.trust_claims) if (t.logo) paths.add(t.logo);
+  const resolve = cmsRuntime().resolveMediaIds;
+  const mediaIds: Record<string, string> = paths.size && resolve ? await resolve([...paths]) : {};
+  const mediaId = (src: string | null | undefined): string | null => (src ? (mediaIds[src] ?? null) : null);
+  const withMediaIds = ({ image, items, ...rest }: Props): Props => ({
+    ...rest,
+    ...(typeof image === 'string' && mediaId(image) ? { imageId: mediaId(image) } : {}),
+    ...(Array.isArray(items)
+      ? {
+          items: items.map((it) => {
+            const src = itemImage(it);
+            if (!src) return it;
+            const { image: _image, ...r } = it as Props;
+            return mediaId(src) ? { ...r, imageId: mediaId(src) } : r;
+          }),
+        }
+      : {}),
+  });
+
   const existingPages = await keys(db.select({ slug: cmsPage.slug }).from(cmsPage), (x) => x.slug);
   for (const p of records.pages) {
     const slug = pageSlugSchema.safeParse(p.slug);
@@ -63,7 +94,7 @@ export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
     const blocks = [...p.blocks]
       .sort((a, b) => a.sort - b.sort)
       .map((b) => {
-        const block = parseBlock(b.type, b.props);
+        const block = parseBlock(b.type, withMediaIds(b.props));
         if (!block) r.notes.push(`page ${slug.data}: block ${b.type} skipped (unknown type or invalid data)`);
         return block;
       })
@@ -118,13 +149,13 @@ export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
     await keys(db.select({ key: cmsTestimonial.key }).from(cmsTestimonial), (x) => x.key),
     (x) => x.key,
     (rows) =>
-      db.insert(cmsTestimonial).values(rows.map((t) => ({ key: t.key, name: t.author, location: t.location ?? null, body: t.body, source: t.source ?? null, position: t.sort, status: 'published' as const }))),
+      db.insert(cmsTestimonial).values(rows.map((t) => ({ key: t.key, name: t.author, location: t.location ?? null, body: t.body, source: t.source ?? null, photoMediaId: mediaId(t.avatar), position: t.sort, status: 'published' as const }))),
   );
   await insertMissing(
     records.team,
     await keys(db.select({ key: cmsTeamMember.key }).from(cmsTeamMember), (x) => x.key),
     (x) => x.key,
-    (rows) => db.insert(cmsTeamMember).values(rows.map((t) => ({ key: t.key, name: t.name, role: t.role ?? null, bio: t.bio ?? null, position: t.sort, status: 'published' as const }))),
+    (rows) => db.insert(cmsTeamMember).values(rows.map((t) => ({ key: t.key, name: t.name, role: t.role ?? null, bio: t.bio ?? null, photoMediaId: mediaId(t.photo), position: t.sort, status: 'published' as const }))),
   );
   await insertMissing(
     records.counters,
@@ -132,14 +163,12 @@ export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
     (x) => x.key,
     (rows) => db.insert(cmsCounter).values(rows.map((c) => ({ key: c.key, label: c.label, value: c.value, suffix: c.suffix ?? null, verified: c.verified, position: c.sort }))),
   );
-  const logos = records.trust_claims.flatMap((t) => (t.logo ? [t.logo] : []));
-  const logoIds = logos.length && cmsRuntime().resolveMediaIds ? await cmsRuntime().resolveMediaIds!(logos) : {};
   await insertMissing(
     records.trust_claims,
     await keys(db.select({ key: cmsTrustClaim.key }).from(cmsTrustClaim), (x) => x.key),
     (x) => x.key,
     (rows) =>
-      db.insert(cmsTrustClaim).values(rows.map((t) => ({ key: t.key, label: t.label, value: t.value ?? null, logoMediaId: t.logo ? (logoIds[t.logo] ?? null) : null, show: t.visible, position: t.sort }))),
+      db.insert(cmsTrustClaim).values(rows.map((t) => ({ key: t.key, label: t.label, value: t.value ?? null, logoMediaId: mediaId(t.logo), show: t.visible, position: t.sort }))),
   );
 
   ctx.log.info('cms content seeded', { inserted: r.inserted, skipped: r.skipped });

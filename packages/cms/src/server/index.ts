@@ -21,4 +21,3 @@ export {
   type VideoView,
 } from './queries';
 export { blockJsonLd, resolveBlocks, type BlockContext } from './render';
-export { CmsPageBody, cmsMetadata, JsonLdGraph, NO_PAGE, pageMetadataFor } from './page-route';

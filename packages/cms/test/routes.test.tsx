@@ -9,7 +9,8 @@ import { deleteEntityForm, saveEntityAction, saveMenuAction, savePageAction } fr
 import { EntityEditPage, MenuEditPage, PageEditPage } from '../src/admin/pages';
 import { pageInputSchema } from '../src/domain';
 import { cmsCounter, cmsPage, cmsTestimonial, cmsTrustClaim, cmsTeamMember } from '../src/schema';
-import { configureCms, getMenu, NO_PAGE, saveEntity, savePage } from '../src/server';
+import { configureCms, getMenu, saveEntity, savePage } from '../src/server';
+import { NO_PAGE } from '../src/ui';
 import About from '../src/routes/about';
 import CatchAll, { generateMetadata as catchAllMetadata, generateStaticParams as catchAllParams } from '../src/routes/page';
 import Guide from '../src/routes/guide';

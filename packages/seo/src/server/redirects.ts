@@ -34,9 +34,10 @@ export function resetRedirectCache(): void {
 }
 
 async function redirectMap(): Promise<Map<string, { to: string; statusCode: number }>> {
-  if (memo && Date.now() - memo.at < TTL_MS) return memo.map;
+  // performance.now(), not Date.now(): the miss path runs inside a blocking prerender, where the clock is an unstable value
+  if (memo && performance.now() - memo.at < TTL_MS) return memo.map;
   const rows = await db.select({ from: seoRedirect.fromPath, to: seoRedirect.toPath, statusCode: seoRedirect.statusCode }).from(seoRedirect);
-  memo = { at: Date.now(), map: new Map(rows.map((r) => [r.from, { to: r.to, statusCode: r.statusCode }])) };
+  memo = { at: performance.now(), map: new Map(rows.map((r) => [r.from, { to: r.to, statusCode: r.statusCode }])) };
   return memo.map;
 }
 

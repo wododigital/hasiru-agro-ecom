@@ -1,5 +1,5 @@
-# BUILD STATUS  (updated 2026-10-20T07:40+0530)
-Current wave: 3 (merged: WP-28, WP-29, WP-30, WP-31; see the Wave 3 merge section)   Next action: run `pnpm smoke --strict` against a migrated + `jobs:install`ed + seeded DB under `next start` with `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`, fix what it reports (money, jobs, admin saves), then the Wave 3 gate.   Previous next action: Wave 3 (WP-28 apps/shop assembly, WP-29 admin dashboard + reports per REQUIREMENTS-ADDENDUM section 9, WP-30 apps/minimal proof + recipe) from `ecom-build`; Wave 3 worktrees were already running during the Wave 2 gate (`.worktrees/wp-28..31`), so their agents must rebase onto this commit before merging (the gate changed `packages/core/src/manifest/paths.ts`, cart restore, flows ports, catalog `BuyBoxIsland`, `turbo.json`). All 33 modules are enabled in `apps/shop/modules.config.ts`; `apps/minimal` enables its full target set (addendum 1) and builds. Boot wiring (`configureX` bindings for every Wave 1 and 2 module) is still WP-28's; until then storefront pages that need a port render their degraded state.
+# BUILD STATUS  (updated 2026-10-20T14:10+0530)
+Current wave: final gate DONE (merged: WP-32, WP-33 on top of the boot wiring; see "Final gate" at the end).   Next action: staging deploy prep (Postgres 17 on the VPS, env from docs/FINAL-REPORT.md section 7, `MEDIA_ROOT` absolute) and the open items in docs/FINAL-REPORT.md section 4 (ERP payloads, proxy CSP from marketing, `HA` order prefix, 404 on private routes, Playwright/Lighthouse).   Previous next action: run `pnpm smoke --strict` against a migrated + `jobs:install`ed + seeded DB under `next start`, fix what it reports, then the Wave 3 gate (done: boot agent + final gate).
 
 Only the orchestrator edits this file; per-agent detail stays in `BUILD-STATUS/wp-xx.md`.
 
@@ -34,12 +34,12 @@ Only the orchestrator edits this file; per-agent detail stays in `BUILD-STATUS/w
 | WP-26 | ai-assistant | opus | wave-2 agent | done | 36 unit / 0 e2e | wave 2 | BUILD-STATUS/wp-26.md; API key is an admin setting, mock via `/api/_mock/claude` |
 | WP-27 | erp-sync + hasiru-ops-adapter | opus | wave-2 agent | done | 29 + 20 unit / 0 e2e | wave 2 | BUILD-STATUS/wp-27.md; pg transport forces verified TLS off loopback (A74) |
 | WP-28 | apps/shop assembly + integration gate | opus | boot agent | done (boot wiring) | money smoke 19/19, jobs 12/12, full smoke 210 pass / 0 fail | boot: bind module ports | boot wiring 2026-10-20 10:00-11:00 IST; BUILD-STATUS/verify-money.md, verify-jobs.md |
-| WP-29 | admin dashboard + reports + keys checklist | opus | | todo | | | |
-| WP-30 | apps/minimal proof + recipe | sonnet | | todo | | | minimal enables its full target set (A75) and builds; recipe doc + E2E smoke still to write |
-| WP-31 | E2E flow (a) + CTA crawler | opus | | todo | | | |
-| WP-32 | E2E flows (b)(c) + admin + webhooks + sync | opus | | todo | | | |
-| WP-33 | Lighthouse + budgets + security + structural visual | opus | | todo | | | |
-| WP-34 | Redundancy audit + docs + status | read | | todo | | | |
+| WP-29 | admin dashboard + reports + keys checklist | opus | wave-3 agent + wp-33 agent | done | admin smoke 26/0/0 on the final tree | merged (final gate) | BUILD-STATUS/wp-33.md: Home KPIs + sparklines + things to do, Analytics overview/reports/live, DataTable on 7 index pages, detail frames, save bars; `adminTodos` + `compare` added to core contracts at the gate |
+| WP-30 | apps/minimal proof + recipe | sonnet | wave-3 agent | done | builds (final gate) | wave 3 | docs/NEW-STORE-RECIPE.md; minimal E2E smoke not written |
+| WP-31 | E2E flow (a) + CTA crawler | opus | wave-3 agent + boot agent | done (as `tooling/smoke.mjs`) | full smoke 226/0/17 | wave 3 + boot | HTTP smoke instead of Playwright: routes, money, jobs, admin sections |
+| WP-32 | storefront fixes: seed, links, account redirect, real 404s | opus | wp-32 agent | done | routes smoke 169/0/16 on the final tree | merged (final gate) | BUILD-STATUS/wp-32.md: 587 masters no derivatives, 292 products, Wikimedia photos linked, policies published + noindex, `unstable_paramMatching` on 10 routes |
+| WP-33 | Shopify admin leftovers (was: Lighthouse + budgets) | opus | wp-33 agent | done | see WP-29 | merged (final gate) | Lighthouse and budgets not run (open) |
+| WP-34 | Redundancy audit + docs + status | read | final gate | docs done, audit skipped | | final gate | docs/FINAL-REPORT.md, HANDOFF.md, this file; F1-3/F1-4/F1-5 audit items open |
 
 ## Wave 1 gate (round 1, 2026-10-20) - what the orchestrator ran on the merged tree
 | Check | Result |
@@ -146,7 +146,7 @@ Wave 0 requests still open are repeated here; agent files hold the full text.
 | WP-06 | WP-17, WP-19 | `priceLines`/`priceSnapshot` for line prices, `applicablePromos(cart)` + `applyCoupon(code, cart, { subject })`, both into `core.computeTotals`; `redeem({ orderId, phone, customerId, discounts }, { tx })` inside place-order; catch `RedemptionError` | info for Wave 2 |
 | WP-07 | WP-19, WP-27 | `reserve(lines, { ttlSec, reference, tx })`, `commit(reservationId, { tx })`, `release`, `adjust({ reason: 'cancel' })`; `setFromErp(items, { tx? })` per page with `updatedAt`, `missing` for mapping, drift from `onHand` vs `erpOnHand` | info for Wave 2 |
 | WP-07 | WP-16 | consent / lead API so notify-me stores `consent_id` and creates a `notify_me` lead | open (contract change; customers exports `recordConsent`, `upsertLead`; wire through a port in WP-28) |
-| WP-08 | orchestrator (contracts) | add `adminSearch?: AdminSearchProvider[]` and `settingsUrls?: SettingsUrl[]` to `ModuleManifest` (validated structurally today) | open |
+| WP-08 | orchestrator (contracts) | add `adminSearch?: AdminSearchProvider[]` and `settingsUrls?: SettingsUrl[]` to `ModuleManifest` (validated structurally today) | open (`adminTodos` was added at the final gate; these two still structural) |
 | WP-09 | WP-00b / orchestrator | move the path normalisation rule (lowercase outside `%XX`, case-exempt prefixes, trailing slash) into core and import it from `proxy.ts` and seo `normalisePath` | open (Wave 5 audit) |
 | WP-09 | WP-08 | shared `staffPageOrNotFound(permission)`; seo and cms carry a 6-line copy each | open (Wave 5 audit; admin-shell's `requireAdmin` has different semantics) |
 | WP-09 | WP-24 | model videos via `videosFor({ modelSlug })` from `@ecomkit/cms/server` (check `registry.has('cms')`) | info |
@@ -156,7 +156,7 @@ Wave 0 requests still open are repeated here; agent files hold the full text.
 | WP-12 | WP-19, WP-29 | `track('purchase', { value, test })` on confirmation; GA4 commerce events; reports with `group: 'sales' | 'products' | 'customers'` | info |
 | WP-13 | WP-04 / WP-28 | `registerPlantSource(...)` from `@ecomkit/places/server` at boot; `places.districtsFor(plantClimate)` for PDP "Grows well in" | done 2026-10-20 (boot agent): `registerPlantSource` bound from catalog plant listings with climate; `districtsFor` PDP links not done |
 | WP-13 | WP-14 | consume `data/media/sourcing-log.json` so the 69 photo-less live plants pick up the sourced photos | open: F1-1 |
-| WP-14 | WP-09 | cms block types used by `cms.json` (`hero, product_rail, plant_calculator, compost_calculator, why_choose_us, video_rail, testimonials, trust_marquee, farm_development_teaser, page_hero, process_steps, feature_list, enquiry_cta, text, team, contact`); cms skips unknown types with a note | open: F1-2 |
+| WP-14 | WP-09 | cms block types used by `cms.json` (`hero, product_rail, plant_calculator, compost_calculator, why_choose_us, video_rail, testimonials, trust_marquee, farm_development_teaser, page_hero, process_steps, feature_list, enquiry_cta, text, team, contact`); cms skips unknown types with a note | done 2026-10-20 (final gate): the pipeline emits cms types instead (F1-2) |
 | WP-14 | WP-28 | checkout policy note copy belongs in `apps/shop/messages/en.ts` | info |
 | WP-16 | WP-02 | call `ensureProfile({ userId, phone, email, name })` on sign-up (idempotent, emits `customer.created`); auth already emits `customer.created` from its user-create hook (A02-5), so WP-28 wires one subscriber instead | open |
 | WP-16 | WP-03 | private store `{ putPrivate, read }` and public `{ putImage, ref }` ports for enquiry uploads and review photos | done 2026-10-20 (boot agent): media `server/stores.ts`: `privateStore` (enquiries), `imageStore` (reviews), `imageRefs`, `masterAssetIds` (seed) |
@@ -172,7 +172,7 @@ Wave 0 requests still open are repeated here; agent files hold the full text.
 ## Open fixes
 - F0-1 (`.env.example`): DONE 2026-10-20, `apps/shop/.env.example`.
 - F1-1 (`tooling/scripts/seed/**`, `data/seed/**`): ship `collections.json` (A04-4 slugs), tag native rows `native-saplings`, merge `sourcing-log.json` photos into product records (69 live plants still `image_needed`), then confirm `importSeed()` accepts the A14-6 keys and the `woo_legacy` nullable fields (catalog side may need small changes; coordinate through WP-28). Owner: WP-28 (data step) with catalog.
-- F1-2 (`packages/cms/src/domain`, `data/seed/cms.json`): reconcile the block type list between `cms.json` and the cms block schemas; unknown types are skipped today, so the seeded home page would render without those sections. Owner: WP-28.
+- F1-2 (`packages/cms/src/domain`, `data/seed/cms.json`): DONE at the final gate: `cms-content.ts` emits the module's block types (39 blocks load, 0 skipped); `product_rail` and the calculator teasers have no block type and are dropped from the home seed (FINAL-REPORT section 4 item 6).
 - F1-3 (`packages/search/src/server/source.ts`, `packages/catalog/src/server/queries.ts` `facetSource`): one mapping from catalog columns to facet values. Owner: WP-34 (Wave 5 audit); not blocking.
 - F1-4 (`tooling/scripts/seed/lib/xlsx.ts`): replace the hand-rolled XLSX reader with the now-declared `xlsx` package only if the seed output stays byte-identical. Owner: WP-34.
 - F1-5 (`packages/seo/src/admin/pages.tsx`, `packages/cms/src/admin/pages.tsx`): 6-line `staffOrNotFound` copies; fold into admin-shell's `requireAdmin` or a core helper. Owner: WP-34.
@@ -247,3 +247,27 @@ Setup: `pnpm db:fresh verify-money` -> `ecomkit_verify_money`, `drizzle-kit migr
 ## boot (2026-10-20 10:00-11:00 IST) - details in BUILD-STATUS/verify-money.md, verify-jobs.md
 - Boot wiring done (A78 to A84): money smoke 19/19, jobs 12/12, full smoke 210 pass / 0 fail / 17 skip on a fresh `ecomkit_boot2` (migrate, jobs:install, seed:load, next build, next start :3301 + worker, mocks on).
 - Open for others: erp-sync order/lead payload builders (orders `erpOrderPayload`, customers `leadForErp`), proxy CSP from marketing `cspSources()`, cart `noteContact` is never called (nothing consumes `checkout.contact_saved`), PDP `new Date()` during runtime prerender in catalog (logged, page renders), admin crawl logs "Functions cannot be passed directly to Client Components" (a `<form action>` with a plain function on an admin page; admin owner).
+
+## Final gate (2026-10-20 11:00-14:10 IST) - merged wp-32 + wp-33, verified on a fresh `ecomkit_final`
+Merged `wp/wp-32` then `wp/wp-33` into `ecom-build` (one conflict: `tooling/scripts/seed/run.ts`, kept wp-32's boot call with its warning); worktrees and branches removed. Contracts: `adminTodos` on `ModuleManifest`, `compare?` on `DashboardWidget`/`Report` props (A85); wp-32's `segmentConfig` widening confirmed type-only (A32-3 accepted).
+| Check | Result |
+|---|---|
+| `pnpm install`, `modules:sync --check` shop / minimal | lockfile unchanged; 154 / 67 planned, 0 out of date |
+| `drizzle-kit generate` apps/shop | no schema changes |
+| `pnpm turbo run typecheck lint` | 76/76 tasks pass |
+| `pnpm turbo run test` | 38/38 packages pass |
+| `next build` shop + minimal (seeded `ecomkit_final`) | both exit 0 |
+| `db:fresh final` -> migrate -> `jobs:install` -> `seed:load` | 587 media masters `ready` (0 derivatives), 292 products (282 with images), 294 stock levels, 15 cms pages / 39 blocks, idempotent rerun `+0` |
+| `node tooling/smoke.mjs` (full) on `next start :3399` + worker | **226 pass, 0 fail, 17 skip** |
+| `--only=money` / `--only=jobs` / `--only=admin` / `--only=routes` | **19/0/0**, **12/0/1**, **26/0/0**, **169/0/16** |
+| Manual adversarial checks (PDP images 200, 10 unknown-slug 404s + catch-all, signed-out account redirect, policy text, owner vs support admin, anonymous admin lists nothing) | all pass (docs/FINAL-REPORT.md section 3) |
+Fixes applied at the gate (A85 to A91; full text in docs/FINAL-REPORT.md section 5):
+- A85 contracts `adminTodos` + `compare` (from wp-33's request); admin-shell imports the core `AdminTodo` type.
+- A86 cms vocabulary: `tooling/scripts/seed/cms-content.ts` emits the cms module's block types; `data/seed/cms.json` regenerated (39 blocks load, was 3 of 44; policy pages had no body before).
+- A87 `@ecomkit/cms/server` no longer exports React page components (`CmsPageBody`, `pageMetadataFor`, `cmsMetadata`, `JsonLdGraph`, `NO_PAGE` live in `@ecomkit/cms/ui`), so `boot()` configures cms in every process (web, worker, seed) and the cms seed hook links block images, team photos, testimonial avatars and trust logos through `resolveMediaIds`.
+- A88 `POST /api/internal/revalidate` accepts loopback `x-forwarded-for` entries (`next start` sets the header itself); it still refuses `x-real-ip`, non-loopback addresses and non-loopback hosts. Worker cache expiry works (0 `revalidate failed`).
+- A89 seo redirect memo TTL uses `performance.now()` (the miss path runs inside a blocking prerender; `Date.now()` there became a static-generation bailout = 500 on every unknown catch-all path once seo was bound).
+- A90 core job runner passes `{}` for a scheduled job's null payload (`media.warm` sweep crashed every 15 minutes).
+- A91 PDP JSON-LD clock is a `'use cache'` hourly `cachedNow()`; `EnquiryForm` awaits `connection()` before its per-request time token (both prerender clock warnings gone).
+- The boot agent's "Functions cannot be passed directly to Client Components" does not reproduce on the merged tree (0 in two admin crawls, none in `core_error_issue`); most likely removed by wp-33's DataTable/ActionForm index pages.
+Environment notes: `MEDIA_ROOT` must be absolute and shared (the default is cwd-relative, which made every `/media` URL 404 when the server ran from `apps/shop`); this Mac is at 97% disk, so monitoring's disk check and `/api/health/ready` report down locally.

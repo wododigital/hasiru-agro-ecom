@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { GuideArticle } from '../ui';
-import { cmsMetadata, cmsRuntime, getPost, imagesFor, JsonLdGraph, listPosts, NO_PAGE } from '../server';
+import { cmsMetadata, GuideArticle, JsonLdGraph, NO_PAGE } from '../ui';
+import { cmsRuntime, getPost, imagesFor, listPosts } from '../server';
 
 type Props = { params: Promise<{ slug: string }> };
 

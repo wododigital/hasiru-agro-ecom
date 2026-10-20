@@ -36,3 +36,9 @@ export async function pdpCommerce(productId: string, variantId: string | null): 
   ]);
   return { ladder, stock, reviews: aggregate };
 }
+
+/** Clock for JSON-LD `priceValidUntil`: cached by the hour so the prerendered product shell never reads `new Date()`. */
+export async function cachedNow(): Promise<Date> {
+  cacheFor([], 'hours');
+  return new Date();
+}

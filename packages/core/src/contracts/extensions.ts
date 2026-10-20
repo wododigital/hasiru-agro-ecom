@@ -110,7 +110,8 @@ export interface DashboardWidget {
   order: number;
   size: 'sm' | 'md' | 'lg' | 'full';
   permission?: Permission;
-  component: Lazy<ComponentType<{ range: DateRange }>>;
+  /** `compare` is the comparison range picked in the admin range bar (null or absent when none). */
+  component: Lazy<ComponentType<{ range: DateRange; compare?: DateRange | null }>>;
 }
 
 // ---- report ----------------------------------------------------------------
@@ -119,8 +120,21 @@ export interface Report {
   title: string;
   group: string;
   permission: Permission;
-  component: Lazy<ComponentType<{ range: DateRange }>>;
+  component: Lazy<ComponentType<{ range: DateRange; compare?: DateRange | null }>>;
   csv?: Lazy<(range: DateRange) => Promise<{ filename: string; rows: string[][] }>>;
+}
+
+// ---- admin-todo ------------------------------------------------------------
+/** Home "Things to do": a count of items needing action, linking to the filtered admin index (shown above zero only). */
+export interface AdminTodo {
+  id: string;
+  /** Plural noun phrase after the count, e.g. "orders to dispatch". */
+  label: string;
+  /** The filtered index, e.g. /admin/orders?view=unfulfilled. */
+  href: string;
+  order: number;
+  permission: Permission;
+  count: Lazy<() => Promise<number>>;
 }
 
 // ---- health-check ----------------------------------------------------------

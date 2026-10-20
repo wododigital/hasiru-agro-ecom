@@ -25,6 +25,8 @@ describe('POST /api/internal/revalidate', () => {
       ['product:p1', { expire: 0 }],
       ['catalog', { expire: 0 }],
     ]);
+    // next start itself adds the socket address as x-forwarded-for: a loopback entry is the worker's direct call
+    expect((await call(body, { [SIGNATURE_HEADER]: signature, 'x-forwarded-for': '::ffff:127.0.0.1' })).status).toBe(200);
   });
 
   it('refuses forged, stale, proxied, non-loopback and malformed requests', async () => {
@@ -34,6 +36,7 @@ describe('POST /api/internal/revalidate', () => {
     const stale = revalidateRequest([tags.catalog], Date.now() - 10 * 60_000);
     expect((await call(stale.body, { [SIGNATURE_HEADER]: stale.signature })).status).toBe(401);
     expect((await call(body, { [SIGNATURE_HEADER]: signature, 'x-forwarded-for': '1.2.3.4' })).status).toBe(404);
+    expect((await call(body, { [SIGNATURE_HEADER]: signature, 'x-forwarded-for': '127.0.0.1', 'x-real-ip': '127.0.0.1' })).status).toBe(404);
     expect((await call(body, { [SIGNATURE_HEADER]: signature }, 'http://shop.example/api/internal/revalidate')).status).toBe(404);
     const bad = revalidateRequest(['../etc']);
     expect((await call(bad.body, { [SIGNATURE_HEADER]: bad.signature })).status).toBe(400);
