@@ -1,6 +1,7 @@
 // Step 9.10: CMS seed. Home blocks, farm development pages, about, contact, why choose us, menus,
 // testimonials (3) and team (4) from the current hasiruagro.com site, trust claims and counters. Policy
-// pages hold only the sentences the SRS has and stay draft + noindex until the client publishes them.
+// pages hold only the sentences the SRS has (plus a contact line where the SRS has none); they are published
+// because the footer links them, and stay noindex until the client sends the full text.
 // Copy follows the site rules: no em or en dashes, no "phase" wording (the old site's "Phase One" steps are
 // "Step 1" here).
 import { join } from 'node:path';
@@ -30,9 +31,11 @@ function img(name: string): string {
   return m.file;
 }
 const blocks = (...b: [string, Record<string, unknown>][]): Block[] => b.map(([type, props], i) => ({ type, props, sort: i + 1 }));
-const page = (slug: string, title: string, seoTitle: string, description: string, b: Block[], draft = false): Page => ({
-  slug, title, status: draft ? 'draft' : 'published', noindex: draft, blocks: b, seo: { title: seoTitle, description },
+const page = (slug: string, title: string, seoTitle: string, description: string, b: Block[], noindex = false): Page => ({
+  slug, title, status: 'published', noindex, blocks: b, seo: { title: seoTitle, description },
 });
+/** Body for a policy page the SRS has no text for yet. */
+const PENDING_POLICY = blocks(['text', { body: 'The full policy is being prepared. For any question, call +91 81051 00749 or email contact@hasiruagro.com.' }]);
 
 const PROCESS = [
   { step: 1, title: 'Site assessment', text: 'Soil, water and climate study on your land.', image: 'process_site_assessment_field_survey_hasiru_agro.webp', href: '/farm-development/site-assessment' },
@@ -171,25 +174,25 @@ export const buildCms = once(() => {
       }],
       ['enquiry_cta', { href: '/build-farm-with-us' }],
     )),
-    // Policy pages: only what the SRS says. Draft + noindex, out of the sitemap and footer until published.
+    // Policy pages: only what the SRS says. Published (the footer links them) but noindex until the client's text arrives.
     page('policies/cancellation-and-refund', 'Cancellation and refund policy', 'Cancellation and Refund Policy | Hasiru Agro', 'Cancellation or return of an order is not allowed.', blocks(
       ['text', { body: 'Cancellation or return of an order is not allowed.' }],
     ), true),
-    page('policies/damage-and-replacement', 'Damage and replacement policy', 'Damage and Replacement Policy | Hasiru Agro', 'Damage and replacement policy.', [], true),
+    page('policies/damage-and-replacement', 'Damage and replacement policy', 'Damage and Replacement Policy | Hasiru Agro', 'Damage and replacement policy.', PENDING_POLICY, true),
     page('policies/delivery', 'Delivery policy', 'Delivery Policy | Hasiru Agro', 'Nursery pickup, scheduled weekly delivery in Bengaluru and outstation transport.', blocks(
       ['text', { body: 'Customers can choose nursery pickup or delivery. Within Bengaluru, deliveries are planned on a scheduled basis, once a week. Outstation transportation is calculated separately and considers distance and weight. Packing charges are calculated separately.' }],
     ), true),
-    page('policies/privacy', 'Privacy policy', 'Privacy Policy | Hasiru Agro', 'Privacy policy.', [], true),
-    page('policies/terms', 'Terms and conditions', 'Terms and Conditions | Hasiru Agro', 'Terms and conditions.', [], true),
+    page('policies/privacy', 'Privacy policy', 'Privacy Policy | Hasiru Agro', 'Privacy policy.', PENDING_POLICY, true),
+    page('policies/terms', 'Terms and conditions', 'Terms and Conditions | Hasiru Agro', 'Terms and conditions.', PENDING_POLICY, true),
   ].sort((a, b) => a.slug.localeCompare(b.slug));
 
   const menus = [
     {
       key: 'footer',
       items: [
-        { label: 'Timber trees', href: '/plants/timber-trees', sort: 1 },
-        { label: 'Fruiting trees', href: '/plants/fruiting-trees', sort: 2 },
-        { label: 'Other plants', href: '/plants/other-plants', sort: 3 },
+        { label: 'Timber trees', href: '/plants/timber', sort: 1 },
+        { label: 'Fruiting trees', href: '/plants/fruiting', sort: 2 },
+        { label: 'Other plants', href: '/plants/other', sort: 3 },
         { label: 'Inputs', href: '/inputs', sort: 4 },
         { label: 'Farm development', href: '/farm-development', sort: 5 },
         { label: 'About us', href: '/about', sort: 6 },
@@ -239,5 +242,5 @@ export const buildCms = once(() => {
 export default async function step(ctx: SeedContext): Promise<void> {
   const cms = buildCms();
   writeSeedFile(join(ctx.seedDir, 'cms.json'), [SOURCES.site, SOURCES.srs, SOURCES.handoff], cms, ctx);
-  ctx.log.info(`cms-content: ${cms.pages.length} pages (${cms.pages.filter((p) => p.status === 'draft').length} draft), ${cms.testimonials.length} testimonials, ${cms.team.length} team`);
+  ctx.log.info(`cms-content: ${cms.pages.length} pages (${cms.pages.filter((p) => p.noindex).length} noindex), ${cms.testimonials.length} testimonials, ${cms.team.length} team`);
 }

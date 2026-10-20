@@ -2,6 +2,8 @@ import { defineModule } from '@ecomkit/core/manifest';
 
 type Exp = 'default' | 'generateMetadata' | 'generateStaticParams';
 const page = (path: string, module: string, exports: Exp[] = ['default', 'generateMetadata']) => ({ path, module: `routes/${module}`, kind: 'page', exports }) as const;
+/** Unknown slugs wait for the full render (real 404 status) instead of the shared fallback shell. */
+const blockingSlug = { unstable_paramMatching: { slug: 'blocking' } };
 const admin = (path: string, module: string) => ({ path, module: `routes/${module}`, kind: 'page', exports: ['default'] }) as const;
 const nav = (label: string, href: string, icon: string, order: number) => ({ label, href, icon, order, permission: 'content.write' }) as const;
 
@@ -16,10 +18,10 @@ export default defineModule({
   optional: ['seo'],
   schema: () => import('./schema'),
   routes: [
-    page('/[...slug]', 'page', ['default', 'generateMetadata', 'generateStaticParams']),
-    page('/policies/[slug]', 'policy', ['default', 'generateMetadata', 'generateStaticParams']),
+    { ...page('/[...slug]', 'page', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blockingSlug },
+    { ...page('/policies/[slug]', 'policy', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blockingSlug },
     page('/guides', 'guides'),
-    page('/guides/[slug]', 'guide', ['default', 'generateMetadata', 'generateStaticParams']),
+    { ...page('/guides/[slug]', 'guide', ['default', 'generateMetadata', 'generateStaticParams']), segmentConfig: blockingSlug },
     page('/videos', 'videos'),
     page('/about', 'about'),
     page('/contact', 'contact'),

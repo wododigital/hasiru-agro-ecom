@@ -184,7 +184,7 @@ describe('sitemap source', () => {
 });
 
 describe('seed hook', () => {
-  it('seeds content once; policy pages always land as draft + noindex', async () => {
+  it('seeds content once; policy pages keep the file status but always land noindex', async () => {
     const dir = mkdtempSync(join(tmpdir(), 'wp09-cms-'));
     writeFileSync(
       join(dir, 'cms.json'),
@@ -210,8 +210,8 @@ describe('seed hook', () => {
     expect(await runSeed(ctx)).toMatchObject({ inserted: 0, skipped: 7 });
 
     const policy = (await t.db.select().from(cmsPage).where(sql`slug = 'policies/delivery'`))[0]!;
-    expect(policy).toMatchObject({ status: 'draft', noindex: true, template: 'policy' });
-    expect(await getPage('policies/delivery')).toBeNull();
+    expect(policy).toMatchObject({ status: 'published', noindex: true, template: 'policy' });
+    expect(await getPage('policies/delivery')).not.toBeNull();
     expect((await pageEntries()).map((e) => e.path)).toEqual(['/about']);
     expect((await listTrustClaims()).length).toBe(0);
     expect((await getMenu('footer')).map((n) => n.href)).toEqual(['/about']);

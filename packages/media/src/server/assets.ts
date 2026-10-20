@@ -149,7 +149,8 @@ export async function uploadFile(input: UploadInput): Promise<{ asset: MediaAsse
         sourceUrl: meta.sourceUrl ?? null,
         creditRequired: meta.creditRequired ?? false,
         isPrivate,
-        status: needsDerivatives ? 'processing' : 'ready',
+        // derive 'none' (seed masters) is served as the master only: ready now, so the worker sweep never derives it.
+        status: needsDerivatives && input.derive !== 'none' ? 'processing' : 'ready',
         createdBy: input.createdBy ?? null,
       })
       .onConflictDoNothing({ target: mediaAsset.sha256 })
@@ -211,6 +212,9 @@ export async function deriveAsset(id: string): Promise<MediaAsset | null> {
       rows.push({ assetId: id, format: d.format, width: d.width, storageKey: key, bytes: d.data.byteLength });
     }
     return await withTx(async (tx) => {
+      // Lock the asset first: two derives of one asset (seed rerun while the worker's sweep or warm job runs)
+      // would otherwise both delete nothing and both insert, and the second hits the derivative primary key.
+      await tx.select({ id: mediaAsset.id }).from(mediaAsset).where(eq(mediaAsset.id, id)).for('update');
       await tx.delete(mediaDerivative).where(eq(mediaDerivative.assetId, id));
       await tx.insert(mediaDerivative).values(rows);
       const [row] = await tx.update(mediaAsset).set({ status: 'ready', updatedAt: sql`now()` }).where(eq(mediaAsset.id, id)).returning();

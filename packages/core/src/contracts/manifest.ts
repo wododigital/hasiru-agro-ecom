@@ -60,7 +60,8 @@ export interface RouteDef {
   module: string;
   kind: 'page' | 'route';
   exports: readonly RouteExport[];
-  segmentConfig?: Readonly<Record<string, string | number | boolean>>;
+  /** Scalars, or a string map for object-valued config such as `unstable_paramMatching: { slug: 'blocking' }`. */
+  segmentConfig?: Readonly<Record<string, string | number | boolean | Readonly<Record<string, string>>>>;
 }
 
 export interface AdminNavItem {

@@ -1,9 +1,10 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T04:43:22+05:30",
+  "generated_at": "2026-10-20T09:58:54+05:30",
   "sources": [
     "latest_products.xlsx (Dis-wise Geo data)",
-    "data/seed/district-hq.json"
+    "data/seed/district-hq.json",
+    "data/seed/products.json"
   ],
   "records": {
     "states": [

@@ -21,7 +21,7 @@ source_row,sku,name_en,status,match,woo_sku,woo_name,confidence,scoring_suggeste
 23,HAP-0020,Vietnam super early Jackfruit,active,exact,HA00174,Vietnam Jackfruit All season Grafted,1,sibling:HA00174,"Vietnam super early = ""Vietnam Jackfruit All season Grafted"" (same plant, file named Vietnam-super-early)",365,912,265,50,woo,0,4,false,true
 24,HAP-0021,Jamun (Jambu nerale),active,none,,,1,sibling:HA0075,Seeded desi jamun; the old shop only had grafted cultivars,150,,110,50,researched,0,2,false,true
 25,HAP-0022,Jamun Grafted,active,sibling,HA00156,Thai black Jamun,0.61,sibling:HA00156,,280,,200,50,woo_sibling,0,2,false,true
-26,HAP-0023,Karonda,active,none,,,0,none:,,120,,86,200,researched,0,0,true,true
+26,HAP-0023,Karonda,active,none,,,0,none:,,120,,86,200,researched,0,1,false,true
 27,HAP-0024,All Season Kagzi Lemon,active,exact,HA0079,Lemon Tree - All Season Kagzi lemon,1,exact:HA0079,,310,440,225,100,woo,1189,2,false,false
 28,HAP-0025,Seedless Lemon,active,sibling,HA00161,Thai seedless lime,1,exact:HA00161,"Thai seedless lime is a lime, used for price only",310,,225,100,woo_sibling,0,2,false,true
 29,HAP-0026,All Season Mango,active,exact,HA008,All Season Mango,1,exact:HA008,,490,700,355,50,woo,0,3,false,false
@@ -32,13 +32,13 @@ source_row,sku,name_en,status,match,woo_sku,woo_name,confidence,scoring_suggeste
 34,HAP-0031,Raspuri Mango,active,exact,HA00131,Raspuri Mango,1,exact:HA00131,,490,700,355,50,woo,138,3,false,false
 35,HAP-0032,Sakkaregutli Mango,active,sibling,HA00166,Totapuri Mango,1,sibling:HA0081,Sakkaregutli priced like Totapuri (closest desi cultivar),490,,355,50,woo_sibling,0,3,false,true
 36,HAP-0033,Totapuri Mango,active,exact,HA00166,Totapuri Mango,1,exact:HA00166,,490,700,355,50,woo,0,3,false,false
-37,HAP-0034,Monkey Jack,active,none,,,0,none:,,350,,250,50,researched,0,0,true,true
+37,HAP-0034,Monkey Jack,active,none,,,0,none:,,350,,250,50,researched,0,1,false,true
 38,HAP-0035,Malta B-1 Mosumbi,active,exact,HA0032,B-1 Musambi Malta,1,exact:HA0032,,350,500,250,100,woo,250,2,false,false
 39,HAP-0036,Mozaffarpur shahi Litchi,active,exact,HA00105,Sweet Shahi Litchi (Air layered),0.76,exact:HA00105,,420,600,300,50,woo,290,2,false,false
 40,HAP-0037,Nagpur Orange,active,exact,HA00106,Nagpur Orange,1,exact:HA00106,,350,500,250,100,woo,198,2,false,false
 41,HAP-0038,Nutmeg grafted,active,exact,HA00107,Nutmeg (Grafted),1,exact:HA00107,,700,1000,505,50,woo,0,3,false,false
 42,HAP-0039,Nutmeg seeded,active,exact,HA00108,Nutmeg (Seeded),1,exact:HA00108,,280,400,200,50,woo,0,3,false,false
-43,HAP-0040,Pandrah (No.15) Papaya,active,none,,,0,none:,,60,,43,200,researched,0,2,false,true
+43,HAP-0040,Pandrah (No.15) Papaya,active,none,,,0,none:,,60,,43,200,researched,0,3,false,true
 44,HAP-0041,Peanut butter,active,exact,HA00113,Peanut butter,1,exact:HA00113,,700,1000,505,200,woo,0,3,false,false
 45,HAP-0042,Karimunda Pepper,active,sibling,HA00117,Pepper ( Rooted ),0.11,sibling:HA00117,,190,,135,200,woo_sibling,0,3,false,true
 46,HAP-0043,Paniyur Pepper,active,sibling,HA00117,Pepper ( Rooted ),0.13,sibling:HA00117,,190,,135,200,woo_sibling,0,3,false,true
@@ -49,11 +49,11 @@ source_row,sku,name_en,status,match,woo_sku,woo_name,confidence,scoring_suggeste
 51,HAP-0048,Starfruit,active,exact,HA00147,Starfruit,1,exact:HA00147,,350,500,250,200,woo,213,2,false,false
 52,HAP-0049,Sweet tamarind,active,exact,HA00163,Thai sweet tamarind,1,exact:HA00163,,310,440,225,50,woo,96,3,false,false
 53,HAP-0050,Water Apple Red,active,exact,HA00179,Water Apple Red,1,exact:HA00179,,310,440,225,100,woo,0,3,false,false
-54,HAP-0051,Wild Jackfruit (Hebbalasu),active,none,,,0,none:,,150,,110,50,researched,0,0,true,true
-55,HAP-0052,Wood apple,active,none,,,0,none:,,150,,110,100,researched,0,0,true,true
-56,HAP-0053,Yelakki Banana,active,none,,,0,none:,,60,,43,200,researched,0,0,true,true
-57,HAP-0054,Robusta (Pachbaale) Banana,active,none,,,0,none:,,60,,43,200,researched,0,0,true,true
-58,HAP-0055,Red Banana,active,none,,,0,none:,,60,,43,200,researched,0,0,true,true
+54,HAP-0051,Wild Jackfruit (Hebbalasu),active,none,,,0,none:,,150,,110,50,researched,0,1,false,true
+55,HAP-0052,Wood apple,active,none,,,0,none:,,150,,110,100,researched,0,1,false,true
+56,HAP-0053,Yelakki Banana,active,none,,,0,none:,,60,,43,200,researched,0,1,false,true
+57,HAP-0054,Robusta (Pachbaale) Banana,active,none,,,0,none:,,60,,43,200,researched,0,1,false,true
+58,HAP-0055,Red Banana,active,none,,,0,none:,,60,,43,200,researched,0,1,false,true
 59,HAP-0056,Abiu,active,exact,HA003,Abiu (Seeded),1,exact:HA003,,1090,1560,785,50,woo,0,3,false,false
 60,HAP-0057,Achachiru,active,exact,HA004,Achachiru,1,exact:HA004,,1080,1540,780,100,woo,30,3,false,false
 61,HAP-0058,Coorg Avocado,active,exact,HA0027,Avocado coorg variety,1,exact:HA0027,,350,875,250,50,woo,0,3,false,false
@@ -65,13 +65,13 @@ source_row,sku,name_en,status,match,woo_sku,woo_name,confidence,scoring_suggeste
 67,HAP-0064,Japanese Red diamond Guava,active,exact,HA0076,Japanese Red diamond Guava,1,exact:HA0076,,560,800,405,100,woo,0,3,false,false
 68,HAP-0065,Strawberry Guava,active,exact,HA00148,Strawberry guava,1,exact:HA00148,,630,900,455,100,woo,0,4,false,false
 69,HAP-0066,Ice cream beans,active,exact,HA00190,Ice cream beans,1,exact:HA00190,,1120,1600,805,100,woo,0,2,false,false
-70,HAP-0067,Jaboticaba Sabara,active,none,,,0,none:,,1200,,865,100,researched,0,0,true,true
+70,HAP-0067,Jaboticaba Sabara,active,none,,,0,none:,,1200,,865,100,researched,0,1,false,true
 71,HAP-0068,Longan,active,exact,HA0090,Longon,1,exact:HA0090,,1960,2800,1410,100,woo,0,3,false,false
 72,HAP-0069,Macadamia Nuts Grafted,active,sibling,HA0091,Australian Macadamia Nut plant,1,exact:HA0091,Old shop listing is the seeded macadamia; the grafted row borrows its price (grafted likely higher),770,,555,50,woo_sibling,0,4,false,true
 73,HAP-0070,Macadamia Nuts Seeded,active,exact,HA0091,Australian Macadamia Nut plant,1,exact:HA0091,,770,1925,555,50,woo,3807,4,false,true
 74,HAP-0071,Variegated Mango,active,exact,HA00170,Variegated Mango,1,exact:HA00170,,740,1060,535,50,woo,0,1,false,false
 75,HAP-0072,Mangosteen,active,exact,HA0097,Mangosteen (1.5ft),1,exact:HA0097,,630,900,455,100,woo,162,3,false,false
-76,HAP-0073,Matoa,active,none,,,0,none:,,800,,575,100,researched,0,0,true,true
+76,HAP-0073,Matoa,active,none,,,0,none:,,800,,575,100,researched,0,1,false,true
 77,HAP-0074,Milk fruit/ star apple,active,exact,HA00102,Milk fruit,1,exact:HA00102,,1175,1680,845,100,woo,0,3,false,true
 78,HAP-0075,Miracle fruit,active,exact,HA00103,Miracle fruit,1,exact:HA00103,,1765,2520,1270,200,woo,100,3,false,false
 79,HAP-0076,Miyazaki Mango,active,exact,HA00104,Japanese Miyazaki Mango Plant Grafted,1,exact:HA00104,,1120,1600,805,50,woo,128,2,false,false
@@ -81,83 +81,83 @@ source_row,sku,name_en,status,match,woo_sku,woo_name,confidence,scoring_suggeste
 83,HAP-0080,N-18 Rambutan,active,exact,HA00127,Rambutan N-18 (3ft),1,exact:HA00127,,770,1100,555,50,woo,0,3,false,false
 84,HAP-0081,Schoolboy Rambutan,active,exact,HA00130,Rambutan Schoolboy,1,exact:HA00130,,770,1100,555,50,woo,0,3,false,false
 85,HAP-0082,Salak,active,exact,HA00198,Salak,1,exact:HA00198,,1820,2600,1310,100,woo,20,2,false,false
-86,HAP-0083,Velvet apple,active,none,,,0,none:,,450,,325,100,researched,0,0,true,true
+86,HAP-0083,Velvet apple,active,none,,,0,none:,,450,,325,100,researched,0,1,false,true
 87,HAP-0084,All spice,active,exact,HA009,All spices,1,exact:HA009,,310,440,225,200,woo,0,3,false,false
 88,HAP-0085,Nelyani gold Cardamom,active,sibling,HA0045,Cardamom(Vijetha),0,sibling:HA0045,,225,,160,200,woo_sibling,0,3,false,true
 89,HAP-0086,Ceylon Cinnamon,active,exact,HA0049,Cinnamon,1,sibling:HA0049,"Old shop ""Cinnamon"" is the Ceylon cinnamon",225,320,160,100,woo,0,3,false,true
 90,HAP-0087,Clove,active,exact,HA0050,Clove,1,exact:HA0050,,225,320,160,100,woo,0,3,false,false
-91,HAP-0088,Curry leaves,active,none,,,0,none:,,80,,58,100,researched,0,0,true,true
+91,HAP-0088,Curry leaves,active,none,,,0,none:,,80,,58,100,researched,0,1,false,true
 92,HAP-0089,Bamboo,active,sibling,HA0038,Bhima Bamboo,0.63,sibling:HA0038,,250,,180,50,woo_sibling,0,2,false,true
 93,HAP-0090,Mahogany,active,exact,HA0092,Mahagony,1,exact:HA0092,,250,360,180,50,woo,12,2,false,false
-94,HAP-0091,Neem,active,sibling,HA0073,Honge(Pongamia pinnata),1,none:,No neem in the old shop; priced like Honge (native tree in a bag),225,,160,50,woo_sibling,0,0,true,true
+94,HAP-0091,Neem,active,sibling,HA0073,Honge(Pongamia pinnata),1,none:,No neem in the old shop; priced like Honge (native tree in a bag),225,,160,50,woo_sibling,0,1,false,true
 95,HAP-0092,Pongamia (Honge),active,exact,HA0073,Honge(Pongamia pinnata),1,exact:HA0073,,225,320,160,50,woo,528,2,false,true
 96,HAP-0093,Red sandal,active,exact,HA00137,Red Sandalwood,1,exact:HA00137,,265,380,190,100,woo,100,3,false,false
 97,HAP-0094,Sandalwood,active,exact,HA00181,Sandalwood (Chandan),1,exact:HA00181,,265,380,190,100,woo,3998,3,false,false
-98,HAP-0095,Soapnut (Antwala),active,sibling,HA0073,Honge(Pongamia pinnata),1,none:,No soapnut in the old shop; priced like Honge (native tree in a bag),225,,160,100,woo_sibling,0,0,true,true
+98,HAP-0095,Soapnut (Antwala),active,sibling,HA0073,Honge(Pongamia pinnata),1,none:,No soapnut in the old shop; priced like Honge (native tree in a bag),225,,160,100,woo_sibling,0,1,false,true
 99,HAP-0096,Teak,active,exact,HA00152,Teak,1,exact:HA00152,,310,440,225,100,woo,0,2,false,false
-100,HAP-0097,Baobab (Adansonia digitata),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-101,HAP-0098,Bael (Aegle marmelos),active,none,,,1,none:,,150,,110,100,researched_native,0,0,true,true
-102,HAP-0099,Ankola (Alangium salviifolium),active,none,,,1,none:,,60,,43,100,researched_native,0,0,true,true
-103,HAP-0100,Bitter Albizia (Albizia amara),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-104,HAP-0101,Siris Tree (Albizia lebbeck),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-105,HAP-0102,Bidi Leaf Tree (Bauhinia racemosa),active,none,,,1,none:,,90,,65,100,researched_native,0,0,true,true
-106,HAP-0103,Red Silk Cotton (Bombax ceiba),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-107,HAP-0104,Flame of the Forest (Butea monosperma),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-108,HAP-0105,Palash Creeper (Butea superba),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-109,HAP-0106,Rudravanti (Capparis moonii),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-110,HAP-0107,Kumbhi (Careya arborea),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-111,HAP-0108,Karonda Hedge (Carissa carandas),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-112,HAP-0109,Indian Laburnum (Cassia fistula),active,none,,,1,none:,,75,,54,50,researched_native,0,0,true,true
-113,HAP-0110,East Indian Satinwood (Chloroxylon swietenia),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-114,HAP-0111,Yellow Silk Cotton (Cochlospermum religiosum),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-115,HAP-0112,Indian Cherry (Cordia dichotoma),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
+100,HAP-0097,Baobab (Adansonia digitata),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+101,HAP-0098,Bael (Aegle marmelos),active,none,,,1,none:,,150,,110,100,researched_native,0,1,false,true
+102,HAP-0099,Ankola (Alangium salviifolium),active,none,,,1,none:,,60,,43,100,researched_native,0,1,false,true
+103,HAP-0100,Bitter Albizia (Albizia amara),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+104,HAP-0101,Siris Tree (Albizia lebbeck),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+105,HAP-0102,Bidi Leaf Tree (Bauhinia racemosa),active,none,,,1,none:,,90,,65,100,researched_native,0,1,false,true
+106,HAP-0103,Red Silk Cotton (Bombax ceiba),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+107,HAP-0104,Flame of the Forest (Butea monosperma),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
+108,HAP-0105,Palash Creeper (Butea superba),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
+109,HAP-0106,Rudravanti (Capparis moonii),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+110,HAP-0107,Kumbhi (Careya arborea),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+111,HAP-0108,Karonda Hedge (Carissa carandas),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+112,HAP-0109,Indian Laburnum (Cassia fistula),active,none,,,1,none:,,75,,54,50,researched_native,0,1,false,true
+113,HAP-0110,East Indian Satinwood (Chloroxylon swietenia),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+114,HAP-0111,Yellow Silk Cotton (Cochlospermum religiosum),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
+115,HAP-0112,Indian Cherry (Cordia dichotoma),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
 116,HAP-0113,Indian Rosewood (Dalbergia latifolia),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
-117,HAP-0114,Shisham (Dalbergia sissoo),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
+117,HAP-0114,Shisham (Dalbergia sissoo),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
 118,HAP-0115,Male Bamboo (Dendrocalamus strictus),active,none,,,1,none:,,90,,65,50,researched_native,0,2,false,true
-119,HAP-0116,Tendu (Diospyros melanoxylon),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-120,HAP-0117,Mountain Persimmon (Diospyros montana),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-121,HAP-0118,Hopbush (Dodonaea viscosa),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-122,HAP-0119,Medshingi (Dolichandrone falcata),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
+119,HAP-0116,Tendu (Diospyros melanoxylon),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+120,HAP-0117,Mountain Persimmon (Diospyros montana),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
+121,HAP-0118,Hopbush (Dodonaea viscosa),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+122,HAP-0119,Medshingi (Dolichandrone falcata),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
 123,HAP-0120,Khanduchi (Ehretia aspera),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-124,HAP-0121,Governor's Plum (Flacourtia indica),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-125,HAP-0122,Anjan Tree (Hardwickia binata),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-126,HAP-0123,Indian Screw Tree (Helicteres isora),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-127,HAP-0124,Waras (Heterophragma quadriloculare),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-128,HAP-0125,Kurchi (Holarrhena pubescens),active,none,,,1,none:,,90,,65,100,researched_native,0,0,true,true
-129,HAP-0126,Indian Elm (Holoptelea integrifolia),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-130,HAP-0127,Kydia (Kydia calycina),active,none,,,1,none:,,90,,65,100,researched_native,0,0,true,true
-131,HAP-0128,Lendia (Lagerstroemia parviflora),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-132,HAP-0129,Indian Ash Tree (Lannea coromandelica),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-133,HAP-0130,Henna (Lawsonia inermis),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-134,HAP-0131,Mahua (Madhuca longifolia var. latifolia),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-135,HAP-0132,Malabar Neem (Melia dubia),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
+124,HAP-0121,Governor's Plum (Flacourtia indica),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+125,HAP-0122,Anjan Tree (Hardwickia binata),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+126,HAP-0123,Indian Screw Tree (Helicteres isora),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+127,HAP-0124,Waras (Heterophragma quadriloculare),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+128,HAP-0125,Kurchi (Holarrhena pubescens),active,none,,,1,none:,,90,,65,100,researched_native,0,1,false,true
+129,HAP-0126,Indian Elm (Holoptelea integrifolia),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+130,HAP-0127,Kydia (Kydia calycina),active,none,,,1,none:,,90,,65,100,researched_native,0,1,false,true
+131,HAP-0128,Lendia (Lagerstroemia parviflora),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+132,HAP-0129,Indian Ash Tree (Lannea coromandelica),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+133,HAP-0130,Henna (Lawsonia inermis),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+134,HAP-0131,Mahua (Madhuca longifolia var. latifolia),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+135,HAP-0132,Malabar Neem (Melia dubia),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
 136,HAP-0133,Native Amla (Phyllanthus emblica),active,none,,,1,none:,,75,,54,100,researched_native,0,3,false,true
-137,HAP-0134,Manila Tamarind (Pithecellobium dulce),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-138,HAP-0135,Khejri (Prosopis cineraria),active,none,,,1,none:,,75,,54,100,researched_native,0,0,true,true
-139,HAP-0136,Indian Kino (Pterocarpus marsupium),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
+137,HAP-0134,Manila Tamarind (Pithecellobium dulce),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+138,HAP-0135,Khejri (Prosopis cineraria),active,none,,,1,none:,,75,,54,100,researched_native,0,1,false,true
+139,HAP-0136,Indian Kino (Pterocarpus marsupium),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
 140,HAP-0137,Native Red Sanders (Pterocarpus santalinus),active,none,,,1,none:,,90,,65,100,researched_native,0,3,false,true
 141,HAP-0138,Native Sandalwood (Santalum album),active,none,,,1,none:,,90,,65,100,researched_native,0,2,false,true
-142,HAP-0139,Native Soapnut (Sapindus emarginatus),active,none,,,1,none:,,90,,65,100,researched_native,0,0,true,true
-143,HAP-0140,Kusum (Schleichera oleosa),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-144,HAP-0141,Khair (Senegalia catechu),active,none,,,1,none:,,60,,43,100,researched_native,0,0,true,true
-145,HAP-0142,Wild Almond (Sterculia foetida),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
-146,HAP-0143,Karaya Gum Tree (Sterculia urens),active,none,,,1,none:,,90,,65,50,researched_native,0,0,true,true
+142,HAP-0139,Native Soapnut (Sapindus emarginatus),active,none,,,1,none:,,90,,65,100,researched_native,0,1,false,true
+143,HAP-0140,Kusum (Schleichera oleosa),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+144,HAP-0141,Khair (Senegalia catechu),active,none,,,1,none:,,60,,43,100,researched_native,0,1,false,true
+145,HAP-0142,Wild Almond (Sterculia foetida),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
+146,HAP-0143,Karaya Gum Tree (Sterculia urens),active,none,,,1,none:,,90,,65,50,researched_native,0,1,false,true
 147,HAP-0144,Native Jamun (Syzygium cumini),active,none,,,1,none:,,90,,65,50,researched_native,0,2,false,true
 148,HAP-0145,Tamarind (Tamarindus indica),active,none,,,1,none:,,120,,86,50,researched_native,0,3,false,true
-149,HAP-0146,Rohida (Tecomella undulata),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-150,HAP-0147,Bahera (Terminalia bellirica),active,none,,,1,none:,,120,,86,50,researched_native,0,0,true,true
-151,HAP-0148,Nirgundi (Vitex negundo var. negundo),active,none,,,1,none:,,60,,43,200,researched_native,0,0,true,true
-152,HAP-0149,Woolly Dyeing Rosebay (Wrightia arborea),active,none,,,1,none:,,120,,86,100,researched_native,0,0,true,true
-153,HAP-0150,Pala Indigo (Wrightia tinctoria),active,none,,,1,none:,,120,,86,100,researched_native,0,0,true,true
+149,HAP-0146,Rohida (Tecomella undulata),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+150,HAP-0147,Bahera (Terminalia bellirica),active,none,,,1,none:,,120,,86,50,researched_native,0,1,false,true
+151,HAP-0148,Nirgundi (Vitex negundo var. negundo),active,none,,,1,none:,,60,,43,200,researched_native,0,1,false,true
+152,HAP-0149,Woolly Dyeing Rosebay (Wrightia arborea),active,none,,,1,none:,,120,,86,100,researched_native,0,1,false,true
+153,HAP-0150,Pala Indigo (Wrightia tinctoria),active,none,,,1,none:,,120,,86,100,researched_native,0,1,false,true
 154,HAP-0151,Native Ber (Ziziphus mauritiana),active,none,,,1,none:,,75,,54,100,researched_native,0,2,false,true
-155,HAP-0152,Sesbania,active,none,,,0,none:,,45,,32,100,researched,0,0,true,true
-156,HAP-0153,Gliricidia,active,none,,,0,none:,,25,,18,100,researched,0,0,true,true
-157,HAP-0154,Moringa,active,none,,,0,none:,,60,,43,100,researched,0,0,true,true
-158,HAP-0155,Lemongrass,active,none,,,0,none:,,10,,7,200,researched,0,0,true,true
-159,HAP-0156,Vetiver Grass,active,none,,,0,none:,,10,,7,200,researched,0,0,true,true
-160,HAP-0157,Marigold,active,none,,,0,none:,,15,,11,200,researched,0,0,true,true
-161,HAP-0158,Mexican sunflower,active,none,,,0,none:,,15,,11,200,researched,0,0,true,true
-162,HAP-0159,Mulberry,active,none,,,0,none:,,40,,29,200,researched,0,0,true,true
+155,HAP-0152,Sesbania,active,none,,,0,none:,,45,,32,100,researched,0,1,false,true
+156,HAP-0153,Gliricidia,active,none,,,0,none:,,25,,18,100,researched,0,1,false,true
+157,HAP-0154,Moringa,active,none,,,0,none:,,60,,43,100,researched,0,1,false,true
+158,HAP-0155,Lemongrass,active,none,,,0,none:,,10,,7,200,researched,0,1,false,true
+159,HAP-0156,Vetiver Grass,active,none,,,0,none:,,10,,7,200,researched,0,1,false,true
+160,HAP-0157,Marigold,active,none,,,0,none:,,15,,11,200,researched,0,1,false,true
+161,HAP-0158,Mexican sunflower,active,none,,,0,none:,,15,,11,200,researched,0,1,false,true
+162,HAP-0159,Mulberry,active,none,,,0,none:,,40,,29,200,researched,0,1,false,true
 ,HAP-0160,Agarwood,active,exact,HA005,Agarwood,1,,Agarwood: client Plant list and FAQs,280,400,200,100,woo,0,2,false,true
 ,HAP-0161,Guava KG,draft,exact,HA001,Guava KG,1,,woo_legacy draft,450,640,325,100,woo,0,3,false,true
 ,HAP-0162,All season Jackfruit,draft,exact,HA006,All season Jackfruit,1,,woo_legacy draft,530,1325,380,50,woo,0,3,false,true

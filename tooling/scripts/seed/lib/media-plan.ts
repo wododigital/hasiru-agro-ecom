@@ -3,7 +3,7 @@
 // media-manifest.json from the same registry, so a record can never point at a file that is not copied.
 import { readdirSync, readFileSync } from 'node:fs';
 import { basename, extname, join } from 'node:path';
-import { paths, sha256, slugify } from './common';
+import { paths, readJson, sha256, slugify } from './common';
 import { imageSize } from './image-size';
 
 export type MediaSource = 'woo_import' | 'site_import';
@@ -97,5 +97,55 @@ export function siteMaster(name: string): MasterFile | undefined {
   return byFrom.get(join(paths.images(), name));
 }
 
+/** A Wikimedia Commons photo sourced for a plant the backup has no photo of (WP-13, data/media/sourcing-log.json). */
+export interface SourcedPhoto {
+  file: string;
+  /** Absolute path of the committed file (copied when the build writes to another root). */
+  from: string;
+  sha256: string;
+  w: number;
+  h: number;
+  licence: string;
+  author: string | null;
+  source_url: string;
+  credit_required: boolean;
+  credit: string;
+  plants: Set<string>;
+}
+interface SourcingEntry {
+  status: 'sourced' | 'missing' | 'shared';
+  file?: string;
+  same_as?: string;
+  licence?: string;
+  author?: string | null;
+  source_url?: string;
+  credit_required?: boolean;
+  credit?: string;
+}
+const sourced = new Map<string, SourcedPhoto>();
+let sourcingLog: Record<string, SourcingEntry> | undefined;
+
+/** The sourced photo for an image-map plant key (following `shared` entries), registered for `sku`. */
+export function registerSourcedImage(plantKey: string, sku: string): SourcedPhoto | undefined {
+  sourcingLog ??= readJson<{ plants: Record<string, SourcingEntry> }>(paths.sourcingLog()).plants;
+  let e = sourcingLog[plantKey];
+  if (e?.status === 'shared' && e.same_as) e = sourcingLog[e.same_as];
+  if (e?.status !== 'sourced' || !e.file || !e.licence || !e.source_url) return undefined;
+  let photo = sourced.get(e.file);
+  if (!photo) {
+    const from = join(paths.masters(), e.file);
+    const buf = readFileSync(from);
+    const { w, h } = imageSize(buf);
+    photo = {
+      file: e.file, from, sha256: sha256(buf), w, h, licence: e.licence, author: e.author ?? null, source_url: e.source_url,
+      credit_required: e.credit_required ?? true, credit: e.credit ?? `${e.author ?? 'Unknown'}, ${e.licence}, via Wikimedia Commons`, plants: new Set(),
+    };
+    sourced.set(e.file, photo);
+  }
+  photo.plants.add(sku);
+  return photo;
+}
+
+export const allSourced = () => [...sourced.values()].sort((a, b) => a.file.localeCompare(b.file));
 export const allMasters = () => [...bySha.values()].sort((a, b) => a.file.localeCompare(b.file));
 export const primaryRole = (m: MasterFile): MediaRole => ROLE_RANK.find((r) => m.roles.has(r)) ?? 'gallery';

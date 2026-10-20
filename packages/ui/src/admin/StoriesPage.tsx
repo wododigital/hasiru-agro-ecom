@@ -190,7 +190,7 @@ export function StoriesPage() {
       </Story>
 
       <Story id="states" title="Breadcrumbs, Skeleton, EmptyState">
-        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Fruiting trees', href: '/plants/fruiting-trees' }, { label: 'Alphonso mango' }]} />
+        <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Fruiting trees', href: '/plants/fruiting' }, { label: 'Alphonso mango' }]} />
         <div role="status" aria-busy="true" className="flex gap-3">
           <span className="sr-only">Loading example</span>
           <Skeleton className="aspect-square w-32" />

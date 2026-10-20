@@ -41,9 +41,9 @@ const fileSchema = z.object({
 
 /**
  * Seed hook `content`: data/seed/cms.json. Inserts only what is missing (by slug or key) and never overwrites
- * admin edits, so a second run changes nothing. Policy pages are always seeded as draft + noindex, whatever the
- * file says: they publish only when the store owner approves the wording. Blocks that do not validate are skipped
- * with a note.
+ * admin edits, so a second run changes nothing. Policy pages are always seeded noindex (the client's final
+ * wording replaces the placeholder text) and published only when the file says so, since the storefront footer
+ * links them. Blocks that do not validate are skipped with a note.
  */
 export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
   const file = join(ctx.seedDir, 'cms.json');
@@ -76,7 +76,7 @@ export async function runSeed(ctx: SeedContext): Promise<SeedResult> {
           slug: slug.data,
           title: p.title,
           titleKn: undefined,
-          status: policy ? 'draft' : p.status,
+          status: p.status,
           template: policy ? 'policy' : (p.template ?? 'default'),
           seoTitle: p.seo.title ?? undefined,
           seoDescription: p.seo.description ?? undefined,

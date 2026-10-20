@@ -1,10 +1,11 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T04:39:25+05:30",
+  "generated_at": "2026-10-20T09:59:01+05:30",
   "sources": [
     "images/",
     "_work/image-map.json",
-    "_work/products.json"
+    "_work/products.json",
+    "data/media/sourcing-log.json"
   ],
   "records": [
     {
@@ -72,6 +73,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/pithecellobium-dulce-roxb-benth.jpg",
+      "sha256": "023629e90d0de77dd519319f0357fe1450aa21ce3d7734394a7ab5d6b8682825",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "B.navez",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pithecellobium_dulce_tree.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0134"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/lakshmana-phala-hasiru-agro.jpg",
       "sha256": "03061e708ad09a6db6c453904c9190487c1ec3b8f0b27395f4ac4eedb075a84a",
       "source": "woo_import",
@@ -133,6 +147,19 @@
         "HAP-0026"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/vetiever-grass.jpg",
+      "sha256": "03a17b02427c5c877272857eebe7da1d873e4718e667765a0495f4e769858fcb",
+      "source": "wikimedia",
+      "licence": "CC BY 2.0",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Chrysopogon_zizanioides-seeding_habit-Kokomo_Haiku.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0156"
+      ],
+      "role": "main"
     },
     {
       "file": "products/varigated-lime-fruit-with-plant-images.jpg",
@@ -515,6 +542,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/diospyros-melanoxylon-roxb.jpg",
+      "sha256": "0fcce2457c4a3692f13e642916ccf28895bd95a5929dd7b50723019e252e11df",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Xzantiyamoloy",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Diospyros_melanoxylon_little_Tree_of_Purulia,_West_Bengal,_India.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0116"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/vietnam-jack-all-season-fruit-wi.webp",
       "sha256": "11423fe32c0974e002b9dd9cc78052589d43070cd12d0711f84f9a91f3c53baa",
       "source": "woo_import",
@@ -749,6 +789,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/mexican-sunflower.jpg",
+      "sha256": "1a3cb301cf787400725dad671248a68c0b250b2364277cf7657d911856e26fde",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0 us",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-090720-3175-Tithonia_diversifolia-habit_near_stream-Iao_Stream-Maui_(24674866580).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0158"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/taiwan-pink-guava-fruit-fruit-image-hasiruagro.jpg",
       "sha256": "1aae60915ccfa8768d16489662a2017a86f8f8c4215f4929b5b763705afe4b37",
       "source": "woo_import",
@@ -760,6 +813,19 @@
         "HAP-0014"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/moringa.jpg",
+      "sha256": "1b4517a66052744cfa8dfb6a29802b9a0212125602dd6c020a434e030cafdc0f",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Mazhanilavu",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%E0%B4%AE%E0%B5%81%E0%B4%B0%E0%B4%BF%E0%B4%99%E0%B5%8D%E0%B4%99%E0%B4%AA%E0%B5%8D%E0%B4%AA%E0%B5%82%E0%B4%B5%E0%B5%8D_-_Drumstick_tree_flower.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0154"
+      ],
+      "role": "main"
     },
     {
       "file": "products/black-guava-fruit-image-hasiruagro.jpg",
@@ -836,6 +902,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0262"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/wrightia-tinctoria-roxb-r-br.jpg",
+      "sha256": "1ec8f3a0d1e6fd06e2c9729f6ae5334fc5b96e82bb851c2c34f3188cf248a1fd",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Pala_Indigo_tree_(2443398324).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0150"
       ],
       "role": "main"
     },
@@ -1020,6 +1099,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/jackfruit-hebbalasu-wild.jpg",
+      "sha256": "2439f497a47f59a42e147d4ec96b23a534c3d846c05c53bef5c3490505bc887d",
+      "source": "wikimedia",
+      "licence": "CC BY 4.0",
+      "author": "Siddarth Machado",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Artocarpus_hirsutus_101621573.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0051"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/reviewer_sornah_pandian_hasiru_agro.png",
       "sha256": "247ec582f3ddb526ed981d33a5b5bbc5d93c565fd7f880dc4e709be739c7de2f",
       "source": "site_import",
@@ -1055,6 +1147,19 @@
       "role": "site"
     },
     {
+      "file": "sourced/jaboticaba-sabara.jpg",
+      "sha256": "2714b68cdb1e9cdf1065ae3f56d9e9bf7a3be17fad251513d843ef47c46c9037",
+      "source": "wikimedia",
+      "licence": "CC0",
+      "author": "Daderot",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Plinia_cauliflora_(Myrciaria_cauliflora)_-_Fruit_and_Spice_Park_-_Homestead,_Florida_-_DSC08841.jpg",
+      "credit_required": false,
+      "plants": [
+        "HAP-0067"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/ramphal-hasiru-agro-plant.webp",
       "sha256": "27164a8fa5f864021449158520ab12ce803c522e04db78db7d44b9c23d2bc70c",
       "source": "woo_import",
@@ -1079,6 +1184,19 @@
         "HAP-0242"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/bombax-ceiba-l.jpg",
+      "sha256": "27d22a29587da6471b0e8f29994ce0cf04cf3125c4c581b254ad08fedc66ad3c",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.5",
+      "author": "Unknown author",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cotton_tree_at_Tsing_Yi_Island.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0103"
+      ],
+      "role": "main"
     },
     {
       "file": "products/kolkata-patti-lemonplant-with-fr.webp",
@@ -1412,6 +1530,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/sterculia-urens-roxb.jpg",
+      "sha256": "346f07bad4139d0d9017e2432b49a5cf58f5cbc7aaa4190e9dae85be06e3c35c",
+      "source": "wikimedia",
+      "licence": "CC BY 2.0",
+      "author": "gailhampshire from Cradley, Malvern, U.K",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ghost_Tree._Sterculia_urens..jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0143"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/variegated-chikoo-hasiru-agro.webp",
       "sha256": "349c7d82bf28f51662ce258ff983d14c4f810c6d8105d6ce52726ff959bdf484",
       "source": "woo_import",
@@ -1735,6 +1866,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/papaya-pandrah-no-15.jpg",
+      "sha256": "3f517b330f5779281ec499fd3ccf7bddf9cf520418d6387a4cd8cc413b3b6df9",
+      "source": "wikimedia",
+      "licence": "Public domain",
+      "author": "Author: P. Miller",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Papaya_plant_from_below.JPG",
+      "credit_required": false,
+      "plants": [
+        "HAP-0040"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/pepper-f.jpg",
       "sha256": "40ce2a00e9977effccad0d47e75229db1ef29762721e0071ccfcae53ac727512",
       "source": "woo_import",
@@ -1811,6 +1955,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0221"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/sterculia-foetida-l.jpg",
+      "sha256": "43e9d61c36fa22fdd758817684502a8d39cdc2fce48d4499302ca297efd3cfd5",
+      "source": "wikimedia",
+      "licence": "CC0",
+      "author": "Sunil D'Monte",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Sterculia_foetida_112877015.jpg",
+      "credit_required": false,
+      "plants": [
+        "HAP-0142"
       ],
       "role": "main"
     },
@@ -1908,6 +2065,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/schleichera-oleosa-lour-oken.jpg",
+      "sha256": "488f037960b7e67cf36d55083e80f103b8aa794531db1538291d4a6fa011edf5",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Salim Khandoker",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Schleichera_oleosa_(_bn-Kusum),Young_leaves_blooming_in_various_shades_of_red._Ramna_Park,_Dhaka,_(12_March_2020)(1).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0140"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/singapore-cherry-1.jpg",
       "sha256": "48fe86e17327dedaa3d975eadd56b71d48670b5d8776d18c91d9382c19324adb",
       "source": "woo_import",
@@ -1934,6 +2104,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/heterophragma-quadriloculare-roxb-k-schum.jpg",
+      "sha256": "493d98c3fd8ab8c5862a105f131952a61a1565e31ce934a42373570e25db6703",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Heterophragma_quadriloculare_(2276478130).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0124"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/pest_management_brew_large_vessel_hasiru_agro.webp",
       "sha256": "49df3b7904837bfac588959c99978d68fcba8044ff0e85617dfba2ed17e86564",
       "source": "site_import",
@@ -1956,6 +2139,19 @@
         "HAP-0254"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/lannea-coromandelica-houtt-merr.jpg",
+      "sha256": "4b2b45861a1b061ac2f5f1a13ed806eddd010c405a79f5ec26064b3971f688d2",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lannea_coromandelica_(Wodier_Tree)_fruits_in_Hyderabd_W_IMG_7568.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0129"
+      ],
+      "role": "main"
     },
     {
       "file": "products/bhima-bamboo-1.jpg",
@@ -2009,6 +2205,45 @@
         "HAP-0012"
       ],
       "role": "site"
+    },
+    {
+      "file": "sourced/tecomella-undulata-sm-seem.jpg",
+      "sha256": "4ea91dd298f25dd540fc1331c127e7b58029f98bb57f231b0e9a42e3c2558cdb",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "Hadi Karimi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Tecomella_undulata_tree_in_Alamarvdasht,_Fars,_Iran,_by_Hadi_Karimi.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0146"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/holarrhena-pubescens-wall-ex-g-don.jpg",
+      "sha256": "4ee4dba1a854a0ae28fd71f6303829048b86839ec0103e33a1b204c604bd85ab",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vijayanrajapuram",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Holarrhena_pubescens_fruit_beans.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0125"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/helicteres-isora-l.jpg",
+      "sha256": "4f34355cf2ac6a3ce4479500f29d912c67ecf720e4c8c79bea82bf4e9181715f",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:East_Indian_Screw_tree_(22447528190).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0123"
+      ],
+      "role": "main"
     },
     {
       "file": "products/spicy-guava-plant-with-fruit-image-hasiruagro.jpg",
@@ -2074,6 +2309,19 @@
       "role": "site"
     },
     {
+      "file": "sourced/cordia-dichotoma-g-forst.jpg",
+      "sha256": "50f6e526666f2c8fdda4610a6762d1e52b0dd5ccba35c3fb59b2efe08d9fdea8",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Bird_Lime_tree_(3382793130).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0112"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/loquat-hasiru-agro.jpg",
       "sha256": "510c3a6f1234830bb38c69d249fdcb32208a280ef68427cce99f79936089e10d",
       "source": "woo_import",
@@ -2111,6 +2359,19 @@
         "HAP-0278"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/holoptelea-integrifolia-roxb-planch.jpg",
+      "sha256": "51c520958f27c6f7b0aac011802e42c62e654c26fb740c625d4fa3cfd7a658c1",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Entire-leaved_Elm_tree_(3260221191).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0126"
+      ],
+      "role": "main"
     },
     {
       "file": "site/design_contour_water_flow_map_hasiru_agro.webp",
@@ -2161,6 +2422,19 @@
         "HAP-0031"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/dalbergia-sissoo-roxb-ex-dc.jpg",
+      "sha256": "53d100f944c855a93c9f488f392fbc6782a9a19bb32c206df5464336df19c4e8",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Blackwood_Tree_(4656262165).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0114"
+      ],
+      "role": "main"
     },
     {
       "file": "products/mandrin-orange.webp",
@@ -2240,6 +2514,32 @@
         "HAP-0239"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/prosopis-cineraria-l-druce.jpg",
+      "sha256": "564be276817f236d87c11f95d53dea08e5601264d8247b855bf1eeb809d7bd2e",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Mulkh Singh",
+      "source_url": "https://commons.wikimedia.org/wiki/File:A_tree_of_Prosopis_Cineraria_in_India.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0135"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/chloroxylon-swietenia-dc.jpg",
+      "sha256": "575cbcbb69bde3d6c5a4083e573b0b9131b1a7a0ed9e6953ce166a197278f827",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Canopy_of_East_Indian_satinwood_(Chloroxylon_swietenia)_at_Kambalakonda.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0110"
+      ],
+      "role": "main"
     },
     {
       "file": "products/jardalu-mango-plant-with-fruit-image-hasiruagro.jpg",
@@ -2361,6 +2661,32 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/madhuca-longifolia-var-latifolia-roxb-a-chev.jpg",
+      "sha256": "5ac9be9393d77fd098b814befb3634b8751ae21eb5339b7735881526dd2f007b",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Madhuca_longifolia_var_latifolia_(Mahua)_leaves_W_IMG_0247.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0131"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/alangium-salviifolium-l-f-wangerin.jpg",
+      "sha256": "5b06ca9fdba77af389973a4cc492cfceee6133bed08d5e6829c8a56114c2359b",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Vinayaraj",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Alangium_salviifolium_leaves_03.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0099"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/coconut-tiptur-tall.jpg",
       "sha256": "5b3c6a567030cbe7fd7e62b7749fe203ac48629dbcc7765cce5bb81f9420b52d",
       "source": "woo_import",
@@ -2383,6 +2709,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0179"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/flacourtia-indica-burm-f-merr.jpg",
+      "sha256": "5c076ea5c806abf1b35674df6e2001871c9e3ce0226e5838278007b71604910e",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Flacourtia_indica_fruit_in_Hyderabad_W_IMG_7482.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0121"
       ],
       "role": "main"
     },
@@ -2461,6 +2800,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0162"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/mulberry.jpg",
+      "sha256": "609ab233205e7cd6ccda902309091f3b4a5776f9671b432072ad745cae0d0f75",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "B.navez",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Morus_alba_fruits.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0159"
       ],
       "role": "main"
     },
@@ -2783,6 +3135,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/bauhinia-racemosa-lam.jpg",
+      "sha256": "6af5806350a3176f4d4aa9141185c947c6c1adebb62a329443e01fe93caa439d",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Bauhinia_racemosa_(Jhinjheri)_flowers_%26_fruits_W2_IMG_7477.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0102"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/macadamia-hasiru-agro.webp",
       "sha256": "6b054f849c467abd1e60c6ea090c90d296678ea0ee6373baa37d2f87ab125e81",
       "source": "woo_import",
@@ -2928,6 +3293,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/sesbania.jpg",
+      "sha256": "72c6f74607748e1cfce62ed2921982ff0c62b9a3ff92fd847857cf7f5cc2f4bc",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "阿橋 HQ",
+      "source_url": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8%E7%94%B0%E8%8F%81(%E5%A4%A7%E8%8A%B1%E7%94%B0%E8%8F%81)_Sesbania_grandiflora_-%E6%B7%B1%E5%9C%B3%E5%9C%92%E5%8D%9A%E5%9C%92_Shenzhen_Expo_Garden,_China-_(9227096869).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0152"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/thai-black-jamun.jpg",
       "sha256": "7301e3212dd32c8a0a699b1467bf4119b960c38a16420e641a80712089479c53",
       "source": "woo_import",
@@ -2989,6 +3367,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0024"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/butea-superba-roxb-ex-willd.jpg",
+      "sha256": "76b745e562a76f95918c151a20bdd30ba8fbf42d585c79a2f0dda3877e548dd9",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:(Butea_superba)_sapling_in_the_Eastern_Ghats_near_Samedha.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0105"
       ],
       "role": "main"
     },
@@ -3304,6 +3695,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/lemongrass.jpg",
+      "sha256": "7e798332d8cd0504a2a44689dbbec2d6a30d4675d128e3bb204f05d0e159944a",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Undeka 11",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cymbopogon_citratus_lemongrass_plant_in_garden.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0155"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/areca-bukkambudiplant-with-fruit-image-hasiruagro.jpg",
       "sha256": "7ef07cee3e8f9436a24a6ebc25a2571d52c50aad3baaac3b4d9d654791a178c2",
       "source": "woo_import",
@@ -3378,6 +3782,19 @@
         "HAP-0240"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/dodonaea-viscosa-jacq-hedge.jpg",
+      "sha256": "801fbf5022f95be3725f81725061db4ff94068866bf16d29cefd75ab180a50d2",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Juan Carlos Fonseca Mata",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dodonaea_viscosa_-_Leaves.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0118"
+      ],
+      "role": "main"
     },
     {
       "file": "products/kiwi-1.jpg",
@@ -3512,6 +3929,19 @@
       "role": "site"
     },
     {
+      "file": "sourced/careya-arborea-roxb.jpg",
+      "sha256": "898064853c17e2549a05abdd99a60cd1c0d4df18569790bf6b4cf19573c35b52",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Slow_Match_Tree_(6871409034).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0107"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/cocoa-1.jpg",
       "sha256": "89cdc9ea4c93367c4eb13e8437ebf0f9b08ab97f341e559f8e6c7735eae9cf42",
       "source": "woo_import",
@@ -3534,6 +3964,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0248"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/cassia-fistula-l.jpg",
+      "sha256": "8a5204b4d1a0aa502fe1cf19fff2fbfc203f9916b6f75791473f9dcc524667a1",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Dr. Raju Kasambe",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cassia_fistula_tree_branch_with_flower._Thane,_Maharashtra..JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0109"
       ],
       "role": "main"
     },
@@ -3616,6 +4059,19 @@
         "HAP-0193"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/capparis-moonii-wight.jpg",
+      "sha256": "8c799fb454250f253029fef588c3c42cfff390370bf06d0e30a668af7c73e8e3",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Delonix",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Capparis_moonii_-_flower.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0106"
+      ],
+      "role": "main"
     },
     {
       "file": "products/abiu-hasiru-agro.jpg",
@@ -3826,6 +4282,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/adansonia-digitata-l.jpg",
+      "sha256": "92a26289fdcd895f3f54535d6c5dbd2b257dd30def3e24451157df2048382375",
+      "source": "wikimedia",
+      "licence": "CC BY 2.0",
+      "author": "Quinn Norton",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Baobob_tree.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0097"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/bombay-litchi.jpg",
       "sha256": "931b97a0412b357d007c4becb3e62d2d601074c5d281c43a142c9df769d2839c",
       "source": "woo_import",
@@ -3998,6 +4467,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/dolichandrone-falcata-wall-ex-dc-seem.jpg",
+      "sha256": "97cb37a7627fe57a137f4a34cc1d3fefd6b7234a74722eda7eb5d51915b920cd",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Dolichandrone_falcata_fruit_in_Hyderabad_W_IMG_7427.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0119"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/varashree-jackfruit.webp",
       "sha256": "993c95af9c022cef779726fd747e8d9dfeae5bfb20ed554f62a489e3f530a750",
       "source": "woo_import",
@@ -4114,6 +4596,20 @@
       "role": "main"
     },
     {
+      "file": "sourced/soapnut-antwala.jpg",
+      "sha256": "9af77148817b2ba28dcfb3d62e311350665013716618fa5df189109c8e7a4cf0",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Paryavarana Margadarsi Vaisakhi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Soap_nut_tree_(Sapindus_emarginatus)_with_fresh_foliage.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0095",
+        "HAP-0139"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/longon-plant-with-fruit-image-hasiruagro.jpg",
       "sha256": "9b6744a2d71c5a882b925a06cd1380fe4617a49e9253b7afa34771de2c7d4376",
       "source": "woo_import",
@@ -4175,6 +4671,19 @@
         "HAP-0058"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/wrightia-arborea-dennst-mabb.jpg",
+      "sha256": "9c0d771db9ef813b1aaf3b340e69d3db6ddf32b80ec0e9df237bc3eb1ada26c3",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 2.0",
+      "author": "Dinesh Valke from Thane, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Adavi_Ankudu_(Telugu-_%E0%B0%85%E0%B0%A1%E0%B0%B5%E0%B0%BF%E0%B0%85%E0%B0%82%E0%B0%95%E0%B1%81%E0%B0%A1%E0%B1%81)_(4779259879).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0149"
+      ],
+      "role": "main"
     },
     {
       "file": "products/seedless-jackfruit-fruit-with-im.webp",
@@ -4253,6 +4762,32 @@
         "HAP-0219"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/curry-leaves.jpg",
+      "sha256": "9f2cf36f45e39505146aa122bc2f6e5034d8313280e8429c5170a0890e716d5c",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vijay Kumar Soren",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Curry_plant_(curry_leaves).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0088"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/wood-apple.jpg",
+      "sha256": "9f8e22c53b6432b56c28d09e4d341ce210ac9cc6a0108be6244549698acc0d73",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "AntanO",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Wood-apple_tree.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0052"
+      ],
+      "role": "main"
     },
     {
       "file": "products/totapuri-mangoplant-with-fruit-i.webp",
@@ -4469,6 +5004,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/velvet-apple.jpg",
+      "sha256": "a94e90d71cf93cf6ef5565378148a2a62fa9b397494cb27beb2636c3b2966d75",
+      "source": "wikimedia",
+      "licence": "CC BY 4.0",
+      "author": "(c) 林正文, some rights reserved (CC BY)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Butter_Fruit_imported_from_iNaturalist_photo_418627884_on_22_August_2024.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0083"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/taiwan-pink-guavaplant-with-fruit-image-hasiruagro.jpg",
       "sha256": "a95bc2a8f65ce975bef6ea624915a0272bb9db6023f5ed42161d8002a225f96f",
       "source": "woo_import",
@@ -4622,6 +5170,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/hardwickia-binata-roxb.jpg",
+      "sha256": "b295ef90af2b0fcca9191ac87f77195724f69117fe0b1965c113f82d99f882bd",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Ajtjohnsingh",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Hardwickia_binata_a_characteristic_tree_species_of_Eastern_Ghats,_AJT_Johnsingh._._P1020686.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0122"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/diana-anjeer-fig-plants-hasiruagro.jpg",
       "sha256": "b2fb28fd28e970b2dca54455813767a6e1aa7fdcbfd901454b72893222c6cfcf",
       "source": "woo_import",
@@ -4645,6 +5206,21 @@
       "credit_required": false,
       "plants": [
         "HAP-0016"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/banana-yelakki.jpg",
+      "sha256": "b398b0c29855a4e7fc561333d1d5503ce226aa68d0ac71c47774d0f0b4869132",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Ong Jyh Seng",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Musa_acuminata_245646872.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0053",
+        "HAP-0054",
+        "HAP-0055"
       ],
       "role": "main"
     },
@@ -5024,6 +5600,19 @@
       "role": "site"
     },
     {
+      "file": "sourced/lagerstroemia-parviflora-roxb.jpg",
+      "sha256": "c0199ee9baa2ddaa5f7ec02af40010e337870fb4db86a5b3b218b0ebf735d057",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Drorchidaceae",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lagerstroemia_parviflora_tree.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0128"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/jeerige-midi-mango-plant-with-fruit-image-hasiruagro.jpg",
       "sha256": "c04c8cd4b13047a471f44779fddafaa047e0a598aeb3fa8cc192267371dbb14c",
       "source": "woo_import",
@@ -5129,6 +5718,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/kydia-calycina-roxb.jpg",
+      "sha256": "c361c084bf8526cb8c1a5f2b782c15864bc30ba4a686b8f1837a1fe66a07be4c",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Vinayaraj",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Kydia_calycina_flowers_at_Kunnathurpadi_(1).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0127"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/coconut-channarayapatnaplant-with-fruit-image-hasiruagro.jpg",
       "sha256": "c445ccb07065b0fb42a6bc526edb9354947cf45519bdd49907b0b3fa7dfea07b",
       "source": "woo_import",
@@ -5182,6 +5784,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/senegalia-catechu-l-f-p-j-h-hurter-mabb.jpg",
+      "sha256": "c6418cd49655fd050dbe740d071975bd9faf72dd521fd8b42f6b8d7e2c2a085a",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "J.M.Garg",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Khair_(Acacia_catechu)_flowers_at_Hyderabad,_AP_W_IMG_7261.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0141"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/all-season-lemon-2plant-with-fru.webp",
       "sha256": "c651cb7d7a0c8027e4776d45e8354d9bc847db6dc0fa4c88ccfad73ae9e35635",
       "source": "woo_import",
@@ -5205,6 +5820,19 @@
       "plants": [
         "HAP-0113",
         "HAP-0241"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/albizia-amara-roxb-boivin.jpg",
+      "sha256": "c6a1a8555fa71f8e09a7e566a62ae8931faa442b4eb6ca6e802d911e8817bf3e",
+      "source": "wikimedia",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Albizia_amara_flowers_01.JPG",
+      "credit_required": false,
+      "plants": [
+        "HAP-0100"
       ],
       "role": "main"
     },
@@ -5527,6 +6155,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/marigold.jpg",
+      "sha256": "d0ad4226d2c872bac271bb637c42ecf1f3aaefebbfed5b249e1bc72b8df162bf",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Dori",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Urbana_Illinois_park_20070928_img_2120-crop.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0157"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/thai-banana-mango-fruit-image-ha.webp",
       "sha256": "d152a63e5b9873a025a214f87c0129de732bab6a87f901f1108ecf1600976129",
       "source": "woo_import",
@@ -5577,6 +6218,19 @@
         "HAP-0162"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/melia-dubia-cav.jpg",
+      "sha256": "d1fe6f27f1507d549acdf22224f6e03615581876aa9f2e8c8ac9c584e92ffe1a",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "TheSlumPanda",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Leaves_of_Malabar_(Melia_dubia)_plant.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0132"
+      ],
+      "role": "main"
     },
     {
       "file": "products/mango-totapuri-1-hasiru-agro.webp",
@@ -5706,6 +6360,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/butea-monosperma-lam-kuntze.jpg",
+      "sha256": "d6525615058e2a819385ddbca1606b385089ea8be1b3bdebaae97047f547f8fc",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Adityamadhav83",
+      "source_url": "https://commons.wikimedia.org/wiki/File:(Butea_monosperma)_Moduga_tree_at_a_park_in_Madhurawada.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0104"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/transformation_excavator_basin_mountains_hasiru_agro.webp",
       "sha256": "d6c544d7e5daafad95fd82ff9e34db134e245bed97bc34d3cc595956582aecf3",
       "source": "site_import",
@@ -5754,6 +6421,19 @@
         "HAP-0064"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/gliricidia.jpg",
+      "sha256": "d9aa85bd343580672ede0fabeb6f2b83c158631ff50d3e8fd951ddeeb2a2ea2e",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Nativeplants garden",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Fence_Post_Tree(Gliricidia_sepium_2.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0153"
+      ],
+      "role": "main"
     },
     {
       "file": "products/rambutan-schoolboy-plant-with-fruit-image-hasiruagro.jpg",
@@ -5885,6 +6565,19 @@
       "role": "gallery"
     },
     {
+      "file": "sourced/aegle-marmelos-l-corr-a.jpg",
+      "sha256": "dc90fc6be08dc65fe7df1b11b0d52aa4b6d0805d34796c79ad697a30ee6578d2",
+      "source": "wikimedia",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Aegle_marmelos_fruit_06.JPG",
+      "credit_required": false,
+      "plants": [
+        "HAP-0098"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/planting_saplings_truck_loading_hasiru_agro.webp",
       "sha256": "dca56f7913d06bd8f2e087f05e1dc2fe173452c1a1cfdcd425d453ef2a4212a0",
       "source": "site_import",
@@ -6009,6 +6702,19 @@
       "role": "site"
     },
     {
+      "file": "sourced/albizia-lebbeck-l-benth.jpg",
+      "sha256": "e0f3ec4dfe19ac50c891bdee392c6c8573e178c315e3150999a7c65d2948d2e3",
+      "source": "wikimedia",
+      "licence": "CC0",
+      "author": "Forestowlet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Albizia_lebbeck_tree_01.JPG",
+      "credit_required": false,
+      "plants": [
+        "HAP-0101"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/water_harvesting_pond_excavation_hasiru_agro.webp",
       "sha256": "e10ceabebd5ceea1e74e38c9972e6b695a16fc32c816910a7a982894c2846f46",
       "source": "site_import",
@@ -6032,6 +6738,32 @@
         "HAP-0070"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/matoa.jpg",
+      "sha256": "e1979921a0ad5343dbe21fda5b4a4ef967ac421510a5947be092a10b4d89bdc5",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0 us",
+      "author": "Forest and Kim Starr",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-090714-2715-Pometia_pinnata-habit-Napili-Maui_(24602000159).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0073"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/monkey-jack.jpg",
+      "sha256": "e1989802837294789e826c0c235a2ba0620043886d750ae27f0acd2463b52473",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "User:Bellayet",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Deua_Bangladeshi_Fruit.jpeg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0034"
+      ],
+      "role": "main"
     },
     {
       "file": "products/red-chakota-plant-with-fruit-image-hasiruagro.jpg",
@@ -6244,6 +6976,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/vitex-negundo-var-negundo.jpg",
+      "sha256": "edb5373ad9ba4e23e3cd9b3ac01622ae90938f644dc6e16fe2b7939922a6a1ee",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Reji Jacob at Malayalam Wikipedia",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Karinochi-Plant.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0148"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/sandalwood-f.jpg",
       "sha256": "ee60eff5f6cfcb926997aecda9a9f80088b3a2290aed832099056079c6db38c0",
       "source": "woo_import",
@@ -6293,6 +7038,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0194"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/lawsonia-inermis-l.jpg",
+      "sha256": "ef0990b0009208e76e6680f67ea9c6ed5e9b5e910d26fdcbe4abb5e568bf9b11",
+      "source": "wikimedia",
+      "licence": "Public domain",
+      "author": "Cesinha X",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Henna_plant.jpg",
+      "credit_required": false,
+      "plants": [
+        "HAP-0130"
       ],
       "role": "main"
     },
@@ -6417,6 +7175,33 @@
       "role": "main"
     },
     {
+      "file": "sourced/karonda.jpg",
+      "sha256": "f13774400f75c7a0e9c5f2b86f9642d0b522e26ee41c19734d4dc842b1e3e434",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 3.0",
+      "author": "Shyamal",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Carissa_carandas_fruit.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0023",
+        "HAP-0108"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/terminalia-bellirica-gaertn-roxb.jpg",
+      "sha256": "f21ebb96214170813c367b2f9b9a233a2dba469219972a3e29aa2085cbe1f40f",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "A. J. T. Johnsingh, WWF-India and NCF",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Terminalia_belerica_sprouting_young_leaves_in_Bannerghatta_NP_AJTJ_P1010459.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0147"
+      ],
+      "role": "main"
+    },
+    {
       "file": "site/favicon_32px_hasiru_agro.png",
       "sha256": "f26da48abb0e16db41d87a088611f99753488442676fe181fda47474563678e1",
       "source": "site_import",
@@ -6504,6 +7289,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/neem.jpg",
+      "sha256": "f5f56dd51e4588defacd6c5688c231beb1e033aae560516655104744fdec4dd5",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Kwameghana(Bright Kwame Ayisi)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Azadirachta_indica-Neem_tree.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0091"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/siddu-jackfruit.webp",
       "sha256": "f70860e62b7e1d16c4929287697a067b6aa66d338ee52c5f8f17413e58e72939",
       "source": "woo_import",
@@ -6565,6 +7363,19 @@
       "credit_required": false,
       "plants": [
         "HAP-0193"
+      ],
+      "role": "main"
+    },
+    {
+      "file": "sourced/pterocarpus-marsupium-roxb.jpg",
+      "sha256": "f85444de5cbe45417d2e86990399f7227e7c238eba77d268399f5e1a6926537a",
+      "source": "wikimedia",
+      "licence": "CC BY 3.0",
+      "author": "Biswarup Ganguly",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Acharya_Jagadish_Chandra_Bose_Indian_Botanic_Garden_-_Howrah_2011-01-08_9821.JPG",
+      "credit_required": true,
+      "plants": [
+        "HAP-0136"
       ],
       "role": "main"
     },
@@ -6728,6 +7539,19 @@
       "role": "main"
     },
     {
+      "file": "sourced/cochlospermum-religiosum-l-alston.jpg",
+      "sha256": "fe34ad57a36e43597852cf95800ca555a0c0afaef669c38425ade49d5564345f",
+      "source": "wikimedia",
+      "licence": "CC BY 2.0",
+      "author": "Jayesh Patil from Mumbai, India",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cochlospermum_religiosum_-_Yellow_Silk-Cotton_Tree_(5478653421).jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0111"
+      ],
+      "role": "main"
+    },
+    {
       "file": "products/clove-f.jpg",
       "sha256": "fec89f88e877ecdf5bc5637df6e2096137425f05cd914969bb9a2b159ee6b280",
       "source": "woo_import",
@@ -6765,6 +7589,19 @@
         "HAP-0176"
       ],
       "role": "gallery"
+    },
+    {
+      "file": "sourced/diospyros-montana-roxb.jpg",
+      "sha256": "ffbf5e0f950736bec4e837a488dae3e3930371bd3f84d3fa7d3fc2522593b06e",
+      "source": "wikimedia",
+      "licence": "CC BY-SA 4.0",
+      "author": "Rohitjahnavi",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Fruits_of_Diospyros_montana_DSCN1018.jpg",
+      "credit_required": true,
+      "plants": [
+        "HAP-0117"
+      ],
+      "role": "main"
     }
   ]
 }

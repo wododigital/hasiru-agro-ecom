@@ -11,8 +11,9 @@ export default defineModule({
   routes: [
     { path: '/plan', module: 'routes/plan', kind: 'page', exports: ['default', 'generateMetadata'] },
     { path: '/plan/results/[planId]', module: 'routes/plan-results', kind: 'page', exports: ['default', 'generateMetadata'] },
-    { path: '/models/[model]', module: 'routes/model', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'] },
-    { path: '/plants/for/[model]', module: 'routes/plants-for', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'] },
+    // Unknown models wait for the full render (real 404 status) instead of the shared fallback shell.
+    { path: '/models/[model]', module: 'routes/model', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'], segmentConfig: { unstable_paramMatching: { model: 'blocking' } } },
+    { path: '/plants/for/[model]', module: 'routes/plants-for', kind: 'page', exports: ['default', 'generateMetadata', 'generateStaticParams'], segmentConfig: { unstable_paramMatching: { model: 'blocking' } } },
     { path: '/api/plan/generate', module: 'routes/api-generate', kind: 'route', exports: ['POST'] },
     { path: '/api/plan/unlock', module: 'routes/api-unlock', kind: 'route', exports: ['POST'] },
   ],

@@ -1,12 +1,13 @@
 // Step 9.7: copy the image masters the seed uses from the backup into data/media/masters/{products,site}/
 // and write data/media/media-manifest.json. Files are copied only when missing or changed; files in those
-// two folders that nothing uses any more are removed. Records for sourced/ photos (WP-13) are kept as is.
+// two folders that nothing uses any more are removed. sourced/ photos (WP-13) stay where they are; the products
+// that use them get a manifest record with the licence, author and source from data/media/sourcing-log.json.
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 // @boundaries-ignore type-only: the seed-hook contract; @tooling/scripts cannot depend on core (core depends on it for db helpers)
 import type { SeedContext } from '../../../packages/core/src/contracts/extensions';
 import { readJson, sha256, SOURCES, writeSeedFile } from './lib/common';
-import { allMasters, type MasterFile, primaryRole, siteImages } from './lib/media-plan';
+import { allMasters, allSourced, type MasterFile, primaryRole, siteImages, type SourcedPhoto } from './lib/media-plan';
 import { buildProducts } from './fill-gaps';
 
 export interface ManifestRecord {
@@ -22,6 +23,8 @@ export interface ManifestRecord {
 }
 
 export const OWNED_DIRS = ['products', 'site'] as const;
+/** Manifest prefixes this step writes (sourced/ files are WP-13's and are never removed here). */
+const RECORD_DIRS = [...OWNED_DIRS, 'sourced'] as const;
 const LICENCE = {
   woo_import: 'Unverified: used on the old hasiruagro.com shop; confirm rights or replace',
   site_import: 'Hasiru Agro: current hasiruagro.com site',
@@ -39,11 +42,23 @@ const toRecord = (m: MasterFile): ManifestRecord => ({
   role: primaryRole(m),
 });
 
+const sourcedRecord = (p: SourcedPhoto): ManifestRecord => ({
+  file: p.file,
+  sha256: p.sha256,
+  source: 'wikimedia',
+  licence: p.licence,
+  author: p.author,
+  source_url: p.source_url,
+  credit_required: p.credit_required,
+  plants: [...p.plants].sort(),
+  role: 'main',
+});
+
 /** Manifest records this step owns, built from the same registry the product records used. */
 export function mediaRecords(): ManifestRecord[] {
   buildProducts(); // registers every product image
   siteImages(); // and every current-site image
-  return allMasters().map(toRecord);
+  return [...allMasters().map(toRecord), ...allSourced().map(sourcedRecord)];
 }
 
 export default async function step(ctx: SeedContext): Promise<void> {
@@ -52,7 +67,7 @@ export default async function step(ctx: SeedContext): Promise<void> {
   const plan = new Map(allMasters().map((m) => [m.file, m]));
   let copied = 0;
   let removed = 0;
-  for (const m of plan.values()) {
+  for (const m of [...plan.values(), ...allSourced()]) {
     const dest = join(masters, m.file);
     if (existsSync(dest) && sha256(readFileSync(dest)) === m.sha256) continue;
     if (!ctx.dryRun) {
@@ -72,9 +87,9 @@ export default async function step(ctx: SeedContext): Promise<void> {
   }
   const manifestFile = join(ctx.mediaDir, 'media-manifest.json');
   const others = existsSync(manifestFile)
-    ? readJson<{ records: ManifestRecord[] }>(manifestFile).records.filter((r) => !OWNED_DIRS.some((d) => r.file.startsWith(`${d}/`)))
+    ? readJson<{ records: ManifestRecord[] }>(manifestFile).records.filter((r) => !RECORD_DIRS.some((d) => r.file.startsWith(`${d}/`)))
     : [];
   const all = [...records, ...others].sort((a, b) => a.sha256.localeCompare(b.sha256));
-  writeSeedFile(manifestFile, [SOURCES.images, SOURCES.imageMap, SOURCES.woo], all, ctx);
+  writeSeedFile(manifestFile, [SOURCES.images, SOURCES.imageMap, SOURCES.woo, SOURCES.sourcingLog], all, ctx);
   ctx.log.info(`media: ${records.length} masters (${copied} copied, ${removed} removed), ${others.length} records kept from other steps`);
 }
