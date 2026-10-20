@@ -51,7 +51,9 @@ export interface PaymentsAlert {
   severity: 'critical' | 'high' | 'low';
 }
 
-const ports: { orders: PaymentsOrdersPort | null; alert: ((a: PaymentsAlert) => Promise<unknown>) | null } = { orders: null, alert: null };
+type Ports = { orders: PaymentsOrdersPort | null; alert: ((a: PaymentsAlert) => Promise<unknown>) | null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: Ports = ((globalThis as Record<symbol, Ports | undefined>)[Symbol.for('ecomkit.payments.ports')] ??= { orders: null, alert: null });
 
 /**
  * Called once at app boot (instrumentation and worker):

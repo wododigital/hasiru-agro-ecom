@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { AssistantDrawer } from '@ecomkit/ai-assistant/ui';
 import { getMenu } from '@ecomkit/cms/server';
 import type { MenuNode } from '@ecomkit/cms';
 import { messages } from '../../messages/en';
@@ -39,6 +40,7 @@ export async function SiteHeader() {
           {items.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
         </nav>
         <Link href="/search" className="text-sm">{m.notFound.search}</Link>
+        <AssistantDrawer />
         <Link href="/account" className="text-sm">{m.account}</Link>
         <Link href="/cart" className="text-sm">{m.cart}</Link>
       </div>

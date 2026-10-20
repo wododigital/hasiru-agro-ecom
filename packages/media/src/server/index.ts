@@ -32,3 +32,4 @@ export { handleMediaGet, handleUpload } from './http';
 export { mediaRoot } from './storage';
 export { mediaSrc, shareSrc } from '../domain';
 export type { MediaAsset, MediaDerivative } from '../schema';
+export { imageRefs, imageStore, masterAssetIds, privateStore } from './stores';

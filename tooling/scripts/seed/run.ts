@@ -67,6 +67,9 @@ async function build(): Promise<void> {
 async function load(app: string): Promise<void> {
   const registryFile = join(ROOT, 'apps', app, 'src', 'generated', 'registry.ts');
   const { registry } = (await import(pathToFileURL(registryFile).href)) as { registry: Registry };
+  // The app's port bindings (media lookups for product images, catalog facts for planting and inventory hooks).
+  const bootFile = join(ROOT, 'apps', app, 'src', 'boot.ts');
+  if (existsSync(bootFile)) await ((await import(pathToFileURL(bootFile).href)) as { boot(o: { mediaDir: string }): Promise<void> }).boot({ mediaDir: ctx.mediaDir });
   const hooks = registry.list('seedHooks');
   if (!hooks.length) log.warn(`seed:load ${app}: no enabled module has seed hooks`);
   for (const hook of hooks) {

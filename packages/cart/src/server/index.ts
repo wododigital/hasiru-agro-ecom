@@ -32,7 +32,7 @@ export {
   type RestoreResult,
   type RestoreTokenOptions,
 } from './cart';
-export { applyCoupon, cartCount, cartTotals, getCartView, loadCartView, toDrawerData, type CartView, type CartViewLine, type DrawerData } from './view';
+export { applyCoupon, cartCount, cartSummary, cartTotals, checkoutCart, getCartView, loadCartView, toDrawerData, type CartView, type CartViewLine, type CheckoutCartLine, type DrawerData } from './view';
 export { cartContextFromRequest, cartCookieHeader, currentCartContext, getCart, inRequest, writeCartCookie } from './request';
 export {
   cartRuntime,

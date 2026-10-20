@@ -109,10 +109,12 @@ export function CheckoutFormIsland({ data, idempotencyKey, messages: m, pincodeL
   return (
     <form
       ref={formRef}
-      action={(fd: FormData) => {
+      // The action itself (not a wrapper) so the form also posts without JS; with JS the browser-minted key
+      // replaces the server one just before React reads the form data.
+      action={formAction}
+      onSubmit={(e) => {
         browserKey.current ??= crypto.randomUUID();
-        fd.set('idempotencyKey', browserKey.current);
-        formAction(fd);
+        (e.currentTarget.elements.namedItem('idempotencyKey') as HTMLInputElement).value = browserKey.current;
       }}
       className="grid gap-6 lg:grid-cols-[1fr_22rem]" noValidate={false}>
       <input type="hidden" name="idempotencyKey" value={idempotencyKey} />

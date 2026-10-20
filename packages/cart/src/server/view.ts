@@ -7,7 +7,9 @@ import { computeTotals } from '@ecomkit/core/totals';
 import { priceLines } from '@ecomkit/pricing/server';
 import { bulkNudge, lineWeightKg, needsInputsSuggestion, originSchema, toTotalsInput, type BulkNudge, type LineOrigin } from '../domain';
 import type { CartMessages } from '../messages';
-import type { CartRow } from '../schema';
+import { cartCart, type CartRow } from '../schema';
+import { db } from '@ecomkit/core/db';
+import { eq } from 'drizzle-orm';
 import { cartLines, findCart, storeCoupon, type CartContext } from './cart';
 import { cartRuntime, loadVariants, optionalService, type CouponOutcome, type DiscountCartInput } from './runtime';
 
@@ -238,4 +240,70 @@ export function toDrawerData(view: CartView | null, m: CartMessages = cartRuntim
     })),
     total: view.totals ? formatINR(view.totals.totalPaise) : null,
   };
+}
+
+/** A cart line as checkout prices it (structurally checkout's `CheckoutLine`). */
+export interface CheckoutCartLine {
+  lineId: string;
+  productId: string;
+  variantId: string;
+  qty: number;
+  kind: 'product' | 'package';
+  origin: Record<string, unknown> | null;
+  name: string;
+  sku: string | null;
+  hsn: string | null;
+  gstRatePct: number;
+  sizeClass: string | null;
+  weightKg: number;
+  packingFeePaise: number;
+  listUnitPaise: number;
+  tierUnitPaise: number;
+  collectionIds: readonly string[];
+  tagIds: readonly string[];
+}
+
+/** The visitor's active cart priced now, for checkout's `cart.current` port (null without a non-empty cart). */
+export async function checkoutCart(ctx: CartContext): Promise<{ id: string; customerId: string | null; couponCode: string | null; lines: CheckoutCartLine[] } | null> {
+  const cart = await findCart(ctx);
+  if (!cart || cart.status !== 'active') return null;
+  const { rows, priced, quotes } = await priceCart(cart);
+  if (!priced.length) return null;
+  const variants = await loadVariants(priced.map((l) => l.variantId));
+  return {
+    id: cart.id,
+    customerId: cart.customerId ?? ctx.customerId,
+    couponCode: cart.couponCode,
+    lines: priced.map((l) => {
+      const v = variants[l.variantId]!;
+      const q = quotes[l.lineId]!;
+      return {
+        lineId: l.lineId,
+        productId: v.productId,
+        variantId: l.variantId,
+        qty: l.qty,
+        kind: l.kind,
+        origin: rows.find((r) => r.id === l.lineId)?.origin ?? null,
+        name: v.label ? `${v.name} (${v.label})` : v.name,
+        sku: v.sku ?? null,
+        hsn: v.hsn ?? null,
+        gstRatePct: q.gstRatePct,
+        sizeClass: v.sizeClass ?? null,
+        weightKg: l.weightKg,
+        packingFeePaise: v.packingFeePaise ?? 0,
+        listUnitPaise: q.listUnitPaise,
+        tierUnitPaise: q.unitPaise,
+        collectionIds: v.collectionIds ?? [],
+        tagIds: v.tagIds ?? [],
+      };
+    }),
+  };
+}
+
+/** Status, owner, total and item count of a cart by id (flows reminders); null when it does not exist. */
+export async function cartSummary(cartId: string): Promise<{ status: CartRow['status']; customerId: string | null; totalPaise: Paise | null; itemCount: number } | null> {
+  const [cart] = /^[0-9a-f-]{36}$/i.test(cartId) ? await db.select().from(cartCart).where(eq(cartCart.id, cartId)) : [];
+  if (!cart) return null;
+  const view = await loadCartView(cart);
+  return { status: cart.status, customerId: cart.customerId, totalPaise: view.totals?.totalPaise ?? null, itemCount: view.count };
 }

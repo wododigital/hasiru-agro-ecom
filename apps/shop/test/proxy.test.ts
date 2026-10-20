@@ -67,6 +67,14 @@ describe('proxy', () => {
     expect(res.headers.get('strict-transport-security')).toContain('max-age=');
   });
 
+  it('never redirects the worker\'s loopback calls to machine endpoints', () => {
+    vi.stubEnv('SITE_URL', 'https://www.example.com');
+    expect(proxy(request('http://127.0.0.1:3000/api/internal/revalidate', {})).status).toBe(200);
+    expect(proxy(request('http://127.0.0.1:3000/api/health/live', {})).status).toBe(200);
+    expect(proxy(request('http://127.0.0.1:3000/api/webhooks/phonepe', {})).status).toBe(200);
+    expect(proxy(request('http://127.0.0.1:3000/plants', {})).status).toBe(301);
+  });
+
   it('passes the request path to layouts as x-pathname', () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
     const res = proxy(request('https://www.example.com/admin/products'));

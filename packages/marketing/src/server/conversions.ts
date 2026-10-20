@@ -19,16 +19,16 @@ import type { MarketingSettings } from '../settings';
 import { getOrderAttribution } from './attribution';
 import { loadSettings, mockBase, siteUrl, vendorHttp, type Http } from './config';
 
-let orders: OrdersPort | null = null;
-let httpOverride: Http | null = null;
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const deps: { orders: OrdersPort | null; http: Http | null } = ((globalThis as Record<symbol, { orders: OrdersPort | null; http: Http | null } | undefined>)[Symbol.for('ecomkit.marketing.deps')] ??= { orders: null, http: null });
 
 /**
  * Boot wiring (host app): `configureMarketing({ orders: { forConversion } })` from the orders module. Without it
  * server-side conversions are skipped (logged); the browser tags still work.
  */
-export function configureMarketing(deps: { orders?: OrdersPort | null; http?: Http | null }): void {
-  if (deps.orders !== undefined) orders = deps.orders;
-  if (deps.http !== undefined) httpOverride = deps.http;
+export function configureMarketing(next: { orders?: OrdersPort | null; http?: Http | null }): void {
+  if (next.orders !== undefined) deps.orders = next.orders;
+  if (next.http !== undefined) deps.http = next.http;
 }
 
 export const sha256Hex = (v: string): string => createHash('sha256').update(v, 'utf8').digest('hex');
@@ -94,6 +94,7 @@ export async function conversion(
   options: { refundId?: string; amountPaise?: number; now?: Date; log?: Logger } = {},
 ): Promise<ConversionResult[]> {
   const log = options.log;
+  const orders = deps.orders;
   if (!orders) {
     log?.warn('marketing: no orders port configured, conversion skipped', { orderId, name });
     return [];
@@ -128,7 +129,7 @@ export async function conversion(
     const body = name === 'refund' ? ga4Refund(order, options.amountPaise ?? order.valuePaise, ctx) : ga4Purchase(order, ctx);
     const base = mode === 'mock' ? `${mockBase('ga4')}/mp/collect` : 'https://www.google-analytics.com/mp/collect';
     const url = `${base}?measurement_id=${encodeURIComponent(s.ga4MeasurementId)}&api_secret=${encodeURIComponent(s.ga4ApiSecret!)}`;
-    return post('ga4', name, orderId, httpOverride ?? vendorHttp(mode, GA4_HOSTS), url, body);
+    return post('ga4', name, orderId, deps.http ?? vendorHttp(mode, GA4_HOSTS), url, body);
   });
 
   // Meta: Purchase only (Meta has no refund event). Hashed contact data needs advertising consent.
@@ -147,7 +148,7 @@ export async function conversion(
       });
       const base = mode === 'mock' ? mockBase('meta-capi') : 'https://graph.facebook.com';
       const url = `${base}/${s.metaGraphVersion}/${s.metaPixelId}/events`;
-      return post('meta_capi', 'purchase', orderId, httpOverride ?? vendorHttp(mode, META_HOSTS), url, { ...body, access_token: s.metaCapiToken });
+      return post('meta_capi', 'purchase', orderId, deps.http ?? vendorHttp(mode, META_HOSTS), url, { ...body, access_token: s.metaCapiToken });
     });
   }
 
@@ -165,6 +166,7 @@ export const onOrderRefunded: EventHandler<'order.refunded'> = async (payload, c
 
 /** Data for the browser purchase tags on the order confirmation page; null for test orders or without the orders port. */
 export async function purchaseTagData(orderId: string): Promise<PurchaseTagData | null> {
+  const orders = deps.orders;
   if (!orders) return null;
   const order = await orders.forConversion(orderId);
   if (!order || order.isTest) return null;

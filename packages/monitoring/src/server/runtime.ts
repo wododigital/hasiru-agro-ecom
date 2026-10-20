@@ -21,7 +21,8 @@ const defaultPost: WebhookPoster = async (url, payload) => {
   return { ok: res.ok, status: res.status };
 };
 
-const runtime: MonitoringRuntime = {
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const runtime: MonitoringRuntime = ((globalThis as Record<symbol, MonitoringRuntime | undefined>)[Symbol.for('ecomkit.monitoring.runtime')] ??= {
   registry: null,
   notifications: async () => (runtime.registry ? runtime.registry.service('notifications') : null),
   postWebhook: defaultPost,
@@ -29,7 +30,7 @@ const runtime: MonitoringRuntime = {
     const s = await statfs(path);
     return { freeBytes: s.bavail * s.bsize, totalBytes: s.blocks * s.bsize };
   },
-};
+});
 
 /**
  * Call once in the web process (instrumentation register) and in the worker:

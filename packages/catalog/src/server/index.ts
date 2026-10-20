@@ -44,3 +44,4 @@ export { listAdminProducts, getProductForEdit, listCollectionsAdmin, listTagsAdm
 export { cacheFor, expireTags } from '@ecomkit/core/cache-tags';
 export { pageMetadata, listingIndexing } from './meta';
 export { loadListing, parseListingQuery, SORTS, type Listing, type Sort } from './listing';
+export { gstRatesFor, productLabel, productSeo, variantBySku, variantFacts, variantRefsBySku, variantsOf, type VariantFacts } from './lookups';

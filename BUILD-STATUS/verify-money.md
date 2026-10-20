@@ -1,41 +1,49 @@
-# verify-money (2026-10-20, 07:14-07:20 IST)
+# verify-money (2026-10-20, 10:20-11:00 IST, boot agent)
 
-Setup: `pnpm db:fresh verify-money` -> `ecomkit_verify_money`, `drizzle-kit migrate` (6 migrations), `jobs:install`, `seed:load --app shop` with the media hook skipped (media is ~588 assets through sharp and would not finish in the budget). `next start --port 3203` on the existing `apps/shop/.next` (07:12 build, not rebuilt), worker (`tsx --conditions=react-server worker.ts`) on the same DB, `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`. Command: `node tooling/smoke.mjs --base=http://localhost:3203 --only=money`.
+Setup: `pnpm db:fresh boot2` -> `ecomkit_boot2`, `drizzle-kit migrate`, `pnpm jobs:install`, `pnpm seed:load --app shop`
+(media masters imported as-is, no derivatives: a temporary local edit per Shyam's 09:55 instruction, not committed;
+WP-32 owns the permanent change). `next build` apps/shop (370 pages, exit 0), `next start --port 3301`, worker
+(`NODE_OPTIONS=--conditions=react-server tsx worker.ts`, 50 queues / 20 schedules), `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`.
+Command: `node tooling/smoke.mjs --base=http://localhost:3301` (full) and `--only=money`.
 
-## Result table
+## Result (money section, 19 checks)
 
-| Check | Result | Detail |
+| Check | Result | Evidence |
 |---|---|---|
-| seed: purchasable variant (inventory_level rows) | FIXED -> PASS | was 0 rows: inventory seed needs catalog `variantRefsBySku`, which catalog never exported. Now 284 levels, 15540 units on hand |
-| GET /api/cart (quote) | PASS | 200, empty cart JSON |
-| /cart, /checkout render | PASS | 200 |
-| PhonePe webhook, bad signature | PASS | 401 |
-| add to cart (POST /api/cart/lines) | **FAIL** | 500 `cart is not configured: call configureCart({ variants }) at boot` |
-| place order | SKIP (blocked) | no Place order form: cart is empty because add-to-cart 500s |
-| mock PhonePe pay + signed webhook | not reached | blocked by add-to-cart |
-| order paid / stock committed / invoice / email + WhatsApp queued / analytics | not reached | blocked |
-| failure path: payment failed | not reached | blocked (code path exists: `payments/src/server/jobs.ts` sweep -> `orders.paymentExpired({ reason: 'failed' })`) |
-| failure path: oversell / unknown variant | **FAIL** | unknown variant id also 500s (same missing `configureCart`), should be a 4xx |
+| unknown variant refused | PASS | 404 `unknown_variant` (was a 500 before boot) |
+| add to cart | PASS | 200 `{"qty":10}` |
+| coupon applied (no-JS cart form, live 10% code rule) | PASS | `cart_cart.coupon_code` set |
+| cart quote | PASS | 10 items, Rs 2,385 |
+| place order (no-JS checkout form, local slot delivery, Bengaluru 560060) | PASS | order `pending_payment` |
+| order totals: delivery + GST + coupon | PASS | total 388500, shipping 150000, tax 22881 (18% GST on delivery and packing; plants are 0%), coupon 26500 |
+| coupon redeemed | PASS | `discounts_redemption` row |
+| stock reserved | PASS | reservation `held`, reserved 0 -> 10 |
+| payment attempt (mock PhonePe) | PASS | redirect to `/api/_mock/phonepe/paypage` |
+| mock pay page: success | PASS | 303 -> `/pay/return` |
+| signed webhook received | PASS | 1 signed `payments_webhook_event` (posted by the mock to `INTERNAL_BASE_URL`) |
+| order paid | PASS | `paid` (worker: webhook job -> status check -> `markPaymentReceived`) |
+| stock committed | PASS | reservation `committed`, on hand -10, reserved back to 0 |
+| invoice issued | PASS | `orders_invoice` row (subscriber of `order.paid`, about 30 s after payment) |
+| notification queued (email) | PASS | `order.confirmed` queued |
+| notification queued (whatsapp) | PASS | `order.confirmed` queued |
+| conversion recorded (marketing) | PASS | ga4 + meta rows, `skipped_not_configured` (no vendor ids set) |
+| failure: payment failed -> order cancelled, stock released | PASS | mock `fail` -> attempt failed -> window closed -> sweep: order `cancelled`, reservation `released` |
+| failure: oversell refused | PASS | more than free stock in the cart: place-order creates no order |
 
-## Fixed (in scope, uncommitted)
+Full smoke on the same server: **210 pass, 0 fail, 17 skip** (routes 166 / money 19 / jobs 12 / admin 13). Skips: detail
+routes without a seeded sample, `/api/health/ready` 503 until the worker heartbeat, Google feed 403 (token-protected).
 
-- `packages/inventory/src/server/seed.ts`: when `@ecomkit/catalog/server` has no `variantRefsBySku`, resolve sku -> variant with a seed-time SQL read (`product.sku || variant.sku_suffix`, the rule in `catalog/src/domain/seed.ts:262`). Without it `seed:load` wrote no `inventory_level` rows, so nothing was purchasable and the smoke money section always SKIPped.
-
-## Root blocker (outside the money scope: apps/shop)
-
-The web process has **no boot wiring at all**: `apps/shop/instrumentation.ts` only exports `onRequestError`; there is no `register()` and nothing in `apps/shop` calls `configureCart`, `configurePricing`, `configurePayments`, checkout/orders ports, `configureShipping`, etc. (BUILD-STATUS.md open rows for WP-28 boot wiring, Wave 1 + Wave 2 lists). Every money step after the empty quote depends on it. Needed in `instrumentation.ts register()` (nodejs runtime) and mirrored in `worker.ts`:
-
-1. `configureCart({ variants, registry, discounts, shipping, inventory, messages })`: `variants` needs a catalog adapter returning `CartVariant` (no such export exists in catalog yet; write it in the app from catalog read APIs).
-2. `configurePricing({ gstRates, variantsOf })` (throws `pricing is not configured` otherwise).
-3. Checkout/orders ports: `markConverted`, `noteContact` (cart), `bookSlot` (shipping), `redeem` (discounts), `reserve/commit` (inventory), `recordOrder` (customers).
-4. `configurePayments({ orders, alert })` with `orderForPayments`; `configureShipping({ places, resolvePincode })`.
-5. Unknown/oversold variant on `/api/cart/lines` should return 4xx once cart is configured; recheck.
-
-After wiring: rebuild shop, rerun `node tooling/smoke.mjs --only=money` against `ecomkit_verify_money` (DB is migrated + seeded, can be reused).
-
-## Other findings
-
-- Catalog seed skips 10 products (HAP-0006, 0045, 0092, 0093, 0171, 0174, 0188, 0197, 0225, 0273): `seoDescription` > 320 chars or `shortDescription` > 1000 chars in `data/seed/products.json`. Data or schema owner to decide (truncate in seed build, or relax the zod max).
-- `next start` warns that `output: 'standalone'` wants `node .next/standalone/server.js`; it served fine for this check.
-- The smoke has no failure-path cases (payment failed, oversell); not added since the happy path cannot run yet.
-- Agents sharing one scratchpad overwrote each other's `env.sh`; per-agent subfolders avoid it.
+## What it took (root causes fixed)
+1. No boot wiring at all: `apps/shop/src/boot.ts` binds every module port (see BUILD-STATUS.md, WP-28).
+2. Module port state lived in module scope; Next compiles instrumentation and routes as separate module instances, so a
+   binding made at boot was invisible to routes. All port holders now live on `globalThis` (core auth provider, pricing,
+   checkout, orders, payments, enquiries, reviews, flows, erp-sync, marketing, monitoring, inventory sender).
+3. Registry component thunks (pdpSections, cartBlocks) resolved through the instrumentation copy of the registry, so
+   their client islands were missing from the route's client manifest (PDP render error). The root layout publishes the
+   route copy (`src/route-registry.ts`); boot's registry reads through to it.
+4. `proxy.ts` 301'd the worker's loopback calls (revalidation POST, uptime, mock gateway, webhooks) to the canonical host.
+   Machine prefixes `/api/internal/ /api/health/ /api/webhooks/ /api/_mock/` are never redirected (test added).
+5. Core settings: Drizzle's jsonb reader JSON-parsed stored strings again, so an admin save of a numeric-looking text
+   field (payments `clientVersion` "1") broke checkout with a ZodError. `readRows` parses `value::text` once (test added).
+6. Seed: no prices were ever seeded (pricing had no seed hook) and no shipping setup existed (`data/seed/shipping.json`
+   missing). Added `pricing.prices` hook (284 prices, 277 bulk tiers) and the shipping seed file (WP-18 request 1).

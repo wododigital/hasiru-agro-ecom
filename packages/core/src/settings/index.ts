@@ -1,4 +1,4 @@
-import { and, eq, inArray } from 'drizzle-orm';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import * as React from 'react';
 import type { z, ZodObject, ZodRawShape, ZodType } from 'zod';
 import type { ModuleId } from '../contracts';
@@ -60,8 +60,14 @@ export function maskSecret(value: string | null | undefined): string {
 type Taint = (message: string, lifetime: object, value: string) => void;
 const taint = (React as unknown as { experimental_taintUniqueValue?: Taint }).experimental_taintUniqueValue;
 
+// `value::text` parsed once: Drizzle's jsonb reader JSON-parses the driver's already-decoded value again, which turns a
+// stored string such as "1" or "true" into a number or boolean (a saved numeric-looking text field then fails its schema).
 async function readRows(moduleId: ModuleId, dbOrTx: DbOrTx = db) {
-  return dbOrTx.select().from(coreSettings).where(eq(coreSettings.module, moduleId));
+  const rows = await dbOrTx
+    .select({ key: coreSettings.key, isSecret: coreSettings.isSecret, json: sql<string>`${coreSettings.value}::text` })
+    .from(coreSettings)
+    .where(eq(coreSettings.module, moduleId));
+  return rows.map((r) => ({ key: r.key, isSecret: r.isSecret, value: JSON.parse(r.json) as unknown }));
 }
 
 /**

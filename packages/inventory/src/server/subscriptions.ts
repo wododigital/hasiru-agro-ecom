@@ -9,14 +9,15 @@ import { inventoryLevel, inventorySubscription } from '../schema';
 import { getStock } from './stock';
 
 type SenderProvider = () => Promise<NotificationSender | null>;
-let senderProvider: SenderProvider = async () => null;
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const state: { sender: SenderProvider } = ((globalThis as Record<symbol, { sender: SenderProvider } | undefined>)[Symbol.for('ecomkit.inventory.sender')] ??= { sender: async () => null });
 
 /**
  * The app binds the notifications service once at boot, normally `() => registry.service('notifications')`
  * (same pattern as core `setAuthProvider`). Unbound or disabled: subscriptions stay pending and nothing is sent.
  */
 export function setNotificationsProvider(next: SenderProvider): void {
-  senderProvider = next;
+  state.sender = next;
 }
 
 const MAX_PENDING_PER_CONTACT = 5;
@@ -68,7 +69,7 @@ export async function subscribe(input: NotifyMeInput | Record<string, unknown>):
 export async function notifyBackInStock(variantId: string, options: { batch?: number } = {}): Promise<{ sent: number; pending: number }> {
   const stock = await getStock(variantId);
   if (!stock || stock.available <= 0) return { sent: 0, pending: 0 };
-  const sender = await senderProvider();
+  const sender = await state.sender();
   if (!sender) return { sent: 0, pending: await pendingCount(variantId) };
 
   const { rows } = await db.execute<{ id: string; product_id: string; phone: string | null; email: string | null }>(sql`

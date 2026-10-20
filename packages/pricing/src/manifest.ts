@@ -19,5 +19,6 @@ export default defineModule({
     },
   ],
   provides: { pricing: () => import('./server/pricing').then((m) => m.pricingReader) },
+  seedHooks: [{ id: 'pricing.prices', order: 10, run: () => import('./server/seed').then((m) => m.seedHook) }],
   emits: ['price.changed'],
 });

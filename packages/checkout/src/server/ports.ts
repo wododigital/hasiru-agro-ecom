@@ -120,7 +120,8 @@ export interface CheckoutPorts {
   attribution: (() => Promise<Record<string, unknown> | null>) | null;
 }
 
-const ports: CheckoutPorts = { cart: null, orders: null, payments: null, inventory: null, shipping: null, discounts: null, regions: null, attribution: null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: CheckoutPorts = ((globalThis as Record<symbol, CheckoutPorts | undefined>)[Symbol.for('ecomkit.checkout.ports')] ??= { cart: null, orders: null, payments: null, inventory: null, shipping: null, discounts: null, regions: null, attribution: null });
 export const getCheckoutPorts = (): Readonly<CheckoutPorts> => ports;
 export function configureCheckout(next: Partial<CheckoutPorts>): void {
   Object.assign(ports, next);

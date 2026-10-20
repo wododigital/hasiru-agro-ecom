@@ -86,6 +86,23 @@ export const messages = {
     compost: { eyebrow: 'Compost calculator', title: 'How much compost do your plants need?' },
     videos: { eyebrow: 'Learn how', title: 'Planting the right way' },
   },
+  /** Store details for metadata, JSON-LD and llms.txt (contact block of data/seed/cms.json). */
+  store: {
+    phone: '+91 81051 00749',
+    email: 'contact@hasiruagro.com',
+    address: { streetAddress: 'Near Komghatta Lake, Tavarekere Main Road, Kengeri', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', postalCode: '560060', addressCountry: 'IN' },
+    llms: [
+      {
+        title: 'How to buy',
+        body: 'Add plants to the cart (bulk prices apply automatically), check delivery for your pincode at checkout and pay online. Pickup at the nursery is free.',
+        links: [
+          { title: 'All plants', path: '/plants' },
+          { title: 'Help me choose (planting plan)', path: '/plan' },
+          { title: 'Farm development enquiry', path: '/build-farm-with-us' },
+        ],
+      },
+    ],
+  },
   /** Host overrides for module default copy, keyed by module id. Modules merge these over their own messages.ts. */
   ui,
 } as const;

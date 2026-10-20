@@ -145,6 +145,13 @@ describe('settings', () => {
     expect(await getSettings(def)).toMatchObject({ merchantId: 'M778', advancePct: 55 });
   });
 
+  it('reads a stored numeric-looking string back as a string (no double JSON decode)', async () => {
+    await setSettings(def, { merchantId: '1' }, { actorId: null });
+    expect((await getSettings(def)).merchantId).toBe('1');
+    await setSettings(def, { merchantId: 'true' }, { actorId: null });
+    expect((await getSettingsForAdmin(def)).values.merchantId).toBe('true');
+  });
+
   it('refuses a tampered stored secret', async () => {
     await setSettings(def, { clientSecret: 'sk_live_zzzzzz999999' }, { actorId: null });
     const [row] = await t.db.select().from(coreSettings).where(sql`${coreSettings.module} = 'payments' and ${coreSettings.key} = 'clientSecret'`);

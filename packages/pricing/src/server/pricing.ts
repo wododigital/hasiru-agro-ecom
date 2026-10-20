@@ -19,15 +19,16 @@ export interface PricingDeps {
   variantsOf(productId: string): Promise<{ variantId: string; label: string }[]>;
 }
 
-let deps: PricingDeps | null = null;
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const state: { deps: PricingDeps | null } = ((globalThis as Record<symbol, { deps: PricingDeps | null } | undefined>)[Symbol.for('ecomkit.pricing.deps')] ??= { deps: null });
 
 export function configurePricing(next: PricingDeps): void {
-  deps = next;
+  state.deps = next;
 }
 
 function requireDeps(): PricingDeps {
-  if (!deps) throw new Error('pricing is not configured: call configurePricing({ gstRates, variantsOf }) at boot');
-  return deps;
+  if (!state.deps) throw new Error('pricing is not configured: call configurePricing({ gstRates, variantsOf }) at boot');
+  return state.deps;
 }
 
 const p = (n: number) => asPaise(n);

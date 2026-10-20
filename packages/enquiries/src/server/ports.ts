@@ -32,7 +32,9 @@ export interface PrivateFileStore {
   read(mediaId: string): Promise<StoredFile | null>;
 }
 
-const ports: { contacts: EnquiryContacts | null; files: PrivateFileStore | null } = { contacts: null, files: null };
+type Ports = { contacts: EnquiryContacts | null; files: PrivateFileStore | null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: Ports = ((globalThis as Record<symbol, Ports | undefined>)[Symbol.for('ecomkit.enquiries.ports')] ??= { contacts: null, files: null });
 
 /**
  * Called once at app boot (instrumentation / worker):

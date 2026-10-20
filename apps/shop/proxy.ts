@@ -10,6 +10,11 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 /** Paths whose case is meaningful (tokens, files, framework assets): never lowercased. */
 export const CASE_EXEMPT_PREFIXES = ['/_next/', '/api/', '/media/', '/r/', '/order/', '/feeds/', '/og/'] as const;
+/**
+ * Machine endpoints, never canonical-redirected: the worker reaches them over the loopback INTERNAL_BASE_URL
+ * (revalidation, uptime, mock gateway) and gateways POST webhooks; a 301 turns a POST into a GET.
+ */
+export const MACHINE_PREFIXES = ['/api/internal/', '/api/health/', '/api/webhooks/', '/api/_mock/'] as const;
 /** Dynamic routes that get a per-request nonce CSP. */
 export const NONCE_PREFIXES = ['/admin', '/account', '/checkout', '/pay'] as const;
 
@@ -70,7 +75,7 @@ export function proxy(request: NextRequest): NextResponse {
   const host = (request.headers.get('x-forwarded-host') ?? request.headers.get('host') ?? request.nextUrl.host).split(',')[0]!.trim();
   const target = canonicalTargetFromEnv();
 
-  const redirectTo = canonicalRedirect({ proto, host, pathname, search }, target);
+  const redirectTo = startsWithAny(pathname, MACHINE_PREFIXES) ? null : canonicalRedirect({ proto, host, pathname, search }, target);
   if (redirectTo) return NextResponse.redirect(redirectTo, 301);
 
   const isDev = process.env.NODE_ENV === 'development';

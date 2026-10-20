@@ -80,6 +80,12 @@ export async function applyCoupon(
   const now = options.now ?? new Date();
   const limit = await rateLimit(`coupon-apply:${options.subject}`, { limit: COUPON_ATTEMPT_LIMIT, windowSec: COUPON_ATTEMPT_WINDOW_SEC, now });
   if (!limit.ok) return { ok: false, reason: 'rate_limited' };
+  return evaluateCoupon(input, cart, { ...options, now });
+}
+
+/** `applyCoupon` without the attempt limit: re-checks a code already accepted on a cart (every cart view). */
+export async function evaluateCoupon(input: string, cart: DiscountCart, options: { phone?: string | null; customerId?: string | null; now?: Date } = {}): Promise<CouponResult> {
+  const now = options.now ?? new Date();
   const code = normaliseCode(input);
   if (!code) return { ok: false, reason: 'invalid' };
 

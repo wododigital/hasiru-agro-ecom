@@ -7,6 +7,7 @@ export {
   COUPON_ATTEMPT_LIMIT,
   COUPON_ATTEMPT_WINDOW_SEC,
   createSingleUseCode,
+  evaluateCoupon,
   getRule,
   hashPhone,
   listRules,

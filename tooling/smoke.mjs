@@ -20,6 +20,8 @@ const MAX_LINKS = Number(arg('max-links', '400'));
 const DB = process.env.DATABASE_URL;
 const SECRET = process.env.INTERNAL_SECRET;
 const results = [];
+// One client IP per run (TEST-NET-2), set the way nginx sets X-Real-IP, so per-IP limits do not carry over between runs.
+const SMOKE_IP = `198.51.100.${Math.floor(Math.random() * 254) + 1}`;
 const rec = (section, name, status, detail = '') => results.push({ section, name, status, detail: String(detail).slice(0, 140) });
 
 // ---------- helpers ----------
@@ -51,7 +53,7 @@ async function req(path, { method = 'GET', body, headers = {}, admin = false } =
       method,
       body,
       redirect: 'manual',
-      headers: { origin: BASE, cookie: cookieHeader(admin ? OWNER_COOKIE : ''), 'user-agent': 'ecomkit-smoke', ...headers },
+      headers: { origin: BASE, cookie: cookieHeader(admin ? OWNER_COOKIE : ''), 'user-agent': 'ecomkit-smoke', 'x-real-ip': SMOKE_IP, ...headers },
       signal: AbortSignal.timeout(30000),
     });
     setCookies(res);
@@ -259,73 +261,178 @@ async function routes() {
   rec(S, `internal links (${todo.length} probed)`, bad ? 'FAIL' : 'PASS', bad ? `${bad} returned 5xx` : 'no 5xx');
 }
 
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+/** Polls a SQL scalar until `ok(value)` or the timeout; returns the last value. */
+async function until(q, ok, timeoutMs = 30000) {
+  let v = one(q);
+  for (const end = Date.now() + timeoutMs; !ok(v) && Date.now() < end; ) {
+    await wait(1000);
+    v = one(q);
+  }
+  return v;
+}
+// One phone per smoke run: flows cap messages per contact per 7 days, coupons per phone.
+const SMOKE_PHONE = `98${String(Date.now()).slice(-8)}`;
+const E164 = `+91${SMOKE_PHONE}`;
+const BUYER = { name: 'Smoke Buyer', phone: SMOKE_PHONE, email: `smoke-${SMOKE_PHONE}@example.invalid` };
+const newCart = () => jar.delete('cart');
+const addLine = (variantId, delta) => req('/api/cart/lines', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variantId, delta }) });
+const purchasable = (minFree) =>
+  sql(`select v.id from catalog_variant v join catalog_product p on p.id = v.product_id and p.status = 'active' and p.deleted_at is null
+    join pricing_price pp on pp.variant_id = v.id join inventory_level l on l.variant_id = v.id
+    where l.on_hand - l.reserved >= ${minFree} and l.ready_in_days is null order by l.on_hand desc limit 3`)?.map((r) => r[0]) ?? [];
+const level = (v) => sql(`select on_hand, reserved from inventory_level where variant_id = '${v}'`)?.[0]?.map(Number) ?? [NaN, NaN];
+/** The no-JS checkout post (React form action): the form's own hidden fields plus the buyer's answers. */
+function placeOrder(extra = {}) {
+  return submitForm('/checkout', /^idempotencyKey$/, { ...BUYER, policyAck: '1', paymentChoice: 'online', expectedTotalPaise: '', ...extra }, { admin: false });
+}
+const latestOrder = (since) => sql(`select id, status, total_paise, tax_paise, shipping_paise, coupon_paise, reservation_id from orders_order where created_at >= '${since}' order by created_at desc limit 1`)?.[0] ?? null;
+
 async function money() {
   const S = 'money';
   const missing = ['cart_cart', 'orders_order', 'payments_attempt'].filter((t) => DB && !tableExists(t));
   if (missing.length) return rec(S, 'money path', 'SKIP', `tables missing (modules not enabled in modules.config): ${missing.join(', ')}`);
+  if (!DB) return rec(S, 'money path', 'SKIP', 'DATABASE_URL not set (assertions read the database)');
   const cartApi = await req('/api/cart');
   if (cartApi.status === 404) return rec(S, 'money path', 'SKIP', '/api/cart not assembled');
-  const variant = sql(`select v.id from catalog_variant v join catalog_product p on p.id = v.product_id
-    left join inventory_level l on l.variant_id = v.id where coalesce(l.on_hand, 1) > 1 limit 1`)?.[0]?.[0];
-  if (!variant) return rec(S, 'money path', 'SKIP', 'no seeded purchasable variant');
-  const stockBefore = count(`select coalesce(sum(on_hand),0) from inventory_level where variant_id = '${variant}'`);
+  const [variant] = purchasable(20);
+  if (!variant) return rec(S, 'money path', 'SKIP', 'no seeded purchasable variant (price + stock)');
+  const local = one(`select id from shipping_method where kind = 'local_slot' limit 1`);
+  const [onHand0, reserved0] = level(variant);
 
-  const add = await req('/api/cart/lines', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variantId: variant, delta: 1 }) });
-  rec(S, 'add to cart', add.status === 200 && json(add)?.qty >= 1 ? 'PASS' : 'FAIL', `${add.status} ${add.text.slice(0, 80)}`);
-  const quote = await req('/api/cart');
-  const q = json(quote);
-  rec(S, 'cart quote', quote.status === 200 && q ? 'PASS' : 'FAIL', `${quote.status} ${quote.text.slice(0, 100)}`);
+  // cart
+  newCart();
+  const unknown = await addLine(randomUUID(), 1);
+  rec(S, 'unknown variant refused', unknown.status === 404 ? 'PASS' : 'FAIL', `${unknown.status} ${unknown.text.slice(0, 60)}`);
+  const add = await addLine(variant, 10);
+  rec(S, 'add to cart', add.status === 200 && json(add)?.qty === 10 ? 'PASS' : 'FAIL', `${add.status} ${add.text.slice(0, 80)}`);
 
+  // coupon: a live 10% code rule, applied through the cart page's no-JS coupon form
+  const code = `SMOKE${SMOKE_PHONE.slice(-6)}`;
+  sql(`with r as (insert into discounts_rule (id, name, kind, status, value_type, value) values ('${randomUUID()}', 'Smoke 10%', 'code', 'active', 'percent', 10) returning id)
+    insert into discounts_code (id, rule_id, code) select '${randomUUID()}', id, '${code}' from r`);
+  const cp = await submitForm('/cart', /^code$/, { code }, { admin: false });
+  const stored = one(`select coupon_code from cart_cart where coupon_code = '${code}' and status = 'active' limit 1`);
+  rec(S, 'coupon applied', stored === code ? 'PASS' : 'FAIL', cp.skipped ?? `POST ${cp.res.status}, cart coupon ${stored}`);
+  const quote = json(await req('/api/cart'));
+  rec(S, 'cart quote', quote?.count === 10 && quote?.total ? 'PASS' : 'FAIL', JSON.stringify({ count: quote?.count, total: quote?.total }));
+
+  // checkout: local delivery in Bengaluru (delivery charge + 18% GST on charges), online payment
   const since = one('select now()');
-  const placed = await submitForm('/checkout', /place order|pay now|\$ACTION_ID/i, {
-    name: 'Smoke Buyer', phone: '9876543210', email: 'smoke-buyer@example.invalid', line1: '1 Test Road', pincode: '560001', city: 'Bengaluru', consent: 'on',
-  }, { admin: false });
-  if (placed.skipped) return rec(S, 'place order', 'SKIP', placed.skipped);
-  const order = sql(`select id, status from orders_order where created_at >= '${since}' order by created_at desc limit 1`)?.[0];
+  const placed = await placeOrder({ methodId: local ?? '', pincode: '560060', line1: '1 Test Road', villageTown: 'Kengeri', district: 'Bengaluru Urban', districtSlug: 'bengaluru-urban', state: 'Karnataka', stateCode: 'KA', marketingConsent: 'on' });
+  if (placed.skipped) return rec(S, 'place order', 'FAIL', placed.skipped);
+  const order = latestOrder(since);
   rec(S, 'place order', order ? 'PASS' : 'FAIL', order ? `order ${order[0]} ${order[1]}` : `POST /checkout -> ${placed.res.status} ${placed.res.location ?? ''}`);
   if (!order) return;
-  const attempt = sql(`select merchant_order_id, amount_paise from payments_attempt where order_id = '${order[0]}' order by attempt_no desc limit 1`)?.[0];
+  const [orderId, , total, tax, shipping, coupon, reservationId] = order;
+  rec(S, 'order totals: delivery + GST + coupon', Number(shipping) > 0 && Number(tax) > 0 && Number(coupon) > 0 ? 'PASS' : 'FAIL', `total ${total} shipping ${shipping} tax ${tax} coupon ${coupon}`);
+  rec(S, 'coupon redeemed', count(`select count(*) from discounts_redemption where order_id = '${orderId}'`) > 0 ? 'PASS' : 'FAIL');
+  const [, reserved1] = level(variant);
+  const held = one(`select status from inventory_reservation where id::text = '${reservationId}'`);
+  rec(S, 'stock reserved', held === 'held' && reserved1 === reserved0 + 10 ? 'PASS' : 'FAIL', `reservation ${held}, reserved ${reserved0} -> ${reserved1}`);
+
+  // mock PhonePe: the buyer pays on the mock pay page; the mock posts a signed webhook; the worker applies it
+  const attempt = sql(`select id, merchant_order_id, redirect_url from payments_attempt where order_id = '${orderId}' order by attempt_no desc limit 1`)?.[0];
   if (!attempt) return rec(S, 'payment attempt', 'FAIL', 'no payments_attempt row');
-  if (!SECRET) return rec(S, 'signed webhook', 'SKIP', 'INTERNAL_SECRET not set');
-  const pw = createHmac('sha256', SECRET).update('ecomkit:payments-mock-webhook').digest().toString('hex');
-  const auth = createHash('sha256').update(`mock:${pw}`).digest('hex');
-  const body = JSON.stringify({
-    event: 'checkout.order.completed',
-    payload: { merchantOrderId: attempt[0], orderId: `MOCK-${attempt[0]}`, state: 'COMPLETED', amount: Number(attempt[1]), paymentDetails: [{ transactionId: `T${Date.now()}`, paymentMode: 'UPI_INTENT', state: 'COMPLETED', amount: Number(attempt[1]), timestamp: Date.now() }] },
-  });
-  const wh = await req('/api/webhooks/phonepe', { method: 'POST', headers: { 'content-type': 'application/json', authorization: auth }, body });
-  rec(S, 'signed mock webhook', wh.status < 300 ? 'PASS' : 'FAIL', String(wh.status));
-  // the webhook is processed by a job: give the worker a moment
-  let status = '';
-  for (let i = 0; i < 20 && !['paid', 'confirmed'].includes(status); i++) {
-    status = one(`select status from orders_order where id = '${order[0]}'`) ?? '';
-    if (!['paid', 'confirmed'].includes(status)) await new Promise((r) => setTimeout(r, 500));
+  rec(S, 'payment attempt (mock PhonePe)', attempt[2]?.includes('/api/_mock/phonepe/paypage') ? 'PASS' : 'FAIL', attempt[2] ?? '');
+  const pay = await req('/api/_mock/phonepe/paypage', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ o: attempt[1], outcome: 'success' }).toString() });
+  rec(S, 'mock pay page: success', pay.status === 303 ? 'PASS' : 'FAIL', `${pay.status} -> ${pay.location ?? ''}`);
+  const signed = await until(`select count(*) from payments_webhook_event where signature_ok and payload->'payload'->>'merchantOrderId' = '${attempt[1]}'`, (v) => Number(v) > 0, 15000);
+  rec(S, 'signed webhook received', Number(signed) > 0 ? 'PASS' : 'FAIL', `${signed} signed events`);
+  const status = await until(`select status from orders_order where id = '${orderId}'`, (v) => v === 'paid', 45000);
+  rec(S, 'order paid', status === 'paid' ? 'PASS' : 'FAIL', status || 'no row (is the worker running?)');
+  const [onHand2, reserved2] = level(variant);
+  const committed = one(`select status from inventory_reservation where id::text = '${reservationId}'`);
+  rec(S, 'stock committed', committed === 'committed' && onHand2 === onHand0 - 10 && reserved2 === reserved0 ? 'PASS' : 'FAIL', `reservation ${committed}, on hand ${onHand0} -> ${onHand2}, reserved ${reserved2}`);
+  const invoice = await until(`select count(*) from orders_invoice where order_id = '${orderId}'`, (v) => Number(v) > 0, 90000);
+  rec(S, 'invoice issued', Number(invoice) > 0 ? 'PASS' : 'FAIL');
+  for (const ch of ['email', 'whatsapp']) {
+    const n = await until(`select count(*) from notifications_message where order_id = '${orderId}' and channel = '${ch}'`, (v) => Number(v) > 0, 30000);
+    rec(S, `notification queued (${ch})`, Number(n) > 0 ? 'PASS' : 'FAIL', `${n} messages: ${(sql(`select template_key || ':' || status from notifications_message where order_id = '${orderId}' and channel = '${ch}'`) ?? []).map((r) => r[0]).join(', ')}`);
   }
-  rec(S, 'order paid', ['paid', 'confirmed'].includes(status) ? 'PASS' : 'FAIL', status || 'no row (is the worker running?)');
-  const stockAfter = count(`select coalesce(sum(on_hand),0) from inventory_level where variant_id = '${variant}'`);
-  rec(S, 'stock committed', stockAfter < stockBefore ? 'PASS' : 'FAIL', `${stockBefore} -> ${stockAfter}`);
-  rec(S, 'invoice issued', count(`select count(*) from orders_invoice where order_id = '${order[0]}'`) > 0 ? 'PASS' : 'FAIL');
-  const msgs = sql(`select channel, count(*) from notifications_message where created_at >= '${since}' group by 1`) ?? [];
-  for (const ch of ['email', 'whatsapp']) rec(S, `notification queued (${ch})`, msgs.some(([c]) => c === ch) ? 'PASS' : 'FAIL', JSON.stringify(msgs));
-  const ev = sql(`select name from analytics_event where occurred_at >= '${since}' group by 1`) ?? [];
-  rec(S, 'analytics events', ev.length ? 'PASS' : 'FAIL', ev.map((e) => e[0]).join(',') || 'none');
+  const conv = await until(`select count(*) from marketing_conversion_event where order_id = '${orderId}'`, (v) => Number(v) > 0, 30000);
+  rec(S, 'conversion recorded (marketing)', Number(conv) > 0 ? 'PASS' : 'FAIL', (sql(`select destination || ':' || status from marketing_conversion_event where order_id = '${orderId}'`) ?? []).map((r) => r[0]).join(', '));
+
+  // failure path: payment fails, the window closes, the sweep cancels the order and releases the hold
+  newCart();
+  await addLine(variant, 2);
+  const since2 = one('select now()');
+  await placeOrder({ methodId: one(`select id from shipping_method where kind = 'pickup' limit 1`) ?? '' });
+  const failed = latestOrder(since2);
+  const fa = failed && sql(`select merchant_order_id from payments_attempt where order_id = '${failed[0]}' order by attempt_no desc limit 1`)?.[0]?.[0];
+  if (!fa) rec(S, 'failed payment releases stock', 'FAIL', 'second order or attempt missing');
+  else {
+    await req('/api/_mock/phonepe/paypage', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ o: fa, outcome: 'fail' }).toString() });
+    await until(`select state from payments_attempt where merchant_order_id = '${fa}'`, (v) => v === 'failed', 30000);
+    sql(`update payments_attempt set expires_at = now() - interval '1 minute' where order_id = '${failed[0]}'`); // the payment window closes
+    const st = await until(`select status from orders_order where id = '${failed[0]}'`, (v) => v === 'cancelled', 100000);
+    const rel = one(`select status from inventory_reservation where id::text = '${failed[6]}'`);
+    rec(S, 'failed payment cancels order, releases stock', st === 'cancelled' && rel === 'released' ? 'PASS' : 'FAIL', `order ${st}, reservation ${rel}`);
+  }
+
+  // oversell: more than the free stock is refused at place-order (no order, no hold)
+  newCart();
+  const [h, r] = level(variant);
+  await addLine(variant, h - r + 5);
+  const since3 = one('select now()');
+  const over = await placeOrder({ methodId: one(`select id from shipping_method where kind = 'pickup' limit 1`) ?? '' });
+  const none = latestOrder(since3);
+  rec(S, 'oversell refused', !none && !over.skipped ? 'PASS' : 'FAIL', none ? `order ${none[0]} created` : over.skipped ?? `POST ${over.res.status}`);
+  newCart();
+}
+
+async function abandonedCart(S, since) {
+  if (!SECRET) return rec(S, 'abandoned cart flow', 'SKIP', 'INTERNAL_SECRET not set (consent rows hold contact hashes)');
+  // A fresh guest who ticked marketing consent at checkout and left: the checkout form autosaves the contact and the
+  // consent tick on blur (JS), so the smoke writes those same two rows (session contact, consent with core's hashes).
+  const phone = `97${String(Date.now()).slice(-8)}`;
+  const buyer = { name: 'Smoke Leaver', phone: `+91${phone}`, email: `smoke-leaver-${phone}@example.invalid` };
+  const key = createHmac('sha256', SECRET).update('ecomkit:contact-hash').digest();
+  const hash = (v) => createHmac('sha256', key).update(v).digest('base64url').slice(0, 22);
+  sql(`insert into customers_consent (id, phone_hash, email_hash, purpose, status, text_shown, source) values ('${randomUUID()}', '${hash(buyer.phone)}', '${hash(buyer.email)}', 'marketing', 'granted', 'smoke', 'checkout')`);
+  newCart();
+  const [v] = purchasable(5);
+  if (!v) return rec(S, 'abandoned cart flow', 'SKIP', 'no purchasable variant');
+  await addLine(v, 1);
+  await req('/checkout'); // opens the checkout session for this cart
+  const cartId = one(`select cart_id from checkout_session where created_at >= '${since}' and order_id is null order by created_at desc limit 1`);
+  if (!cartId) return rec(S, 'abandoned cart flow', 'FAIL', 'no checkout session for the cart');
+  // The checkout form autosaves the contact on blur (JS); the smoke writes the same session row that autosave writes.
+  sql(`update checkout_session set contact = '${JSON.stringify({ ...buyer, marketingConsent: true })}'::jsonb where cart_id = '${cartId}'`);
+  sql(`update cart_cart set last_activity_at = now() - interval '2 days' where id = '${cartId}'`);
+  const st = await until(`select status from cart_cart where id = '${cartId}'`, (x) => x === 'abandoned', 330000);
+  rec(S, 'cart marked abandoned (job)', st === 'abandoned' ? 'PASS' : 'FAIL', st ?? '');
+  const run = await until(`select r.id || ':' || r.status || ':' || coalesce(r.stop_reason::text, '') from flows_run r join flows_flow f on f.id = r.flow_id where f.key = 'abandoned_cart' and r.subject_id = '${cartId}'`, (x) => !!x, 30000);
+  const [runId, runStatus, stop] = (run ?? '::').split(':');
+  rec(S, 'abandoned cart flow run started', runStatus === 'running' ? 'PASS' : 'FAIL', run ?? 'no run');
+  if (runStatus !== 'running') return;
+  // The first reminder waits an hour: move the run's clock back instead of waiting.
+  sql(`update flows_run set started_at = now() - interval '4 hours', next_step_at = now() where id = '${runId}'`);
+  const msg = await until(`select count(*) from notifications_message where flow_run_id = '${runId}' and template_key = 'cart.reminder_1'`, (x) => Number(x) > 0, 120000);
+  rec(S, 'reminder queued', Number(msg) > 0 ? 'PASS' : 'FAIL', `${msg} cart.reminder_1 messages${stop ? ` (${stop})` : ''}`);
+  const rendered = one(`select rendered::text from notifications_message where flow_run_id = '${runId}' limit 1`) ?? '';
+  const link = /https?:\/\/[^\s"\\]+\/api\/cart\/restore\?t=[A-Za-z0-9._%-]+/.exec(rendered)?.[0];
+  if (!link) return rec(S, 'restore link works', 'FAIL', 'no restore link in the message');
+  const page = await req(link.replace(/^https?:\/\/[^/]+/, ''));
+  const t = /name="t" value="([^"]+)"/.exec(page.text)?.[1]?.replaceAll('&#46;', '.');
+  const post = t ? await req('/api/cart/restore', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ t }).toString() }) : null;
+  rec(S, 'restore link works', page.status === 200 && post?.status === 303 && post.location?.endsWith('/cart') ? 'PASS' : 'FAIL', `GET ${page.status}, POST ${post?.status} -> ${post?.location ?? ''}`);
+  newCart();
 }
 
 async function jobs() {
   const S = 'jobs';
   const since = one('select now()');
-  // abandoned cart: cart.abandoned -> flow run -> reminder queued (needs the worker; the sweep runs on its schedule)
+  // abandoned cart: a guest cart with a saved checkout contact (marketing consent from the money run's order) goes
+  // idle -> cart.mark-abandoned (every 5 min) -> flows run -> first reminder with the cart's restore link.
   if (DB && !tableExists('flows_run')) rec(S, 'abandoned cart flow', 'SKIP', 'flows tables missing (module not enabled)');
-  else if (DB && tableExists('cart_cart')) {
-    const n = count(`select count(*) from flows_run r join flows_flow f on f.id = r.flow_id where f.key = 'cart_abandoned'`);
-    rec(S, 'abandoned cart flow runs', n > 0 ? 'PASS' : 'SKIP', `${n} runs (needs consented cart + worker sweep; clock not advanced by smoke)`);
-  }
+  else if (DB) await abandonedCart(S, since);
   // notify-me
   // notify-me only accepts a variant that has an inventory level row
   const variant = one('select variant_id from inventory_level limit 1');
   if (!variant) rec(S, 'notify-me', 'SKIP', 'no inventory_level rows (seed data)');
   else {
-    const r = await req('/api/notify-me', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variantId: variant, channel: 'email', email: 'smoke-notify@example.invalid', consent: true }) });
+    const r = await req('/api/notify-me', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variantId: variant, channel: 'email', email: `smoke-notify-${SMOKE_PHONE}@example.invalid`, consent: true }) });
     const rows = count(`select count(*) from inventory_subscription where created_at >= '${since}'`);
     rec(S, 'notify-me', r.status < 300 && rows > 0 ? 'PASS' : r.status >= 500 || r.status === 0 ? 'FAIL' : 'FAIL', `${r.status} rows=${rows} ${r.text.slice(0, 80)}`);
   }
@@ -349,30 +456,37 @@ async function jobs() {
       rec(S, 'wizard plan unlock', un.status < 300 ? 'PASS' : 'FAIL', `${un.status} ${un.text.slice(0, 80)}`);
     }
   }
-  // ERP sync against the mock + feed regeneration: admin action buttons (server-action forms)
-  for (const [name, page, match, table] of [
-    ['ERP sync now (mock)', '/admin/settings/erp-sync', /sync stock now/i, 'erp_sync_run'],
-    ['feed regeneration', '/admin/settings/feeds', /rebuild feeds now/i, 'feeds_run'],
+  // ERP sync against the mock + feed regeneration. The admin "Sync stock now" / "Rebuild feeds now" buttons are
+  // JS-only settings actions that just enqueue these jobs; the smoke enqueues the same jobs and the worker runs them.
+  for (const [name, queue, data, table] of [
+    ['ERP sync now (mock)', 'erp-sync.pull-inventory', { force: true }, 'erp_sync_run'],
+    ['feed regeneration', 'feeds.regenerate', {}, 'feeds_run'],
   ]) {
-    if (DB && !tableExists(table)) {
+    if (!DB || !tableExists(table)) {
       rec(S, name, 'SKIP', `${table} missing (module not enabled)`);
       continue;
     }
     const before = count(`select count(*) from ${table}`);
-    const s = await submitForm(page, match);
-    if (s.skipped) {
-      rec(S, name, 'SKIP', s.skipped);
-      continue;
-    }
-    await new Promise((r) => setTimeout(r, 1500));
-    const after = count(`select count(*) from ${table}`);
-    rec(S, name, s.res.status < 500 && after > before ? 'PASS' : 'FAIL', `POST ${s.res.status}, ${table} ${before} -> ${after}`);
+    sql(`insert into pgboss.job (name, data) values ('${queue}', '${JSON.stringify(data)}'::jsonb)`);
+    const after = Number(await until(`select count(*) from ${table}`, (x) => Number(x) > before, 60000));
+    const last = one(`select row_to_json(t)::text from (select * from ${table} order by 1 desc limit 1) t`) ?? '';
+    rec(S, name, after > before ? 'PASS' : 'FAIL', `${table} ${before} -> ${after} ${last.slice(0, 90)}`);
   }
   if (DB && tableExists('feeds_file')) {
     const token = one(`select value->>'token' from core_settings where module = 'feeds' limit 1`);
     const r = await req(`/feeds/google.xml${token ? `?token=${token}` : ''}`);
     rec(S, 'google feed served', r.status === 200 ? 'PASS' : r.status >= 500 ? 'FAIL' : 'SKIP', String(r.status));
   }
+  // monitoring: repeated forged payment webhooks raise the critical developer alert
+  for (let i = 0; i < 3; i++) await req('/api/webhooks/phonepe', { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'forged' }, body: '{}' });
+  const al = await until(`select count(*) from monitoring_alert where rule_key = 'payments.webhook_signature' and status <> 'resolved'`, (x) => Number(x) > 0, 15000);
+  rec(S, 'developer alert on payment failure', Number(al) > 0 ? 'PASS' : 'FAIL', `${al} open payments.webhook_signature alerts`);
+  // sitemap lists products
+  const idx = await req('/sitemap.xml');
+  const files = [...idx.text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(/^https?:\/\/[^/]+/, ''));
+  let plants = 0;
+  for (const f of files) plants += [...(await req(f)).text.matchAll(/<loc>[^<]*\/(?:plant|input)\/[^<]+<\/loc>/g)].length;
+  rec(S, 'sitemap lists products', plants > 0 ? 'PASS' : 'FAIL', `${files.length} files, ${plants} product URLs`);
 }
 
 async function admin() {

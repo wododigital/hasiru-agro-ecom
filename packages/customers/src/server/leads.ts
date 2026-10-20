@@ -111,3 +111,12 @@ export async function setLeadStatus(rawId: string, status: LeadStatus): Promise<
     await audit({ actorId: staff.userId, actorType: 'staff', action: 'lead.status', entity: 'lead', entityId: id, before, after: { status } }, { tx });
   });
 }
+
+/** System read for follow-up messages (flows' `leads` port): the lead's contact and its plan link, if any. */
+export async function leadContact(leadId: string): Promise<{ name: string; phone: string; email: null; link: string | null } | null> {
+  if (!/^[0-9a-f-]{36}$/i.test(leadId)) return null;
+  const [lead] = await db.select().from(customersLead).where(eq(customersLead.id, leadId));
+  if (!lead) return null;
+  const planId = typeof lead.context.planId === 'string' ? lead.context.planId : null;
+  return { name: lead.name, phone: lead.phoneE164, email: null, link: planId ? `/plan/results/${planId}` : null };
+}

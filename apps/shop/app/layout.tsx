@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { DM_Serif_Display, Outfit } from 'next/font/google';
 import type { ReactNode } from 'react';
 import './globals.css';
+import { publishRouteRegistry } from '../src/route-registry';
+import { registry } from '../src/generated/registry';
+
+// Ports bound at boot read extension components through this route-graph copy of the registry (see src/boot.ts).
+publishRouteRegistry(registry);
 
 // Self-hosted at build time, latin only. theme.css maps --font-display / --font-body to these variables.
 const display = DM_Serif_Display({ weight: '400', subsets: ['latin'], display: 'swap', variable: '--font-dm-serif-display' });

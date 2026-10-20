@@ -1,3 +1,5 @@
+import { PlantCalculatorLauncher } from '@ecomkit/farm-calculators/ui';
+import { TagScripts } from '@ecomkit/marketing/ui';
 import type { ReactNode } from 'react';
 import { SiteFooter, SiteHeader } from '../../src/shell/chrome';
 
@@ -8,6 +10,8 @@ export default function ShopLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main id="main">{children}</main>
       <SiteFooter />
+      <PlantCalculatorLauncher />
+      <TagScripts />
     </>
   );
 }

@@ -33,7 +33,8 @@ export interface ReviewPorts {
   /** Product name and link for the account pages (catalog). */
   products: { label(productId: string): Promise<{ name: string; href: string } | null> } | null;
 }
-const ports: ReviewPorts = { purchases: null, images: null, products: null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: ReviewPorts = ((globalThis as Record<symbol, ReviewPorts | undefined>)[Symbol.for('ecomkit.reviews.ports')] ??= { purchases: null, images: null, products: null });
 export const getReviewPorts = (): Readonly<ReviewPorts> => ports;
 export function configureReviews(next: Partial<ReviewPorts>): void {
   Object.assign(ports, next);

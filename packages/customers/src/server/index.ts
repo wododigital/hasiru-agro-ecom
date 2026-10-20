@@ -14,5 +14,5 @@ export {
 export { deleteMyAddress, listMyAddresses, saveMyAddress, type AddressRow } from './addresses';
 export { deleteMyLand, listMyLand, saveMyLand, type LandRow } from './land';
 export { consentHistory, hasConsent, listConsent, recordConsent, type ConsentRow } from './consent';
-export { contactPort, listLeads, setLeadStatus, upsertLead, type ContactPort, type LeadRow } from './leads';
+export { contactPort, leadContact, listLeads, setLeadStatus, upsertLead, type ContactPort, type LeadRow } from './leads';
 export { segmentCounts, segmentMembers, type SegmentMember } from './segments';

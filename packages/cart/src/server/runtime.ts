@@ -18,6 +18,11 @@ export interface CartVariant {
   purchasable: boolean;
   collectionIds?: readonly string[];
   tagIds?: readonly string[];
+  /** Order snapshot facts handed to checkout (`checkoutCart`); absent ones snapshot as null / 0. */
+  sku?: string | null;
+  hsn?: string | null;
+  sizeClass?: string | null;
+  packingFeePaise?: number;
 }
 
 /** A cart as the discounts module reads it (lines at the bulk-tier unit price, A8). */

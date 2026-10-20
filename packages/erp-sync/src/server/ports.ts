@@ -28,7 +28,8 @@ export interface ErpSyncPorts {
   variantCandidates: (() => Promise<MatchCandidate[]>) | null;
 }
 
-const ports: ErpSyncPorts = { adapter: null, orderPayload: null, leadPayload: null, onPushed: null, applyOrderStatus: null, variantCandidates: null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: ErpSyncPorts = ((globalThis as Record<symbol, ErpSyncPorts | undefined>)[Symbol.for('ecomkit.erp-sync.ports')] ??= { adapter: null, orderPayload: null, leadPayload: null, onPushed: null, applyOrderStatus: null, variantCandidates: null });
 
 export function configureErpSync(next: Partial<ErpSyncPorts>): void {
   Object.assign(ports, next);

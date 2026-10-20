@@ -22,7 +22,8 @@ export class NotFoundError extends Error {
 }
 
 type Provider = () => Promise<AuthContext | null>;
-let provider: Provider = async () => null;
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const state: { provider: Provider } = ((globalThis as Record<symbol, { provider: Provider } | undefined>)[Symbol.for('ecomkit.core.authProvider')] ??= { provider: async () => null });
 
 /**
  * Marks the render as request-time before any cookie or session read, so a page that checks the viewer is never
@@ -39,7 +40,7 @@ async function atRequestTime(): Promise<void> {
 
 async function currentProvider(): Promise<AuthContext | null> {
   await atRequestTime();
-  return provider();
+  return state.provider();
 }
 
 /**
@@ -47,7 +48,7 @@ async function currentProvider(): Promise<AuthContext | null> {
  * With no provider (auth module disabled) everyone is a guest and every permission check fails closed.
  */
 export function setAuthProvider(next: Provider): void {
-  provider = next;
+  state.provider = next;
 }
 
 const GUEST: Viewer = { kind: 'guest' };

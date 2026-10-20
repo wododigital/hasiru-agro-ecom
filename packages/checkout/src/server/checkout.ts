@@ -430,8 +430,10 @@ export async function retryPayment(orderId: string, token: string | null): Promi
 }
 
 /** For flows (abandoned checkout): the saved contact of a checkout session, and whether it became an order. */
-export async function checkoutContact(checkoutSessionId: string): Promise<{ cartId: string; contact: StoredContact; orderId: string | null } | null> {
-  const [s] = /^[0-9a-f-]{36}$/i.test(checkoutSessionId) ? await db.select().from(checkoutSession).where(eq(checkoutSession.id, checkoutSessionId)) : [];
+export async function checkoutContact(checkoutSessionId: string, options: { byCart?: boolean } = {}): Promise<{ cartId: string; contact: StoredContact; orderId: string | null } | null> {
+  if (!/^[0-9a-f-]{36}$/i.test(checkoutSessionId)) return null;
+  // byCart: the cart's own id (one checkout per cart). An abandoned cart event carries no session id.
+  const [s] = await db.select().from(checkoutSession).where(eq(options.byCart ? checkoutSession.cartId : checkoutSession.id, checkoutSessionId));
   return s ? { cartId: s.cartId, contact: contactOf(s), orderId: s.orderId } : null;
 }
 

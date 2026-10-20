@@ -6,7 +6,7 @@ import type { SeedContext } from '@ecomkit/core/contracts';
 import type { TestDb } from '@ecomkit/core/testing';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { getLevel } from '../src/server';
-import { runSeed, seedHook, type VariantResolver } from '../src/server/seed';
+import { runSeed, type VariantResolver } from '../src/server/seed';
 import { inventoryDb, ledgerMismatches } from './helpers';
 
 let t: TestDb;
@@ -51,8 +51,8 @@ describe('seed hook', () => {
     expect(await getLevel(ids['I-001-01']!.variantId)).toEqual(before);
   });
 
-  it('without the catalog resolver it skips with a note instead of failing', async () => {
-    const r = await seedHook(ctx);
+  it('without a catalog resolver it skips with a note instead of failing', async () => {
+    const r = await runSeed(ctx, null);
     expect(r.inserted + r.updated).toBe(0);
     expect(r.notes?.join(' ')).toMatch(/variantRefsBySku/);
   });

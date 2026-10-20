@@ -31,7 +31,8 @@ export interface OrdersPorts {
   catalog: { variantBySku(sku: string): Promise<ManualLineRef | null> } | null;
 }
 
-const ports: OrdersPorts = { inventory: null, discounts: null, payments: null, catalog: null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: OrdersPorts = ((globalThis as Record<symbol, OrdersPorts | undefined>)[Symbol.for('ecomkit.orders.ports')] ??= { inventory: null, discounts: null, payments: null, catalog: null });
 export const getOrdersPorts = (): Readonly<OrdersPorts> => ports;
 export function configureOrders(next: Partial<OrdersPorts>): void {
   Object.assign(ports, next);

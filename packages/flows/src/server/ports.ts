@@ -54,7 +54,8 @@ export interface FlowPorts {
   discounts: { createSingleUseCode(options: { ruleId: string; phone: string; expiresAt: Date | null }): Promise<string> } | null;
 }
 
-const ports: FlowPorts = { carts: null, orders: null, leads: null, products: null, discounts: null };
+// On globalThis: instrumentation (boot) and route bundles are separate module instances in Next.
+const ports: FlowPorts = ((globalThis as Record<symbol, FlowPorts | undefined>)[Symbol.for('ecomkit.flows.ports')] ??= { carts: null, orders: null, leads: null, products: null, discounts: null });
 
 export function configureFlows(next: Partial<FlowPorts>): void {
   Object.assign(ports, next);

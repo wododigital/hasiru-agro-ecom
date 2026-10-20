@@ -1,7 +1,9 @@
-import type { Instrumentation } from 'next';
+// Server errors from every route go to core observability.
+export { onRequestError } from '@ecomkit/core/observability';
 
-// Server errors from every route. The core observability adapter (fingerprint, core_error_issue, alerts)
-// replaces this console fallback once it exists; keep the export name.
-export const onRequestError: Instrumentation.onRequestError = async (error, request, context) => {
-  console.error('[request-error]', { method: request.method, path: request.path, routeType: context.routeType, routePath: context.routePath }, error);
-};
+/** Binds the enabled modules' ports once per server process (Node runtime only). */
+export async function register(): Promise<void> {
+  if (process.env.NEXT_RUNTIME !== 'nodejs') return;
+  const { boot } = await import('./src/boot');
+  await boot();
+}
