@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  allowedBy,
   capiBodySchema,
   capiTimeIssue,
   consentMode,
@@ -33,8 +32,6 @@ describe('consent cookie and Consent Mode', () => {
     expect(consentMode(null)).toEqual({ ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
     expect(consentMode({ analytics: true, marketing: false, at: 1 })).toEqual({ ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
     expect(consentMode({ analytics: false, marketing: true, at: 1 }).ad_user_data).toBe('granted');
-    expect(allowedBy(null, 'marketing')).toBe(false);
-    expect(allowedBy(null, 'none')).toBe(true);
   });
 });
 

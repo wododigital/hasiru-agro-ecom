@@ -64,7 +64,7 @@ function injectSnippet(id: string, snippet: string, placement: 'head' | 'body_en
 
 /**
  * Loads the vendor tags the visitor consented to, after the page is idle: GA4 (analytics), Google Ads and Meta Pixel
- * (advertising), and active custom tags for the current path. Sets Consent Mode v2 defaults to denied first.
+ * (advertising), and active custom tags for the current path. Sets the Google Consent Mode defaults to denied first.
  * Renders nothing.
  */
 export function TagLoaderIsland({ config }: { config: PublicTagConfig }) {

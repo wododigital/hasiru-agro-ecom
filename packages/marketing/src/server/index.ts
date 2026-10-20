@@ -2,7 +2,7 @@ import 'server-only';
 
 export { cspSources, publicTagConfig, readPublicTagConfig, resetCspMemo, settingsDef } from './config';
 export { deleteTag, getTag, listTags, saveTag } from './tags';
-export { consentCookie, postConsent, readCookie } from './consent';
+export { postConsent } from './consent';
 export { getOrderAttribution, readAttribution, saveOrderAttribution, type CookieReader, type OrderAttribution } from './attribution';
 export {
   configureMarketing,
@@ -11,7 +11,6 @@ export {
   onOrderPaid,
   onOrderRefunded,
   purchaseTagData,
-  sha256Hex,
   type ConversionResult,
 } from './conversions';
 export type { ConversionOrder, OrdersPort, PurchaseTagData } from '../domain/conversions';

@@ -33,14 +33,8 @@ export interface ConsentModeState {
   analytics_storage: ConsentSignal;
 }
 
-/** Google Consent Mode v2 signals for a choice; no choice yet means everything denied. */
+/** Google Consent Mode signals (including ad_user_data and ad_personalization) for a choice; no choice yet means everything denied. */
 export function consentMode(choice: ConsentChoice | null): ConsentModeState {
   const ads: ConsentSignal = choice?.marketing ? 'granted' : 'denied';
   return { ad_storage: ads, ad_user_data: ads, ad_personalization: ads, analytics_storage: choice?.analytics ? 'granted' : 'denied' };
-}
-
-/** Whether a tag that needs `kind` consent may load under `choice`. Tags that need no consent always load. */
-export function allowedBy(choice: ConsentChoice | null, kind: 'analytics' | 'marketing' | 'none'): boolean {
-  if (kind === 'none') return true;
-  return !!choice?.[kind];
 }
