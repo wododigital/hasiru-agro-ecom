@@ -2,6 +2,7 @@
 // delivery quotes and the totals from core.computeTotals (the only totals pipeline).
 import type { AppliedDiscountInput, CartBlockLine, CartLineOrigin, ImageRef, Paise, PriceQuote, ShippingMethodQuote, StockInfo, TotalsBreakdown } from '@ecomkit/core/contracts';
 import { formatINR } from '@ecomkit/core/money';
+import { rateLimit } from '@ecomkit/core/rate-limit';
 import { computeTotals } from '@ecomkit/core/totals';
 import { priceLines } from '@ecomkit/pricing/server';
 import { bulkNudge, lineWeightKg, needsInputsSuggestion, originSchema, toTotalsInput, type BulkNudge, type LineOrigin } from '../domain';
@@ -195,6 +196,8 @@ export async function cartCount(ctx: CartContext): Promise<number> {
  * A code the shopper typed: checked by the discounts module against the current cart (rate-limited per cart)
  * and stored only when it applies.
  */
+const COUPON_IP_LIMIT = { limit: 30, windowSec: 3600 };
+
 export async function applyCoupon(ctx: CartContext, code: string): Promise<CouponOutcome> {
   const port = cartRuntime().discounts;
   if (!port) return { ok: false, reason: 'unavailable' };
@@ -202,6 +205,9 @@ export async function applyCoupon(ctx: CartContext, code: string): Promise<Coupo
   if (!cart) return { ok: false, reason: 'empty' };
   const { priced, discountCart } = await priceCart(cart);
   if (!priced.length) return { ok: false, reason: 'empty' };
+  // Per client IP as well as per cart: a fresh cart per attempt must not reset the guessing budget.
+  const perIp = await rateLimit(`coupon-try:${ctx.createSubject ?? 'anon'}`, COUPON_IP_LIMIT);
+  if (!perIp.ok) return { ok: false, reason: 'rate_limited' };
   const outcome = await port.applyCoupon(code, discountCart, { subject: `cart:${cart.id}`, customerId: ctx.customerId });
   if (outcome.ok) await storeCoupon(ctx, outcome.code);
   return outcome;
