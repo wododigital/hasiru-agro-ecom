@@ -40,6 +40,9 @@ function Section({ step, title, children }: { step: number; title: string; child
  * Every total comes from the server (`quoteAction`); place-order reprices again. Errors keep the form filled.
  */
 export function CheckoutFormIsland({ data, idempotencyKey, messages: m, pincodeLookupUrl }: CheckoutFormIslandProps) {
+  // The key replays an order (and its guest link), so with JS it is a per-browser secret minted on first submit and
+  // reused for retries; the server-rendered key only serves the no-JS form.
+  const browserKey = useRef<string | null>(null);
   const [view, setView] = useState<QuoteView>(data.quote);
   const [methodId, setMethodId] = useState(view.method?.methodId ?? '');
   const [choice, setChoice] = useState<PaymentChoice>('online');
@@ -104,7 +107,14 @@ export function CheckoutFormIsland({ data, idempotencyKey, messages: m, pincodeL
   const methodPrice = (q: ShippingMethodQuote) => (q.pricePaise + q.packingPaise === 0 ? m.delivery.free : rs(q.pricePaise + q.packingPaise));
 
   return (
-    <form ref={formRef} action={formAction} className="grid gap-6 lg:grid-cols-[1fr_22rem]" noValidate={false}>
+    <form
+      ref={formRef}
+      action={(fd: FormData) => {
+        browserKey.current ??= crypto.randomUUID();
+        fd.set('idempotencyKey', browserKey.current);
+        formAction(fd);
+      }}
+      className="grid gap-6 lg:grid-cols-[1fr_22rem]" noValidate={false}>
       <input type="hidden" name="idempotencyKey" value={idempotencyKey} />
       <input type="hidden" name="expectedTotalPaise" value={t.totalPaise} />
       <input type="hidden" name="districtSlug" value={address.districtSlug} />

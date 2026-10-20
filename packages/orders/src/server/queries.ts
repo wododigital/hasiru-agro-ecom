@@ -1,7 +1,7 @@
 import { getViewer, NotFoundError, requireOwner, requirePermission } from '@ecomkit/core/auth-context';
 import type { Viewer } from '@ecomkit/core/contracts';
 import { db } from '@ecomkit/core/db';
-import { maskPii } from '@ecomkit/customers/domain';
+import { maskPii, seesFullPii } from '@ecomkit/customers/domain';
 import { and, asc, count, desc, eq, ilike, inArray, or, sql, type SQL } from 'drizzle-orm';
 import { istDay, ORDER_STATUSES, type OrderContact, type OrderStatus, type SavedView } from '../domain';
 import { ordersEvent, ordersInvoice, ordersLine, ordersOrder } from '../schema';
@@ -109,7 +109,14 @@ export async function listOrdersAdmin(params: AdminListParams): Promise<{ rows: 
   const where = and(
     viewWhere(params.view, istDay(now)),
     status ? eq(ordersOrder.status, status) : undefined,
-    q ? or(ilike(ordersOrder.number, `%${q}%`), sql`${ordersOrder.contact} ->> 'phone' ilike ${`%${q}%`}`, sql`${ordersOrder.contact} ->> 'name' ilike ${`%${q}%`}`) : undefined,
+    // Phone search only for staff who see full phones; otherwise it would reveal masked digits by trial.
+    q
+      ? or(
+          ilike(ordersOrder.number, `%${q}%`),
+          seesFullPii(staff) ? sql`${ordersOrder.contact} ->> 'phone' ilike ${`%${q}%`}` : undefined,
+          sql`${ordersOrder.contact} ->> 'name' ilike ${`%${q}%`}`,
+        )
+      : undefined,
   );
   const [rows, [total]] = await Promise.all([
     db.select().from(ordersOrder).where(where).orderBy(desc(ordersOrder.placedAt), desc(ordersOrder.id)).limit(pageSize).offset((page - 1) * pageSize),

@@ -269,7 +269,11 @@ export async function placeOrder(raw: PlaceOrderInput, meta: { ip?: string | nul
 
   // A replayed submit (double click, retry after a timeout) finds its order by key, even after the cart converted.
   const [byKey] = await db.select().from(checkoutSession).where(eq(checkoutSession.idempotencyKey, input.idempotencyKey));
-  if (byKey?.orderId) return replayResult(byKey.orderId);
+  if (byKey?.orderId) {
+    // A signed-in buyer's order never replays to anyone else (the result carries the order capability).
+    if (byKey.customerId && byKey.customerId !== customerId) return { ok: false, formError: 'cart_empty' };
+    return replayResult(byKey.orderId);
+  }
 
   let cart: CheckoutCart;
   try {

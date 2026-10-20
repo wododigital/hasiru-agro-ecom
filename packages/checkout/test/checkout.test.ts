@@ -165,6 +165,18 @@ describe('place order', () => {
     expect(h.starts).toHaveLength(1);
   });
 
+  it('idempotency: a signed-in buyer\'s key never replays their order to someone else', async () => {
+    wire(newId());
+    asCustomer();
+    const body = form();
+    const mine = await placeOrder(body);
+    expect(mine.ok).toBe(true);
+    asCustomer();
+    expect(await placeOrder(body)).toEqual({ ok: false, formError: 'cart_empty' });
+    asGuest();
+    expect(await placeOrder(body)).toEqual({ ok: false, formError: 'cart_empty' });
+  });
+
   it('oversell is blocked: no order, no number used, no consent, form stays fillable', async () => {
     const cartId = newId();
     const { fakeInventory } = await import('@ecomkit/core/testing');

@@ -117,6 +117,12 @@ describe('admin access', () => {
     expect((await adminInvoice(req, { params: Promise.resolve({ id: mine.id }) })).status).toBe(200);
     asStaff('catalog_editor');
     expect((await adminInvoice(req, { params: Promise.resolve({ id: mine.id }) })).status).toBe(404);
+    // Support (masked PII): no invoice PDF with the buyer's phone, and no phone-digit search oracle.
+    asStaff('support');
+    expect((await adminInvoice(req, { params: Promise.resolve({ id: mine.id }) })).status).toBe(404);
+    expect((await listOrdersAdmin({ view: 'all', q: '98765' })).rows.some((o) => o.id === mine.id)).toBe(false);
+    asStaff('manager');
+    expect((await listOrdersAdmin({ view: 'all', q: '98765' })).rows.some((o) => o.id === mine.id)).toBe(true);
   });
 
   it('saved views filter the list', async () => {
