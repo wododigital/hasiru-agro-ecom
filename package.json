@@ -18,7 +18,8 @@
     "modules:sync": "tsx tooling/scripts/modules-sync.ts",
     "seed:build": "tsx tooling/scripts/seed/run.ts build",
     "seed:load": "tsx tooling/scripts/seed/run.ts load",
-    "cta-coverage": "tsx tooling/scripts/cta-coverage.ts"
+    "cta-coverage": "tsx tooling/scripts/cta-coverage.ts",
+    "smoke": "node tooling/smoke.mjs"
   },
   "devDependencies": {
     "@tooling/eslint": "workspace:*",
