@@ -53,7 +53,16 @@ export const uiMessages = {
     next: 'Next page',
     pageOf: (page: number, pages: number) => `Page ${page} of ${pages}`,
     empty: 'Nothing here yet',
+    views: 'Views',
+    activeFilters: 'Active filters',
+    removeFilter: (label: string) => `Remove filter ${label}`,
+    bulk: 'Bulk actions',
+    selected: 'Selected rows',
+    selectAll: 'Select all rows',
+    selectRow: 'Select row',
   },
+  detail: { back: 'Back', more: 'More actions' },
+  saveBar: { unsaved: 'Unsaved changes', discard: 'Discard', save: 'Save' },
 };
 
 export type UiMessages = typeof uiMessages;

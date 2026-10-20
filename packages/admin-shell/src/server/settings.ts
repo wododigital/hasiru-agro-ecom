@@ -70,6 +70,27 @@ export function settingsIndex(registry: Registry): { moduleId: string; title: st
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 
+/**
+ * Integrations keys checklist: every secret field across enabled modules and whether it is configured. Reads only
+ * the configured flag, never a secret value.
+ */
+export async function keysChecklist(registry: Registry): Promise<{ moduleId: string; title: string; href: string; keys: { key: string; label: string; configured: boolean }[] }[]> {
+  const rows = await Promise.all(
+    registry.settings.map(async ({ moduleId, settings }) => {
+      const secrets = describeSettings(settings.schema).filter((f) => f.kind === 'secret');
+      if (!secrets.length) return null;
+      const stored = await getSettingsForAdmin(defineSettings(moduleId, settings.schema));
+      return {
+        moduleId,
+        title: settingsTitle(registry, moduleId),
+        href: `/admin/settings/${moduleId}`,
+        keys: secrets.map((f) => ({ key: f.key, label: f.label, configured: stored.secrets[f.key]?.configured ?? false })),
+      };
+    }),
+  );
+  return rows.filter((r) => r !== null).sort((a, b) => a.title.localeCompare(b.title));
+}
+
 const has = (viewer: StaffViewer, p: Permission) => viewer.permissions.includes(p);
 const actionEntity = 'settings_action';
 

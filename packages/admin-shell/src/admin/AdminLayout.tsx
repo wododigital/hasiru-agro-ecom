@@ -2,7 +2,7 @@ import { getViewer } from '@ecomkit/core/auth-context';
 import type { StaffViewer } from '@ecomkit/core/contracts';
 import type { Registry } from '@ecomkit/core/manifest';
 import { Skeleton, ToastRegion } from '@ecomkit/ui';
-import { Bell, CircleDot, icons } from 'lucide-react';
+import { Bell, CircleDot, icons, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense, type ReactNode } from 'react';
@@ -77,10 +77,17 @@ async function GatedShell({ registry, children, search, account, title = 'Admin'
   if (gate === 'not-found') notFound();
   if (gate === 'bare' || viewer.kind !== 'staff') return children;
 
-  const sections: NavSectionView[] = navSections(registry.nav, viewer.permissions).map((s) => ({
-    ...s,
-    items: s.items.map((i) => ({ label: i.label, href: i.href, icon: <NavIcon name={i.icon} /> })),
-  }));
+  const all = navSections(registry.nav, viewer.permissions);
+  const sections: NavSectionView[] = all
+    .filter((s) => s.band !== 'settings')
+    .map((s) => ({ ...s, items: s.items.map((i) => ({ label: i.label, href: i.href, icon: <NavIcon name={i.icon} /> })) }));
+  // Settings pinned bottom-left (Shopify): opens the settings layout, which lists every module's settings.
+  const settings = all.some((s) => s.band === 'settings') ? (
+    <Link href="/admin/settings" className="mt-auto flex items-center gap-2.5 rounded-sm px-3 py-2 text-sm hover:bg-surface-2" data-cta="admin-nav-settings">
+      <Settings aria-hidden="true" className="size-4 text-muted" />
+      Settings
+    </Link>
+  ) : null;
 
   return (
     <div className="min-h-dvh bg-bg text-text lg:grid lg:grid-cols-[15rem_1fr]">
@@ -91,10 +98,14 @@ async function GatedShell({ registry, children, search, account, title = 'Admin'
         <nav aria-label="Admin">
           <NavList sections={sections} />
         </nav>
+        {settings}
       </aside>
       <div className="flex min-w-0 flex-col">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b border-border bg-surface px-3 md:px-4">
-          <MobileNavIsland sections={sections} title={title} />
+          <MobileNavIsland sections={sections} title={title} settings={settings} />
+          <Link href="/admin" className="hidden px-1 text-sm font-semibold text-primary lg:hidden md:inline">
+            {title}
+          </Link>
           {search && hasSearch(registry, viewer.permissions) ? <SearchIsland search={search} /> : <div className="flex-1" />}
           <div className="ml-auto flex items-center gap-1">
             {registry.has('monitoring') && viewer.permissions.includes('health.read') ? (

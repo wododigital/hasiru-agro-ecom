@@ -8,6 +8,7 @@ export {
   loadSettingsView,
   runSettingsAction,
   saveSettings,
+  keysChecklist,
   settingsIndex,
   settingsTitle,
   type ActionOutcome,

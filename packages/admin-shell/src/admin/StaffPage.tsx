@@ -154,6 +154,7 @@ async function StaffContent({ staff, actions, searchParams }: StaffPageProps) {
         total={all.length}
         pageSize={PAGE_SIZE}
         basePath="/admin/staff"
+        views={STATUSES.map((st) => ({ id: st, label: st.charAt(0).toUpperCase() + st.slice(1), filters: { status: st } }))}
         filters={[
           { key: 'role', label: 'Role', options: STAFF_ROLES.map((r) => ({ value: r, label: ROLE_LABELS[r] })) },
           { key: 'status', label: 'Status', options: STATUSES.map((s) => ({ value: s, label: s })) },
