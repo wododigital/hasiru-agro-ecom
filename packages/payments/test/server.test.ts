@@ -10,6 +10,7 @@ import { anomalyHealth, attemptsForOrder, gatewayHealth, listAttempts, listOpenB
 import { settingsDef, webhookCredentials } from '../src/server/config';
 import { pollPending, sweep } from '../src/server/jobs';
 import {
+  capturedOf,
   createPayment,
   markBankTransferReceived,
   paymentOptions,
@@ -361,6 +362,10 @@ describe('offline and partial methods', () => {
     expect(await pollPending({ now: new Date(Date.now() + 10 * MIN) })).toMatchObject({ checked: 0 });
     expect(await markBankTransferReceived({ attemptId: r.attemptId, amountPaise: 60000, actorId: STAFF_ID })).toMatchObject({ ok: true, anomaly: null });
     expect(orders.paid).toEqual([{ orderId: order.id, amountPaise: 60000, attemptId: r.attemptId, method: 'bank_transfer' }]);
+    // Re-marking a completed transfer cannot inflate the captured amount that caps refunds.
+    expect(await markBankTransferReceived({ attemptId: r.attemptId, amountPaise: 9_000_000, actorId: STAFF_ID })).toEqual({ ok: false, reason: 'not_pending' });
+    const [done] = await t.db.select().from(paymentsAttempt).where(eq(paymentsAttempt.id, r.attemptId));
+    expect(capturedOf(done!)).toBe(60000);
 
     const other = await start(5000, 'bank_transfer');
     expect(await markBankTransferReceived({ attemptId: other.r.attemptId, amountPaise: 4000, actorId: STAFF_ID })).toMatchObject({ ok: true, anomaly: 'amount_mismatch' });

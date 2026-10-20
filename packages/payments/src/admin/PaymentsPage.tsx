@@ -25,6 +25,7 @@ const NOTICE: Record<string, string> = {
   invalid: 'Check the values and try again.',
   not_found: 'Not found.',
   not_offline: 'Only bank transfers can be marked received.',
+  not_pending: 'This transfer is already marked received.',
 };
 
 const columns: Column<PaymentAttemptRow>[] = [

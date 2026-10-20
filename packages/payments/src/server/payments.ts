@@ -227,7 +227,8 @@ export async function applyPaymentState(attemptId: string, reported: ReportedSta
       reported: { state: reported.state, amountPaise: reported.amountPaise },
     });
     const patch: Partial<typeof paymentsAttempt.$inferInsert> = { updatedAt: now };
-    if (reported.raw !== undefined) patch.rawStatus = reported.raw as Record<string, unknown>;
+    // The captured amount (rawStatus.amount) caps refunds, so it is frozen once the attempt leaves pending.
+    if (reported.raw !== undefined && (row.state === 'pending' || decision.next)) patch.rawStatus = reported.raw as Record<string, unknown>;
     if (decision.next) {
       patch.state = decision.next;
       patch.nextPollAt = null;
@@ -291,11 +292,13 @@ export const fetchStatus = syncAttempt;
 export const markReceivedInput = z.object({ attemptId: z.uuid(), amountPaise: z.number().int().positive(), actorId: z.uuid() });
 
 /** Staff confirm a bank transfer arrived. The amount entered is checked like a gateway capture. */
-export async function markBankTransferReceived(input: z.input<typeof markReceivedInput>): Promise<{ ok: true; attempt: PaymentAttemptRow; anomaly: Anomaly | null } | { ok: false; reason: 'not_found' | 'not_offline' }> {
+export async function markBankTransferReceived(input: z.input<typeof markReceivedInput>): Promise<{ ok: true; attempt: PaymentAttemptRow; anomaly: Anomaly | null } | { ok: false; reason: 'not_found' | 'not_offline' | 'not_pending' }> {
   const { attemptId, amountPaise, actorId } = markReceivedInput.parse(input);
   const [row] = await db.select().from(paymentsAttempt).where(eq(paymentsAttempt.id, attemptId));
   if (!row) return { ok: false, reason: 'not_found' };
   if (row.provider !== 'bank_transfer') return { ok: false, reason: 'not_offline' };
+  // Only a pending transfer can be marked received; re-marking a completed one must not change its captured amount.
+  if (row.state !== 'pending') return { ok: false, reason: 'not_pending' };
   const applied = await applyPaymentState(attemptId, { state: 'completed', amountPaise, raw: { amount: amountPaise, markedBy: actorId } }, { actorId });
   return applied ? { ok: true, attempt: applied.attempt, anomaly: applied.decision.anomaly } : { ok: false, reason: 'not_found' };
 }
