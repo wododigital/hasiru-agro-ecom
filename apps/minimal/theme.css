@@ -1,0 +1,29 @@
+/*
+ * Minimal store theme: a neutral slate and indigo palette. A new store restyles itself by overriding the
+ * @ecomkit/ui semantic tokens in a file like this one; nothing else carries colour literals.
+ */
+:root,
+[data-surface='shop'] {
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f1f4;
+  --color-text: #1f2328;
+  --color-muted: #5b6370;
+  --color-border: #e1e3e8;
+
+  --color-primary: #3730a3;
+  --color-primary-fg: #ffffff;
+  --color-primary-hover: #4338ca;
+  --color-primary-strong: #272277;
+  --color-accent: #f59e0b;
+  --color-accent-fg: #1f2328;
+
+  --color-ring: #4338ca;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --font-display: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+}

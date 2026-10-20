@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+@import '@ecomkit/ui/tokens.css';
+@import '../theme.css';
+
+/* Tailwind does not scan node_modules; the glob must end in a file pattern. */
+@source '../../../packages/*/src/**/*.{ts,tsx}';

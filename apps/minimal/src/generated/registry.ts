@@ -8,8 +8,12 @@ import m_media from '@ecomkit/media/manifest';
 import m_catalog from '@ecomkit/catalog/manifest';
 import m_pricing from '@ecomkit/pricing/manifest';
 import m_inventory from '@ecomkit/inventory/manifest';
+import m_cart from '@ecomkit/cart/manifest';
 import m_customers from '@ecomkit/customers/manifest';
+import m_orders from '@ecomkit/orders/manifest';
+import m_checkout from '@ecomkit/checkout/manifest';
+import m_payments from '@ecomkit/payments/manifest';
 import m_seo from '@ecomkit/seo/manifest';
 
-export const enabledModules = ["core","ui","auth","media","catalog","pricing","inventory","customers","seo"] as const;
-export const registry = createRegistry([m_core, m_ui, m_auth, m_media, m_catalog, m_pricing, m_inventory, m_customers, m_seo], { mocks: true });
+export const enabledModules = ["core","ui","auth","media","catalog","pricing","inventory","cart","customers","orders","checkout","payments","seo"] as const;
+export const registry = createRegistry([m_core, m_ui, m_auth, m_media, m_catalog, m_pricing, m_inventory, m_cart, m_customers, m_orders, m_checkout, m_payments, m_seo], { mocks: true });
