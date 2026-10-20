@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { requirePermission } from '@ecomkit/core/auth-context';
-import { TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
+import { Badge, Card, DetailFrame, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
 import { toIstLocal } from '../domain';
 import { getRule } from '../server/discounts';
 import { CodesFormIsland } from './CodesFormIsland';
@@ -30,12 +30,12 @@ export async function DiscountEditPage({ id }: { id: string | null }) {
     : BLANK;
 
   return (
-    <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-semibold">{r ? r.name : 'New discount'}</h1>
-      <RuleFormIsland defaults={defaults} />
+    <DetailFrame title={r ? r.name : 'New discount'} backHref="/admin/discounts" backLabel="Discounts" badges={r ? <Badge tone={r.status === 'active' ? 'success' : 'outline'}>{r.status}</Badge> : null} meta={r ? (r.kind === 'code' ? 'Coupon code' : 'Automatic promotion') : undefined}>
+      <Card>
+        <RuleFormIsland defaults={defaults} />
+      </Card>
       {r?.kind === 'code' && detail ? (
-        <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold">Codes</h2>
+        <Card title="Codes">
           <CodesFormIsland ruleId={r.id} />
           {detail.codes.length ? (
             <Table>
@@ -59,8 +59,8 @@ export async function DiscountEditPage({ id }: { id: string | null }) {
               </TBody>
             </Table>
           ) : null}
-        </section>
+        </Card>
       ) : null}
-    </div>
+    </DetailFrame>
   );
 }

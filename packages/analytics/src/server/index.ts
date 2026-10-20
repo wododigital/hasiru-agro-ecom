@@ -7,8 +7,10 @@ export { createPartitionJob, ensurePartitions, listPartitions, type PartitionCha
 export {
   attentionReport,
   botsReport,
+  dailyKpis,
   funnelReport,
   journeysReport,
+  liveReport,
   overviewReport,
   report,
   searchReport,

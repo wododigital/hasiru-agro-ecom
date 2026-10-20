@@ -31,3 +31,14 @@ export async function assignAction(form: FormData): Promise<void> {
   await assign(id, form.get('clear') ? null : viewer.kind === 'staff' ? viewer.userId : null);
   back(id);
 }
+
+/** Bulk from the enquiries index (row checkboxes): "Assign to me" or a status move, bound per button. The bound status comes from the client, so it is checked. */
+export async function bulkAction(op: string, form: FormData): Promise<void> {
+  const ids = form.getAll('ids').map(String).slice(0, 200);
+  const viewer = await getViewer();
+  for (const id of ids) {
+    if (op === 'assign_me') await assign(id, viewer.kind === 'staff' ? viewer.userId : null);
+    else if (ENQUIRY_STATUSES.includes(op as EnquiryStatus)) await transition(id, op as EnquiryStatus);
+  }
+  revalidatePath('/admin/enquiries');
+}

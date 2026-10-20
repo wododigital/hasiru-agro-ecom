@@ -26,6 +26,9 @@ export default defineModule({
       { path: '/admin/abandoned-checkouts', module: 'routes/admin-abandoned-checkouts', kind: 'page', exports: ['default', 'generateMetadata'] },
     ],
   },
+  reports: [
+    { id: 'flows.abandoned-checkouts', title: 'Abandoned checkouts', group: 'sales', permission: 'analytics.read', component: () => import('./admin/report').then((m) => m.AbandonedCheckoutsReport) },
+  ],
   permissions: ['marketing.write', 'orders.read'],
   jobs: {
     'flows.run-due': { handler: () => import('./server/runner').then((m) => m.runDueJob), options: { policy: 'singleton', retryLimit: 2, expireInSec: 50 } },

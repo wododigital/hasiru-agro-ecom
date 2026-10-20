@@ -1,13 +1,16 @@
-import { PERMISSIONS, type DateRange, type ModuleManifest } from '@ecomkit/core/contracts';
+import { PERMISSIONS, type ModuleManifest } from '@ecomkit/core/contracts';
 import { z } from 'zod';
 
 /**
- * Two admin extension points the frozen manifest contract does not name yet (requested for core contracts in
+ * Three admin extension points the frozen manifest contract does not name yet (requested for core contracts in
  * BUILD-STATUS/wp-08.md). A module adds them as extra manifest keys; admin-shell reads them structurally and
  * validates them with zod here, so a malformed entry is dropped instead of breaking the admin.
  *
  *   adminSearch: [{ id, label, order, permission, search: () => import('./server/search').then((m) => m.search) }]
  *   settingsUrls: [{ label, path, help? }]   copyable webhook / redirect URLs on the module's settings page
+ *   adminTodos: [{ id, label, href, order, permission, count: () => import('./admin/todos').then((m) => m.x) }]
+ *                                            Home "Things to do": a count of items needing action, linking to the
+ *                                            filtered index (shown only when the count is above zero)
  */
 
 export interface AdminSearchHit {
@@ -25,6 +28,16 @@ export interface AdminSearchProvider {
   permission: (typeof PERMISSIONS)[number];
   search: () => Promise<(query: string, limit: number) => Promise<AdminSearchHit[]>>;
 }
+export interface AdminTodo {
+  id: string;
+  /** Plural noun phrase after the count, e.g. "orders to dispatch". */
+  label: string;
+  /** The filtered index, e.g. /admin/orders?view=unfulfilled. */
+  href: string;
+  order: number;
+  permission: (typeof PERMISSIONS)[number];
+  count: () => Promise<() => Promise<number>>;
+}
 export interface SettingsUrl {
   label: string;
   /** Path on the canonical host (absolute URLs are shown as they are). */
@@ -38,6 +51,14 @@ const providerSchema = z.object({
   order: z.number(),
   permission: z.enum(PERMISSIONS),
   search: z.custom<AdminSearchProvider['search']>((v) => typeof v === 'function'),
+});
+const todoSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  href: z.string().regex(/^\/admin(\/|$|\?)/),
+  order: z.number(),
+  permission: z.enum(PERMISSIONS),
+  count: z.custom<AdminTodo['count']>((v) => typeof v === 'function'),
 });
 const urlSchema = z.object({ label: z.string().min(1), path: z.string().regex(/^(\/|https:\/\/)/), help: z.string().optional() });
 
@@ -62,6 +83,12 @@ export function searchProviders(modules: readonly ModuleManifest[]): (AdminSearc
     .sort((a, b) => a.order - b.order);
 }
 
+export function todoProviders(modules: readonly ModuleManifest[]): (AdminTodo & { moduleId: string })[] {
+  return modules
+    .flatMap((m) => validList((m as { adminTodos?: unknown }).adminTodos, todoSchema).map((t) => ({ ...t, moduleId: m.id })))
+    .sort((a, b) => a.order - b.order);
+}
+
 export function settingsUrls(manifest: ModuleManifest | undefined): SettingsUrl[] {
   return validList((manifest as { settingsUrls?: unknown } | undefined)?.settingsUrls, urlSchema);
 }
@@ -74,40 +101,5 @@ export function absoluteUrl(path: string, origin: string | null | undefined): st
 
 export const searchQuerySchema = z.string().trim().min(2).max(100);
 
-// ---- dashboard range ----------------------------------------------------------
-
-const isoDate = z.iso.date();
-
-/** Today's date in India (YYYY-MM-DD). */
-export function istDate(now: Date): string {
-  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
-}
-
-function shiftDays(date: string, days: number): string {
-  const d = new Date(`${date}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() + days);
-  return d.toISOString().slice(0, 10);
-}
-
-/** Dashboard range from `?from=&to=`: valid dates, from <= to, at most 366 days; else the last 30 days in IST. */
-export function parseRange(input: { from?: unknown; to?: unknown }, now: Date): DateRange {
-  const today = istDate(now);
-  const fallback = { from: shiftDays(today, -29), to: today };
-  const from = isoDate.safeParse(input.from);
-  const to = isoDate.safeParse(input.to);
-  if (!from.success || !to.success || from.data > to.data) return fallback;
-  if (shiftDays(from.data, 366) <= to.data) return fallback;
-  return { from: from.data, to: to.data };
-}
-
-export type CompareMode = 'previous-period' | 'previous-year' | 'none';
-
-/** Comparison window for the Home and Analytics date range: the same-length period before, or the same dates a year back. */
-export function compareRange(range: DateRange, mode: CompareMode): DateRange | null {
-  if (mode === 'none') return null;
-  if (mode === 'previous-year') return { from: shiftDays(range.from, -365), to: shiftDays(range.to, -365) };
-  const days = Math.round((Date.parse(range.to) - Date.parse(range.from)) / 86_400_000) + 1;
-  return { from: shiftDays(range.from, -days), to: shiftDays(range.from, -1) };
-}
-
-export const parseCompare = (v: unknown): CompareMode => (v === 'previous-year' || v === 'none' ? v : 'previous-period');
+// ---- dashboard range (one implementation, in ui: Home, Analytics and report pages share it) ----------------
+export { compareRange, istDate, parseCompare, parseRange, type CompareMode } from '@ecomkit/ui/domain';

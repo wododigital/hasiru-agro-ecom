@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, cn } from '@ecomkit/ui';
+import { Button, cn, SaveBarIsland } from '@ecomkit/ui';
 import { useActionState, type ReactNode } from 'react';
 import type { FormState } from './form-state';
 
@@ -12,6 +12,7 @@ export function ActionFormIsland({
   variant = 'primary',
   className,
   cta,
+  saveBar = false,
 }: {
   action: (prev: FormState, fd: FormData) => Promise<FormState>;
   children: ReactNode;
@@ -19,10 +20,13 @@ export function ActionFormIsland({
   variant?: 'primary' | 'outline' | 'danger' | 'subtle';
   className?: string;
   cta?: string;
+  /** Sticky "Unsaved changes" bar (Shopify) on edit forms. */
+  saveBar?: boolean;
 }) {
   const [state, formAction, pending] = useActionState(action, null);
   return (
     <form action={formAction} className={cn('flex flex-col gap-3', className)}>
+      {saveBar ? <SaveBarIsland saveLabel={submitLabel} pending={pending} /> : null}
       {children}
       <div className="flex flex-wrap items-center gap-3">
         <Button type="submit" variant={variant} size="sm" disabled={pending} data-cta={cta}>

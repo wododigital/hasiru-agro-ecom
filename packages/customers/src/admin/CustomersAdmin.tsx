@@ -1,10 +1,10 @@
 // Admin pages for customers, leads, segments and consent (admin copy is English-only, exempt from messages).
 import { asPaise, formatINR } from '@ecomkit/core/money';
-import { Badge, Button, DataTable, Select, Stat, type Column } from '@ecomkit/ui';
+import { Badge, Button, Card, DataTable, DetailFrame, Select, Stat, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { CONSENT_PURPOSES, LEAD_SOURCES, LEAD_STATUSES, SEGMENT_KEYS, type ConsentPurpose, type LeadSource, type LeadStatus, type SegmentKey } from '../domain';
+import { CONSENT_PURPOSES, CUSTOMER_TYPES, LEAD_SOURCES, LEAD_STATUSES, SEGMENT_KEYS, type ConsentPurpose, type LeadSource, type LeadStatus, type SegmentKey } from '../domain';
 import {
   getCustomer,
   listConsent,
@@ -18,19 +18,27 @@ import {
   type SegmentMember,
 } from '../server';
 
+import { CUSTOMER_VIEWS } from '../server/profiles';
 import { setLeadStatusAction } from './actions';
 
 const PAGE = 25;
 const when = (d: Date | null) => (d ? d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) : '-');
 const Title = ({ children }: { children: string }) => <h1 className="text-2xl font-semibold">{children}</h1>;
 
+/** /admin/customers (Shopify index): saved views, search (name, or exact phone / email), type filter, whole-row click. Phones masked for support. */
 export async function CustomersListPage({ searchParams }: { searchParams: SearchParamsInput }) {
-  const params = parseTableParams(searchParams);
-  const { rows, total } = await listCustomers({ q: params.q, page: params.page, pageSize: PAGE });
+  const params = parseTableParams(searchParams, { filters: { view: CUSTOMER_VIEWS, type: CUSTOMER_TYPES } });
+  const { rows, total } = await listCustomers({
+    q: params.q,
+    view: params.filters.view as (typeof CUSTOMER_VIEWS)[number] | undefined,
+    type: params.filters.type as (typeof CUSTOMER_TYPES)[number] | undefined,
+    page: params.page,
+    pageSize: PAGE,
+  });
   const columns: Column<CustomerRow>[] = [
-    { id: 'name', header: 'Name', cell: (r) => <Link className="text-primary underline" href={`/admin/customers/${r.userId}`}>{r.displayName ?? 'Unnamed'}</Link> },
+    { id: 'name', header: 'Name', cell: (r) => r.displayName ?? 'Unnamed' },
     { id: 'phone', header: 'Phone', cell: (r) => r.phoneE164 ?? '-' },
-    { id: 'type', header: 'Type', cell: (r) => r.customerType },
+    { id: 'type', header: 'Type', cell: (r) => <Badge tone="outline">{r.customerType}</Badge> },
     { id: 'orders', header: 'Orders', align: 'right', cell: (r) => r.ordersCount },
     { id: 'spent', header: 'Spent', align: 'right', cell: (r) => formatINR(asPaise(r.lifetimePaise)) },
     { id: 'since', header: 'Since', cell: (r) => when(r.createdAt) },
@@ -38,39 +46,62 @@ export async function CustomersListPage({ searchParams }: { searchParams: Search
   return (
     <div className="flex flex-col gap-4">
       <Title>Customers</Title>
-      <DataTable columns={columns} rows={rows} rowKey={(r) => r.userId} params={params} total={total} pageSize={PAGE} basePath="/admin/customers" />
+      <DataTable
+        columns={columns}
+        rows={rows}
+        rowKey={(r) => r.userId}
+        rowHref={(r) => `/admin/customers/${r.userId}`}
+        params={params}
+        total={total}
+        pageSize={PAGE}
+        basePath="/admin/customers"
+        views={[
+          { id: 'repeat', label: 'Repeat buyers', filters: { view: 'repeat' } },
+          { id: 'no_orders', label: 'No orders yet', filters: { view: 'no_orders' } },
+          { id: 'farmer', label: 'Farmers', filters: { type: 'farmer' } },
+          { id: 'business', label: 'Businesses', filters: { type: 'business' } },
+        ]}
+        filters={[{ key: 'type', label: 'Type', options: CUSTOMER_TYPES.map((t) => ({ value: t, label: t })) }]}
+      />
     </div>
   );
 }
 
+/** /admin/customers/[id] (detail frame): contact and business details beside the order summary. */
 export async function CustomerDetailPage({ id }: { id: string }) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const c = await getCustomer(id);
   if (!c) notFound();
-  const rows: [string, string][] = [
-    ['Phone', c.phoneE164 ?? '-'],
-    ['Email', c.email ?? '-'],
-    ['Type', c.customerType],
-    ['GSTIN', c.gstin ?? '-'],
-    ['Business name', c.legalName ?? '-'],
-    ['Orders', String(c.ordersCount)],
-    ['Lifetime spend', formatINR(asPaise(c.lifetimePaise))],
-    ['First order', when(c.firstOrderAt)],
-    ['Last order', when(c.lastOrderAt)],
-    ['Source', c.source ?? '-'],
-  ];
+  const list = (rows: [string, string][]) => (
+    <dl className="grid grid-cols-[9rem_1fr] gap-2 text-sm">
+      {rows.map(([k, v]) => (
+        <div key={k} className="contents">
+          <dt className="text-muted">{k}</dt>
+          <dd className="break-words">{v}</dd>
+        </div>
+      ))}
+    </dl>
+  );
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
-      <Title>{c.displayName ?? 'Customer'}</Title>
-      <dl className="grid grid-cols-[10rem_1fr] gap-2 text-sm">
-        {rows.map(([k, v]) => (
-          <div key={k} className="contents">
-            <dt className="text-muted">{k}</dt>
-            <dd>{v}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
+    <DetailFrame
+      title={c.displayName ?? 'Customer'}
+      backHref="/admin/customers"
+      backLabel="Customers"
+      meta={`Customer since ${when(c.createdAt)}`}
+      badges={<Badge tone="outline">{c.customerType}</Badge>}
+      aside={
+        <>
+          <Card title="Contact">{list([['Phone', c.phoneE164 ?? '-'], ['Email', c.email ?? '-'], ['Source', c.source ?? '-']])}</Card>
+          <Card title="Business">{list([['GSTIN', c.gstin ?? '-'], ['Business name', c.legalName ?? '-']])}</Card>
+        </>
+      }
+    >
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Stat label="Orders" value={c.ordersCount} />
+        <Stat label="Lifetime spend" value={formatINR(asPaise(c.lifetimePaise))} />
+      </div>
+      <Card title="Orders">{list([['First order', when(c.firstOrderAt)], ['Last order', when(c.lastOrderAt)]])}</Card>
+    </DetailFrame>
   );
 }
 

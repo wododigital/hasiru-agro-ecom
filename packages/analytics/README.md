@@ -9,10 +9,10 @@ First-party analytics and journey tracking: a small browser collector, an idempo
 | `./manifest` | module manifest (`id: 'analytics'`, depends on `core`, `ui`; optional `customers`, `orders`) |
 | `./schema` | `analyticsVisitor`, `analyticsSession`, `analyticsEvent`, `analyticsDailyRollup`, `analyticsWebVital` |
 | `./domain` | pure helpers: `parseBatch`, `cleanPath`, `scrubProps`, `botName`, `deviceOf`, `channelOf`, `startsNewSession`, partition maths, `funnelCounts`, `vitalRating`, `BEACON_JS` |
-| `./server` | `ingest(body, ctx)`, `createBeaconIngest(options)`, `report(name, range)` and one function per report, `rollupDay`, `computeDayMetrics`, `ensurePartitions`, job handlers, `onConsentChanged` |
+| `./server` | `ingest(body, ctx)`, `createBeaconIngest(options)`, `report(name, range)` and one function per report, `dailyKpis(from, to)`, `liveReport()`, `rollupDay`, `computeDayMetrics`, `ensurePartitions`, job handlers, `onConsentChanged` |
 | `./ui` | `<AnalyticsScript />` (put once in the storefront layout), `track(name, props)` for client code |
-| `./admin` | `AnalyticsPage({ searchParams, reports })`, `ANALYTICS_TABS` |
-| `./routes/*` | `beacon-script` (GET /b.js), `beacon-ingest` (POST /api/beacon-ingest), `admin-analytics` (/admin/analytics) |
+| `./admin` | `AnalyticsPage({ searchParams, kpis })`, `ReportsListPage({ searchParams, reports })`, `ReportPage({ id, searchParams, reports })`, `LivePage()`, KPI widgets `SessionsKpi`, `ConversionKpi`, type `ReportProps` |
+| `./routes/*` | `beacon-script` (GET /b.js), `beacon-ingest` (POST /api/beacon-ingest), `admin-analytics`, `admin-analytics-reports`, `admin-analytics-report` (/admin/analytics/reports/[id]), `admin-analytics-live` |
 
 ## Collector (`/b.js`, about 2.3 KB gzipped)
 
@@ -55,8 +55,16 @@ Event subscriptions: `consent.changed`. Emits nothing.
 
 ## Reports and admin
 
-`report(name, range)` with `name` in `overview, funnel, traffic, journeys, search, wizard, attention, bots, vitals` and an IST `{ from, to }` range. Overview reads rollups for past days and computes today (and any day not rolled up) live. `/admin/analytics` shows the tabs Overview, Funnel, Sales, Products, Traffic, Customers, Journeys (with a per-session timeline), Search and filters, Wizard, Attention, Bots, Vitals; tab and range live in the URL. Sales, Products and Customers render the `reports` extension items of group `sales`, `products`, `customers` from other modules; the host page passes `registry.list('reports')`. Permission: `analytics.read`.
+`report(name, range)` with `name` in `overview, funnel, traffic, journeys, search, wizard, attention, bots, vitals` and an IST `{ from, to }` range. Overview reads rollups for past days and computes today (and any day not rolled up) live.
+
+Admin (Shopify structure), all `analytics.read`, range + Compare to in the URL:
+- `/admin/analytics`: KPI cards (every module's `.kpi.` dashboard widgets, passed by the host), sessions per day, channels, top pages.
+- `/admin/analytics/reports`: every enabled module's `reports` the viewer may open, grouped by category; `/admin/analytics/reports/[id]` renders one with `{ range, compare, params }`. This module's: conversion funnel, sessions by source, search terms, journeys (per-session timeline via `?session=`), planner and calculators, attention and clicks, automated visitors, web vitals.
+- `/admin/analytics/live`: visitors in the last 5 minutes, pages, channels and events of the last 30 minutes; refreshes every 15 s while visible.
+- Dashboard widgets `analytics.kpi.sessions` and `analytics.kpi.conversion` (Home strip). Conversion is browser-tracked purchases over sessions; sales figures come from the orders module's cards.
+
+The hand-written app files `app/(admin)/admin/analytics/page.tsx` and `reports/page.tsx`, `reports/[id]/page.tsx` pass `registry.list('dashboardWidgets')` / `registry.list('reports')`; without them the package routes show only this module's own cards and reports.
 
 ## How to disable
 
-Remove `analytics` from the app's module list and run `modules:sync`. Remove `<AnalyticsScript />` from the layout; `track()` calls then queue into an array nobody reads, so callers need no change. The hand-written app files (`app/b.js/route.ts`, `app/api/beacon-ingest/route.ts`, `app/(admin)/admin/analytics/page.tsx`) are deleted with it.
+Remove `analytics` from the app's module list and run `modules:sync`. Remove `<AnalyticsScript />` from the layout; `track()` calls then queue into an array nobody reads, so callers need no change. The hand-written app files (`app/b.js/route.ts`, `app/api/beacon-ingest/route.ts`, `app/(admin)/admin/analytics/page.tsx`, `reports/page.tsx`, `reports/[id]/page.tsx`) are deleted with it.

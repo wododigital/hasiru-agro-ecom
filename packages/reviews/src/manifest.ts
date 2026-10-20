@@ -15,6 +15,8 @@ export default defineModule({
     nav: [{ label: 'Reviews', href: '/admin/reviews', icon: 'star', order: NAV_BANDS.products + 70, permission: 'reviews.moderate' }],
     pages: [{ path: '/admin/reviews', module: 'routes/admin-reviews', kind: 'page', exports: ['default', 'generateMetadata'] }],
   },
+  // Home "Things to do" (read structurally by admin-shell).
+  adminTodos: [{ id: 'reviews.pending', label: 'reviews to moderate', href: '/admin/reviews?status=pending', order: 70, permission: 'reviews.moderate', count: () => import('./admin/todos').then((m) => m.pendingReviews) }],
   permissions: ['reviews.moderate'],
   emits: ['review.submitted', 'review.approved'],
   provides: { reviews: () => import('./server/reviews').then((m) => m.reviewsReader) },

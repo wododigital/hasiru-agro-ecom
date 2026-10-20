@@ -40,6 +40,8 @@ export default defineModule({
       },
     ],
   },
+  // Home "Things to do" (read structurally by admin-shell).
+  adminTodos: [{ id: 'monitoring.alerts', label: 'open alerts', href: '/admin/health/alerts', order: 60, permission: 'health.read', count: () => import('./admin/todos').then((m) => m.openAlerts) }],
   permissions: ['health.read', 'jobs.retry'],
   jobs: {
     'monitoring.tick': {

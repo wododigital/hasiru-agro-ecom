@@ -1,11 +1,11 @@
-import { requirePermission } from '@ecomkit/core/auth-context';
+import { can, requirePermission } from '@ecomkit/core/auth-context';
 import { Badge, DataTable, buttonVariants, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
 import * as E from '../domain/enums';
 import type { Kind } from '../domain/enums';
 import { ADMIN_PAGE_SIZE, dataGaps, listAdminProducts, listCollectionsAdmin, listFaqsAdmin, listTagsAdmin, productOptions, type GapKind } from '../server/admin-queries';
-import { deleteCollectionAction, deleteFaqAction, deleteTagAction, importAction, saveCollectionAction, saveFaqAction, saveTagAction } from './actions';
+import { bulkStatusAction, deleteCollectionAction, deleteFaqAction, deleteTagAction, importAction, saveCollectionAction, saveFaqAction, saveTagAction } from './actions';
 import { ActionFormIsland } from './ActionFormIsland';
 import { AreaField, Card, CheckField, Grid, SelectField, TextField } from './fields';
 
@@ -19,8 +19,10 @@ const PRODUCT_SPEC = {
 
 /** /admin/products (plants) and /admin/inputs. */
 export async function ProductsListPage({ kind, searchParams }: { kind: Kind; searchParams: SP }) {
-  await requirePermission('products.read');
-  const params = parseTableParams(await searchParams, PRODUCT_SPEC);
+  const viewer = await requirePermission('products.read');
+  const sp = await searchParams;
+  const params = parseTableParams(sp, PRODUCT_SPEC);
+  const done = [(sp as Record<string, string | string[] | undefined>).done].flat()[0];
   const { rows, total } = await listAdminProducts({ kind, q: params.q, status: params.filters.status, review: params.filters.review as 'needs_review' | undefined, sort: params.sort, dir: params.dir, page: params.page });
   type Row = (typeof rows)[number];
   const columns: Column<Row>[] = [
@@ -28,11 +30,7 @@ export async function ProductsListPage({ kind, searchParams }: { kind: Kind; sea
       id: 'name',
       header: 'Name',
       sortable: true,
-      cell: (r) => (
-        <Link href={`/admin/products/${r.id}`} className="font-semibold text-primary hover:underline">
-          {r.name}
-        </Link>
-      ),
+      cell: (r) => r.name,
     },
     { id: 'sku', header: 'SKU', sortable: true, cell: (r) => r.sku },
     { id: 'collection', header: 'Collection', cell: (r) => r.collection ?? '-' },
@@ -63,14 +61,36 @@ export async function ProductsListPage({ kind, searchParams }: { kind: Kind; sea
           </Link>
         </div>
       </div>
+      {done ? (
+        <p role="status" className="rounded-md bg-success/12 px-3 py-2 text-sm text-success">
+          Updated {Number(done) || 0} products.
+        </p>
+      ) : null}
       <DataTable
         columns={columns}
         rows={rows}
         rowKey={(r) => r.id}
+        rowHref={(r) => `/admin/products/${r.id}`}
         params={params}
         total={total}
         pageSize={ADMIN_PAGE_SIZE}
         basePath={base}
+        views={[
+          { id: 'active', label: 'Active', filters: { status: 'active' } },
+          { id: 'draft', label: 'Draft', filters: { status: 'draft' } },
+          { id: 'archived', label: 'Archived', filters: { status: 'archived' } },
+          { id: 'review', label: 'Needs review', filters: { review: 'needs_review' } },
+          { id: 'photo', label: 'Needs photo', filters: { review: 'image_needed' } },
+        ]}
+        bulkActions={
+          can(viewer, 'products.write')
+            ? [
+                { label: 'Set active', action: bulkStatusAction.bind(null, base, 'active') },
+                { label: 'Set draft', action: bulkStatusAction.bind(null, base, 'draft') },
+                { label: 'Archive', action: bulkStatusAction.bind(null, base, 'archived'), tone: 'danger' as const },
+              ]
+            : undefined
+        }
         filters={[
           { key: 'status', label: 'Status', options: E.STATUSES.map((s) => ({ value: s, label: s })) },
           { key: 'review', label: 'Needs', options: [{ value: 'needs_review', label: 'Review' }, { value: 'image_needed', label: 'Photo' }] },

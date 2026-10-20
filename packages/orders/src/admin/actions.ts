@@ -115,3 +115,27 @@ export async function manualOrderAction(form: FormData): Promise<never> {
     return `/admin/orders/${created.id}?done=created${link}`;
   });
 }
+
+/** Bulk status move from the orders index (row checkboxes): each order goes through the same guarded transition; refused ones are counted, not fatal. */
+async function bulkMove(form: FormData, to: 'confirmed' | 'packed'): Promise<never> {
+  const ids = form.getAll('ids').map(String).slice(0, 200);
+  let moved = 0;
+  for (const orderId of ids) {
+    try {
+      await staffTransition({ orderId, to });
+      moved++;
+    } catch (err) {
+      if (!errorCode(err)) throw err;
+    }
+  }
+  revalidatePath('/admin/orders');
+  redirect(`/admin/orders?done=bulk&n=${moved}&skipped=${ids.length - moved}`);
+}
+
+export async function bulkConfirmAction(form: FormData): Promise<never> {
+  return bulkMove(form, 'confirmed');
+}
+
+export async function bulkPackAction(form: FormData): Promise<never> {
+  return bulkMove(form, 'packed');
+}

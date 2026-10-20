@@ -236,6 +236,22 @@ export async function saveRule(input: RuleInput, actor: { actorId: string | null
   return { id: saved.id };
 }
 
+/** Bulk status from the discounts index: audited per rule, `promo:active` expired once. Permission is the caller's job. Returns how many changed. */
+export async function setRulesStatus(ids: readonly string[], status: 'active' | 'paused' | 'archived', actor: { actorId: string | null }): Promise<number> {
+  const wanted = [...new Set(ids)].filter((id) => /^[0-9a-f-]{36}$/i.test(id)).slice(0, 200);
+  if (!wanted.length) return 0;
+  const n = await withTx(async (tx) => {
+    const before = await tx.select().from(discountsRule).where(and(inArray(discountsRule.id, wanted), ne(discountsRule.status, status))).for('update');
+    for (const b of before) {
+      const [after] = await tx.update(discountsRule).set({ status, updatedAt: new Date() }).where(eq(discountsRule.id, b.id)).returning();
+      await audit({ actorId: actor.actorId, actorType: 'staff', action: 'discount.update', entity: 'discount', entityId: b.id, before: b, after }, { tx });
+    }
+    return before.length;
+  });
+  if (n) await invalidateTags([tags.promoActive]);
+  return n;
+}
+
 /**
  * Adds codes to a `kind = code` rule. Codes are normalised to upper case; a code that already exists
  * anywhere is skipped and reported. Pass `singleUsePhone` to pin a code to one customer (one use).

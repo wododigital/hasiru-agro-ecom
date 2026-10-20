@@ -1,6 +1,6 @@
 import { can, getViewer, requirePermission } from '@ecomkit/core/auth-context';
 import type { ProductFormTab } from '@ecomkit/core/contracts';
-import { Badge, Skeleton, Tabs, TabsContent, TabsList, TabsTrigger, buttonVariants } from '@ecomkit/ui';
+import { Badge, DetailFrame, Skeleton, Tabs, TabsContent, TabsList, TabsTrigger, buttonVariants } from '@ecomkit/ui';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -36,7 +36,7 @@ async function DetailsSection({ p, kind, tagIds, secondaryIds }: { p: ProductRow
   const [collections, tags] = await Promise.all([collectionOptions(), tagOptions()]);
   const own = collections.filter((c) => c.kind === kind);
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel={p ? 'Save details' : 'Create product'} cta="admin-product-save-details">
+    <ActionFormIsland action={saveProductAction} saveBar={!!p} submitLabel={p ? 'Save details' : 'Create product'} cta="admin-product-save-details">
       <Hidden id={p?.id ?? null} fields={DETAILS} />
       <input type="hidden" name="_tags" value="1" />
       <Grid>
@@ -84,7 +84,7 @@ function PlantSection({ p }: { p: ProductRow }) {
   const s = p.spacingFt ?? {};
   const c = p.compostKg;
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel="Save plant data" cta="admin-product-save-plant">
+    <ActionFormIsland action={saveProductAction} saveBar submitLabel="Save plant data" cta="admin-product-save-plant">
       <Hidden id={p.id} fields={PLANT} />
       <Grid>
         <SelectField name="sizeClass" label="Size class" value={p.sizeClass} options={E.SIZE_CLASSES} />
@@ -136,7 +136,7 @@ function PlantSection({ p }: { p: ProductRow }) {
 
 function InputSection({ p }: { p: ProductRow }) {
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel="Save input data" cta="admin-product-save-input">
+    <ActionFormIsland action={saveProductAction} saveBar submitLabel="Save input data" cta="admin-product-save-input">
       <Hidden id={p.id} fields={INPUT} />
       <Grid>
         <TextField name="inputType" label="Input type" value={p.inputType} help="compost, biochar, seeds, liquid, bio_pesticide" />
@@ -149,7 +149,7 @@ function InputSection({ p }: { p: ProductRow }) {
 
 function ContentSection({ p }: { p: ProductRow }) {
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel="Save content" cta="admin-product-save-content">
+    <ActionFormIsland action={saveProductAction} saveBar submitLabel="Save content" cta="admin-product-save-content">
       <Hidden id={p.id} fields={CONTENT} />
       <AreaField name="shortDescription" label="Short description" value={p.shortDescription} rows={3} />
       <AreaField name="descriptionHtml" label="Description (HTML)" value={p.descriptionHtml} rows={10} help="Sanitised on save: headings, lists, tables and links are kept." />
@@ -167,7 +167,7 @@ function ContentSection({ p }: { p: ProductRow }) {
 function VariantsSection({ p, variants }: { p: ProductRow; variants: readonly VariantRow[] }) {
   const rows = [...variants, null];
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel="Save variants and logistics" cta="admin-product-save-variants">
+    <ActionFormIsland action={saveProductAction} saveBar submitLabel="Save variants and logistics" cta="admin-product-save-variants">
       <Hidden id={p.id} fields={LOGISTICS} />
       <input type="hidden" name="_variants" value="1" />
       <Grid>
@@ -223,7 +223,7 @@ function VariantsSection({ p, variants }: { p: ProductRow; variants: readonly Va
 
 function ProvenanceSection({ p }: { p: ProductRow }) {
   return (
-    <ActionFormIsland action={saveProductAction} submitLabel="Save provenance" cta="admin-product-save-provenance">
+    <ActionFormIsland action={saveProductAction} saveBar submitLabel="Save provenance" cta="admin-product-save-provenance">
       <Hidden id={p.id} fields={PROVENANCE} />
       <div className="flex flex-wrap gap-4">
         <CheckField name="needsReview" label="Needs review" checked={p.needsReview} />
@@ -278,32 +278,35 @@ export async function ProductEditPage({ id }: { id: string }) {
     ...injected.map((t) => ({ id: `${t.moduleId}-${t.id}`, label: t.label })),
   ];
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-semibold">{p.name}</h1>
-          <p className="flex flex-wrap items-center gap-2 text-sm text-muted">
-            {p.sku}
-            <Badge tone={p.status === 'active' ? 'success' : 'neutral'}>{p.status}</Badge>
-            {p.needsReview ? <Badge tone="warning">needs review</Badge> : null}
-            {p.imageNeeded ? <Badge tone="warning">photo needed</Badge> : null}
-          </p>
-        </div>
-        <div className="flex gap-2">
-          {p.status === 'active' ? (
-            <Link href={productPath(p.kind, p.slug)} className={buttonVariants({ variant: 'outline', size: 'sm' })} target="_blank" data-cta="admin-product-view">
-              View on store
-            </Link>
-          ) : null}
-          <form action={deleteProductAction}>
-            <input type="hidden" name="id" value={p.id} />
-            <input type="hidden" name="kind" value={p.kind} />
-            <button type="submit" className={buttonVariants({ variant: 'danger', size: 'sm' })} data-cta="admin-product-delete">
-              Archive
-            </button>
-          </form>
-        </div>
-      </div>
+    <DetailFrame
+      title={p.name}
+      backHref={p.kind === 'input' ? '/admin/inputs' : '/admin/products'}
+      backLabel={p.kind === 'input' ? 'Inputs' : 'Plants'}
+      meta={p.sku}
+      badges={
+        <>
+          <Badge tone={p.status === 'active' ? 'success' : 'neutral'}>{p.status}</Badge>
+          {p.needsReview ? <Badge tone="warning">needs review</Badge> : null}
+          {p.imageNeeded ? <Badge tone="warning">photo needed</Badge> : null}
+        </>
+      }
+      primary={
+        p.status === 'active' ? (
+          <Link href={productPath(p.kind, p.slug)} className={buttonVariants({ variant: 'outline', size: 'sm' })} target="_blank" data-cta="admin-product-view">
+            View on store
+          </Link>
+        ) : null
+      }
+      more={
+        <form action={deleteProductAction}>
+          <input type="hidden" name="id" value={p.id} />
+          <input type="hidden" name="kind" value={p.kind} />
+          <button type="submit" className="w-full text-left text-danger" data-cta="admin-product-delete">
+            Archive
+          </button>
+        </form>
+      }
+    >
       <Tabs defaultValue="details">
         <TabsList aria-label="Product sections">
           {tabs.map((t) => (
@@ -335,6 +338,6 @@ export async function ProductEditPage({ id }: { id: string }) {
           </TabsContent>
         ))}
       </Tabs>
-    </div>
+    </DetailFrame>
   );
 }

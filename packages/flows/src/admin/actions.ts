@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { isFlowKey, type FlowKey } from '../domain';
-import { testRun } from '../server/admin';
+import { stopAbandonedRuns, testRun } from '../server/admin';
 import { saveFlow } from '../server/flows';
 import { formToSettings, text } from './form';
 
@@ -42,4 +42,10 @@ export async function testRunAction(form: FormData): Promise<void> {
   const { messageIds } = await testRun(key, { phone, email }, viewer.userId);
   revalidatePath(pageOf(key));
   redirect(`${pageOf(key)}?tested=${messageIds.length}`);
+}
+
+/** Bulk "Stop reminders" on /admin/abandoned-checkouts (row checkboxes). */
+export async function stopRemindersAction(form: FormData): Promise<void> {
+  await stopAbandonedRuns(form.getAll('ids').map(String));
+  revalidatePath('/admin/abandoned-checkouts');
 }

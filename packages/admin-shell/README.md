@@ -9,7 +9,7 @@ The admin frame every store gets: sidebar built from the enabled modules' `admin
 - Settings: `/admin/settings` lists modules with settings; `/admin/settings/<module>` renders the zod schema as a form (groups from `.meta({ group })`, labels from `.meta({ title })` or the key, help, placeholder, defaults), secret fields write-only and masked (`••••` + last 4), `settings.actions[]` as buttons with their last result, copyable URLs, and the module's `settings.customPanel` underneath. No module owns a route under `/admin/settings`.
 - Audit: `/admin/audit`, filter by record type and id, field-level changes, keyset paging.
 - Staff and roles: `/admin/staff` (list, invite, change role, disable, resend invite) and `/admin/roles` (permission matrix per role), both owner only (`staff.manage`).
-- Dashboard: `/admin`, date range (default last 30 days IST) and a 4-column grid of `dashboardWidgets` filtered by permission; each widget streams behind its own skeleton and error boundary.
+- Home: `/admin`, date range (default last 30 days IST) with Compare to (previous period / previous year / none), a strip of KPI cards (dashboard widgets whose id contains `.kpi.`; each gets `range` and `compare`), "Things to do" (every module's `adminTodos` counts above zero, linking to the filtered index), then the other `dashboardWidgets` in a 4-column grid. All filtered by permission; each widget streams behind its own skeleton and error boundary.
 
 ## Public API
 
@@ -17,7 +17,7 @@ The admin frame every store gets: sidebar built from the enabled modules' `admin
 |---|---|
 | `@ecomkit/admin-shell/admin` | `AdminLayout`, `DashboardPage`, `SettingsIndexPage`, `SettingsPage`, `AuditPage`, `StaffPage`, `RolesPage`, `ActionForm` (the one admin form island), `PageHeader`, `NoAccess` |
 | `@ecomkit/admin-shell/server` | `requireAdmin(permission?)` (page guard: 404 non-staff, `forbidden` state for staff without the permission), `saveSettings`, `runSettingsAction`, `loadSettingsView`, `settingsIndex`, `searchAdmin`, `loadAudit`, `staffForms`, `failure`, `requestMeta` |
-| `@ecomkit/admin-shell/domain` | pure helpers: `adminGate`, `navSections`, `activeHref`, `describeSettings`, `formToPatch`, `safeRedirect`, `parseRange`, `istDate`, `auditChanges`, `searchProviders`, `settingsUrls`, types `FormState`, `StaffAdmin`, `AdminSearchProvider`, `SettingsUrl` |
+| `@ecomkit/admin-shell/domain` | pure helpers: `adminGate`, `navSections`, `activeHref`, `describeSettings`, `formToPatch`, `safeRedirect`, `parseRange`, `compareRange`, `parseCompare`, `istDate` (re-exported from `@ecomkit/ui/domain`), `todoProviders`, `auditChanges`, `searchProviders`, `settingsUrls`, types `FormState`, `StaffAdmin`, `AdminSearchProvider`, `AdminTodo`, `SettingsUrl` |
 | `@ecomkit/admin-shell/manifest` | nav: Home (0), Settings (900), Staff (980), Roles (985), Audit log (990) |
 
 Permissions used: `settings.read` (view), `settings.write` (save, run actions), `settings.secrets` (change a secret; owner only), `audit.read`, `staff.manage`.
@@ -45,12 +45,14 @@ None of its own. Reads and writes `core_settings` and `core_audit_log` through `
 ## Extension points it renders
 
 - `admin.nav[]`, `settings` (`schema`, `actions[]`, `customPanel`), `dashboardWidgets[]` (contract).
-- `adminSearch[]` and `settingsUrls[]`: extra manifest keys, read structurally and validated with zod until they join the core contract (requested). Shapes:
+- `adminSearch[]`, `adminTodos[]` and `settingsUrls[]`: extra manifest keys, read structurally and validated with zod until they join the core contract (requested). Shapes:
 
 ```ts
 adminSearch: [{ id: 'orders', label: 'Orders', order: 0, permission: 'orders.read',
   search: () => import('./server/admin-search').then((m) => m.search) }] // (q, limit) => [{ id, title, subtitle?, href: '/admin/...' }]
 settingsUrls: [{ label: 'Webhook URL', path: '/api/webhooks/<provider>', help: '...' }]
+adminTodos: [{ id: 'orders.dispatch', label: 'orders to dispatch', href: '/admin/orders?view=unfulfilled', order: 10,
+               permission: 'orders.read', count: () => import('./admin/todos').then((m) => m.ordersToDispatch) }]
 ```
 
 - Settings actions: `kind: 'oauth-redirect'` results must carry an https or same-origin `redirectUrl`; anything else is refused. Every run is audited (`settings.action`), which is also the "last run" shown next to the button. A throwing action is captured under Health and reported as failed.

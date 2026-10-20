@@ -1,140 +1,193 @@
-import { can, getViewer, requirePermission } from '@ecomkit/core/auth-context';
-import type { DateRange, Report } from '@ecomkit/core/contracts';
-import { Button, cn, DateRange as DateRangeField, Skeleton } from '@ecomkit/ui';
+import { can, requirePermission } from '@ecomkit/core/auth-context';
+import type { DashboardWidget, DateRange, Report } from '@ecomkit/core/contracts';
+import { buttonVariants, DetailFrame, RangeBar, Skeleton, Stat, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
+import { compareRange, parseCompare, parseRange, rangeQuery, type CompareMode } from '@ecomkit/ui/domain';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { Suspense, type ReactNode } from 'react';
-import { dateRangeSchema } from '../domain/reports';
-import { lastDays } from '../domain/time';
-import { AttentionTab, BotsTab, FunnelTab, JourneysTab, NotEnabled, OverviewTab, SearchTab, TrafficTab, VitalsTab, WizardTab } from './tabs';
+import { liveReport } from '../server/reports';
+import { LiveRefreshIsland } from './LiveRefreshIsland';
+import { OverviewCharts, type ReportProps } from './tabs';
 
-/** Tab order from the plan. Sales, Products and Customers render `reports` of that group from other modules. */
-export const ANALYTICS_TABS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'funnel', label: 'Funnel' },
-  { id: 'sales', label: 'Sales', group: 'sales' },
-  { id: 'products', label: 'Products', group: 'products' },
-  { id: 'traffic', label: 'Traffic' },
-  { id: 'customers', label: 'Customers', group: 'customers' },
-  { id: 'journeys', label: 'Journeys' },
-  { id: 'search', label: 'Search and filters' },
-  { id: 'wizard', label: 'Wizard' },
-  { id: 'attention', label: 'Attention' },
-  { id: 'bots', label: 'Bots' },
-  { id: 'vitals', label: 'Vitals' },
-] as const;
-type TabId = (typeof ANALYTICS_TABS)[number]['id'];
+// Admin copy is English-only (exempt from the messages rule).
 
-type SearchParams = Record<string, string | string[] | undefined>;
-export interface AnalyticsPageProps {
-  searchParams: Promise<SearchParams>;
-  /** `registry.list('reports')` from the host; the Sales, Products and Customers tabs show the ones of their group. */
-  reports?: readonly Report[];
-}
+type SearchParams = Promise<Record<string, string | string[] | undefined>>;
+type Widget = Pick<DashboardWidget, 'id' | 'title' | 'permission' | 'component'>;
 
 const BASE = '/admin/analytics';
-const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+const GROUP_LABEL: Record<string, string> = { sales: 'Sales', products: 'Products', customers: 'Customers', acquisition: 'Acquisition', behaviour: 'Behaviour', inventory: 'Inventory', performance: 'Performance' };
+const groupLabel = (g: string) => GROUP_LABEL[g] ?? g.charAt(0).toUpperCase() + g.slice(1);
 
-function href(tab: TabId, range: DateRange, extra: Record<string, string> = {}): string {
-  return `${BASE}?${new URLSearchParams({ tab, from: range.from, to: range.to, ...extra })}`;
+/** Range, compare and the page's other string params from the URL. Call after a permission check (it reads the clock). */
+async function readQuery(searchParams: SearchParams): Promise<{ range: DateRange; mode: CompareMode; compare: DateRange | null; params: Record<string, string> }> {
+  const sp = await searchParams;
+  const params = Object.fromEntries(Object.entries(sp).flatMap(([k, v]) => (typeof v === 'string' ? [[k, v]] : Array.isArray(v) && v[0] ? [[k, v[0]]] : [])));
+  const range = parseRange(params, new Date());
+  const mode = parseCompare(params.compare);
+  return { range, mode, compare: compareRange(range, mode), params };
 }
 
-/** /admin/analytics: tabs in the URL (?tab=), date range in the URL (?from=&to=, IST), default the last 28 days. */
-export async function AnalyticsPage({ searchParams, reports = [] }: AnalyticsPageProps) {
-  await requirePermission('analytics.read');
-  const sp = await searchParams;
-  const tab: TabId = ANALYTICS_TABS.find((t) => t.id === one(sp.tab))?.id ?? 'overview';
-  const parsed = dateRangeSchema.safeParse({ from: one(sp.from), to: one(sp.to) });
-  const range: DateRange = parsed.success ? parsed.data : lastDays(28);
-  const session = one(sp.session);
+async function Slot({ load, ...props }: { load: Widget['component'] | Report['component'] } & ReportProps) {
+  const Body = await load();
+  return <Body range={props.range} {...{ compare: props.compare, params: props.params }} />;
+}
 
+function Header({ title, actions }: { title: string; actions?: ReactNode }) {
   return (
-    <div className="flex flex-col gap-5 p-4 md:p-6">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <h1 className="text-2xl font-semibold text-text">Analytics</h1>
-        <form method="get" action={BASE} className="flex flex-wrap items-end gap-2">
-          <input type="hidden" name="tab" value={tab} />
-          <DateRangeField defaultValue={range} />
-          <Button type="submit" size="sm" variant="subtle">
-            Apply
-          </Button>
-        </form>
-      </header>
-      <nav aria-label="Analytics reports" className="flex gap-2 overflow-x-auto pb-1">
-        {ANALYTICS_TABS.map((t) => (
-          <Link
-            key={t.id}
-            href={href(t.id, range)}
-            prefetch={false}
-            aria-current={t.id === tab ? 'page' : undefined}
-            className={cn(
-              'rounded-full border-[1.5px] border-border bg-surface px-4 py-1.5 text-sm font-semibold whitespace-nowrap text-primary hover:border-primary',
-              t.id === tab && 'border-primary bg-primary text-primary-fg',
-            )}
-          >
-            {t.label}
-          </Link>
+    <header className="flex flex-wrap items-end justify-between gap-4">
+      <h1 className="text-2xl font-semibold text-text">{title}</h1>
+      {actions}
+    </header>
+  );
+}
+
+const subLinks = (
+  <div className="flex gap-2">
+    <Link href={`${BASE}/reports`} className={buttonVariants({ size: 'sm', variant: 'outline' })} data-cta="analytics-reports">
+      Reports
+    </Link>
+    <Link href={`${BASE}/live`} className={buttonVariants({ size: 'sm', variant: 'outline' })} data-cta="analytics-live">
+      Live view
+    </Link>
+  </div>
+);
+
+export interface AnalyticsPageProps {
+  searchParams: SearchParams;
+  /** KPI dashboard widgets (`registry.list('dashboardWidgets').filter(isKpiWidget)` in the host); default: this module's own. */
+  kpis?: readonly Widget[];
+}
+
+/** /admin/analytics (Shopify overview): date range + compare, KPI cards, sessions per day, channels, top pages. */
+export async function AnalyticsPage({ searchParams, kpis = [] }: AnalyticsPageProps) {
+  const viewer = await requirePermission('analytics.read');
+  const { range, mode, compare } = await readQuery(searchParams);
+  const cards = kpis.filter((w) => !w.permission || can(viewer, w.permission));
+  return (
+    <div className="flex flex-col gap-5">
+      <Header title="Analytics" actions={subLinks} />
+      <RangeBar action={BASE} range={range} compare={mode} compared={compare} className="items-start" />
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5" data-kpis="">
+        {cards.map((w) => (
+          <Suspense key={w.id} fallback={<Skeleton className="h-28" />}>
+            <Slot load={w.component} range={range} compare={compare} />
+          </Suspense>
         ))}
-      </nav>
-      <Suspense key={`${tab}:${range.from}:${range.to}:${session ?? ''}`} fallback={<TabSkeleton />}>
-        <TabBody tab={tab} range={range} session={session} reports={reports} />
+      </div>
+      <Suspense fallback={<Skeleton className="h-64" />}>
+        <OverviewCharts range={range} />
       </Suspense>
     </div>
   );
 }
 
-async function TabBody({ tab, range, session, reports }: { tab: TabId; range: DateRange; session?: string; reports: readonly Report[] }): Promise<ReactNode> {
-  switch (tab) {
-    case 'overview':
-      return <OverviewTab range={range} />;
-    case 'funnel':
-      return <FunnelTab range={range} />;
-    case 'traffic':
-      return <TrafficTab range={range} />;
-    case 'journeys':
-      return <JourneysTab range={range} sessionId={session} hrefFor={(id) => href('journeys', range, { session: id })} />;
-    case 'search':
-      return <SearchTab range={range} />;
-    case 'wizard':
-      return <WizardTab range={range} />;
-    case 'attention':
-      return <AttentionTab range={range} />;
-    case 'bots':
-      return <BotsTab range={range} />;
-    case 'vitals':
-      return <VitalsTab range={range} />;
-    case 'sales':
-    case 'products':
-    case 'customers':
-      return <GroupReports group={tab} range={range} reports={reports} />;
-  }
-}
-
-async function GroupReports({ group, range, reports }: { group: string; range: DateRange; reports: readonly Report[] }) {
-  const viewer = await getViewer();
-  const mine = reports.filter((r) => r.group === group && can(viewer, r.permission));
-  if (mine.length === 0) return <NotEnabled what={group[0]!.toUpperCase() + group.slice(1)} />;
-  const loaded = await Promise.all(mine.map(async (r) => ({ id: r.id, title: r.title, Component: await r.component() })));
+/** /admin/analytics/reports: every report the viewer may open (from all enabled modules), grouped by category. */
+export async function ReportsListPage({ searchParams, reports }: { searchParams: SearchParams; reports: readonly Report[] }) {
+  const viewer = await requirePermission('analytics.read');
+  const { range, mode } = await readQuery(searchParams);
+  const mine = reports.filter((r) => can(viewer, r.permission)).sort((a, b) => groupLabel(a.group).localeCompare(groupLabel(b.group)) || a.title.localeCompare(b.title));
+  const q = rangeQuery(range, mode);
   return (
-    <div className="flex flex-col gap-6">
-      {loaded.map(({ id, title, Component }) => (
-        <section key={id} className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-text">{title}</h2>
-          <Component range={range} />
-        </section>
-      ))}
+    <div className="flex flex-col gap-5">
+      <Header title="Reports" actions={subLinks} />
+      <Table>
+        <THead>
+          <Tr>
+            <Th>Report</Th>
+            <Th>Category</Th>
+          </Tr>
+        </THead>
+        <TBody>
+          {mine.map((r) => (
+            <Tr key={r.id} className="relative">
+              <Td>
+                <Link href={`${BASE}/reports/${r.id}?${q}`} className="font-medium after:absolute after:inset-0 hover:underline" data-cta={`report-${r.id}`}>
+                  {r.title}
+                </Link>
+              </Td>
+              <Td className="text-muted">{groupLabel(r.group)}</Td>
+            </Tr>
+          ))}
+        </TBody>
+      </Table>
     </div>
   );
 }
 
-function TabSkeleton() {
+/** /admin/analytics/reports/[id]: one report over the URL's range, with compare passed to the report body. */
+export async function ReportPage({ id, searchParams, reports }: { id: string; searchParams: SearchParams; reports: readonly Report[] }) {
+  await requirePermission('analytics.read');
+  const r = reports.find((x) => x.id === id);
+  if (!r) notFound();
+  await requirePermission(r.permission);
+  const { range, mode, compare, params } = await readQuery(searchParams);
   return (
-    <div className="flex flex-col gap-3" aria-busy="true">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-        {Array.from({ length: 6 }, (_, i) => (
-          <Skeleton key={i} className="h-24" />
-        ))}
+    <DetailFrame
+      title={r.title}
+      backHref={`${BASE}/reports`}
+      meta={groupLabel(r.group)}
+      primary={<RangeBar action={`${BASE}/reports/${r.id}`} range={range} compare={mode} compared={compare} keep={params.session ? { session: params.session } : {}} />}
+    >
+      <Suspense key={`${range.from}:${range.to}:${mode}:${params.session ?? ''}`} fallback={<Skeleton className="h-64" />}>
+        <Slot load={r.component} range={range} compare={compare} params={params} />
+      </Suspense>
+    </DetailFrame>
+  );
+}
+
+const num = (n: number) => n.toLocaleString('en-IN');
+const timeIst = (at: string) => new Date(at).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+/** /admin/analytics/live: visitors right now, pages and events of the last 30 minutes; refreshes itself. */
+export async function LivePage() {
+  const live = await liveReport();
+  return (
+    <div className="flex flex-col gap-5">
+      <LiveRefreshIsland />
+      <Header title="Live view" actions={subLinks} />
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <Stat label="Visitors right now" value={num(live.visitorsNow)} delta="active in the last 5 minutes" />
+        <Stat label="Sessions right now" value={num(live.sessionsNow)} />
+        <Stat label="Sessions today" value={num(live.sessionsToday)} />
+        <Stat label="Purchases today" value={num(live.purchasesToday)} delta="tracked in the browser" />
       </div>
-      <Skeleton className="h-48" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <LiveTable title="Pages, last 30 minutes" rows={live.pages.map((p) => [p.path, num(p.views)])} head={['Path', 'Views']} />
+        <LiveTable title="Channels, last 30 minutes" rows={live.channels.map((c) => [c.channel, num(c.sessions)])} head={['Channel', 'Sessions']} />
+      </div>
+      <LiveTable title="Latest events" rows={live.events.map((e) => [timeIst(e.at), e.name.replaceAll('_', ' '), e.path, e.device])} head={['Time (IST)', 'Event', 'Path', 'Device']} />
     </div>
+  );
+}
+
+function LiveTable({ title, head, rows }: { title: string; head: string[]; rows: string[][] }) {
+  return (
+    <section className="flex flex-col gap-2">
+      <h2 className="text-base font-semibold text-text">{title}</h2>
+      {rows.length === 0 ? (
+        <p className="rounded-md border border-dashed border-border px-3 py-4 text-sm text-muted">Nobody here in the last 30 minutes.</p>
+      ) : (
+        <Table>
+          <THead>
+            <Tr>
+              {head.map((h) => (
+                <Th key={h}>{h}</Th>
+              ))}
+            </Tr>
+          </THead>
+          <TBody>
+            {rows.map((r, i) => (
+              <Tr key={i}>
+                {r.map((c, j) => (
+                  <Td key={j} className="max-w-[28rem] truncate">
+                    {c}
+                  </Td>
+                ))}
+              </Tr>
+            ))}
+          </TBody>
+        </Table>
+      )}
+    </section>
   );
 }

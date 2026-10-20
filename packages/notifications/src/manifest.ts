@@ -36,6 +36,8 @@ export default defineModule({
     ],
     customPanel: () => import('./admin/pages').then((m) => m.SettingsPanel),
   },
+  // Home "Things to do" (read structurally by admin-shell).
+  adminTodos: [{ id: 'notifications.failed', label: 'failed messages', href: '/admin/messages?status=failed', order: 40, permission: 'settings.read', count: () => import('./admin/todos').then((m) => m.failedMessages) }],
   permissions: ['settings.read', 'settings.write', 'settings.secrets'],
   jobs: {
     'notifications.deliver': { handler: () => import('./server/sender').then((m) => m.deliverJob), options: { retryLimit: 5, retryDelaySec: 30, retryBackoff: true, retryDelayMaxSec: 3600 } },

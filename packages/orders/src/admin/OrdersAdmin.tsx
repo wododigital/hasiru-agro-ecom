@@ -1,11 +1,10 @@
 import { can, requirePermission } from '@ecomkit/core/auth-context';
 import type { Paise } from '@ecomkit/core/contracts';
 import { formatINR } from '@ecomkit/core/money';
-import { Badge, Button, buttonVariants, Checkbox, DataTable, EmptyState, Input, Select, Textarea, type Column } from '@ecomkit/ui';
+import { Badge, Button, buttonVariants, Card, cn, Checkbox, DataTable, DetailFrame, EmptyState, Input, Select, Textarea, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import type { ReactNode } from 'react';
 import {
   istDateTime,
   ORDER_STATUSES,
@@ -23,7 +22,7 @@ import {
 import { ordersMessages } from '../messages';
 import { dispatchPlan, getOrderForStaff, getOrdersPorts, listOrdersAdmin, type OrderRow } from '../server';
 import { StatusBadge } from '../ui';
-import { manualOrderAction, noteAction, offlinePaymentAction, refundAction, replacementAction, testFlagAction, transitionAction } from './actions';
+import { bulkConfirmAction, bulkPackAction, manualOrderAction, noteAction, offlinePaymentAction, refundAction, replacementAction, testFlagAction, transitionAction } from './actions';
 
 const rs = (p: number) => formatINR(p as Paise);
 const STATUS_LABEL = ordersMessages.status;
@@ -42,6 +41,12 @@ const ERRORS: Record<string, string> = {
 
 function Flash({ flags }: { flags: Record<string, string | undefined> }) {
   if (flags.error) return <p role="alert" className="rounded-md bg-danger/12 px-3 py-2 text-sm text-danger">{ERRORS[flags.error] ?? 'Something went wrong.'}</p>;
+  if (flags.done === 'bulk')
+    return (
+      <p role="status" className="rounded-md bg-success/12 px-3 py-2 text-sm text-success">
+        Updated {flags.n ?? 0} orders.{Number(flags.skipped) > 0 ? ` ${flags.skipped} skipped: that change is not allowed from their status.` : ''}
+      </p>
+    );
   if (flags.done)
     return (
       <p role="status" className="rounded-md bg-success/12 px-3 py-2 text-sm text-success">
@@ -59,22 +64,21 @@ function Flash({ flags }: { flags: Record<string, string | undefined> }) {
 
 // ---- list -------------------------------------------------------------------
 
-/** /admin/orders with saved views (Unfulfilled, Pending payment, Today's slot, Outstation, Replacements). */
+/** /admin/orders (Shopify index): saved-view tabs, search, status filter, row checkboxes with bulk moves, whole-row click. */
 export async function OrdersListPage({ searchParams, now: nowOverride }: { searchParams: SearchParamsInput; now?: Date }) {
-  await requirePermission('orders.read');
+  const staff = await requirePermission('orders.read');
   const now = nowOverride ?? new Date();
   const params = parseTableParams(searchParams, { filters: { view: SAVED_VIEWS, status: ORDER_STATUSES } });
   const view = (params.filters.view ?? 'all') as SavedView;
   const { rows, total } = await listOrdersAdmin({ view, q: params.q, status: params.filters.status, page: params.page, pageSize: PAGE_SIZE, now });
+  const flags = Object.fromEntries(['done', 'n', 'skipped'].map((k) => [k, [(searchParams as Record<string, string | string[] | undefined>)[k]].flat()[0]]));
   const columns: Column<OrderRow>[] = [
     {
       id: 'number',
       header: 'Order',
       cell: (o) => (
         <span className="flex flex-col">
-          <Link href={`/admin/orders/${o.id}`} className="font-medium text-primary underline-offset-4 hover:underline">
-            {o.number}
-          </Link>
+          {o.number}
           <span className="flex gap-1">
             {o.isTest ? <Badge tone="outline">Test</Badge> : null}
             {o.source === 'replacement' ? <Badge tone="neutral">Replacement</Badge> : null}
@@ -86,7 +90,7 @@ export async function OrdersListPage({ searchParams, now: nowOverride }: { searc
     { id: 'placed', header: 'Placed (IST)', cell: (o) => istDateTime(o.placedAt) },
     { id: 'customer', header: 'Customer', cell: (o) => <span className="flex flex-col">{(o.contact as OrderContact).name}<span className="text-xs text-muted">{(o.contact as OrderContact).phone}</span></span> },
     { id: 'status', header: 'Status', cell: (o) => <StatusBadge status={o.status} /> },
-    { id: 'payment', header: 'Payment', cell: (o) => o.paymentStatus.replace('_', ' ') },
+    { id: 'payment', header: 'Payment', cell: (o) => <Badge tone={o.paymentStatus === 'paid' ? 'success' : o.paymentStatus === 'failed' ? 'danger' : 'outline'}>{o.paymentStatus.replace('_', ' ')}</Badge> },
     {
       id: 'delivery',
       header: 'Delivery',
@@ -110,27 +114,19 @@ export async function OrdersListPage({ searchParams, now: nowOverride }: { searc
           </Link>
         </div>
       </div>
-      <nav aria-label="Saved views" className="flex flex-wrap gap-2">
-        {SAVED_VIEWS.map((v) => (
-          <Link
-            key={v}
-            href={v === 'all' ? '/admin/orders' : `/admin/orders?view=${v}`}
-            aria-current={v === view ? 'page' : undefined}
-            className={buttonVariants({ size: 'sm', variant: v === view ? 'primary' : 'ghost' })}
-          >
-            {SAVED_VIEW_LABELS[v]}
-          </Link>
-        ))}
-      </nav>
+      <Flash flags={flags} />
       <DataTable
         columns={columns}
         rows={rows}
         rowKey={(o) => o.id}
+        rowHref={(o) => `/admin/orders/${o.id}`}
         params={params}
         total={total}
         pageSize={PAGE_SIZE}
         basePath="/admin/orders"
+        views={SAVED_VIEWS.filter((v) => v !== 'all').map((v) => ({ id: v, label: SAVED_VIEW_LABELS[v], filters: { view: v } }))}
         filters={[{ key: 'status', label: 'Status', options: ORDER_STATUSES.map((s) => ({ value: s, label: STATUS_LABEL[s] })) }]}
+        bulkActions={can(staff, 'orders.write') ? [{ label: 'Confirm', action: bulkConfirmAction }, { label: 'Mark packed', action: bulkPackAction }] : undefined}
         empty={<EmptyState title="No orders in this view" />}
       />
     </div>
@@ -138,15 +134,6 @@ export async function OrdersListPage({ searchParams, now: nowOverride }: { searc
 }
 
 // ---- detail -----------------------------------------------------------------
-
-function Panel({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
-      <h2 className="font-semibold">{title}</h2>
-      {children}
-    </section>
-  );
-}
 
 const MOVE_LABEL: Partial<Record<OrderStatus, string>> = { confirmed: 'Confirm', packed: 'Mark packed', dispatched: 'Mark dispatched', delivered: 'Mark delivered', cancelled: 'Cancel order' };
 
@@ -163,18 +150,121 @@ export async function OrderDetailPage({ id, flags }: { id: string; flags: Record
   const refundable = o.paidPaise - o.refundedPaise;
   const canReplace = can(staff, 'orders.write') && (o.status === 'delivered' || o.status === 'partially_refunded');
   const hasPayments = !!getOrdersPorts().payments;
+  const [primaryMove, ...otherMoves] = moves.filter((m) => m !== 'cancelled');
+  const move = (to: OrderStatus, primary = false) => (
+    <form key={to} action={transitionAction}>
+      <input type="hidden" name="orderId" value={o.id} />
+      <input type="hidden" name="to" value={to} />
+      {primary ? (
+        <Button type="submit" size="sm" data-cta={`admin-order-${to}`}>
+          {MOVE_LABEL[to] ?? to}
+        </Button>
+      ) : (
+        <button type="submit" className={cn('w-full text-left', to === 'cancelled' && 'text-danger')} data-cta={`admin-order-${to}`}>
+          {MOVE_LABEL[to] ?? to}
+        </button>
+      )}
+    </form>
+  );
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <Link href="/admin/orders" className="text-sm text-primary hover:underline">
-          Orders
-        </Link>
-        <h1 className="text-2xl font-semibold">{o.number}</h1>
-        <StatusBadge status={o.status} />
-        <Badge tone="outline">{o.paymentStatus.replace('_', ' ')}</Badge>
-        {o.isTest ? <Badge tone="outline">Test</Badge> : null}
-        {o.source !== 'web' ? <Badge tone="neutral">{o.source}</Badge> : null}
-      </div>
+    <DetailFrame
+      title={o.number}
+      backHref="/admin/orders"
+      backLabel="Orders"
+      meta={`Placed ${istDateTime(o.placedAt)} (IST)`}
+      badges={
+        <>
+          <StatusBadge status={o.status} />
+          <Badge tone="outline">{o.paymentStatus.replace('_', ' ')}</Badge>
+          {o.isTest ? <Badge tone="outline">Test</Badge> : null}
+          {o.source !== 'web' ? <Badge tone="neutral">{o.source}</Badge> : null}
+        </>
+      }
+      primary={primaryMove ? move(primaryMove, true) : null}
+      more={
+        <>
+          {otherMoves.map((to) => move(to))}
+          {invoice ? (
+            <a href={`/admin/orders/${o.id}/invoice.pdf`} data-cta="admin-order-invoice">
+              Invoice {invoice.number} ({invoice.kind.toUpperCase()})
+            </a>
+          ) : null}
+          {can(staff, 'orders.write') ? (
+            <form action={testFlagAction}>
+              <input type="hidden" name="orderId" value={o.id} />
+              <input type="hidden" name="isTest" value={o.isTest ? '0' : '1'} />
+              <button type="submit" className="w-full text-left">
+                {o.isTest ? 'Unmark test order' : 'Mark as test order'}
+              </button>
+            </form>
+          ) : null}
+          {moves.includes('cancelled') ? move('cancelled') : null}
+        </>
+      }
+      aside={
+        <>
+        <Card title="Customer">
+          <p className="text-sm">
+            {contact.name}
+            <br />
+            {contact.phone}
+            <br />
+            {contact.email}
+          </p>
+          {address ? <address className="text-sm not-italic text-muted">{[address.line1, address.line2, address.landmark, address.villageTown, address.district, address.state, address.pincode].filter(Boolean).join(', ')}</address> : null}
+        </Card>
+        <Card title="Delivery">
+          <p className="text-sm">
+            {delivery.label ?? delivery.kind}
+            {delivery.slotDate ? `, ${slotLabel(delivery.slotDate)}` : ''}
+            {delivery.vehicle ? `, ${delivery.vehicle}` : ''}
+            {delivery.km ? `, ${delivery.km} km` : ''}
+          </p>
+          <p className="text-sm text-muted">Weight {Number(o.weightKg)} kg</p>
+        </Card>
+        {can(staff, 'orders.write') && o.balanceDuePaise > 0 && o.status !== 'cancelled' ? (
+          <Card title="Record payment received offline">
+            <form action={offlinePaymentAction} className="flex gap-2">
+              <input type="hidden" name="orderId" value={o.id} />
+              <Input name="amount" type="number" min="1" step="0.01" required defaultValue={o.balanceDuePaise / 100} aria-label="Amount in rupees" />
+              <Button type="submit" size="sm">
+                Record
+              </Button>
+            </form>
+          </Card>
+        ) : null}
+        {can(staff, 'orders.refund') && hasPayments && refundable > 0 ? (
+          <Card title="Refund (payment anomalies only)">
+            <form action={refundAction} className="flex flex-col gap-2">
+              <input type="hidden" name="orderId" value={o.id} />
+              <Input name="amount" type="number" min="1" step="0.01" max={refundable / 100} required defaultValue={refundable / 100} aria-label="Refund amount in rupees" />
+              <Input name="reason" required maxLength={500} placeholder="Reason" aria-label="Reason" />
+              <Button type="submit" size="sm" variant="outline" data-cta="admin-order-refund">
+                Refund
+              </Button>
+            </form>
+          </Card>
+        ) : null}
+        {canReplace ? (
+          <Card title="Create replacement">
+            <form action={replacementAction} className="flex flex-col gap-2">
+              <input type="hidden" name="orderId" value={o.id} />
+              {lines.map((l) => (
+                <label key={l.id} className="flex items-center justify-between gap-2 text-sm">
+                  {(l.productSnapshot as ProductSnapshot).name}
+                  <Input name={`qty:${l.id}`} type="number" min="0" max={l.qty} defaultValue={0} className="w-20" />
+                </label>
+              ))}
+              <Textarea name="reason" required maxLength={500} placeholder="Damage reported" aria-label="Reason" />
+              <Button type="submit" size="sm" data-cta="admin-order-replacement">
+                Create zero-value replacement
+              </Button>
+            </form>
+          </Card>
+        ) : null}
+        </>
+      }
+    >
       <Flash flags={flags} />
       {parent ? (
         <p className="text-sm">
@@ -191,175 +281,79 @@ export async function OrderDetailPage({ id, flags }: { id: string; flags: Record
           ))}
         </p>
       ) : null}
-      <div className="grid gap-4 lg:grid-cols-3">
-        <div className="flex flex-col gap-4 lg:col-span-2">
-          <Panel title="Items">
-            <table className="w-full text-sm">
-              <thead className="text-left text-muted">
-                <tr>
-                  <th>Item</th>
-                  <th>Qty</th>
-                  <th className="text-right">Unit</th>
-                  <th className="text-right">Discount</th>
-                  <th className="text-right">Total</th>
+      <Card title="Items">
+        <table className="w-full text-sm">
+          <thead className="text-left text-muted">
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th className="text-right">Unit</th>
+              <th className="text-right">Discount</th>
+              <th className="text-right">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {lines.map((l) => {
+              const p = l.productSnapshot as ProductSnapshot;
+              return (
+                <tr key={l.id} className="border-t border-border">
+                  <td>
+                    {p.name} <span className="text-xs text-muted">{p.sku}</span>
+                    {l.tierApplied ? <Badge tone="accent" className="ml-1">Bulk</Badge> : null}
+                  </td>
+                  <td>{l.qty}</td>
+                  <td className="text-right">{rs(l.unitPricePaise)}</td>
+                  <td className="text-right">{l.lineDiscountPaise ? rs(l.lineDiscountPaise) : ''}</td>
+                  <td className="text-right">{rs(l.lineTotalPaise)}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {lines.map((l) => {
-                  const p = l.productSnapshot as ProductSnapshot;
-                  return (
-                    <tr key={l.id} className="border-t border-border">
-                      <td>
-                        {p.name} <span className="text-xs text-muted">{p.sku}</span>
-                        {l.tierApplied ? <Badge tone="accent" className="ml-1">Bulk</Badge> : null}
-                      </td>
-                      <td>{l.qty}</td>
-                      <td className="text-right">{rs(l.unitPricePaise)}</td>
-                      <td className="text-right">{l.lineDiscountPaise ? rs(l.lineDiscountPaise) : ''}</td>
-                      <td className="text-right">{rs(l.lineTotalPaise)}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <dl className="grid grid-cols-2 gap-x-4 text-sm">
-              <dt>Subtotal (list)</dt>
-              <dd className="text-right">{rs(o.subtotalPaise)}</dd>
-              <dt>Bulk savings</dt>
-              <dd className="text-right">-{rs(o.tierSavingsPaise)}</dd>
-              <dt>Promotions</dt>
-              <dd className="text-right">-{rs(o.promoPaise)}</dd>
-              <dt>Coupon</dt>
-              <dd className="text-right">-{rs(o.couponPaise)}</dd>
-              <dt>Packing</dt>
-              <dd className="text-right">{rs(o.packingPaise)}</dd>
-              <dt>Delivery</dt>
-              <dd className="text-right">{rs(o.shippingPaise)}</dd>
-              <dt>GST included</dt>
-              <dd className="text-right">{rs(o.taxPaise)}</dd>
-              <dt className="font-semibold">Total</dt>
-              <dd className="text-right font-semibold">{rs(o.totalPaise)}</dd>
-              <dt>Paid</dt>
-              <dd className="text-right">{rs(o.paidPaise)}</dd>
-              <dt>Refunded</dt>
-              <dd className="text-right">{rs(o.refundedPaise)}</dd>
-              <dt>Balance due</dt>
-              <dd className="text-right">{rs(o.balanceDuePaise)}</dd>
-            </dl>
-            {invoice ? (
-              <a href={`/admin/orders/${o.id}/invoice.pdf`} className={buttonVariants({ size: 'sm', variant: 'outline' })} data-cta="admin-order-invoice">
-                Invoice {invoice.number} ({invoice.kind.toUpperCase()})
-              </a>
-            ) : null}
-          </Panel>
-          <Panel title="Timeline">
-            <ol className="flex flex-col gap-1 text-sm">
-              {events.map((e) => (
-                <li key={e.id}>
-                  <span className="text-muted">{istDateTime(e.createdAt)}</span> <b>{e.type}</b> <code className="text-xs">{JSON.stringify(e.data)}</code>
-                </li>
-              ))}
-            </ol>
-            {can(staff, 'orders.write') ? (
-              <form action={noteAction} className="flex gap-2">
-                <input type="hidden" name="orderId" value={o.id} />
-                <Input name="note" required maxLength={2000} placeholder="Add a note" aria-label="Note" />
-                <Button type="submit" size="sm">
-                  Add note
-                </Button>
-              </form>
-            ) : null}
-          </Panel>
-        </div>
-        <div className="flex flex-col gap-4">
-          <Panel title="Customer">
-            <p className="text-sm">
-              {contact.name}
-              <br />
-              {contact.phone}
-              <br />
-              {contact.email}
-            </p>
-            {address ? <address className="text-sm not-italic text-muted">{[address.line1, address.line2, address.landmark, address.villageTown, address.district, address.state, address.pincode].filter(Boolean).join(', ')}</address> : null}
-          </Panel>
-          <Panel title="Delivery">
-            <p className="text-sm">
-              {delivery.label ?? delivery.kind}
-              {delivery.slotDate ? `, ${slotLabel(delivery.slotDate)}` : ''}
-              {delivery.vehicle ? `, ${delivery.vehicle}` : ''}
-              {delivery.km ? `, ${delivery.km} km` : ''}
-            </p>
-            <p className="text-sm text-muted">Weight {Number(o.weightKg)} kg</p>
-          </Panel>
-          {moves.length ? (
-            <Panel title="Status">
-              <div className="flex flex-wrap gap-2">
-                {moves.map((to) => (
-                  <form key={to} action={transitionAction}>
-                    <input type="hidden" name="orderId" value={o.id} />
-                    <input type="hidden" name="to" value={to} />
-                    <Button type="submit" size="sm" variant={to === 'cancelled' ? 'outline' : 'primary'} data-cta={`admin-order-${to}`}>
-                      {MOVE_LABEL[to] ?? to}
-                    </Button>
-                  </form>
-                ))}
-              </div>
-            </Panel>
-          ) : null}
-          {can(staff, 'orders.write') && o.balanceDuePaise > 0 && o.status !== 'cancelled' ? (
-            <Panel title="Record payment received offline">
-              <form action={offlinePaymentAction} className="flex gap-2">
-                <input type="hidden" name="orderId" value={o.id} />
-                <Input name="amount" type="number" min="1" step="0.01" required defaultValue={o.balanceDuePaise / 100} aria-label="Amount in rupees" />
-                <Button type="submit" size="sm">
-                  Record
-                </Button>
-              </form>
-            </Panel>
-          ) : null}
-          {can(staff, 'orders.refund') && hasPayments && refundable > 0 ? (
-            <Panel title="Refund (payment anomalies only)">
-              <form action={refundAction} className="flex flex-col gap-2">
-                <input type="hidden" name="orderId" value={o.id} />
-                <Input name="amount" type="number" min="1" step="0.01" max={refundable / 100} required defaultValue={refundable / 100} aria-label="Refund amount in rupees" />
-                <Input name="reason" required maxLength={500} placeholder="Reason" aria-label="Reason" />
-                <Button type="submit" size="sm" variant="outline" data-cta="admin-order-refund">
-                  Refund
-                </Button>
-              </form>
-            </Panel>
-          ) : null}
-          {canReplace ? (
-            <Panel title="Create replacement">
-              <form action={replacementAction} className="flex flex-col gap-2">
-                <input type="hidden" name="orderId" value={o.id} />
-                {lines.map((l) => (
-                  <label key={l.id} className="flex items-center justify-between gap-2 text-sm">
-                    {(l.productSnapshot as ProductSnapshot).name}
-                    <Input name={`qty:${l.id}`} type="number" min="0" max={l.qty} defaultValue={0} className="w-20" />
-                  </label>
-                ))}
-                <Textarea name="reason" required maxLength={500} placeholder="Damage reported" aria-label="Reason" />
-                <Button type="submit" size="sm" data-cta="admin-order-replacement">
-                  Create zero-value replacement
-                </Button>
-              </form>
-            </Panel>
-          ) : null}
-          {can(staff, 'orders.write') ? (
-            <Panel title="Test order">
-              <form action={testFlagAction} className="flex items-center gap-2">
-                <input type="hidden" name="orderId" value={o.id} />
-                <input type="hidden" name="isTest" value={o.isTest ? '0' : '1'} />
-                <Button type="submit" size="sm" variant="ghost">
-                  {o.isTest ? 'Unmark test order' : 'Mark as test order'}
-                </Button>
-              </form>
-            </Panel>
-          ) : null}
-        </div>
-      </div>
-    </div>
+              );
+            })}
+          </tbody>
+        </table>
+        <dl className="grid grid-cols-2 gap-x-4 text-sm">
+          <dt>Subtotal (list)</dt>
+          <dd className="text-right">{rs(o.subtotalPaise)}</dd>
+          <dt>Bulk savings</dt>
+          <dd className="text-right">-{rs(o.tierSavingsPaise)}</dd>
+          <dt>Promotions</dt>
+          <dd className="text-right">-{rs(o.promoPaise)}</dd>
+          <dt>Coupon</dt>
+          <dd className="text-right">-{rs(o.couponPaise)}</dd>
+          <dt>Packing</dt>
+          <dd className="text-right">{rs(o.packingPaise)}</dd>
+          <dt>Delivery</dt>
+          <dd className="text-right">{rs(o.shippingPaise)}</dd>
+          <dt>GST included</dt>
+          <dd className="text-right">{rs(o.taxPaise)}</dd>
+          <dt className="font-semibold">Total</dt>
+          <dd className="text-right font-semibold">{rs(o.totalPaise)}</dd>
+          <dt>Paid</dt>
+          <dd className="text-right">{rs(o.paidPaise)}</dd>
+          <dt>Refunded</dt>
+          <dd className="text-right">{rs(o.refundedPaise)}</dd>
+          <dt>Balance due</dt>
+          <dd className="text-right">{rs(o.balanceDuePaise)}</dd>
+        </dl>
+      </Card>
+      <Card title="Timeline">
+        <ol className="flex flex-col gap-1 text-sm">
+          {events.map((e) => (
+            <li key={e.id}>
+              <span className="text-muted">{istDateTime(e.createdAt)}</span> <b>{e.type}</b> <code className="text-xs">{JSON.stringify(e.data)}</code>
+            </li>
+          ))}
+        </ol>
+        {can(staff, 'orders.write') ? (
+          <form action={noteAction} className="flex gap-2">
+            <input type="hidden" name="orderId" value={o.id} />
+            <Input name="note" required maxLength={2000} placeholder="Add a note" aria-label="Note" />
+            <Button type="submit" size="sm">
+              Add note
+            </Button>
+          </form>
+        ) : null}
+      </Card>
+    </DetailFrame>
   );
 }
 
@@ -374,7 +368,7 @@ export async function DispatchPage({ now: nowOverride }: { now?: Date } = {}) {
       <h1 className="text-2xl font-semibold">Dispatch planner</h1>
       {plan.length === 0 ? <EmptyState title="Nothing to dispatch" body="Paid and confirmed delivery orders appear here by slot date." /> : null}
       {plan.map((g) => (
-        <Panel key={g.slotDate} title={`${g.slotDate === 'unscheduled' ? 'No slot date' : slotLabel(g.slotDate)}: ${g.weightKg} kg`}>
+        <Card key={g.slotDate} title={`${g.slotDate === 'unscheduled' ? 'No slot date' : slotLabel(g.slotDate)}: ${g.weightKg} kg`}>
           {g.vehicles.map((v) => (
             <div key={v.vehicle} className="flex flex-col gap-1">
               <h3 className="text-sm font-semibold">
@@ -392,7 +386,7 @@ export async function DispatchPage({ now: nowOverride }: { now?: Date } = {}) {
               </ul>
             </div>
           ))}
-        </Panel>
+        </Card>
       ))}
     </div>
   );
