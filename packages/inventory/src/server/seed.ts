@@ -2,6 +2,8 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { SeedContext, SeedResult } from '@ecomkit/core/contracts';
+import { db } from '@ecomkit/core/db';
+import { sql } from 'drizzle-orm';
 import { z } from 'zod';
 import type { SeedLevel } from '../domain';
 import { seedLevels } from './stock';
@@ -33,11 +35,20 @@ async function catalogResolver(): Promise<VariantResolver | null> {
   const spec = '@ecomkit/catalog/server';
   try {
     const mod = (await import(/* @vite-ignore */ spec)) as { variantRefsBySku?: VariantResolver };
-    return mod.variantRefsBySku ?? null;
+    return mod.variantRefsBySku ?? sqlResolver;
   } catch {
-    return null;
+    return sqlResolver;
   }
 }
+
+// ponytail: seed-time read of catalog's tables (variant sku = product sku + suffix, catalog seed.ts:262)
+// until catalog exports variantRefsBySku; without it no inventory_level rows were seeded and nothing was purchasable.
+const sqlResolver: VariantResolver = async (skus) => {
+  const r = await db.execute<{ sku: string; variant_id: string; product_id: string }>(
+    sql`select p.sku || v.sku_suffix as sku, v.id as variant_id, v.product_id from catalog_variant v join catalog_product p on p.id = v.product_id where p.sku || v.sku_suffix in ${[...skus]}`,
+  );
+  return Object.fromEntries(r.rows.map((x) => [x.sku, { variantId: x.variant_id, productId: x.product_id }]));
+};
 
 export async function readSeedVariants(seedDir: string): Promise<{ sku: string; onHand: number; readyInDays: number | null; lowStockThreshold: number | null }[]> {
   const out: { sku: string; onHand: number; readyInDays: number | null; lowStockThreshold: number | null }[] = [];

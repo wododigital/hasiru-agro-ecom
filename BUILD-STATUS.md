@@ -1,4 +1,4 @@
-# BUILD STATUS  (updated 2026-10-20T07:20+0530)
+# BUILD STATUS  (updated 2026-10-20T07:40+0530)
 Current wave: 3 (merged: WP-28, WP-29, WP-30, WP-31; see the Wave 3 merge section)   Next action: run `pnpm smoke --strict` against a migrated + `jobs:install`ed + seeded DB under `next start` with `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`, fix what it reports (money, jobs, admin saves), then the Wave 3 gate.   Previous next action: Wave 3 (WP-28 apps/shop assembly, WP-29 admin dashboard + reports per REQUIREMENTS-ADDENDUM section 9, WP-30 apps/minimal proof + recipe) from `ecom-build`; Wave 3 worktrees were already running during the Wave 2 gate (`.worktrees/wp-28..31`), so their agents must rebase onto this commit before merging (the gate changed `packages/core/src/manifest/paths.ts`, cart restore, flows ports, catalog `BuyBoxIsland`, `turbo.json`). All 33 modules are enabled in `apps/shop/modules.config.ts`; `apps/minimal` enables its full target set (addendum 1) and builds. Boot wiring (`configureX` bindings for every Wave 1 and 2 module) is still WP-28's; until then storefront pages that need a port render their degraded state.
 
 Only the orchestrator edits this file; per-agent detail stays in `BUILD-STATUS/wp-xx.md`.
@@ -208,3 +208,30 @@ Wave 0 requests still open are repeated here; agent files hold the full text.
 - 2026-10-20 ~04:20 IST: wave 0 gate committed; nothing mid-flight.
 - 2026-10-20 ~06:30 IST: wave 1 gate committed; nothing mid-flight.
 - 2026-10-20 ~07:35 IST: wave 2 gate committed (round 1). Final full gate and the minimal rebuild results are in the Wave 2 gate table above; see `BUILD-STATUS/orchestrator-security.md` for the applied security items. Wave 3 agents were already running in `.worktrees/wp-28..31` during this gate and must rebase.
+
+- verify-money (2026-10-20 07:20): money path BLOCKED at add-to-cart (500 `cart is not configured`): apps/shop has no web boot wiring (`instrumentation.ts` has no `register()`; no configureCart/configurePricing/configurePayments/checkout ports). Inventory seed fixed (levels now seeded). Details + wiring list: BUILD-STATUS/verify-money.md.
+
+## verify-jobs (2026-10-20 07:25 IST) — details in BUILD-STATUS/verify-jobs.md
+- Fixed: `apps/shop/worker.ts` binds `configureErpSync({ adapter: opsAdapter })`; smoke jobs payloads (wizard, notify-me, ERP/feeds pages).
+- Unfinished: worker + web boot wiring for `configurePayments` (no orders-side `PaymentsOrdersPort` exists; `payments.sweep` dead-letters), `configureFlows` (abandoned-cart reminders never start: needs a cart `snapshot` port + `restoreLink` over cart `restoreToken`), `configureMarketing`; `inventory_level` unseeded; `seed:load` media step duplicate-key crash on a fresh DB.
+
+- verify-storefront (07:30 IST): routes smoke 137 pass / 12 fail / 27 skip on a seeded DB, no code changed; open items (seo boot wiring, customers anonymous account pages, CMS pages 404 from build-time cache, footer seed links) in BUILD-STATUS/verify-storefront.md
+
+## verify-admin (2026-10-20 07:29 IST) - details in BUILD-STATUS/verify-admin.md
+Admin green on `smoke --only=routes,admin`: 63 admin routes PASS (0 FAIL), 17 settings sections render, settings save, integration key sealed + redacted in audit, discount create, audit rows, support role matrix. No admin code change needed; `tooling/smoke.mjs` fixed (discount check posted wrong fields) and extended (Suspense render-error detection, settings sections, integration key, price, stock, role matrix). Unfinished: product/price/stock saves not run on a seeded DB (seed:load too slow / killed); `/account/{profile,addresses,land,reviews}` render a module NotFoundError at 200 for anonymous visitors (account area).
+
+## Final (2026-10-20 07:40 IST)
+- Typecheck re-run on the merged tree:  Tasks:    38 successful, 38 total (exit 0).
+- Final fresh-DB smoke on :3299, unit re-run and rebuild NOT done (session limit 07:42). Numbers in docs/FINAL-REPORT.md are the verifiers 07:14-07:32 runs against the 07:12 build.
+- Open first: apps/shop boot wiring (configureCart/Pricing/Payments/Seo/Flows/Marketing + ports) in instrumentation.ts register() and worker.ts. See docs/FINAL-REPORT.md section 4.
+
+## verify-storefront (merged 07:40) - details in BUILD-STATUS/verify-storefront.md
+# Verify: storefront (2026-10-20 07:14-07:30 IST)
+
+Setup: `pnpm db:fresh verify-storefront` + migrate + `jobs:install` OK; `seed:load` was too slow under swarm CPU load (media hook still deriving images after 6 min, then SIGTERMed), so the run used `ecomkit_verify_storefront2` = `CREATE DATABASE ... TEMPLATE ecomkit_wp_28` (282 products, 221 media). Server: the shared 07:12 `apps/shop/.next` build, `next start --port 3201` with `DATABASE_URL`, `SITE_URL`, `SETTINGS_MASTER_KEY`, `MEDIA_ROOT=<repo>/storage/media`, `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`, `INTERNAL_SECRET`. Smoke: `node tooling/smoke.mjs --base=http://localhost:3201 --only=routes`.
+
+## verify-money (merged 07:40) - details in BUILD-STATUS/verify-money.md
+# verify-money (2026-10-20, 07:14-07:20 IST)
+
+Setup: `pnpm db:fresh verify-money` -> `ecomkit_verify_money`, `drizzle-kit migrate` (6 migrations), `jobs:install`, `seed:load --app shop` with the media hook skipped (media is ~588 assets through sharp and would not finish in the budget). `next start --port 3203` on the existing `apps/shop/.next` (07:12 build, not rebuilt), worker (`tsx --conditions=react-server worker.ts`) on the same DB, `ENABLE_MOCKS=1 ALLOW_MOCKS_IN_PROD=1`. Command: `node tooling/smoke.mjs --base=http://localhost:3203 --only=money`.
+

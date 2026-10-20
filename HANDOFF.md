@@ -1,3 +1,9 @@
+# Hasiru Agro: Resume from here (2026-10-20 07:40 IST)
+
+Branch `ecom-build` (local, not pushed) holds the full Next.js 16 / @ecomkit store build. Read `docs/FINAL-REPORT.md` first: run commands, what was built, real check numbers, open items. First job on resume: boot wiring in `apps/shop/instrumentation.ts` + `worker.ts` (section 4 of the report); the money path is blocked on it. Status detail: `BUILD-STATUS.md`, `BUILD-STATUS/verify-*.md`. Below is the earlier prototype handoff (branch `prototype-html`), kept for the brand and data decisions.
+
+---
+
 # Hasiru Agro: New E-Commerce Site, Prototype Handoff
 
 Last updated: 2026-10-18. Resume from here.

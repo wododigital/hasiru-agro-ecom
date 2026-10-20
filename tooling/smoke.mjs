@@ -119,17 +119,22 @@ async function submitForm(page, match, overrides = {}, { admin = true, waitMs = 
 let OWNER_COOKIE = arg('cookie', process.env.SMOKE_COOKIE) ?? '';
 function mintOwnerCookie() {
   if (OWNER_COOKIE || !DB || !SECRET) return;
+  OWNER_COOKIE = mintCookie('owner') ?? '';
+}
+function mintCookie(role) {
+  if (!DB || !SECRET) return null;
+  const email = role === 'owner' ? 'smoke-owner@example.invalid' : `smoke-${role}@example.invalid`;
   const secret = createHmac('sha256', SECRET).update('ecomkit:better-auth').digest().toString('base64url');
   const token = randomBytes(24).toString('base64url');
   const ok = sql(`
     insert into auth_user (id, name, email, email_verified, role, two_factor_enabled, created_at, updated_at)
-      values ('${randomUUID()}', 'Smoke Owner', 'smoke-owner@example.invalid', true, 'owner', true, now(), now())
-      on conflict (email) do update set role = 'owner', two_factor_enabled = true, banned = false;
+      values ('${randomUUID()}', 'Smoke ${role}', '${email}', true, '${role}', true, now(), now())
+      on conflict (email) do update set role = '${role}', two_factor_enabled = true, banned = false;
     insert into auth_session (id, token, user_id, expires_at, created_at, updated_at)
-      select '${randomUUID()}', '${token}', id, now() + interval '1 day', now(), now() from auth_user where email = 'smoke-owner@example.invalid';`);
-  if (ok === null) return;
+      select '${randomUUID()}', '${token}', id, now() + interval '1 day', now(), now() from auth_user where email = '${email}';`);
+  if (ok === null) return null;
   const sig = createHmac('sha256', secret).update(token).digest('base64');
-  OWNER_COOKIE = `ek.session_token=${encodeURIComponent(`${token}.${sig}`)}`;
+  return `ek.session_token=${encodeURIComponent(`${token}.${sig}`)}`;
 }
 
 // ---------- route manifest ----------
@@ -214,6 +219,10 @@ async function routes() {
     } else if (r.status === 404 && origin === 'module' && !missing && !pattern.includes('[')) {
       status = 'SKIP';
       detail += ' (module route not assembled)';
+    } else if (r.status === 200 && /\d+:E\{\\?"digest\\?":\\?"(?!NEXT_)/.test(r.text)) {
+      // a server error inside a streamed Suspense boundary still answers 200; the RSC payload carries E{digest} (NEXT_* digests are notFound/redirect)
+      status = 'FAIL';
+      detail += ' (render error inside a Suspense boundary: see server log for the digest)';
     } else if (missing && r.status !== 404 && r.status < 500 && r.status >= 200 && r.status < 300 && !pattern.startsWith('/admin')) {
       detail += ' (unknown slug did not 404)';
     }
@@ -312,8 +321,9 @@ async function jobs() {
     rec(S, 'abandoned cart flow runs', n > 0 ? 'PASS' : 'SKIP', `${n} runs (needs consented cart + worker sweep; clock not advanced by smoke)`);
   }
   // notify-me
-  const variant = one('select id from catalog_variant limit 1');
-  if (!variant) rec(S, 'notify-me', 'SKIP', 'no seeded variant');
+  // notify-me only accepts a variant that has an inventory level row
+  const variant = one('select variant_id from inventory_level limit 1');
+  if (!variant) rec(S, 'notify-me', 'SKIP', 'no inventory_level rows (seed data)');
   else {
     const r = await req('/api/notify-me', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ variantId: variant, channel: 'email', email: 'smoke-notify@example.invalid', consent: true }) });
     const rows = count(`select count(*) from inventory_subscription where created_at >= '${since}'`);
@@ -329,20 +339,20 @@ async function jobs() {
     else rec(S, 'enquiry submit', rows > 0 ? 'PASS' : 'FAIL', `${s.res.status}${s.res.location ? ' -> ' + s.res.location : ''} rows=${rows}`);
   }
   // wizard plan generate + soft unlock
-  const gen = await req('/api/plan/generate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ acres: 1, district: 'bengaluru-urban', purposes: ['fruit', 'timber'] }) });
+  const gen = await req('/api/plan/generate', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ sqft: 43560, district: one('select slug from places_district order by (slug = \'bengaluru-urban\') desc limit 1') ?? 'bengaluru-urban', purpose: one('select slug from planting_model order by position limit 1') ?? 'fruit' }) });
   if (gen.status === 404) rec(S, 'wizard plan generate', 'SKIP', '/api/plan/generate not assembled');
   else {
     const planId = json(gen)?.planId ?? json(gen)?.id;
     rec(S, 'wizard plan generate', gen.status < 300 && planId ? 'PASS' : 'FAIL', `${gen.status} ${gen.text.slice(0, 80)}`);
     if (planId) {
-      const un = await req('/api/plan/unlock', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ planId, name: 'Smoke Farmer', phone: '9876543210', consent: true }) });
+      const un = await req('/api/plan/unlock', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ step: 'soft', planId, name: 'Smoke Farmer', phone: '9876543210' }) });
       rec(S, 'wizard plan unlock', un.status < 300 ? 'PASS' : 'FAIL', `${un.status} ${un.text.slice(0, 80)}`);
     }
   }
   // ERP sync against the mock + feed regeneration: admin action buttons (server-action forms)
   for (const [name, page, match, table] of [
-    ['ERP sync now (mock)', '/admin/erp', /sync stock now/i, 'erp_sync_run'],
-    ['feed regeneration', '/admin/marketing/feeds', /rebuild feeds now/i, 'feeds_run'],
+    ['ERP sync now (mock)', '/admin/settings/erp-sync', /sync stock now/i, 'erp_sync_run'],
+    ['feed regeneration', '/admin/settings/feeds', /rebuild feeds now/i, 'feeds_run'],
   ]) {
     if (DB && !tableExists(table)) {
       rec(S, name, 'SKIP', `${table} missing (module not enabled)`);
@@ -376,7 +386,28 @@ async function admin() {
   const settings = await req('/admin/settings', { admin: true });
   const modules = [...new Set(hrefs(settings.text).filter((h) => /^\/admin\/settings\/[^/?]+$/.test(h)))];
   rec(S, 'settings sub-pages listed', modules.length ? 'PASS' : 'FAIL', modules.join(' ').slice(0, 140));
-  const target = modules.find((m) => m.endsWith('/store')) ?? modules[0];
+  const broken = [];
+  await pool(modules, 6, async (m) => {
+    const r = await req(m, { admin: true });
+    if (r.status !== 200 || /\d+:E\{\\?"digest\\?":\\?"(?!NEXT_)/.test(r.text) || !/<h1/.test(r.text)) broken.push(`${m} ${r.status}`);
+  });
+  rec(S, `every settings section renders (${modules.length})`, broken.length ? 'FAIL' : 'PASS', broken.join(' '));
+  // role matrix: support (no settings/analytics/marketing permissions) sees neither the links nor the pages
+  const support = mintCookie('support');
+  if (!support) rec(S, 'role matrix (support)', 'SKIP', 'cannot mint a support session');
+  else {
+    const get = (path) => fetch(BASE + path, { redirect: 'manual', headers: { cookie: support }, signal: AbortSignal.timeout(30000) }).then(async (r) => ({ status: r.status, text: await r.text() }));
+    const home = await get('/admin');
+    const leaked = ['/admin/settings', '/admin/analytics', '/admin/discounts'].filter((h) => hrefs(home.text).includes(h));
+    rec(S, 'role matrix: support nav hides settings/analytics/discounts', home.status === 200 && !leaked.length ? 'PASS' : 'FAIL', `${home.status} leaked=${leaked.join(',')}`);
+    const page = await get('/admin/settings/payments');
+    const denied = page.status === 404 || /do not have access/i.test(page.text);
+    rec(S, 'role matrix: support denied /admin/settings/payments', denied && !/name="[^"]*key/i.test(page.text) ? 'PASS' : 'FAIL', String(page.status));
+    const orders = await get('/admin/orders');
+    rec(S, 'role matrix: support can open /admin/orders', orders.status === 200 && !/do not have access/i.test(orders.text) ? 'PASS' : 'FAIL', String(orders.status));
+  }
+  let target = modules.find((m) => m.endsWith('/store'));
+  for (const m of target ? [] : modules) if (forms((await req(m, { admin: true })).text).some((f) => /save/i.test(f.text))) { target = m; break; }
   if (target) {
     const before = one(`select updated_at from core_settings where module = '${target.split('/').pop()}' order by updated_at desc limit 1`);
     const s = await submitForm(target, /save/i);
@@ -385,6 +416,13 @@ async function admin() {
       const after = one(`select updated_at from core_settings where module = '${target.split('/').pop()}' order by updated_at desc limit 1`);
       rec(S, `save ${target}`, s.res.status < 400 && after && after !== before ? 'PASS' : 'FAIL', `${s.res.status}, updated_at ${before} -> ${after}`);
     }
+  }
+  // integration keys: a secret saved through the payments form is stored sealed (is_secret, never the plaintext)
+  if (modules.includes('/admin/settings/payments')) {
+    const plain = `smoke-secret-${randomBytes(6).toString('hex')}`;
+    const k = await submitForm('/admin/settings/payments', /save/i, { clientSecret: plain });
+    const row = sql(`select is_secret, value::text from core_settings where module = 'payments' and key = 'clientSecret'`)?.[0];
+    rec(S, 'save integration key (payments.clientSecret)', k.skipped ? 'SKIP' : k.res.status < 400 && row?.[0] === 't' && !row[1].includes(plain) ? 'PASS' : 'FAIL', k.skipped ?? `${k.res.status}, row=${row ? `secret=${row[0]} plaintext=${row[1].includes(plain)}` : 'none'}`);
   }
   // product: save the first product's edit form unchanged
   const pid = one('select id from catalog_product order by created_at limit 1');
@@ -395,10 +433,38 @@ async function admin() {
     const after = one(`select updated_at from catalog_product where id = '${pid}'`);
     rec(S, 'save product', s.skipped ? 'SKIP' : s.res.status < 400 && after !== before ? 'PASS' : 'FAIL', s.skipped ?? `${s.res.status}, updated_at ${before} -> ${after}`);
   }
+  // price + stock: the first priced variant's pricing form and its inventory count form
+  const pv = sql('select p.variant_id, p.product_id, p.price_paise from pricing_price p join inventory_level l using (variant_id) order by p.updated_at limit 1')?.[0];
+  if (!pv) rec(S, 'save price / stock', 'SKIP', 'no priced variant with a stock level');
+  else {
+    const [vid, prodId, paise] = pv;
+    const newPrice = ((Number(paise) + 100) / 100).toFixed(2);
+    const forms1 = forms((await req(`/admin/products/${prodId}`, { admin: true })).text);
+    const post = async (f, overrides) => {
+      const fd = new FormData();
+      for (const [k, v] of f.fields) fd.append(k, k in overrides ? overrides[k] : v);
+      return req(f.action && !f.action.startsWith('javascript') ? f.action : `/admin/products/${prodId}`, { method: 'POST', body: fd, admin: true });
+    };
+    const pf = forms1.find((f) => f.fields.some(([n, v]) => n === 'variantId' && v === vid) && f.fields.some(([n]) => n === 'price'));
+    if (!pf) rec(S, 'save price', 'SKIP', `no pricing form for ${vid} on /admin/products/${prodId}`);
+    else {
+      const r = await post(pf, { price: newPrice });
+      const now = one(`select price_paise from pricing_price where variant_id = '${vid}'`);
+      rec(S, 'save price', r.status < 400 && Number(now) === Math.round(Number(newPrice) * 100) ? 'PASS' : 'FAIL', `${r.status}, ${paise} -> ${now}`);
+    }
+    const sf = forms1.find((f) => f.fields.some(([n, v]) => n === 'variantId' && v === vid) && f.fields.some(([n]) => n === 'onHand'));
+    if (!sf) rec(S, 'save stock count', 'SKIP', `no count form for ${vid} on /admin/products/${prodId}`);
+    else {
+      const r = await post(sf, { onHand: '7', note: 'smoke recount' });
+      const now = one(`select on_hand from inventory_level where variant_id = '${vid}'`);
+      rec(S, 'save stock count', r.status < 400 && now === '7' ? 'PASS' : 'FAIL', `${r.status}, on_hand=${now}`);
+    }
+  }
   // discount: create one via /admin/discounts/new
   const code = `SMOKE${Date.now().toString(36).toUpperCase()}`;
-  const d = await submitForm('/admin/discounts/new', /save|create/i, { code, title: `Smoke ${code}`, value: '5', type: 'percent' });
-  const dRow = count(`select count(*) from discounts_code where upper(code) = '${code}'`);
+  // the rule form (codes are added on the rule's own page after the create redirect)
+  const d = await submitForm('/admin/discounts/new', /save|create/i, { name: `Smoke ${code}`, kind: 'automatic', status: 'draft', valueType: 'percent', value: '5', appliesTo: 'order' });
+  const dRow = count(`select count(*) from discounts_rule where name = 'Smoke ${code}'`);
   rec(S, 'create discount', d.skipped ? 'SKIP' : dRow > 0 ? 'PASS' : 'FAIL', d.skipped ?? `${d.res.status}${d.res.location ? ' -> ' + d.res.location : ''}, rows=${dRow}`);
   const auditAfter = count('select count(*) from core_audit_log');
   rec(S, 'audit rows written', auditAfter > auditBefore ? 'PASS' : 'FAIL', `${auditBefore} -> ${auditAfter}`);

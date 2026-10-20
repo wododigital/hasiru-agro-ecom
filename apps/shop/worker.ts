@@ -2,7 +2,13 @@
 // jobs, schedules and event subscribers from the generated registry.
 // Contract for @ecomkit/core/jobs: export startWorker(registry) -> { stop() }.
 import type { Registry } from '@ecomkit/core/manifest';
+import { configureErpSync } from '@ecomkit/erp-sync/server';
+import { opsAdapter } from '@ecomkit/hasiru-ops-adapter/server';
 import { registry } from './src/generated/registry';
+
+// Worker-side port bindings (the web process binds its own in instrumentation; WP-28 boot wiring).
+// ponytail: only the ERP adapter so far; flows/marketing ports still unbound here (see BUILD-STATUS/verify-jobs.md).
+configureErpSync({ adapter: opsAdapter });
 
 interface WorkerEntry {
   startWorker(registry: Registry): Promise<{ stop(): Promise<void> }>;
