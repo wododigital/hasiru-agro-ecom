@@ -44,7 +44,7 @@ psql "$DATABASE_URL" -f apps/<store>/seed/seed.sql     # idempotent starter data
 
 ## 5. Environment
 
-`DATABASE_URL`, `SITE_URL`, `NEXT_PUBLIC_SITE_URL`, `INTERNAL_SECRET` (32+ chars), `INTERNAL_BASE_URL`, `SETTINGS_MASTER_KEY='1:<base64 32 bytes>'`, `MEDIA_ROOT` (absolute), `ENABLE_MOCKS`. In a production build (`next start`) `ENABLE_MOCKS` must be `0`; the payments mock gateway works under `next dev` or a non-production `NODE_ENV` only. Payment credentials are entered in admin settings, not env.
+`DATABASE_URL`, `SITE_URL`, `NEXT_PUBLIC_SITE_URL`, `INTERNAL_SECRET` (32+ chars), `INTERNAL_BASE_URL`, `SETTINGS_MASTER_KEY='1:<base64 32 bytes>'`, `MEDIA_ROOT` (absolute), `ENABLE_MOCKS`. In a production build (`next start`) `ENABLE_MOCKS` must be `0`, unless `ALLOW_MOCKS_IN_PROD=1` is also set (local smoke runs only; never in a deploy). After `drizzle-kit migrate`, run `pnpm jobs:install` once so the web process can enqueue jobs. Payment credentials are entered in admin settings, not env.
 
 ## 6. Build and verify
 

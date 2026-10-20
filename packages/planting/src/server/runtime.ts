@@ -1,6 +1,9 @@
 import 'server-only';
 import type { CartLineOrigin, ImageRef, ModuleId, PlacesReader, PlantClimate, PricingReader, Role } from '@ecomkit/core/contracts';
+import { inArray } from 'drizzle-orm';
+import { catalogProduct } from '@ecomkit/catalog/schema';
 import { imagesFor, listProducts, mainMediaIds } from '@ecomkit/catalog/server';
+import { db } from '@ecomkit/core/db';
 import { places as placesReader } from '@ecomkit/places/server';
 import { pricingReader } from '@ecomkit/pricing/server';
 import { plantingMessages, type PlantingMessages } from '../messages';
@@ -112,6 +115,13 @@ async function taggedNitrogenFixers(): Promise<ReadonlySet<string>> {
   }
 }
 
+/** Default seed binding: catalog product id per sku (model members in data/seed/models.json are keyed by sku). */
+async function catalogIdsBySku(skus: readonly string[]): Promise<Record<string, string>> {
+  if (!skus.length) return {};
+  const rows = await db.select({ id: catalogProduct.id, sku: catalogProduct.sku }).from(catalogProduct).where(inArray(catalogProduct.sku, [...skus]));
+  return Object.fromEntries(rows.map((r) => [r.sku, r.id]));
+}
+
 export function mergeMessages(overrides: Overrides = {}): PlantingMessages {
   const out = { ...plantingMessages } as Record<string, unknown>;
   for (const [k, v] of Object.entries(overrides)) out[k] = { ...(plantingMessages as Record<string, object>)[k], ...v };
@@ -129,7 +139,7 @@ function build(input: PlantingRuntimeInput): PlantingRuntime {
     videos: input.videos ?? null,
     otp: input.otp ?? null,
     nitrogenFixers: input.nitrogenFixers ?? taggedNitrogenFixers,
-    productIdsBySku: input.productIdsBySku ?? null,
+    productIdsBySku: input.productIdsBySku === undefined ? catalogIdsBySku : input.productIdsBySku,
     messages: mergeMessages(input.messages),
   };
 }

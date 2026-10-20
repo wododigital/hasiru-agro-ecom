@@ -22,6 +22,8 @@ export const serverEnvSchema = z
     SETTINGS_MASTER_KEY: keySpec.optional(),
     SETTINGS_MASTER_KEY_PREVIOUS: keySpec.optional(),
     ENABLE_MOCKS: flag,
+    /** Local-only: lets a production build (`next start`) serve mocks for smoke runs. Never set in a deploy. */
+    ALLOW_MOCKS_IN_PROD: flag,
     GIT_SHA: z.string().optional(),
   })
   .superRefine((env, ctx) => {
@@ -29,7 +31,7 @@ export const serverEnvSchema = z
     for (const key of ['DATABASE_URL', 'SITE_URL', 'INTERNAL_SECRET', 'SETTINGS_MASTER_KEY'] as const) {
       if (!env[key]) ctx.addIssue({ code: 'custom', path: [key], message: 'required in production' });
     }
-    if (env.ENABLE_MOCKS === '1') ctx.addIssue({ code: 'custom', path: ['ENABLE_MOCKS'], message: 'must be 0 in production' });
+    if (env.ENABLE_MOCKS === '1' && env.ALLOW_MOCKS_IN_PROD !== '1') ctx.addIssue({ code: 'custom', path: ['ENABLE_MOCKS'], message: 'must be 0 in production' });
   });
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
 

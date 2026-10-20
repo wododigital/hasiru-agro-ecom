@@ -15,6 +15,7 @@
     "e2e:minimal": "pnpm -F minimal e2e",
     "dev": "pnpm -F shop dev",
     "db:fresh": "tsx tooling/scripts/db-fresh.ts",
+    "jobs:install": "tsx tooling/scripts/jobs-install.ts",
     "modules:sync": "tsx tooling/scripts/modules-sync.ts",
     "seed:build": "tsx tooling/scripts/seed/run.ts build",
     "seed:load": "tsx --conditions=react-server tooling/scripts/seed/run.ts load",
