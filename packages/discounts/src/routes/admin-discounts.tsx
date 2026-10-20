@@ -5,6 +5,6 @@ export function generateMetadata(): Metadata {
   return { title: 'Discounts' };
 }
 
-export default function AdminDiscountsRoute() {
-  return <DiscountsListPage />;
+export default async function AdminDiscountsRoute({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  return <DiscountsListPage searchParams={await searchParams} />;
 }

@@ -1,5 +1,7 @@
+import { requirePermission } from '@ecomkit/core/auth-context';
 import type { DateRange } from '@ecomkit/core/contracts';
 import { db } from '@ecomkit/core/db';
+import { cache } from 'react';
 import { sql, type SQL } from 'drizzle-orm';
 import { z } from 'zod';
 import { dateRangeSchema, FUNNEL_STEPS, funnelCounts, pathKey, VITAL_METRICS, type ReportName, type VitalMetric } from '../domain/reports';
@@ -288,4 +290,47 @@ export async function report<N extends ReportName>(name: N, range: DateRange, op
     vitals: () => vitalsReport(r),
   };
   return run[name]() as Promise<ReportMap[N]>;
+}
+
+// ---- KPI cards (Home strip, Analytics overview) and live view -------------------------------------
+
+/** Per-day sessions, tracked purchases and tracked revenue for a range, from the rollups (today live). One query set per request. */
+export const dailyKpis = cache(async (from: string, to: string) => {
+  await requirePermission('analytics.read');
+  const range = dateRangeSchema.parse({ from, to });
+  const byDay = await dayMetrics(range, new Date());
+  const days = daysIn(range);
+  const pick = (metric: string) => days.map((day) => sum(new Map([[day, byDay.get(day) ?? []]]), metric));
+  return { days, sessions: pick('sessions'), purchases: pick('purchases'), revenuePaise: pick('revenue_paise') };
+});
+
+/** Live view: who is on the site now (last 5 minutes), the last 30 minutes' pages and events, and today so far. */
+export async function liveReport(nowOverride?: Date) {
+  await requirePermission('analytics.read');
+  // The clock is read after the request-time permission check (cache components).
+  const now = nowOverride ?? new Date();
+  const at = now.toISOString();
+  const recent = (minutes: number) => sql`${at}::timestamptz - make_interval(mins => ${minutes})`;
+  const [active] = await rows<{ visitors: number; sessions: number }>(
+    sql`select count(distinct s.visitor_id)::int as visitors, count(*)::int as sessions from analytics_session s where s.last_event_at >= ${recent(5)} and ${HUMAN}`,
+  );
+  const today = bounds({ from: istDay(now), to: istDay(now) });
+  const [day] = await rows<{ sessions: number; purchases: number }>(
+    sql`select (select count(*)::int from analytics_session s where ${today('s.started_at')} and ${HUMAN}) as sessions,
+               (select count(*)::int from ${humanEvents(today, sql`e.name = 'purchase'`)}) as purchases`,
+  );
+  const last30 = (c: string) => sql`${sql.raw(c)} >= ${recent(30)}`;
+  return {
+    visitorsNow: Number(active?.visitors ?? 0),
+    sessionsNow: Number(active?.sessions ?? 0),
+    sessionsToday: Number(day?.sessions ?? 0),
+    purchasesToday: Number(day?.purchases ?? 0),
+    pages: await rows<{ path: string; views: number }>(sql`select e.path, count(*)::int as views from ${humanEvents(last30, sql`e.name = 'page_view'`)} group by 1 order by 2 desc limit 15`),
+    channels: await rows<{ channel: string; sessions: number }>(
+      sql`select s.channel, count(*)::int as sessions from analytics_session s where s.last_event_at >= ${recent(30)} and ${HUMAN} group by 1 order by 2 desc`,
+    ),
+    events: await rows<{ at: string; name: string; path: string; device: string }>(
+      sql`select e.server_ts::text as at, e.name, e.path, s.device::text as device from ${humanEvents(last30)} order by e.server_ts desc limit 30`,
+    ),
+  };
 }

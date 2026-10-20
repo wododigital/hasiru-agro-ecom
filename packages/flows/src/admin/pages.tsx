@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { formatINR } from '@ecomkit/core/money';
-import { Badge, Button, Checkbox, EmptyState, FormField, Input, Select, Stat, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
+import { can, requirePermission } from '@ecomkit/core/auth-context';
+import { Badge, Button, Checkbox, DataTable, EmptyState, FormField, Input, Select, Stat, TBody, THead, Table, Td, Th, Tr, type Column } from '@ecomkit/ui';
+import { parseTableParams } from '@ecomkit/ui/domain';
 import { FLOW_CHANNELS, FLOW_DEFS, isFlowKey, isMarketingTemplate } from '../domain';
-import { getFlowDetail, listAbandonedCheckouts, listFlowCards } from '../server/admin';
+import { ABANDONED_VIEWS, getFlowDetail, listAbandonedCheckouts, listFlowCards, type AbandonedRow, type AbandonedView } from '../server/admin';
 import type { RunRow } from '../server/runner';
-import { saveFlowAction, testRunAction } from './actions';
+import { saveFlowAction, stopRemindersAction, testRunAction } from './actions';
 
 const IST = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
 const when = (d: Date | null) => (d ? IST.format(d) : '');
@@ -20,6 +22,7 @@ const STOP_LABEL: Record<string, string> = {
   purchased: 'Purchased',
   replied: 'Replied',
   unsubscribed: 'Unsubscribed',
+  stopped_by_staff: 'Stopped by staff',
 };
 
 type Search = Promise<Record<string, string | string[] | undefined>>;
@@ -208,9 +211,22 @@ export async function FlowPage({ params, searchParams }: { params: Promise<{ key
   );
 }
 
-/** /admin/abandoned-checkouts */
-export async function AbandonedCheckoutsPage() {
-  const { rows, last30 } = await listAbandonedCheckouts();
+const ABANDONED_LABEL: Record<AbandonedView, string> = { running: 'Reminding', recovered: 'Recovered', completed: 'Not recovered', stopped: 'Stopped' };
+const PAGE = 50;
+
+/** /admin/abandoned-checkouts (Shopify index): 30-day stats, saved views by outcome, row checkboxes to stop reminders. No contact data is shown. */
+export async function AbandonedCheckoutsPage({ searchParams }: { searchParams: Search }) {
+  const viewer = await requirePermission('orders.read');
+  const params = parseTableParams(await searchParams, { filters: { view: ABANDONED_VIEWS } });
+  const { rows, total, last30 } = await listAbandonedCheckouts({ view: params.filters.view as AbandonedView | undefined, page: params.page, pageSize: PAGE });
+  const columns: Column<AbandonedRow>[] = [
+    { id: 'when', header: 'Abandoned (IST)', className: 'whitespace-nowrap', cell: ({ run }) => when(run.startedAt) },
+    { id: 'value', header: 'Cart value', align: 'right', cell: ({ valuePaise }) => (valuePaise === null ? '' : formatINR(valuePaise)) },
+    { id: 'items', header: 'Items', align: 'right', cell: ({ itemCount }) => itemCount ?? '' },
+    { id: 'sent', header: 'Reminders sent', align: 'right', cell: ({ run }) => run.messages },
+    { id: 'outcome', header: 'Outcome', cell: ({ run }) => <RunStatus run={run} /> },
+    { id: 'next', header: 'Next reminder', className: 'whitespace-nowrap', cell: ({ run }) => when(run.nextStepAt) },
+  ];
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
@@ -224,39 +240,19 @@ export async function AbandonedCheckoutsPage() {
         <Stat label="Reminded" value={String(last30.messaged)} />
         <Stat label="Recovered after a reminder" value={String(last30.recovered)} />
       </div>
-      {rows.length === 0 ? (
-        <EmptyState title="No abandoned checkouts" body="Carts left with a known contact appear here." />
-      ) : (
-        <Table>
-          <THead>
-            <Tr>
-              <Th>Abandoned (IST)</Th>
-              <Th>Cart value</Th>
-              <Th>Items</Th>
-              <Th>Reminders sent</Th>
-              <Th>Outcome</Th>
-              <Th>Next reminder</Th>
-            </Tr>
-          </THead>
-          <TBody>
-            {rows.map(({ run, valuePaise, itemCount }) => (
-              <Tr key={run.id}>
-                <Td className="whitespace-nowrap">{when(run.startedAt)}</Td>
-                <Td>{valuePaise === null ? '' : formatINR(valuePaise)}</Td>
-                <Td>{itemCount ?? ''}</Td>
-                <Td>
-                  {run.messages}
-                  {run.context.restoredAt ? ', link opened' : ''}
-                </Td>
-                <Td>
-                  <RunStatus run={run} />
-                </Td>
-                <Td className="whitespace-nowrap">{when(run.nextStepAt)}</Td>
-              </Tr>
-            ))}
-          </TBody>
-        </Table>
-      )}
+      <DataTable
+        columns={columns}
+        rows={rows}
+        rowKey={({ run }) => run.id}
+        params={params}
+        total={total}
+        pageSize={PAGE}
+        basePath="/admin/abandoned-checkouts"
+        search={false}
+        views={ABANDONED_VIEWS.map((v) => ({ id: v, label: ABANDONED_LABEL[v], filters: { view: v } }))}
+        bulkActions={can(viewer, 'marketing.write') ? [{ label: 'Stop reminders', action: stopRemindersAction, tone: 'danger' }] : undefined}
+        empty={<EmptyState title="No abandoned checkouts" body="Carts left with a known contact appear here." />}
+      />
     </div>
   );
 }

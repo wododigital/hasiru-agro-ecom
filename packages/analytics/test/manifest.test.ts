@@ -17,6 +17,9 @@ describe('manifest', () => {
     ]);
     expect(registry.subscribers('consent.changed').map((s) => s.moduleId)).toEqual(['analytics']);
     expect(registry.nav.find((n) => n.moduleId === 'analytics')).toMatchObject({ href: '/admin/analytics', order: 600, permission: 'analytics.read' });
+    expect(registry.list('reports').map((r) => r.id)).toContain('analytics.conversion-funnel');
+    for (const r of registry.list('reports')) expect(typeof (await r.component())).toBe('function');
+    for (const w of registry.list('dashboardWidgets')) expect(typeof (await w.component())).toBe('function');
     for (const job of registry.jobs.filter((j) => j.moduleId === 'analytics')) expect(typeof (await job.def.handler())).toBe('function');
     expect(typeof (await registry.subscribers('consent.changed')[0]!.handler())).toBe('function');
   });
@@ -31,6 +34,9 @@ describe('manifest', () => {
       'routes/beacon-script': () => import('../src/routes/beacon-script'),
       'routes/beacon-ingest': () => import('../src/routes/beacon-ingest'),
       'routes/admin-analytics': () => import('../src/routes/admin-analytics'),
+      'routes/admin-analytics-reports': () => import('../src/routes/admin-analytics-reports'),
+      'routes/admin-analytics-report': () => import('../src/routes/admin-analytics-report'),
+      'routes/admin-analytics-live': () => import('../src/routes/admin-analytics-live'),
     };
     for (const r of [...(manifest.routes ?? []), ...(manifest.admin?.pages ?? [])]) {
       const mod = await load[r.module]!();

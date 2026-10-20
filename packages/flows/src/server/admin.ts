@@ -1,3 +1,4 @@
+import { audit } from '@ecomkit/core/audit';
 import { requirePermission } from '@ecomkit/core/auth-context';
 import type { Paise, Recipient } from '@ecomkit/core/contracts';
 import { db } from '@ecomkit/core/db';
@@ -5,7 +6,7 @@ import { newId } from '@ecomkit/core/ids';
 import { formatINR } from '@ecomkit/core/money';
 import { DEFAULT_TEMPLATES, templateVariables } from '@ecomkit/notifications/domain';
 import { send } from '@ecomkit/notifications/server';
-import { and, count, desc, eq, gt, sql, sum } from 'drizzle-orm';
+import { and, count, desc, eq, gt, inArray, sql, sum } from 'drizzle-orm';
 import { FLOW_DEFS, FLOW_KEYS, type FlowKey } from '../domain';
 import { flowsRun, flowsRunStep } from '../schema';
 import { ensureFlows, getFlowRow, type FlowRow } from './flows';
@@ -64,14 +65,37 @@ export interface AbandonedRow {
   itemCount: number | null;
 }
 
-/** /admin/abandoned-checkouts: abandoned-cart runs with cart value (from cart), messages and outcome. */
-export async function listAbandonedCheckouts(options: { now?: Date; limit?: number } = {}): Promise<{ rows: AbandonedRow[]; last30: { started: number; messaged: number; recovered: number } }> {
+/** Saved views of /admin/abandoned-checkouts: still reminding, recovered after a reminder, reminders finished, stopped. */
+export const ABANDONED_VIEWS = ['running', 'recovered', 'completed', 'stopped'] as const;
+export type AbandonedView = (typeof ABANDONED_VIEWS)[number];
+
+function viewWhere(view: AbandonedView | undefined) {
+  switch (view) {
+    case 'running':
+      return eq(flowsRun.status, 'running');
+    case 'recovered':
+      return and(eq(flowsRun.stopReason, 'purchased'), gt(flowsRun.messages, 0));
+    case 'completed':
+      return eq(flowsRun.status, 'completed');
+    case 'stopped':
+      return eq(flowsRun.status, 'stopped');
+    default:
+      return undefined;
+  }
+}
+
+/** /admin/abandoned-checkouts: abandoned-cart runs with cart value (from cart), messages and outcome. Aggregates only: no contact data. */
+export async function listAbandonedCheckouts(
+  options: { now?: Date; view?: AbandonedView; page?: number; pageSize?: number; limit?: number } = {},
+): Promise<{ rows: AbandonedRow[]; total: number; last30: { started: number; messaged: number; recovered: number } }> {
   await requirePermission('orders.read');
   const now = options.now ?? new Date();
   const flow = await getFlowRow('abandoned_cart');
   const notTest = and(eq(flowsRun.flowId, flow.id), eq(flowsRun.isTest, false));
-  const [runs, [stats]] = await Promise.all([
-    db.select().from(flowsRun).where(notTest).orderBy(desc(flowsRun.startedAt), desc(flowsRun.id)).limit(options.limit ?? 50),
+  const listed = and(notTest, viewWhere(options.view));
+  const pageSize = options.pageSize ?? options.limit ?? 50;
+  const [runs, [stats], [counted]] = await Promise.all([
+    db.select().from(flowsRun).where(listed).orderBy(desc(flowsRun.startedAt), desc(flowsRun.id)).limit(pageSize).offset(((options.page ?? 1) - 1) * pageSize),
     db
       .select({
         started: count(),
@@ -80,7 +104,9 @@ export async function listAbandonedCheckouts(options: { now?: Date; limit?: numb
       })
       .from(flowsRun)
       .where(and(notTest, gt(flowsRun.startedAt, new Date(now.getTime() - MONTH_MS)))),
+    db.select({ n: count() }).from(flowsRun).where(listed),
   ]);
+  const total = counted?.n ?? 0;
   const carts = flowPorts().carts;
   const rows = await Promise.all(
     runs.map(async (run) => {
@@ -88,7 +114,41 @@ export async function listAbandonedCheckouts(options: { now?: Date; limit?: numb
       return { run, valuePaise: snap?.totalPaise ?? null, itemCount: snap?.itemCount ?? null };
     }),
   );
-  return { rows, last30: { started: stats?.started ?? 0, messaged: stats?.messaged ?? 0, recovered: stats?.recovered ?? 0 } };
+  return { rows, total, last30: { started: stats?.started ?? 0, messaged: stats?.messaged ?? 0, recovered: stats?.recovered ?? 0 } };
+}
+
+/** Abandoned checkouts report: per IST day of the range, carts abandoned, reminded, and recovered after a reminder. Counts only. */
+export async function abandonedByDay(range: { from: string; to: string }): Promise<{ day: string; started: number; reminded: number; recovered: number }[]> {
+  await requirePermission('analytics.read');
+  const flow = await getFlowRow('abandoned_cart');
+  const { rows } = await db.execute<{ day: string; started: number; reminded: number; recovered: number }>(sql`
+    with d as (select generate_series(${range.from}::date, ${range.to}::date, interval '1 day')::date as day),
+    r as (
+      select (started_at at time zone 'Asia/Kolkata')::date as day, count(*)::int as started,
+        (count(*) filter (where messages > 0))::int as reminded,
+        (count(*) filter (where stop_reason = 'purchased' and messages > 0))::int as recovered
+      from flows_run where flow_id = ${flow.id} and is_test = false
+        and started_at >= (${range.from}::date)::timestamp at time zone 'Asia/Kolkata'
+        and started_at < (${range.to}::date + 1)::timestamp at time zone 'Asia/Kolkata'
+      group by 1)
+    select d.day::text as day, coalesce(r.started, 0)::int as started, coalesce(r.reminded, 0)::int as reminded, coalesce(r.recovered, 0)::int as recovered
+    from d left join r on r.day = d.day order by d.day`);
+  return rows;
+}
+
+/** Bulk "Stop reminders" from the abandoned checkouts index: only running abandoned-cart runs stop; audited. Returns how many stopped. */
+export async function stopAbandonedRuns(ids: readonly string[], now: Date = new Date()): Promise<number> {
+  const staff = await requirePermission('marketing.write');
+  const wanted = [...new Set(ids)].filter((id) => /^[0-9a-f-]{36}$/i.test(id)).slice(0, 200);
+  if (!wanted.length) return 0;
+  const flow = await getFlowRow('abandoned_cart');
+  const stopped = await db
+    .update(flowsRun)
+    .set({ status: 'stopped', stopReason: 'stopped_by_staff', nextStepAt: null, updatedAt: now })
+    .where(and(inArray(flowsRun.id, wanted), eq(flowsRun.flowId, flow.id), eq(flowsRun.status, 'running')))
+    .returning({ id: flowsRun.id });
+  for (const r of stopped) await audit({ actorId: staff.userId, actorType: 'staff', action: 'flow.run.stop', entity: 'flows_run', entityId: r.id, after: { stopReason: 'stopped_by_staff' } });
+  return stopped.length;
 }
 
 /** Example values for every variable a template uses, so a test send renders exactly like a real one. */

@@ -1,10 +1,11 @@
 // Admin pages for the enquiry pipeline (admin copy is English-only, exempt from messages).
-import { Badge, Button, DataTable, Select, Stat, Textarea, type Column } from '@ecomkit/ui';
+import { can, getViewer } from '@ecomkit/core/auth-context';
+import { Badge, Button, Card, DataTable, DetailFrame, Select, Stat, Textarea, type Column } from '@ecomkit/ui';
 import { parseTableParams, type SearchParamsInput } from '@ecomkit/ui/domain';
 import Link from 'next/link';
 import { ENQUIRY_STATUSES, QUIET_AFTER_DAYS, type EnquiryStatus } from '../domain';
 import { getEnquiry, lastEnquiry, listEnquiries, pipeline, type EnquiryListRow } from '../server';
-import { addNoteAction, assignAction, transitionAction } from './actions';
+import { addNoteAction, assignAction, bulkAction, transitionAction } from './actions';
 
 const PAGE = 25;
 const when = (d: Date | null) => (d ? d.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) : '-');
@@ -60,7 +61,7 @@ export async function EnquiriesPage({ searchParams }: { searchParams: SearchPara
   }
   const { rows, total } = await listEnquiries({ q: params.q, status: params.filters.status as EnquiryStatus | undefined, page: params.page, pageSize: PAGE });
   const columns: Column<EnquiryListRow>[] = [
-    { id: 'name', header: 'Name', cell: (r) => <Link className="text-primary underline" href={`/admin/enquiries/${r.id}`}>{r.name}</Link> },
+    { id: 'name', header: 'Name', cell: (r) => r.name },
     { id: 'phone', header: 'Phone', cell: (r) => r.phoneE164 },
     { id: 'kind', header: 'Kind', cell: (r) => label(r.kind) },
     { id: 'acres', header: 'Acres', align: 'right', cell: (r) => r.acres ?? '-' },
@@ -80,7 +81,23 @@ export async function EnquiriesPage({ searchParams }: { searchParams: SearchPara
         total={total}
         pageSize={PAGE}
         basePath="/admin/enquiries"
+        rowHref={(r) => `/admin/enquiries/${r.id}`}
+        views={[
+          { id: 'new', label: 'New', filters: { status: 'new' } },
+          { id: 'contacted', label: 'Contacted', filters: { status: 'contacted' } },
+          { id: 'quotation', label: 'Quotation', filters: { status: 'quotation' } },
+          { id: 'won', label: 'Won', filters: { status: 'closed_won' } },
+        ]}
         filters={[{ key: 'status', label: 'Status', options: ENQUIRY_STATUSES.map((s) => ({ value: s, label: label(s) })) }]}
+        bulkActions={
+          can(await getViewer(), 'enquiries.write')
+            ? [
+                { label: 'Assign to me', action: bulkAction.bind(null, 'assign_me') },
+                { label: 'Mark contacted', action: bulkAction.bind(null, 'contacted') },
+                { label: 'Close as lost', action: bulkAction.bind(null, 'closed_lost'), tone: 'danger' as const },
+              ]
+            : undefined
+        }
       />
     </div>
   );
@@ -88,6 +105,7 @@ export async function EnquiriesPage({ searchParams }: { searchParams: SearchPara
 
 export async function EnquiryDetailPage({ id }: { id: string }) {
   const { enquiry: e, notes, attachments } = await getEnquiry(id);
+  const canWrite = can(await getViewer(), 'enquiries.write');
   const facts: [string, string][] = [
     ['Phone', e.phoneE164],
     ['Email', e.email ?? '-'],
@@ -103,62 +121,77 @@ export async function EnquiryDetailPage({ id }: { id: string }) {
     ['Received', when(e.createdAt)],
   ];
   return (
-    <div className="flex max-w-3xl flex-col gap-6">
-      <div className="flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold">{e.name}</h1>
-        <StatusBadge row={e} />
-      </div>
-      <dl className="grid grid-cols-[10rem_1fr] gap-2 text-sm">
-        {facts.map(([k, v]) => (
-          <div key={k} className="contents">
-            <dt className="text-muted">{k}</dt>
-            <dd className="whitespace-pre-wrap">{v}</dd>
-          </div>
-        ))}
-      </dl>
-      <div className="flex flex-wrap gap-3">
-        <form action={transitionAction} className="flex items-center gap-2">
-          <input type="hidden" name="id" value={e.id} />
-          <Select name="status" defaultValue={e.status} aria-label="Status">
-            {ENQUIRY_STATUSES.map((s) => (
-              <option key={s} value={s}>
-                {label(s)}
-              </option>
-            ))}
-          </Select>
-          <Button type="submit" variant="primary" size="sm">
-            Move
-          </Button>
-        </form>
+    <DetailFrame
+      title={e.name}
+      backHref="/admin/enquiries"
+      backLabel="Enquiries"
+      meta={`Received ${when(e.createdAt)}`}
+      badges={<StatusBadge row={e} />}
+      primary={
+        canWrite ? (
         <form action={assignAction} className="flex gap-2">
           <input type="hidden" name="id" value={e.id} />
-          <Button type="submit" variant="subtle" size="sm">
+          <Button type="submit" variant="primary" size="sm">
             Assign to me
           </Button>
-          {e.assignedTo ? (
-            <Button type="submit" name="clear" value="1" variant="ghost" size="sm">
-              Unassign
-            </Button>
-          ) : null}
         </form>
-      </div>
-      {attachments.length ? (
-        <section className="flex flex-col gap-2">
-          <h2 className="font-semibold">Attachments</h2>
-          <ul className="flex flex-col gap-1 text-sm">
-            {attachments.map((a) => (
-              <li key={a.id}>
-                <a className="text-primary underline" href={`/api/admin/enquiries/attachments/${a.id}`}>
-                  {a.fileName}
-                </a>{' '}
-                <span className="text-muted">({Math.ceil(a.sizeBytes / 1024)} KB)</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-      <section className="flex flex-col gap-3">
-        <h2 className="font-semibold">Remarks</h2>
+        ) : null
+      }
+      more={
+        canWrite && e.assignedTo ? (
+          <form action={assignAction}>
+            <input type="hidden" name="id" value={e.id} />
+            <button type="submit" name="clear" value="1" className="w-full text-left">
+              Unassign
+            </button>
+          </form>
+        ) : undefined
+      }
+      aside={
+        <>
+          <Card title="Status">
+            <form action={transitionAction} className="flex items-center gap-2">
+              <input type="hidden" name="id" value={e.id} />
+              <Select name="status" defaultValue={e.status} aria-label="Status">
+                {ENQUIRY_STATUSES.map((s) => (
+                  <option key={s} value={s}>
+                    {label(s)}
+                  </option>
+                ))}
+              </Select>
+              <Button type="submit" variant="subtle" size="sm">
+                Move
+              </Button>
+            </form>
+          </Card>
+          {attachments.length ? (
+            <Card title="Attachments">
+              <ul className="flex flex-col gap-1 text-sm">
+                {attachments.map((a) => (
+                  <li key={a.id}>
+                    <a className="text-primary underline" href={`/api/admin/enquiries/attachments/${a.id}`}>
+                      {a.fileName}
+                    </a>{' '}
+                    <span className="text-muted">({Math.ceil(a.sizeBytes / 1024)} KB)</span>
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ) : null}
+        </>
+      }
+    >
+      <Card title="Details">
+        <dl className="grid grid-cols-[10rem_1fr] gap-2 text-sm">
+          {facts.map(([k, v]) => (
+            <div key={k} className="contents">
+              <dt className="text-muted">{k}</dt>
+              <dd className="whitespace-pre-wrap">{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </Card>
+      <Card title="Remarks">
         <form action={addNoteAction} className="flex flex-col gap-2">
           <input type="hidden" name="id" value={e.id} />
           <Textarea name="body" required maxLength={4000} aria-label="New remark" />
@@ -174,8 +207,8 @@ export async function EnquiryDetailPage({ id }: { id: string }) {
             </li>
           ))}
         </ul>
-      </section>
-    </div>
+      </Card>
+    </DetailFrame>
   );
 }
 

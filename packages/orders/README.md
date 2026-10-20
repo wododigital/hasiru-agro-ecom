@@ -30,6 +30,12 @@ Domain (`@ecomkit/orders/domain`): `TRANSITIONS`, `checkTransition`, `staffMoves
 
 Storefront: `/account/orders`, `/account/orders/[id]`, `/account/orders/[id]/invoice.pdf`, `/order/[token]`, `/order/[token]/invoice.pdf`. Admin: `/admin/orders` (saved views: All, Unfulfilled, Pending payment, Today's slot, Outstation, Replacements), `/admin/orders/[id]`, `/admin/orders/dispatch`, `/admin/orders/new`, `/admin/orders/[id]/invoice.pdf`.
 
+## Admin (Shopify structure)
+
+- `/admin/orders`: saved-view tabs (Unfulfilled, Pending payment, Today's slot, Outstation, Replacements), search, status filter, row checkboxes with bulk Confirm / Mark packed (`orders.write`, each through the guarded transition; refused ones are counted), whole-row click. `/admin/orders/[id]` uses the detail frame: next status move as primary action, other moves, invoice, test flag and cancel under More actions.
+- Home KPI cards (`analytics.read`): `orders.kpi.sales` (net of refunds), `orders.kpi.orders`, `orders.kpi.aov`. Reports: sales over time, average order value, top products, returning customers (`server/reports.ts`: aggregates only, test orders, replacements, unpaid and cancelled orders excluded, IST days).
+- Home "Things to do" (`adminTodos`): orders to dispatch, payments pending (the saved views' totals).
+
 ## Settings (`orders`)
 
 `numberPrefix` (default `ORD`; the store sets its own), `invoicePrefix` (`INV`), `sellerLegalName`, `sellerGstin`, `sellerAddress`, `sellerStateCode` (CGST + SGST inside it, IGST outside), `chargesHsn` (`9965`).

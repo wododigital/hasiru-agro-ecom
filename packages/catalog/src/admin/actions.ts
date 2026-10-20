@@ -1,6 +1,7 @@
 'use server';
 
 import { ForbiddenError, NotFoundError, requirePermission } from '@ecomkit/core/auth-context';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { rowToFields } from '../server/import';
 import { getProductForEdit } from '../server/admin-queries';
@@ -16,6 +17,7 @@ import {
   saveFaq,
   saveProduct,
   saveTag,
+  setProductStatus,
   tagFieldsSchema,
   type Actor,
 } from '../server/write';
@@ -161,4 +163,17 @@ export async function importAction(_prev: FormState, fd: FormData): Promise<Form
   } catch (err) {
     return failure(err);
   }
+}
+
+/**
+ * Bulk status from the products index (row checkboxes), bound per list: `bulkStatusAction.bind(null, base, status)`.
+ * Bound arguments come from the client, so both are checked here.
+ */
+export async function bulkStatusAction(base: string, status: string, fd: FormData): Promise<never> {
+  const actor = await staff('products.write');
+  const back = base === '/admin/inputs' ? '/admin/inputs' : '/admin/products';
+  const to = (['active', 'draft', 'archived'] as const).find((s) => s === status);
+  const n = to ? await setProductStatus(fd.getAll('ids').map(String), to, actor) : 0;
+  revalidatePath(back);
+  redirect(`${back}?done=${n}`);
 }

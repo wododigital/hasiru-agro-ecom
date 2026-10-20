@@ -22,6 +22,8 @@ export default defineModule({
       { path: '/admin/enquiries/[id]', module: 'routes/admin-enquiry', kind: 'page', exports: ['default', 'generateMetadata'] },
     ],
   },
+  // Home "Things to do" (read structurally by admin-shell).
+  adminTodos: [{ id: 'enquiries.new', label: 'new enquiries', href: '/admin/enquiries?status=new', order: 30, permission: 'enquiries.read', count: () => import('./admin/todos').then((m) => m.newEnquiries) }],
   permissions: ['enquiries.read', 'enquiries.write'],
   emits: ['enquiry.created', 'enquiry.status_changed'],
   dashboardWidgets: [

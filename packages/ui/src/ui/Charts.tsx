@@ -12,8 +12,8 @@ interface ChartProps {
 
 export function Sparkline({ values, label, width = 120, height = 32, className }: ChartProps) {
   return (
-    <svg role="img" aria-label={label} viewBox={`0 0 ${width} ${height}`} width={width} height={height} className={cn('text-primary-hover', className)}>
-      <polyline points={sparkPoints(values, { width, height })} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+    <svg role="img" aria-label={label} viewBox={`0 0 ${width} ${height}`} width={width} height={height} preserveAspectRatio="none" className={cn('text-primary-hover', className)}>
+      <polyline points={sparkPoints(values, { width, height })} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }

@@ -143,6 +143,33 @@ export async function saveProduct(input: SaveProductInput, actor: Actor): Promis
   return { id: product.id, slug: product.slug, previousSlug, expired };
 }
 
+/**
+ * Bulk status change from the products index: one transaction, an audit row and `product.updated` per product
+ * (`product.published` on first activation, as `saveProduct` does), deleted products skipped. Returns how many changed.
+ */
+export async function setProductStatus(ids: readonly string[], status: (typeof E.STATUSES)[number], actor: Actor): Promise<number> {
+  const wanted = z.array(z.uuid()).max(200).parse([...new Set(ids)]);
+  if (!wanted.length) return 0;
+  const { count, tagList } = await withTx(async (tx) => {
+    const before = await tx.select().from(catalogProduct).where(and(inArray(catalogProduct.id, wanted), sql`${catalogProduct.deletedAt} is null`)).for('update');
+    const changed = before.filter((b) => b.status !== status);
+    for (const b of changed) {
+      const [after] = await tx
+        .update(catalogProduct)
+        .set({ status, updatedAt: new Date(), publishedAt: status === 'active' ? (b.publishedAt ?? new Date()) : b.publishedAt })
+        .where(eq(catalogProduct.id, b.id))
+        .returning();
+      await audit({ actorId: actor.actorId, actorType: actor.actorType, action: 'product.update', entity: 'catalog_product', entityId: b.id, before: b, after }, { tx });
+      await emit('product.updated', { productId: b.id }, { tx });
+      if (status === 'active') await emit('product.published', { productId: b.id, slug: b.slug }, { tx });
+    }
+    const tagList = changed.length ? [tags.catalog, ...changed.map((b) => tags.product(b.id)), ...(await collectionTags(tx, changed.map((b) => b.collectionId)))] : [];
+    return { count: changed.length, tagList };
+  });
+  if (tagList.length) await expireTags(tagList);
+  return count;
+}
+
 /** Soft delete: the row stays for orders and history; the PDP 404s and listings drop it. */
 export async function deleteProduct(id: string, actor: Actor): Promise<void> {
   const tagList = await withTx(async (tx) => {

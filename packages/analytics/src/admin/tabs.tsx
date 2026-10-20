@@ -1,10 +1,16 @@
 import type { DateRange } from '@ecomkit/core/contracts';
-import { asPaise, formatINR } from '@ecomkit/core/money';
-import { Badge, BarChart, EmptyState, Stat, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
+import { Badge, BarChart, TBody, THead, Table, Td, Th, Tr } from '@ecomkit/ui';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { delta, vitalRating, type VitalMetric } from '../domain/reports';
+import { vitalRating, type VitalMetric } from '../domain/reports';
 import { report } from '../server/reports';
+
+/** Props every report body receives from the report page (`params`: the page's string query values). */
+export interface ReportProps {
+  range: DateRange;
+  compare?: DateRange | null;
+  params?: Readonly<Record<string, string>>;
+}
 
 // Admin copy is English-only (exempt from the messages rule).
 
@@ -48,38 +54,17 @@ function Grid<T>({ title, rows, cols, empty = 'No data in this range yet.' }: { 
   );
 }
 
-function Delta({ current, previous }: { current: number; previous: number }) {
-  const d = delta(current, previous);
-  if (d === null) return current > 0 ? <>new vs previous period</> : null;
-  return <>{`${d >= 0 ? '+' : ''}${(d * 100).toFixed(1)}% vs previous period`}</>;
-}
-const trend = (c: number, p: number): 'up' | 'down' | 'flat' => (c > p ? 'up' : c < p ? 'down' : 'flat');
-
-export async function OverviewTab({ range }: { range: DateRange }) {
+/** Overview body under the KPI cards: sessions per day, channels, top pages. */
+export async function OverviewCharts({ range }: { range: DateRange }) {
   const r = await report('overview', range);
-  const k = r.kpis;
-  const p = r.previous;
-  const stats: [string, string, number, number][] = [
-    ['Visitors', num(k.visitors), k.visitors, p.visitors],
-    ['Sessions', num(k.sessions), k.sessions, p.sessions],
-    ['Page views', num(k.pageViews), k.pageViews, p.pageViews],
-    ['Purchases', num(k.purchases), k.purchases, p.purchases],
-    ['Revenue (tracked)', formatINR(asPaise(k.revenuePaise)), k.revenuePaise, p.revenuePaise],
-    ['Conversion rate', pct(k.conversionRate), k.conversionRate, p.conversionRate],
-  ];
   return (
     <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-        {stats.map(([label, value, c, prev]) => (
-          <Stat key={label} label={label} value={value} delta={<Delta current={c} previous={prev} />} trend={trend(c, prev)} />
-        ))}
-      </div>
-      <section className="flex flex-col gap-2">
+      <section className="flex flex-col gap-2 rounded-md border border-border bg-surface p-4">
         <h2 className="text-base font-semibold text-text">Sessions per day</h2>
         <BarChart values={r.series.map((s) => s.sessions)} label={`Sessions per day, ${range.from} to ${range.to}`} width={720} height={120} className="h-auto w-full" />
       </section>
       <div className="grid gap-6 lg:grid-cols-2">
-        <Grid title="Channels" rows={r.channels} cols={[['Channel', (x) => x.key], ['Sessions', (x) => num(x.value), 'right']]} />
+        <Grid title="Sessions by channel" rows={r.channels} cols={[['Channel', (x) => x.key], ['Sessions', (x) => num(x.value), 'right']]} />
         <Grid title="Top pages" rows={r.topPages} cols={[['Path', (x) => x.key], ['Views', (x) => num(x.value), 'right']]} />
       </div>
     </div>
@@ -124,8 +109,9 @@ export async function TrafficTab({ range }: { range: DateRange }) {
   );
 }
 
-export async function JourneysTab({ range, sessionId, hrefFor }: { range: DateRange; sessionId?: string; hrefFor: (sessionId: string) => string }) {
-  const r = await report('journeys', range, { sessionId });
+export async function JourneysTab({ range, params = {} }: ReportProps) {
+  const r = await report('journeys', range, { sessionId: params.session });
+  const hrefFor = (id: string) => `?${new URLSearchParams({ ...params, from: range.from, to: range.to, session: id })}`;
   return (
     <div className="flex flex-col gap-6">
       {r.timeline ? (
@@ -244,6 +230,3 @@ export async function VitalsTab({ range }: { range: DateRange }) {
   );
 }
 
-export function NotEnabled({ what }: { what: string }) {
-  return <EmptyState title={`${what} reports appear here when the module that records them is enabled.`} body="They are supplied by other modules through the reports extension point." />;
-}

@@ -375,6 +375,11 @@ async function jobs() {
   }
 }
 
+/** Links inside the admin sidebar (`<nav aria-label="Admin">`): the parent of every section, plus the open section's sub-entries. */
+const sidebar = (html) => [...new Set([...html.matchAll(/<nav aria-label="Admin">([\s\S]*?)<\/nav>/g)].flatMap((m) => hrefs(m[1])))];
+/** A 200 page whose RSC payload carries a non-Next error digest crashed inside a Suspense boundary. */
+const renderError = (text) => /\d+:E\{\\?"digest\\?":\\?"(?!NEXT_)/.test(text);
+
 async function admin() {
   const S = 'admin';
   if (!OWNER_COOKIE) return rec(S, 'admin saves', 'SKIP', 'no owner cookie (set SMOKE_COOKIE or DATABASE_URL + INTERNAL_SECRET)');
@@ -389,7 +394,7 @@ async function admin() {
   const broken = [];
   await pool(modules, 6, async (m) => {
     const r = await req(m, { admin: true });
-    if (r.status !== 200 || /\d+:E\{\\?"digest\\?":\\?"(?!NEXT_)/.test(r.text) || !/<h1/.test(r.text)) broken.push(`${m} ${r.status}`);
+    if (r.status !== 200 || renderError(r.text) || !/<h1/.test(r.text)) broken.push(`${m} ${r.status}`);
   });
   rec(S, `every settings section renders (${modules.length})`, broken.length ? 'FAIL' : 'PASS', broken.join(' '));
   // role matrix: support (no settings/analytics/marketing permissions) sees neither the links nor the pages
@@ -405,7 +410,63 @@ async function admin() {
     rec(S, 'role matrix: support denied /admin/settings/payments', denied && !/name="[^"]*key/i.test(page.text) ? 'PASS' : 'FAIL', String(page.status));
     const orders = await get('/admin/orders');
     rec(S, 'role matrix: support can open /admin/orders', orders.status === 200 && !/do not have access/i.test(orders.text) ? 'PASS' : 'FAIL', String(orders.status));
+    const hidden = ['/admin/analytics', '/admin/analytics/reports', '/admin/analytics/live', '/admin/settings', '/admin/discounts', '/admin/marketing/automations'];
+    const navLeak = [];
+    for (const h of sidebar(home.text)) for (const x of sidebar((await get(h)).text)) if (hidden.includes(x)) navLeak.push(x);
+    for (const h of sidebar(home.text)) if (hidden.includes(h)) navLeak.push(h);
+    rec(S, 'role matrix: support sidebar (all sections opened) hides restricted entries', navLeak.length ? 'FAIL' : 'PASS', [...new Set(navLeak)].join(','));
+    rec(S, 'role matrix: support home has no revenue KPI cards', /data-widget="orders\.kpi\./.test(home.text) ? 'FAIL' : 'PASS');
+    const rep = await get('/admin/analytics/reports/orders.sales-over-time');
+    rec(S, 'role matrix: support denied sales report', rep.status === 404 || rep.status >= 400 || /do not have access|forbidden/i.test(rep.text) || renderError(rep.text) ? 'PASS' : 'FAIL', String(rep.status));
+    // PII: support never sees a full Indian phone number on the people lists
+    const pii = [];
+    for (const h of ['/admin/orders', '/admin/customers', '/admin/enquiries']) if (/\+91 ?\d{10}\b/.test((await get(h)).text.replace(/\\u002B/g, '+'))) pii.push(h);
+    rec(S, 'role matrix: support sees masked phones', pii.length ? 'FAIL' : 'PASS', pii.join(','));
   }
+  // nav: every sidebar entry, and every sub-entry (shown once its section is open), renders for the owner
+  const seen = new Set(['/admin']);
+  const queue = sidebar(dash.text);
+  const navBroken = [];
+  while (queue.length) {
+    const h = queue.shift();
+    if (seen.has(h)) continue;
+    seen.add(h);
+    const r = await req(h, { admin: true });
+    if (r.status !== 200 || renderError(r.text)) navBroken.push(`${h} ${r.status}`);
+    for (const x of sidebar(r.text)) if (!seen.has(x)) queue.push(x);
+  }
+  rec(S, `every nav entry and sub-entry renders (${seen.size})`, seen.size > 10 && !navBroken.length ? 'PASS' : 'FAIL', navBroken.join(' ') || [...seen].join(' ').slice(0, 140));
+  // home: KPI strip (sessions, sales, orders, conversion, AOV) and things to do
+  const kpis = ['analytics.kpi.sessions', 'orders.kpi.sales', 'orders.kpi.orders', 'analytics.kpi.conversion', 'orders.kpi.aov'].filter((k) => !dash.text.includes(`data-widget="${k}"`));
+  rec(S, 'home KPI cards with sparklines', !kpis.length && /data-kpis/.test(dash.text) && !renderError(dash.text) ? 'PASS' : 'FAIL', kpis.length ? `missing ${kpis.join(',')}` : 'all five');
+  rec(S, 'home things to do + range compare', /id="things-to-do"/.test(dash.text) && /name="compare"/.test(dash.text) ? 'PASS' : 'FAIL');
+  const compared = await req('/admin?from=2026-01-01&to=2026-01-31&compare=previous-year', { admin: true });
+  rec(S, 'home with a custom range + previous year', compared.status === 200 && !renderError(compared.text) && compared.text.includes('2025-01-01') ? 'PASS' : 'FAIL', String(compared.status));
+  // analytics: overview, live view, and every report page from the reports list
+  for (const h of ['/admin/analytics', '/admin/analytics/live']) {
+    const r = await req(h, { admin: true });
+    rec(S, `analytics ${h}`, r.status === 200 && !renderError(r.text) ? 'PASS' : 'FAIL', String(r.status));
+  }
+  const list = await req('/admin/analytics/reports', { admin: true });
+  const reports = [...new Set(hrefs(list.text).filter((h) => /^\/admin\/analytics\/reports\/[^/?]+/.test(h)))];
+  const wanted = ['orders.sales-over-time', 'orders.average-order-value', 'analytics.conversion-funnel', 'analytics.sessions-by-source', 'orders.top-products', 'orders.returning-customers', 'flows.abandoned-checkouts', 'analytics.search-terms'];
+  const missing = wanted.filter((id) => !reports.some((h) => h.includes(`/reports/${id}?`)));
+  rec(S, `reports list (${reports.length})`, list.status === 200 && !missing.length ? 'PASS' : 'FAIL', missing.length ? `missing ${missing.join(',')}` : '');
+  const repBroken = [];
+  await pool(reports, 4, async (h) => {
+    const r = await req(`${h}${h.includes('?') ? '&' : '?'}compare=previous-period`, { admin: true });
+    if (r.status !== 200 || renderError(r.text) || !/<h1/.test(r.text)) repBroken.push(`${h.split('?')[0]} ${r.status}`);
+  });
+  rec(S, `every report page renders (${reports.length})`, reports.length && !repBroken.length ? 'PASS' : 'FAIL', repBroken.join(' '));
+  // index tables: saved-view tabs (and the bulk bar when the list has rows) on the Shopify-style lists
+  const idx = ['/admin/orders', '/admin/products', '/admin/customers', '/admin/enquiries', '/admin/discounts', '/admin/abandoned-checkouts', '/admin/reviews'];
+  const idxBad = [];
+  for (const h of idx) {
+    const r = await req(h, { admin: true });
+    const rows = /name="ids"/.test(r.text);
+    if (r.status !== 200 || renderError(r.text) || !/aria-label="Views"/.test(r.text) || (rows && !/aria-label="Bulk actions"/.test(r.text))) idxBad.push(`${h} ${r.status}`);
+  }
+  rec(S, `index tables: views + bulk bar (${idx.length})`, idxBad.length ? 'FAIL' : 'PASS', idxBad.join(' '));
   let target = modules.find((m) => m.endsWith('/store'));
   for (const m of target ? [] : modules) if (forms((await req(m, { admin: true })).text).some((f) => /save/i.test(f.text))) { target = m; break; }
   if (target) {

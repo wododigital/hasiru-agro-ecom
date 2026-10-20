@@ -23,6 +23,8 @@ export default defineModule({
     { id: 'inventory', label: 'Inventory', order: 30, permission: 'inventory.read', component: () => import('./admin/InventoryTab').then((m) => m.InventoryTab) },
   ],
   pdpSections: [{ id: 'inventory.notify-me', order: 40, slot: 'aside', component: () => import('./ui/NotifyMeSection').then((m) => m.NotifyMeSection) }],
+  // Home "Things to do" (read structurally by admin-shell).
+  adminTodos: [{ id: 'inventory.low', label: 'variants low on stock', href: '/admin/inventory?state=low', order: 50, permission: 'inventory.read', count: () => import('./admin/todos').then((m) => m.lowStock) }],
   permissions: ['inventory.read', 'inventory.write'],
   jobs: {
     'inventory.release-expired': {

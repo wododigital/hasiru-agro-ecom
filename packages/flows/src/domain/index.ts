@@ -27,6 +27,8 @@ export const STOP_REASONS = [
   'purchased',
   'replied',
   'unsubscribed',
+  /** Reminders stopped by staff from the abandoned checkouts index. */
+  'stopped_by_staff',
 ] as const;
 export type StopReason = (typeof STOP_REASONS)[number];
 

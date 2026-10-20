@@ -1,13 +1,19 @@
 import type { TestDb } from '@ecomkit/core/testing';
 import { TEST_NOW } from '@ecomkit/core/testing';
 import { sql } from 'drizzle-orm';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { REPORT_NAMES } from '../src/domain/reports';
 import { istDay } from '../src/domain/time';
 import { ingest } from '../src/server/ingest';
 import { report } from '../src/server/reports';
 import { computeDayMetrics, rollupDailyJob, rollupDay, storedDayMetrics } from '../src/server/rollup';
 import { analyticsDb, BOT_UA, CHROME_UA, DESKTOP_UA, ev, minutes } from './helpers';
+
+// Server-rendering the admin pages outside Next: the list toolbar and live-view islands call useRouter.
+vi.mock('next/navigation', async (original) => ({
+  ...(await original<Record<string, unknown>>()),
+  useRouter: () => ({ replace() {}, push() {}, refresh() {} }),
+}));
 
 let t: TestDb;
 const DAY = istDay(TEST_NOW); // 2026-10-20
@@ -140,16 +146,31 @@ describe('reports', () => {
 describe('admin page', () => {
   const range = { from: DAY, to: DAY };
 
-  it('renders the report tabs from real data', async () => {
+  it('renders the overview, KPI cards and report bodies from real data', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server');
+    const { setAuthProvider } = await import('@ecomkit/core/auth-context');
     const tabs = await import('../src/admin/tabs');
-    const overview = renderToStaticMarkup(await tabs.OverviewTab({ range }));
-    expect(overview).toContain('Conversion rate');
-    expect(overview).toContain('Rs 1,250');
+    const kpis = await import('../src/admin/kpis');
+    const overview = renderToStaticMarkup(await tabs.OverviewCharts({ range }));
+    expect(overview).toContain('Sessions per day');
+    setAuthProvider(async () => ({
+      getViewer: async () => ({ kind: 'guest' }),
+      requirePermission: async (p) => ({ kind: 'staff', userId: 'u', name: 'Owner', email: 'o@x.in', role: 'owner', permissions: [p] }),
+      requireOwner: async () => {
+        throw new Error('not used');
+      },
+    }));
+    const conversion = renderToStaticMarkup(await kpis.ConversionKpi({ range, compare: { from: '2025-01-01', to: '2025-01-01' } }));
+    expect(conversion).toContain('Conversion rate');
+    expect(conversion).toContain('New in this period');
+    expect(renderToStaticMarkup(await kpis.SessionsKpi({ range }))).toContain('<svg');
+    const live = renderToStaticMarkup(await (await import('../src/admin/AnalyticsPage')).LivePage());
+    expect(live).toContain('Visitors right now');
+    setAuthProvider(async () => null);
     const vitals = renderToStaticMarkup(await tabs.VitalsTab({ range }));
     expect(vitals).toContain('3,100 ms');
-    const journeys = renderToStaticMarkup(await tabs.JourneysTab({ range, hrefFor: (id) => `/admin/analytics?tab=journeys&session=${id}` }));
-    expect(journeys).toContain('/admin/analytics?tab=journeys&amp;session=');
+    const journeys = renderToStaticMarkup(await tabs.JourneysTab({ range, params: { from: DAY } }));
+    expect(journeys).toContain('session=');
     for (const Tab of [tabs.FunnelTab, tabs.TrafficTab, tabs.SearchTab, tabs.WizardTab, tabs.AttentionTab, tabs.BotsTab]) {
       expect(renderToStaticMarkup(await Tab({ range })).length).toBeGreaterThan(100);
     }
@@ -169,6 +190,29 @@ describe('admin page', () => {
       },
     }));
     await expect(AnalyticsPage({ searchParams })).resolves.toBeTruthy();
+    // the reports list hides reports needing a permission the viewer lacks; an unknown report is a 404
+    const { ReportsListPage, ReportPage } = await import('../src/admin/AnalyticsPage');
+    const { renderToStaticMarkup } = await import('react-dom/server');
+    const Body = async () => null;
+    const reports = [
+      { id: 'a.mine', title: 'Mine', group: 'sales', permission: 'analytics.read' as const, component: async () => Body },
+      { id: 'b.other', title: 'Other', group: 'inventory', permission: 'inventory.read' as const, component: async () => Body },
+    ];
+    setAuthProvider(async () => ({
+      getViewer: async () => ({ kind: 'staff', userId: 'u', name: 'Analyst', email: 'a@x.in', role: 'manager', permissions: ['analytics.read'] }),
+      requirePermission: async (p) => {
+        if (p !== 'analytics.read') throw new ForbiddenError();
+        return { kind: 'staff', userId: 'u', name: 'Analyst', email: 'a@x.in', role: 'manager', permissions: ['analytics.read'] };
+      },
+      requireOwner: async () => {
+        throw new Error('not used');
+      },
+    }));
+    const list = renderToStaticMarkup(await ReportsListPage({ searchParams, reports }));
+    expect(list).toContain('/admin/analytics/reports/a.mine?');
+    expect(list).not.toContain('b.other');
+    await expect(ReportPage({ id: 'b.other', searchParams, reports })).rejects.toBeInstanceOf(ForbiddenError);
+    await expect(ReportPage({ id: 'nope', searchParams, reports })).rejects.toThrow();
     setAuthProvider(async () => null);
   });
 });

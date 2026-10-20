@@ -79,15 +79,24 @@ export async function getCustomer(userId: string): Promise<CustomerRow | null> {
   return row ? maskPii(row, viewer) : null;
 }
 
-/** Admin list. `q` matches a phone or email exactly (by hash) or a name by substring. */
-export async function listCustomers(options: { q?: string; page?: number; pageSize?: number } = {}): Promise<{ rows: CustomerRow[]; total: number }> {
+/** Saved views of the customers index: repeat buyers, never ordered. */
+export const CUSTOMER_VIEWS = ['repeat', 'no_orders'] as const;
+
+/** Admin list. `q` matches a phone or email exactly (by hash) or a name by substring; `type` and `view` narrow it. */
+export async function listCustomers(
+  options: { q?: string; type?: CustomerType; view?: (typeof CUSTOMER_VIEWS)[number]; page?: number; pageSize?: number } = {},
+): Promise<{ rows: CustomerRow[]; total: number }> {
   await requirePermission('customers.read');
   const viewer = await getViewer();
   const pageSize = options.pageSize ?? 25;
   const q = options.q?.trim();
-  const where = q
-    ? or(eq(customersProfile.phoneHash, hashContact(q) ?? ''), eq(customersProfile.emailHash, hashContact(q) ?? ''), ilike(customersProfile.displayName, `%${q.replace(/[%_\\]/g, '\\$&')}%`))
-    : undefined;
+  const where = and(
+    q
+      ? or(eq(customersProfile.phoneHash, hashContact(q) ?? ''), eq(customersProfile.emailHash, hashContact(q) ?? ''), ilike(customersProfile.displayName, `%${q.replace(/[%_\\]/g, '\\$&')}%`))
+      : undefined,
+    options.type ? eq(customersProfile.customerType, options.type) : undefined,
+    options.view === 'repeat' ? sql`${customersProfile.ordersCount} > 1` : options.view === 'no_orders' ? eq(customersProfile.ordersCount, 0) : undefined,
+  );
   const [rows, [total]] = await Promise.all([
     db
       .select()

@@ -1,11 +1,12 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { requirePermission } from '@ecomkit/core/auth-context';
 import { zodAction, type ActionResult } from '@ecomkit/core/validation';
 import { generateCodes, ruleFormSchema } from '../domain';
-import { addCodes, saveRule } from '../server/discounts';
+import { addCodes, saveRule, setRulesStatus } from '../server/discounts';
 
 const PERMISSION = 'marketing.write' as const;
 
@@ -57,4 +58,12 @@ export async function addCodesAction(
   form: FormData,
 ): Promise<ActionResult<{ added: string[]; skipped: string[]; error?: string }>> {
   return addCodesSafe(form);
+}
+
+/** Bulk status from the index (row checkboxes), bound per button; the bound status comes from the client, so it is checked. */
+export async function bulkRuleStatusAction(status: string, form: FormData): Promise<void> {
+  const staff = await requirePermission(PERMISSION);
+  const to = (['active', 'paused', 'archived'] as const).find((s) => s === status);
+  if (to) await setRulesStatus(form.getAll('ids').map(String), to, { actorId: staff.userId });
+  revalidatePath('/admin/discounts');
 }

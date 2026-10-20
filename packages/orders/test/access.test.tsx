@@ -141,7 +141,18 @@ describe('admin access', () => {
 describe('pages render', () => {
   it('admin list, detail, dispatch planner and manual order form', async () => {
     asStaff('manager');
-    expect(await html(OrdersListPage({ searchParams: { view: 'unfulfilled' } }))).toContain(mine.number);
+    const list = await html(OrdersListPage({ searchParams: { view: 'unfulfilled' } }));
+    expect(list).toContain(mine.number);
+    // Shopify index: the Unfulfilled tab is current, rows carry checkboxes and the bulk bar, the row links to the detail
+    expect(list).toMatch(/aria-current="page"[^>]*>Unfulfilled/);
+    expect(list).toContain('name="ids"');
+    expect(list).toContain('Mark packed');
+    expect(list).toContain(`href="/admin/orders/${mine.id}"`);
+    asStaff('support');
+    const masked = await html(OrdersListPage({ searchParams: {} }));
+    expect(masked).not.toContain('Mark packed'); // no orders.write: no bulk moves
+    expect(masked).not.toContain('9876543210'); // and phones stay masked
+    asStaff('manager');
     const detail = await html(OrderDetailPage({ id: mine.id, flags: { done: '1' } }));
     expect(detail).toContain('Confirm');
     expect(detail).toContain('Timeline');

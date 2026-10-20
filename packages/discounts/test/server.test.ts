@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ForbiddenError, setAuthProvider } from '@ecomkit/core/auth-context';
 import type { EventHandler, Permission, StaffViewer } from '@ecomkit/core/contracts';
 import { withTx } from '@ecomkit/core/db';
@@ -25,6 +25,12 @@ import {
   RedemptionError,
   saveRule,
 } from '../src/server/discounts';
+
+// Server-rendering the admin pages outside Next: the list toolbar and live-view islands call useRouter.
+vi.mock('next/navigation', async (original) => ({
+  ...(await original<Record<string, unknown>>()),
+  useRouter: () => ({ replace() {}, push() {}, refresh() {} }),
+}));
 
 let t: TestDb;
 const STAFF = newId();

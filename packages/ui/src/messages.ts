@@ -43,6 +43,17 @@ export const uiMessages = {
   dateRange: {
     from: 'From',
     to: 'To',
+    compare: 'Compare to',
+    previousPeriod: 'Previous period',
+    previousYear: 'Previous year',
+    none: 'No comparison',
+    apply: 'Apply',
+    compared: (from: string, to: string, cFrom: string, cTo: string) => `${from} to ${to}, compared with ${cFrom} to ${cTo}`,
+  },
+  kpi: {
+    vs: 'vs comparison',
+    isNew: 'New in this period',
+    trend: (label: string) => `${label}, one point per day`,
   },
   table: {
     search: 'Search',

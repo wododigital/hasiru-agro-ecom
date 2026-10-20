@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { Button, Checkbox, FormField, Input, Select, Textarea } from '@ecomkit/ui';
+import { Button, Checkbox, FormField, Input, SaveBarIsland, Select, Textarea } from '@ecomkit/ui';
 import { saveRuleAction } from './actions';
 
 export interface RuleFormDefaults {
@@ -38,6 +38,7 @@ export function RuleFormIsland({ defaults }: { defaults: RuleFormDefaults }) {
   return (
     <form action={action} className="flex max-w-3xl flex-col gap-4">
       {d.id ? <input type="hidden" name="id" value={d.id} /> : null}
+      {d.id ? <SaveBarIsland pending={pending} /> : null}
       <div className="grid gap-4 sm:grid-cols-2">
         <FormField id="name" label="Internal name" required error={err('name')}>
           {(c) => <Input {...c} name="name" defaultValue={d.name} required />}

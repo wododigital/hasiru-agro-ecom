@@ -55,10 +55,12 @@ export interface BulkAction {
   tone?: 'default' | 'danger';
 }
 
-const sameFilters = (a: Readonly<Record<string, string>>, b: Readonly<Record<string, string>>) => {
-  const ka = Object.keys(a);
-  return ka.length === Object.keys(b).length && ka.every((k) => a[k] === b[k]);
-};
+/** The tab to highlight: the view with the most filters that are all applied (extra filters show as chips); else All. */
+function activeView<V extends { filters: Readonly<Record<string, string>> }>(views: readonly V[], applied: Readonly<Record<string, string>>): V | undefined {
+  return views
+    .filter((v) => Object.entries(v.filters).every(([k, val]) => applied[k] === val))
+    .sort((a, b) => Object.keys(b.filters).length - Object.keys(a.filters).length)[0];
+}
 
 /** Loading state for an index page: toolbar plus rows. */
 export function DataTableSkeleton({ rows = 8 }: { rows?: number }) {
@@ -84,7 +86,11 @@ export function DataTable<Row>({ columns, rows, rowKey, params, total, pageSize,
   const nextHref = params.page < pages ? href({ page: params.page + 1 }) : null;
   const pager = 'grid size-9 place-items-center rounded-sm border border-border bg-surface hover:bg-surface-2';
   const viewHref = (f: Readonly<Record<string, string>>) => basePath + tableQuery({ q: '', filters: {}, sort: params.sort, dir: params.dir, page: 1 }, { filters: { ...f } });
-  const chips = Object.entries(params.filters).map(([key, value]) => {
+  const tabs = views?.length ? [{ id: 'all', label: l.all, filters: {} }, ...views] : [];
+  const current = activeView(tabs, params.filters);
+  // The active saved view's own filters are the tab, not chips.
+  const viewKeys = new Set(Object.keys(current?.filters ?? {}));
+  const chips = Object.entries(params.filters).filter(([key]) => !viewKeys.has(key)).map(([key, value]) => {
     const f = filters.find((x) => x.key === key);
     return { key, label: `${f?.label ?? key}: ${f?.options.find((o) => o.value === value)?.label ?? value}` };
   });
@@ -93,10 +99,10 @@ export function DataTable<Row>({ columns, rows, rowKey, params, total, pageSize,
 
   return (
     <div className={cn('flex flex-col gap-3', className)}>
-      {views?.length ? (
+      {tabs.length ? (
         <nav aria-label={l.views} className="flex gap-1 overflow-x-auto border-b border-border">
-          {[{ id: 'all', label: l.all, filters: {} }, ...views].map((v) => {
-            const on = sameFilters(v.filters, params.filters);
+          {tabs.map((v) => {
+            const on = v.id === current?.id;
             return (
               <Link
                 key={v.id}

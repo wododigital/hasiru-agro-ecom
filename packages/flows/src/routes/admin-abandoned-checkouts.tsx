@@ -5,6 +5,6 @@ export function generateMetadata(): Metadata {
   return { title: 'Abandoned checkouts' };
 }
 
-export default function AdminAbandonedCheckoutsRoute() {
-  return <AbandonedCheckoutsPage />;
+export default function AdminAbandonedCheckoutsRoute({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  return <AbandonedCheckoutsPage searchParams={searchParams} />;
 }
