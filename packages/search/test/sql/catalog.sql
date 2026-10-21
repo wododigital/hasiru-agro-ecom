@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS catalog_product (
   name text NOT NULL,
   name_kn text,
   scientific_name text,
+  collection_id uuid,
+  subcategory text,
   size_class text,
   propagation text,
   nitrogen_fixer boolean,
@@ -27,6 +29,7 @@ CREATE TABLE IF NOT EXISTS catalog_product (
   published_at timestamptz,
   deleted_at timestamptz
 );
+CREATE TABLE IF NOT EXISTS catalog_collection (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE, name text NOT NULL, parent_id uuid, position int NOT NULL DEFAULT 0);
 CREATE TABLE IF NOT EXISTS catalog_tag (id uuid PRIMARY KEY, slug text NOT NULL UNIQUE, name text NOT NULL, kind text NOT NULL);
 CREATE TABLE IF NOT EXISTS catalog_product_tag (product_id uuid NOT NULL, tag_id uuid NOT NULL, PRIMARY KEY (product_id, tag_id));
 CREATE TABLE IF NOT EXISTS catalog_variant (id uuid PRIMARY KEY, product_id uuid NOT NULL, label text NOT NULL, is_default boolean NOT NULL DEFAULT false, position int NOT NULL DEFAULT 0);

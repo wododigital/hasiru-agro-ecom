@@ -15,6 +15,8 @@ configureCms({
   images: (ids) => getImages(ids),            // media
   resolveMediaIds: (paths) => idsForMasters(paths), // media, seed only (trust claim logos)
   metadata: buildMetadata, jsonLd, onMissing: resolveMissing, addRedirect, // seo (all optional)
+  productRail: ProductRailSlot,               // renders `product_rail` blocks (catalog ProductRail)
+  components: { plant_calculator: { label: 'Plant calculator', Component: PlantCalculatorSlot } }, // `component` blocks
   messages: { guides: { title: 'Guides' } },   // host copy
 });
 ```
@@ -24,7 +26,12 @@ configureCms({
 `hero` (heading, subheading, image, up to 2 buttons; the h1 on `landing` pages), `rich_text` (HTML, sanitised with
 core `safeHtml` on save and again on read), `faq` (feeds FAQPage JSON-LD), `cta`, `video` (by ids or category; feeds
 VideoObject), `trust_band` (claims with `show` only), `testimonials`, `counters` (verified only), `gallery`, `rail`
-(link cards), `team`. A block whose stored data no longer validates is skipped, never rendered broken. Links accept a
+(link cards), `team`, `product_rail` (eyebrow, heading, source `bestsellers | collection | tag | ids` with a slug or
+product ids, `plant | input`, limit, optional link; rendered by the host's `productRail` port, so cms never reads
+products) and `component` (embeds a host-registered component by key, e.g. a calculator; the page editor lists the
+registered keys). Both render their heading in the static shell and the port output in a request-time Suspense hole
+(build workers prerender shells before the host binds its ports); an unbound port leaves the heading only. The trust band is a running marquee of the shown
+claims with their logos. A block whose stored data no longer validates is skipped, never rendered broken. Links accept a
 site path, https, `tel:` or `mailto:` only.
 
 Videos link out (poster plus "Watch on YouTube"); no third-party iframe or image loads on the page, so the storefront

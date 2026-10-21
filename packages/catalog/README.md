@@ -15,12 +15,14 @@ configureCatalog({
   images: (ids) => media.imageRefs(ids),      // media: ImageRef per asset id
   resolveMediaIds: (paths) => media.assetIdsForMasters(paths), // seed import: master path -> asset id
   jsonLd, metadata: buildMetadata, addRedirect, // seo module
-  listingAside: FacetSidebar,                 // search module
+  listingFacets: ListingFacets,               // host component composing the search module's facet UI
   messages: en.catalog,                       // host copy overrides
 });
 ```
 
-Unbound means: no registry -> no prices, stock, reviews, fit or cart buttons; no `images` -> leaf placeholders; no `jsonLd` -> no structured data; no `addRedirect` -> old slugs still 308 through `previous_slugs`.
+Unbound means: no registry -> no prices, stock, reviews, fit or cart buttons; no `images` -> leaf placeholders; no `jsonLd` -> no structured data; no `addRedirect` -> old slugs still 308 through `previous_slugs`; no `listingFacets` -> plain grid with a sort form and numbered pages.
+
+`listingFacets` receives every product id of the listing scope in display order and a server-rendered `ProductCard` per id (`ListingFacetsProps`); the host filters, sorts and pages them (the shop binds the search module's sidebar, mobile sheet and URL state). Components with client islands must load from the route graph, so the shop binds a slot at boot and publishes the component from its storefront layout (`apps/shop/src/route-ui.tsx`).
 
 ## Public API
 
@@ -28,7 +30,7 @@ Unbound means: no registry -> no prices, stock, reviews, fit or cart buttons; no
 |---|---|
 | `./server` | `listProducts(filter)`, `getProduct(slug)` / `getProductBySlug`, `movedSlug`, `getCollection`, `topCollections`, `getCuratedTag`, `productCard(id)`, `productCards(ids)`, `buildCards(rows)`, `facetSource()`, `sitemapEntries()`, `loadListing()`; writes `saveProduct`, `deleteProduct`, `saveCollection`, `saveTag`, `saveFaq` (+ deletes); `importSeed`, `importSheet`, `importCsv`, `exportSheet`, `exportCsv`; admin reads (`listAdminProducts`, `getProductForEdit`, `dataGaps` ...); `configureCatalog`; `pageMetadata` |
 | `./domain` | pure: `deriveAvailability`, `buildProductCard` (badge priority, chips), `productJsonLdInput`, `productFacts`, `tierLadder` / `tierAt`, `facetRow`, `productFieldsSchema` (zod, every boundary), seed mapping, the grower-sheet layout, CSV columns |
-| `./ui` | `ProductCard`, `ProductGrid`, `ListingPage`, `ProductPage`, `FitPanel`, `TierTable`, `Gallery`, `NotifyForm`, islands `CardBuyIsland`, `BuyBoxIsland`, `RecentlyViewedIsland` |
+| `./ui` | `ProductCard`, `ProductGrid`, `ProductRail` (best sellers, a collection, a tag or hand-picked ids, in a scroll rail; best sellers top up with in-stock products of the kind), `ListingPage`, `ProductPage`, `FitPanel`, `TierTable`, `Gallery`, `NotifyForm`, islands `CardBuyIsland`, `BuyBoxIsland`, `RecentlyViewedIsland` |
 | `./admin` | `ProductEditPage`, `ProductCreatePage`, `ProductsListPage`, `CollectionsPage`, `TagsPage`, `FaqsPage`, `DataGapsPage`, `ImportPage`, `ActionFormIsland` |
 | `./messages` | `catalogMessages` (default copy) |
 

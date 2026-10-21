@@ -36,6 +36,8 @@ export const seedProductSchema = z.object({
   tags: z.array(z.string()).default([]),
   is_best_seller: z.boolean().default(false),
   is_featured: z.boolean().default(false),
+  /** When the product was first listed; omitted = part of the opening catalogue (never shown as "New"). */
+  published_at: z.iso.datetime({ offset: true }).nullable().optional(),
   plant: z
     .object({
       size_class: z.enum(['L', 'M', 'S']).nullable().optional(),
@@ -152,6 +154,7 @@ export interface MappedSeedProduct {
   tags: MappedTag[];
   faqs: MappedFaq[];
   images: MappedImage[];
+  publishedAt: Date | null;
 }
 
 /** Agronomy traits every plant catalogue can derive; trait tags get curated listing pages. */
@@ -290,7 +293,8 @@ export function mapSeedProduct(rec: SeedProduct, slugify: (s: string) => string)
     position: i,
   }));
 
-  return { fields, collectionCode: rec.collection, subcategory: rec.subcategory ?? null, variants, tags: [...tags.values()], faqs, images };
+  const publishedAt = rec.published_at ? new Date(rec.published_at) : null;
+  return { fields, collectionCode: rec.collection, subcategory: rec.subcategory ?? null, variants, tags: [...tags.values()], faqs, images, publishedAt };
 }
 
 /** Collections derived from product codes when no collections.json exists: one top collection per code, one child per subcategory. */

@@ -1,5 +1,6 @@
 import type { ImageRef, JsonLdBuilders, MetadataInput } from '@ecomkit/core/contracts';
 import type { Metadata } from 'next';
+import type { ComponentType } from 'react';
 import { mergeCmsMessages, type CmsMessages, type CmsMessagesOverride } from '../messages';
 
 /**
@@ -7,6 +8,24 @@ import { mergeCmsMessages, type CmsMessages, type CmsMessagesOverride } from '..
  * re-export cms pages). Every field is optional: no images -> leaf placeholders, no seo -> plain title metadata
  * and no JSON-LD, no onMissing -> plain 404.
  */
+/** What a `product_rail` block asks the host for (the catalog renders it; cms never reads products). */
+export interface ProductRailPortProps {
+  source: 'bestsellers' | 'collection' | 'tag' | 'ids';
+  value: string | null;
+  productIds: readonly string[];
+  kind: 'plant' | 'input';
+  limit: number;
+  /** Accessible name of the rail. */
+  label: string;
+}
+
+/** A host component an `component` block can embed (calculators...), listed by key in the page editor. */
+export interface CmsComponent {
+  /** Admin label in the block editor. */
+  label: string;
+  Component: ComponentType;
+}
+
 export interface CmsRuntimeInput {
   /** media: ImageRefs for asset ids (missing ids are absent). */
   images?: ((ids: readonly string[]) => Promise<Record<string, ImageRef>>) | null;
@@ -20,6 +39,10 @@ export interface CmsRuntimeInput {
   onMissing?: ((path: string) => Promise<never>) | null;
   /** seo: `addRedirect`, called when a published page or guide changes its address. */
   addRedirect?: ((fromPath: string, toPath: string) => Promise<unknown>) | null;
+  /** Renders `product_rail` blocks (catalog). Unbound: the block renders nothing. */
+  productRail?: ComponentType<ProductRailPortProps> | null;
+  /** Components `component` blocks embed, by key. An unknown key renders nothing. */
+  components?: Readonly<Record<string, CmsComponent>>;
   messages?: CmsMessagesOverride;
 }
 
@@ -38,6 +61,8 @@ function build(input: CmsRuntimeInput): CmsRuntime {
     jsonLd: input.jsonLd ?? null,
     onMissing: input.onMissing ?? null,
     addRedirect: input.addRedirect ?? null,
+    productRail: input.productRail ?? null,
+    components: input.components ?? {},
     messages: mergeCmsMessages(input.messages),
   };
 }

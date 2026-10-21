@@ -43,6 +43,12 @@ function stable(v: unknown): string {
       .join(',')}}`;
   return JSON.stringify(v ?? null);
 }
+/**
+ * Seed records describe the store's opening catalogue, so they are dated before any "New" window rather than at
+ * import time (which marked every product New). A record with `published_at` keeps its own date.
+ */
+export const SEED_LISTED_AT = new Date('2026-01-01T00:00:00+05:30');
+
 const same = (desired: Record<string, unknown>, row: Record<string, unknown>): boolean => Object.keys(desired).every((k) => stable(desired[k]) === stable(row[k]));
 
 async function readEnvelope(file: string): Promise<unknown[] | null> {
@@ -195,7 +201,7 @@ export async function importSeed(options: SeedImportOptions): Promise<SeedResult
       if (!row) {
         const [ins] = await tx
           .insert(catalogProduct)
-          .values({ ...desired, publishedAt: desired.status === 'active' ? new Date() : null })
+          .values({ ...desired, publishedAt: desired.status === 'active' ? (m.publishedAt ?? SEED_LISTED_AT) : null })
           .returning({ id: catalogProduct.id });
         id = ins!.id;
         bump(c, 'inserted');
@@ -205,7 +211,7 @@ export async function importSeed(options: SeedImportOptions): Promise<SeedResult
         else {
           await tx
             .update(catalogProduct)
-            .set({ ...desired, publishedAt: row.publishedAt ?? (desired.status === 'active' ? new Date() : null), updatedAt: new Date() })
+            .set({ ...desired, publishedAt: row.publishedAt ?? (desired.status === 'active' ? (m.publishedAt ?? SEED_LISTED_AT) : null), updatedAt: new Date() })
             .where(eq(catalogProduct.id, row.id));
           bump(c, 'updated');
         }

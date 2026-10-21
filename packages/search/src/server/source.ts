@@ -1,7 +1,7 @@
 import type { DbOrTx } from '@ecomkit/core/db';
 import { sql } from 'drizzle-orm';
 import type { SearchSourceRow } from '../domain/build-index';
-import { facetValuesFromProduct } from '../domain/facets';
+import { facetValuesFromProduct, slug } from '../domain/facets';
 import { VISIBLE } from './search';
 
 /**
@@ -10,13 +10,18 @@ import { VISIBLE } from './search';
  * inventory tables exist, so the index degrades (no price slider, no stock toggle) without them.
  * Tag value labels come back alongside (tags are data, not copy).
  */
-export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSourceRow[]; tagLabels: Record<string, string> }> {
+export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSourceRow[]; tagLabels: Record<string, string>; labels: Record<string, Record<string, string>> }> {
   const { rows: present } = await db.execute<{ t: string }>(sql`
-    select t from unnest(array['catalog_tag', 'catalog_product_tag', 'catalog_variant', 'pricing_price', 'inventory_level']) t
+    select t from unnest(array['catalog_collection', 'catalog_tag', 'catalog_product_tag', 'catalog_variant', 'pricing_price', 'inventory_level']) t
     where to_regclass(t) is not null`);
   const has = new Set(present.map((r) => r.t));
   const tags = has.has('catalog_tag') && has.has('catalog_product_tag');
   const variants = has.has('catalog_variant');
+
+  const collections = has.has('catalog_collection');
+  const catCol = collections
+    ? sql`(select coalesce(pc.slug, c.slug) from catalog_collection c left join catalog_collection pc on pc.id = c.parent_id where c.id = p.collection_id)`
+    : sql`null::text`;
 
   const tagCol = tags
     ? sql`array(select t.slug from catalog_product_tag pt join catalog_tag t on t.id = pt.tag_id where pt.product_id = p.id order by t.slug)`
@@ -53,6 +58,8 @@ export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSource
     availability_override: string | null;
     published_at: string | Date | null;
     tag_slugs: string[];
+    category: string | null;
+    subcategory: string | null;
     price_paise: number | null;
     available: string | number | null;
   }>(sql`
@@ -60,7 +67,7 @@ export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSource
       p.size_class::text as size_class, p.propagation::text as propagation, p.nitrogen_fixer, p.drought_tolerance::text as drought_tolerance,
       p.water_need::text as water_need, p.exposure::text as exposure, p.temp_min, p.temp_max, p.rainfall_min, p.rainfall_max,
       p.bearing_years_min, p.spacing_ft, p.availability_override::text as availability_override, p.published_at,
-      ${tagCol} as tag_slugs, ${priceCol} as price_paise, ${stockCol} as available
+      ${tagCol} as tag_slugs, ${catCol} as category, p.subcategory, ${priceCol} as price_paise, ${stockCol} as available
     from catalog_product p
     where ${VISIBLE}
     order by p.is_best_seller desc, p.is_featured desc, p.name, p.id`);
@@ -70,6 +77,13 @@ export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSource
     const { rows: t } = await db.execute<{ slug: string; name: string }>(sql`select slug, name from catalog_tag order by name, slug`);
     tagLabels = Object.fromEntries(t.map((r) => [r.slug, r.name]));
   }
+  // Category labels are collection names in collection order; subcategory labels are the stored text.
+  let catLabels: Record<string, string> = {};
+  if (collections) {
+    const { rows: c } = await db.execute<{ slug: string; name: string }>(sql`select slug, name from catalog_collection where parent_id is null order by position, name`);
+    catLabels = Object.fromEntries(c.map((r) => [slug(r.slug), r.name]));
+  }
+  const subLabels = Object.fromEntries(rows.flatMap((r) => (r.subcategory ? [[slug(r.subcategory), r.subcategory]] : [])));
 
   const n = (v: string | number | null) => (v == null ? null : Number(v));
   const out = rows.map((r): SearchSourceRow => {
@@ -87,6 +101,8 @@ export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSource
       aliases: r.search_aliases ?? [],
       facets: facetValuesFromProduct({
         kind: r.kind,
+        category: r.category,
+        subcategory: r.subcategory,
         sizeClass: r.size_class,
         propagation: r.propagation,
         nitrogenFixer: r.nitrogen_fixer,
@@ -109,5 +125,5 @@ export async function loadSearchSource(db: DbOrTx): Promise<{ rows: SearchSource
       },
     };
   });
-  return { rows: out, tagLabels };
+  return { rows: out, tagLabels, labels: { cat: catLabels, sub: subLabels } };
 }

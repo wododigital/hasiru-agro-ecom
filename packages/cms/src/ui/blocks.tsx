@@ -1,10 +1,13 @@
 import type { ImageRef } from '@ecomkit/core/contracts';
-import { ImageWithFallback, Rail, buttonVariants, cn } from '@ecomkit/ui';
+import { ImageWithFallback, Marquee, Rail, Skeleton, buttonVariants, cn } from '@ecomkit/ui';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { connection } from 'next/server';
+import { Suspense, type ReactNode } from 'react';
+import type { ProductRailPortProps } from '../server/runtime';
 import { isExternalHref, type Block, type BlockData } from '../domain';
 import type { CmsMessages } from '../messages';
 import type { BlockContext } from '../server/render';
+import { cmsRuntime } from '../server/runtime';
 import { VideoGrid } from './videos';
 
 type M = CmsMessages;
@@ -32,6 +35,67 @@ function Section({ heading, children, className }: { heading?: string | null; ch
       {heading ? <h2 className="font-display text-3xl text-primary">{heading}</h2> : null}
       {children}
     </section>
+  );
+}
+
+/** Eyebrow, heading and an optional link on the right (product rails, embedded tools). */
+function SectionHead({ eyebrow, heading, link, body }: { eyebrow?: string; heading?: string; link?: { label: string; href: string } | null; body?: string }) {
+  if (!eyebrow && !heading && !link && !body) return null;
+  return (
+    <div className="flex flex-wrap items-end justify-between gap-3">
+      <div className="flex flex-col gap-1">
+        {eyebrow ? <p className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">{eyebrow}</p> : null}
+        {heading ? <h2 className="font-display text-3xl text-primary">{heading}</h2> : null}
+        {body ? <p className="max-w-2xl text-muted">{body}</p> : null}
+      </div>
+      {link ? (
+        <SmartLink href={link.href} cta="cms-section-link" className="font-semibold text-primary underline-offset-4 hover:underline">
+          {link.label}
+          <span aria-hidden="true" className="ml-1">
+            →
+          </span>
+        </SmartLink>
+      ) : null}
+    </div>
+  );
+}
+
+/**
+ * Port output is request-time: static shells are prerendered by build workers where the host has not bound its
+ * ports, so the port is read only after `connection()` (inside the block's Suspense hole).
+ */
+async function RailPort(props: ProductRailPortProps) {
+  await connection();
+  const Port = cmsRuntime().productRail;
+  return Port ? <Port {...props} /> : null;
+}
+
+async function ComponentPort({ name }: { name: string }) {
+  await connection();
+  const entry = cmsRuntime().components[name];
+  return entry ? <entry.Component /> : null;
+}
+
+function ProductRailBlock({ data }: { data: BlockData<'product_rail'> }) {
+  const link = data.linkLabel && data.linkHref ? { label: data.linkLabel, href: data.linkHref } : null;
+  return (
+    <Section>
+      <SectionHead eyebrow={data.eyebrow} heading={data.heading} link={link} />
+      <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+        <RailPort source={data.source} value={data.value ?? null} productIds={data.productIds} kind={data.kind} limit={data.limit ?? 12} label={data.heading ?? data.eyebrow ?? data.kind} />
+      </Suspense>
+    </Section>
+  );
+}
+
+function ComponentBlock({ data }: { data: BlockData<'component'> }) {
+  return (
+    <Section>
+      <SectionHead eyebrow={data.eyebrow} heading={data.heading} body={data.body} />
+      <Suspense fallback={<Skeleton className="h-72 w-full" />}>
+        <ComponentPort name={data.key} />
+      </Suspense>
+    </Section>
   );
 }
 
@@ -90,20 +154,27 @@ function Cta({ data }: { data: BlockData<'cta'> }) {
   );
 }
 
+/** A running band of the shown trust claims (logo + label), paused on hover and static under reduced motion. */
 function TrustBand({ heading, ctx, m }: { heading?: string; ctx: BlockContext; m: M }) {
   if (!ctx.trust.length) return null;
   return (
-    <Section heading={heading ?? m.blocks.trustHeading}>
-      <ul className="flex flex-wrap items-center gap-6">
+    <section className="border-t-[3px] border-accent bg-primary-strong py-4 text-primary-fg">
+      <h2 className="sr-only">{heading ?? m.blocks.trustHeading}</h2>
+      <Marquee duration={28}>
         {ctx.trust.map((t) => (
-          <li key={t.key} className="flex items-center gap-3 rounded-md bg-surface px-4 py-3 shadow-card">
-            {t.logoMediaId && ctx.images[t.logoMediaId] ? <ImageWithFallback image={ctx.images[t.logoMediaId]!} alt="" sizes="48px" className="size-10 object-contain" /> : null}
-            <span className="font-semibold text-primary">{t.value ? `${t.value} ` : ''}</span>
-            <span className="text-sm text-text">{t.label}</span>
-          </li>
+          <span key={t.key} className="flex items-center gap-3 text-lg whitespace-nowrap">
+            {t.logoMediaId && ctx.images[t.logoMediaId] ? (
+              <span className="relative block h-9 w-14 overflow-hidden rounded-md bg-surface p-0.5">
+                <ImageWithFallback image={ctx.images[t.logoMediaId]!} alt="" fill sizes="56px" className="object-contain" />
+              </span>
+            ) : (
+              <span aria-hidden="true" className="size-2 rounded-full bg-accent" />
+            )}
+            <span>{t.value ? `${t.value} ${t.label}` : t.label}</span>
+          </span>
         ))}
-      </ul>
-    </Section>
+      </Marquee>
+    </section>
   );
 }
 
@@ -248,6 +319,10 @@ export function BlockList({ blocks, ctx, messages: m, heroIsH1 = false }: { bloc
             return <CardRail key={key} data={b.data} ctx={ctx} />;
           case 'team':
             return <Team key={key} heading={b.data.heading} ctx={ctx} m={m} />;
+          case 'product_rail':
+            return <ProductRailBlock key={key} data={b.data} />;
+          case 'component':
+            return <ComponentBlock key={key} data={b.data} />;
           default:
             return null;
         }

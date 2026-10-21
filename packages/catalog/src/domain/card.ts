@@ -23,6 +23,11 @@ export interface CardSource {
   isBestSeller: boolean;
   publishedAt: Date | null;
   variantId: string | null;
+  /** Quick facts line (height at dispatch, sunlight, temperature range); absent fields are skipped. */
+  heightFt?: number | null;
+  exposure?: string | null;
+  tempMin?: number | null;
+  tempMax?: number | null;
 }
 
 export interface CardContext {
@@ -58,6 +63,8 @@ export interface ProductCardData {
   variantId: string | null;
   badges: CardBadge[];
   chips: CardChip[];
+  /** Short facts shown under the name: height, sunlight, temperature. */
+  facts: string[];
   price: { unitPaise: Paise; compareAtPaise: Paise | null } | null;
   bulk: { label: string; minQty: number; reached: boolean } | null;
   rating: { average: number | null; count: number; show: boolean } | null;
@@ -100,6 +107,11 @@ export function buildProductCard(p: CardSource, ctx: CardContext): ProductCardDa
   else if (p.yieldText) chips.push({ id: 'yield', label: m.yieldLabel(p.yieldText), tone: 'neutral' });
   chips.push(...ctx.extraChips);
 
+  const facts: string[] = [];
+  if (p.heightFt != null) facts.push(m.height(p.heightFt));
+  if (p.exposure) facts.push(m.exposure[p.exposure] ?? p.exposure);
+  if (p.tempMin != null && p.tempMax != null) facts.push(m.temp(p.tempMin, p.tempMax));
+
   let stockLabel: string | null = null;
   if (availability === 'low_stock' && ctx.stock) stockLabel = m.onlyLeft(ctx.stock.available);
   else if (availability === 'in_stock') stockLabel = m.inStock;
@@ -120,6 +132,7 @@ export function buildProductCard(p: CardSource, ctx: CardContext): ProductCardDa
     variantId: p.variantId,
     badges: candidates.filter((b): b is CardBadge => b !== null).slice(0, MAX_BADGES),
     chips,
+    facts,
     price: unit != null ? { unitPaise: unit, compareAtPaise: compareAt } : null,
     bulk: bulkTier ? { label: m.bulkFrom(formatINR(bulkTier.unitPaise), bulkTier.minQty), minQty: bulkTier.minQty, reached } : null,
     rating: ctx.reviews ? { average: ctx.reviews.average, count: ctx.reviews.count, show: ctx.reviews.showRating } : null,

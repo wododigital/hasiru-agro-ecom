@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 import { BLOCK_FIELDS, ENTITIES, MENU_ITEM_FIELDS, PAGE_FIELDS, TEMPLATES, isEntityKey, pagePath, type EntityKey } from '../domain';
 import type { CmsPage } from '../schema';
-import { entityCounts, getEntity, getMenuForEdit, getPageForEdit, listEntities, listMenus, listPages } from '../server';
+import { cmsRuntime, entityCounts, getEntity, getMenuForEdit, getPageForEdit, listEntities, listMenus, listPages } from '../server';
 import { deleteEntityForm, deleteMenuForm, deletePageForm, saveEntityAction, saveMenuAction, savePageAction } from './actions';
 import { FieldInput } from './fields';
 import { FormIsland } from './FormIsland';
@@ -14,6 +14,13 @@ import { ListEditorIsland } from './ListEditorIsland';
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 const PAGE_SIZE = 50;
+
+/** Block editor forms, with the "Embedded tool" choices filled from the host's registered components. */
+function blockFields(): typeof BLOCK_FIELDS {
+  const options = Object.entries(cmsRuntime().components).map(([value, c]) => ({ value, label: c.label }));
+  const component = BLOCK_FIELDS.component;
+  return { ...BLOCK_FIELDS, component: { ...component, fields: component.fields.map((f) => (f.name === 'key' ? { ...f, options } : f)) } };
+}
 
 /** Content admin answers 404 to anyone without content.write. */
 export async function contentStaffOrNotFound(): Promise<void> {
@@ -159,7 +166,7 @@ export async function PageEditPage({ params, searchParams }: { params: Promise<{
           ))}
         </div>
         <h2 className="text-lg font-semibold">Blocks</h2>
-        <ListEditorIsland name="blocks" types={BLOCK_FIELDS} initial={(data?.blocks ?? []).map((b) => ({ type: b.type, data: b.data as Record<string, unknown> }))} addLabel="Add block" />
+        <ListEditorIsland name="blocks" types={blockFields()} initial={(data?.blocks ?? []).map((b) => ({ type: b.type, data: b.data as Record<string, unknown> }))} addLabel="Add block" />
       </FormIsland>
       {page ? (
         <form action={deletePageForm} className="self-start">

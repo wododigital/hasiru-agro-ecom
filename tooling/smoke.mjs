@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Smoke test against a running apps/shop (plain Node 22 fetch, no deps).
-//   node tooling/smoke.mjs [--base=http://localhost:3131] [--only=routes,money,jobs,admin] [--cookie='ek.session_token=...']
+//   node tooling/smoke.mjs [--base=http://localhost:3131] [--only=routes,storefront,money,jobs,admin] [--cookie='ek.session_token=...']
 //                          [--strict] [--max-links=400]
 // env: BASE_URL, SMOKE_COOKIE, DATABASE_URL (DB assertions + owner session minting, via psql), INTERNAL_SECRET
 //      (mints a signed owner session cookie and signs the mock PhonePe webhook; must match the server's).
@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (k, d) => process.argv.find((a) => a.startsWith(`--${k}=`))?.split('=').slice(1).join('=') ?? d;
 const BASE = (arg('base', process.env.BASE_URL) ?? 'http://localhost:3131').replace(/\/$/, '');
-const ONLY = new Set(arg('only', 'routes,money,jobs,admin').split(','));
+const ONLY = new Set(arg('only', 'routes,storefront,money,jobs,admin').split(','));
 const STRICT = process.argv.includes('--strict');
 const MAX_LINKS = Number(arg('max-links', '400'));
 const DB = process.env.DATABASE_URL;
@@ -818,6 +818,41 @@ async function supportCrawl(S, support, pages) {
   rec(S, `support crawl (${pages.length} pages): no errors captured`, !bad.length && events === 0 && forbidden === 0 ? 'PASS' : 'FAIL', `${bad.join(' ')} events=${events} forbiddenIssues=${forbidden}`);
 }
 
+// ---------- storefront: home rails + calculators, listing filters ----------
+const cardCount = (html) => new Set([...html.matchAll(/data-product-id="([^"]+)"/g)].map((m) => m[1])).size;
+const resultCount = (html) => Number(/>(\d+) results?</.exec(html)?.[1] ?? NaN);
+
+async function storefront() {
+  const S = 'storefront';
+  const home = await req('/');
+  const h = home.text ?? '';
+  const cards = cardCount(h);
+  const adds = (h.match(/data-cta="card-add-to-cart"/g) ?? []).length;
+  rec(S, 'home lists products with add buttons', home.status === 200 && cards >= 4 && adds >= 1 ? 'PASS' : 'FAIL', `${home.status}, ${cards} product cards, ${adds} add buttons`);
+  const calcs = ['calculator-add-plants', 'calculator-add-compost-pack'].filter((c) => h.includes(`data-cta="${c}"`));
+  rec(S, 'home embeds the plant and compost calculators', calcs.length === 2 ? 'PASS' : 'FAIL', calcs.join(', ') || 'none found');
+  const h1s = (h.match(/<h1[\s>]/g) ?? []).length;
+  rec(S, 'home has one h1 and no cms page title or breadcrumb', h1s === 1 && !/>Home<\/h1>/.test(h) && !/aria-label="Breadcrumb/i.test(h) ? 'PASS' : 'FAIL', `${h1s} h1`);
+
+  const plants = await req('/plants');
+  const p = plants.text ?? '';
+  const boxes = [...p.matchAll(/type="checkbox"[^>]*id="[\w]+-([a-z][a-z0-9_]{0,15})-([a-z0-9][a-z0-9_.-]{0,39})"|id="[\w]+-([a-z][a-z0-9_]{0,15})-([a-z0-9][a-z0-9_.-]{0,39})"[^>]*type="checkbox"/g)]
+    .map((m) => [m[1] ?? m[3], m[2] ?? m[4]])
+    .filter(([k]) => k !== 'stock' && k !== 'fit');
+  const all = resultCount(p);
+  rec(S, '/plants has a filter control', plants.status === 200 && boxes.length > 0 && /data-cta="listing-sort"/.test(p) ? 'PASS' : 'FAIL', `${plants.status}, ${boxes.length} facet checkboxes, ${all} results`);
+  let changed = null;
+  for (const [k, v] of boxes) {
+    const f = await req(`/plants?f=${encodeURIComponent(`${k}:${v}`)}`);
+    const n = resultCount(f.text ?? '');
+    if (f.status === 200 && n > 0 && n < all && cardCount(f.text) <= n) {
+      changed = `${k}:${v} -> ${n} of ${all}`;
+      break;
+    }
+  }
+  rec(S, 'a filter changes /plants results', changed ? 'PASS' : 'FAIL', changed ?? `no facet value narrowed ${all} results`);
+}
+
 // ---------- run ----------
 const up = await req('/api/health/live');
 if (up.status === 0) {
@@ -825,7 +860,7 @@ if (up.status === 0) {
   process.exit(2);
 }
 mintOwnerCookie();
-for (const [name, fn] of [['routes', routes], ['money', money], ['jobs', jobs], ['admin', admin]]) {
+for (const [name, fn] of [['routes', routes], ['storefront', storefront], ['money', money], ['jobs', jobs], ['admin', admin]]) {
   if (!ONLY.has(name)) continue;
   try {
     await fn();

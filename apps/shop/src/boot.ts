@@ -65,6 +65,7 @@ import { messages } from '../messages/en';
 import type { Registry } from '@ecomkit/core/manifest';
 import { registry as ownRegistry } from './generated/registry';
 import { routeRegistry } from './route-registry';
+import { routeSlot } from './route-ui';
 
 // Reads through to the route bundle's registry copy when the root layout has published one (see route-registry.ts).
 const registry: Registry = new Proxy(ownRegistry, { get: (own, key) => Reflect.get(routeRegistry() ?? own, key) });
@@ -100,6 +101,7 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
     jsonLd: seo?.jsonLd() ?? null,
     metadata: seo?.buildMetadata ?? null,
     addRedirect: seo ? async (from, to) => void (await seo.addRedirect(from, to)) : null,
+    listingFacets: routeSlot('ListingFacets'),
   });
   configurePricing({ gstRates: gstRatesFor, variantsOf });
   setNotificationsProvider(async () => backInStockSender);
@@ -157,6 +159,12 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
   // cms: every process (seed:load links block images, team photos and logos to media); the seo hooks only on the web.
   configureCms({
     images: imageRefs,
+    // cms blocks that show products or tools render catalog and farm-calculators components (route-ui.tsx).
+    productRail: routeSlot('ProductRail'),
+    components: {
+      plant_calculator: { label: m.home.calculator.eyebrow, Component: routeSlot('PlantCalculator') },
+      compost_calculator: { label: m.home.compost.eyebrow, Component: routeSlot('CompostCalculator') },
+    },
     resolveMediaIds: options.mediaDir ? (srcs) => masterAssetIds(srcs, options.mediaDir!) : null,
     ...(seo ? { metadata: seo.buildMetadata, jsonLd: seo.jsonLd, onMissing: seo.resolveMissing, addRedirect: seo.addRedirect } : {}),
   });

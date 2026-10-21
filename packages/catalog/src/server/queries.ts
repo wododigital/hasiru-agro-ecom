@@ -53,6 +53,8 @@ const cardColumns = {
   isBestSeller: p.isBestSeller,
   publishedAt: p.publishedAt,
   variantId: defaultVariant,
+  heightFt: p.heightAtDispatchFt,
+  exposure: p.exposure,
   tempMin: p.tempMin,
   tempOpt: p.tempOpt,
   tempMax: p.tempMax,
@@ -96,6 +98,10 @@ function toCardRow(r: RawCardRow): CardRow {
     isBestSeller: r.isBestSeller,
     publishedAt: r.publishedAt ? new Date(r.publishedAt) : null,
     variantId: r.variantId,
+    heightFt: r.heightFt == null ? null : Number(r.heightFt),
+    exposure: r.exposure,
+    tempMin: r.tempMin == null ? null : Number(r.tempMin),
+    tempMax: r.tempMax == null ? null : Number(r.tempMax),
     climate: climateOf(r),
   };
 }

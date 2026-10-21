@@ -5,10 +5,13 @@ import { readCatalogSettings } from '../server/cards';
 import { loadListing, parseListingQuery, SORTS } from '../server/listing';
 import type { ListFilter } from '../server/queries';
 import { catalogRuntime } from '../server/runtime';
-import { ProductGrid } from './ProductCard';
+import { ProductCard, ProductGrid } from './ProductCard';
 import { JsonLdScript } from './PdpParts';
 
 type SearchParams = Record<string, string | string[] | undefined>;
+
+/** Listing scopes stay well under this (catalogues under ~500 products). */
+const MAX_SCOPE = 1000;
 
 export interface ListingPageProps {
   title: string;
@@ -107,9 +110,10 @@ async function ListingResults({ title, filter, path, searchParams, collectionSlu
   const m = rt.messages.listing;
   const [sp, settings] = await Promise.all([searchParams, readCatalogSettings()]);
   const query = parseListingQuery(sp);
-  const listing = await loadListing(filter, { ...query, pageSize: settings.pageSize });
+  const Facets = rt.listingFacets;
+  // With filters bound, every card of the scope goes to the facet island (it filters, sorts and pages in the browser).
+  const listing = await loadListing(filter, Facets ? { sort: 'featured', page: 1, pageSize: MAX_SCOPE } : { ...query, pageSize: settings.pageSize });
   const cartEnabled = rt.registry?.has('cart') ?? false;
-  const Aside = rt.listingAside;
   const href = (page: number) => {
     const q = new URLSearchParams();
     if (query.sort !== 'featured') q.set('sort', query.sort);
@@ -121,13 +125,18 @@ async function ListingResults({ title, filter, path, searchParams, collectionSlu
     ? rt.jsonLd.graph([rt.jsonLd.collectionPage({ name: title, path, items: listing.cards.slice(0, 24).map((c) => ({ name: c.name, path: c.href })) })])
     : null;
 
+  if (Facets) {
+    const cards = Object.fromEntries(listing.cards.map((card, i) => [card.id, <ProductCard key={card.id} card={card} cartEnabled={cartEnabled} messages={rt.messages} eager={i < 4} />]));
+    return (
+      <>
+        <JsonLdScript json={jsonLd} />
+        <Facets productIds={listing.productIds} cards={cards} collectionSlug={collectionSlug} searchParams={sp} />
+      </>
+    );
+  }
+
   return (
-    <div className="flex flex-col gap-4 lg:flex-row">
-      {Aside ? (
-        <aside className="lg:w-64 lg:shrink-0">
-          <Aside productIds={listing.productIds} collectionSlug={collectionSlug} />
-        </aside>
-      ) : null}
+    <div className="flex flex-col gap-4">
       <section className="flex flex-1 flex-col gap-4" aria-live="polite">
         <JsonLdScript json={jsonLd} />
         <form method="get" action={path} className="flex flex-wrap items-center justify-between gap-2">
