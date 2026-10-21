@@ -123,6 +123,7 @@ export async function saveContact(raw: ContactInput, options: { now?: Date } = {
     if (!reachable && next.name === prev.name) return { sessionId: session.id, changed: false };
     await tx.update(checkoutSession).set({ contact: next, updatedAt: sql`now()` }).where(eq(checkoutSession.id, session.id));
     if (reachable && (next.phone || next.email)) {
+      await getCheckoutPorts().cart?.noteContact(cart.id, { tx });
       await emit('checkout.contact_saved', { checkoutSessionId: session.id, cartId: cart.id, phone: next.phone, email: next.email }, { tx });
     }
     return { sessionId: session.id, changed: true };

@@ -96,6 +96,16 @@ describe('contact autosave and consent', () => {
     expect(await checkoutContact(session!.id)).toMatchObject({ cartId, orderId: null, contact: { phone: '+919876543210' } });
   });
 
+  it('notes the contact on the cart (abandoned-cart hasContact) only when a phone or email is saved', async () => {
+    const cartId = newId();
+    const h = wire(cartId);
+    await saveContact({ name: 'Asha', phone: null, email: null });
+    expect(h.contacted).toEqual([]);
+    await saveContact({ name: 'Asha', phone: '98765 43210', email: null });
+    await saveContact({ name: 'Asha K', phone: '98765 43210', email: null });
+    expect(h.contacted).toEqual([cartId]);
+  });
+
   it('a bad phone is a validation error, not a stored value', async () => {
     wire(newId());
     await expect(saveContact({ name: 'x', phone: '12345', email: null })).rejects.toThrow();

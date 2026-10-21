@@ -60,6 +60,7 @@ export function fixtureCart(id: string): CheckoutCart {
 export interface Harness {
   cart: CheckoutCart | null;
   converted: string[];
+  contacted: string[];
   created: CheckoutOrderInput[];
   orders: Map<string, CheckoutOrderSummary>;
   starts: { orderId: string; amountPaise: Paise }[];
@@ -74,6 +75,7 @@ export function wire(cartId: string, overrides: Partial<Harness> = {}): Harness 
   const h: Harness = {
     cart: fixtureCart(cartId),
     converted: [],
+    contacted: [],
     created: [],
     orders: new Map(),
     starts: [],
@@ -87,6 +89,7 @@ export function wire(cartId: string, overrides: Partial<Harness> = {}): Harness 
     cart: {
       current: async () => (h.cart && !h.converted.includes(h.cart.id) ? h.cart : null),
       markConverted: async (id) => void h.converted.push(id),
+      noteContact: async (id) => void h.contacted.push(id),
     },
     orders: {
       createOrder: async (input, { tx }) => {

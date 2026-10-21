@@ -7,6 +7,7 @@ import {
   currentCartContext,
   inRequest,
   markConverted,
+  noteContact,
   replacePackage,
   restorePath,
   restoreToken,
@@ -209,6 +210,7 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
     cart: {
       current: async () => checkoutCart(await currentCartContext()),
       markConverted: async (cartId, orderId, o) => void (await markConverted(cartId, orderId, o)),
+      noteContact,
     },
     orders: {
       // checkout's input is the structural shape; orders validates it with its own schema.

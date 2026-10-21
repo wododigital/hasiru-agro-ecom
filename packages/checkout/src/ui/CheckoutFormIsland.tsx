@@ -4,7 +4,7 @@ import type { Paise, ShippingMethodQuote } from '@ecomkit/core/contracts';
 import { formatINR } from '@ecomkit/core/money';
 import { Button, Checkbox, FormField, Input, Select } from '@ecomkit/ui';
 import Link from 'next/link';
-import { useActionState, useRef, useState, useTransition, type ReactNode } from 'react';
+import { useActionState, useEffect, useRef, useState, useTransition, type ReactNode } from 'react';
 import { slotLabel as slotText, type PaymentChoice } from '../domain';
 import type { CheckoutMessages } from '../messages';
 import type { CheckoutPageData, QuoteView } from '../server';
@@ -82,6 +82,13 @@ export function CheckoutFormIsland({ data, idempotencyKey, messages: m, pincodeL
       void saveContactAction({ name: v('name'), phone: v('phone'), email: v('email') });
     }, 400);
   };
+
+  // A signed-in buyer's contact comes prefilled from the account and may never blur: save it once so a checkout
+  // left here can be reminded. A no-op on the server when the session already has it.
+  useEffect(() => {
+    const c = data.contact;
+    if (data.signedIn && (c.phone || c.email)) void saveContactAction({ name: c.name, phone: c.phone, email: c.email });
+  }, [data]);
 
   const setField = (k: AddressField, v: string) => setAddress((a) => ({ ...a, [k]: v }));
 
