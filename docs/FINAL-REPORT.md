@@ -66,7 +66,7 @@ All numbers below are from the final merged tree after every fix in section 5, b
 Nothing here blocks a staging deploy; ordered by value.
 
 1. **ERP payloads**: erp-sync `orderPayload` / `leadPayload` / `applyOrderStatus` / `variantCandidates` are not bound (orders `erpOrderPayload`, customers `leadForErp` do not exist yet), so order and lead push to hasiru-ops is a no-op; stock pull works.
-2. **Marketing vendors in the proxy CSP**: `apps/shop/proxy.ts` reads `CSP_VENDOR_SOURCES` from env; marketing's `cspSources()` is not wired (pixels need their hosts listed in the env until then).
+2. **Marketing vendors in the proxy CSP**: DONE in WP-37: `apps/shop/proxy.ts` merges marketing's `cspSources()` (configured vendors + active custom tags, 60 s memo) into script/connect/img/frame-src; `CSP_VENDOR_SOURCES` stays as an extra allowlist.
 3. **Orders number prefix** is the default `ORD-`: set `HA` in Settings > Orders before go-live (`numberPrefix`).
 4. **Unknown ids on private or token routes answer 200 + noindex**, not 404: `/account/orders/[id]`, `/checkout/[orderId]/pay`, `/order/[token]`, `/plan/results/[planId]`, `/models/[model]/3d`, `/og/[...slug]`, and admin detail pages (the layouts' Suspense boundary has already sent headers). Anonymous `/admin/*` likewise answers 200 with an empty noindex shell instead of a 404 or a redirect (A08-3 proxy pre-check not built). Signed-out `/account/*` redirects are streamed (200 + client redirect), not a 307.
 5. **`unstable_paramMatching: { slug: 'blocking' }`** (10 routes, gives the real 404s) is marked unstable in Next 16.4.0: recheck on the bump after 2026-10-29.
