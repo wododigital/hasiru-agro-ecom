@@ -50,6 +50,8 @@ export const DEFAULT_FACET_CONFIG: FacetConfig = {
   facets: [
     { key: 'fit', kind: 'toggle', toggleValue: 'yes', priority: 1 },
     { key: 'stock', kind: 'toggle', toggleValue: 'in', priority: 9 },
+    { key: 'cat', kind: 'multi', priority: 2 },
+    { key: 'sub', kind: 'multi', priority: 3 },
     { key: 'kind', kind: 'multi', priority: 2 },
     { key: 'model', kind: 'multi', priority: 3 },
     { key: 'size', kind: 'multi', priority: 4 },
@@ -79,6 +81,9 @@ export const DEFAULT_FACET_CONFIG: FacetConfig = {
 /** Product facts the facet values derive from (camelCase of the catalog columns). */
 export interface ProductFacts {
   kind: string;
+  /** Top-level collection slug and the free-text subcategory (Desi, Exotic, Spices...). */
+  category?: string | null;
+  subcategory?: string | null;
   sizeClass?: string | null;
   propagation?: string | null;
   nitrogenFixer?: boolean | null;
@@ -120,7 +125,7 @@ export function bearBucket(years: number | null | undefined): string | null {
   return '7plus';
 }
 
-const slug = (v: string) => v.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
+export const slug = (v: string) => v.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 const SIZE: Record<string, string> = { l: 'large', m: 'medium', s: 'small' };
 
 /**
@@ -132,6 +137,8 @@ export function facetValuesFromProduct(p: ProductFacts): Record<string, string[]
   const one = (key: string, v: string | null | undefined) => {
     if (v != null && v !== '') out[key] = [slug(v)];
   };
+  one('cat', p.category);
+  one('sub', p.subcategory);
   if (p.sizeClass) out.size = [SIZE[p.sizeClass.toLowerCase()] ?? slug(p.sizeClass)];
   one('prop', p.propagation);
   one('drought', p.droughtTolerance);

@@ -3,6 +3,12 @@ import { href, optInt, optText, optUuid, reqText, type FieldSpec } from './field
 
 const link = z.object({ label: reqText(80), href });
 const optHeading = optText(160);
+const optHref = z.preprocess((v) => (v === '' || v === null ? undefined : v), href.optional());
+
+/** Product rail sources: the catalog's best sellers, a collection or tag (by slug), or hand-picked product ids. */
+export const PRODUCT_RAIL_SOURCES = ['bestsellers', 'collection', 'tag', 'ids'] as const;
+/** Registered component keys (calculators and the like) the host binds; lowercase with `_` or `-`. */
+const componentKey = z.string().trim().regex(/^[a-z][a-z0-9_-]{0,39}$/, 'a registered component key');
 
 /** Every block type and its data. Adding a type = a schema here, a field list below and a renderer in ui. */
 export const blockDataSchemas = {
@@ -17,6 +23,20 @@ export const blockDataSchemas = {
   gallery: z.object({ heading: optHeading, imageIds: z.array(z.uuid()).min(1).max(24) }),
   rail: z.object({ heading: optHeading, items: z.array(z.object({ title: reqText(120), href, imageId: optUuid, caption: optText(200) })).min(1).max(24) }),
   team: z.object({ heading: optHeading }),
+  product_rail: z
+    .object({
+      eyebrow: optText(80),
+      heading: optHeading,
+      source: z.enum(PRODUCT_RAIL_SOURCES).default('bestsellers'),
+      value: optText(120),
+      productIds: z.array(z.uuid()).max(24).default([]),
+      kind: z.enum(['plant', 'input']).default('plant'),
+      limit: optInt(1, 24),
+      linkLabel: optText(60),
+      linkHref: optHref,
+    })
+    .refine((d) => d.source === 'bestsellers' || (d.source === 'ids' ? d.productIds.length > 0 : !!d.value), { message: 'a collection or tag slug, or product ids, for this source', path: ['value'] }),
+  component: z.object({ key: componentKey, eyebrow: optText(80), heading: optHeading, body: optText(400) }),
 } as const;
 
 export type BlockType = keyof typeof blockDataSchemas;
@@ -120,6 +140,49 @@ export const BLOCK_FIELDS: Record<BlockType, { label: string; fields: readonly F
     ],
   },
   team: { label: 'Team', fields: [{ name: 'heading', label: 'Heading', kind: 'text' }] },
+  product_rail: {
+    label: 'Product rail',
+    fields: [
+      { name: 'eyebrow', label: 'Eyebrow', kind: 'text' },
+      { name: 'heading', label: 'Heading', kind: 'text' },
+      {
+        name: 'source',
+        label: 'Products from',
+        kind: 'select',
+        required: true,
+        options: [
+          { value: 'bestsellers', label: 'Best sellers' },
+          { value: 'collection', label: 'A collection' },
+          { value: 'tag', label: 'A tag' },
+          { value: 'ids', label: 'Hand-picked products' },
+        ],
+      },
+      { name: 'value', label: 'Collection or tag slug', kind: 'text', help: 'For "A collection" or "A tag", e.g. fruiting' },
+      { name: 'productIds', label: 'Products (ids, in order)', kind: 'media-list', help: 'For "Hand-picked products"' },
+      {
+        name: 'kind',
+        label: 'Product type',
+        kind: 'select',
+        options: [
+          { value: 'plant', label: 'Plants' },
+          { value: 'input', label: 'Farm inputs' },
+        ],
+      },
+      { name: 'limit', label: 'How many (default 12)', kind: 'number' },
+      { name: 'linkLabel', label: 'Link label', kind: 'text', help: 'e.g. View all' },
+      { name: 'linkHref', label: 'Link', kind: 'url' },
+    ],
+  },
+  component: {
+    label: 'Embedded tool',
+    fields: [
+      // Options are the host's registered components (filled in by the page editor).
+      { name: 'key', label: 'Tool', kind: 'select', required: true, options: [] },
+      { name: 'eyebrow', label: 'Eyebrow', kind: 'text' },
+      { name: 'heading', label: 'Heading', kind: 'text' },
+      { name: 'body', label: 'Text', kind: 'textarea' },
+    ],
+  },
 };
 
 /** Media ids a list of blocks shows (resolved in one batch before render). */

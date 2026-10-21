@@ -1,7 +1,7 @@
 import 'server-only';
 
 // Public server API of the catalog (BUILD-PLAN 2.5): reads, writes, import/export, cards, runtime binding.
-export { configureCatalog, catalogRuntime, optionalService, type CatalogRegistry, type CatalogRuntimeInput, type ListingAsideProps } from './runtime';
+export { configureCatalog, catalogRuntime, optionalService, type CatalogRegistry, type CatalogRuntimeInput, type ListingFacetsProps } from './runtime';
 export {
   listProducts,
   getProductBySlug,

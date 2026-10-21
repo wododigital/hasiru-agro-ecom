@@ -11,8 +11,8 @@ import { loadSearchSource } from './source';
 
 /** Builds the index from the database (uncached). Labels come from messages; tag labels from catalog_tag. */
 export async function buildIndexFromDb(dbOrTx: DbOrTx, messages: SearchMessages = searchMessages, now?: Date): Promise<SearchIndex> {
-  const { rows, tagLabels } = await loadSearchSource(dbOrTx);
-  return buildSearchIndex(rows, { facets: messages.facets, values: { ...messages.values, tag: tagLabels } }, now);
+  const { rows, tagLabels, labels } = await loadSearchSource(dbOrTx);
+  return buildSearchIndex(rows, { facets: messages.facets, values: { ...messages.values, ...labels, tag: tagLabels } }, now);
 }
 
 /** The cached index (tag `catalog`: any product save expires it). */

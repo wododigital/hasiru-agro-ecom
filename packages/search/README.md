@@ -4,7 +4,7 @@ Search and faceted filtering for small catalogues (under ~500 products). `/searc
 
 ## Responsibility
 - Text search over a product's name, local-language name, scientific name and aliases. It reads `catalog_product.search_aliases`, so English, Kannada, scientific and romanised aliases all match. There is no separate document or synonym table.
-- Builds the facet index from the catalog. Facets are size, purpose (model), rainfall, temperature, drought, water need, propagation, nitrogen fixer, sunlight, bearing time, tags, stock and price. Labels come from `messages.ts`.
+- Builds the facet index from the catalog. Facets are category (top-level collection), sub-category (Desi, Exotic, Spices...), size, purpose (model), rainfall, temperature, drought, water need, propagation, nitrogen fixer, sunlight, bearing time, tags, stock and price. Labels come from `messages.ts`.
 - The engine combines selections with OR within a facet and AND across facets. Counts are disjunctive.
 - Auto-hide rule: a facet is hidden when the current scope has fewer than 2 values for it, or more than 60% of the scope is unknown for it. A toggle facet is hidden when its value covers none or all of the known products. An active facet is never hidden.
 - Zero results never leave the visitor stuck. The page shows chips that each drop one filter, with the count that drop would give. It then shows the closest matches: first the least important single filter that, dropped alone, gives results; failing that, filters relaxed one after another, least important first. Assistance and guided-choice links follow, and each empty combination is logged.

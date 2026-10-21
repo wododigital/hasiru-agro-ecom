@@ -7,6 +7,8 @@ export const searchMessages = {
   facets: {
     fit: 'Fits my district',
     stock: 'In stock',
+    cat: 'Category',
+    sub: 'Sub-category',
     kind: 'Type',
     model: 'Purpose',
     size: 'Size',

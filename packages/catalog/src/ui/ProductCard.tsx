@@ -44,6 +44,7 @@ export function ProductCard({ card, cartEnabled, messages = catalogMessages, eag
             {card.nameKn}
           </p>
         ) : null}
+        {card.facts.length ? <p className="text-xs text-muted">{card.facts.join(' · ')}</p> : null}
         {card.chips.length ? (
           <ul className="flex flex-wrap gap-1">
             {card.chips.map((c) => (
@@ -57,7 +58,8 @@ export function ProductCard({ card, cartEnabled, messages = catalogMessages, eag
           {card.price ? <Price paise={card.price.unitPaise} compareAtPaise={card.price.compareAtPaise} /> : null}
           {card.bulk ? <p className={cn('text-xs', card.bulk.reached ? 'font-semibold text-accent-fg bg-accent/30 rounded-sm px-1' : 'text-muted')}>{card.bulk.label}</p> : null}
           <div className="flex items-center justify-between gap-2">
-            {card.rating ? <Rating average={card.rating.average} count={card.rating.count} /> : <span />}
+            {/* No stars until there are enough reviews: the card already carries a "New" badge for recent products. */}
+            {card.rating?.show && card.rating.average != null ? <Rating average={card.rating.average} count={card.rating.count} /> : <span />}
             {card.stockLabel ? <span className={cn('text-xs', card.availability === 'low_stock' ? 'text-warning font-semibold' : card.notifyMe ? 'text-danger' : 'text-muted')}>{card.stockLabel}</span> : null}
           </div>
           {card.purchasable && cartEnabled && card.variantId ? (

@@ -48,6 +48,9 @@ export const catalogMessages = {
     harvestIn: (years: number) => `Harvest in ${years} yrs`,
     yieldLabel: (text: string) => `Yield ${text}`,
     view: (name: string) => `View ${name}`,
+    height: (ft: number) => `${ft} ft`,
+    exposure: { full_sun: 'Full sun', partial_shade: 'Partial shade', shade: 'Shade' } as Record<string, string>,
+    temp: (min: number, max: number) => `${min} to ${max} C`,
   },
   pdp: {
     addToCart: 'Add to cart',

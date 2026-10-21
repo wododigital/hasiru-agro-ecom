@@ -1,6 +1,6 @@
 import type { ImageRef, JsonLdBuilders, MetadataInput, ModuleId, ProductCardChipSource, PdpSection, ProductFormTab, ServiceKey, ServiceMap } from '@ecomkit/core/contracts';
 import type { Metadata } from 'next';
-import type { ComponentType } from 'react';
+import type { ComponentType, ReactNode } from 'react';
 import { mergeMessages, type CatalogMessages, type CatalogMessagesOverride } from '../messages';
 
 /** The part of the app registry the catalog reads (optional modules, extension points). */
@@ -12,9 +12,15 @@ export interface CatalogRegistry {
   list(key: 'productFormTabs'): readonly (ProductFormTab & { moduleId: ModuleId })[];
 }
 
-export interface ListingAsideProps {
+/**
+ * A faceted listing body (the search module's filters bound by the host). The catalog hands over every product of
+ * the listing scope in display order with its server-rendered card; the host filters, sorts and pages them.
+ */
+export interface ListingFacetsProps {
   productIds: readonly string[];
+  cards: Readonly<Record<string, ReactNode>>;
   collectionSlug: string | null;
+  searchParams: Readonly<Record<string, string | string[] | undefined>>;
 }
 
 /**
@@ -35,8 +41,8 @@ export interface CatalogRuntimeInput {
   addRedirect?: ((fromPath: string, toPath: string) => Promise<void>) | null;
   /** The visitor's district slug (places/planting set it); default reads the `district` cookie. */
   readDistrict?: (() => Promise<string | null>) | null;
-  /** Rendered beside listings (the search module's facet sidebar). */
-  listingAside?: ComponentType<ListingAsideProps> | null;
+  /** Renders listing results with filters (sidebar, mobile sheet, URL state). Unbound: plain grid with sort and pages. */
+  listingFacets?: ComponentType<ListingFacetsProps> | null;
   messages?: CatalogMessagesOverride;
   now?: () => Date;
 }
@@ -68,7 +74,7 @@ function build(input: CatalogRuntimeInput): CatalogRuntime {
     metadata: input.metadata ?? null,
     addRedirect: input.addRedirect ?? null,
     readDistrict: input.readDistrict ?? districtFromCookie,
-    listingAside: input.listingAside ?? null,
+    listingFacets: input.listingFacets ?? null,
     messages: mergeMessages(input.messages),
     now: input.now ?? (() => new Date()),
   };

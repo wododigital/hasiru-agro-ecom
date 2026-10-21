@@ -132,13 +132,17 @@ const SERVICES: { slug: string; title: string; intro: string; points: { title: s
 export const buildCms = once(() => {
   const pages: Page[] = [
     page('home', 'Home', 'Plants, Saplings and Farm Development in Bengaluru | Hasiru Agro', 'Fruit, timber and native saplings from our Bengaluru nursery, with farm design and management for landowners across South India.', blocks(
-      // The home hero is the app's own (two paths: shop or wizard). Product rails and the calculator teasers need
-      // cms block types that call catalog and farm-calculators; until then the home shows the content blocks below.
-      richText('Why choose us', [], WHY),
-      ['video', { limit: 6 }],
-      ['testimonials', { limit: 3 }],
+      // The app renders the two-path hero (shop or wizard) from this block's text and image; the rest follow in order.
+      ['hero', { heading: 'Healthy saplings for farm-scale planting', subheading: 'Grafted fruit trees, timber and plantation crops from our own nursery. Bulk prices, farm inputs and delivery across Karnataka.', image: img('hero_farm_transformation_hasiru_agro.webp') }],
+      ['product_rail', { eyebrow: 'Best sellers', heading: 'Most planted this season', source: 'bestsellers', kind: 'plant', limit: 12, linkLabel: 'View all plants', linkHref: '/plants' }],
+      ['component', { key: 'plant_calculator', eyebrow: 'Plant calculator', heading: 'How many plants fit your land?' }],
+      ['product_rail', { eyebrow: 'Farm inputs', heading: 'Feed the soil, not just the plant', source: 'bestsellers', kind: 'input', limit: 12, linkLabel: 'All farm inputs', linkHref: '/inputs' }],
+      ['component', { key: 'compost_calculator', eyebrow: 'Compost calculator', heading: 'How much compost do your plants need?' }],
       ['trust_band', {}],
+      ['video', { heading: 'Planting the right way', limit: 6 }],
+      ['testimonials', { limit: 3 }],
       processRail('Farm development'),
+      richText('Why choose us', [], WHY),
     )),
     page('farm-development', 'Farm development', 'Farm Design, Setup and Management | Hasiru Agro', 'From barren land to a living farm: site assessment, satellite mapping, earthwork, planting and ongoing management by our own team.', blocks(
       ['hero', { heading: 'From barren land to living farm', subheading: 'We take your land through five steps and manage it until it sustains itself.', image: img('transformation_young_saplings_field_hasiru_agro.webp') }],

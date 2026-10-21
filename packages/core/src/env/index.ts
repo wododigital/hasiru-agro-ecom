@@ -13,6 +13,8 @@ export const serverEnvSchema = z
     DATABASE_URL: z.url().optional(),
     /** Owner role (migrations and seed only). */
     DATABASE_OWNER_URL: z.url().optional(),
+    /** Connections per process (default 10); set 2 for `next build`, whose prerender workers each open a pool. */
+    DATABASE_POOL_MAX: z.coerce.number().int().min(1).max(100).optional(),
     /** Canonical origin, e.g. https://www.example.com. */
     SITE_URL: z.url().optional(),
     /** Where the worker reaches the web process for tag revalidation. */

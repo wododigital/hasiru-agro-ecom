@@ -542,7 +542,8 @@ function clientRecord(p: PlantRow, match: Match, flags: PlantListFlag | undefine
     subcategory: p.subcategory,
     tags: p.tags,
     is_priority: !!flags,
-    is_best_seller: !!flags,
+    // Best seller = featured in the old shop (prototype rule); the client's priority list stays `is_priority`.
+    is_best_seller: exact?.['Is featured?'] === '1',
     is_featured: exact?.['Is featured?'] === '1',
     sourcing: flags ? (flags.supplier ? 'supplier' : 'own') : null,
     has_video: { whatsapp: flags?.whatsapp ?? false, youtube: flags?.youtube ?? false },
@@ -716,7 +717,7 @@ function legacyRecord(w: WooRow, sku: string, size: SizeClass, isAgarwood: boole
     subcategory: mapped.subcategory,
     tags: isAgarwood ? ['forestry_timber', 'medicinal'] : [],
     is_priority: isAgarwood,
-    is_best_seller: isAgarwood,
+    is_best_seller: w['Is featured?'] === '1',
     is_featured: w['Is featured?'] === '1',
     sourcing: isAgarwood ? 'supplier' : null,
     has_video: { whatsapp: false, youtube: false },

@@ -113,6 +113,12 @@ describe('product card data', () => {
     expect(buildProductCard(source, await ctx({ fit: 'not_recommended' })).chips.map((c) => c.id)).not.toContain('fit');
   });
 
+  it('quick facts: height at dispatch, sunlight and temperature, skipping what is unknown', async () => {
+    const card = buildProductCard({ ...source, heightFt: 2, exposure: 'full_sun', tempMin: 10, tempMax: 40 }, await ctx());
+    expect(card.facts).toEqual(['2 ft', 'Full sun', '10 to 40 C']);
+    expect(buildProductCard({ ...source, exposure: 'partial_shade', tempMin: 10 }, await ctx()).facts).toEqual(['Partial shade']);
+  });
+
   it('without pricing the card has no price and cannot be bought', async () => {
     const card = buildProductCard(source, await ctx({ price: null }));
     expect(card.price).toBeNull();

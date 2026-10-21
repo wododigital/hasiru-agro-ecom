@@ -67,6 +67,10 @@ beforeAll(async () => {
     if (p.onHand != null) await t.pool.query(`insert into inventory_level (variant_id, on_hand, reserved) values ($1, $2, 0)`, [vid, p.onHand]);
   }
   await t.pool.query(`insert into catalog_product_tag (product_id, tag_id) values ($1, $2), ($3, $2)`, [uuid(3), tagId, uuid(4)]);
+  // Category = top-level collection (a child collection counts as its parent); subcategory is free text.
+  await t.pool.query(`insert into catalog_collection (id, slug, name, parent_id) values ($1, 'fruiting', 'Fruiting trees', null), ($2, 'desi', 'Desi', $1)`, [uuid(910), uuid(911)]);
+  await t.pool.query(`update catalog_product set collection_id = $1, subcategory = 'Desi' where slug = 'mango-alphonso'`, [uuid(911)]);
+  await t.pool.query(`update catalog_product set collection_id = $1, subcategory = 'Exotic' where slug = 'sapota'`, [uuid(910)]);
 }, 120_000);
 
 afterAll(async () => {
@@ -130,6 +134,10 @@ describe('index source from the catalog tables', () => {
     expect(view({ model: ['commercial'] })).toEqual(['mango-alphonso']); // null spacing (miyawaki) is not a model
     expect(view({ size: ['large'], drought: ['high'] })).toEqual(['red-sandalwood']);
     expect(view({ tag: ['native'] }).sort()).toEqual(['red-sandalwood', 'sapota']);
+    expect(index.facets.cat!.values.fruiting!.label).toBe('Fruiting trees');
+    expect(index.facets.sub!.values.exotic!.label).toBe('Exotic');
+    expect(view({ cat: ['fruiting'] }).sort()).toEqual(['mango-alphonso', 'sapota']);
+    expect(view({ sub: ['desi'] })).toEqual(['mango-alphonso']);
   });
 
   it('facetPageProps scopes facets to search hits in relevance order and parses the URL', async () => {

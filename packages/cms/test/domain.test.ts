@@ -24,7 +24,17 @@ const uuid = '0192a000-0000-7000-8000-0000000000aa';
 describe('blocks', () => {
   it('every block type has editor fields and a schema', () => {
     expect(Object.keys(BLOCK_FIELDS).sort()).toEqual([...BLOCK_TYPES].sort());
-    expect(BLOCK_TYPES).toEqual(['hero', 'rich_text', 'faq', 'cta', 'video', 'trust_band', 'testimonials', 'counters', 'gallery', 'rail', 'team']);
+    expect(BLOCK_TYPES).toEqual(['hero', 'rich_text', 'faq', 'cta', 'video', 'trust_band', 'testimonials', 'counters', 'gallery', 'rail', 'team', 'product_rail', 'component']);
+  });
+
+  it('product rails need a slug or ids for their source; embedded tools need a registered key', () => {
+    expect(parseBlock('product_rail', { heading: 'Best sellers' })).toMatchObject({ data: { source: 'bestsellers', kind: 'plant', productIds: [] } });
+    expect(parseBlock('product_rail', { source: 'collection', value: '' })).toBeNull();
+    expect(parseBlock('product_rail', { source: 'collection', value: 'fruiting', kind: 'input', limit: '8', linkHref: '' })).toMatchObject({ data: { value: 'fruiting', kind: 'input', limit: 8 } });
+    expect(parseBlock('product_rail', { source: 'ids', productIds: [] })).toBeNull();
+    expect(parseBlock('product_rail', { source: 'bestsellers', linkHref: 'javascript:alert(1)' })).toBeNull();
+    expect(parseBlock('component', { key: 'plant_calculator', heading: 'How many plants?' })).toMatchObject({ data: { key: 'plant_calculator' } });
+    expect(parseBlock('component', { key: 'Bad Key' })).toBeNull();
   });
 
   it('validates typed data, turns blank optional inputs into absent fields, rejects bad links', () => {

@@ -439,7 +439,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -626,7 +626,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -813,7 +813,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -1010,7 +1010,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -1590,7 +1590,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -1787,7 +1787,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -1983,7 +1983,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -2193,7 +2193,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -2390,7 +2390,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -2584,7 +2584,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -2778,7 +2778,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -3157,7 +3157,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -3356,7 +3356,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -3561,7 +3561,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -3767,7 +3767,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -3967,7 +3967,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -4160,7 +4160,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -5311,7 +5311,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -5506,7 +5506,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -5701,7 +5701,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -5896,7 +5896,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -6091,7 +6091,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -6290,7 +6290,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -6664,7 +6664,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -7037,7 +7037,7 @@
         "desi_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -7224,7 +7224,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -7418,7 +7418,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -7611,7 +7611,7 @@
         "plantation_crop"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -7995,7 +7995,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -8193,7 +8193,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -9356,7 +9356,7 @@
         "drought_tolerant"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -10135,7 +10135,7 @@
         "biomass"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -10321,7 +10321,7 @@
         "biomass"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -10507,7 +10507,7 @@
         "biomass"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -11079,7 +11079,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -11273,7 +11273,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -11844,7 +11844,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -12232,7 +12232,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -12426,7 +12426,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -13187,7 +13187,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -13392,7 +13392,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -13596,7 +13596,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -14545,7 +14545,7 @@
         "exotic_fruits"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -16076,7 +16076,7 @@
         "spices"
       ],
       "is_priority": false,
-      "is_best_seller": false,
+      "is_best_seller": true,
       "is_featured": true,
       "sourcing": null,
       "has_video": {
@@ -16269,7 +16269,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -16467,7 +16467,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -16662,7 +16662,7 @@
         "spices"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -17037,7 +17037,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "own",
       "has_video": {
@@ -17225,7 +17225,7 @@
         "drought_tolerant"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -17800,7 +17800,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -17999,7 +17999,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -18385,7 +18385,7 @@
         "forestry_timber"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -24986,7 +24986,7 @@
         "drought_tolerant"
       ],
       "is_priority": true,
-      "is_best_seller": true,
+      "is_best_seller": false,
       "is_featured": false,
       "sourcing": "supplier",
       "has_video": {
@@ -31022,7 +31022,7 @@
       "subcategory": "Exotic",
       "tags": [],
       "is_priority": false,
-      "is_best_seller": false,
+      "is_best_seller": true,
       "is_featured": true,
       "sourcing": null,
       "has_video": {

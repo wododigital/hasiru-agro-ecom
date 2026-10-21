@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-20T11:42:07+05:30",
+  "generated_at": "2026-10-20T17:39:14+05:30",
   "sources": [
     "hasiruagro.com (current site copy)",
     "HASIRU AGRO SRS Doc1 (1).pdf",
@@ -361,30 +361,77 @@
         "noindex": false,
         "blocks": [
           {
-            "type": "rich_text",
+            "type": "hero",
             "props": {
-              "html": "<h2>Why choose us</h2><ul><li><strong>Intelligent farm design</strong>: Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow.</li><li><strong>200+ native varieties</strong>: Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised.</li><li><strong>Full-time farm team</strong>: Trained agronomists and field staff, not freelancers. Every visit is documented.</li><li><strong>Radical transparency</strong>: Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm.</li><li><strong>30-year vision</strong>: Every tree placement plans for its 30-year canopy, shade and yield cycle.</li></ul>"
+              "heading": "Healthy saplings for farm-scale planting",
+              "subheading": "Grafted fruit trees, timber and plantation crops from our own nursery. Bulk prices, farm inputs and delivery across Karnataka.",
+              "image": "site/hero_farm_transformation_hasiru_agro.webp"
             },
             "sort": 1
           },
           {
-            "type": "video",
+            "type": "product_rail",
             "props": {
-              "limit": 6
+              "eyebrow": "Best sellers",
+              "heading": "Most planted this season",
+              "source": "bestsellers",
+              "kind": "plant",
+              "limit": 12,
+              "linkLabel": "View all plants",
+              "linkHref": "/plants"
             },
             "sort": 2
+          },
+          {
+            "type": "component",
+            "props": {
+              "key": "plant_calculator",
+              "eyebrow": "Plant calculator",
+              "heading": "How many plants fit your land?"
+            },
+            "sort": 3
+          },
+          {
+            "type": "product_rail",
+            "props": {
+              "eyebrow": "Farm inputs",
+              "heading": "Feed the soil, not just the plant",
+              "source": "bestsellers",
+              "kind": "input",
+              "limit": 12,
+              "linkLabel": "All farm inputs",
+              "linkHref": "/inputs"
+            },
+            "sort": 4
+          },
+          {
+            "type": "component",
+            "props": {
+              "key": "compost_calculator",
+              "eyebrow": "Compost calculator",
+              "heading": "How much compost do your plants need?"
+            },
+            "sort": 5
+          },
+          {
+            "type": "trust_band",
+            "props": {},
+            "sort": 6
+          },
+          {
+            "type": "video",
+            "props": {
+              "heading": "Planting the right way",
+              "limit": 6
+            },
+            "sort": 7
           },
           {
             "type": "testimonials",
             "props": {
               "limit": 3
             },
-            "sort": 3
-          },
-          {
-            "type": "trust_band",
-            "props": {},
-            "sort": 4
+            "sort": 8
           },
           {
             "type": "rail",
@@ -423,7 +470,14 @@
                 }
               ]
             },
-            "sort": 5
+            "sort": 9
+          },
+          {
+            "type": "rich_text",
+            "props": {
+              "html": "<h2>Why choose us</h2><ul><li><strong>Intelligent farm design</strong>: Satellite mapping, contour analysis and a layout made for your land: its slope, soil and water flow.</li><li><strong>200+ native varieties</strong>: Saplings from our own nursery. No middlemen; every sapling is traceable and acclimatised.</li><li><strong>Full-time farm team</strong>: Trained agronomists and field staff, not freelancers. Every visit is documented.</li><li><strong>Radical transparency</strong>: Photo reports, GPS-tagged visits and monthly activity logs, so you always know what is happening on your farm.</li><li><strong>30-year vision</strong>: Every tree placement plans for its 30-year canopy, shade and yield cycle.</li></ul>"
+            },
+            "sort": 10
           }
         ],
         "seo": {

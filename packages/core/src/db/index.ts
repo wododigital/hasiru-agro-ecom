@@ -13,7 +13,8 @@ let current: { db: Db; pool: pg.Pool; url: string } | null = null;
  * DATABASE_URL, the app role); tests call it through `createTestDb`, scripts with the owner URL.
  */
 export function configureDb(url: string, options: { max?: number } = {}): { db: Db; pool: pg.Pool } {
-  const pool = new pg.Pool({ connectionString: url, max: options.max ?? 10 });
+  // DATABASE_POOL_MAX: connections per process. `next build` prerenders in several workers, each with its own pool.
+  const pool = new pg.Pool({ connectionString: url, max: options.max ?? (Number(process.env.DATABASE_POOL_MAX) || 10) });
   const previous = current;
   current = { db: drizzle(pool), pool, url };
   void previous?.pool.end();
