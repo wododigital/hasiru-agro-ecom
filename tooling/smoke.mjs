@@ -699,9 +699,10 @@ const EXPORT_HEADER = 'Order,Placed (IST),Status,Payment status,Fulfilment statu
  */
 async function bulkPost(page, label, ids) {
   const r = await req(page, { admin: true });
-  const bar = /role="toolbar" aria-label="Bulk actions"[^>]*>([\s\S]*?)<\/div>/.exec(r.text)?.[1];
-  if (!bar) return { skipped: `no bulk bar on ${page}` };
-  const button = [...bar.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)].find((m) => m[2].replace(/<[^>]+>/g, '').trim() === label);
+  if (!/role="toolbar" aria-label="Bulk actions"/.test(r.text)) return { skipped: `no bulk bar on ${page}` };
+  // React may stream the bar's bound-action buttons after the shell (`<template id="P:n">` in the bar, the buttons in
+  // a later hidden chunk), so the labelled submit button is looked up in the whole document, not inside the bar.
+  const button = [...r.text.matchAll(/<button\b([^>]*\btype="submit"[^>]*)>([\s\S]*?)<\/button>/g)].find((m) => m[2].replace(/<[^>]+>/g, '').trim() === label);
   if (!button) return { skipped: `no "${label}" button on ${page}` };
   const fd = new FormData();
   const name = /\sname="([^"]*)"/.exec(button[1])?.[1];
