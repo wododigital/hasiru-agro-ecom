@@ -231,7 +231,7 @@ Source of truth is code in `packages/core/src/contracts/`; this table mirrors it
 - One 301 to the canonical URL: host and scheme from `SITE_URL` (skipped when unset, i.e. local dev), trailing slash stripped (not on `/`), path lowercased outside percent-escapes. Case is never changed under `/_next/ /api/ /media/ /r/ /order/ /feeds/ /og/` (tokens and files). Tokens in other paths must be lowercase.
 - Behind nginx it trusts `x-forwarded-proto` and `x-forwarded-host`.
 - `x-locale` request header: `kn-IN` for `/kn…`, else `en-IN` (prefix reserved, not routed).
-- CSP: nonce + `strict-dynamic` on `/admin /account /checkout /pay` (nonce in `x-nonce`); static CSP with `'unsafe-inline'` elsewhere (A25). Marketing vendor sources come from `CSP_VENDOR_SOURCES` until the marketing module supplies them.
+- CSP: nonce + `strict-dynamic` on `/admin /account /checkout /pay` (nonce in `x-nonce`); static CSP with `'unsafe-inline'` elsewhere (A25). A nonce only reaches scripts rendered for the request, so every segment under a nonce prefix awaits `connection()` in its layout (`export const instant = false`): no static shell, every script nonced (WP-37). A new private prefix needs both the proxy entry and that layout; `node tooling/csp-check.mjs` proves it in a real browser. Vendor hosts come from marketing `cspSources()` (enabled module only, 60 s memo) plus `CSP_VENDOR_SOURCES` as an extra allowlist; admin gets none. Zod runs jitless in the browser (`instrumentation-client.ts`) so its `new Function` probe is never a CSP violation.
 - Security headers on every response: nosniff, referrer policy, permissions policy, `X-Frame-Options: DENY`, HSTS when the canonical scheme is https.
 
 ## 13. Forbidden names

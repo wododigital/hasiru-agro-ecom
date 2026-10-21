@@ -2,6 +2,16 @@ import { NextRequest } from 'next/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { canonicalRedirect, proxy } from '../proxy';
 
+// marketing's memoised vendor list (a DB read in the app); here one configured vendor and one custom tag host
+vi.mock('@ecomkit/marketing/server', () => ({
+  cspSources: async () => ({
+    script: ['https://www.googletagmanager.com'],
+    connect: ['https://*.google-analytics.com'],
+    img: ['https://*.google-analytics.com'],
+    frame: ['https://td.doubleclick.net'],
+  }),
+}));
+
 const target = { host: 'www.example.com', proto: 'https' as const };
 const ok = { proto: 'https', host: 'www.example.com', pathname: '/plants', search: '' };
 
@@ -53,40 +63,62 @@ describe('proxy', () => {
     ['http', 'http://www.example.com/plants', {}],
     ['trailing slash', 'https://www.example.com/plants/', {}],
     ['uppercase', 'https://www.example.com/Plants', {}],
-  ])('301s a %s request to the canonical URL', (_name, url, headers) => {
+  ])('301s a %s request to the canonical URL', async (_name, url, headers) => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
-    const res = proxy(request(url, headers));
+    const res = await proxy(request(url, headers));
     expect(res.status).toBe(301);
     expect(res.headers.get('location')).toBe('https://www.example.com/plants');
   });
 
-  it('trusts x-forwarded-proto and x-forwarded-host from nginx', () => {
+  it('trusts x-forwarded-proto and x-forwarded-host from nginx', async () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
-    const res = proxy(request('http://127.0.0.1:3000/plants', { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'www.example.com' }));
+    const res = await proxy(request('http://127.0.0.1:3000/plants', { 'x-forwarded-proto': 'https', 'x-forwarded-host': 'www.example.com' }));
     expect(res.status).toBe(200);
     expect(res.headers.get('strict-transport-security')).toContain('max-age=');
   });
 
-  it('never redirects the worker\'s loopback calls to machine endpoints', () => {
+  it('never redirects the worker\'s loopback calls to machine endpoints', async () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
-    expect(proxy(request('http://127.0.0.1:3000/api/internal/revalidate', {})).status).toBe(200);
-    expect(proxy(request('http://127.0.0.1:3000/api/health/live', {})).status).toBe(200);
-    expect(proxy(request('http://127.0.0.1:3000/api/webhooks/phonepe', {})).status).toBe(200);
-    expect(proxy(request('http://127.0.0.1:3000/plants', {})).status).toBe(301);
+    expect((await proxy(request('http://127.0.0.1:3000/api/internal/revalidate', {}))).status).toBe(200);
+    expect((await proxy(request('http://127.0.0.1:3000/api/health/live', {}))).status).toBe(200);
+    expect((await proxy(request('http://127.0.0.1:3000/api/webhooks/phonepe', {}))).status).toBe(200);
+    expect((await proxy(request('http://127.0.0.1:3000/plants', {}))).status).toBe(301);
   });
 
-  it('passes the request path to layouts as x-pathname', () => {
+  it('passes the request path to layouts as x-pathname', async () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
-    const res = proxy(request('https://www.example.com/admin/products'));
+    const res = await proxy(request('https://www.example.com/admin/products'));
     expect(res.headers.get('x-middleware-request-x-pathname')).toBe('/admin/products');
   });
 
-  it('sets a nonce CSP on checkout and a static CSP on the storefront', () => {
+  it('sets a nonce CSP on checkout and a static CSP on the storefront', async () => {
     vi.stubEnv('SITE_URL', 'https://www.example.com');
-    const shop = proxy(request('https://www.example.com/plants'));
+    const shop = await proxy(request('https://www.example.com/plants'));
     expect(shop.headers.get('content-security-policy')).toContain("script-src 'self' 'unsafe-inline'");
-    const checkout = proxy(request('https://www.example.com/checkout'));
-    expect(checkout.headers.get('content-security-policy')).toMatch(/script-src 'self' 'nonce-[A-Za-z0-9+/=]+' 'strict-dynamic'/);
+    const checkout = await proxy(request('https://www.example.com/checkout'));
+    const csp = checkout.headers.get('content-security-policy')!;
+    expect(csp).toMatch(/script-src 'self' 'nonce-[A-Za-z0-9+/=]+' 'strict-dynamic'/);
+    // Next reads the nonce from the request CSP header and stamps every script it renders for the request
+    expect(checkout.headers.get('x-middleware-request-content-security-policy')).toBe(csp);
     expect(checkout.headers.get('x-frame-options')).toBe('DENY');
+    for (const d of ["frame-ancestors 'none'", "object-src 'none'", "base-uri 'self'", "default-src 'self'"]) {
+      expect(csp).toContain(d);
+      expect(shop.headers.get('content-security-policy')).toContain(d);
+    }
+  });
+
+  it('allows the enabled marketing vendors (and CSP_VENDOR_SOURCES) on storefront and checkout, never on admin', async () => {
+    vi.stubEnv('SITE_URL', 'https://www.example.com');
+    vi.stubEnv('CSP_VENDOR_SOURCES', 'https://extra.example.org');
+    for (const path of ['/plants', '/checkout']) {
+      const csp = (await proxy(request(`https://www.example.com${path}`))).headers.get('content-security-policy')!;
+      expect(csp).toMatch(/script-src [^;]*https:\/\/www\.googletagmanager\.com [^;]*https:\/\/extra\.example\.org/);
+      expect(csp).toContain("connect-src 'self' https://*.google-analytics.com https://extra.example.org");
+      expect(csp).toContain("img-src 'self' data: blob: https://*.google-analytics.com");
+      expect(csp).toContain("frame-src 'self' https://td.doubleclick.net");
+    }
+    const admin = (await proxy(request('https://www.example.com/admin/orders'))).headers.get('content-security-policy')!;
+    expect(admin).not.toMatch(/googletagmanager|extra\.example|frame-src/);
+    expect(admin).toContain("connect-src 'self';");
   });
 });
