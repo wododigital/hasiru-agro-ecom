@@ -1,6 +1,6 @@
 // Test viewers bound through core's auth-context, the seam the auth module fills at app boot.
 import { ForbiddenError, NotFoundError, setAuthProvider } from '@ecomkit/core/auth-context';
-import { ROLE_PERMISSIONS, type CustomerViewer, type StaffRole, type StaffViewer, type Viewer } from '@ecomkit/core/contracts';
+import { ROLE_PERMISSIONS, type CustomerViewer, type Permission, type StaffRole, type StaffViewer, type Viewer } from '@ecomkit/core/contracts';
 import { newId } from '@ecomkit/core/ids';
 
 let current: Viewer = { kind: 'guest' };
@@ -26,7 +26,8 @@ export function asCustomer(id = newId()): CustomerViewer {
   return current;
 }
 
-export function asStaff(role: StaffRole): StaffViewer {
-  current = { kind: 'staff', userId: newId(), name: role, email: `${role}@example.test`, role, permissions: ROLE_PERMISSIONS[role] };
+/** `extra`: permissions an owner granted the role on top of the default matrix. */
+export function asStaff(role: StaffRole, extra: readonly Permission[] = []): StaffViewer {
+  current = { kind: 'staff', userId: newId(), name: role, email: `${role}@example.test`, role, permissions: [...ROLE_PERMISSIONS[role], ...extra] };
   return current;
 }

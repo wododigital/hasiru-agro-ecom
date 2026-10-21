@@ -22,6 +22,7 @@ export default defineModule({
     { path: '/order/[token]', module: 'routes/order-token', kind: 'page', exports: ['default', 'generateMetadata'] },
     { path: '/order/[token]/invoice.pdf', module: 'routes/order-token-invoice', kind: 'route', exports: ['GET'] },
     { path: '/admin/orders/[id]/invoice.pdf', module: 'routes/admin-order-invoice', kind: 'route', exports: ['GET'] },
+    { path: '/admin/orders/export.csv', module: 'routes/admin-orders-export', kind: 'route', exports: ['GET'] },
   ],
   admin: {
     nav: [
@@ -52,7 +53,7 @@ export default defineModule({
     { id: 'orders.pending-payment', label: 'payments pending', href: '/admin/orders?view=pending_payment', order: 20, permission: 'orders.read', count: () => todos().then((m) => m.paymentsPending) },
   ],
   settings: { schema: ordersSettingsSchema },
-  permissions: ['orders.read', 'orders.write', 'orders.refund', 'orders.dispatch'],
+  permissions: ['orders.read', 'orders.write', 'orders.refund', 'orders.dispatch', 'orders.export'],
   emits: [
     'order.placed',
     'order.paid',

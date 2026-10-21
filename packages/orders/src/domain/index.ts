@@ -180,6 +180,23 @@ export const SAVED_VIEW_LABELS: Readonly<Record<SavedView, string>> = {
   replacements: 'Replacements',
 };
 
+/** Date filter on the orders index (Shopify's "Date" presets), by IST calendar day of `placed_at`. */
+export const PLACED_RANGES = ['today', 'last_7_days', 'last_30_days', 'last_90_days', 'last_12_months'] as const;
+export type PlacedRange = (typeof PLACED_RANGES)[number];
+export const PLACED_RANGE_LABELS: Readonly<Record<PlacedRange, string>> = {
+  today: 'Today',
+  last_7_days: 'Last 7 days',
+  last_30_days: 'Last 30 days',
+  last_90_days: 'Last 90 days',
+  last_12_months: 'Last 12 months',
+};
+const PLACED_RANGE_DAYS: Readonly<Record<PlacedRange, number>> = { today: 0, last_7_days: 6, last_30_days: 29, last_90_days: 89, last_12_months: 364 };
+
+/** First IST day (YYYY-MM-DD) the preset includes; today is the last. */
+export function placedFrom(range: PlacedRange, now: Date): string {
+  return istDay(new Date(now.getTime() - PLACED_RANGE_DAYS[range] * 86_400_000));
+}
+
 /** YYYY-MM-DD of an instant in Asia/Kolkata. */
 export function istDay(at: Date): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(at);

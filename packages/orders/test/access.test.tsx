@@ -8,7 +8,10 @@ vi.mock('next/navigation', async (original) => ({
 }));
 import { asCustomer, asGuest, asStaff } from './viewers';
 import { ForbiddenError, NotFoundError } from '@ecomkit/core/auth-context';
+import { db } from '@ecomkit/core/db';
 import { newId } from '@ecomkit/core/ids';
+import { coreAuditLog } from '@ecomkit/core/schema';
+import { desc, eq } from 'drizzle-orm';
 import type { TestDb } from '@ecomkit/core/testing';
 import type { ReactElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -17,9 +20,11 @@ import { DispatchPage, ManualOrderPage, OrderDetailPage, OrdersListPage } from '
 import AccountOrderPage from '../src/routes/account-order';
 import { GET as accountInvoice } from '../src/routes/account-order-invoice';
 import { GET as adminInvoice } from '../src/routes/admin-order-invoice';
+import { GET as exportCsv } from '../src/routes/admin-orders-export';
 import { GET as guestInvoice } from '../src/routes/order-token-invoice';
 import {
   configureOrders,
+  exportOrders,
   getMyOrder,
   getOrderByToken,
   issueInvoice,
@@ -135,6 +140,74 @@ describe('admin access', () => {
     expect(await ids('todays_slot')).not.toContain(mine.id);
     expect((await listOrdersAdmin({ view: 'todays_slot', now: new Date('2099-01-03T09:00:00+05:30') })).rows.map((o) => o.id)).toContain(mine.id);
     expect((await listOrdersAdmin({ view: 'all', q: mine.number })).rows.map((o) => o.id)).toEqual([mine.id]);
+  });
+});
+
+describe('orders CSV export', () => {
+  const collect = async (rows: AsyncIterable<unknown[]>) => {
+    const out: unknown[][] = [];
+    for await (const r of rows) out.push(r);
+    return out;
+  };
+
+  it('needs orders.read + orders.export (owner, manager); support and fulfilment are refused', async () => {
+    for (const role of ['support', 'fulfilment', 'catalog_editor'] as const) {
+      asStaff(role);
+      await expect(exportOrders({ view: 'all' })).rejects.toBeInstanceOf(ForbiddenError);
+      await expect(exportCsv(new Request('http://localhost/admin/orders/export.csv'))).rejects.toBeInstanceOf(ForbiddenError);
+    }
+  });
+
+  it('exports the view or the ticked rows with full contact for a manager, masked for a support role granted export', async () => {
+    asStaff('manager');
+    const all = await exportOrders({ view: 'all' });
+    expect(all.count).toBeGreaterThanOrEqual(2);
+    expect((await collect(all.rows)).length).toBe(all.count);
+    const one = await exportOrders({ view: 'all', ids: [mine.id, 'not-a-uuid'] });
+    const [row] = await collect(one.rows);
+    expect(one.count).toBe(1);
+    expect(row).toEqual([
+      mine.number,
+      expect.any(String),
+      'paid',
+      'paid',
+      'unfulfilled',
+      'Asha',
+      '+919876543210',
+      'asha@example.test',
+      'Sample District',
+      '560001',
+      11,
+      'Sapling A x 10; Compost 25 kg x 1',
+      2525,
+      0,
+      118,
+      43,
+      2643,
+      2643,
+      'online',
+      '',
+      '2099-01-03',
+    ]);
+    expect((await exportOrders({ view: 'pending_payment', ids: [mine.id] })).count).toBe(0);
+    expect((await exportOrders({ view: 'all', ids: [] })).count).toBe(0);
+    const [log] = await db.select().from(coreAuditLog).where(eq(coreAuditLog.action, 'orders.export')).orderBy(desc(coreAuditLog.createdAt)).limit(1);
+    expect(log!.after).toMatchObject({ view: 'all', selected: 0, rows: 0, pii: 'full' });
+
+    asStaff('support', ['orders.export']);
+    const [masked] = await collect((await exportOrders({ view: 'all', ids: [mine.id] })).rows);
+    expect(masked![6]).toContain('•');
+    expect(masked![7]).toBe('a•••@example.test');
+  });
+
+  it('route streams the CSV with the header row', async () => {
+    asStaff('owner');
+    const res = await exportCsv(new Request(`http://localhost/admin/orders/export.csv?ids=${mine.id}`));
+    expect(res.headers.get('content-type')).toBe('text/csv; charset=utf-8');
+    const [header, line] = (await res.text()).split('\r\n');
+    expect(header).toBe('Order,Placed (IST),Status,Payment status,Fulfilment status,Customer,Phone,Email,District,Pincode,Items,Line items,Subtotal,Discount,Shipping,GST,Total,Paid,Payment method,Coupon,Delivery slot');
+    expect(line).toContain(`${mine.number},`);
+    expect(line).toContain(",'+919876543210,");
   });
 });
 
