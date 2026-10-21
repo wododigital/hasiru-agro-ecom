@@ -1,6 +1,6 @@
 // Boot wiring of the proof store: binds the ports of the modules it enables (no discounts, shipping, monitoring,
 // notifications). Called from instrumentation `register()` and seed:load. Idempotent per process.
-import { checkoutCart, configureCart, currentCartContext, markConverted } from '@ecomkit/cart/server';
+import { checkoutCart, configureCart, currentCartContext, markConverted, noteContact } from '@ecomkit/cart/server';
 import { configureCatalog, gstRatesFor, variantFacts, variantsOf } from '@ecomkit/catalog/server';
 import { configureCheckout } from '@ecomkit/checkout/server';
 import { setAuthProvider } from '@ecomkit/core/auth-context';
@@ -34,6 +34,7 @@ export async function boot(options: { mediaDir?: string } = {}): Promise<void> {
     cart: {
       current: async () => checkoutCart(await currentCartContext()),
       markConverted: async (cartId, orderId, o) => void (await markConverted(cartId, orderId, o)),
+      noteContact,
     },
     orders: {
       createOrder: (input, o) => createOrder(input as Parameters<typeof createOrder>[0], o),

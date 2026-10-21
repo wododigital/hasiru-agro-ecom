@@ -92,7 +92,9 @@ describe('push', () => {
     erp.failPushes = 99;
     const id = newOrder('T-0003');
     await enqueueOutbox({ kind: 'order', refId: id });
+    // fixed clock: the row is enqueued at real now(), so pin it to t0 or nothing is due once today passes 06:00Z
     const t0 = new Date('2026-10-20T06:00:00Z');
+    await t.db.update(erpOutbox).set({ nextAttemptAt: t0 }).where(eq(erpOutbox.refId, id));
     expect((await pushDue({ now: t0 })).failed).toBe(1);
     let r = await row(id);
     expect(r).toMatchObject({ status: 'failed', attempts: 1 });
